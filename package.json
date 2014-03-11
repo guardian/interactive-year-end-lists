@@ -1,0 +1,20 @@
+{
+  "name": "world-cup-2014-dream-team",
+  "version": "0.0.0",
+  "description": "Choose your World Cup 2014 dream team",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/GuardianInteractive/world-cup-2014-dream-team.git"
+  },
+  "author": "Guardian Interactive",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/GuardianInteractive/world-cup-2014-dream-team/issues"
+  },
+  "homepage": "https://github.com/GuardianInteractive/world-cup-2014-dream-team",
+  "devDependencies": {
+    "grunt": "^0.4.3",
+    "grunt-contrib-connect": "^0.7.1",
+    "grunt-contrib-jshint": "^0.8.0"
+  }
+}
