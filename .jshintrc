@@ -6,6 +6,7 @@
   "globals": {
     "jQuery": true,
     "module": true,
-    "require": true
+    "require": true,
+    "define": true
   }
 }

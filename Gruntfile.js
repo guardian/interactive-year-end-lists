@@ -32,11 +32,12 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: {
-          baseUrl: './src/js/',
+          baseUrl: './src/js/app/',
           paths: {
-              'underscore': 'libs/underscore',
-              'jquery': 'libs/jquery',
-              'backbone': 'libs/backbone'
+              'underscore': '../libs/underscore',
+              'jquery': '../libs/jquery',
+              'backbone': '../libs/backbone',
+              'text': '../libs/text'
           },
           optimize: 'none',
           name: 'main',
