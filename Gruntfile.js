@@ -40,7 +40,12 @@ module.exports = function(grunt) {
           },
           optimize: 'none',
           name: 'main',
-          out: 'build/js/dreamteam.js'
+          out: 'build/js/boot.js',
+          // FIXME: Is there a better way to do this?
+          wrap: {
+              start: "define([], function() {",
+              end: " return { boot: function(el) { require(['main'], function(app) { app.boot(el); });  }}} );"
+          }
         }
       }
     },
@@ -49,6 +54,13 @@ module.exports = function(grunt) {
       scripts: {
         files: ['src/**/*.js'],
         tasks: ['jshint', 'requirejs'],
+        options: {
+          spawn: false,
+        },
+      },
+      html: {
+        files: ['src/index.html'],
+        tasks: ['copy'],
         options: {
           spawn: false,
         },

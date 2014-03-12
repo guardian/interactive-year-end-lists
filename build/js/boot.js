@@ -1,4 +1,4 @@
-//     Underscore.js 1.6.0
+define([], function() {//     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
@@ -13294,16 +13294,24 @@ define('app/views/page-team',['backbone'], function(Backbone) {
     return Backbone.View.extend({
 
         render: function() {
-            this.$el.html('<p>Hello</p>');
+            this.$el.html('<p>Hello world. I\'m a backbone required view.</p>');
             return this;
         }
 
     });
 });
 
-require(['backbone', 'app/views/page-team'], function(backbone, PageTeamView) {
+define('main',['backbone', 'app/views/page-team'], function(backbone, PageTeamView) {
     var pageTeamView = new PageTeamView();
-    console.log(pageTeamView);
-});
-define("main", function(){});
 
+    console.log('Set things up');
+
+    function boot(el) {
+        el.appendChild(pageTeamView.render().el);
+    }
+
+    return {
+        boot: boot
+    };
+});
+ return { boot: function(el) { require(['main'], function(app) { app.boot(el); });  }}} );
