@@ -1,16 +1,27 @@
 define([
-    'views/page-team'
+    'backbone',
+    'views/page-team',
+    'routes'
 ], function(
-    PageTeamView
+    Backbone,
+    PageTeamView,
+    Routes
 ) {
     var pageTeamView = new PageTeamView();
+
 
     /**
      * Bootstrap loader
      * @param  {element} el DOM element provided from the page ie. <figure>
      */
     function boot(el) {
-       el.appendChild(pageTeamView.render().el);
+
+        // Setup routing
+        var appRoutes = new Routes();
+        Backbone.history.start();
+
+        // Render app into the page
+        el.appendChild(pageTeamView.render().el);
     }
 
     return {

@@ -13678,45 +13678,79 @@ define('text',['module'], function (module) {
 });
 
 
-define('text!templates/player_profile.html',[],function () { return '<div class="player_profile">\n    <img src="<%= playerImage %>"/>\n    <ul>\n        <li><%= name %></li>\n        <li><%= position %></li>\n    </ul>\n</div>';});
+define('text!templates/player_profile.html',[],function () { return '<img src="<%= imageSrc %>"/>\n<ul>\n    <li><%= name %></li>\n    <li><%= position %></li>\n</ul>\n';});
 
 define('views/player',[
+    'underscore',
     'backbone',
     'text!templates/player_profile.html'
 ], function(
+    _,
     Backbone,
     playerTemplate
 ){
 
     return Backbone.View.extend({
+        tagName: 'div',
+        className: 'player_profile',
+
+        initialize: function() {
+            this.template = _.template(playerTemplate);
+        },
+
         render: function() {
-            this.el.innerHTML = playerTemplate;
+            this.$el.html(this.template(this.model.attributes));
             return this;
         }
     });
 });
 
+define('models/player',[
+    'backbone'
+], function(
+    Backbone
+) {
+    return Backbone.Model.extend({
+
+        defaults: {
+            name: null,
+            imageSrc: null,
+            position: null,
+            country: null,
+            careerStart: null,
+            careerEnd: null
+        }
+
+    });
+});
 
 define('text!templates/team_screen.html',[],function () { return '<div id="dreamteam">\n    <h2>Form your dream team</h2>\n\n    <button>Challenge your friends</button>\n\n    <div id="playfield">\n        {{ playfield }}\n    </div>\n\n    <button>Sign in to save your dreamteam</button>\n\n\n    <div id="playerSelection">\n\n        <form id="playerFilters">\n            <p>\n                Show:\n                <select>\n                    <option>All positions</option>\n                </select>\n                <select>\n                    <option>From all countries</option>\n                </select>\n                <select>\n                    <option>From 1960 - 1990</option>\n                </select>\n            </p>\n        </div>\n\n        <div id="playerGallery">\n            <div class="player">{{ photo }}</div>\n        </div>\n    </div>\n\n\n</div>';});
 
 define('views/page-team',[
     'backbone',
     'views/player',
+    'models/player',
     'text!templates/team_screen.html'
 ], function(
     Backbone,
     PlayerView,
+    PlayerModel,
     teamScreenTemplate
 ) {
     return Backbone.View.extend({
 
         initialize: function() {
-            this.player = new PlayerView();
+            var testPlayernModel = new PlayerModel({
+                'name': 'Andrew',
+                'country': 'UK',
+                'position': 'Goalkeeper',
+                'imageSrc': 'pic.jpg'
+            });
+            this.player = new PlayerView({model: testPlayernModel });
         },
 
         render: function() {
             this.$el.html(teamScreenTemplate);
-            console.log(this.player.render().el);
             this.$el.append(this.player.render().el);
             return this;
         }
@@ -13724,23 +13758,67 @@ define('views/page-team',[
     });
 });
 
+define('routes',[
+    'backbone'
+],
+function(
+    Backbone
+){
+    return Backbone.Router.extend({
+        routes: {
+            'about':                    'showAbout',   // dreamteam#about
+            'match/:player1/:player2':  'showMatch',   // dreamteam#match/andrew/daan
+            'user/:username':           'showUser',    // dreamteam#user/andrew
+            '*other':                   'defaultRoute' // dreamteam#
+        },
+
+        showAbout: function() {
+            console.log('in about section');
+        },
+
+        showMatch: function(player1, player2) {
+            console.log(player1, player2);
+        },
+
+        showUser: function(username) {
+            console.log(username);
+        },
+
+        defaultRoute: function(other){
+            console.log('Invalid. You attempted to reach:' + other);
+        }
+    });
+});
+
 define('main',[
-    'views/page-team'
+    'backbone',
+    'views/page-team',
+    'routes'
 ], function(
-    PageTeamView
+    Backbone,
+    PageTeamView,
+    Routes
 ) {
     var pageTeamView = new PageTeamView();
+
 
     /**
      * Bootstrap loader
      * @param  {element} el DOM element provided from the page ie. <figure>
      */
     function boot(el) {
-       el.appendChild(pageTeamView.render().el);
+
+        // Setup routing
+        var appRoutes = new Routes();
+        Backbone.history.start();
+
+        // Render app into the page
+        el.appendChild(pageTeamView.render().el);
     }
 
     return {
         boot: boot
     };
 });
+
  return { boot: function(el) { require(['main'], function(app) { app.boot(el); });  }}} );
