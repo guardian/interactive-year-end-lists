@@ -13290,6 +13290,39 @@ return jQuery;
 
 }));
 
+define('models/player',[
+    'backbone'
+], function(
+    Backbone
+) {
+    return Backbone.Model.extend({
+
+        defaults: {
+            uid: null,
+            name: null,
+            imageSrc: null,
+            position: null,
+            country: null,
+            careerStart: null,
+            careerEnd: null,
+
+            selected: false,
+            active: false
+        }
+
+    });
+});
+define('collections/team',[
+    'backbone',
+    'models/player'
+], function(
+    Backbone,
+    PlayerModel
+) {
+    return Backbone.Collection.extend({
+        model: PlayerModel
+    });
+});
 /**
  * @license RequireJS text 2.0.10 Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
@@ -13678,12 +13711,12 @@ define('text',['module'], function (module) {
 });
 
 
-define('text!templates/player_profile.html',[],function () { return '<img src="<%= imageSrc %>"/>\n<ul>\n    <li><%= name %></li>\n    <li><%= position %></li>\n</ul>\n';});
+define('text!templates/player-profile.html',[],function () { return '<img src="<%= imageSrc %>"/>\n<ul>\n    <li><%= name %></li>\n    <li><%= position %></li>\n</ul>\n';});
 
 define('views/player',[
     'underscore',
     'backbone',
-    'text!templates/player_profile.html'
+    'text!templates/player-profile.html'
 ], function(
     _,
     Backbone,
@@ -13694,8 +13727,16 @@ define('views/player',[
         tagName: 'div',
         className: 'player_profile',
 
+        events: {
+            'click': 'clickHandler'
+        },
+
         initialize: function() {
             this.template = _.template(playerTemplate);
+        },
+
+        clickHandler: function() {
+            this.model.set('selected', !this.model.get('selected'));
         },
 
         render: function() {
@@ -13705,57 +13746,97 @@ define('views/player',[
     });
 });
 
-define('models/player',[
-    'backbone'
-], function(
-    Backbone
-) {
-    return Backbone.Model.extend({
 
-        defaults: {
-            name: null,
-            imageSrc: null,
-            position: null,
-            country: null,
-            careerStart: null,
-            careerEnd: null
+define('text!templates/player-list.html',[],function () { return '<form id="player_filters">\n    <p>\n        Show:\n        <select id="players_position">\n            <option>All position</option>\n        </select>\n\n        <select id="players_country">\n            <option>All countries</option>\n        </select>\n\n        <select id="players_era">\n            <option>From 1960 - 1980</option>\n            <option>From 1980 - 1990</option>\n        </select>\n    </p>\n</form>\n\n<div id="player_list"></div>\n\n<div id="position_editor"></div>';});
+
+define('views/player-list',[
+    'underscore',
+    'backbone',
+    'views/player',
+    'text!templates/player-list.html'
+], function(
+    _,
+    Backbone,
+    PlayerView,
+    playerListTemplate
+) {
+    return Backbone.View.extend({
+        id: 'player-selector',
+
+        events: {
+            'change #player_filters': 'filterChange'
+        },
+
+        initialize: function() {
+            this.template = _.template(playerListTemplate);
+            this.playerViews = [];
+            this.updatePlayerViews();
+        },
+
+        filterChange: function() {
+            console.log('Filter changed');
+        },
+
+        updatePlayerViews: function() {
+            this.collection.each(function(playerModel) {
+                this.playerViews.push(new PlayerView({ model : playerModel }));
+            }, this);
+        },
+
+        renderPlayerViews: function() {
+            var domContainer = document.createDocumentFragment();
+            this.playerViews.forEach(function(playerView ) {
+                domContainer.appendChild( playerView.render().el );
+            });
+            return domContainer;
+        },
+
+        render: function() {
+            this.$el.append(this.template({}));
+            this.$('#player_list').append( this.renderPlayerViews() );
+            return this;
         }
 
     });
 });
 
-define('text!templates/team_screen.html',[],function () { return '<div id="dreamteam">\n    <h2>Form your dream team</h2>\n\n    <button>Challenge your friends</button>\n\n    <div id="playfield">\n        {{ playfield }}\n    </div>\n\n    <button>Sign in to save your dreamteam</button>\n\n\n    <div id="playerSelection">\n\n        <form id="playerFilters">\n            <p>\n                Show:\n                <select>\n                    <option>All positions</option>\n                </select>\n                <select>\n                    <option>From all countries</option>\n                </select>\n                <select>\n                    <option>From 1960 - 1990</option>\n                </select>\n            </p>\n        </div>\n\n        <div id="playerGallery">\n            <div class="player">{{ photo }}</div>\n        </div>\n    </div>\n\n\n</div>';});
+
+define('text!templates/team-screen.html',[],function () { return '<h2>TEAM EDITOR</h2>\n<div id="team_status"></div>\n<div id="player_listings"></div>\n';});
 
 define('views/page-team',[
     'backbone',
-    'views/player',
-    'models/player',
-    'text!templates/team_screen.html'
+    'views/player-list',
+    'text!templates/team-screen.html'
 ], function(
     Backbone,
-    PlayerView,
-    PlayerModel,
+    PlayerListView,
     teamScreenTemplate
 ) {
     return Backbone.View.extend({
 
         initialize: function() {
-            var testPlayernModel = new PlayerModel({
-                'name': 'Andrew',
-                'country': 'UK',
-                'position': 'Goalkeeper',
-                'imageSrc': 'pic.jpg'
+            this.collection.on('change', function() {
+                console.log(arguments);
             });
-            this.player = new PlayerView({model: testPlayernModel });
         },
 
         render: function() {
-            this.$el.html(teamScreenTemplate);
-            this.$el.append(this.player.render().el);
+            this.$el.empty();
+            this.playerListView = new PlayerListView({ collection: this.collection });
+            this.$el.append(this.playerListView.render().el);
             return this;
         }
 
     });
+});
+
+define('data/players',[], function() {
+    return [
+        { name: 'andrew', country: 'UK', position: 'GL', imageSrc: '#'},
+        { name: 'sean', country: 'UK', position: 'FT', imageSrc: '#'},
+        { name: 'daan', country: 'UK', position: 'FT', imageSrc: '#'},
+        { name: 'chris', country: 'UK', position: 'DF', imageSrc: '#'}
+    ];
 });
 
 define('routes',[
@@ -13792,14 +13873,21 @@ function(
 
 define('main',[
     'backbone',
+    'collections/team',
     'views/page-team',
+    'data/players',
     'routes'
 ], function(
     Backbone,
+    TeamCollection,
     PageTeamView,
+    PlayerData,
     Routes
 ) {
-    var pageTeamView = new PageTeamView();
+
+    var teamCollection = new TeamCollection(PlayerData);
+    var pageTeamView = new PageTeamView({ collection: teamCollection });
+
 
 
     /**

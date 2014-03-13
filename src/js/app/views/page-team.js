@@ -1,29 +1,24 @@
 define([
     'backbone',
-    'views/player',
-    'models/player',
-    'text!templates/team_screen.html'
+    'views/player-list',
+    'text!templates/team-screen.html'
 ], function(
     Backbone,
-    PlayerView,
-    PlayerModel,
+    PlayerListView,
     teamScreenTemplate
 ) {
     return Backbone.View.extend({
 
         initialize: function() {
-            var testPlayernModel = new PlayerModel({
-                'name': 'Andrew',
-                'country': 'UK',
-                'position': 'Goalkeeper',
-                'imageSrc': 'pic.jpg'
+            this.collection.on('change', function() {
+                console.log(arguments);
             });
-            this.player = new PlayerView({model: testPlayernModel });
         },
 
         render: function() {
-            this.$el.html(teamScreenTemplate);
-            this.$el.append(this.player.render().el);
+            this.$el.empty();
+            this.playerListView = new PlayerListView({ collection: this.collection });
+            this.$el.append(this.playerListView.render().el);
             return this;
         }
 

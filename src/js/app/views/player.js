@@ -1,7 +1,7 @@
 define([
     'underscore',
     'backbone',
-    'text!templates/player_profile.html'
+    'text!templates/player-profile.html'
 ], function(
     _,
     Backbone,
@@ -12,8 +12,16 @@ define([
         tagName: 'div',
         className: 'player_profile',
 
+        events: {
+            'click': 'clickHandler'
+        },
+
         initialize: function() {
             this.template = _.template(playerTemplate);
+        },
+
+        clickHandler: function() {
+            this.model.set('selected', !this.model.get('selected'));
         },
 
         render: function() {

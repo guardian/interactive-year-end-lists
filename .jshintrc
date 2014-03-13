@@ -8,6 +8,7 @@
     "module": true,
     "require": true,
     "define": true,
-    "console": true
+    "console": true,
+    "document": true
   }
 }

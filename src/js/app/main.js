@@ -1,13 +1,20 @@
 define([
     'backbone',
+    'collections/team',
     'views/page-team',
+    'data/players',
     'routes'
 ], function(
     Backbone,
+    TeamCollection,
     PageTeamView,
+    PlayerData,
     Routes
 ) {
-    var pageTeamView = new PageTeamView();
+
+    var teamCollection = new TeamCollection(PlayerData);
+    var pageTeamView = new PageTeamView({ collection: teamCollection });
+
 
 
     /**
