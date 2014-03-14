@@ -11,11 +11,11 @@ define([
     Backbone,
     PlayerListView,
     TeamOverview,
-    teamScreenTemplate
+    TeamScreenTemplate
 ) {
     return Backbone.View.extend({
 
-        template: _.template(teamScreenTemplate),
+        template: _.template(TeamScreenTemplate),
 
         initialize: function(options) {
         },

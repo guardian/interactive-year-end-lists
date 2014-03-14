@@ -23,7 +23,7 @@ define([
     App.opponent = new Backbone.Model();
 
     // Collections
-    App.usersTeamCollection = new TeamCollection();
+    App.usersTeamCollection = new TeamCollection(Array(11));
     App.opponentTeamCollection = new TeamCollection();
     App.playerCollection = new Backbone.Collection(PlayerData);
 

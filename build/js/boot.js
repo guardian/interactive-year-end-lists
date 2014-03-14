@@ -13734,7 +13734,7 @@ define('views/player',[
     App,
     Backbone,
     _,
-    playerTemplate
+    PlayerTemplate
 ){
 
     return Backbone.View.extend({
@@ -13742,7 +13742,7 @@ define('views/player',[
 
         className: 'player_profile',
 
-        template: _.template(playerTemplate),
+        template: _.template(PlayerTemplate),
 
         events: {
             'click': 'clickHandler'
@@ -13757,6 +13757,8 @@ define('views/player',[
         },
 
         clickHandler: function() {
+            App.player.set('selectedPlayer', this.model);
+
             this.model.set('selected', !this.model.get('selected'));
             if (this.model.get('selected')) {
                 App.usersTeamCollection.add(this.model);
@@ -13773,7 +13775,7 @@ define('views/player',[
 });
 
 
-define('text!templates/player-list.html',[],function () { return '<form id="player_filters">\n    <p>\n        Show:\n        <select id="players_position">\n            <option>All position</option>\n        </select>\n\n        <select id="players_country">\n            <option>All countries</option>\n        </select>\n\n        <select id="players_era">\n            <option>From 1960 - 1980</option>\n            <option>From 1980 - 1990</option>\n        </select>\n    </p>\n</form>\n\n<div id="player_list"></div>\n\n<div id="position_editor"></div>';});
+define('text!templates/player-list.html',[],function () { return '<form id="player_filters">\n    <p>\n        Show:\n        <select id="players_position">\n            <option>All position</option>\n        </select>\n\n        <select id="players_country">\n            <option>All countries</option>\n        </select>\n\n        <select id="players_era">\n            <option>From 1960 - 1980</option>\n            <option>From 1980 - 1990</option>\n        </select>\n    </p>\n</form>\n\n<div id="player_list"></div>';});
 
 define('views/player-list',[
     'underscore',
@@ -13784,7 +13786,7 @@ define('views/player-list',[
     _,
     Backbone,
     PlayerView,
-    playerListTemplate
+    PlayerListTemplate
 ) {
     return Backbone.View.extend({
         id: 'player-selector',
@@ -13793,7 +13795,7 @@ define('views/player-list',[
             'change #player_filters': 'filterChange'
         },
 
-        template:  _.template(playerListTemplate),
+        template:  _.template(PlayerListTemplate),
 
         initialize: function() {
             this.playerViews = [];
@@ -13819,7 +13821,6 @@ define('views/player-list',[
         },
 
         render: function() {
-            console.log('in here. Player list view');
             this.$el.html(this.template({}));
             this.$('#player_list').append( this.renderPlayerViews() );
             return this;
@@ -13880,6 +13881,61 @@ define('views/team-overview',[
 });
 
 
+define('text!templates/position-editor.html',[],function () { return '<div id="position_editor">\n    <div id="selected_player">\n        <p>Player name: <%= selectedPlayer.name %></p>\n        <p>Player country: <%= selectedPlayer.country %></p>\n    </div>\n\n    <ol>\n        <% _.each(players, function(player, index) { %>\n            <li>Position #<%= index %></li>\n        <% }) %>\n    </ol>\n\n    <button id="close_position">Cancel</button>\n    <button id="save_position" disabled>Save</button>\n</div>';});
+
+define('views/position-editor',[
+    'app',
+    'underscore',
+    'backbone',
+    'text!templates/position-editor.html'
+], function(
+    App,
+    _,
+    Backbone,
+    PositionEditorTemplate
+) {
+    return Backbone.View.extend({
+
+        template: _.template(PositionEditorTemplate),
+
+        events: {
+            'click #close_position': 'closeEditor'
+        },
+
+        initialize: function() {
+            this.$el.hide();
+            this.listenTo(App.player, 'change:selectedPlayer', this.handlePlayerSelect);
+            this.templateData = { selectedPlayer: { name: 'bob' }, players: [] };
+        },
+
+        closeEditor: function() {
+            App.player.set('selectedPlayer', null);
+        },
+
+        handlePlayerSelect: function(model) {
+            var selectedPlayer = App.player.get('selectedPlayer');
+
+            if (selectedPlayer) {
+                this.templateData = {
+                    players: App.usersTeamCollection.toJSON(),
+                    selectedPlayer: App.player.get('selectedPlayer').toJSON()
+                };
+
+                this.render();
+            }
+
+            this.$el.toggle(!!selectedPlayer);
+        },
+
+        render: function() {
+            this.$el.html(this.template( this.templateData ));
+            return this;
+        }
+
+    });
+});
+
+
 define('text!templates/team-screen.html',[],function () { return '<h2>TEAM EDITOR</h2>\n\n<div id="team_status"></div>\n<h2>Hello <%= username %></h2>\n<p>Share your team</p>\n<button id="sign-in">Sign in to save</button>\n\n<div id="player_listings"></div>\n';});
 
 define('views/team-screen',[
@@ -13888,6 +13944,7 @@ define('views/team-screen',[
     'backbone',
     'views/player-list',
     'views/team-overview',
+    'views/position-editor',
     'text!templates/team-screen.html'
 ], function(
     App,
@@ -13895,6 +13952,7 @@ define('views/team-screen',[
     Backbone,
     PlayerListView,
     TeamOverview,
+    PositionEditorView,
     TeamScreenTemplate
 ) {
     return Backbone.View.extend({
@@ -13905,6 +13963,7 @@ define('views/team-screen',[
             this.$el.empty();
 
             this.teamOverview = new TeamOverview();
+            this.positionEditorView = new PositionEditorView();
             this.playerListView = new PlayerListView({
                 collection: this.collection
             });
@@ -13912,6 +13971,7 @@ define('views/team-screen',[
             this.$el.html(this.template( App.player.toJSON() ));
             this.$el.append(this.playerListView.render().$el);
             this.$el.append(this.teamOverview.render().$el);
+            this.$el.append(this.positionEditorView.render().$el);
 
             return this;
         }
@@ -13935,11 +13995,11 @@ define('views/match-screen',[
     Backbone,
     PlayerListView,
     TeamOverview,
-    teamScreenTemplate
+    TeamScreenTemplate
 ) {
     return Backbone.View.extend({
 
-        template: _.template(teamScreenTemplate),
+        template: _.template(TeamScreenTemplate),
 
         initialize: function(options) {
         },
@@ -14024,7 +14084,7 @@ define('main',[
     App.opponent = new Backbone.Model();
 
     // Collections
-    App.usersTeamCollection = new TeamCollection();
+    App.usersTeamCollection = new TeamCollection(Array(11));
     App.opponentTeamCollection = new TeamCollection();
     App.playerCollection = new Backbone.Collection(PlayerData);
 

@@ -7,7 +7,7 @@ define([
     _,
     Backbone,
     PlayerView,
-    playerListTemplate
+    PlayerListTemplate
 ) {
     return Backbone.View.extend({
         id: 'player-selector',
@@ -16,7 +16,7 @@ define([
             'change #player_filters': 'filterChange'
         },
 
-        template:  _.template(playerListTemplate),
+        template:  _.template(PlayerListTemplate),
 
         initialize: function() {
             this.playerViews = [];
@@ -42,7 +42,6 @@ define([
         },
 
         render: function() {
-            console.log('in here. Player list view');
             this.$el.html(this.template({}));
             this.$('#player_list').append( this.renderPlayerViews() );
             return this;

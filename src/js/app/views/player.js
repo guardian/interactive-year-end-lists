@@ -7,7 +7,7 @@ define([
     App,
     Backbone,
     _,
-    playerTemplate
+    PlayerTemplate
 ){
 
     return Backbone.View.extend({
@@ -15,7 +15,7 @@ define([
 
         className: 'player_profile',
 
-        template: _.template(playerTemplate),
+        template: _.template(PlayerTemplate),
 
         events: {
             'click': 'clickHandler'
@@ -30,6 +30,8 @@ define([
         },
 
         clickHandler: function() {
+            App.player.set('selectedPlayer', this.model);
+
             this.model.set('selected', !this.model.get('selected'));
             if (this.model.get('selected')) {
                 App.usersTeamCollection.add(this.model);
