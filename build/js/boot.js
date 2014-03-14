@@ -13290,6 +13290,15 @@ return jQuery;
 
 }));
 
+define('app',[
+    'backbone',
+], function(
+    Backbone
+) {
+    var app = {};
+    return app;
+});
+
 define('models/player',[
     'backbone'
 ], function(
@@ -13320,18 +13329,12 @@ define('collections/team',[
     PlayerModel
 ) {
     return Backbone.Collection.extend({
-        model: PlayerModel
+        model: PlayerModel,
+
+        // Remote DB
+        url: '#'
     });
 });
-define('app',[
-    'backbone',
-], function(
-    Backbone
-) {
-    var app = {};
-    return app;
-});
-
 /**
  * @license RequireJS text 2.0.10 Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
@@ -13745,7 +13748,13 @@ define('views/player',[
             'click': 'clickHandler'
         },
 
-        initialize: function() {},
+        initialize: function() {
+            this.listenTo(this.model, 'change:selected', this.updateStatus);
+        },
+
+        updateStatus: function() {
+            this.$el.toggleClass('selected', this.model.get('selected'));
+        },
 
         clickHandler: function() {
             this.model.set('selected', !this.model.get('selected'));
@@ -13786,10 +13795,9 @@ define('views/player-list',[
 
         template:  _.template(playerListTemplate),
 
-        initialize: function(options) {
+        initialize: function() {
             this.playerViews = [];
             this.updatePlayerViews();
-            this.usersTeamCollection = options.usersTeamCollection;
         },
 
         filterChange: function() {
@@ -13811,7 +13819,8 @@ define('views/player-list',[
         },
 
         render: function() {
-            this.$el.append(this.template({}));
+            console.log('in here. Player list view');
+            this.$el.html(this.template({}));
             this.$('#player_list').append( this.renderPlayerViews() );
             return this;
         }
@@ -13819,28 +13828,47 @@ define('views/player-list',[
     });
 });
 
+
+define('text!templates/team-overview.html',[],function () { return '<ol class="pitch">\n<% _.each(players, function(player) { %>\n    <li class="pitch_player"><%= player.name %></li>\n<% }) %>\n</ol>\n\n<p>Skills - <%= skillPercentage %>%</p>\n<p>Creativity - <%= creativityPercentage %>%</p>\n<p>Unforgettably - <%= unforgettablyPercentage %>%</p>';});
+
 define('views/team-overview',[
     'app',
     'backbone',
+    'underscore',
+    'text!templates/team-overview.html'
 ], function(
     App,
-    Backbone
+    Backbone,
+    _,
+    TeamOverviewTemplate
 ) {
     return Backbone.View.extend({
         id: 'team-view',
+
+        template: _.template(TeamOverviewTemplate),
 
         initialize: function() {
             this.listenTo(App.usersTeamCollection, 'add remove', this.render);
         },
 
         generatePitch: function() {
-            var el = document.createDocumentFragment();
-            App.usersTeamCollection.each(function(model) {
-                var player = document.createElement('p');
-                player.innerHTML = model.get('name');
-                el.appendChild(player);
+            // var el = document.createDocumentFragment();
+            // App.usersTeamCollection.each(function(model) {
+            //     var player = document.createElement('p');
+            //     player.innerHTML = model.get('name');
+            //     el.appendChild(player);
+            // });
+            // return el;
+            //
+
+            // STUB: Calculate team stats
+
+            return this.template({
+                players: App.usersTeamCollection.toJSON(),
+                skillPercentage: 33,
+                creativityPercentage: 89,
+                unforgettablyPercentage: 33
             });
-            return el;
         },
 
         render: function() {
@@ -13852,14 +13880,58 @@ define('views/team-overview',[
 });
 
 
-define('text!templates/team-screen.html',[],function () { return '<h2>TEAM EDITOR</h2>\n<div id="team_status"></div>\n<div id="player_listings"></div>\n';});
+define('text!templates/team-screen.html',[],function () { return '<h2>TEAM EDITOR</h2>\n\n<div id="team_status"></div>\n<h2>Hello <%= username %></h2>\n<p>Share your team</p>\n<button id="sign-in">Sign in to save</button>\n\n<div id="player_listings"></div>\n';});
 
-define('views/page-team',[
+define('views/team-screen',[
+    'app',
+    'underscore',
     'backbone',
     'views/player-list',
     'views/team-overview',
     'text!templates/team-screen.html'
 ], function(
+    App,
+    _,
+    Backbone,
+    PlayerListView,
+    TeamOverview,
+    TeamScreenTemplate
+) {
+    return Backbone.View.extend({
+
+        template: _.template(TeamScreenTemplate),
+
+        render: function() {
+            this.$el.empty();
+
+            this.teamOverview = new TeamOverview();
+            this.playerListView = new PlayerListView({
+                collection: this.collection
+            });
+
+            this.$el.html(this.template( App.player.toJSON() ));
+            this.$el.append(this.playerListView.render().$el);
+            this.$el.append(this.teamOverview.render().$el);
+
+            return this;
+        }
+
+    });
+});
+
+
+define('text!templates/match-screen.html',[],function () { return '<h1>MATCH</h1>\n\n<%= username %> VS. <%= opponent %>';});
+
+define('views/match-screen',[
+    'app',
+    'underscore',
+    'backbone',
+    'views/player-list',
+    'views/team-overview',
+    'text!templates/match-screen.html'
+], function(
+    App,
+    _,
     Backbone,
     PlayerListView,
     TeamOverview,
@@ -13867,28 +13939,16 @@ define('views/page-team',[
 ) {
     return Backbone.View.extend({
 
+        template: _.template(teamScreenTemplate),
+
         initialize: function(options) {
-            this.collection.on('change', function() {
-                console.log(arguments);
-            });
-
-            this.usersTeamCollection = options.usersTeamCollection;
-
-            this.playerListView = new PlayerListView({
-                collection: this.collection,
-                usersTeamCollection: this.usersTeamCollection
-            });
-
-            this.teamOverview = new TeamOverview();
         },
 
         render: function() {
-            //this.$el.empty();
-
-
-            this.$el.append(this.playerListView.render().$el);
-            this.$el.append(this.teamOverview.render().$el);
-
+            this.$el.html(this.template({
+                username: App.player.get('username'),
+                opponent: App.opponent.get('username')
+            }));
             return this;
         }
 
@@ -13905,64 +13965,72 @@ define('data/players',[], function() {
 });
 
 define('routes',[
+    'app',
     'backbone'
 ],
 function(
+    App,
     Backbone
 ){
     return Backbone.Router.extend({
         routes: {
-            'about':                    'showAbout',   // dreamteam#about
-            'match/:player1/:player2':  'showMatch',   // dreamteam#match/andrew/daan
-            'user/:username':           'showUser',    // dreamteam#user/andrew
-            '*other':                   'defaultRoute' // dreamteam#
+            'user/:username':              'showUser',    // dreamteam#user/andrew
+            'match/:username/:oppontent':  'showMatch',   // dreamteam#match/andrew/daan
+            '*other':                      'defaultRoute' // dreamteam#
         },
 
-        showAbout: function() {
-            console.log('in about section');
-        },
+        showMatch: function(username, oppontent) {
+            App.player.set('username', username);
+            App.opponent.set('username', oppontent);
 
-        showMatch: function(player1, player2) {
-            console.log(player1, player2);
+            App.$el.empty();
+            App.$el.html(App.matchView.render().$el);
         },
 
         showUser: function(username) {
-            console.log(username);
+            App.player.set('username', username);
+            App.$el.empty();
+            App.$el.html(App.teamView.render().$el);
         },
 
         defaultRoute: function(other){
-            console.log('Invalid. You attempted to reach:' + other);
+            this.showUser();
         }
     });
 });
 
 define('main',[
+    'app',
+    'jquery',
     'backbone',
     'collections/team',
-    'views/page-team',
+    'views/team-screen',
+    'views/match-screen',
     'data/players',
-    'routes',
-    'app'
-
+    'routes'
 ], function(
+    App,
+    $,
     Backbone,
     TeamCollection,
-    PageTeamView,
+    TeamScreenView,
+    MatchScreenView,
     PlayerData,
-    Routes,
-    App
+    Routes
 ) {
 
+    // Models
+    App.player = new Backbone.Model();
+    App.opponent = new Backbone.Model();
 
-    App.usersTeamCollection = new Backbone.Collection();
+    // Collections
+    App.usersTeamCollection = new TeamCollection();
+    App.opponentTeamCollection = new TeamCollection();
+    App.playerCollection = new Backbone.Collection(PlayerData);
 
-    var teamCollection = new TeamCollection(PlayerData);
-    var usersTeamCollection = new Backbone.Collection.extend();
-
-    var pageTeamView = new PageTeamView({
-        collection: teamCollection,
-        usersTeamCollection: usersTeamCollection
-    });
+    // Views
+    App.teamView = new TeamScreenView({ collection: App.playerCollection });
+    App.matchView = new MatchScreenView();
 
 
     /**
@@ -13970,12 +14038,12 @@ define('main',[
      * @param  {element} el DOM element provided from the page ie. <figure>
      */
     function boot(el) {
+        // Store DOM target
+        App.$el = $(el);
+
         // Setup routing
         var appRoutes = new Routes();
         Backbone.history.start();
-
-        // Render app into the page
-        el.appendChild(pageTeamView.render().el);
     }
 
     return {

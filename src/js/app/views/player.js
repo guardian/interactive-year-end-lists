@@ -21,7 +21,13 @@ define([
             'click': 'clickHandler'
         },
 
-        initialize: function() {},
+        initialize: function() {
+            this.listenTo(this.model, 'change:selected', this.updateStatus);
+        },
+
+        updateStatus: function() {
+            this.$el.toggleClass('selected', this.model.get('selected'));
+        },
 
         clickHandler: function() {
             this.model.set('selected', !this.model.get('selected'));

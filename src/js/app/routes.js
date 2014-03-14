@@ -1,31 +1,34 @@
 define([
+    'app',
     'backbone'
 ],
 function(
+    App,
     Backbone
 ){
     return Backbone.Router.extend({
         routes: {
-            'about':                    'showAbout',   // dreamteam#about
-            'match/:player1/:player2':  'showMatch',   // dreamteam#match/andrew/daan
-            'user/:username':           'showUser',    // dreamteam#user/andrew
-            '*other':                   'defaultRoute' // dreamteam#
+            'user/:username':              'showUser',    // dreamteam#user/andrew
+            'match/:username/:oppontent':  'showMatch',   // dreamteam#match/andrew/daan
+            '*other':                      'defaultRoute' // dreamteam#
         },
 
-        showAbout: function() {
-            console.log('in about section');
-        },
+        showMatch: function(username, oppontent) {
+            App.player.set('username', username);
+            App.opponent.set('username', oppontent);
 
-        showMatch: function(player1, player2) {
-            console.log(player1, player2);
+            App.$el.empty();
+            App.$el.html(App.matchView.render().$el);
         },
 
         showUser: function(username) {
-            console.log(username);
+            App.player.set('username', username);
+            App.$el.empty();
+            App.$el.html(App.teamView.render().$el);
         },
 
         defaultRoute: function(other){
-            console.log('Invalid. You attempted to reach:' + other);
+            this.showUser();
         }
     });
 });

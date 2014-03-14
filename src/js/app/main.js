@@ -1,30 +1,35 @@
 define([
+    'app',
+    'jquery',
     'backbone',
     'collections/team',
-    'views/page-team',
+    'views/team-screen',
+    'views/match-screen',
     'data/players',
-    'routes',
-    'app'
-
+    'routes'
 ], function(
+    App,
+    $,
     Backbone,
     TeamCollection,
-    PageTeamView,
+    TeamScreenView,
+    MatchScreenView,
     PlayerData,
-    Routes,
-    App
+    Routes
 ) {
 
+    // Models
+    App.player = new Backbone.Model();
+    App.opponent = new Backbone.Model();
 
-    App.usersTeamCollection = new Backbone.Collection();
+    // Collections
+    App.usersTeamCollection = new TeamCollection();
+    App.opponentTeamCollection = new TeamCollection();
+    App.playerCollection = new Backbone.Collection(PlayerData);
 
-    var teamCollection = new TeamCollection(PlayerData);
-    var usersTeamCollection = new Backbone.Collection.extend();
-
-    var pageTeamView = new PageTeamView({
-        collection: teamCollection,
-        usersTeamCollection: usersTeamCollection
-    });
+    // Views
+    App.teamView = new TeamScreenView({ collection: App.playerCollection });
+    App.matchView = new MatchScreenView();
 
 
     /**
@@ -32,12 +37,12 @@ define([
      * @param  {element} el DOM element provided from the page ie. <figure>
      */
     function boot(el) {
+        // Store DOM target
+        App.$el = $(el);
+
         // Setup routing
         var appRoutes = new Routes();
         Backbone.history.start();
-
-        // Render app into the page
-        el.appendChild(pageTeamView.render().el);
     }
 
     return {

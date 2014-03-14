@@ -6,6 +6,9 @@ define([
     PlayerModel
 ) {
     return Backbone.Collection.extend({
-        model: PlayerModel
+        model: PlayerModel,
+
+        // Remote DB
+        url: '#'
     });
 });

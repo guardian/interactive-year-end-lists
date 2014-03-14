@@ -18,10 +18,9 @@ define([
 
         template:  _.template(playerListTemplate),
 
-        initialize: function(options) {
+        initialize: function() {
             this.playerViews = [];
             this.updatePlayerViews();
-            this.usersTeamCollection = options.usersTeamCollection;
         },
 
         filterChange: function() {
@@ -43,7 +42,8 @@ define([
         },
 
         render: function() {
-            this.$el.append(this.template({}));
+            console.log('in here. Player list view');
+            this.$el.html(this.template({}));
             this.$('#player_list').append( this.renderPlayerViews() );
             return this;
         }
