@@ -16,10 +16,12 @@ define([
             'change #player_filters': 'filterChange'
         },
 
-        initialize: function() {
-            this.template = _.template(playerListTemplate);
+        template:  _.template(playerListTemplate),
+
+        initialize: function(options) {
             this.playerViews = [];
             this.updatePlayerViews();
+            this.usersTeamCollection = options.usersTeamCollection;
         },
 
         filterChange: function() {

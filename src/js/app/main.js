@@ -3,18 +3,28 @@ define([
     'collections/team',
     'views/page-team',
     'data/players',
-    'routes'
+    'routes',
+    'app'
+
 ], function(
     Backbone,
     TeamCollection,
     PageTeamView,
     PlayerData,
-    Routes
+    Routes,
+    App
 ) {
 
-    var teamCollection = new TeamCollection(PlayerData);
-    var pageTeamView = new PageTeamView({ collection: teamCollection });
 
+    App.usersTeamCollection = new Backbone.Collection();
+
+    var teamCollection = new TeamCollection(PlayerData);
+    var usersTeamCollection = new Backbone.Collection.extend();
+
+    var pageTeamView = new PageTeamView({
+        collection: teamCollection,
+        usersTeamCollection: usersTeamCollection
+    });
 
 
     /**
@@ -22,7 +32,6 @@ define([
      * @param  {element} el DOM element provided from the page ie. <figure>
      */
     function boot(el) {
-
         // Setup routing
         var appRoutes = new Routes();
         Backbone.history.start();

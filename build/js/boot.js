@@ -13323,6 +13323,15 @@ define('collections/team',[
         model: PlayerModel
     });
 });
+define('app',[
+    'backbone',
+], function(
+    Backbone
+) {
+    var app = {};
+    return app;
+});
+
 /**
  * @license RequireJS text 2.0.10 Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
@@ -13714,29 +13723,37 @@ define('text',['module'], function (module) {
 define('text!templates/player-profile.html',[],function () { return '<img src="<%= imageSrc %>"/>\n<ul>\n    <li><%= name %></li>\n    <li><%= position %></li>\n</ul>\n';});
 
 define('views/player',[
-    'underscore',
+    'app',
     'backbone',
+    'underscore',
     'text!templates/player-profile.html'
 ], function(
-    _,
+    App,
     Backbone,
+    _,
     playerTemplate
 ){
 
     return Backbone.View.extend({
         tagName: 'div',
+
         className: 'player_profile',
+
+        template: _.template(playerTemplate),
 
         events: {
             'click': 'clickHandler'
         },
 
-        initialize: function() {
-            this.template = _.template(playerTemplate);
-        },
+        initialize: function() {},
 
         clickHandler: function() {
             this.model.set('selected', !this.model.get('selected'));
+            if (this.model.get('selected')) {
+                App.usersTeamCollection.add(this.model);
+            } else {
+                App.usersTeamCollection.remove(this.model);
+            }
         },
 
         render: function() {
@@ -13767,10 +13784,12 @@ define('views/player-list',[
             'change #player_filters': 'filterChange'
         },
 
-        initialize: function() {
-            this.template = _.template(playerListTemplate);
+        template:  _.template(playerListTemplate),
+
+        initialize: function(options) {
             this.playerViews = [];
             this.updatePlayerViews();
+            this.usersTeamCollection = options.usersTeamCollection;
         },
 
         filterChange: function() {
@@ -13800,30 +13819,76 @@ define('views/player-list',[
     });
 });
 
+define('views/team-overview',[
+    'app',
+    'backbone',
+], function(
+    App,
+    Backbone
+) {
+    return Backbone.View.extend({
+        id: 'team-view',
+
+        initialize: function() {
+            this.listenTo(App.usersTeamCollection, 'add remove', this.render);
+        },
+
+        generatePitch: function() {
+            var el = document.createDocumentFragment();
+            App.usersTeamCollection.each(function(model) {
+                var player = document.createElement('p');
+                player.innerHTML = model.get('name');
+                el.appendChild(player);
+            });
+            return el;
+        },
+
+        render: function() {
+            this.$el.html(this.generatePitch());
+            return this;
+        }
+
+    });
+});
+
 
 define('text!templates/team-screen.html',[],function () { return '<h2>TEAM EDITOR</h2>\n<div id="team_status"></div>\n<div id="player_listings"></div>\n';});
 
 define('views/page-team',[
     'backbone',
     'views/player-list',
+    'views/team-overview',
     'text!templates/team-screen.html'
 ], function(
     Backbone,
     PlayerListView,
+    TeamOverview,
     teamScreenTemplate
 ) {
     return Backbone.View.extend({
 
-        initialize: function() {
+        initialize: function(options) {
             this.collection.on('change', function() {
                 console.log(arguments);
             });
+
+            this.usersTeamCollection = options.usersTeamCollection;
+
+            this.playerListView = new PlayerListView({
+                collection: this.collection,
+                usersTeamCollection: this.usersTeamCollection
+            });
+
+            this.teamOverview = new TeamOverview();
         },
 
         render: function() {
-            this.$el.empty();
-            this.playerListView = new PlayerListView({ collection: this.collection });
-            this.$el.append(this.playerListView.render().el);
+            //this.$el.empty();
+
+
+            this.$el.append(this.playerListView.render().$el);
+            this.$el.append(this.teamOverview.render().$el);
+
             return this;
         }
 
@@ -13876,18 +13941,28 @@ define('main',[
     'collections/team',
     'views/page-team',
     'data/players',
-    'routes'
+    'routes',
+    'app'
+
 ], function(
     Backbone,
     TeamCollection,
     PageTeamView,
     PlayerData,
-    Routes
+    Routes,
+    App
 ) {
 
-    var teamCollection = new TeamCollection(PlayerData);
-    var pageTeamView = new PageTeamView({ collection: teamCollection });
 
+    App.usersTeamCollection = new Backbone.Collection();
+
+    var teamCollection = new TeamCollection(PlayerData);
+    var usersTeamCollection = new Backbone.Collection.extend();
+
+    var pageTeamView = new PageTeamView({
+        collection: teamCollection,
+        usersTeamCollection: usersTeamCollection
+    });
 
 
     /**
@@ -13895,7 +13970,6 @@ define('main',[
      * @param  {element} el DOM element provided from the page ie. <figure>
      */
     function boot(el) {
-
         // Setup routing
         var appRoutes = new Routes();
         Backbone.history.start();

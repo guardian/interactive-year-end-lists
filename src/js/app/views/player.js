@@ -1,27 +1,35 @@
 define([
-    'underscore',
+    'app',
     'backbone',
+    'underscore',
     'text!templates/player-profile.html'
 ], function(
-    _,
+    App,
     Backbone,
+    _,
     playerTemplate
 ){
 
     return Backbone.View.extend({
         tagName: 'div',
+
         className: 'player_profile',
+
+        template: _.template(playerTemplate),
 
         events: {
             'click': 'clickHandler'
         },
 
-        initialize: function() {
-            this.template = _.template(playerTemplate);
-        },
+        initialize: function() {},
 
         clickHandler: function() {
             this.model.set('selected', !this.model.get('selected'));
+            if (this.model.get('selected')) {
+                App.usersTeamCollection.add(this.model);
+            } else {
+                App.usersTeamCollection.remove(this.model);
+            }
         },
 
         render: function() {
