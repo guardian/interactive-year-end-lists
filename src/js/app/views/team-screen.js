@@ -2,7 +2,7 @@ define([
     'app',
     'underscore',
     'backbone',
-    'views/player-list',
+    'views/squad-selection',
     'views/team-overview',
     'views/position-editor',
     'text!templates/team-screen.html'

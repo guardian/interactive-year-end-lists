@@ -1,8 +1,9 @@
+// Team A vs Team B
 define([
     'app',
     'underscore',
     'backbone',
-    'views/player-list',
+    'views/squad-selection',
     'views/team-overview',
     'text!templates/match-screen.html'
 ], function(
