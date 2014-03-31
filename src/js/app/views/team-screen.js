@@ -3,15 +3,15 @@ define([
     'underscore',
     'backbone',
     'views/squad-selection',
-    'views/team-overview',
+    'views/team-rating',
     'views/position-editor',
     'text!templates/team-screen.html'
 ], function(
     App,
     _,
     Backbone,
-    PlayerListView,
-    TeamOverview,
+    SquadSelectionView,
+    TeamRating,
     PositionEditorView,
     TeamScreenTemplate
 ) {
@@ -24,15 +24,15 @@ define([
         render: function() {
             this.$el.empty();
 
-            this.teamOverview = new TeamOverview();
+            this.teamRating = new TeamRating();
             this.positionEditorView = new PositionEditorView();
-            this.playerListView = new PlayerListView({
+            this.SquadSelectionView = new SquadSelectionView({
                 collection: this.collection
             });
 
             this.$el.html(this.template( App.player.toJSON() ));
-            this.$el.append(this.playerListView.render().$el);
-            this.$el.append(this.teamOverview.render().$el);
+            this.$el.append(this.SquadSelectionView.render().$el);
+            this.$el.append(this.teamRating.render().$el);
             this.$el.append(this.positionEditorView.render().$el);
 
             return this;

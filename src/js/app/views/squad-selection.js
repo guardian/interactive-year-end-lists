@@ -8,7 +8,7 @@ define([
     _,
     Backbone,
     PlayerView,
-    PlayerListTemplate
+    SquadSelectionTemplate
 ) {
     return Backbone.View.extend({
         id: 'player-selector',
@@ -18,7 +18,7 @@ define([
             'click #resetTeam': 'resetTeam'
         },
 
-        template:  _.template(PlayerListTemplate),
+        template:  _.template(SquadSelectionTemplate),
 
         initialize: function() {            
             this.playerViews = [];

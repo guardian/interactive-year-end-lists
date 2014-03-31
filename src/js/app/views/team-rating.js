@@ -2,7 +2,7 @@ define([
     'app',
     'backbone',
     'underscore',
-    'text!templates/team-overview.html'
+    'text!templates/team-rating.html'
 ], function(
     App,
     Backbone,
