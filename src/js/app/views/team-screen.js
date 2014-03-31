@@ -19,6 +19,8 @@ define([
 
         template: _.template(TeamScreenTemplate),
 
+        className: 'container',
+
         render: function() {
             this.$el.empty();
 
