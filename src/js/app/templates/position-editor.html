@@ -1,12 +1,12 @@
 <div id="position_editor">
     <div id="selected_player">
-        <p>Player name: <%= selectedPlayer.name %></p>
+        <p>Player name: <%= selectedPlayer.name %> - <%= selectedPlayer.uid %></p>
         <p>Player country: <%= selectedPlayer.country %></p>
     </div>
 
     <ol>
-        <% _.each(players, function(player, index) { %>
-            <li>Position #<%= index %></li>
+        <% _.each(players, function(player) { %>
+            <li><%= player.name %></li>
         <% }) %>
     </ol>
 

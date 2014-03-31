@@ -73,7 +73,8 @@ module.exports = function(grunt) {
         files: [
           { src: 'src/index.html', dest: 'build/index.html' },
           { src: 'src/css/partials/*.css', dest: 'build/css/vendor.css' },
-          { src: 'src/js/libs/require.js', dest: 'build/js/require.js' }
+          { src: 'src/js/libs/require.js', dest: 'build/js/require.js' },
+          {expand: true, cwd: 'src/images/', src: ['**/*.{png,jpg,svg}'], dest:'build/images/' }
         ]
       }
     }

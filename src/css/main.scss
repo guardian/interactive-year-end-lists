@@ -14,27 +14,28 @@ body {
 /**
  * Player selection
  */
+ .selection-info {
+ 	display: none;
+ }
+ .selected .selection-info {
+ 	display: none !important;	
+ }
  #team-view {
  	display: none;
  }
-
-#player-selector {
-	float:left;
-	width: 70%;
-}
-
- #player_list {
- 	float: left;
- 	clear: both;
- 	width: 100%;
- }
+ 
  .player_profile {
  	float: left;
  	width: 25%;
  }
+ .player_profile img {
+ 	width: 100%;
+ }
+
  .player_profile .inner {
  	padding: 10px;
  }
+
  .player_profile.selected > div {
- 	border: 1px solid red;
+ 	opacity: 0.5;
  }

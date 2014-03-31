@@ -1,5 +1,11 @@
-<img src="<%= imageSrc %>"/>
-<ul>
-    <li><%= name %></li>
-    <li><%= position %></li>
-</ul>
+<div class="inner">
+	<img src="<%= imageSrc %>"/>
+	<p><%= name %></p>
+	<div class="selection-info">
+		<span class="close">&times;</span>
+		<ul>
+		    <li><%= position %></li>
+		</ul>
+		<button class="addToSquad">Add to squad</button>
+	</div>
+</div>

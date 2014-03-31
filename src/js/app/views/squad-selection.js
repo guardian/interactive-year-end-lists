@@ -12,6 +12,7 @@ define([
 ) {
     return Backbone.View.extend({
         id: 'player-selector',
+        className: 'col-sm-8',
 
         events: {
             'change #player_filters': 'filterChange',
