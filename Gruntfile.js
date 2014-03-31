@@ -53,8 +53,8 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['src/**/*.js', 'src/js/app/templates/*.html'],
-        tasks: ['jshint', 'requirejs'],
+        files: ['src/**/*.js', 'src/**/*.scss', 'src/js/app/templates/*.html'],
+        tasks: ['jshint', 'requirejs', 'sass'],
         options: {
           spawn: false,
         },
