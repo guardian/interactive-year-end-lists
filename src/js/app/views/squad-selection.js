@@ -20,9 +20,7 @@ define([
 
         template:  _.template(PlayerListTemplate),
 
-        initialize: function() {
-            console.log('player-list.js has been initialized.');
-            
+        initialize: function() {            
             this.playerViews = [];
             this.updatePlayerViews();
         },
