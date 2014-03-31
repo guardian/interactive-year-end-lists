@@ -15,7 +15,7 @@ module.exports = function(grunt) {
     sass: {
       build: {
         options: {
-          includePaths: ['src/css/']
+          includePaths: ['src/css/', 'src/css/partials/']
         },
         files: {
           'build/css/main.css': 'src/css/main.scss'
@@ -72,6 +72,7 @@ module.exports = function(grunt) {
       build: {
         files: [
           { src: 'src/index.html', dest: 'build/index.html' },
+          { src: 'src/css/partials/*.css', dest: 'build/css/vendor.css' },
           { src: 'src/js/libs/require.js', dest: 'build/js/require.js' }
         ]
       }

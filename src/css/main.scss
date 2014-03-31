@@ -2,3 +2,39 @@
  * Project: World Cup 2014 dream team
  * File:    Main SCSS
  */
+
+$font-stack: Helvetica, sans-serif;
+$primary-color: #333;
+
+body {
+
+}
+
+
+/**
+ * Player selection
+ */
+ #team-view {
+ 	display: none;
+ }
+
+#player-selector {
+	float:left;
+	width: 70%;
+}
+
+ #player_list {
+ 	float: left;
+ 	clear: both;
+ 	width: 100%;
+ }
+ .player_profile {
+ 	float: left;
+ 	width: 25%;
+ }
+ .player_profile .inner {
+ 	padding: 10px;
+ }
+ .player_profile.selected > div {
+ 	border: 1px solid red;
+ }
