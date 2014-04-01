@@ -19,9 +19,7 @@ define([
         },
 
         generatePitch: function() {
-
-            // STUB: Calculate team stats
-
+            
             return this.template({
                 players: App.usersTeamCollection.toJSON(),
                 skillPercentage: 33,
