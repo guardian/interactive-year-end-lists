@@ -14,28 +14,31 @@ body {
 /**
  * Player selection
  */
- .selection-info {
+ .selection-info, .removeFromSquad {
  	display: none;
  }
  .selected .selection-info {
  	display: none !important;	
  }
- #team-view {
- 	display: none;
- }
- 
- .player_profile {
- 	float: left;
- 	width: 25%;
- }
  .player_profile img {
  	width: 100%;
  }
-
- .player_profile .inner {
- 	padding: 10px;
+ .player_profile .removeFromSquad {
+ 	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 60px;
+	width: 100%;
+	text-align: center;
+	cursor: pointer;
+	color: red;
+	bottom: 0;
  }
 
  .player_profile.selected > div {
  	opacity: 0.5;
  }
+ .player_profile.selected:hover .removeFromSquad {
+ 	display: block;
+ }
+ 

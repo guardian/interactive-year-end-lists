@@ -13,13 +13,13 @@ define([
     return Backbone.View.extend({
         tagName: 'div',
 
-        className: 'col-xs-4 player_profile',
+        className: 'col-xs-3 col-lg-4 player_profile',
 
         template: _.template(PlayerTemplate),
 
         events: {
             'click': 'showSelectionInfo',
-            'click .selection-info button.addToSquad': 'addToSquad',
+            'click button.addToSquad, .removeFromSquad': 'addToSquad',
         },
 
         initialize: function() {
@@ -42,9 +42,7 @@ define([
         addToSquad: function() {
             
             this.hideAllSelectionInfo();
-
-            App.player.set('selectedPlayer', this.model);
-
+            
             this.model.set('selected', !this.model.get('selected'));
 
             if (this.model.get('selected')) {

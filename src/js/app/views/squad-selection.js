@@ -11,7 +11,7 @@ define([
     SquadSelectionTemplate
 ) {
     return Backbone.View.extend({
-        id: 'player-selector',
+        id: 'squad-selection',
         className: 'col-sm-8',
 
         events: {
