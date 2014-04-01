@@ -15,10 +15,11 @@ define([
 
 
         validateAddingPlayer: function(model) {
-			var response = { status: 'error', message: '' };
+			var response = { status: 'fail', message: '' };
             
             // Cant have more than 4 players
             if((App.usersTeamCollection.length + 1) <= 4) {
+            	
                 // Cant have more than x players in position y
                 var allowedPositions = {
                     'Striker' : 2,
@@ -43,6 +44,7 @@ define([
 			if(response.status == 'success') {
 				App.usersTeamCollection.add(model);
 			} else {
+
 				alert(response.message);
 			}
         },
