@@ -41,4 +41,18 @@ body {
  .player_profile.selected:hover .removeFromSquad {
  	display: block;
  }
- 
+
+
+
+ /**
+  * Pitch view
+  */
+ .pitch {
+ 	margin: 0;
+ 	padding: 0;
+ 	background: url('/images/pitch.jpg');
+ 	min-height: 400px;
+ 	background-size: contain;
+ 	background-repeat: no-repeat;
+ 	list-style: none;
+ }
