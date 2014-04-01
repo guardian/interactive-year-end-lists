@@ -29,11 +29,14 @@ define([
         },
 
         openCard: function() {
-            this.model = App.playerCollection.get(App.playerSelected.get('highlighted'));
-            this.templateData = {"playerSelected": this.model.attributes};
-            this.$el.html(this.template(this.templateData));
+            if(App.playerSelected.get('highlighted')) {
+                this.model = App.playerCollection.get(App.playerSelected.get('highlighted'));
+                this.templateData = {"playerSelected": this.model.attributes};
+                this.$el.html(this.template(this.templateData));
 
-            this.$el.show();
+                this.$el.show();
+                App.playerSelected.set('highlighted', 0);
+            }
         },
 
         closeCard: function() {
