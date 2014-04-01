@@ -22,6 +22,8 @@ define([
     App.player = new Backbone.Model();
     App.opponent = new Backbone.Model();
 
+    App.playerSelected = new Backbone.Model();
+
     // Collections
     App.playerCollection = new Backbone.Collection(PlayerData);
 
@@ -31,7 +33,6 @@ define([
     // Views
     App.teamView = new TeamScreenView({ collection: App.playerCollection });
     App.matchView = new MatchScreenView();
-
 
     /**
      * Bootstrap loader
