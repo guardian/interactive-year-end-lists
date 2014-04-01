@@ -1,6 +1,12 @@
 <ol class="pitch">
 	<% _.each(players, function(player) { %>
-	    <li class="pitch_player position-<%= player.position.toLowerCase() %>"><%= player.name %> - <%= player.apps %>/<%= player.gls %></li>
+	    <li class="pitch_player position-<%= player.position.toLowerCase() %>">
+	    	<img src="<%= player.imageSrc %>" alt="">
+	    	<%= player.name %>
+	    	<span class="stats">
+	    		<%= player.apps %>/<%= player.gls %>
+	    	</span>
+	    </li>
 	<% }) %>
 </ol>
 

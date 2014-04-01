@@ -55,4 +55,36 @@ body {
  	background-size: contain;
  	background-repeat: no-repeat;
  	list-style: none;
+ 	position: relative;
+ }
+ .pitch img {
+ 	width: 50px;
+ 	height: 50px;
+ 	border-radius: 50%;
+ 	box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.5);
+ }
+ .pitch_player {
+ 	position: absolute;
+	max-width: 80px;
+	font-size: 12px;
+	color: #fff;
+	text-align: center;
+ }
+ .pitch_player span {
+ 	display: block;
+ }
+
+ /* Strikers */
+ .pitch_player.position-striker {
+ 	left: 60px;
+ 	top: 40px;
+ }
+ .pitch_player.position-striker:nth-child(2) {
+ 	left: 154px;
+ }
+
+ /* Goalkeepers */
+ .pitch_player.position-goalkeeper {
+ 	bottom: 15px;
+ 	left: 105px;
  }
