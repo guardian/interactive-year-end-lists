@@ -25,6 +25,12 @@ body {
 /**
  * Player selection
  */
+ #player_filters {
+ 	margin-bottom: 20px;
+ }
+ #player_filters select {
+ 	margin-right: 7px;
+ }
  .selection-info, .removeFromSquad, .player_profile .close {
  	display: none;
  }

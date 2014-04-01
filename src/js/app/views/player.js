@@ -3,7 +3,7 @@ define([
     'backbone',
     'underscore',
     'data/players',
-    'text!templates/player-profile.html'
+    'text!templates/player-list.html'
 ], function(
     App,
     Backbone,
@@ -15,7 +15,7 @@ define([
     return Backbone.View.extend({
         tagName: 'div',
 
-        className: 'col-xs-3 col-lg-4 player_profile',
+        className: 'col-xs-4 col-sm-3 player_profile',
 
         template: _.template(PlayerTemplate),
 
