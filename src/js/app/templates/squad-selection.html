@@ -1,22 +1,23 @@
 
-<form id="player_filters">
-    <p>
-        Show:
-        <select id="players_position" data-filter-name="position">
+<form id="player_filters" class="form-inline" role="form">
+    <div class="form-group">
+        <select id="players_position" class="form-control" data-filter-name="position">
             <option value="">All positions</option>
             <% _.each(positions, function(position) { %>
                 <option value="<%= position %>"><%= position %></option>
             <% }) %>
         </select>
-
-        <select id="players_country" data-filter-name="country">
+    </div>
+    <div class="form-group">
+        <select id="players_country" class="form-control" data-filter-name="country">
             <option value="">All countries</option>
             <% _.each(countries, function(country) { %>
                 <option value="<%= country %>"><%= country %></option>
             <% }) %>
         </select>
-
-        <select id="players_era" data-filter-name="era">
+    </div>
+    <div class="form-group">
+        <select id="players_era" class="form-control" data-filter-name="era">
             <option value="">All eras</option>
             <option value="1940">1940s</option>
             <option value="1950">1950s</option>
@@ -26,9 +27,14 @@
             <option value="1990">1990s</option>
             <option value="2000">2000s</option>
         </select>
-
-        <button id="resetTeam">Reset</button>
-    </p>
+    </div>
+    <button id="resetTeam btn btn-default">Reset</button>
 </form>
 
+<div class="alert alert-warning alert-dismissable selection-error" style="display:none">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    
+</div>
+
 <div id="player_list" class="row"></div>
+

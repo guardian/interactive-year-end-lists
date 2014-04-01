@@ -33,6 +33,9 @@ define([
             if($(ev.target).hasClass('close')) {
                 return false;
             } else {
+                $('#mask').show();
+                $('html').addClass('noscroll');
+                this.$el.addClass('highlighted');
                 this.$el.find('.selection-info').show();
             }
         },
@@ -46,14 +49,30 @@ define([
             if (App.usersTeamCollection.contains(this.model)) {
                 App.usersTeamCollection.remove(this.model);
             } else {
-                App.usersTeamCollection.addPlayerToCollection(this.model);
+                var response = App.usersTeamCollection.addPlayerToCollection(this.model);
+                if(response.status == 'fail') {
+                    this.showErrorMessage(response.message);
+                }
             }
             this.updateStatus();
             return false;
         },
 
         hideAllSelectionInfo: function() {
-            $('.selection-info').hide();
+            $('html').removeClass('noscroll');
+            $('.highlighted').removeClass('highlighted');
+            $('.selection-info, .selection-error, #mask').hide();
+
+            $('.hover').hover(function(){
+            $(this).addClass('flip');
+            },function(){
+                $(this).removeClass('flip');
+            });
+
+        },
+
+        showErrorMessage: function(message) {
+            $('.selection-error').text(message).show();
         },
 
         render: function() {
