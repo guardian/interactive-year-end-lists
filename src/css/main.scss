@@ -35,9 +35,48 @@ body {
  /* Player modal */
   .player_profile {
   	text-align: center;
+  	margin-bottom: 7px;
+  	cursor: pointer;
   }
- .player_profile img {
+  .player_profile .removePlayer {
+  	display:none;
+  }
+  .player_profile.selected .removePlayer {
+  	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	padding-top: 50px;
+	font-size: 22px;
+	font-weight: bold;
+	z-index: 2;
+  }
+  .player_profile.selected img {
+  	opacity: 0.5;
+}
+  .player_profile .inner {
+  	position: relative;
+  }
+  .player_profile.selected .removePlayer {
+  	display: block;
+  	position: absolute;
+  	width:100%;
+  	height: 100%;
+  	opacity: 0.5;
+  }
+img.player-image, .player_profile img {
  	width: 100%;
+ }
+ .modal .player-bio {
+ 	max-height: 350px;
+ 	overflow: scroll;
+ }
+ .modal.player-card img.flag {
+ 	margin-right: 5px;
+ }
+ .modal.player-card .table {
+ 	font-size: 12px;
+ 	margin: 20px 0 0;
  }
 
 

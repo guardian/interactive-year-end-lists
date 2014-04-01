@@ -15,7 +15,7 @@ define([
     return Backbone.View.extend({
         tagName: 'div',
         id: 'playerSelectedModal',
-        className: 'modal',
+        className: 'modal player-card',
         template: _.template(ProfileTemplate),
 
         events: {
@@ -44,19 +44,13 @@ define([
             return false;
         },
 
-        updateStatus: function() {
-            this.$el.toggleClass('selected', App.usersTeamCollection.contains(this.model));
-        },
-
         addToSquad: function() {
             this.closeCard();
-            if (App.usersTeamCollection.contains(this.model)) {
-                App.usersTeamCollection.remove(this.model);
+            var response = App.usersTeamCollection.addPlayerToCollection(this.model);
+            if(response.status == 'fail') {
+                console.log(response.message);
             } else {
-                var response = App.usersTeamCollection.addPlayerToCollection(this.model);
-                if(response.status == 'fail') {
-                    console.log(response.message);
-                }
+                $('#player_profile_' + this.model.cid).addClass('selected');
             }
             return false;
         },
