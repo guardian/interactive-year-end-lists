@@ -2,23 +2,29 @@
 <form id="player_filters">
     <p>
         Show:
-        <select id="players_position">
-            <option>All position</option>
+        <select id="players_position" data-filter-name="position">
+            <option value="">All positions</option>
+            <% _.each(positions, function(position) { %>
+                <option value="<%= position %>"><%= position %></option>
+            <% }) %>
         </select>
 
-        <select id="players_country">
-            <option>All countries</option>
+        <select id="players_country" data-filter-name="country">
+            <option value="">All countries</option>
+            <% _.each(countries, function(country) { %>
+                <option value="<%= country %>"><%= country %></option>
+            <% }) %>
         </select>
 
-        <select id="players_era">
-            <option>All eras</option>
-            <option>From 1940 - 1950</option>
-            <option>From 1950 - 1960</option>
-            <option>From 1960 - 1970</option>
-            <option>From 1970 - 1980</option>
-            <option>From 1980 - 1990</option>
-            <option>From 1990 - 2000</option>
-            <option>From 2000 - 2010</option>
+        <select id="players_era" data-filter-name="era">
+            <option value="">All eras</option>
+            <option value="1940">1940s</option>
+            <option value="1950">1950s</option>
+            <option value="1960">1960s</option>
+            <option value="1970">1970s</option>
+            <option value="1980">1980s</option>
+            <option value="1990">1990s</option>
+            <option value="2000">2000s</option>
         </select>
 
         <button id="resetTeam">Reset</button>
