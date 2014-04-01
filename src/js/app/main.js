@@ -23,10 +23,16 @@ define([
     App.opponent = new Backbone.Model();
 
     // Collections
-    App.usersTeamCollection = new TeamCollection();
-    App.opponentTeamCollection = new TeamCollection();
     App.playerCollection = new Backbone.Collection(PlayerData);
 
+    App.usersTeamCollection = new TeamCollection();
+    App.opponentTeamCollection = new TeamCollection();
+
+    // TODO: Adding test data for designing the pitch with positions
+    App.usersTeamCollection.add(PlayerData[1]);
+    App.usersTeamCollection.add(PlayerData[2]);
+    App.usersTeamCollection.add(PlayerData[3]);
+    
     // Views
     App.teamView = new TeamScreenView({ collection: App.playerCollection });
     App.matchView = new MatchScreenView();
