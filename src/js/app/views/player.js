@@ -2,11 +2,13 @@ define([
     'app',
     'backbone',
     'underscore',
+    'data/players',
     'text!templates/player-profile.html'
 ], function(
     App,
     Backbone,
     _,
+    PlayerData,
     PlayerTemplate
 ){
 
@@ -44,25 +46,7 @@ define([
             if (App.usersTeamCollection.contains(this.model)) {
                 App.usersTeamCollection.remove(this.model);
             } else {
-
-                // Cant have more than 4 players
-                if((App.usersTeamCollection.length + 1) <= 4) {
-
-                    // Cant have more than x players in position y
-                    var allowedPositions = {
-                        'Striker' : 2,
-                        'Midfield' : 2,
-                        'Defender' : 2,
-                        'Goalkeeper' : 1
-                    };
-                    if((App.usersTeamCollection.where({'position' : this.model.get('position')}).length + 1) <= allowedPositions[this.model.get('position')]) {
-                        App.usersTeamCollection.add(this.model);
-                    } else {
-                        alert('Cant have more than ' + allowedPositions[this.model.get('position')] + ' ' + this.model.get('position') + 's');
-                    }
-                } else {
-                    alert('Cant have more than 4 players!');
-                }
+                App.usersTeamCollection.addPlayerToCollection(this.model);
             }
             this.updateStatus();
             return false;
