@@ -15,12 +15,21 @@ module.exports = function(grunt) {
     sass: {
       build: {
         options: {
+          outputStyle: 'compressed',
           includePaths: ['src/css/', 'src/css/partials/']
         },
         files: {
           'build/css/main.css': 'src/css/main.scss'
         }
       }
+    },
+
+    autoprefixer: {
+      build: {
+            files: {
+                'build/css/main.css': 'build/css/main.css'
+            }
+        }
     },
 
     clean: ['build/'],
@@ -54,7 +63,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['src/**/*.js', 'src/**/*.scss', 'src/js/app/templates/*.html'],
-        tasks: ['jshint', 'requirejs', 'sass'],
+        tasks: ['jshint', 'requirejs', 'sass', 'autoprefixer'],
         options: {
           spawn: false,
         },
@@ -87,6 +96,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-sass');
 
   grunt.registerTask('build', ['jshint', 'clean', 'sass', 'requirejs', 'copy']);
