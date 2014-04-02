@@ -214,27 +214,28 @@ figure.testing .container {
 	 	left: 210px;
 	 }
 	 /* Midfielders */
-	 .pitch_player.position-mc {
-	 	left: 60px;
-	 	top: 40px;
+	 .pitch_player.position-ml, .pitch_player.position-mr, .pitch_player.position-mc {
+	 	top: 180px;
+ 	 }
+ 	 .pitch_player.position-mc {
+	 	left: 110px;
 	 }
 	 .pitch_player.position-mc.second {
-	 	left: 154px;
+	 	left: 210px;
 	 }
 	  /* Defenders */
-	 .pitch_player.position-lb {
+	 .pitch_player.position-lb, .pitch_player.position-rb, .pitch_player.position-cb {
 	 	left: 60px;
-	 	top: 40px;
+	 	top: 315px;
 	 }
 	 .pitch_player.position-rb {
 	 	left: 154px;
 	 }
 	 .pitch_player.position-cb {
-	 	left: 115px;
-	 	top: 330px;
+	 	left: 110px;
 	 }
 	 .pitch_player.position-cb.second {
-	 	left: 154px;
+	 	left: 210px;
 	 }
 	 /* Goalkeepers */
 	 .pitch_player.position-gk {
