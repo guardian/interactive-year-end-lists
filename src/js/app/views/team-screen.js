@@ -23,6 +23,15 @@ define([
 
         className: 'container',
 
+        events: {
+            'click button#sign-in': 'beginSignIn',
+        },
+
+        beginSignIn: function() {
+            console.log('Begin signup');
+            return false;
+        },
+
         render: function() {
             this.$el.empty();
 
