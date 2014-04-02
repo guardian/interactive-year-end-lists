@@ -7,15 +7,29 @@
 	overflow: hidden;
 }
 
-#mask {
-	display:none;
-	background: rgba(50, 50, 50, 0.5);
-	position:fixed;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
+/* Ovewrite Bootstrap for NGW */
+figure.testing .container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
 }
+@media (min-width: 768px) {
+  figure.testing .container {
+    width: auto;
+  }
+}
+@media (min-width: 992px) {
+  figure.testing .container {
+    width: auto;
+  }
+}
+@media (min-width: 1200px) {
+  figure.testing .container {
+    width: auto;
+  }
+}
+
 /**
  * Player selection
  */
