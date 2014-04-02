@@ -1,6 +1,12 @@
-<div class="modal-dialog">
-	<div class="modal-content">
-		<div class="modal-body">
+
+<div class="flip-container" ontouchstart="this.classList.add('hover');">
+	<div class="flipper">
+
+		<div class="front" style="background-image: url(<%= playerSelected.imageSrcLarge %>);">
+			<h1 class="front-name"><%= playerSelected.name %></h1>
+		</div>
+
+		<div class="back">
 			<div class="row">
 				<div class="col-xs-4">
 					<img src="<%= playerSelected.imageSrc %>" class="player-image" alt="<%= playerSelected.name %>">
@@ -25,14 +31,13 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title"><%= playerSelected.name %></h4>
 					<%= playerSelected.bio %>
+					<hr>
+					<% if (validation.status === 'fail') { %>
+						<span class="selection-warning"><%= validation.message %></span>
+					<% } %>
+					<button type="button" class="addToSquad btn btn-primary <%= validation.status === 'fail' ?  'disabled' : '' %>">Add to squad</button>
 				</div>
 			</div>
-		</div>
-		<div class="modal-footer">
-			<% if (validation.status === 'fail') { %>
-				<span class="selection-warning"><%= validation.message %></span>
-			<% } %>
-			<button type="button" class="addToSquad btn btn-primary <%= validation.status === 'fail' ?  'disabled' : '' %>">Add to squad</button>
-		</div>
-	</div>
-</div>
+		</div> <!-- .back -->
+	</div> <!-- .flipper -->
+</div> <!-- .flip-container -->
