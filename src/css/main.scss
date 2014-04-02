@@ -9,229 +9,236 @@
 
 /* Ovewrite Bootstrap for NGW */
 figure.testing .container {
-  margin-right: auto;
-  margin-left: auto;
   padding-left: 0;
   padding-right: 0;
 }
-@media (min-width: 768px) {
+@media (min-width: 46.25em) {
   figure.testing .container {
     width: auto;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 61.25em) {
   figure.testing .container {
     width: auto;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 81.25em) {
   figure.testing .container {
     width: auto;
   }
 }
 
-/**
- * Player selection
- */
- #player_filters {
- 	margin-bottom: 20px;
- }
- #player_filters select {
- 	margin-right: 7px;
- }
-  .player_profile {
-  	text-align: center;
-  	margin-bottom: 7px;
-  	cursor: pointer;
-  }
-  .player_profile .removePlayer {
-  	display:none;
-  }
-  .player_profile.selected .removePlayer {
-  	display: block;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	padding-top: 50px;
-	font-size: 22px;
-	font-weight: bold;
-	z-index: 2;
-  }
-  .player_profile.selected img {
-  	opacity: 0.5;
-}
-  .player_profile .inner {
-  	position: relative;
-  }
-  .player_profile.selected .removePlayer {
-  	display: block;
-  	position: absolute;
-  	width:100%;
-  	height: 100%;
-  	opacity: 0.5;
-  }
-img.player-image, .player_profile img {
- 	width: 100%;
- }
+.interactive-dream-team {
 
- #playerSelectedModal .modal-content {
- 	height: 480px;
- }
-
- /* Player card (Modal) */
-
- .player-card {
- 	position: fixed;
-	display: none;
-	left: 50%;
-	margin-left: -275px;
-	top: 50px;
-	border-radius: 8px;
-	width: 600px;
-	z-index: 3000;
- }
- .player-card .front-name {
- 	color: #fff;
-	padding: 30px;
-	margin: 0;
- }
- .player-card .player-bio {
- 	max-height: 350px;
- 	overflow: scroll;
- }
- .player-card.player-card img.flag {
- 	margin-right: 5px;
- }
- .player-card.player-card .table {
- 	font-size: 12px;
- 	margin: 20px 0 0;
- }
- .player-card.player-card .selection-warning {
- 	margin-right: 15px;
- }
-
-/* Modal Flip */
-/* simple */
-.flip-container {
-	perspective: 2500;
-	transform-style: preserve-3d;
-}
-
-/* START: Accommodating for IE */
-.flip-container:hover .back, .flip-container.hover .back {
-	transform: rotateY(0deg);
-}
-.flip-container:hover .front, .flip-container.hover .front {
-    transform: rotateY(180deg);
-}
-/* END: Accommodating for IE */
-
-.flip-container, .front, .back {
-	height: 550px;
-	border-radius: 8px;
-}
-.front, .back {
-	width: 100%;
-}
-.back {
-	padding: 20px;
-}
-.front, .back {
-	backface-visibility: hidden;
-    transition: 0.6s;
-    transform-style: preserve-3d;
-	box-shadow: 0 5px 15px rgba(0,0,0,.5);
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-.front {
-	transform: rotateY(0deg);
-	background: #000;
-	z-index: 3;
-	background-size: cover;
-	background-position: 50% 50%;
-}
-
-.back {
-	z-index: 2;
-	background: #fff;
-    transform: rotateY(-180deg);
-}
-
-@media(max-width:767px){
- 	.player-card {
-		margin-left: -150px;
-		width: 300px;
-		top: 20px;
+	/**
+	 * Player selection
+	 */
+	 #player_filters {
+	 	margin-bottom: 20px;
 	 }
-	 .flip-container, .front, .back {
-		height: 450px;
+	 #player_filters select {
+	 	margin-right: 7px;
+	 }
+	  .player_profile {
+	  	text-align: center;
+	  	margin-bottom: 7px;
+	  	cursor: pointer;
+	  }
+	  .player_profile .removePlayer {
+	  	display:none;
+	  }
+	  .player_profile.selected .removePlayer {
+	  	display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		padding-top: 50px;
+		font-size: 22px;
+		font-weight: bold;
+		z-index: 2;
+	  }
+	  .player_profile.selected img {
+	  	opacity: 0.5;
 	}
- }
+	  .player_profile .inner {
+	  	position: relative;
+	  }
+	  .player_profile.selected .removePlayer {
+	  	display: block;
+	  	position: absolute;
+	  	width:100%;
+	  	height: 100%;
+	  	opacity: 0.5;
+	  }
+	img.player-image, .player_profile img {
+	 	width: 100%;
+	 }
 
- /**
-  * Pitch view
-  */
- .pitch {
- 	margin: 0;
- 	padding: 0;
- 	background: url('/images/pitch.jpg');
- 	min-height: 500px;
- 	background-size: contain;
- 	background-repeat: no-repeat;
- 	list-style: none;
- 	position: relative;
- }
- .pitch img {
- 	width: 50px;
- 	height: 50px;
- 	border-radius: 50%;
- 	box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.5);
- 	display: block;
- }
- .pitch_player {
- 	position: absolute;
-	max-width: 80px;
-	font-size: 12px;
-	color: #fff;
-	text-align: center;
- }
+	 #playerSelectedModal .modal-content {
+	 	height: 480px;
+	 }
 
- /* Strikers */
- .pitch_player.position-st {
- 	left: 110px;
- 	top: 40px;
- }
- .pitch_player.position-st.second {
- 	left: 210px;
- }
- /* Midfielders */
- .pitch_player.position-mc {
- 	left: 60px;
- 	top: 40px;
- }
- .pitch_player.position-mc.second {
- 	left: 154px;
- }
-  /* Defenders */
- .pitch_player.position-lb {
- 	left: 60px;
- 	top: 40px;
- }
- .pitch_player.position-rb {
- 	left: 154px;
- }
- .pitch_player.position-cb {
- 	left: 115px;
- 	top: 330px;
- }
- .pitch_player.position-cb.second {
- 	left: 154px;
- }
- /* Goalkeepers */
- .pitch_player.position-gk {
- 	bottom: 15px;
- 	left: 160px;
- }
+	 /* Player card (Modal) */
+
+	 .giwc-player-card {
+	 	position: fixed;
+		display: none;
+		left: 50%;
+		margin-left: -275px;
+		top: 50px;
+		border-radius: 8px;
+		width: 600px;
+		z-index: 3000;
+	 }
+	 .giwc-player-card .front-name {
+	 	color: #fff;
+		padding: 30px;
+		margin: 0;
+	 }
+	 .giwc-player-card .player-bio {
+	 	max-height: 350px;
+	 	overflow: scroll;
+	 }
+	 .giwc-player-card img.flag {
+	 	margin-right: 5px;
+	 }
+	 .giwc-player-card .table {
+	 	font-size: 12px;
+	 	margin: 20px 0 0;
+	 }
+	 .giwc-player-card .selection-warning {
+	 	margin-right: 15px;
+	 }
+
+	/* Modal Flip */
+	/* simple */
+	.flip-container {
+		perspective: 2500;
+		transform-style: preserve-3d;
+	}
+
+	/* START: Accommodating for IE */
+	.flip-container:hover .back, .flip-container.hover .back {
+		transform: rotateY(0deg);
+	}
+	.flip-container:hover .front, .flip-container.hover .front {
+	    transform: rotateY(180deg);
+	}
+	/* END: Accommodating for IE */
+
+	.flip-container, .front, .back {
+		height: 550px;
+		border-radius: 8px;
+	}
+	.front, .back {
+		width: 100%;
+	}
+	.back {
+		padding: 20px;
+	}
+	.front, .back {
+		backface-visibility: hidden;
+	    transition: 0.6s;
+	    transform-style: preserve-3d;
+		box-shadow: 0 5px 15px rgba(0,0,0,.5);
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.front {
+		transform: rotateY(0deg);
+		background: #000;
+		z-index: 3;
+		background-size: cover;
+		background-position: 50% 50%;
+	}
+
+	.back {
+		z-index: 2;
+		background: #fff;
+	    transform: rotateY(-180deg);
+	}
+
+	@media(max-width:46.25em){
+	 	.giwc-player-card {
+			margin-left: -150px;
+			width: 300px;
+			top: 20px;
+		 }
+		 .flip-container, .front, .back {
+			height: 450px;
+		}
+	 }
+
+	 /**
+	  * Pitch view
+	  */
+	 .pitch {
+	 	margin: 0;
+	 	padding: 0;
+	 	background: url('/images/pitch.jpg');
+	 	min-height: 500px;
+	 	background-size: contain;
+	 	background-repeat: no-repeat;
+	 	list-style: none;
+	 	position: relative;
+	 	clear:both;
+	 }
+	 @media(min-width:740px){
+	  .pitch {
+	    clear:none;
+	  }
+	}
+	 .pitch img {
+	 	width: 50px;
+	 	height: 50px;
+	 	border-radius: 50%;
+	 	box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.5);
+	 	display: block;
+	 }
+	 .pitch_player {
+	 	position: absolute;
+		max-width: 80px;
+		font-size: 12px;
+		color: #fff;
+		text-align: center;
+	 }
+
+	 /* Strikers */
+	 .pitch_player.position-st {
+	 	left: 110px;
+	 	top: 40px;
+	 }
+	 .pitch_player.position-st.second {
+	 	left: 210px;
+	 }
+	 /* Midfielders */
+	 .pitch_player.position-mc {
+	 	left: 60px;
+	 	top: 40px;
+	 }
+	 .pitch_player.position-mc.second {
+	 	left: 154px;
+	 }
+	  /* Defenders */
+	 .pitch_player.position-lb {
+	 	left: 60px;
+	 	top: 40px;
+	 }
+	 .pitch_player.position-rb {
+	 	left: 154px;
+	 }
+	 .pitch_player.position-cb {
+	 	left: 115px;
+	 	top: 330px;
+	 }
+	 .pitch_player.position-cb.second {
+	 	left: 154px;
+	 }
+	 /* Goalkeepers */
+	 .pitch_player.position-gk {
+	 	bottom: 15px;
+	 	left: 160px;
+	 }
+}

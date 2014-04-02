@@ -15,7 +15,7 @@ define([
     return Backbone.View.extend({
         tagName: 'div',
         id: 'playerSelectedModal',
-        className: 'player-card',
+        className: 'giwc-player-card',
         template: _.template(ProfileTemplate),
 
         events: {
