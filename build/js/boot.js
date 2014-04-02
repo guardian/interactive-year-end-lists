@@ -13322,9 +13322,11 @@ define('models/player',[
     });
 });
 define('collections/team',[
+	'app',
     'backbone',
     'models/player'
 ], function(
+	App,
     Backbone,
     PlayerModel
 ) {
@@ -13332,9 +13334,115 @@ define('collections/team',[
         model: PlayerModel,
 
         // Remote DB
-        url: '#'
+        url: '#',
+
+        validateAddingPlayer: function(model) {
+			var response = { status: 'fail', message: '' };
+            
+            // Cannot already be in squad
+            if (!App.usersTeamCollection.contains(model)) {
+
+                // Cant have more than 4 players
+                if((App.usersTeamCollection.length + 1) <= 11) {
+
+                    // Cant have more than x players in position y
+                    var allowedPositions = {
+                        'ST' : 2,
+                        'ML' : 1,
+                        'MR' : 1,
+                        'MC' : 2,
+                        'RB' : 1,
+                        'LB' : 1,
+                        'CB' : 2,
+                        'GK' : 1
+                    };
+                    if((App.usersTeamCollection.where({'position' : model.get('position')}).length + 1) <= allowedPositions[model.get('position')]) {
+                        response.status = 'success';
+                    } else {
+                        response.message = 'Cant have more than ' + allowedPositions[model.get('position')] + ' ' + model.get('position').toLowerCase() + 's';
+                    }
+                } else {
+                    response.message = 'Cant have more than 11 players!';
+                }
+            } else {
+                response.message = model.get('name') + ' is aleady in your squad!';
+            }
+            return response;
+        },
+
+        addPlayerToCollection: function(model) {
+			var response = this.validateAddingPlayer(model);
+			if(response.status == 'success') {
+				App.usersTeamCollection.add(model);
+			}
+			return response;
+        }
+
+
+
     });
 });
+define('data/players',[], function() {
+
+    var imagePath = '/images/player-';
+
+    var players = [
+        { name: 'Ronaldo', apps: 98, gls: 62, uid: 1, country: 'Brazil', position: 'ST', imageSrc: imagePath + 'ronaldo.jpg' },
+        { name: 'Maradonna', apps: 91, gls: 34, uid: 2, country: 'Argentina', position: 'ST', imageSrc: imagePath + 'maradonna.jpg'},
+        { name: 'Baggio', apps: 56, gls: 27, uid: 3, country: 'Italy', position: 'ST', imageSrc: imagePath + 'baggio.jpg'},
+        { name: 'Banks', apps: 73, gls: 0, uid: 4, country: 'England', position: 'GK', imageSrc: imagePath + 'banks.jpg'},
+        { name: 'Beckenbauer', apps: 103, gls: 14, uid: 5, country: 'Germany', position: 'CB', imageSrc: imagePath + 'beckenbauer.jpg'},
+        { name: 'Cruyff', apps: 48, gls: 33, uid: 6, country: 'Holland', position: 'MC', imageSrc: imagePath + 'cruijff.jpg'},
+        { name: 'Eusebio', apps: 64, gls: 41, uid: 7, country: 'Portugal', position: 'MC', imageSrc: imagePath + 'eusebio.jpg'},
+        { name: 'Klinsmann', apps: 80, gls: 38, uid: 8, country: 'Germany', position: 'ST', imageSrc: imagePath + 'klinsmann.jpg'},
+        { name: 'Moore', apps: 108, gls: 2, uid: 9, country: 'England', position: 'CB', imageSrc: imagePath + 'moore.jpg'},
+        { name: 'Pele', apps: 92, gls: 77, uid: 10, country: 'Brazil', position: 'ST', imageSrc: imagePath + 'pele.jpg'},
+        { name: 'Baines', apps: 92, gls: 77, uid: 10, country: 'England', position: 'LB', imageSrc: imagePath + 'baines.jpg'},
+        { name: 'Cafu', apps: 92, gls: 77, uid: 10, country: 'Brazil', position: 'RB', imageSrc: imagePath + 'cafu.jpg'},
+        { name: 'Paolo Maldini', apps: 92, gls: 77, uid: 10, country: 'Italy', position: 'CB', imageSrc: imagePath + 'maldini.jpg'},
+
+    ];
+
+    var bios = [
+        'Ronaldo Luís Nazário de Lima (locally: [ʁoˈnawðu ˈlwiʒ nɐˈzaɾju dʒ ˈɫĩmɐ]; born 18 September 1976[2]) commonly known as Ronaldo, is a retired Brazilian footballer. Popularly dubbed "the phenomenon", he is considered by experts and fans to be one of the greatest football players of all time.[3][4] He is one of only three men to have won the FIFA World Player of the Year award three times or more, along with Zinedine Zidane and Lionel Messi. He won his first Ballon d\'Or in 1997 and won the award again in 2002.',
+        'Diego Armando Maradona Franco is an Argentine footballer who currently plays for Deportivo Riestra in the fifth tier of Argentina football. He has served as a manager and coach at other clubs as well as for the national team of Argentina.', 
+        'Edson Arantes do Nascimento (Brazilian Portuguese: [ˈɛtsõ (w)ɐˈɾɐ̃tʃiz du nɐsiˈmẽtu]), better known as Pelé (Brazilian Portuguese: [pe̞ˈlɛ], name given as Edison on birth certificate, born 21 October 1940 – however, Pelé claims that he was born on 23 October[1]), is a retired Brazilian footballer. He is regarded by many experts, football critics, former players, current players and football fans in general as the best player of all time.[12] In 1999, he was voted World Player of the Century by the International Federation of Football History & Statistics.[13] The same year, influential France Football magazine consulted their former Ballon D\'Or winners to elect the Football Player of the Century. Pelé came in first place.[14] In 1999, Pelé was elected \"Athlete of the Century\" by the IOC, and was named in Time magazine\'s list of 100 most influential people of the 20th century.[15] In 2013 he received the FIFA Ballon d\'Or Prix d\'Honneur in recognition of his career and achievements as a global icon of football.', 
+        'Gordon Banks, OBE (born 30 December 1937) is a former England international football goalkeeper. He made 628 appearances during a 15 year career in the Football League, and won 73 caps for his country. The IFFHS named Banks the second best goalkeeper of the 20th century – after Lev Yashin (1st) and ahead of Dino Zoff (3rd). He was named FWA Footballer of the Year in 1972, and was named FIFA Goalkeeper of the Year on six occasions.', 
+        'Ronaldo Luís Nazário de Lima (locally: [ʁoˈnawðu ˈlwiʒ nɐˈzaɾju dʒ ˈɫĩmɐ]; born 18 September 1976[2]) commonly known as Ronaldo, is a retired Brazilian footballer. Popularly dubbed "the phenomenon", he is considered by experts and fans to be one of the greatest football players of all time.[3][4] He is one of only three men to have won the FIFA World Player of the Year award three times or more, along with Zinedine Zidane and Lionel Messi. He won his first Ballon d\'Or in 1997 and won the award again in 2002.', 
+        'Ronaldo Luís Nazário de Lima (locally: [ʁoˈnawðu ˈlwiʒ nɐˈzaɾju dʒ ˈɫĩmɐ]; born 18 September 1976[2]) commonly known as Ronaldo, is a retired Brazilian footballer. Popularly dubbed "the phenomenon", he is considered by experts and fans to be one of the greatest football players of all time.[3][4] He is one of only three men to have won the FIFA World Player of the Year award three times or more, along with Zinedine Zidane and Lionel Messi. He won his first Ballon d\'Or in 1997 and won the award again in 2002.', 
+        'Ronaldo Luís Nazário de Lima (locally: [ʁoˈnawðu ˈlwiʒ nɐˈzaɾju dʒ ˈɫĩmɐ]; born 18 September 1976[2]) commonly known as Ronaldo, is a retired Brazilian footballer. Popularly dubbed "the phenomenon", he is considered by experts and fans to be one of the greatest football players of all time.[3][4] He is one of only three men to have won the FIFA World Player of the Year award three times or more, along with Zinedine Zidane and Lionel Messi. He won his first Ballon d\'Or in 1997 and won the award again in 2002.', 
+        'Ronaldo Luís Nazário de Lima (locally: [ʁoˈnawðu ˈlwiʒ nɐˈzaɾju dʒ ˈɫĩmɐ]; born 18 September 1976[2]) commonly known as Ronaldo, is a retired Brazilian footballer. Popularly dubbed "the phenomenon", he is considered by experts and fans to be one of the greatest football players of all time.[3][4] He is one of only three men to have won the FIFA World Player of the Year award three times or more, along with Zinedine Zidane and Lionel Messi. He won his first Ballon d\'Or in 1997 and won the award again in 2002.', 
+        'Ronaldo Luís Nazário de Lima (locally: [ʁoˈnawðu ˈlwiʒ nɐˈzaɾju dʒ ˈɫĩmɐ]; born 18 September 1976[2]) commonly known as Ronaldo, is a retired Brazilian footballer. Popularly dubbed "the phenomenon", he is considered by experts and fans to be one of the greatest football players of all time.[3][4] He is one of only three men to have won the FIFA World Player of the Year award three times or more, along with Zinedine Zidane and Lionel Messi. He won his first Ballon d\'Or in 1997 and won the award again in 2002.',
+        'Edson Arantes do Nascimento, better known as Pelé, is a retired Brazilian footballer. He is regarded by many experts, football critics, former players, current players and football fans in general as the best player of all time.',
+        'Leighton John Baines is an English footballer who plays for Everton and the England national football team.',
+        'Marcos Evangelista de Moraes, better known as Cafu, is a former Brazilian footballer. He is the most internationally capped male Brazilian player and also made history playing for São Paulo, Roma and Milan.',
+        'Paolo Cesare Maldini is a former Italian footballer who played as a left or central defender, being adept with either foot although naturally right-footed.'
+    ];
+
+    var images = [
+        'http://elitedaily.com/wp-content/uploads/2012/03/ronaldo-brazil.jpg',
+        'http://1.bp.blogspot.com/-ugwwZTIU-7c/Tbc2Q_hxHJI/AAAAAAAAAiM/Z20-1GgYRoA/s1600/Diego+Maradona%252C+Terry+Butcher+and+Kenny+Sansom+during+Argentina%25E2%2580%2599s+2-1+win+over+England+at+the+1986+World+Cup+finals+in+Mexico%252C+1986.jpg',
+        'http://24.media.tumblr.com/tumblr_m2s308HJqP1qfxktpo1_1280.jpg',
+        'http://24.media.tumblr.com/tumblr_m2s308HJqP1qfxktpo1_1280.jpg',
+        'http://24.media.tumblr.com/tumblr_m2s308HJqP1qfxktpo1_1280.jpg',
+        'http://3.bp.blogspot.com/-T6thyDdI_Sc/Uk3-9-8p3WI/AAAAAAAADhM/N3PXnErdF8o/s640/cruyff2.jpg',
+        'http://24.media.tumblr.com/tumblr_m2s308HJqP1qfxktpo1_1280.jpg',
+        'http://24.media.tumblr.com/tumblr_m2s308HJqP1qfxktpo1_1280.jpg',
+        'http://24.media.tumblr.com/tumblr_m2s308HJqP1qfxktpo1_1280.jpg',
+        'http://www.futebolfreecs.com.br/wp-content/uploads/2013/11/pele.jpg',
+        'http://i3.mirror.co.uk/incoming/article854991.ece/ALTERNATES/s2197/Defenders:%20Leighton%20Baines%20(Everton%20FC)-854991',
+        'http://imguol.com/2013/04/23/27jun1998---lateral-cafu-em-acao-durante-a-vitoria-por-4-a-1-do-brasil-sobre-o-chile-pelas-oitavas-da-copa-do-mundo-1998-1366758548989_1920x1080.jpg',
+        'http://elvenezolanonews.com/wp-content/uploads/2014/02/maldini___italy.jpg'
+    ];
+
+    for (var i in players) {
+        players[i].bio = bios[i];
+        players[i].imageSrcLarge = images[i];
+    }
+    return players;
+
+});
+
 /**
  * @license RequireJS text 2.0.10 Copyright (c) 2010-2012, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
@@ -13723,48 +13831,125 @@ define('text',['module'], function (module) {
 });
 
 
-define('text!templates/player-profile.html',[],function () { return '<img src="<%= imageSrc %>"/>\n<ul>\n    <li><%= name %></li>\n    <li><%= position %></li>\n</ul>\n';});
+define('templates/player-modal.html',[],function () { return '\n<div class="flip-container" ontouchstart="this.classList.add(\'hover\');">\n\t<div class="flipper">\n\n\t\t<div class="front" style="background-image: url(<%= playerSelected.imageSrcLarge %>);">\n\t\t\t<h1 class="front-name"><%= playerSelected.name %></h1>\n\t\t</div>\n\n\t\t<div class="back">\n\t\t\t<div class="row">\n\t\t\t\t<div class="col-xs-4">\n\t\t\t\t\t<img src="<%= playerSelected.imageSrc %>" class="player-image" alt="<%= playerSelected.name %>">\n\n\t\t\t\t\t<table class="table table-bordered">\n\t\t\t\t\t<tbody>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td colspan="2"><img src="/images/flags/<%= playerSelected.country %>.png" class="flag" /><%= playerSelected.country %></td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>Apperances</td>\n\t\t\t\t\t\t\t<td><%= playerSelected.apps %></td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td>Goals</td>\n\t\t\t\t\t\t\t<td><%= playerSelected.gls %></td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t</tbody>\n\t\t\t\t\t</table>\n\t\t\t\t</div>\n\t\t\t\t<div class="col-xs-8 player-bio">\n\t\t\t\t\t<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n\t\t\t\t\t<h4 class="modal-title"><%= playerSelected.name %></h4>\n\t\t\t\t\t<%= playerSelected.bio %>\n\t\t\t\t\t<hr>\n\t\t\t\t\t<% if (validation.status === \'fail\') { %>\n\t\t\t\t\t\t<span class="selection-warning"><%= validation.message %></span>\n\t\t\t\t\t<% } %>\n\t\t\t\t\t<button type="button" class="addToSquad btn btn-primary <%= validation.status === \'fail\' ?  \'disabled\' : \'\' %>">Add to squad</button>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div> <!-- .back -->\n\t</div> <!-- .flipper -->\n</div> <!-- .flip-container -->';});
+
+define('views/player-modal',[
+    'app',
+    'backbone',
+    'underscore',
+    'data/players',
+    'templates/player-modal.html'
+], function(
+    App,
+    Backbone,
+    _,
+    PlayerData,
+    ProfileTemplate
+){
+
+    return Backbone.View.extend({
+        tagName: 'div',
+        id: 'playerSelectedModal',
+        className: 'player-card',
+        template: _.template(ProfileTemplate),
+
+        events: {
+            'click button.addToSquad, .removeFromSquad': 'addToSquad',
+            'click .close': 'closeCard'
+        },
+
+        initialize: function() {
+            this.templateData = {"playerSelected": '', 'validation': {}};
+            App.playerSelected.on('change', this.openCard, this);
+        },
+
+        openCard: function() {
+            if(App.playerSelected.get('highlighted')) {
+                this.model = App.playerCollection.get(App.playerSelected.get('highlighted'));
+
+                this.templateData.validation = App.usersTeamCollection.validateAddingPlayer(this.model);
+                this.templateData.playerSelected = this.model.attributes;
+                
+                this.$el.html(this.template(this.templateData));
+
+                this.$el.show();
+                App.playerSelected.set('highlighted', 0);
+            }
+        },
+
+        closeCard: function() {
+            this.$el.hide();
+            return false;
+        },
+
+        addToSquad: function() {
+            this.closeCard();
+            var response = App.usersTeamCollection.addPlayerToCollection(this.model);
+            console.log(response.message);
+            if(response.status == 'fail') {
+                
+            } else {
+                $('#player_profile_' + this.model.cid).addClass('selected');
+            }
+            return false;
+        },
+
+        render: function() {
+            this.$el.html(this.template(this.templateData));
+            return this;
+        }
+    });
+});
+
+
+define('templates/player-list.html',[],function () { return '<div class="inner">\n\t<span class="removePlayer">Unpick</span>\n\t<img src="<%= imageSrc %>" class="img-circle"/>\n\t<p><%= name %></p>\n</div>';});
 
 define('views/player',[
     'app',
     'backbone',
     'underscore',
-    'text!templates/player-profile.html'
+    'data/players',
+    'views/player-modal',
+    'templates/player-list.html'
 ], function(
     App,
     Backbone,
     _,
+    PlayerData,
+    PlayerModal,
     PlayerTemplate
 ){
 
     return Backbone.View.extend({
         tagName: 'div',
 
-        className: 'player_profile',
+        className: 'col-xs-4 col-sm-3 player_profile',
 
         template: _.template(PlayerTemplate),
 
         events: {
-            'click': 'clickHandler'
+            'click img, p': 'openPlayerCard',
+            'click .removePlayer': 'removePlayerFromSquad'
         },
 
         initialize: function() {
-            this.listenTo(this.model, 'change:selected', this.updateStatus);
+            this.$el.attr('id', 'player_profile_' + this.model.cid);
+            App.playerSelected.on('change', this.openCard, this);
+            this.showSelectedPlayer();
         },
 
-        updateStatus: function() {
-            this.$el.toggleClass('selected', this.model.get('selected'));
+        showSelectedPlayer: function() {
+            this.$el.toggleClass('selected', App.usersTeamCollection.contains(this.model));
         },
 
-        clickHandler: function() {
-            App.player.set('selectedPlayer', this.model);
+        openPlayerCard: function() {
+            App.playerSelected.set('highlighted', this.model.cid);
+        },
 
-            this.model.set('selected', !this.model.get('selected'));
-            if (this.model.get('selected')) {
-                App.usersTeamCollection.add(this.model);
-            } else {
-                App.usersTeamCollection.remove(this.model);
-            }
+        removePlayerFromSquad: function() {
+            App.usersTeamCollection.remove(this.model);
+            this.showSelectedPlayer();
+            return false;
         },
 
         render: function() {
@@ -13775,41 +13960,84 @@ define('views/player',[
 });
 
 
-define('text!templates/player-list.html',[],function () { return '<form id="player_filters">\n    <p>\n        Show:\n        <select id="players_position">\n            <option>All position</option>\n        </select>\n\n        <select id="players_country">\n            <option>All countries</option>\n        </select>\n\n        <select id="players_era">\n            <option>From 1960 - 1980</option>\n            <option>From 1980 - 1990</option>\n        </select>\n    </p>\n</form>\n\n<div id="player_list"></div>';});
+define('templates/squad-selection.html',[],function () { return '\n<form id="player_filters" class="form-inline" role="form">\n    <div class="form-group">\n        <select id="players_position" class="form-control" data-filter-name="position">\n            <option value="">All positions</option>\n            <% _.each(positions, function(position) { %>\n                <option value="<%= position %>"><%= position %></option>\n            <% }) %>\n        </select>\n    </div>\n    <div class="form-group">\n        <select id="players_country" class="form-control" data-filter-name="country">\n            <option value="">All countries</option>\n            <% _.each(countries, function(country) { %>\n                <option value="<%= country %>"><%= country %></option>\n            <% }) %>\n        </select>\n    </div>\n    <div class="form-group">\n        <select id="players_era" class="form-control" data-filter-name="era">\n            <option value="">All eras</option>\n            <option value="1940">1940s</option>\n            <option value="1950">1950s</option>\n            <option value="1960">1960s</option>\n            <option value="1970">1970s</option>\n            <option value="1980">1980s</option>\n            <option value="1990">1990s</option>\n            <option value="2000">2000s</option>\n        </select>\n    </div>\n    <button id="resetTeam" class="btn btn-default">Reset</button>\n</form>\n\n<div class="alert alert-warning alert-dismissable selection-error" style="display:none">\n    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>\n    \n</div>\n\n<div id="player_list" class="row"></div>\n\n';});
 
-define('views/player-list',[
+// Squad selection
+define('views/squad-selection',[
+    'app',
     'underscore',
     'backbone',
     'views/player',
-    'text!templates/player-list.html'
+    'templates/squad-selection.html'
 ], function(
+    App,
     _,
     Backbone,
     PlayerView,
-    PlayerListTemplate
+    SquadSelectionTemplate
 ) {
     return Backbone.View.extend({
-        id: 'player-selector',
+        id: 'squad-selection',
+        className: 'col-sm-8',
 
         events: {
-            'change #player_filters': 'filterChange'
+            'change #player_filters': 'filterChange',
+            'click #resetTeam': 'resetTeam'
         },
 
-        template:  _.template(PlayerListTemplate),
+        template:  _.template(SquadSelectionTemplate),
 
         initialize: function() {
-            this.playerViews = [];
+            this.templateData = this.createFilterOptions();
             this.updatePlayerViews();
         },
 
-        filterChange: function() {
-            console.log('Filter changed');
+        createFilterOptions: function() {
+            var countries = [], positions = [];
+            App.playerCollection.each(function(player) {
+                if($.inArray(player.get('position'), positions) < 0) {
+                    positions.push(player.get('position'));
+                }
+                if($.inArray(player.get('country'), countries) < 0) {
+                    countries.push(player.get('country'));
+                }
+            });
+            var filterOptions = {};
+            if(countries) {
+                filterOptions.countries = countries.sort();
+            }
+            if(positions) {
+                filterOptions.positions = positions.sort();
+            }
+            return filterOptions;
         },
 
-        updatePlayerViews: function() {
-            this.collection.each(function(playerModel) {
+        filterChange: function() {
+            var filterOptions = {};
+            $('#player_filters select').each(function( index ) {
+                if($(this).val()) {
+                    filterOptions[$(this).data('filter-name')] = $(this).val();
+                }
+            });
+            this.updatePlayerViews(filterOptions);
+        },
+
+        resetTeam: function() {
+            this.updatePlayerViews();
+            $('#player_filters select').val('');
+            return false;
+        },
+
+        updatePlayerViews: function(filterOptions) {
+            this.playerViews = [];
+            var playersFiltered = App.playerCollection;
+            if(!_.isEmpty(filterOptions)) {
+                playersFiltered = App.playerCollection.where(filterOptions);
+            }
+            playersFiltered.map(function(playerModel) {
                 this.playerViews.push(new PlayerView({ model : playerModel }));
             }, this);
+            this.renderPlayerViews();
         },
 
         renderPlayerViews: function() {
@@ -13817,12 +14045,12 @@ define('views/player-list',[
             this.playerViews.forEach(function(playerView ) {
                 domContainer.appendChild( playerView.render().el );
             });
-            return domContainer;
+            this.$('#player_list').html(domContainer);
         },
 
         render: function() {
-            this.$el.html(this.template({}));
-            this.$('#player_list').append( this.renderPlayerViews() );
+            this.$el.html(this.template(this.templateData));
+            this.renderPlayerViews();
             return this;
         }
 
@@ -13830,50 +14058,47 @@ define('views/player-list',[
 });
 
 
-define('text!templates/team-overview.html',[],function () { return '<ol class="pitch">\n<% _.each(players, function(player) { %>\n    <li class="pitch_player"><%= player.name %></li>\n<% }) %>\n</ol>\n\n<p>Skills - <%= skillPercentage %>%</p>\n<p>Creativity - <%= creativityPercentage %>%</p>\n<p>Unforgettably - <%= unforgettablyPercentage %>%</p>';});
+define('templates/team-rating.html',[],function () { return '\n<ol class="pitch">\n\t<% _.each(players, function(player) { %>\n\t    <li class="pitch_player position-<%= player.position.toLowerCase() %>">\n\t    \t<img src="<%= player.imageSrc %>" alt="">\n\t    \t<%= player.name %>\n\t    </li>\n\t<% }) %>\n</ol>\n\n<p>Total Goals - <%= stats.goals %></p>\n<p>Total Apps - <%= stats.apps %></p>';});
 
-define('views/team-overview',[
+define('views/team-rating',[
     'app',
     'backbone',
     'underscore',
-    'text!templates/team-overview.html'
+    'templates/team-rating.html'
 ], function(
     App,
     Backbone,
     _,
-    TeamOverviewTemplate
+    TeamRatingTemplate
 ) {
     return Backbone.View.extend({
-        id: 'team-view',
-
-        template: _.template(TeamOverviewTemplate),
+        id: 'team-rating',
+        className: 'col-sm-4',
+        template: _.template(TeamRatingTemplate),
 
         initialize: function() {
             this.listenTo(App.usersTeamCollection, 'add remove', this.render);
         },
 
         generatePitch: function() {
-            // var el = document.createDocumentFragment();
-            // App.usersTeamCollection.each(function(model) {
-            //     var player = document.createElement('p');
-            //     player.innerHTML = model.get('name');
-            //     el.appendChild(player);
-            // });
-            // return el;
-            //
-
-            // STUB: Calculate team stats
+            var stats = {
+                goals: 0,
+                apps: 0
+            };
+            App.usersTeamCollection.each(function(player) {
+                stats.goals = stats.goals + player.get('gls');
+                stats.apps = stats.apps + player.get('apps');
+            });
 
             return this.template({
                 players: App.usersTeamCollection.toJSON(),
-                skillPercentage: 33,
-                creativityPercentage: 89,
-                unforgettablyPercentage: 33
+                stats: stats
             });
         },
 
         render: function() {
             this.$el.html(this.generatePitch());
+            $('.pitch_player.position-cb:eq(1), .pitch_player.position-mc:eq(1), .pitch_player.position-st:eq(1)').addClass('second');
             return this;
         }
 
@@ -13881,13 +14106,13 @@ define('views/team-overview',[
 });
 
 
-define('text!templates/position-editor.html',[],function () { return '<div id="position_editor">\n    <div id="selected_player">\n        <p>Player name: <%= selectedPlayer.name %></p>\n        <p>Player country: <%= selectedPlayer.country %></p>\n    </div>\n\n    <ol>\n        <% _.each(players, function(player, index) { %>\n            <li>Position #<%= index %></li>\n        <% }) %>\n    </ol>\n\n    <button id="close_position">Cancel</button>\n    <button id="save_position" disabled>Save</button>\n</div>';});
+define('templates/position-editor.html',[],function () { return '<div id="position_editor">\n\n    <ol>\n        <li><%= selectedPlayer.name %></li>\n        <% _.each(players, function(player) { %>\n            <li><%= player.name %></li>\n        <% }) %>\n    </ol>\n\n    <button id="close_position">Cancel</button>\n    <button id="save_position" disabled>Save</button>\n</div>';});
 
 define('views/position-editor',[
     'app',
     'underscore',
     'backbone',
-    'text!templates/position-editor.html'
+    'templates/position-editor.html'
 ], function(
     App,
     _,
@@ -13936,41 +14161,59 @@ define('views/position-editor',[
 });
 
 
-define('text!templates/team-screen.html',[],function () { return '<h2>TEAM EDITOR</h2>\n\n<div id="team_status"></div>\n<h2>Hello <%= username %></h2>\n<p>Share your team</p>\n<button id="sign-in">Sign in to save</button>\n\n<div id="player_listings"></div>\n';});
+define('templates/team-screen.html',[],function () { return '<div class="row">\n\t<div class="col-xs-12">\n\n\t\t<h2>TEAM EDITOR</h2>\n\t\t<div id="team_status"></div>\n\t\t<h2>Hello <%= username %></h2>\n\t\t<p>Share your team</p>\n\t\t\n\t\t<button id="sign-in" class="btn btn-primary">Sign in to save</button>\n\n\t\t<div id="player_listings"></div>\n\n\t\t<hr>\n\t\t\n\t</div>\n</div>';});
 
 define('views/team-screen',[
     'app',
     'underscore',
     'backbone',
-    'views/player-list',
-    'views/team-overview',
+    'views/squad-selection',
+    'views/team-rating',
     'views/position-editor',
-    'text!templates/team-screen.html'
+    'views/player-modal',
+    'templates/team-screen.html'
 ], function(
     App,
     _,
     Backbone,
-    PlayerListView,
-    TeamOverview,
+    SquadSelectionView,
+    TeamRating,
     PositionEditorView,
+    PlayerModal,
     TeamScreenTemplate
 ) {
     return Backbone.View.extend({
 
         template: _.template(TeamScreenTemplate),
 
+        className: 'container',
+
+        events: {
+            'click button#sign-in': 'beginSignIn',
+        },
+
+        beginSignIn: function() {
+            console.log('Begin signup');
+            return false;
+        },
+
         render: function() {
             this.$el.empty();
 
-            this.teamOverview = new TeamOverview();
+            this.teamRating = new TeamRating();
             this.positionEditorView = new PositionEditorView();
-            this.playerListView = new PlayerListView({
+            this.SquadSelectionView = new SquadSelectionView({
                 collection: this.collection
             });
+            this.PlayerModal = new PlayerModal();
 
             this.$el.html(this.template( App.player.toJSON() ));
-            this.$el.append(this.playerListView.render().$el);
-            this.$el.append(this.teamOverview.render().$el);
+            
+            this.$el.append('<div id="team-screen" class="row"></div>');
+            this.$el.find('#team-screen').html(this.SquadSelectionView.render().$el);
+            this.$el.find('#team-screen').append(this.teamRating.render().$el);
+            this.$el.find('#team-screen').append(this.PlayerModal.render().$el);
+
             this.$el.append(this.positionEditorView.render().$el);
 
             return this;
@@ -13980,21 +14223,22 @@ define('views/team-screen',[
 });
 
 
-define('text!templates/match-screen.html',[],function () { return '<h1>MATCH</h1>\n\n<%= username %> VS. <%= opponent %>';});
+define('templates/match-screen.html',[],function () { return '<h1>MATCH</h1>\n\n<%= username %> VS. <%= opponent %>';});
 
+// Team A vs Team B
 define('views/match-screen',[
     'app',
     'underscore',
     'backbone',
-    'views/player-list',
-    'views/team-overview',
-    'text!templates/match-screen.html'
+    'views/squad-selection',
+    'views/team-rating',
+    'templates/match-screen.html'
 ], function(
     App,
     _,
     Backbone,
     PlayerListView,
-    TeamOverview,
+    TeamRating,
     TeamScreenTemplate
 ) {
     return Backbone.View.extend({
@@ -14013,15 +14257,6 @@ define('views/match-screen',[
         }
 
     });
-});
-
-define('data/players',[], function() {
-    return [
-        { name: 'andrew', country: 'UK', position: 'GL', imageSrc: '#'},
-        { name: 'sean', country: 'UK', position: 'FT', imageSrc: '#'},
-        { name: 'daan', country: 'UK', position: 'FT', imageSrc: '#'},
-        { name: 'chris', country: 'UK', position: 'DF', imageSrc: '#'}
-    ];
 });
 
 define('routes',[
@@ -14083,15 +14318,17 @@ define('main',[
     App.player = new Backbone.Model();
     App.opponent = new Backbone.Model();
 
+    App.playerSelected = new Backbone.Model();
+
     // Collections
-    App.usersTeamCollection = new TeamCollection(Array(11));
-    App.opponentTeamCollection = new TeamCollection();
     App.playerCollection = new Backbone.Collection(PlayerData);
 
+    App.usersTeamCollection = new TeamCollection();
+    App.opponentTeamCollection = new TeamCollection();
+    
     // Views
     App.teamView = new TeamScreenView({ collection: App.playerCollection });
     App.matchView = new MatchScreenView();
-
 
     /**
      * Bootstrap loader
