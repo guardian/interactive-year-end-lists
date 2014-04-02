@@ -170,7 +170,7 @@ img.player-image, .player_profile img {
  	margin: 0;
  	padding: 0;
  	background: url('/images/pitch.jpg');
- 	min-height: 400px;
+ 	min-height: 500px;
  	background-size: contain;
  	background-repeat: no-repeat;
  	list-style: none;
@@ -193,22 +193,20 @@ img.player-image, .player_profile img {
 
  /* Strikers */
  .pitch_player.position-st {
- 	left: 60px;
+ 	left: 110px;
  	top: 40px;
  }
- .pitch_player.position-st:nth-child(2) {
- 	left: 154px;
+ .pitch_player.position-st.second {
+ 	left: 210px;
  }
-
  /* Midfielders */
  .pitch_player.position-mc {
  	left: 60px;
  	top: 40px;
  }
- .pitch_player.position-mc:nth-child(2) {
+ .pitch_player.position-mc.second {
  	left: 154px;
  }
-
   /* Defenders */
  .pitch_player.position-lb {
  	left: 60px;
@@ -218,15 +216,14 @@ img.player-image, .player_profile img {
  	left: 154px;
  }
  .pitch_player.position-cb {
- 	left: 60px;
- 	top: 40px;
+ 	left: 115px;
+ 	top: 330px;
  }
- .pitch_player.position-cb:nth-child(2) {
+ .pitch_player.position-cb.second {
  	left: 154px;
  }
-
  /* Goalkeepers */
  .pitch_player.position-gk {
  	bottom: 15px;
- 	left: 105px;
+ 	left: 160px;
  }
