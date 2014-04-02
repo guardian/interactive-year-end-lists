@@ -69,7 +69,7 @@ module.exports = function(grunt) {
         },
       },
       html: {
-        files: ['src/index.html'],
+        files: ['src/*.html'],
         tasks: ['copy'],
         options: {
           spawn: false,
@@ -81,6 +81,7 @@ module.exports = function(grunt) {
       build: {
         files: [
           { src: 'src/index.html', dest: 'build/index.html' },
+          { src: 'src/ngw.html', dest: 'build/ngw.html' },
           { src: 'src/css/partials/*.css', dest: 'build/css/vendor.css' },
           { src: 'src/js/libs/require.js', dest: 'build/js/require.js' },
           {expand: true, cwd: 'src/images/', src: ['**/*.{png,jpg,svg}'], dest:'build/images/' }
