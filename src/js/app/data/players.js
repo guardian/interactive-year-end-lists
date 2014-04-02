@@ -4,7 +4,7 @@ define([], function() {
 
     var players = [
         { name: 'Ronaldo', apps: 98, gls: 62, uid: 1, country: 'Brazil', position: 'ST', imageSrc: imagePath + 'ronaldo.jpg' },
-        { name: 'Maradonna', apps: 91, gls: 34, uid: 2, country: 'Argentina', position: 'ST', imageSrc: imagePath + 'maradonna.jpg'},
+        { name: 'Maradona', apps: 91, gls: 34, uid: 2, country: 'Argentina', position: 'ST', imageSrc: imagePath + 'maradona.jpg'},
         { name: 'Baggio', apps: 56, gls: 27, uid: 3, country: 'Italy', position: 'ST', imageSrc: imagePath + 'baggio.jpg'},
         { name: 'Banks', apps: 73, gls: 0, uid: 4, country: 'England', position: 'GK', imageSrc: imagePath + 'banks.jpg'},
         { name: 'Beckenbauer', apps: 103, gls: 14, uid: 5, country: 'Germany', position: 'CB', imageSrc: imagePath + 'beckenbauer.jpg'},
