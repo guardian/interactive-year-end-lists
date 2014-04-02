@@ -34,8 +34,7 @@ define([
 
                 this.templateData.validation = App.usersTeamCollection.validateAddingPlayer(this.model);
                 this.templateData.playerSelected = this.model.attributes;
-
-                console.log(this.templateData);
+                
                 this.$el.html(this.template(this.templateData));
 
                 this.$el.show();
