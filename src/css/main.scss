@@ -192,20 +192,20 @@ img.player-image, .player_profile img {
  }
 
  /* Strikers */
- .pitch_player.position-striker {
+ .pitch_player.position-st {
  	left: 60px;
  	top: 40px;
  }
- .pitch_player.position-striker:nth-child(2) {
+ .pitch_player.position-st:nth-child(2) {
  	left: 154px;
  }
 
  /* Midfielders */
- .pitch_player.position-striker {
+ .pitch_player.position-mc {
  	left: 60px;
  	top: 40px;
  }
- .pitch_player.position-striker:nth-child(2) {
+ .pitch_player.position-mc:nth-child(2) {
  	left: 154px;
  }
 
@@ -226,7 +226,7 @@ img.player-image, .player_profile img {
  }
 
  /* Goalkeepers */
- .pitch_player.position-goalkeeper {
+ .pitch_player.position-gk {
  	bottom: 15px;
  	left: 105px;
  }
