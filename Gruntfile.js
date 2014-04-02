@@ -60,10 +60,24 @@ module.exports = function(grunt) {
       }
     },
 
+    'string-replace': {
+      dist: {
+        files: {
+          'build/js/boot.js': 'build/js/boot.js'
+        },
+        options: {
+          replacements: [{
+            pattern: /text!/ig,
+            replacement: ''
+          }]
+        }
+      }
+    },
+
     watch: {
       scripts: {
         files: ['src/**/*.js', 'src/**/*.scss', 'src/js/app/templates/*.html'],
-        tasks: ['jshint', 'requirejs', 'sass', 'autoprefixer'],
+        tasks: ['jshint', 'requirejs', 'sass', 'autoprefixer', 'string-replace'],
         options: {
           spawn: false,
         },
@@ -87,7 +101,7 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'src/images/', src: ['**/*.{png,jpg,svg}'], dest:'build/images/' }
         ]
       }
-    }
+    },
 
   });
 
@@ -99,7 +113,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-string-replace');
 
-  grunt.registerTask('build', ['jshint', 'clean', 'sass', 'requirejs', 'copy']);
+  grunt.registerTask('build', ['jshint', 'clean', 'sass', 'autoprefixer', 'requirejs', 'copy', 'string-replace']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
 };
