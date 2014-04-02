@@ -187,17 +187,18 @@ figure.testing .container {
 	  * Pitch view
 	  */
 	 .pitch {
-	 	margin: 0;
+	 	margin: 0 auto;
 	 	padding: 0;
 	 	background: url('/images/pitch.jpg');
-	 	min-height: 500px;
+	 	height: 500px;
+	 	width: 370px;
 	 	background-size: contain;
 	 	background-repeat: no-repeat;
 	 	list-style: none;
 	 	position: relative;
 	 	clear:both;
 	 }
-	 @media(min-width:740px){
+	 @media(max-width:740px){
 	  .pitch {
 	    clear:none;
 	  }

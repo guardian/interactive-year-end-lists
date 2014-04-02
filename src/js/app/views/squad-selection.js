@@ -14,7 +14,7 @@ define([
 ) {
     return Backbone.View.extend({
         id: 'squad-selection',
-        className: 'col-md-8',
+        className: 'col-xs-12 col-sm-8',
 
         events: {
             'change #player_filters': 'filterChange',
