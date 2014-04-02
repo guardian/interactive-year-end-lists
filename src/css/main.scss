@@ -33,6 +33,18 @@ figure.testing .container {
 	/**
 	 * Player selection
 	 */
+	 @media (min-width: 56.25em) {
+		#squad-selection {
+			width: 100%;
+			margin-right: -400px;
+			padding-right: 430px;
+		}
+		#team-rating {
+			width: 400px;
+			float: right;
+		}
+	}
+
 	 #player_filters {
 	 	margin-bottom: 20px;
 	 }
@@ -207,35 +219,39 @@ figure.testing .container {
 
 	 /* Strikers */
 	 .pitch_player.position-st {
-	 	left: 110px;
+	 	left: 115px;
 	 	top: 40px;
 	 }
 	 .pitch_player.position-st.second {
-	 	left: 210px;
+	 	left: 205px;
 	 }
 	 /* Midfielders */
 	 .pitch_player.position-ml, .pitch_player.position-mr, .pitch_player.position-mc {
 	 	top: 180px;
+	 	left: 25px;
+ 	 }
+ 	 .pitch_player.position-mr {
+ 	 	left: 300px;
  	 }
  	 .pitch_player.position-mc {
-	 	left: 110px;
+	 	left: 115px;
 	 }
 	 .pitch_player.position-mc.second {
-	 	left: 210px;
+	 	left: 205px;
 	 }
 	  /* Defenders */
 	 .pitch_player.position-lb, .pitch_player.position-rb, .pitch_player.position-cb {
-	 	left: 60px;
+	 	left: 25px;
 	 	top: 315px;
 	 }
 	 .pitch_player.position-rb {
-	 	left: 154px;
+	 	left: 300px;
 	 }
 	 .pitch_player.position-cb {
-	 	left: 110px;
+	 	left: 115px;
 	 }
 	 .pitch_player.position-cb.second {
-	 	left: 210px;
+	 	left: 205px;
 	 }
 	 /* Goalkeepers */
 	 .pitch_player.position-gk {

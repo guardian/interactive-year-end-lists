@@ -11,7 +11,7 @@ define([
 ) {
     return Backbone.View.extend({
         id: 'team-rating',
-        className: 'col-sm-4',
+        className: 'col-md-4',
         template: _.template(TeamRatingTemplate),
 
         initialize: function() {
