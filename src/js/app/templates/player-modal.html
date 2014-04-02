@@ -1,9 +1,5 @@
 <div class="modal-dialog">
 	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h4 class="modal-title"><%= playerSelected.name %></h4>
-		</div>
 		<div class="modal-body">
 			<div class="row">
 				<div class="col-xs-4">
@@ -26,12 +22,17 @@
 					</table>
 				</div>
 				<div class="col-xs-8 player-bio">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title"><%= playerSelected.name %></h4>
 					<%= playerSelected.bio %>
 				</div>
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="addToSquad btn btn-primary">Add to squad</button>
+			<% if (validation.status === 'fail') { %>
+				<span class="selection-warning"><%= validation.message %></span>
+			<% } %>
+			<button type="button" class="addToSquad btn btn-primary <%= validation.status === 'fail' ?  'disabled' : '' %>">Add to squad</button>
 		</div>
 	</div>
 </div>

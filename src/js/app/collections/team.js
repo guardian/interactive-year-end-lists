@@ -30,10 +30,9 @@ define([
                         'Goalkeeper' : 1
                     };
                     if((App.usersTeamCollection.where({'position' : model.get('position')}).length + 1) <= allowedPositions[model.get('position')]) {
-                        App.usersTeamCollection.add(model);
                         response.status = 'success';
                     } else {
-                        response.message = 'Cant have more than ' + allowedPositions[model.get('position')] + ' ' + model.get('position') + 's';
+                        response.message = 'Cant have more than ' + allowedPositions[model.get('position')] + ' ' + model.get('position').toLowerCase() + 's';
                     }
                 } else {
                     response.message = 'Cant have more than 4 players!';

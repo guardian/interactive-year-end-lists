@@ -24,14 +24,18 @@ define([
         },
 
         initialize: function() {
-            this.templateData = {"playerSelected": ''};
+            this.templateData = {"playerSelected": '', 'validation': {}};
             App.playerSelected.on('change', this.openCard, this);
         },
 
         openCard: function() {
             if(App.playerSelected.get('highlighted')) {
                 this.model = App.playerCollection.get(App.playerSelected.get('highlighted'));
-                this.templateData = {"playerSelected": this.model.attributes};
+
+                this.templateData.validation = App.usersTeamCollection.validateAddingPlayer(this.model);
+                this.templateData.playerSelected = this.model.attributes;
+
+                console.log(this.templateData);
                 this.$el.html(this.template(this.templateData));
 
                 this.$el.show();
@@ -47,8 +51,9 @@ define([
         addToSquad: function() {
             this.closeCard();
             var response = App.usersTeamCollection.addPlayerToCollection(this.model);
+            console.log(response.message);
             if(response.status == 'fail') {
-                console.log(response.message);
+                
             } else {
                 $('#player_profile_' + this.model.cid).addClass('selected');
             }
