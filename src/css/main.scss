@@ -81,8 +81,6 @@ img.player-image, .player_profile img {
 	border-radius: 8px;
 	width: 600px;
 	z-index: 3000;
-
-
  }
  .player-card .front-name {
  	color: #fff;
@@ -211,6 +209,17 @@ img.player-image, .player_profile img {
     -ms-transform: rotateY(-180deg);
     transform: rotateY(-180deg);
 }
+
+@media(max-width:767px){
+ 	.player-card {
+		margin-left: -150px;
+		width: 300px;
+		top: 20px;
+	 }
+	 .flip-container, .front, .back {
+		height: 450px;
+	}
+ }
 
  /**
   * Pitch view
