@@ -47,7 +47,6 @@ define([
             this.$el.append('<div id="team-screen" class="row"></div>');
             this.$el.find('#team-screen').html(this.SquadSelectionView.render().$el);
             this.$el.find('#team-screen').append(this.teamRating.render().$el);
-            this.$el.find('#team-screen').append(this.teamRating.render().$el);
             this.$el.find('#team-screen').append(this.PlayerModal.render().$el);
 
             this.$el.append(this.positionEditorView.render().$el);
