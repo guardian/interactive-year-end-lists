@@ -200,6 +200,31 @@ img.player-image, .player_profile img {
  	left: 154px;
  }
 
+ /* Midfielders */
+ .pitch_player.position-striker {
+ 	left: 60px;
+ 	top: 40px;
+ }
+ .pitch_player.position-striker:nth-child(2) {
+ 	left: 154px;
+ }
+
+  /* Defenders */
+ .pitch_player.position-lb {
+ 	left: 60px;
+ 	top: 40px;
+ }
+ .pitch_player.position-rb {
+ 	left: 154px;
+ }
+ .pitch_player.position-cb {
+ 	left: 60px;
+ 	top: 40px;
+ }
+ .pitch_player.position-cb:nth-child(2) {
+ 	left: 154px;
+ }
+
  /* Goalkeepers */
  .pitch_player.position-goalkeeper {
  	bottom: 15px;
