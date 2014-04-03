@@ -26,13 +26,18 @@ define([
 
     // Collections
     App.playerCollection = new Backbone.Collection(PlayerData);
-
     App.usersTeamCollection = new TeamCollection();
     App.opponentTeamCollection = new TeamCollection();
-    
+
     // Views
     App.teamView = new TeamScreenView({ collection: App.playerCollection });
     App.matchView = new MatchScreenView();
+
+    var preSelected = [1, 2, 3, 4, 5, 6];
+    preSelected.map(function(playerUID) {
+        var playerModel = App.playerCollection.findWhere({'uid':playerUID});
+        App.usersTeamCollection.addPlayerToCollection(playerModel);
+    });
 
     /**
      * Bootstrap loader

@@ -36,7 +36,7 @@ define([
 
         render: function() {
             this.$el.html(this.generatePitch());
-            $('.pitch_player.position-cb:eq(1), .pitch_player.position-mc:eq(1), .pitch_player.position-st:eq(1)').addClass('second');
+            this.$el.find('.pitch_player.position-cb:eq(1), .pitch_player.position-mc:eq(1), .pitch_player.position-st:eq(1)').addClass('second');
             return this;
         }
 
