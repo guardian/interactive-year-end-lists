@@ -29,6 +29,14 @@ define([
         },
 
         openCard: function() {
+            /*
+            require(["common/modules/identity/api"], function(api) { 
+                if(!App.userDetails) {
+                    App.userDetails = api.getUserOrSignIn();
+                }
+            });
+*/
+
             if(App.playerSelected.get('highlighted')) {
                 this.model = App.playerCollection.get(App.playerSelected.get('highlighted'));
 

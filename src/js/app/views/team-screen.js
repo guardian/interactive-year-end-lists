@@ -28,7 +28,12 @@ define([
         },
 
         beginSignIn: function() {
-            console.log('Begin signup');
+            
+            if(App.userDetails) {
+                console.log('Already logged in.');
+            } else {
+                console.log('Begin signup.');
+            }
             return false;
         },
 
@@ -42,7 +47,7 @@ define([
             });
             this.PlayerModal = new PlayerModal();
 
-            this.$el.html(this.template( App.player.toJSON() ));
+            this.$el.html(this.template(App.player.toJSON()));
             
             this.$el.append('<div id="team-screen" class="row"></div>');
             this.$el.find('#team-screen').html(this.SquadSelectionView.render().$el);

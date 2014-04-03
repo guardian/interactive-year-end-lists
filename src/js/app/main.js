@@ -29,6 +29,19 @@ define([
     App.usersTeamCollection = new TeamCollection();
     App.opponentTeamCollection = new TeamCollection();
 
+    /*
+    // Get current user details
+    require(["common/modules/identity/api"], function(api) { 
+        App.userDetails = api.getUserFromCookie();
+        if(App.userDetails) {
+            // Go grab list of ID's and pre-populate team
+        } else {
+            // New team selection
+
+        }
+    });
+    */
+
     // Views
     App.teamView = new TeamScreenView({ collection: App.playerCollection });
     App.matchView = new MatchScreenView();
