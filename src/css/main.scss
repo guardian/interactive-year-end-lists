@@ -74,6 +74,9 @@ figure.testing .container {
 	}
 	  .player_profile .inner {
 	  	position: relative;
+	  	padding: 7px;
+	  	margin-bottom: 15px;
+	  	box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.1);
 	  }
 	  .player_profile.selected .removePlayer {
 	  	display: block;
@@ -258,5 +261,25 @@ figure.testing .container {
 	 .pitch_player.position-gk {
 	 	bottom: 15px;
 	 	left: 160px;
+	 }
+
+
+	 /* Country Colours */
+	 .bg-italy {
+	 	background: #0E64B8;
+	 }
+	 .bg-brazil {
+	 	background: #e8e316;
+	 }
+	 .bg-england {
+	 	background: #fff;
+	 }
+	 .bg-germany {
+	 	background: green;
+	 }
+
+	 /* Countries white text */
+	 .bg-italy, .bg-germany {
+	 	color: #fff;
 	 }
 }
