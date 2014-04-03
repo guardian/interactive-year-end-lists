@@ -56,6 +56,13 @@ define([
         },
 
         addToSquad: function() {
+
+            if(!App.userDetails) {
+                // TODO: make a prompt
+                alert('Please log in first!');
+                return;
+            }
+
             this.closeCard();
             var response = App.usersTeamCollection.addPlayerToCollection(this.model);
             console.log(response.message);
