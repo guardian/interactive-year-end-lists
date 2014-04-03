@@ -1,6 +1,6 @@
 define([], function() {
 
-    var imagePath = '/images/player-';
+    var imagePath = 'images/player-';
 
     var players = [
         { name: 'Ronaldo', apps: 98, gls: 62, uid: 1, country: 'Brazil', position: 'ST', imageSrc: imagePath + 'ronaldo.jpg' },
