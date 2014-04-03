@@ -16,6 +16,7 @@ define([
 
         initialize: function() {
             this.listenTo(App.usersTeamCollection, 'add remove', this.render);
+            this.templateData = { "userDetails": null };
         },
 
         generatePitch: function() {
@@ -30,7 +31,8 @@ define([
 
             return this.template({
                 players: App.usersTeamCollection.toJSON(),
-                stats: stats
+                stats: stats,
+                userDetails: App.userDetails
             });
         },
 

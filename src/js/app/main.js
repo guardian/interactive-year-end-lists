@@ -33,24 +33,28 @@ define([
     // Get current user details
     require(["common/modules/identity/api"], function(api) { 
         App.userDetails = api.getUserFromCookie();
-        if(App.userDetails) {
-            // Go grab list of ID's and pre-populate team
-        } else {
-            // New team selection
-
-        }
+        
     });
     */
+    App.userDetails = null;
+    App.userDetails = {
+        'username': 'Daniel',
+        'team' : {
+            'name' : '50 Shades of O’Shea',
+            'preSelected' : [1, 2, 3, 4, 5, 6]
+        }
+    };
+    
+    if(App.userDetails) {
+        App.userDetails.team.preSelected.map(function(playerUID) {
+            var playerModel = App.playerCollection.findWhere({'uid':playerUID});
+            App.usersTeamCollection.addPlayerToCollection(playerModel);
+        });
+    }
 
     // Views
     App.teamView = new TeamScreenView({ collection: App.playerCollection });
     App.matchView = new MatchScreenView();
-
-    var preSelected = [1, 2, 3, 4, 5, 6];
-    preSelected.map(function(playerUID) {
-        var playerModel = App.playerCollection.findWhere({'uid':playerUID});
-        App.usersTeamCollection.addPlayerToCollection(playerModel);
-    });
 
     $('head').append('<link rel="stylesheet" href="/css/vendor.css" type="text/css" />');
     $('head').append('<link rel="stylesheet" href="/css/main.css" type="text/css" />');

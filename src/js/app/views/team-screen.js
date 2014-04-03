@@ -27,6 +27,10 @@ define([
             'click button#sign-in': 'beginSignIn',
         },
 
+        initialize: function() {
+            this.templateData = { "userDetails": null };
+        },
+
         beginSignIn: function() {
             
             if(App.userDetails) {
@@ -47,7 +51,8 @@ define([
             });
             this.PlayerModal = new PlayerModal();
 
-            this.$el.html(this.template(App.player.toJSON()));
+            this.templateData.userDetails = App.userDetails;
+            this.$el.html(this.template(this.templateData));
             
             this.$el.append('<div id="team-screen" class="row"></div>');
             this.$el.find('#team-screen').html(this.SquadSelectionView.render().$el);

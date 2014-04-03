@@ -1,4 +1,8 @@
 
+<% if(userDetails) { %>
+	<h3><%= userDetails.team.name %></h3>
+<% } %>
+
 <ol class="pitch">
 	<% _.each(players, function(player) { %>
 	    <li class="pitch_player position-<%= player.position.toLowerCase() %>">
@@ -10,3 +14,7 @@
 
 <p>Total Goals - <%= stats.goals %></p>
 <p>Total Apps - <%= stats.apps %></p>
+
+<% if(userDetails) { %>
+	<button>Save team</button>
+<% } %>
