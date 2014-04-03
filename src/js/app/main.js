@@ -29,21 +29,21 @@ define([
     App.usersTeamCollection = new TeamCollection();
     App.opponentTeamCollection = new TeamCollection();
 
-    /*
     // Get current user details
-    require(["common/modules/identity/api"], function(api) { 
-        App.userDetails = api.getUserFromCookie();
-        
-    });
-    */
     App.userDetails = null;
-    App.userDetails = {
-        'username': 'Daniel',
-        'team' : {
-            'name' : '50 Shades of O’Shea',
-            'preSelected' : [1, 2, 3, 4, 5, 6]
+
+    require(["common/modules/identity/api"], function(api) { 
+        var loggedIn = api.getUserFromCookie();
+        if(loggedIn) {
+            App.userDetails = {
+                'username': App.userDetails.displayName,
+                'team' : {
+                    'name' : '50 Shades of O’Shea',
+                    'preSelected' : [1, 2, 3, 4, 5, 6]
+                }
+            };
         }
-    };
+    });
     
     if(App.userDetails) {
         App.userDetails.team.preSelected.map(function(playerUID) {

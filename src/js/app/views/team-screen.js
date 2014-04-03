@@ -32,12 +32,9 @@ define([
         },
 
         beginSignIn: function() {
-            
-            if(App.userDetails) {
-                console.log('Already logged in.');
-            } else {
-                console.log('Do signup.');
-            }
+            require(["common/modules/identity/api"], function(api) { 
+                var loggedIn = getUserOrSignIn();
+            });
             return false;
         },
 
