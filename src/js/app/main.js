@@ -18,21 +18,22 @@ define([
     Routes
 ) {
 
-    // Models
-    App.player = new Backbone.Model();
-    App.opponent = new Backbone.Model();
-
-    App.playerSelected = new Backbone.Model();
-
-    // Collections
-    App.playerCollection = new Backbone.Collection(PlayerData);
-    App.usersTeamCollection = new TeamCollection();
-    App.opponentTeamCollection = new TeamCollection();
-
     // Get current user details
     App.userDetails = null;
 
     require(["common/modules/identity/api"], function(api) { 
+
+        // Models
+        App.player = new Backbone.Model();
+        App.opponent = new Backbone.Model();
+
+        App.playerSelected = new Backbone.Model();
+
+        // Collections
+        App.playerCollection = new Backbone.Collection(PlayerData);
+        App.usersTeamCollection = new TeamCollection();
+        App.opponentTeamCollection = new TeamCollection();
+
         var loggedIn = api.getUserFromCookie();
         if(loggedIn) {
             App.userDetails = {
@@ -43,21 +44,22 @@ define([
                 }
             };
         }
-    });
     
-    if(App.userDetails) {
-        App.userDetails.team.preSelected.map(function(playerUID) {
-            var playerModel = App.playerCollection.findWhere({'uid':playerUID});
-            App.usersTeamCollection.addPlayerToCollection(playerModel);
-        });
-    }
+        if(App.userDetails) {
+            App.userDetails.team.preSelected.map(function(playerUID) {
+                var playerModel = App.playerCollection.findWhere({'uid':playerUID});
+                App.usersTeamCollection.addPlayerToCollection(playerModel);
+            });
+        }
 
-    // Views
-    App.teamView = new TeamScreenView({ collection: App.playerCollection });
-    App.matchView = new MatchScreenView();
+        // Views
+        App.teamView = new TeamScreenView({ collection: App.playerCollection });
+        App.matchView = new MatchScreenView();
 
-    $('head').append('<link rel="stylesheet" href="/css/vendor.css" type="text/css" />');
-    $('head').append('<link rel="stylesheet" href="/css/main.css" type="text/css" />');
+        $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');
+        $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
+
+    });
 
     /**
      * Bootstrap loader
