@@ -29,6 +29,7 @@ define([
         initialize: function() {
             this.$el.attr('id', 'player_profile_' + this.model.cid);
             App.playerSelected.on('change', this.openCard, this);
+            this.listenTo(App.usersTeamCollection, 'add remove reset', this.showSelectedPlayer);
             this.showSelectedPlayer();
         },
 

@@ -14,8 +14,12 @@ define([
         className: 'col-xs-12 col-sm-4',
         template: _.template(TeamRatingTemplate),
 
+        events: {
+            'click #clearSelection': 'clearSelection'
+        },
+
         initialize: function() {
-            this.listenTo(App.usersTeamCollection, 'add remove', this.render);
+            this.listenTo(App.usersTeamCollection, 'add remove reset', this.render);
             this.templateData = { "userDetails": null };
         },
 
@@ -34,6 +38,11 @@ define([
                 stats: stats,
                 userDetails: App.userDetails
             });
+        },
+
+        clearSelection: function() {
+            App.usersTeamCollection.reset();
+            return false;
         },
 
         render: function() {

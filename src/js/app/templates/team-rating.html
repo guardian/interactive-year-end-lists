@@ -16,5 +16,7 @@
 <p>Total Apps - <%= stats.apps %></p>
 
 <% if(userDetails) { %>
-	<button>Save team</button>
+	<% if(players) { %>
+		<button id="clearSelection">Clear selection</button>
+	<% } %>
 <% } %>
