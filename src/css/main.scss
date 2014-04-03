@@ -8,27 +8,27 @@
 }
 
 /* Ovewrite Bootstrap for NGW */
-figure.testing .container {
+figure.interactive .container {
   padding-left: 0;
   padding-right: 0;
 }
 @media (min-width: 46.25em) {
-  figure.testing .container {
+  figure.interactive .container {
     width: auto;
   }
 }
 @media (min-width: 61.25em) {
-  figure.testing .container {
+  figure.interactive .container {
     width: auto;
   }
 }
 @media (min-width: 81.25em) {
-  figure.testing .container {
+  figure.interactive .container {
     width: auto;
   }
 }
 
-.interactive {
+figure.interactive {
 
 	/**
 	 * Player selection

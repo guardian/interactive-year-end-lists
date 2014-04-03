@@ -32,7 +32,7 @@ define([
             if(App.userDetails) {
                 console.log('Already logged in.');
             } else {
-                console.log('Begin signup.');
+                console.log('Do signup.');
             }
             return false;
         },

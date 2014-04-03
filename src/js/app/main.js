@@ -52,8 +52,8 @@ define([
         App.usersTeamCollection.addPlayerToCollection(playerModel);
     });
 
-    $('head').append('<link rel="stylesheet" href="vendor.css" type="text/css" />');
-    $('head').append('<link rel="stylesheet" href="main.css" type="text/css" />');
+    $('head').append('<link rel="stylesheet" href="/css/vendor.css" type="text/css" />');
+    $('head').append('<link rel="stylesheet" href="/css/main.css" type="text/css" />');
 
     /**
      * Bootstrap loader
