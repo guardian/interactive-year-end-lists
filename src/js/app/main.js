@@ -18,48 +18,54 @@ define([
     Routes
 ) {
 
+    // Models
+    App.player = new Backbone.Model();
+    App.opponent = new Backbone.Model();
+
+    App.playerSelected = new Backbone.Model();
+
+    // Collections
+    App.playerCollection = new Backbone.Collection(PlayerData);
+    App.usersTeamCollection = new TeamCollection();
+    App.opponentTeamCollection = new TeamCollection();
+
+    // Views
+    App.teamView = new TeamScreenView({ collection: App.playerCollection });
+    App.matchView = new MatchScreenView();
+
+    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');
+    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
+
     // Get current user details
     App.userDetails = null;
 
-    require(["common/modules/identity/api"], function(api) { 
+    function autoLogin() {
+        require(["common/modules/identity/api"], function(api) { 
+            var loggedIn = api.getUserFromCookie();
+            
+            console.log(loggedIn);
 
-        // Models
-        App.player = new Backbone.Model();
-        App.opponent = new Backbone.Model();
-
-        App.playerSelected = new Backbone.Model();
-
-        // Collections
-        App.playerCollection = new Backbone.Collection(PlayerData);
-        App.usersTeamCollection = new TeamCollection();
-        App.opponentTeamCollection = new TeamCollection();
-
-        var loggedIn = api.getUserFromCookie();
-        if(loggedIn) {
-            App.userDetails = {
-                'username': App.userDetails.displayName,
-                'team' : {
-                    'name' : '50 Shades of O’Shea',
-                    'preSelected' : [1, 2, 3, 4, 5, 6]
+            if(loggedIn) {
+                App.userDetails = {
+                    'username': App.userDetails.displayName,
+                    'team' : {
+                        'name' : '50 Shades of O’Shea',
+                        'preSelected' : [1, 2, 3, 4, 5, 6]
+                    }
+                };
+                if(App.userDetails.team.preSelected) {
+                    App.userDetails.team.preSelected.map(function(playerUID) {
+                        var playerModel = App.playerCollection.findWhere({'uid':playerUID});
+                        App.usersTeamCollection.addPlayerToCollection(playerModel);
+                    });
                 }
+            }
+            return {
+                boot: boot
             };
-        }
-    
-        if(App.userDetails) {
-            App.userDetails.team.preSelected.map(function(playerUID) {
-                var playerModel = App.playerCollection.findWhere({'uid':playerUID});
-                App.usersTeamCollection.addPlayerToCollection(playerModel);
-            });
-        }
-
-        // Views
-        App.teamView = new TeamScreenView({ collection: App.playerCollection });
-        App.matchView = new MatchScreenView();
-
-        $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');
-        $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
-
-    });
+        });
+    }
+    autoLogin();
 
     /**
      * Bootstrap loader
@@ -74,7 +80,9 @@ define([
         Backbone.history.start();
     }
 
+    console.log('Boot!');
     return {
         boot: boot
     };
+
 });
