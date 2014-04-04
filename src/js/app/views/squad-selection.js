@@ -13,15 +13,15 @@ define([
     SquadSelectionTemplate
 ) {
     return Backbone.View.extend({
+
         id: 'squad-selection',
         className: 'col-xs-12 col-sm-8',
+        template:  _.template(SquadSelectionTemplate),
 
         events: {
             'change #player_filters': 'filterChange',
             'click #resetTeam': 'resetTeam'
         },
-
-        template:  _.template(SquadSelectionTemplate),
 
         initialize: function() {
             this.templateData = this.createFilterOptions();

@@ -15,7 +15,7 @@ define([
     TeamScreenTemplate
 ) {
     return Backbone.View.extend({
-
+        
         template: _.template(TeamScreenTemplate),
 
         initialize: function(options) {

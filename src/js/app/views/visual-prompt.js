@@ -10,9 +10,10 @@ define([
     VisualPromptTemplate
 ) {
     return Backbone.View.extend({
-        template: _.template(VisualPromptTemplate),
-        className: 'visual-prompt',
 
+        className: 'visual-prompt',
+        template: _.template(VisualPromptTemplate),
+        
         events: {
             'click #closePrompt': 'closePrompt'
         },

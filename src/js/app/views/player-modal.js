@@ -13,6 +13,7 @@ define([
 ){
 
     return Backbone.View.extend({
+        
         tagName: 'div',
         id: 'playerSelectedModal',
         className: 'giwc-player-card',
@@ -57,7 +58,7 @@ define([
         addToSquad: function() {
 
             this.closeCard();
-            
+
             if(!App.userDetails.get('username')) {
                 App.visualPrompt.set({
                     'message': 'Please login first',

@@ -10,6 +10,7 @@ define([
     TeamRatingTemplate
 ) {
     return Backbone.View.extend({
+        
         id: 'team-rating',
         className: 'col-xs-12 col-sm-4',
         template: _.template(TeamRatingTemplate),

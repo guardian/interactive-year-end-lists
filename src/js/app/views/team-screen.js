@@ -21,9 +21,8 @@ define([
 ) {
     return Backbone.View.extend({
 
-        template: _.template(TeamScreenTemplate),
-
         className: 'container',
+        template: _.template(TeamScreenTemplate),
 
         events: {
             'click #signIn': 'beginSignIn'
