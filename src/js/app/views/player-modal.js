@@ -56,6 +56,8 @@ define([
 
         addToSquad: function() {
 
+            this.closeCard();
+            
             if(!App.userDetails.get('username')) {
                 App.visualPrompt.set({
                     'message': 'Please login first',
@@ -64,7 +66,6 @@ define([
                 return;
             }
 
-            this.closeCard();
             var response = App.usersTeamCollection.addPlayerToCollection(this.playerModel);
             if(response.status == 'fail') {
                 App.visualPrompt.set({
