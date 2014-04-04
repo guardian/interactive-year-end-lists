@@ -21,6 +21,9 @@ define([
 ) {
 
     // Models
+    App.userDetails = new UserModel();
+    App.userDetails.checkUserStatus();
+
     App.player = new Backbone.Model();
     App.opponent = new Backbone.Model();
 
@@ -37,9 +40,6 @@ define([
 
     $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');
     $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
-
-    // Get current user details
-    App.userDetails = new UserModel();
 
     /**
      * Bootstrap loader

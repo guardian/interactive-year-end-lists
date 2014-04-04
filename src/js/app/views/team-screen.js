@@ -24,38 +24,23 @@ define([
         className: 'container',
 
         events: {
-            'click #signIn': 'beginSignIn',
+            'click #signIn': 'beginSignIn'
         },
 
         initialize: function() {
-            //App.userDetails.on('change', this.render, this);
+            App.userDetails.on('change:username', this.prePopulateTeam, this);
+        },
+
+        prePopulateTeam: function() {
+            if(App.userDetails.get('username')) {
+                App.userDetails.fetchUserTeamFromStorage();
+                this.render();
+            }
         },
 
         beginSignIn: function() {
-            App.userDetails.set('username', 'Daniel Levitt');
-            App.userDetails.set('teamName', '50 Shades of OShea');
-            App.userDetails.set('teamSelection', [1, 2, 3, 4, 5]);
-
-            if(App.userDetails.get('teamSelection')) {
-                var selection = App.userDetails.get('teamSelection');
-                selection.map(function(playerUID) {
-                    var playerModel = App.playerCollection.findWhere({'uid':playerUID});
-                    App.usersTeamCollection.addPlayerToCollection(playerModel);
-                });
-            }
-
-            this.render();
-
+            App.userDetails.loginUser();
             return false;
-
-            /*
-            require(["common/modules/identity/api"], function(api) { 
-                var loggedIn = getUserOrSignIn();
-                console.log('Do signup!');
-                console.log(loggedIn);
-            });
-            return false;
-            */
         },
 
         render: function() {
