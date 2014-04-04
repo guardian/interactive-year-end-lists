@@ -1,6 +1,6 @@
 
-<% if(userDetails) { %>
-	<h3><%= userDetails.team.name %></h3>
+<% if(userDetails.username) { %>
+	<h3><%= userDetails.teamName %></h3>
 	<button id="goToMatch">Go to match</button>
 <% } %>
 
@@ -16,7 +16,7 @@
 <p>Total Goals - <%= stats.goals %></p>
 <p>Total Apps - <%= stats.apps %></p>
 
-<% if(userDetails) { %>
+<% if(userDetails.username) { %>
 	<% if(0 < players.length) { %>
 		<button id="clearSelection">Clear selection</button>
 	<% } %>

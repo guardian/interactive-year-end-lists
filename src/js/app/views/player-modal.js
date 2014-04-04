@@ -36,46 +36,43 @@ define([
                 }
             });
 */
-
             if(App.playerSelected.get('highlighted')) {
-                this.model = App.playerCollection.get(App.playerSelected.get('highlighted'));
+                this.playerModel = App.playerCollection.get(App.playerSelected.get('highlighted'));
 
-                this.templateData.validation = App.usersTeamCollection.validateAddingPlayer(this.model);
-                this.templateData.playerSelected = this.model.attributes;
-                
-                this.$el.html(this.template(this.templateData));
+                this.templateData.validation = App.usersTeamCollection.validateAddingPlayer(this.playerModel);
+                this.templateData.playerSelected = this.playerModel.toJSON();
 
-                this.$el.show();
-                App.playerSelected.set('highlighted', 0);
+                this.render();
+
+                $('#' + this.$el.attr('id')).show();
             }
         },
 
         closeCard: function() {
             this.$el.hide();
+            App.playerSelected.set('highlighted', 0);
             return false;
         },
 
         addToSquad: function() {
 
-            if(!App.userDetails) {
-                // TODO: make a prompt
+            if(!App.userDetails.get('username')) {
                 alert('Please log in first!');
                 return;
             }
 
             this.closeCard();
-            var response = App.usersTeamCollection.addPlayerToCollection(this.model);
-            console.log(response.message);
+            var response = App.usersTeamCollection.addPlayerToCollection(this.playerModel);
             if(response.status == 'fail') {
-                
+                alert('Can\'t do that Dave');
             } else {
-                $('#player_profile_' + this.model.cid).addClass('selected');
+                //$('#player_profile_' + this.model.cid).addClass('selected');
             }
             return false;
         },
 
         render: function() {
-            this.$el.html(this.template(this.templateData));
+            $('#' + this.$el.attr('id')).html(this.template(this.templateData));
             return this;
         }
     });

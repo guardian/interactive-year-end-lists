@@ -2,6 +2,7 @@ define([
     'app',
     'jquery',
     'backbone',
+    'models/user',
     'collections/team',
     'views/team-screen',
     'views/match-screen',
@@ -11,6 +12,7 @@ define([
     App,
     $,
     Backbone,
+    UserModel,
     TeamCollection,
     TeamScreenView,
     MatchScreenView,
@@ -37,35 +39,7 @@ define([
     $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
 
     // Get current user details
-    App.userDetails = null;
-
-    function autoLogin() {
-        require(["common/modules/identity/api"], function(api) { 
-            var loggedIn = api.getUserFromCookie();
-            
-            console.log(loggedIn);
-
-            if(loggedIn) {
-                App.userDetails = {
-                    'username': App.userDetails.displayName,
-                    'team' : {
-                        'name' : '50 Shades of O’Shea',
-                        'preSelected' : [1, 2, 3, 4, 5, 6]
-                    }
-                };
-                if(App.userDetails.team.preSelected) {
-                    App.userDetails.team.preSelected.map(function(playerUID) {
-                        var playerModel = App.playerCollection.findWhere({'uid':playerUID});
-                        App.usersTeamCollection.addPlayerToCollection(playerModel);
-                    });
-                }
-            }
-            return {
-                boot: boot
-            };
-        });
-    }
-    autoLogin();
+    App.userDetails = new UserModel();
 
     /**
      * Bootstrap loader
@@ -79,8 +53,7 @@ define([
         var appRoutes = new Routes();
         Backbone.history.start();
     }
-
-    console.log('Boot!');
+    
     return {
         boot: boot
     };

@@ -2,8 +2,8 @@ define([
     'app',
     'underscore',
     'backbone',
-    'views/squad-selection',
     'views/team-rating',
+    'views/squad-selection',
     'views/position-editor',
     'views/player-modal',
     'text!templates/team-screen.html'
@@ -11,8 +11,8 @@ define([
     App,
     _,
     Backbone,
-    SquadSelectionView,
     TeamRating,
+    SquadSelectionView,
     PositionEditorView,
     PlayerModal,
     TeamScreenTemplate
@@ -24,39 +24,56 @@ define([
         className: 'container',
 
         events: {
-            'click button#sign-in': 'beginSignIn',
+            'click #signIn': 'beginSignIn',
         },
 
         initialize: function() {
-            this.templateData = { "userDetails": null };
+            //App.userDetails.on('change', this.render, this);
         },
 
         beginSignIn: function() {
+            App.userDetails.set('username', 'Daniel Levitt');
+            App.userDetails.set('teamName', '50 Shades of OShea');
+            App.userDetails.set('teamSelection', [1, 2, 3, 4, 5]);
+
+            if(App.userDetails.get('teamSelection')) {
+                var selection = App.userDetails.get('teamSelection');
+                selection.map(function(playerUID) {
+                    var playerModel = App.playerCollection.findWhere({'uid':playerUID});
+                    App.usersTeamCollection.addPlayerToCollection(playerModel);
+                });
+            }
+
+            this.render();
+
+            return false;
+
+            /*
             require(["common/modules/identity/api"], function(api) { 
                 var loggedIn = getUserOrSignIn();
+                console.log('Do signup!');
+                console.log(loggedIn);
             });
             return false;
+            */
         },
 
         render: function() {
             this.$el.empty();
 
-            this.teamRating = new TeamRating();
-            this.positionEditorView = new PositionEditorView();
-            this.SquadSelectionView = new SquadSelectionView({
-                collection: this.collection
-            });
-            this.PlayerModal = new PlayerModal();
+            var teamRating = new TeamRating();
+            var positionEditorView = new PositionEditorView();
+            var squadSelectionView = new SquadSelectionView();
+            var playerModal = new PlayerModal();
 
-            this.templateData.userDetails = App.userDetails;
-            this.$el.html(this.template(this.templateData));
+            this.$el.html(this.template({ "userDetails": App.userDetails.toJSON() }));
             
             this.$el.append('<div id="team-screen" class="row"></div>');
-            this.$el.find('#team-screen').html(this.SquadSelectionView.render().$el);
-            this.$el.find('#team-screen').append(this.teamRating.render().$el);
-            this.$el.find('#team-screen').append(this.PlayerModal.render().$el);
+            this.$el.find('#team-screen').html(squadSelectionView.render().$el);
+            this.$el.find('#team-screen').append(teamRating.render().$el);
+            this.$el.find('#team-screen').append(playerModal.render().$el);
 
-            this.$el.append(this.positionEditorView.render().$el);
+            this.$el.append(positionEditorView.render().$el);
 
             return this;
         }

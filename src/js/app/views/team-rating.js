@@ -20,7 +20,6 @@ define([
 
         initialize: function() {
             this.listenTo(App.usersTeamCollection, 'add remove reset', this.render);
-            this.templateData = { "userDetails": null };
         },
 
         generatePitch: function() {
@@ -36,7 +35,7 @@ define([
             return this.template({
                 players: App.usersTeamCollection.toJSON(),
                 stats: stats,
-                userDetails: App.userDetails
+                userDetails: App.userDetails.toJSON()
             });
         },
 

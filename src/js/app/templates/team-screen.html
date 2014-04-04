@@ -3,11 +3,11 @@
 
 		<h2>TEAM EDITOR</h2>
 		<div id="team_status"></div>
-		<% if(userDetails) { %>
+		<% if(userDetails.username) { %>
 			<h2>Hello <%= userDetails.username %></h2>
 		<% } else { %>
 			<p>Share your team</p>
-			<button id="sign-in" class="btn btn-primary">Sign in to save</button>
+			<button id="signIn" class="btn btn-primary">Sign in to save</button>
 		<% } %>
 
 		<div id="player_listings"></div>
