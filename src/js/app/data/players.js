@@ -38,15 +38,15 @@ define([], function() {
     var images = [
         'http://elitedaily.com/wp-content/uploads/2012/03/ronaldo-brazil.jpg',
         'http://1.bp.blogspot.com/-ugwwZTIU-7c/Tbc2Q_hxHJI/AAAAAAAAAiM/Z20-1GgYRoA/s1600/Diego+Maradona%252C+Terry+Butcher+and+Kenny+Sansom+during+Argentina%25E2%2580%2599s+2-1+win+over+England+at+the+1986+World+Cup+finals+in+Mexico%252C+1986.jpg',
-        'http://24.media.tumblr.com/tumblr_m2s308HJqP1qfxktpo1_1280.jpg',
+        'http://static.guim.co.uk/sys-images/Football/Clubs/Club%20Home/2009/3/19/1237491250850/Gordon-Banks-denies-Pele-001.jpg',
         'http://24.media.tumblr.com/tumblr_m2s308HJqP1qfxktpo1_1280.jpg',
         'http://a4.espncdn.com/photo/2013/0608/soc_winners_10.jpg',
         'http://3.bp.blogspot.com/-T6thyDdI_Sc/Uk3-9-8p3WI/AAAAAAAADhM/N3PXnErdF8o/s640/cruyff2.jpg',
-        'http://24.media.tumblr.com/tumblr_m2s308HJqP1qfxktpo1_1280.jpg',
-        'http://24.media.tumblr.com/tumblr_m2s308HJqP1qfxktpo1_1280.jpg',
-        'http://24.media.tumblr.com/tumblr_m2s308HJqP1qfxktpo1_1280.jpg',
+        'http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/1/5/1388918527498/Eus-bio-was-the-prototype-006.jpg',
+        'http://imortaisdofutebol.files.wordpress.com/2013/03/klinsmann_1998.jpg',
+        'http://www.bobbymooreonline.co.uk/images/66_winners.jpg',
         'http://www.futebolfreecs.com.br/wp-content/uploads/2013/11/pele.jpg',
-        'http://i3.mirror.co.uk/incoming/article854991.ece/ALTERNATES/s2197/Defenders:%20Leighton%20Baines%20(Everton%20FC)-854991',
+        'http://www.footballtop.ru/sites/default/files/photos/news/baines-19-3-13.jpg',
         'http://imguol.com/2013/04/23/27jun1998---lateral-cafu-em-acao-durante-a-vitoria-por-4-a-1-do-brasil-sobre-o-chile-pelas-oitavas-da-copa-do-mundo-1998-1366758548989_1920x1080.jpg',
         'http://elvenezolanonews.com/wp-content/uploads/2014/02/maldini___italy.jpg'
     ];
