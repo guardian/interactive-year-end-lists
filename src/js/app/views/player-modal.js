@@ -13,7 +13,7 @@ define([
 ){
 
     return Backbone.View.extend({
-        
+
         tagName: 'div',
         id: 'playerSelectedModal',
         className: 'giwc-player-card',
@@ -30,13 +30,6 @@ define([
         },
 
         openCard: function() {
-            /*
-            require(["common/modules/identity/api"], function(api) { 
-                if(!App.userDetails) {
-                    App.userDetails = api.getUserOrSignIn();
-                }
-            });
-            */
             if(App.playerSelected.get('highlighted')) {
                 this.playerModel = App.playerCollection.get(App.playerSelected.get('highlighted'));
 
@@ -45,12 +38,12 @@ define([
 
                 this.render();
 
-                this.$el.show();
+                this.$el.fadeIn('fast');
             }
         },
 
         closeCard: function() {
-            this.$el.hide();
+            this.$el.fadeOut('fast');
             App.playerSelected.set('highlighted', 0);
             return false;
         },

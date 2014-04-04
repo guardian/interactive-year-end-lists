@@ -53,7 +53,7 @@ define([
             App.userDetails.set('teamSelection', [1, 2, 3, 4, 5]);
             
             App.visualPrompt.set({
-                'message': '<img src="http://www.riyadh.gov.sa/en/Style%20Library/RP/images/loading.gif" class="loading"> Loading your team',
+                'message': '*Loading gif* Loading your team',
                 'closePrompt' : null
             });
 
