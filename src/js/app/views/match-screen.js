@@ -23,8 +23,8 @@ define([
 
         render: function() {
             this.$el.html(this.template({
-                username: App.player.get('username'),
-                opponent: App.opponent.get('username')
+                username: 'bluedaniel',
+                opponent: 'yogibear'
             }));
             return this;
         }
