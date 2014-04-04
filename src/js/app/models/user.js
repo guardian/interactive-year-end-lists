@@ -14,9 +14,14 @@ define([
         },
 
         checkUserStatus: function() {
+
+            // DEV
+
+
+            // BUILD
+            
             require(["common/modules/identity/api"], function(api) { 
                 var loggedIn = api.getUserFromCookie();
-                console.log(loggedIn);
                 if(loggedIn) {
                     App.userDetails.set('username', loggedIn.id);
                     return true;
@@ -24,15 +29,19 @@ define([
                     return false;
                 }
             });
+            
         },
 
         loginUser: function() {
+            //App.userDetails.set('username', 'boohoo');
+            
             require(["common/modules/identity/api"], function(api) { 
                 var loggedIn = api.getUserOrSignIn();
                 if(loggedIn) {
                     App.userDetails.set('username', loggedIn.id);
                 }
             });
+            
         },
 
         saveUserTeamToStorage: function() {
@@ -41,16 +50,32 @@ define([
 
         fetchUserTeamFromStorage: function() {
 
-            App.userDetails.set('teamName', '50 Shades of OShea');
             App.userDetails.set('teamSelection', [1, 2, 3, 4, 5]);
+            
+            App.visualPrompt.set({
+                'message': '<img src="http://www.riyadh.gov.sa/en/Style%20Library/RP/images/loading.gif" class="loading"> Loading your team',
+                'closePrompt' : null
+            });
 
             if(App.userDetails.get('teamSelection')) {
-                var selection = App.userDetails.get('teamSelection');
-                selection.map(function(playerUID) {
-                    var playerModel = App.playerCollection.findWhere({'uid':playerUID});
-                    App.usersTeamCollection.addPlayerToCollection(playerModel);
-                });
-                App.userDetails.set('teamSelection', [1, 2, 3, 4, 5]);
+                setTimeout(function(){
+
+                    App.userDetails.set('teamName', '50 Shades of OShea');
+                    
+                    var selection = App.userDetails.get('teamSelection');
+                    selection.map(function(playerUID) {
+                        var playerModel = App.playerCollection.findWhere({'uid':playerUID});
+                        App.usersTeamCollection.addPlayerToCollection(playerModel);
+                    });
+                    App.userDetails.set('teamSelection', [1, 2, 3, 4, 5]);
+
+                    App.visualPrompt.set({
+                        'message': null
+                    });
+                    
+                    return;
+
+                }, 5000);
             }
 
             return;

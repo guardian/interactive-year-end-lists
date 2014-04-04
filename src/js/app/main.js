@@ -27,7 +27,10 @@ define([
     App.player = new Backbone.Model();
     App.opponent = new Backbone.Model();
 
-    App.playerSelected = new Backbone.Model();
+    // Variables for listeners
+    App.playerSelected = new Backbone.Model(); // Opens the player card
+    App.visualPrompt = new Backbone.Model(); // Shows a prompt to the user (loading etc)
+
 
     // Collections
     App.playerCollection = new Backbone.Collection(PlayerData);

@@ -57,16 +57,20 @@ define([
         addToSquad: function() {
 
             if(!App.userDetails.get('username')) {
-                alert('Please log in first!');
+                App.visualPrompt.set({
+                    'message': 'Please login first',
+                    'closePrompt' : true
+                });
                 return;
             }
 
             this.closeCard();
             var response = App.usersTeamCollection.addPlayerToCollection(this.playerModel);
             if(response.status == 'fail') {
-                alert('Can\'t do that Dave');
-            } else {
-                //$('#player_profile_' + this.model.cid).addClass('selected');
+                App.visualPrompt.set({
+                    'message': response.message,
+                    'closePrompt' : true
+                });
             }
             return false;
         },

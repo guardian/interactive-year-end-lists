@@ -6,6 +6,7 @@ define([
     'views/squad-selection',
     'views/position-editor',
     'views/player-modal',
+    'views/visual-prompt',
     'text!templates/team-screen.html'
 ], function(
     App,
@@ -15,6 +16,7 @@ define([
     SquadSelectionView,
     PositionEditorView,
     PlayerModal,
+    VisualPrompt,
     TeamScreenTemplate
 ) {
     return Backbone.View.extend({
@@ -46,6 +48,8 @@ define([
         render: function() {
             this.$el.empty();
 
+            var visualPrompt = new VisualPrompt();
+
             var teamRating = new TeamRating();
             var positionEditorView = new PositionEditorView();
             var squadSelectionView = new SquadSelectionView();
@@ -55,6 +59,8 @@ define([
             
             this.$el.append('<div id="team-screen" class="row"></div>');
             this.$el.find('#team-screen').html(squadSelectionView.render().$el);
+
+            this.$el.find('#team-screen').append(visualPrompt.render().$el);
             this.$el.find('#team-screen').append(teamRating.render().$el);
             this.$el.find('#team-screen').append(playerModal.render().$el);
 
