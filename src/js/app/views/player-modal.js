@@ -35,7 +35,7 @@ define([
                     App.userDetails = api.getUserOrSignIn();
                 }
             });
-*/
+            */
             if(App.playerSelected.get('highlighted')) {
                 this.playerModel = App.playerCollection.get(App.playerSelected.get('highlighted'));
 
@@ -44,7 +44,7 @@ define([
 
                 this.render();
 
-                $('#' + this.$el.attr('id')).show();
+                this.$el.show();
             }
         },
 
@@ -72,7 +72,7 @@ define([
         },
 
         render: function() {
-            $('#' + this.$el.attr('id')).html(this.template(this.templateData));
+            this.$el.html(this.template(this.templateData));
             return this;
         }
     });
