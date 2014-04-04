@@ -38,8 +38,8 @@ define([], function() {
     var images = [
         'http://elitedaily.com/wp-content/uploads/2012/03/ronaldo-brazil.jpg',
         'http://1.bp.blogspot.com/-ugwwZTIU-7c/Tbc2Q_hxHJI/AAAAAAAAAiM/Z20-1GgYRoA/s1600/Diego+Maradona%252C+Terry+Butcher+and+Kenny+Sansom+during+Argentina%25E2%2580%2599s+2-1+win+over+England+at+the+1986+World+Cup+finals+in+Mexico%252C+1986.jpg',
-        'http://static.guim.co.uk/sys-images/Football/Clubs/Club%20Home/2009/3/19/1237491250850/Gordon-Banks-denies-Pele-001.jpg',
         'http://24.media.tumblr.com/tumblr_m2s308HJqP1qfxktpo1_1280.jpg',
+        'http://static.guim.co.uk/sys-images/Football/Clubs/Club%20Home/2009/3/19/1237491250850/Gordon-Banks-denies-Pele-001.jpg',
         'http://a4.espncdn.com/photo/2013/0608/soc_winners_10.jpg',
         'http://3.bp.blogspot.com/-T6thyDdI_Sc/Uk3-9-8p3WI/AAAAAAAADhM/N3PXnErdF8o/s640/cruyff2.jpg',
         'http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/1/5/1388918527498/Eus-bio-was-the-prototype-006.jpg',
