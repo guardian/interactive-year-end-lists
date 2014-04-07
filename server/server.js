@@ -23,13 +23,17 @@ app.configure(function() {
 });
 
 mongoose.connect("mongodb://localhost/test");
-
-app.get("/users/1234", function(req, res, next) {
-    console.log('meow');
+mongoose.connection.on('open', function() {
+    console.log("Connected to Mongoose...");
 });
 
-app.put("/users/:test", function(req, res, next) {
-    console.log('meow');
+app.get("/users", function(req, res, next) {
+    console.log('/users GET endpoint');
+    return 'love';
+});
+
+app.put("/users/:id", function(req, res, next) {
+    console.log('/users/:id PUT endpoint');
 });
 
 http.createServer(app).listen(app.get('port'), function() {
