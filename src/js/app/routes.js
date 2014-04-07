@@ -28,8 +28,8 @@ function(
         },
 
         defaultRoute: function(other){
-            //this.showUser();
-            this.showMatch();
+            this.showUser();
+            //this.showMatch();
         }
     });
 });
