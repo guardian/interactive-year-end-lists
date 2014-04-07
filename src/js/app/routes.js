@@ -28,6 +28,7 @@ function(
         },
 
         defaultRoute: function(other){
+            //this.showUser();
             this.showMatch();
         }
     });

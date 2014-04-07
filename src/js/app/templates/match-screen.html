@@ -1,3 +1,35 @@
-<h1>MATCH</h1>
 
-<%= username %> VS. <%= opponent %>
+<div class="row" style="clear:both;">
+	<div class="col-xs-12">
+		<h1 class="score">2 <span>-</span> 1</h1>
+		<span class="start">Start Match</span>
+	</div>
+	<div class="col-xs-12 col-sm-3">
+		<p><%= username %></p>
+		<ol class="pitch">
+			
+		</ol>
+	</div>
+	<div class="col-xs-12 col-sm-6 match-highlights">
+		<h2 class="time">90 <span>minutes</span></h2>
+		<div class="match-details">
+
+			<% _.each(moments, function(moment) { %>
+				<div class="moment">
+					<span class="action-time"><%= moment.time %>"</span>
+					<div class="action action-<%= moment.action.toLowerCase() %>">
+						<span class="action-title action-<%= moment.action.toLowerCase() %>"><b><%= moment.action %></b></span> 
+						<p><%= moment.description %></p>
+					</div>
+				</div>
+	        <% }); %>
+
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-3">
+		<p><%= opponent %></p>
+		<ol class="pitch">
+			
+		</ol>
+	</div>
+</div>

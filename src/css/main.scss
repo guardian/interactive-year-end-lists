@@ -9,8 +9,8 @@
 
 /* Ovewrite Bootstrap for NGW */
 figure.interactive .container {
-  padding-left: 0;
-  padding-right: 0;
+	padding-left: 0;
+	padding-right: 0;
 }
 @media (min-width: 46.25em) {
   figure.interactive .container {
@@ -213,7 +213,7 @@ figure.interactive {
 	 .pitch {
 	 	margin: 0 auto;
 	 	padding: 0;
-	 	background: url('images/pitch.jpg');
+	 	background: url('http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/images/pitch.jpg');
 	 	height: 500px;
 	 	width: 370px;
 	 	background-size: contain;
@@ -302,5 +302,65 @@ figure.interactive {
 	 /* Countries white text */
 	 .bg-italy, .bg-germany {
 	 	color: #fff;
+	 }
+
+	 /* Match screen */
+
+	 #match-screen .pitch {
+	 	width: 100%;
+	 }
+
+	 h1.score {
+	 	font-size: 3em;
+	 	text-align: center;
+	 }
+
+	 h2.time {
+	 	font-size: 3em;
+		line-height: 1.1;
+		margin-bottom: 30px;
+		border-bottom: 1px dotted #ccc;
+		padding-bottom: 30px;
+	 }
+	 h2.time span {
+	 	display: block;
+	 	font-size: 40%;
+	 }
+	 .match-highlights {
+	 	text-align: center;
+	 }
+	 .match-details {
+	 	text-align: left;
+	 }
+	 .match-details .moment {
+		display: block;
+		float: left;
+		width: 100%;
+		margin: 0 0 25px;
+		display:none;
+ 	}
+ 	.match-details .action {
+ 		font-size: 14px;
+		background: #f7f7f7;
+		padding: 11px 15px;
+		margin-left: 40px;
+		border-left: 3px solid #ccc;
+	 }
+	 .match-details .action.action-goal {
+	 	background: #e5f3ff;
+	}
+	 .match-details .action-title {
+	 	font-family: "EgyptianHeadline",georgia,serif;
+		font-size: 16px;
+		float: left;
+		width: 100%;
+		margin-bottom: 10px;
+		color: #333;
+		font-weight: bold;
+	 }
+	 .match-details .moment .action-time {
+	 	float: left;
+	 	width: 40px;
+	 	margin-top: 10px;
 	 }
 }
