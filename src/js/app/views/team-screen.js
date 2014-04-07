@@ -29,7 +29,7 @@ define([
         },
 
         initialize: function() {
-            App.userDetails.on('change:username', this.prePopulateTeam, this);
+            this.prePopulateTeam();
         },
 
         prePopulateTeam: function() {
@@ -45,6 +45,7 @@ define([
         },
 
         render: function() {
+
             this.$el.empty();
 
             var visualPrompt = new VisualPrompt();

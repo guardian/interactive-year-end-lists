@@ -20,6 +20,8 @@ define([
     Routes
 ) {
 
+    App.environment = 'development';
+
     // Models
     App.userDetails = new UserModel();
     App.userDetails.checkUserStatus();
@@ -31,7 +33,6 @@ define([
     App.playerSelected = new Backbone.Model(); // Opens the player card
     App.visualPrompt = new Backbone.Model(); // Shows a prompt to the user (loading etc)
 
-
     // Collections
     App.playerCollection = new Backbone.Collection(PlayerData);
     App.usersTeamCollection = new TeamCollection();
@@ -41,8 +42,8 @@ define([
     App.teamView = new TeamScreenView({ collection: App.playerCollection });
     App.matchView = new MatchScreenView();
 
-    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');
-    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
+//    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');
+//    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
 
     /**
      * Bootstrap loader
