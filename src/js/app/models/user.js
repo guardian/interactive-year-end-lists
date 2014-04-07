@@ -7,16 +7,31 @@ define([
 ) {
     return Backbone.Model.extend({
 
+        idAttribute : "_id",
+        urlRoot: "http://localhost:3000/users",
         defaults: {
+            _id: null,
             username: null,
-            teamName: null,
             teamSelection: null
         },
 
         checkUserStatus: function() {
 
             if(App.environment == 'development') {
-                App.userDetails.set('username', 'bluedaniel');
+
+                App.userDetails.fetch(123);
+
+                var attrs = {
+                    _id: '1236',
+                    username: 'bluedanielsss',
+                    //teamSelection: [1, 2, 3, 4, 5]
+                };
+
+                //App.userDetails.set();
+                App.userDetails.save(attrs);
+
+                console.log(App.userDetails);
+
             } else {
                 require(["common/modules/identity/api"], function(api) { 
                     require(["common/modules/identity/api"], function(api) { 
@@ -48,18 +63,14 @@ define([
 
         saveUserTeamToStorage: function() {
             if(App.environment == 'development') {
-            
+                var ar = this.parseTeamIntoArray();
+                console.log(ar);
             } else {
                 
             }
         },
 
         fetchUserTeamFromStorage: function() {
-            if(App.environment == 'development') {
-                App.userDetails.set('teamSelection', [1, 2, 3, 4, 5]);
-            } else {
-                
-            }
 
             if(App.userDetails.get('teamSelection')) {
 
@@ -74,6 +85,14 @@ define([
                 });
             }
             return;
+        },
+
+        parseTeamIntoArray: function() {
+            var team = [];
+            App.usersTeamCollection.each(function(player) {
+                team.push(player.get('uid'));
+            });
+            return team;
         }
 
     });
