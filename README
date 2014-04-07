@@ -1,0 +1,29 @@
+world-cup-2014-dream-team
+=========================
+
+Choose your World Cup 2014 dream team
+
+PLAYER DB
+    https://docs.google.com/a/guardian.co.uk/spreadsheet/ccc?key=0AkRR3zKqdlUHdFE5SjJtS3gyUHF3ZEcwYlF0SHgxbkE
+
+USER DATA STRUCTURE
+    {
+        _id:            '001',
+        username:       'anom'
+        teamSelection:  ['player_id', 'player_id', ...]
+    }
+
+
+MATCH DATA STRUCUTRE
+    {
+        date:                   'Mon Apr 07 2014 17:21:29 GMT+0100 (BST)'
+        user_1_id:              '001',
+        user_1_teamSelection:   ['player_id', 'player_id', ...],
+        user_1_goals:           2,
+
+
+        user_2_id:              '002',
+        user_2_teamSelection:   ['player_id', 'player_id', ...]
+        user_2_goals:           1
+    }
+
