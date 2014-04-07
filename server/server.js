@@ -1,37 +1,37 @@
-var express = require('express'),
-mongoose = require('mongoose'),
-http = require('http'),
-path = require('path');
-
+var express = require('express');
+var mongoose = require('mongoose');
+var cors = require('cors');
 var app = express();
 
-app.configure(function() {
-    app.set('port', process.env.PORT || 3000);
-    app.set('views', __dirname + '/views');
-    app.set('view engine', 'jade');
-    app.use(express.methodOverride());
-    app.use(express.bodyParser());
-    app.use(app.router);
-    app.use(express.static(path.join(__dirname, 'public')));
-    app.use(function (req, res, next) {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-        res.setHeader('Access-Control-Allow-Credentials', true);
-        next();
-    });
-});
+// Restrict requests to known good domains
+var whitelist = ['http://localhost:9000', 'http://www.theguardian.com'];
+var corsOptions = {
+    origin: function(origin, callback){
+        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+        callback(null, originIsWhitelisted);
+    }
+};
 
+// Setup
+app.use(cors(corsOptions));
+app.use(app.router);
 mongoose.connect("mongodb://localhost/test");
 
-app.get("/users/1234", function(req, res, next) {
-    console.log('meow');
+// Routes
+app.options('*', cors(corsOptions));
+
+app.get("/users/:id", function(req, res, next) {
+    console.log('GET: ', req.params.id);
+    res.jsonp({ 'id': req.params.id });
 });
 
-app.put("/users/:test", function(req, res, next) {
-    console.log('meow');
+app.put("/users/:id", function(req, res, next) {
+    console.log('PUT: ', req.params.id);
+    res.jsonp({ 'id': req.params.id });
 });
 
-http.createServer(app).listen(app.get('port'), function() {
-    console.log("Express server listening on port " + app.get('port'));
+
+// Start server
+var server = app.listen(3000, function() {
+    console.log('Listening on port %d', server.address().port);
 });
