@@ -21,16 +21,11 @@ define([
 
                 App.userDetails.fetch(123);
 
-                var attrs = {
-                    _id: '1236',
+                App.userDetails.set({
+                    _id: '9999',
                     username: 'bluedanielsss',
-                    //teamSelection: [1, 2, 3, 4, 5]
-                };
-
-                //App.userDetails.set();
-                App.userDetails.save(attrs);
-
-                console.log(App.userDetails);
+                    teamSelection: [1, 2, 3, 4, 5]
+                }).save();
 
             } else {
                 require(["common/modules/identity/api"], function(api) { 
