@@ -125,6 +125,12 @@ define([], function() {
 {"uid":123,"country":"Cameroon","name":"Roger Milla","position":"ST","attack":14,"defense":10,"discipline":15,"creativity":11,"unpredictability":18,"volatility":10,"star quality":14},
 {"uid":124,"country":"Germany","name":"Karl-Heinz Rumenigge","position":"ST","attack":17,"defense":12,"discipline":15,"creativity":13,"unpredictability":10,"volatility":5,"star quality":15}];
 
-    return players;
+	var uniquePlayers = [];
+
+	players.map(function(player) {
+        if(player.name) {uniquePlayers.push(player);
+        }
+    });
+    return uniquePlayers;
 
 });
