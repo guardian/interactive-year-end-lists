@@ -25,6 +25,8 @@ define([
         },
 
         initialize: function(options) {
+            this.listenTo(App.player1, 'change', this.render);
+            this.listenTo(App.player2, 'change', this.render);
         },
 
         showDivs: function () {
@@ -37,6 +39,20 @@ define([
             }
         },
 
+        isReady: function() {
+            if(App.player1 && App.player2) {
+                console.log('Start match');
+            }
+        },
+
+        loadingRender: function() {
+
+        },
+
+        matchResultRender: function() {
+
+        },
+
         render: function() {
 
             var moments = {
@@ -47,8 +63,8 @@ define([
             };
 
             this.$el.html(this.template({
-                username: 'bluedaniel',
-                opponent: 'yogibear',
+                player1: App.player1.toJSON(),
+                player2: App.player2.toJSON(),
                 moments: moments
             }));
 

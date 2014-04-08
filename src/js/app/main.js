@@ -28,9 +28,9 @@ define([
     App.userDetails = new UserModel();
     App.userDetails.checkUserStatus();
 
-    App.player = new Backbone.Model();
-    App.opponent = new Backbone.Model();
-
+    App.player1 = new UserModel();
+    App.player2 = new UserModel();
+    
     // Variables for listeners
     App.playerSelected = new Backbone.Model(); // Opens the player card
     App.visualPrompt = new Backbone.Model(); // Shows a prompt to the user (loading etc)
