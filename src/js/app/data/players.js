@@ -170,5 +170,4 @@ function getCountryName(CountryName) {
             return countries[i].code.toLowerCase();
         }
     }
-    return "";
 }
