@@ -38,7 +38,10 @@ define([
     // Collections
     App.playerCollection = new Backbone.Collection(PlayerData);
     App.usersTeamCollection = new TeamCollection();
-    App.opponentTeamCollection = new TeamCollection();
+    
+
+    App.player1TeamCollection = new TeamCollection();
+    App.player2TeamCollection = new TeamCollection();
 
     // Views
     App.userView = new UserView();
