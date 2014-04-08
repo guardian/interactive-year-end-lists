@@ -6,6 +6,13 @@ Choose your World Cup 2014 dream team
 PLAYER DB
     https://docs.google.com/a/guardian.co.uk/spreadsheet/ccc?key=0AkRR3zKqdlUHdFE5SjJtS3gyUHF3ZEcwYlF0SHgxbkE
 
+
+
+
+MONGO SETUP
+
+    db.users.ensureIndex( { 'guardianID': 1 }, { unique: true });
+
 USER DATA STRUCTURE
     {
         _id:            '001',

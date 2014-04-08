@@ -7,20 +7,28 @@ define([
 ) {
     return Backbone.Model.extend({
 
-        idAttribute : "guardianID",
         urlRoot: "http://localhost:3000/users",
+
+        idAttribute: '_id',
+
         defaults: {
             guardianID: null,
-            username: null,
-            teamSelection: null
+            username: 'Anon',
+            teamSelection: ''
+        },
+
+        fetchByGuardianId: function(_options) {
+            var options = _options || {};
+            options.data = { guardianID: this.get('guardianID') };
+            return this.fetch(options);
         },
 
         checkUserStatus: function() {
 
-            if(App.environment == 'development') {
-                
-                App.userDetails.set({guardianID: 213123});
-                App.userDetails.fetch({
+            if(App.environment === 'development') {
+
+                App.userDetails.set({'guardianID': '053'});
+                App.userDetails.fetchByGuardianId({
                     success: function (user) {
                         if(!user.username) {
                             // Create new user, dont bother fetching team.
@@ -31,11 +39,15 @@ define([
                             // this.fetchUserTeamFromStorage
                         }
                         App.userDetails.set(user.toJSON());
+
+                    },
+                    error: function(err) {
+                        console.error('fetchByGuardianId failed: ', err);
                     }
                 });
             } else {
-                require(["common/modules/identity/api"], function(api) { 
-                    require(["common/modules/identity/api"], function(api) { 
+                require(["common/modules/identity/api"], function(api) {
+                    require(["common/modules/identity/api"], function(api) {
                         var loggedIn = api.getUserFromCookie();
                         if(loggedIn) {
                             App.userDetails.set('username', loggedIn.id);
@@ -50,10 +62,10 @@ define([
         },
 
         loginUser: function() {
-            if(App.environment == 'development') {
-                
+            if(App.environment === 'development') {
+
             } else {
-                require(["common/modules/identity/api"], function(api) { 
+                require(["common/modules/identity/api"], function(api) {
                     var loggedIn = api.getUserOrSignIn();
                     if(loggedIn) {
                         App.userDetails.set('username', loggedIn.id);
@@ -67,7 +79,7 @@ define([
                 App.userDetails.set({teamSelection: this.parseTeamIntoArray()});
                 App.userDetails.save();
             } else {
-                
+
             }
         },
 

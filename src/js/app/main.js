@@ -60,7 +60,7 @@ define([
         var appRoutes = new Routes();
         Backbone.history.start();
     }
-    
+
     return {
         boot: boot
     };
