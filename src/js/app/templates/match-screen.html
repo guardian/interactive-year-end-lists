@@ -7,14 +7,12 @@
 
 	<div class="row" style="clear:both;">
 		<div class="col-xs-12 col-sm-3">
-			<h3><%= player1.username %></h3>
+			<h3><%= player1.details.username %></h3>
 			<ol class="pitch">
-				
-			</ol>
-			<ul>
-				<li>71" Pele</li>
-				<li>34" Ronaldo</li>
-			</ul>
+		        <% _.each(player1.team, function(player) { %>
+		            <li><%= player.name %></li>
+		        <% }) %>
+		    </ol>
 		</div>
 		<div class="col-xs-12 col-sm-6 match-highlights">
 			<div class="row" style="clear:both;">
@@ -44,14 +42,12 @@
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-3">
-			<h3><%= player2.username %></h3>
+			<h3><%= player2.details.username %></h3>
 			<ol class="pitch">
-				
-			</ol>
-			<ul>
-				<li>Goal - 21" Baggio</li>
-				<li>Red - 67" Beckham</li>
-			</ul>
+		        <% _.each(player2.team, function(player) { %>
+		            <li><%= player.name %></li>
+		        <% }) %>
+		    </ol>
 		</div>
 	</div>
 
