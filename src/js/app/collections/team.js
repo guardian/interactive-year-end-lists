@@ -1,17 +1,16 @@
 define([
 	'app',
     'backbone',
-    'models/player'
+    'models/player',
+    'models/user'
 ], function(
 	App,
     Backbone,
     PlayerModel
 ) {
     return Backbone.Collection.extend({
+        
         model: PlayerModel,
-
-        // Remote DB
-        url: '#',
 
         validateAddingPlayer: function(model) {
 			var response = { status: 'fail', message: '' };
@@ -47,12 +46,20 @@ define([
             return response;
         },
 
-        addPlayerToCollection: function(model) {
+        addPlayerToCollection: function(model, saveToStorage) {
 			var response = this.validateAddingPlayer(model);
 			if(response.status == 'success') {
 				App.usersTeamCollection.add(model);
+                if(saveToStorage) {
+                    App.userDetails.saveUserTeamToStorage();
+                }
 			}
 			return response;
+        },
+
+        removePlayerFromCollection: function(model) {
+            App.usersTeamCollection.remove(model);
+            App.userDetails.saveUserTeamToStorage();
         }
 
     });

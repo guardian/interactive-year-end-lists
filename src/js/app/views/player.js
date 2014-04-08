@@ -41,7 +41,7 @@ define([
         },
 
         removePlayerFromSquad: function() {
-            App.usersTeamCollection.remove(this.model);
+            App.usersTeamCollection.removePlayerFromCollection(this.model);
             this.showSelectedPlayer();
             return false;
         },

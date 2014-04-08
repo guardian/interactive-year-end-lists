@@ -29,12 +29,7 @@ define([
         },
 
         initialize: function() {
-            this.prePopulateTeam();
-            App.usersTeamCollection.on('add remove reset', this.saveTeam, this);
-        },
-
-        saveTeam: function() {
-            App.userDetails.saveUserTeamToStorage();
+            this.listenTo(App.userDetails, 'change', this.prePopulateTeam);
         },
 
         prePopulateTeam: function() {

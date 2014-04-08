@@ -4,6 +4,7 @@ define([
     'backbone',
     'models/user',
     'collections/team',
+    'views/user-screen',
     'views/team-screen',
     'views/match-screen',
     'data/players',
@@ -14,6 +15,7 @@ define([
     Backbone,
     UserModel,
     TeamCollection,
+    UserView,
     TeamScreenView,
     MatchScreenView,
     PlayerData,
@@ -39,6 +41,7 @@ define([
     App.opponentTeamCollection = new TeamCollection();
 
     // Views
+    App.userView = new UserView();
     App.teamView = new TeamScreenView({ collection: App.playerCollection });
     App.matchView = new MatchScreenView();
 
