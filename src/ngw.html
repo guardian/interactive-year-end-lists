@@ -162,7 +162,7 @@ figure{margin:0}figure img{display:block}figure.img{margin-top:16px;margin-top:1
         css: {
             loaded: false
         },
-        config: 
+        config:
 
 {
     "page": {
@@ -191,7 +191,7 @@ figure{margin:0}figure img{display:block}figure.img{margin-top:16px;margin-top:1
         baseUrl: 'http://assets.guim.co.uk/javascripts',
         apiName: 'require',
         paths: {
-            
+
             facebook: '//connect.facebook.net/en_US/all.js',
             swipe: 'http://assets.guim.co.uk/javascripts/components/swipe/swipe.65541404276bebe1a0d492ea92583bcc.js',
             zxcvbn: 'http://assets.guim.co.uk/javascripts/components/zxcvbn/index.e050d80d97a9547725aa2bc48c54de1a.js',
@@ -209,7 +209,7 @@ figure{margin:0}figure img{display:block}figure.img{margin-top:16px;margin-top:1
 
         if (!isModern) { return false; }
 
-        
+
             function loadCssFromStorage() {
                 var c = localStorage.getItem('gu.css.e243aa41e4063c336385ab60da7d1bea'), s, sc;
                 if(c) {
@@ -221,9 +221,9 @@ figure{margin:0}figure img{display:block}figure.img{margin-top:16px;margin-top:1
                     guardian.css.loaded = true;
                 }
             }
-        
+
         function loadFontsAsynchronously() {
-            
+
             var f, x;
 
             x = document.getElementById('gu');
@@ -240,9 +240,9 @@ figure{margin:0}figure img{display:block}figure.img{margin-top:16px;margin-top:1
                 fontPreference = localStorage['gu.prefs.switch.font-family'],
                 fontSwitch = (fontPreference) ? JSON.parse(fontPreference).value : undefined;
 
-            
+
                 showFonts = true;
-            
+
 
             if (fontSwitch === true) {
                 showFonts = true;
@@ -256,7 +256,7 @@ figure{margin:0}figure img{display:block}figure.img{margin-top:16px;margin-top:1
                     var style = styleNodes[i],
                         nameAndCacheKey = style.getAttribute('data-cache-file-woff').match(/fonts\/(.*)\.woff(?:\.(.*))?\.json$/),
                         cachedCss = localStorage.getItem('gu.fonts.' + nameAndCacheKey[1] + '.' + nameAndCacheKey[2]);
-                        
+
                         try {
                             cachedCss = JSON.parse(cachedCss).value;
                         } catch(e) {}
@@ -268,10 +268,10 @@ figure{margin:0}figure img{display:block}figure.img{margin-top:16px;margin-top:1
             }
         }
 
-        
+
         var htmlClassNames = "";
 
-        
+
         function hasSvgSupport() {
             var ns = {'svg': 'http://www.w3.org/2000/svg'};
             return !!document.createElementNS && !!document.createElementNS(ns.svg, 'svg').createSVGRect;
@@ -281,9 +281,9 @@ figure{margin:0}figure img{display:block}figure.img{margin-top:16px;margin-top:1
         }
         document.documentElement.className = document.documentElement.className.replace(/\bjs-off\b/g, '') + ' js-on ' + htmlClassNames;
 
-        
+
         var loadsHintedFonts = /Windows/;
-        
+
         var loadsNonHintedFonts = /W(indows Phone|PDesktop)/;
 
         guardian.shouldLoadFontsAsynchronously = loadsHintedFonts.test(navigator.userAgent)
@@ -297,9 +297,9 @@ figure{margin:0}figure img{display:block}figure.img{margin-top:16px;margin-top:1
 
 
 
-        
+
             loadCssFromStorage();
-        
+
 
     })(guardian.isModernBrowser);
 </script>
@@ -954,7 +954,7 @@ Current version
 </div>
 </noscript>
 <script>
-                    
+
                     if (!guardian.isModernBrowser) {
                         var analyticsImage = document.createElement("img");
                         analyticsImage.src = "http://hits.theguardian.com/b/ss/guardiangu-frontend,guardiangu-network/1/H.25.3/?c3=theguardian.com&c4=Web+browsers%2CTim+Berners-Lee%2CInternet%2CTechnology%2CUK+news%2CWorld+news&v19=frontend&cdp=2&c11=technology&c8=2057724&v7=GFE%3Atechnology%3AInteractive%3Aa-partial-history-of-the-open-web&event=&ns=guardian&c19=frontend&v23=&c56=Partial+Javascript&v8=2057724&c9=Interactive&ch=technology&v67=nextgen-served&c30=content&c6=Sean+Clarke%2CGarry+Blight%2CSimon+Jeffery&e27=&g=www.theguardian.com%2Ftechnology%2Fng-interactive%2F2014%2Fmar%2F12%2Fa-partial-history-of-the-open-web&c13=&pageName=GFE%3Atechnology%3AInteractive%3Aa-partial-history-of-the-open-web&c14=4164&c10=&c25=";
@@ -962,12 +962,12 @@ Current version
                         analyticsImage.height = "1";
                         document.body.appendChild(analyticsImage);
 
-                        
-                        
-                            
+
+
+
                             var img = new Image();
                             img.src = "//beacon.www.theguardian.com/count/pva.gif";
-                        
+
                     }
                 </script>
 <script>
@@ -991,7 +991,7 @@ Current version
             require(['http://localhost:9000/js/boot.js'], function(app) {
                 app.boot(el);
             });
-        }, 500);
+        }, 1000);
         </script>
 </body>
 </html>
