@@ -1,8 +1,8 @@
 module.exports = function(grunt) {
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    // Local web server
     connect: {
       server: {
         options: {
@@ -12,6 +12,14 @@ module.exports = function(grunt) {
       }
     },
 
+    // Backend API enpoint
+    nodemon: {
+      dev: {
+        script: 'server/server.js'
+      }
+    },
+
+    // CSS
     sass: {
       build: {
         options: {
@@ -24,6 +32,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // Normalise CSS prefixes
     autoprefixer: {
       build: {
             files: {
@@ -32,12 +41,15 @@ module.exports = function(grunt) {
         }
     },
 
+    // Empty out build folder
     clean: ['build/'],
 
+    // Lint JavaScript files
     jshint: {
       files: ['Gruntfile.js', 'src/js/*.js', 'src/js/app/**/*.js']
     },
 
+    // Combine main app into one JS file
     requirejs: {
       compile: {
         options: {
@@ -60,6 +72,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // Fix to remove 'text!' AMD module names as CurlJS has problems them
     'string-replace': {
       dist: {
         files: {
@@ -74,6 +87,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // Listen to file changes
     watch: {
       scripts: {
         files: ['src/**/*.js', 'src/**/*.scss', 'src/js/app/templates/*.html'],
@@ -91,6 +105,7 @@ module.exports = function(grunt) {
       },
     },
 
+    // Copy needed files into the build folder
     copy: {
       build: {
         files: [
@@ -98,13 +113,19 @@ module.exports = function(grunt) {
           { src: 'src/ngw.html', dest: 'build/ngw.html' },
           { src: 'src/css/partials/*.css', dest: 'build/css/vendor.css' },
           { src: 'src/js/libs/require.js', dest: 'build/js/require.js' },
-          {expand: true, cwd: 'src/images/', src: ['**/*.{png,jpg,svg}'], dest:'build/images/' }
+          {
+            expand: true,
+            cwd: 'src/images/',
+            src: ['**/*.{png,jpg,svg}'],
+            dest:'build/images/'
+          }
         ]
       }
     },
 
   });
 
+  // Load plugins
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
@@ -113,8 +134,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-string-replace');
 
+  // Tasks
   grunt.registerTask('build', ['jshint', 'clean', 'sass', 'autoprefixer', 'requirejs', 'copy', 'string-replace']);
-  grunt.registerTask('default', ['build', 'connect', 'watch']);
+  grunt.registerTask('default', ['build', 'connect', 'nodemon', 'watch']);
 };
