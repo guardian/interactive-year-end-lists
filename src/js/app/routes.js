@@ -22,13 +22,17 @@ function(
         },
 
         showUser: function(username) {
-            App.player.set('username', username);
+            App.$el.empty();
+            App.$el.html(App.userView.render().$el);
+        },
+
+        showMyTeam: function(username) {
             App.$el.empty();
             App.$el.html(App.teamView.render().$el);
         },
 
         defaultRoute: function(other){
-            this.showUser();
+            this.showMyTeam();
         }
     });
 });

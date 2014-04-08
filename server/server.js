@@ -14,21 +14,100 @@ var corsOptions = {
 
 // Setup
 app.use(cors(corsOptions));
+app.use(express.bodyParser());
 app.use(app.router);
 mongoose.connect("mongodb://localhost/test");
 
 // Routes
 app.options('*', cors(corsOptions));
 
-app.get("/users/:id", function(req, res, next) {
-    console.log('GET: ', req.params.id);
-    res.jsonp({ 'id': req.params.id });
+
+var UserSchema = mongoose.Schema({
+    guardianID: String,
+    username: String,
+    teamSelection: String
+});
+var User = mongoose.model('User', UserSchema);
+
+
+app.get("/users", function(req, res, next) {
+
+    var params = {};
+
+    if(req.params.id) {
+        params = {guardianID: req.params.id};
+    }
+
+    User.find(params ,function(err,docs){
+        if(err) throw err;
+        res.send(docs);
+    });
 });
 
-app.put("/users/:id", function(req, res, next) {
-    console.log('PUT: ', req.params.id);
-    res.jsonp({ 'id': req.params.id });
+app.get("/users/:guardianID", function(req, res, next) {
+
+//    User.find().remove().exec();
+    User.findOne({guardianID: req.params.guardianID}, function(err, user) {
+        if(err) throw err;
+        res.jsonp(user);
+    });
 });
+
+app.put("/users/:guardianID", function(req, res, next){
+
+    User.findOne({guardianID: req.params.guardianID}, function(err, user) {
+        if(err) throw err;
+
+        var newUser = new User(req.params);
+        newUser.save(function (err) {
+            if(err) throw err;
+            res.jsonp(newUser);
+        });
+        res.jsonp(user);
+    });
+
+    var newUser = new User({
+        guardianID: req.body.guardianID,
+        username: req.body.username,
+        teamSelection: req.body.teamSelection
+    });
+    newUser.save(function (err) {
+        if(err) throw err;
+        res.jsonp(newUser);
+    });
+            /*
+    var id = req.params.id;
+    User.find({id: req.params.id}, function(err, user) {
+        if(err) throw err;
+
+        if(user.length > 0) {
+            console.log(user);
+        } else {
+            console.log(req.body);
+            var newUser = new User({
+                id: req.params.id,
+                username: req.params.username,
+                teamSelection: req.params.teamSelection
+            });
+            newUser.save(function (err) {
+                if(err) throw err;
+                res.jsonp(newUser);
+            });
+        }
+    });
+*/
+});
+
+app.del("/users/:guardianID", function(req, res, next){
+    var id = req.params.guardianID;
+    User.findById(id, function(err, user) {
+        user.remove(function(err) {
+            if(err) throw err;
+
+        });
+    });
+});
+
 
 
 // Start server
