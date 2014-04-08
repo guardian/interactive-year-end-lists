@@ -130,7 +130,6 @@ define([], function() {
 players.map(function(player) {
         if(player.name) {
 player.countrycode = getCountryName(player.country);
-console.log(player.countrycode);
 uniquePlayers.push(player);
         }
     });
