@@ -58,7 +58,7 @@ app.put("/users/:guardianID", function(req, res, next){
     User.findOne({guardianID: req.params.guardianID}, function(err, user) {
         if(err) throw err;
 
-        if(user.guardianID) {
+        if(user) {
             user.username = req.body.username;
             user.teamSelection = req.body.teamSelection;
         } else {

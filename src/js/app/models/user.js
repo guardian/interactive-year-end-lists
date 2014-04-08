@@ -15,22 +15,21 @@ define([
             teamSelection: null
         },
 
-        populateDB: function() {
-            App.userDetails.set({
-                guardianID: 8888,
-                username: 'bluedaniel',
-                teamSelection: null
-            });
-            App.userDetails.save();
-        },
-
         checkUserStatus: function() {
 
             if(App.environment == 'development') {
                 
-                App.userDetails.set({guardianID: 8888});
+                App.userDetails.set({guardianID: 213123});
                 App.userDetails.fetch({
                     success: function (user) {
+                        if(!user.username) {
+                            // Create new user, dont bother fetching team.
+                            // user.username from Cookie
+                            //App.userDetails.set('username', 'hamlet');
+                            //App.userDetails.save();
+                        } else {
+                            // this.fetchUserTeamFromStorage
+                        }
                         App.userDetails.set(user.toJSON());
                     }
                 });
