@@ -18,7 +18,9 @@ define([
         checkUserStatus: function() {
 
             if(App.environment == 'development') {
-                
+
+                // Create new model isNew() -> POST
+
                 App.userDetails.set({guardianID: 213123});
                 App.userDetails.fetch({
                     success: function (user) {
@@ -28,6 +30,7 @@ define([
                             //App.userDetails.set('username', 'hamlet');
                             //App.userDetails.save();
                         } else {
+
                             // this.fetchUserTeamFromStorage
                         }
                         App.userDetails.set(user.toJSON());

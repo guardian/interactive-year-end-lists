@@ -59,9 +59,11 @@ app.put("/users/:guardianID", function(req, res, next){
         if(err) throw err;
 
         if(user) {
+            // Update existing 
             user.username = req.body.username;
             user.teamSelection = req.body.teamSelection;
         } else {
+            // Create new user
             user = new User(req.body);
         }
         user.save(function (err) {
