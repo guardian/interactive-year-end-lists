@@ -46,7 +46,7 @@ define([
         },
 
         isReady: function() {
-            
+
             if(this.userValidForMatch(App.player1) && this.userValidForMatch(App.player2)) {
 
                 var team1 = App.player1TeamCollection.toJSON();
@@ -124,6 +124,9 @@ define([
         render: function() {
 
             this.$el.html(this.template(this.templateData));
+            this.$el.find('.pitch').each(function(index, i) {
+                $(this).find('.pitch_player.position-cb:eq(1), .pitch_player.position-mc:eq(1), .pitch_player.position-st:eq(1)').addClass('second');
+            });
 
             return this;
         }

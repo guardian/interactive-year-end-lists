@@ -5,10 +5,13 @@
 		<div class="col-xs-12 col-sm-3">
 			<h3><%= player1.details.username %></h3>
 			<ol class="pitch">
-		        <% _.each(player1.team, function(player) { %>
-		            <li><%= player.name %></li>
-		        <% }) %>
-		    </ol>
+				<% _.each(player1.team, function(player) { %>
+				    <li class="pitch_player position-<%= player.position.toLowerCase() %>">
+				    	<img src="<%= player.imageSrc %>" alt="">
+				    	<%= player.name %>
+				    </li>
+				<% }) %>
+			</ol>
 		</div>
 		<div class="col-xs-12 col-sm-6 match-highlights">
 			<div class="row" style="clear:both;">
@@ -42,11 +45,16 @@
 		</div>
 		<div class="col-xs-12 col-sm-3">
 			<h3><%= player2.details.username %></h3>
+
 			<ol class="pitch">
-		        <% _.each(player2.team, function(player) { %>
-		            <li><%= player.name %></li>
-		        <% }) %>
-		    </ol>
+				<% _.each(player2.team, function(player) { %>
+				    <li class="pitch_player position-<%= player.position.toLowerCase() %>">
+				    	<img src="<%= player.imageSrc %>" alt="">
+				    	<%= player.name %>
+				    </li>
+				<% }) %>
+			</ol>
+
 		</div>
 	</div>
 
