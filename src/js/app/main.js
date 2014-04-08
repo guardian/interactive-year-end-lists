@@ -28,9 +28,9 @@ define([
     App.userDetails = new UserModel();
     App.userDetails.checkUserStatus();
 
-    App.player = new Backbone.Model();
-    App.opponent = new Backbone.Model();
-
+    App.player1 = new UserModel();
+    App.player2 = new UserModel();
+    
     // Variables for listeners
     App.playerSelected = new Backbone.Model(); // Opens the player card
     App.visualPrompt = new Backbone.Model(); // Shows a prompt to the user (loading etc)
@@ -38,7 +38,10 @@ define([
     // Collections
     App.playerCollection = new Backbone.Collection(PlayerData);
     App.usersTeamCollection = new TeamCollection();
-    App.opponentTeamCollection = new TeamCollection();
+    
+
+    App.player1TeamCollection = new TeamCollection();
+    App.player2TeamCollection = new TeamCollection();
 
     // Views
     App.userView = new UserView();

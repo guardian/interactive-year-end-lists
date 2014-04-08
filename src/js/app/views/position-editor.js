@@ -19,21 +19,21 @@ define([
 
         initialize: function() {
             this.$el.hide();
-            this.listenTo(App.player, 'change:selectedPlayer', this.handlePlayerSelect);
+            this.listenTo(App.playerSelected, 'change:highlighted', this.handlePlayerSelect);
             this.templateData = { selectedPlayer: { name: 'bob' }, players: [] };
         },
 
         closeEditor: function() {
-            App.player.set('selectedPlayer', null);
+            App.playerSelected.set('highlighted', 0);
         },
 
         handlePlayerSelect: function(model) {
-            var selectedPlayer = App.player.get('selectedPlayer');
+            var selectedPlayer = App.playerSelected.get('highlighted');
 
             if (selectedPlayer) {
                 this.templateData = {
                     players: App.usersTeamCollection.toJSON(),
-                    selectedPlayer: App.player.get('selectedPlayer').toJSON()
+                    selectedPlayer: App.playerSelected.toJSON()
                 };
 
                 this.render();

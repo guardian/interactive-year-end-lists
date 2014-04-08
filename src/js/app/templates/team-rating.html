@@ -7,14 +7,11 @@
 <ol class="pitch">
 	<% _.each(players, function(player) { %>
 	    <li class="pitch_player position-<%= player.position.toLowerCase() %>">
-	    	<img src="<%= player.imageSrc %>" alt="">
-	    	<%= player.name %>
+	    	<img src="http://placehold.it/50x50" alt="">
+	    	<%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
 	    </li>
 	<% }) %>
 </ol>
-
-<p>Total Goals - <%= stats.goals %></p>
-<p>Total Apps - <%= stats.apps %></p>
 
 <% if(userDetails.username) { %>
 	<% if(0 < players.length) { %>

@@ -65,7 +65,8 @@ app.get('/users', function(req, res) {
 // Create new user
 app.post('/users', function(req, res) {
     var newUser = new User({
-        guardianID: req.body.guardianID
+        guardianID: req.body.guardianID,
+        username: req.body.username
     });
 
     newUser.save(function(err, product) {

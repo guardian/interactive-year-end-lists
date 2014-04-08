@@ -27,7 +27,7 @@ define([
 
             if(App.environment === 'development') {
 
-                App.userDetails.set({'guardianID': '053'});
+                App.userDetails.set({'guardianID': '0530'});
                 App.userDetails.fetchByGuardianId({
                     success: function (user) {
                         if(!user.username) {
@@ -36,6 +36,7 @@ define([
                             //App.userDetails.set('username', 'hamlet');
                             //App.userDetails.save();
                         } else {
+
                             // this.fetchUserTeamFromStorage
                         }
                         App.userDetails.set(user.toJSON());

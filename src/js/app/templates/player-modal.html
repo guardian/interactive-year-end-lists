@@ -4,19 +4,19 @@
 	<div class="flip-container" ontouchstart="this.classList.add('hover');">
 		<div class="flipper">
 
-			<div class="front" style="background-image: url(<%= playerSelected.imageSrcLarge %>);">
+			<div class="front">
 				<h1 class="front-name"><%= playerSelected.name %></h1>
 			</div>
 
 			<div class="back">
 				<div class="row">
 					<div class="col-xs-4">
-						<img src="<%= playerSelected.imageSrc %>" class="player-image" alt="<%= playerSelected.name %>">
+						<img src="http://placehold.it/350x400" class="player-image" alt="<%= playerSelected.name %>">
 
 						<table class="table table-bordered">
 						<tbody>
 							<tr>
-								<td colspan="2"><img src="images/flags/<%= playerSelected.country %>.png" class="flag" /><%= playerSelected.country %></td>
+								<td colspan="2"><img src="images/flags/<%= playerSelected.countrycode %>.png" class="flag" /><%= playerSelected.country %></td>
 							</tr>
 							<tr>
 								<td>Apperances</td>
