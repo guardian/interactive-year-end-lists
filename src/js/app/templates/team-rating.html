@@ -8,7 +8,7 @@
 	<% _.each(players, function(player) { %>
 	    <li class="pitch_player position-<%= player.position.toLowerCase() %>">
 	    	<img src="http://placehold.it/50x50" alt="">
-	    	<%= player.name %>
+	    	<%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
 	    </li>
 	<% }) %>
 </ol>

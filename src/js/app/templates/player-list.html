@@ -1,5 +1,5 @@
 <div class="inner bg-<%= country.toLowerCase() %>">
 	<span class="removePlayer">Unpick</span>
 	<img src="http://placehold.it/150x200" />
-	<p><%= name %></p>
+	<p><%= name.substring(name.lastIndexOf(" ")+1) %></p>
 </div>
