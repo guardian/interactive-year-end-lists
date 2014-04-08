@@ -1,10 +1,6 @@
 
 <% if(player1.details && player2.details) { %>
 
-	<span class="start">Start Match</span>
-
-	<hr>
-
 	<div class="row" style="clear:both;">
 		<div class="col-xs-12 col-sm-3">
 			<h3><%= player1.details.username %></h3>
@@ -26,6 +22,9 @@
 					<h1 class="score">1</h1>
 				</div>
 			</div>
+
+			<span class="start" style="clear: both;display: block;cursor: pointer;">Start Match</span>
+
 			<div class="match-details">
 				<% _.each(moments, function(moment) { %>
 					<div class="moment">

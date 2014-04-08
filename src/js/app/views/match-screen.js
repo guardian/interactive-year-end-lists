@@ -21,7 +21,7 @@ define([
         template: _.template(TeamScreenTemplate),
 
         events: {
-            'click .start': 'showDivs'
+            'click .start': 'startMatchTextGenerator'
         },
 
         initialize: function(options) {
@@ -34,17 +34,19 @@ define([
             };
         },
 
-        showDivs: function () {
-            // If there are hidden divs left
-            if($('.moment:hidden').length) {
-                // Fade the first of them in
-                $('.moment:hidden:last').fadeIn();
-                // And wait one second before fading in the next one
-                setTimeout(this.showDivs, 1000);
-            }
+        startMatchTextGenerator: function () {
+
+            jQuery.fn.reverse = [].reverse;
+
+            this.$el.find('.moment').reverse().each(function(index, i) {
+                $(this).delay(index * 2001).fadeIn('slow');
+            });
+
+            this.$el.find('.start').hide();
         },
 
         isReady: function() {
+            
             if(this.userValidForMatch(App.player1) && this.userValidForMatch(App.player2)) {
 
                 var team1 = App.player1TeamCollection.toJSON();
