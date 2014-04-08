@@ -58,44 +58,18 @@ app.put("/users/:guardianID", function(req, res, next){
     User.findOne({guardianID: req.params.guardianID}, function(err, user) {
         if(err) throw err;
 
-        var newUser = new User(req.params);
-        newUser.save(function (err) {
-            if(err) throw err;
-            res.jsonp(newUser);
-        });
-        res.jsonp(user);
-    });
-
-    var newUser = new User({
-        guardianID: req.body.guardianID,
-        username: req.body.username,
-        teamSelection: req.body.teamSelection
-    });
-    newUser.save(function (err) {
-        if(err) throw err;
-        res.jsonp(newUser);
-    });
-            /*
-    var id = req.params.id;
-    User.find({id: req.params.id}, function(err, user) {
-        if(err) throw err;
-
-        if(user.length > 0) {
-            console.log(user);
+        if(user.guardianID) {
+            user.username = req.body.username;
+            user.teamSelection = req.body.teamSelection;
         } else {
-            console.log(req.body);
-            var newUser = new User({
-                id: req.params.id,
-                username: req.params.username,
-                teamSelection: req.params.teamSelection
-            });
-            newUser.save(function (err) {
-                if(err) throw err;
-                res.jsonp(newUser);
-            });
+            var user = new User(req.body);
         }
+        user.save(function (err) {
+            if(err) throw err;
+            res.jsonp(user);
+        });
     });
-*/
+    
 });
 
 app.del("/users/:guardianID", function(req, res, next){
