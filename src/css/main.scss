@@ -85,7 +85,7 @@ figure.interactive {
 	 #player_filters .form-group {
 		float: left;
 		width: 31.3%;
-		background: #efefef;
+		background: url(../images/down_arrow.png) no-repeat right #f4f4ee;
 		margin-right: 3%;
 	 }
 	  .player_profile {
@@ -247,7 +247,7 @@ figure.interactive {
 	 	padding: 0;
 	 	background: url('http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/images/pitch.jpg');
 	 	height: 500px;
-	 	width: 370px;
+	 	width: 300px;
 	 	background-size: contain;
 	 	background-repeat: no-repeat;
 	 	list-style: none;
@@ -259,61 +259,65 @@ figure.interactive {
 	    clear:none;
 	  }
 	}
-	 .pitch img {
-	 	width: 50px;
-	 	height: 50px;
+	 .pitch span {
+	 	width: 45px;
+	 	height: 45px;
 	 	border-radius: 50%;
 	 	box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.5);
 	 	display: block;
+	 	margin-bottom: 3px;
+	 	border: 2px solid #fff;
+	 	background-size: cover;
+	 	background-color: #ccc;
 	 }
 	 .pitch_player {
 	 	position: absolute;
 		max-width: 80px;
-		font-size: 12px;
+		font-size: 11px;
 		color: #fff;
 		text-align: center;
 	 }
 
 	 /* Strikers */
 	 .pitch_player.position-st {
-	 	left: 115px;
+	 	left: 95px;
 	 	top: 40px;
 	 }
 	 .pitch_player.position-st.second {
-	 	left: 205px;
+	 	left: 165px;
 	 }
 	 /* Midfielders */
 	 .pitch_player.position-ml, .pitch_player.position-mr, .pitch_player.position-mc {
-	 	top: 180px;
-	 	left: 25px;
+	 	top: 140px;
+	 	left: 20px;
  	 }
  	 .pitch_player.position-mr {
- 	 	left: 300px;
+ 	 	left: 230px;
  	 }
  	 .pitch_player.position-mc {
-	 	left: 115px;
+	 	left: 90px;
 	 }
 	 .pitch_player.position-mc.second {
-	 	left: 205px;
+	 	left: 160px;
 	 }
 	  /* Defenders */
 	 .pitch_player.position-lb, .pitch_player.position-rb, .pitch_player.position-cb {
-	 	left: 25px;
-	 	top: 315px;
+	 	left: 20px;
+	 	top: 245px;
 	 }
 	 .pitch_player.position-rb {
-	 	left: 300px;
+	 	left: 230px;
 	 }
 	 .pitch_player.position-cb {
-	 	left: 115px;
+	 	left: 90px;
 	 }
 	 .pitch_player.position-cb.second {
-	 	left: 205px;
+	 	left: 160px;
 	 }
 	 /* Goalkeepers */
 	 .pitch_player.position-gk {
-	 	bottom: 15px;
-	 	left: 160px;
+	 	top: 335px;
+	 	left: 125px;
 	 }
 
 

@@ -56,12 +56,13 @@ define([
             var playerModal = new PlayerModal();
 
             this.$el.html(this.template({ "userDetails": App.userDetails.toJSON() }));
-            
+
             this.$el.append('<div id="team-screen" class="row"></div>');
-            this.$el.find('#team-screen').html(squadSelectionView.render().$el);
+            this.$el.find('#team-screen').html(teamRating.render().$el);
+            this.$el.find('#team-screen').append(squadSelectionView.render().$el);
 
             this.$el.find('#team-screen').append(visualPrompt.render().$el);
-            this.$el.find('#team-screen').append(teamRating.render().$el);
+
             this.$el.find('#team-screen').append(playerModal.render().$el);
 
             this.$el.append(positionEditorView.render().$el);

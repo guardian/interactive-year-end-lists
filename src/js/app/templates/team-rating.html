@@ -7,14 +7,15 @@
 <ol class="pitch">
 	<% _.each(players, function(player) { %>
 	    <li class="pitch_player position-<%= player.position.toLowerCase() %>">
-	    	<img src="http://placehold.it/50x50" alt="">
+	    	<span style="background-image:url(http://placehold.it/50x50)" title="Drop <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>"></span>
 	    	<%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
 	    </li>
 	<% }) %>
 </ol>
-
+<!--
 <% if(userDetails.username) { %>
 	<% if(0 < players.length) { %>
 		<button id="clearSelection">Clear selection</button>
 	<% } %>
 <% } %>
+-->

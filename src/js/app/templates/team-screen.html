@@ -1,19 +1,15 @@
 <div class="row">
 	<div class="col-xs-12">
-
-		<h2>TEAM EDITOR</h2>
-
-		<h2 id="team_status"></h2>
 		<% if(userDetails.username) { %>
-			<h2>Hello <%= userDetails.username %></h2>
+			<h1>Hello <%= userDetails.username %></h1>
 		<% } else { %>
-			<p>Share your team</p>
+			<h1>Signin to create your dream team</h1>
 			<button id="signIn" class="btn btn-primary">Sign in to save</button>
 		<% } %>
 
 		<div id="player_listings"></div>
 
 		<hr>
-		
+
 	</div>
 </div>
