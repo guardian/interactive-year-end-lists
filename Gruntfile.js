@@ -12,7 +12,7 @@ module.exports = function(grunt) {
       }
     },
 
-    // Backend API enpoint
+    // Backend API endpoint
     nodemon: {
       dev: {
         script: 'server/server.js'
