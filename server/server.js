@@ -62,14 +62,14 @@ app.put("/users/:guardianID", function(req, res, next){
             user.username = req.body.username;
             user.teamSelection = req.body.teamSelection;
         } else {
-            var user = new User(req.body);
+            user = new User(req.body);
         }
         user.save(function (err) {
             if(err) throw err;
             res.jsonp(user);
         });
     });
-    
+
 });
 
 app.del("/users/:guardianID", function(req, res, next){
@@ -81,7 +81,6 @@ app.del("/users/:guardianID", function(req, res, next){
         });
     });
 });
-
 
 
 // Start server

@@ -7,7 +7,8 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 9000,
-          base: 'build'
+          base: 'build',
+          keepalive: true
         }
       }
     },
@@ -46,7 +47,7 @@ module.exports = function(grunt) {
 
     // Lint JavaScript files
     jshint: {
-      files: ['Gruntfile.js', 'src/js/*.js', 'src/js/app/**/*.js']
+      files: ['Gruntfile.js', 'src/js/*.js', 'server/*.js', 'src/js/app/**/*.js']
     },
 
     // Combine main app into one JS file
@@ -93,14 +94,21 @@ module.exports = function(grunt) {
         files: ['src/**/*.js', 'src/**/*.scss', 'src/js/app/templates/*.html'],
         tasks: ['jshint', 'requirejs', 'sass', 'autoprefixer', 'string-replace'],
         options: {
-          spawn: false,
+          spawn: false
         },
+      },
+      server: {
+        files: ['server/*.js'],
+        tasks: ['jshint'],
+        options: {
+          spawn: false
+        }
       },
       html: {
         files: ['src/*.html'],
         tasks: ['copy'],
         options: {
-          spawn: false,
+          spawn: false
         },
       },
     },
@@ -123,6 +131,17 @@ module.exports = function(grunt) {
       }
     },
 
+    // Run multiple tasks at once
+    concurrent: {
+      assets: ['requirejs', 'sass'],
+      watchers: {
+        tasks: ['connect', 'nodemon', 'watch'],
+        options: {
+            logConcurrentOutput: true
+        }
+      }
+    }
+
   });
 
   // Load plugins
@@ -135,9 +154,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-string-replace');
 
   // Tasks
-  grunt.registerTask('build', ['jshint', 'clean', 'sass', 'autoprefixer', 'requirejs', 'copy', 'string-replace']);
-  grunt.registerTask('default', ['build', 'connect', 'nodemon', 'watch']);
+  grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
+  grunt.registerTask('default', ['build', 'concurrent:watchers']);
 };
