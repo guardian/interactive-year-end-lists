@@ -15,15 +15,6 @@ define([
             teamSelection: null
         },
 
-        populateDB: function() {
-            App.userDetails.set({
-                guardianID: 8888,
-                username: 'bluedaniel',
-                teamSelection: null
-            });
-            App.userDetails.save();
-        },
-
         checkUserStatus: function() {
 
             if(App.environment == 'development') {
