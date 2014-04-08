@@ -24,18 +24,9 @@ define([
         },
 
         generatePitch: function() {
-            var stats = {
-                goals: 0,
-                apps: 0
-            };
-            App.usersTeamCollection.each(function(player) {
-                stats.goals = stats.goals + player.get('gls');
-                stats.apps = stats.apps + player.get('apps');
-            });
 
             return this.template({
                 players: App.usersTeamCollection.toJSON(),
-                stats: stats,
                 userDetails: App.userDetails.toJSON()
             });
         },
