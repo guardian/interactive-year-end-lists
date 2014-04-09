@@ -27,7 +27,7 @@ define([
         },
 
         initialize: function() {
-            this.listenTo(App.userDetails, 'change', this.prePopulateTeam);
+            this.listenTo(App.userDetails, 'change:teamSelection', this.prePopulateTeam);
         },
 
         prePopulateTeam: function() {
