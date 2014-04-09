@@ -32,7 +32,7 @@ define([
         },
 
         clearSelection: function() {
-            App.usersTeamCollection.reset([]);
+            App.usersTeamCollection.removeAllPlayersFromCollection();
             return false;
         },
 

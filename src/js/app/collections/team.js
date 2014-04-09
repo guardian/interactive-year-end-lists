@@ -60,6 +60,11 @@ define([
         removePlayerFromCollection: function(model) {
             App.usersTeamCollection.remove(model);
             App.userDetails.saveUserTeamToStorage();
+        },
+
+        removeAllPlayersFromCollection: function() {
+            App.usersTeamCollection.reset([]);
+            App.userDetails.saveUserTeamToStorage();
         }
 
     });
