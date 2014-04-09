@@ -51,7 +51,7 @@ figure.interactive {
 		margin-right: 7px;
 	}
 
-	#squad-selection {
+	#squad-filters {
 		position: relative;
 		padding-top: 75px;
 	}
@@ -59,7 +59,7 @@ figure.interactive {
 	 * Player selection
 	 */
 	 @media (min-width: 56.25em) {
-		#squad-selection {
+		#squad-filters {
 			width: 100%;
 			margin-right: -400px;
 			padding-right: 430px;
@@ -70,17 +70,17 @@ figure.interactive {
 		}
 	}
 
-	 #player_filters {
+	 #squad-filters form {
 	 	position: absolute;
 		top: 0;
 		left: 15px;
 		right: 15px;
 		z-index: 1;
 	 }
-	 #player_filters.player_filters_fixed {
+	 #squad-filters form.squad-filters-fixed {
 	 	position: fixed;
 	 }
-	 #player_filters .inner {
+	 #squad-filters form .inner {
 	 	padding: 10px;
 		float: left;
 		background: #fff;
@@ -88,11 +88,11 @@ figure.interactive {
 		border-bottom: 1px solid #ccc;
 	 }
 	 @media (min-width: 56.25em) {
-		#player_filters {
+		#squad-filters form {
 			padding-right: 415px;
 		}
 	}
-	 #player_filters .form-group select {
+	 #squad-filters form .form-group select {
 	   background: transparent;
 	   padding: 11px 8px;
 	   font-size: 13px;
@@ -103,7 +103,7 @@ figure.interactive {
 	   margin-right: 3%;
 	   width: 100%;
 	 }
-	 #player_filters .form-group {
+	 #squad-filters form .form-group {
 		float: left;
 		width: 31.3%;
 		background: url(../images/down_arrow.png) no-repeat right #f4f4ee;

@@ -14,12 +14,12 @@ define([
 ) {
     return Backbone.View.extend({
 
-        id: 'squad-selection',
+        id: 'squad-filters',
         className: 'col-xs-12 col-sm-8',
         template:  _.template(SquadFiltersTemplate),
 
         events: {
-            'change #player_filters': 'filterChange',
+            'change #squad-filters form': 'filterChange',
             'click #resetTeam': 'resetTeam'
         },
 
@@ -36,13 +36,13 @@ define([
 
         setNavigationPosition: function() {
             if(!this.navigationPosition || this.windowSize) {
-                if($('#squad-selection').length) {
-                    this.navigationPosition = $('#squad-selection').offset().top;
+                if($('#squad-filters').length) {
+                    this.navigationPosition = $('#squad-filters').offset().top;
                 }
                 this.windowSize = 0;
             }
             if(this.navigationPosition) {
-                $('#player_filters').toggleClass('player_filters_fixed', $(document).scrollTop() >= this.navigationPosition);
+                $('#squad-filters form').toggleClass('squad-filters-fixed', $(document).scrollTop() >= this.navigationPosition);
             }
         },
 
@@ -68,7 +68,7 @@ define([
 
         filterChange: function() {
             var filterOptions = {};
-            $('#player_filters select').each(function( index ) {
+            $('#squad-filters select').each(function( index ) {
                 if($(this).val()) {
                     filterOptions[$(this).data('filter-name')] = $(this).val();
                 }
@@ -78,7 +78,7 @@ define([
 
         resetTeam: function() {
             this.updateSquadListViews();
-            $('#player_filters select').val('');
+            $('#squad-filters select').val('');
             return false;
         },
 
