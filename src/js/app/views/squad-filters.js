@@ -19,7 +19,7 @@ define([
         template:  _.template(SquadFiltersTemplate),
 
         events: {
-            'change #squad-filters form': 'filterChange',
+            'change select': 'filterChange',
             'click #resetTeam': 'resetTeam'
         },
 
@@ -67,6 +67,7 @@ define([
         },
 
         filterChange: function() {
+
             var filterOptions = {};
             $('#squad-filters select').each(function( index ) {
                 if($(this).val()) {
