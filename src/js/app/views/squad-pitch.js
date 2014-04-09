@@ -11,7 +11,7 @@ define([
 ) {
     return Backbone.View.extend({
 
-        id: 'team-rating',
+        id: 'squad-pitch',
         className: 'col-xs-12 col-sm-4',
         template: _.template(SquadPitchTemplate),
 

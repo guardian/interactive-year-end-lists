@@ -35,7 +35,7 @@ define([
                 App.userDetails.fetchUserTeamFromStorage();
 
                 var squadPitch = new SquadPitchView();
-                this.$el.find('#team-rating').html(squadPitch.render().$el);
+                this.$el.find('#squad-pitch').html(squadPitch.render().$el);
             }
         },
 
