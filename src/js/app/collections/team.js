@@ -9,12 +9,12 @@ define([
     PlayerModel
 ) {
     return Backbone.Collection.extend({
-        
+
         model: PlayerModel,
 
         validateAddingPlayer: function(model) {
 			var response = { status: 'fail', message: '' };
-            
+
             // Cannot already be in squad
             if (!App.usersTeamCollection.contains(model)) {
 

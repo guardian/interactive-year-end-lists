@@ -3,6 +3,13 @@ define([
 ], function(
     Backbone
 ) {
-    var app = {};
+    var app = {
+        env: 'dev'
+    };
+
+    app.isDev = function() {
+        return app.env === 'dev';
+    };
+
     return app;
 });

@@ -4,10 +4,10 @@ define([
     'backbone',
     'models/user',
     'collections/team',
+    'collections/players',
     'views/user-screen',
     'views/team-screen',
     'views/match-screen',
-    'data/players',
     'routes'
 ], function(
     App,
@@ -15,10 +15,10 @@ define([
     Backbone,
     UserModel,
     TeamCollection,
+    PlayersCollection,
     UserView,
     TeamScreenView,
     MatchScreenView,
-    PlayerData,
     Routes
 ) {
 
@@ -30,15 +30,22 @@ define([
 
     App.player1 = new UserModel();
     App.player2 = new UserModel();
-    
+
     // Variables for listeners
     App.playerSelected = new Backbone.Model(); // Opens the player card
     App.visualPrompt = new Backbone.Model(); // Shows a prompt to the user (loading etc)
 
     // Collections
-    App.playerCollection = new Backbone.Collection(PlayerData);
+    App.playerCollection = new PlayersCollection();
+
+    if (App.isDev()) {
+        App.playerCollection.fetchGoogleData();
+    } else {
+        App.playerCollection.fetchLocal();
+    }
+
     App.usersTeamCollection = new TeamCollection();
-    
+
 
     App.player1TeamCollection = new TeamCollection();
     App.player2TeamCollection = new TeamCollection();

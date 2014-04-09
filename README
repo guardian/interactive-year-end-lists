@@ -8,17 +8,16 @@ PLAYER DB
 
 
 
-
 MONGO SETUP
-
     db.users.ensureIndex( { 'guardianID': 1 }, { unique: true });
 
 USER DATA STRUCTURE
     {
-        _id:            '001',
-        username:       'anom'
-        teamSelection:  ['player_id', 'player_id', ...]
+        guardianID: String,
+        username: String,
+        teamSelection: String - comma seperated player IDs
     }
+
 
 
 MATCH DATA STRUCUTRE
