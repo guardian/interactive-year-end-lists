@@ -100,7 +100,11 @@ define([
             this.SquadLists.forEach(function(SquadList ) {
                 domContainer.appendChild( SquadList.render().el );
             });
-            this.$('#player_list').html(domContainer);
+
+            var playerListContainer = this.$('#player_list');
+            playerListContainer.fadeOut( 'fast', function() {
+                playerListContainer.html(domContainer).fadeIn();
+            });
         },
 
         render: function() {
