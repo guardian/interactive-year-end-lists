@@ -20,7 +20,7 @@ define([
         },
 
         initialize: function() {
-            this.listenTo(App.usersTeamCollection, 'add remove reset', this.render);
+
         },
 
         generatePitch: function() {
