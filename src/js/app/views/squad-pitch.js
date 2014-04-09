@@ -16,6 +16,7 @@ define([
         template: _.template(SquadPitchTemplate),
 
         events: {
+            'click li': 'swapPlayer',
             'click #clearSelection': 'clearSelection'
         },
 
@@ -23,11 +24,11 @@ define([
 
         },
 
-        generatePitch: function() {
-
-            return this.template({
-                players: App.usersTeamCollection.toJSON(),
-                userDetails: App.userDetails.toJSON()
+        swapPlayer: function(event) {
+            var target = $(event.currentTarget);
+            var playerModel = App.playerCollection.findWhere({'uid': parseInt(target.data('uid'))});
+            target.fadeOut('slow', function() {
+                App.usersTeamCollection.removePlayerFromCollection(playerModel);
             });
         },
 
@@ -37,7 +38,10 @@ define([
         },
 
         render: function() {
-            this.$el.html(this.generatePitch());
+            this.$el.html(this.template({
+                players: App.usersTeamCollection.toJSON(),
+                userDetails: App.userDetails.toJSON()
+            }));
             this.$el.find('.pitch_player.position-cb:eq(1), .pitch_player.position-mc:eq(1), .pitch_player.position-st:eq(1)').addClass('second');
             return this;
         }
