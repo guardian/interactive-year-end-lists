@@ -100,17 +100,22 @@ figure.interactive {
 		top: 0;
 		left: 15px;
 		right: 15px;
-		z-index: 1;
+		z-index: 3;
 	 }
 	 #squad-filters form.squad-filters-fixed {
 	 	position: fixed;
+	 	left: 0;
+		right: 0;
 	 }
 	 #squad-filters form .inner {
-	 	padding: 10px;
+	 	padding: 10px 5px;
 		float: left;
 		background: #fff;
 		width: 100%;
-		border-bottom: 1px solid #ccc;
+	 }
+	 #squad-filters form.squad-filters-fixed .inner {
+	 	padding: 10px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 	 }
 	 @media (min-width: 56.25em) {
 		#squad-filters form {
@@ -196,6 +201,7 @@ figure.interactive {
 		color: #888;
 		font-size: 30px;
 		line-height: 1;
+		cursor: pointer;
 	 }
 	 .giwc-player-card {
 	 	position: fixed;
