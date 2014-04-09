@@ -301,7 +301,29 @@ figure.interactive {
 
 	  .playerOptions {
 	  	display: none;
+		background: #fff;
+		width: 200px;
+		padding: 10px;
+		border-radius: 5px;
+		position: absolute;
+		left: 50px;
+		top: 120px;
+		box-shadow:0 5px 15px rgba(0, 0, 0, 0.5);
 	  }
+	  .playerOptions h4 {
+	  	margin: 5px 0 15px;
+	  	text-align: center;
+	  }
+	  .playerOptions button {
+	  	float: left;
+	  	width: 47%;
+	  	min-width: 0;
+	  	margin: 0;
+	  }
+	  .playerOptions button#replacePlayer {
+	  	margin-right: 6%;
+	  }
+
 	 .pitch {
 	 	overflow: hidden;
 	 	margin: 20px auto;
@@ -320,7 +342,7 @@ figure.interactive {
 	    clear:none;
 	  }
 	}
-	 .pitch span {
+	 .pitch span.player-icon {
 	 	width: 45px;
 	 	height: 45px;
 	 	border-radius: 50%;

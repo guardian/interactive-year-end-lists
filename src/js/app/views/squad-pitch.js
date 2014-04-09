@@ -19,7 +19,7 @@ define([
             'click li.pitch_player': 'showOptions',
             'click button#dropPlayer': 'dropPlayer',
             'click button#replacePlayer': 'replacePlayer',
-            'click li': 'showOptions',
+            'click .playerOptions .close': 'closeOptions',
             'click #clearSelection': 'clearSelection'
         },
 
@@ -67,7 +67,7 @@ define([
             this.dropPlayer(null, uid);
 
             $('html, body').animate({
-                scrollTop: $("#player_list").offset().top
+                scrollTop: $("#squad-filters").offset().top
             }, 1000);
 
             return false;
