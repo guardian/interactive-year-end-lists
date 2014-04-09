@@ -4,7 +4,6 @@ define([
     'backbone',
     'views/team-rating',
     'views/squad-selection',
-    'views/position-editor',
     'views/player-modal',
     'views/visual-prompt',
     'text!templates/team-screen.html'
@@ -14,7 +13,6 @@ define([
     Backbone,
     TeamRating,
     SquadSelectionView,
-    PositionEditorView,
     PlayerModal,
     VisualPrompt,
     TeamScreenTemplate
@@ -51,7 +49,6 @@ define([
             var visualPrompt = new VisualPrompt();
 
             var teamRating = new TeamRating();
-            var positionEditorView = new PositionEditorView();
             var squadSelectionView = new SquadSelectionView();
             var playerModal = new PlayerModal();
 
@@ -64,8 +61,6 @@ define([
             this.$el.find('#team-screen').append(visualPrompt.render().$el);
 
             this.$el.find('#team-screen').append(playerModal.render().$el);
-
-            this.$el.append(positionEditorView.render().$el);
 
             return this;
         }
