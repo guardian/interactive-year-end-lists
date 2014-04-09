@@ -16,7 +16,10 @@ define([
         template: _.template(SquadPitchTemplate),
 
         events: {
-            'click li': 'swapPlayer',
+            'click li.pitch_player': 'showOptions',
+            'click button#dropPlayer': 'dropPlayer',
+            'click button#replacePlayer': 'replacePlayer',
+            'click li': 'showOptions',
             'click #clearSelection': 'clearSelection'
         },
 
@@ -24,12 +27,50 @@ define([
 
         },
 
-        swapPlayer: function(event) {
+        showOptions: function(event) {
+
             var target = $(event.currentTarget);
-            var playerModel = App.playerCollection.findWhere({'uid': parseInt(target.data('uid'))});
-            target.fadeOut('slow', function() {
+
+            var playerOptions = $('.playerOptions');
+            playerOptions.find('h4').text(target.text());
+            playerOptions.find('button').attr('data-uid', target.data('uid'));
+            playerOptions.show();
+        },
+
+        closeOptions: function() {
+            $('.playerOptions').hide();
+        },
+
+        dropPlayer: function(event, uid) {
+            this.closeOptions();
+
+            if(!uid) {
+                uid = parseInt($(event.currentTarget).data('uid'));
+            }
+
+            var playerModel = App.playerCollection.findWhere({'uid': uid});
+            $('li[data-uid="' + uid + '"]').fadeOut('slow', function() {
                 App.usersTeamCollection.removePlayerFromCollection(playerModel);
             });
+            return false;
+        },
+
+        replacePlayer: function(event) {
+            this.closeOptions();
+
+            var uid = parseInt($(event.currentTarget).data('uid'));
+            var playerModel = App.playerCollection.findWhere({'uid': uid});
+
+            $('select#players_position').val(playerModel.get('position'));
+            App.filterValues.set('position', playerModel.get('position'));
+
+            this.dropPlayer(null, uid);
+
+            $('html, body').animate({
+                scrollTop: $("#player_list").offset().top
+            }, 1000);
+
+            return false;
         },
 
         clearSelection: function() {

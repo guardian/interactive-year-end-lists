@@ -298,6 +298,10 @@ figure.interactive {
 	 /**
 	  * Pitch view
 	  */
+
+	  .playerOptions {
+	  	display: none;
+	  }
 	 .pitch {
 	 	overflow: hidden;
 	 	margin: 20px auto;

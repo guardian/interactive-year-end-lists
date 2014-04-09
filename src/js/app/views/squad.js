@@ -34,7 +34,7 @@ define([
             if(App.userDetails.get('username')) {
                 App.userDetails.fetchUserTeamFromStorage();
 
-                var squadPitch = new SquadPitchView();
+                var squadPitch = new SquadPitchView({model: App.filterValues});
                 this.$el.find('#squad-pitch').html(squadPitch.render().$el);
             }
         },
@@ -56,8 +56,9 @@ define([
             var visualPrompt = new VisualPromptView();
             this.$el.find('#team-screen').html(visualPrompt.render().$el);
 
-            var squadPitch = new SquadPitchView();
-            var squadFilters = new SquadFiltersView();
+            var squadPitch = new SquadPitchView({model: App.filterValues});
+            var squadFilters = new SquadFiltersView({model: App.filterValues});
+
             var squadModal = new SquadModalView();
 
             this.$el.find('#team-screen').append(squadPitch.render().$el);

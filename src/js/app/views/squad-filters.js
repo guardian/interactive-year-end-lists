@@ -27,6 +27,8 @@ define([
             this.templateData = this.createFilterOptions();
             this.updateSquadListViews();
 
+            this.listenTo(App.filterValues, 'change', this.filterChange);
+
             this.navigationPosition = 0;
             this.windowSize = 0;
 
@@ -68,9 +70,12 @@ define([
 
         filterChange: function() {
 
+            App.filterValues.clear({silent:true});
+
             var filterOptions = {};
             $('#squad-filters select').each(function( index ) {
                 if($(this).val()) {
+                    console.log($(this).val());
                     filterOptions[$(this).data('filter-name')] = $(this).val();
                 }
             });
