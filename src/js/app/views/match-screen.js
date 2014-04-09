@@ -15,7 +15,7 @@ define([
     TeamScreenTemplate
 ) {
     return Backbone.View.extend({
-        
+
         id: 'match-screen',
         className: 'container',
         template: _.template(TeamScreenTemplate),
@@ -81,8 +81,11 @@ define([
             var playerVal = this.validateUser(player);
             if(playerVal.status == 'success') {
                 playerVal = this.validateTeamSelection(player);
-                return true;
+                if(playerVal.status == 'success') {
+                    return true;
+                }
             }
+            console.log(playerVal);
             return false;
         },
 
@@ -100,8 +103,9 @@ define([
             var res = { status: 'fail', message: '' };
             if(player.get('teamSelection')) {
                 var selection = player.get('teamSelection').split(',');
-                if(selection.length < 11) {
 
+                // TODO: Should be 11, for testing allow less than 11
+                if(selection.length <= 11) {
                     selection.map(function(playerUID) {
                         var playerModel = App.playerCollection.findWhere({'uid': parseInt(playerUID)});
                         if(player.get('startingUser') == 1) {
