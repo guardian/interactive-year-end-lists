@@ -1,0 +1,15 @@
+
+<button id="goToMatch" class="<%= !userDetails.username ?  'disabled' : '' %>">Go to match</button>
+
+<% if(0 < players.length && userDetails.username) { %>
+	<button id="clearSelection">Clear selection</button>
+<% } %>
+
+<ol class="pitch">
+	<% _.each(players, function(player) { %>
+	    <li data-uid="<%= player.uid %>" class="pitch_player position-<%= player.position.toLowerCase() %>">
+	    	<span style="background-image:url(/images/players/player<%= player.uid %>.jpg)" title="Drop <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>"></span>
+	    	<%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
+	    </li>
+	<% }) %>
+</ol>

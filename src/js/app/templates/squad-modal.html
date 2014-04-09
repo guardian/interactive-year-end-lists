@@ -1,0 +1,45 @@
+
+<% if(playerSelected.name) { %>
+
+	<div class="flip-container" ontouchstart="this.classList.add('hover');">
+		<div class="flipper">
+
+			<div class="front">
+				<h1 class="front-name"><%= playerSelected.name %></h1>
+			</div>
+
+			<div class="back">
+				<div class="player-bio">
+					<span type="button" class="close">&times;</span>
+					<h2><%= playerSelected.name %></h2>
+					<%= playerSelected.bio %>
+					<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td>Nation</td>
+							<td><%= playerSelected.country %></td>
+						</tr>
+						<tr>
+							<td>Apperances</td>
+							<td><%= playerSelected.apps %></td>
+						</tr>
+						<tr>
+							<td>Goals</td>
+							<td><%= playerSelected.gls %></td>
+						</tr>
+						</tbody>
+					</table>
+
+					<% if (validation.status === 'fail') { %>
+						<hr>
+						<span class="selection-warning"><%= validation.message %></span>
+						<hr>
+					<% } else { %>
+						<button type="button" class="addToSquad">Add to squad</button>
+					<% } %>
+				</div>
+			</div> <!-- .back -->
+		</div> <!-- .flipper -->
+	</div> <!-- .flip-container -->
+
+<% } %>

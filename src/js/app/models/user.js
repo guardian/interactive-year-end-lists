@@ -88,10 +88,12 @@ define([
 
             if(App.userDetails.get('teamSelection')) {
 
+                var playerArr = [];
                 App.userDetails.get('teamSelection').split(',').map(function(playerUID) {
                     var playerModel = App.playerCollection.findWhere({'uid': parseInt(playerUID)});
-                    App.usersTeamCollection.addPlayerToCollection(playerModel);
+                    playerArr.push(playerModel);
                 });
+                App.usersTeamCollection.reset(playerArr);
 
                 App.visualPrompt.set({
                     'message': null

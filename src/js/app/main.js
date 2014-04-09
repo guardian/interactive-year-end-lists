@@ -6,7 +6,7 @@ define([
     'collections/team',
     'collections/players',
     'views/user-screen',
-    'views/team-screen',
+    'views/squad',
     'views/match-screen',
     'routes'
 ], function(
@@ -17,7 +17,7 @@ define([
     TeamCollection,
     PlayersCollection,
     UserView,
-    TeamScreenView,
+    SquadView,
     MatchScreenView,
     Routes
 ) {
@@ -52,7 +52,7 @@ define([
 
     // Views
     App.userView = new UserView();
-    App.teamView = new TeamScreenView({ collection: App.playerCollection });
+    App.squadView = new SquadView({ collection: App.playerCollection });
     App.matchView = new MatchScreenView();
 
 //    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');

@@ -30,6 +30,26 @@ figure.interactive .container {
 
 figure.interactive {
 
+	$buttonColor : #005689;
+
+	button {
+		background: $buttonColor;
+		border: 0 none;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 14px;
+		font-size: 1.4rem;
+		margin: 0 20px 0 0;
+		min-width: 140px;
+		outline: none;
+		padding: 11px 8px;
+		text-align: center;
+	}
+	button.disabled {
+		background: lighten($buttonColor, 20%);
+	}
+
 	.visual-prompt {
 		position: fixed;
 		width: 300px;
@@ -51,26 +71,73 @@ figure.interactive {
 		margin-right: 7px;
 	}
 
+	#squad-filters {
+		position: relative;
+		padding-top: 75px;
+	}
 	/**
 	 * Player selection
 	 */
 	 @media (min-width: 56.25em) {
-		#squad-selection {
+		#squad-filters {
 			width: 100%;
 			margin-right: -400px;
 			padding-right: 430px;
 		}
-		#team-rating {
+		#squad-pitch {
 			width: 400px;
 			float: right;
 		}
 	}
 
-	 #player_filters {
-	 	margin-bottom: 20px;
+	button#clearSelection {
+		float: right;
+		margin: 0;
+	}
+
+	 #squad-filters form {
+	 	position: absolute;
+		top: 0;
+		left: 15px;
+		right: 15px;
+		z-index: 3;
 	 }
-	 #player_filters select {
-	 	margin-right: 7px;
+	 #squad-filters form.squad-filters-fixed {
+	 	position: fixed;
+	 	left: 0;
+		right: 0;
+	 }
+	 #squad-filters form .inner {
+	 	padding: 10px 5px;
+		float: left;
+		background: #fff;
+		width: 100%;
+	 }
+	 #squad-filters form.squad-filters-fixed .inner {
+	 	padding: 10px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	 }
+	 @media (min-width: 56.25em) {
+		#squad-filters form {
+			padding-right: 415px;
+		}
+	}
+	 #squad-filters form .form-group select {
+	   background: transparent;
+	   padding: 11px 8px;
+	   font-size: 13px;
+	   line-height: 1;
+	   border: 0;
+	   border-radius: 0;
+	   -webkit-appearance: none;
+	   margin-right: 3%;
+	   width: 100%;
+	 }
+	 #squad-filters form .form-group {
+		float: left;
+		width: 31.3%;
+		background: url(../images/down_arrow.png) no-repeat right #f4f4ee;
+		margin-right: 3%;
 	 }
 	  .player_profile {
 	  	text-align: center;
@@ -79,14 +146,16 @@ figure.interactive {
 	  }
 	  .player_profile p {
 	  	margin: 8px 0 0;
+	  	font-size: 14px;
 	  }
 	  .player_profile .flag {
 	  	position: absolute;
-		width: 45px;
-		height: 45px;
+		width: 35px;
+		height: 35px;
 		background-size: cover;
-		top: 7px;
-		left: 7px;
+		top: 3px;
+		left: 3px;
+		border-radius: 0 0 50px;
 	  }
 	  .player_profile .removePlayer {
 	  	display:none;
@@ -96,6 +165,8 @@ figure.interactive {
 		position: absolute;
 		width: 100%;
 		height: 100%;
+		left: 0;
+		right: 0;
 		padding-top: 50px;
 		font-size: 22px;
 		font-weight: bold;
@@ -106,16 +177,10 @@ figure.interactive {
 	}
 	  .player_profile .inner {
 	  	position: relative;
-	  	padding: 7px;
+	  	padding: 3px;
 	  	margin-bottom: 15px;
 	  	box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.1);
-	  }
-	  .player_profile.selected .removePlayer {
-	  	display: block;
-	  	position: absolute;
-	  	width:100%;
-	  	height: 100%;
-	  	opacity: 0.5;
+	  	background-image: url(../images/bg_card.png)
 	  }
 	img.player-image, .player_profile img {
 	 	width: 100%;
@@ -126,7 +191,13 @@ figure.interactive {
 	 }
 
 	 /* Player card (Modal) */
-
+	 .close {
+	 	float: right;
+		color: #888;
+		font-size: 30px;
+		line-height: 1;
+		cursor: pointer;
+	 }
 	 .giwc-player-card {
 	 	position: fixed;
 		display: none;
@@ -156,7 +227,11 @@ figure.interactive {
 	 	margin: 20px 0 0;
 	 }
 	 .giwc-player-card .selection-warning {
-	 	margin-right: 15px;
+	 	color: red;
+	 }
+	 .giwc-player-card td, .giwc-player-card th {
+	 	padding: 8px;
+		padding: 0.8rem;
 	 }
 
 	/* Modal Flip */
@@ -224,11 +299,12 @@ figure.interactive {
 	  * Pitch view
 	  */
 	 .pitch {
-	 	margin: 0 auto;
+	 	overflow: hidden;
+	 	margin: 20px auto;
 	 	padding: 0;
 	 	background: url('http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/images/pitch.jpg');
-	 	height: 500px;
-	 	width: 370px;
+	 	height: 400px;
+	 	width: 300px;
 	 	background-size: contain;
 	 	background-repeat: no-repeat;
 	 	list-style: none;
@@ -240,65 +316,70 @@ figure.interactive {
 	    clear:none;
 	  }
 	}
-	 .pitch img {
-	 	width: 50px;
-	 	height: 50px;
+	 .pitch span {
+	 	width: 45px;
+	 	height: 45px;
 	 	border-radius: 50%;
 	 	box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.5);
 	 	display: block;
+	 	margin-bottom: 3px;
+	 	border: 2px solid #fff;
+	 	background-size: cover;
+	 	background-color: #ccc;
 	 }
 	 .pitch_player {
 	 	position: absolute;
 		max-width: 80px;
-		font-size: 12px;
+		font-size: 11px;
 		color: #fff;
 		text-align: center;
 	 }
 
 	 /* Strikers */
 	 .pitch_player.position-st {
-	 	left: 115px;
+	 	left: 95px;
 	 	top: 40px;
 	 }
 	 .pitch_player.position-st.second {
-	 	left: 205px;
+	 	left: 165px;
 	 }
 	 /* Midfielders */
 	 .pitch_player.position-ml, .pitch_player.position-mr, .pitch_player.position-mc {
-	 	top: 180px;
-	 	left: 25px;
+	 	top: 140px;
+	 	left: 20px;
  	 }
  	 .pitch_player.position-mr {
- 	 	left: 300px;
+ 	 	left: 230px;
  	 }
  	 .pitch_player.position-mc {
-	 	left: 115px;
+	 	left: 90px;
 	 }
 	 .pitch_player.position-mc.second {
-	 	left: 205px;
+	 	left: 160px;
 	 }
 	  /* Defenders */
 	 .pitch_player.position-lb, .pitch_player.position-rb, .pitch_player.position-cb {
-	 	left: 25px;
-	 	top: 315px;
+	 	left: 20px;
+	 	top: 245px;
 	 }
 	 .pitch_player.position-rb {
-	 	left: 300px;
+	 	left: 230px;
 	 }
 	 .pitch_player.position-cb {
-	 	left: 115px;
+	 	left: 90px;
 	 }
 	 .pitch_player.position-cb.second {
-	 	left: 205px;
+	 	left: 160px;
 	 }
 	 /* Goalkeepers */
 	 .pitch_player.position-gk {
-	 	bottom: 15px;
-	 	left: 160px;
+	 	top: 335px;
+	 	left: 125px;
 	 }
 
 
 	 /* Country Colours */
+	 /*
 	 .bg-italy {
 	 	background: #0E64B8;
 	 }
@@ -312,12 +393,14 @@ figure.interactive {
 	 	background: green;
 	 }
 
-	 /* Countries white text */
+	 // Countries white text
 	 .bg-italy, .bg-germany {
 	 	color: #fff;
 	 }
+	 */
 
-	 /* Match screen */
+
+	 // Match screen
 
 	 #match-screen .pitch {
 	 	width: 100%;
