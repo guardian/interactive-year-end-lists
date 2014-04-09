@@ -30,6 +30,26 @@ figure.interactive .container {
 
 figure.interactive {
 
+	$buttonColor : #005689;
+
+	button {
+		background: $buttonColor;
+		border: 0 none;
+		color: #ffffff;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 14px;
+		font-size: 1.4rem;
+		margin: 0 20px 0 0;
+		min-width: 140px;
+		outline: none;
+		padding: 11px 8px;
+		text-align: center;
+	}
+	button.disabled {
+		background: lighten($buttonColor, 20%);
+	}
+
 	.visual-prompt {
 		position: fixed;
 		width: 300px;
@@ -68,6 +88,11 @@ figure.interactive {
 			width: 400px;
 			float: right;
 		}
+	}
+
+	button#clearSelection {
+		float: right;
+		margin: 0;
 	}
 
 	 #squad-filters form {
@@ -166,7 +191,12 @@ figure.interactive {
 	 }
 
 	 /* Player card (Modal) */
-
+	 .close {
+	 	float: right;
+		color: #888;
+		font-size: 30px;
+		line-height: 1;
+	 }
 	 .giwc-player-card {
 	 	position: fixed;
 		display: none;
@@ -196,7 +226,11 @@ figure.interactive {
 	 	margin: 20px 0 0;
 	 }
 	 .giwc-player-card .selection-warning {
-	 	margin-right: 15px;
+	 	color: red;
+	 }
+	 .giwc-player-card td, .giwc-player-card th {
+	 	padding: 8px;
+		padding: 0.8rem;
 	 }
 
 	/* Modal Flip */
@@ -264,10 +298,11 @@ figure.interactive {
 	  * Pitch view
 	  */
 	 .pitch {
-	 	margin: 0 auto;
+	 	overflow: hidden;
+	 	margin: 20px auto;
 	 	padding: 0;
 	 	background: url('http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/images/pitch.jpg');
-	 	height: 500px;
+	 	height: 400px;
 	 	width: 300px;
 	 	background-size: contain;
 	 	background-repeat: no-repeat;

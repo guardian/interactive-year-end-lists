@@ -22,20 +22,20 @@ define([
                 if((App.usersTeamCollection.length + 1) <= 11) {
 
                     // Cant have more than x players in position y
-                    var allowedPositions = {
-                        'ST' : 2,
-                        'ML' : 1,
-                        'MR' : 1,
-                        'MC' : 2,
-                        'RB' : 1,
-                        'LB' : 1,
-                        'CB' : 2,
-                        'GK' : 1
+                    var positionsValidation = {
+                        'ST' : {allowed: 2, name: 'Strikers'},
+                        'ML' : {allowed: 1, name: 'Left midfielder'},
+                        'MR' : {allowed: 1, name: 'Right midfielder'},
+                        'MC' : {allowed: 2, name: 'Centre midfielders'},
+                        'RB' : {allowed: 1, name: 'Right back'},
+                        'LB' : {allowed: 1, name: 'Left back'},
+                        'CB' : {allowed: 2, name: 'Centre backs'},
+                        'GK' : {allowed: 1, name: 'Goalkeeper'}
                     };
-                    if((App.usersTeamCollection.where({'position' : model.get('position')}).length + 1) <= allowedPositions[model.get('position')]) {
+                    if((App.usersTeamCollection.where({'position' : model.get('position')}).length + 1) <= positionsValidation[model.get('position')].allowed) {
                         response.status = 'success';
                     } else {
-                        response.message = 'Cant have more than ' + allowedPositions[model.get('position')] + ' ' + model.get('position').toLowerCase() + 's';
+                        response.message = 'Cant have more than ' + positionsValidation[model.get('position')].allowed + ' ' + positionsValidation[model.get('position')].name;
                     }
                 } else {
                     response.message = 'Cant have more than 11 players!';
