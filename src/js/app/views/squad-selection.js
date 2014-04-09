@@ -26,6 +26,24 @@ define([
         initialize: function() {
             this.templateData = this.createFilterOptions();
             this.updatePlayerViews();
+
+            this.navigationPosition = 0;
+            this.windowSize = 0;
+
+            $(window).scroll(this.setNavigationPosition);
+            $(window).resize(function() { this.windowSize = window.innerWidth + window.innerHeight; });
+        },
+
+        setNavigationPosition: function() {
+            if(!this.navigationPosition || this.windowSize) {
+                if($('#squad-selection').length) {
+                    this.navigationPosition = $('#squad-selection').offset().top;
+                }
+                this.windowSize = 0;
+            }
+            if(this.navigationPosition) {
+                $('#player_filters').toggleClass('player_filters_fixed', $(document).scrollTop() >= this.navigationPosition);
+            }
         },
 
         createFilterOptions: function() {

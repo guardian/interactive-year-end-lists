@@ -77,6 +77,9 @@ figure.interactive {
 		right: 15px;
 		z-index: 1;
 	 }
+	 #player_filters.player_filters_fixed {
+	 	position: fixed;
+	 }
 	 #player_filters .inner {
 	 	padding: 10px;
 		float: left;
