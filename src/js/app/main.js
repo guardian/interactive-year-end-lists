@@ -5,7 +5,7 @@ define([
     'models/user',
     'collections/team',
     'views/user-screen',
-    'views/team-screen',
+    'views/squad',
     'views/match-screen',
     'data/players',
     'routes'
@@ -16,7 +16,7 @@ define([
     UserModel,
     TeamCollection,
     UserView,
-    TeamScreenView,
+    SquadView,
     MatchScreenView,
     PlayerData,
     Routes
@@ -30,7 +30,7 @@ define([
 
     App.player1 = new UserModel();
     App.player2 = new UserModel();
-    
+
     // Variables for listeners
     App.playerSelected = new Backbone.Model(); // Opens the player card
     App.visualPrompt = new Backbone.Model(); // Shows a prompt to the user (loading etc)
@@ -38,14 +38,14 @@ define([
     // Collections
     App.playerCollection = new Backbone.Collection(PlayerData);
     App.usersTeamCollection = new TeamCollection();
-    
+
 
     App.player1TeamCollection = new TeamCollection();
     App.player2TeamCollection = new TeamCollection();
 
     // Views
     App.userView = new UserView();
-    App.teamView = new TeamScreenView({ collection: App.playerCollection });
+    App.squadView = new SquadView({ collection: App.playerCollection });
     App.matchView = new MatchScreenView();
 
 //    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');

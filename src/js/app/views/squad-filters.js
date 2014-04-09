@@ -3,20 +3,20 @@ define([
     'app',
     'underscore',
     'backbone',
-    'views/player',
-    'text!templates/squad-selection.html'
+    'views/squad-list',
+    'text!templates/squad-filters.html'
 ], function(
     App,
     _,
     Backbone,
-    PlayerView,
-    SquadSelectionTemplate
+    SquadListView,
+    SquadFiltersTemplate
 ) {
     return Backbone.View.extend({
 
         id: 'squad-selection',
         className: 'col-xs-12 col-sm-8',
-        template:  _.template(SquadSelectionTemplate),
+        template:  _.template(SquadFiltersTemplate),
 
         events: {
             'change #player_filters': 'filterChange',
@@ -25,7 +25,7 @@ define([
 
         initialize: function() {
             this.templateData = this.createFilterOptions();
-            this.updatePlayerViews();
+            this.updateSquadListViews();
 
             this.navigationPosition = 0;
             this.windowSize = 0;
@@ -73,38 +73,38 @@ define([
                     filterOptions[$(this).data('filter-name')] = $(this).val();
                 }
             });
-            this.updatePlayerViews(filterOptions);
+            this.updateSquadListViews(filterOptions);
         },
 
         resetTeam: function() {
-            this.updatePlayerViews();
+            this.updateSquadListViews();
             $('#player_filters select').val('');
             return false;
         },
 
-        updatePlayerViews: function(filterOptions) {
-            this.playerViews = [];
+        updateSquadListViews: function(filterOptions) {
+            this.SquadLists = [];
             var playersFiltered = App.playerCollection;
             if(!_.isEmpty(filterOptions)) {
                 playersFiltered = App.playerCollection.where(filterOptions);
             }
             playersFiltered.map(function(playerModel) {
-                this.playerViews.push(new PlayerView({ model : playerModel }));
+                this.SquadLists.push(new SquadListView({ model : playerModel }));
             }, this);
-            this.renderPlayerViews();
+            this.renderSquadListViews();
         },
 
-        renderPlayerViews: function() {
+        renderSquadListViews: function() {
             var domContainer = document.createDocumentFragment();
-            this.playerViews.forEach(function(playerView ) {
-                domContainer.appendChild( playerView.render().el );
+            this.SquadLists.forEach(function(SquadList ) {
+                domContainer.appendChild( SquadList.render().el );
             });
             this.$('#player_list').html(domContainer);
         },
 
         render: function() {
             this.$el.html(this.template(this.templateData));
-            this.renderPlayerViews();
+            this.renderSquadListViews();
             return this;
         }
 

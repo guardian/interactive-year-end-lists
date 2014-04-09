@@ -2,25 +2,25 @@ define([
     'app',
     'underscore',
     'backbone',
-    'views/team-rating',
-    'views/squad-selection',
-    'views/player-modal',
+    'views/squad-pitch',
+    'views/squad-filters',
+    'views/squad-modal',
     'views/visual-prompt',
-    'text!templates/team-screen.html'
+    'text!templates/squad.html'
 ], function(
     App,
     _,
     Backbone,
-    TeamRating,
-    SquadSelectionView,
-    PlayerModal,
-    VisualPrompt,
-    TeamScreenTemplate
+    SquadPitchView,
+    SquadFiltersView,
+    SquadModalView,
+    VisualPromptView,
+    SquadTemplate
 ) {
     return Backbone.View.extend({
 
         className: 'container',
-        template: _.template(TeamScreenTemplate),
+        template: _.template(SquadTemplate),
 
         events: {
             'click #signIn': 'beginSignIn'
@@ -34,8 +34,8 @@ define([
             if(App.userDetails.get('username')) {
                 App.userDetails.fetchUserTeamFromStorage();
 
-                var teamRating = new TeamRating();
-                this.$el.find('#team-rating').html(this.teamRating.render().$el);
+                var squadPitch = new SquadPitchView();
+                this.$el.find('#team-rating').html(squadPitch.render().$el);
             }
         },
 
@@ -52,17 +52,17 @@ define([
 
             this.$el.append('<div id="team-screen" class="row"></div>');
 
-            var visualPrompt = new VisualPrompt();
-
-            var teamRating = new TeamRating();
-            var squadSelectionView = new SquadSelectionView();
-            var playerModal = new PlayerModal();
-
+            // Push visualPrompt to view
+            var visualPrompt = new VisualPromptView();
             this.$el.find('#team-screen').html(visualPrompt.render().$el);
 
-            this.$el.find('#team-screen').append(teamRating.render().$el);
-            this.$el.find('#team-screen').append(squadSelectionView.render().$el);
-            this.$el.find('#team-screen').append(playerModal.render().$el);
+            var squadPitch = new SquadPitchView();
+            var squadFilters = new SquadFiltersView();
+            var squadModal = new SquadModalView();
+
+            this.$el.find('#team-screen').append(squadPitch.render().$el);
+            this.$el.find('#team-screen').append(squadFilters.render().$el);
+            this.$el.find('#team-screen').append(squadModal.render().$el);
 
             return this;
         }

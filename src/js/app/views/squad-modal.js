@@ -3,13 +3,13 @@ define([
     'backbone',
     'underscore',
     'data/players',
-    'text!templates/player-modal.html'
+    'text!templates/squad-modal.html'
 ], function(
     App,
     Backbone,
     _,
     PlayerData,
-    ProfileTemplate
+    SquadModalTemplate
 ){
 
     return Backbone.View.extend({
@@ -17,7 +17,7 @@ define([
         tagName: 'div',
         id: 'playerSelectedModal',
         className: 'giwc-player-card',
-        template: _.template(ProfileTemplate),
+        template: _.template(SquadModalTemplate),
 
         events: {
             'click button.addToSquad, .removeFromSquad': 'addToSquad',

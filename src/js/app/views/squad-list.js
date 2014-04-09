@@ -3,22 +3,20 @@ define([
     'backbone',
     'underscore',
     'data/players',
-    'views/player-modal',
-    'text!templates/player-list.html'
+    'text!templates/squad-list.html'
 ], function(
     App,
     Backbone,
     _,
     PlayerData,
-    PlayerModal,
-    PlayerTemplate
+    SquadListTemplate
 ){
 
     return Backbone.View.extend({
-        
+
         tagName: 'div',
         className: 'col-xs-4 col-sm-3 col-lg-2 player_profile',
-        template: _.template(PlayerTemplate),
+        template: _.template(SquadListTemplate),
 
         events: {
             'click img, p': 'openPlayerCard',

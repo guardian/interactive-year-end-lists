@@ -3,15 +3,11 @@ define([
     'app',
     'underscore',
     'backbone',
-    'views/squad-selection',
-    'views/team-rating',
     'text!templates/match-screen.html'
 ], function(
     App,
     _,
     Backbone,
-    PlayerListView,
-    TeamRating,
     TeamScreenTemplate
 ) {
     return Backbone.View.extend({

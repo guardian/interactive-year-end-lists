@@ -9,7 +9,7 @@ function(
     return Backbone.Router.extend({
         routes: {
             'user/:username':              'showUser',    // dreamteam#user/andrew
-            'match/:player1id/:player2id':  'showMatch',   // dreamteam#match/andrew/daan
+            'match/:player1id/:player2id': 'showMatch',   // dreamteam#match/andrew/daan
             '*other':                      'defaultRoute' // dreamteam#
         },
 
@@ -30,13 +30,13 @@ function(
             App.$el.html(App.userView.render().$el);
         },
 
-        showMyTeam: function(username) {
+        showSquad: function(username) {
             App.$el.empty();
-            App.$el.html(App.teamView.render().$el);
+            App.$el.html(App.squadView.render().$el);
         },
 
         defaultRoute: function(other){
-            this.showMyTeam();
+            this.showSquad();
         }
     });
 });

@@ -2,18 +2,18 @@ define([
     'app',
     'backbone',
     'underscore',
-    'text!templates/team-rating.html'
+    'text!templates/squad-pitch.html'
 ], function(
     App,
     Backbone,
     _,
-    TeamRatingTemplate
+    SquadPitchTemplate
 ) {
     return Backbone.View.extend({
-        
+
         id: 'team-rating',
         className: 'col-xs-12 col-sm-4',
-        template: _.template(TeamRatingTemplate),
+        template: _.template(SquadPitchTemplate),
 
         events: {
             'click #clearSelection': 'clearSelection'
