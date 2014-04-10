@@ -20,7 +20,7 @@ define([
 
         events: {
             'change select': 'filterChange',
-            'click #resetTeam': 'resetTeam'
+            'click #clearFilters': 'clearFilters'
         },
 
         initialize: function () {
@@ -32,8 +32,8 @@ define([
             this.navigationPosition = 0;
             this.windowSize = 0;
 
-            $(window).scroll(this.setNavigationPosition);
-            $(window).resize(function () {
+            $(window).on('scroll', this.setNavigationPosition);
+            $(window).on('resize', function () {
                 this.windowSize = window.innerWidth + window.innerHeight;
             });
         },
@@ -52,7 +52,9 @@ define([
 
         createFilterOptions: function () {
             var countries = [],
-                positions = [];
+                positions = [],
+                filterOptions = {};
+
             App.playerCollection.each(function (player) {
                 if ($.inArray(player.get('position'), positions) < 0) {
                     positions.push(player.get('position'));
@@ -61,7 +63,6 @@ define([
                     countries.push(player.get('country'));
                 }
             });
-            var filterOptions = {};
             if (countries) {
                 filterOptions.countries = countries.sort();
             }
@@ -73,7 +74,7 @@ define([
 
         filterChange: function () {
             var newOptions = {};
-            $('#squad-filters select').each(function (index) {
+            this.$el.find('select').each(function (index) {
                 if ($(this).val()) {
                     newOptions[$(this).data('filter-name')] = $(this).val();
                 }
@@ -81,25 +82,26 @@ define([
             this.model.set(newOptions);
         },
 
-        resetTeam: function () {
+        clearFilters: function () {
             this.updateSquadListViews();
-            $('#squad-filters select').val('');
+            this.$el.find('select').val('all');
             return false;
         },
 
         updateSquadListViews: function () {
 
-            var modelValues = this.model.toJSON();
-            var whereQuery = {};
-            for (var i in modelValues) {
+            var modelValues = this.model.toJSON(),
+                whereQuery = {},
+                i = 0,
+                playersFiltered = App.playerCollection;
+            
+            for (i in modelValues) {
                 if (modelValues[i] && modelValues[i] !== 'all') {
                     whereQuery[i] = modelValues[i];
                 }
             }
 
             this.SquadLists = [];
-            var playersFiltered = App.playerCollection;
-
             if (!_.isEmpty(whereQuery)) {
                 playersFiltered = App.playerCollection.where(whereQuery);
             }
@@ -121,12 +123,13 @@ define([
         },
 
         renderSquadListViews: function () {
-            var domContainer = document.createDocumentFragment();
+            var domContainer = document.createDocumentFragment(),
+                playerListContainer = this.$('#player_list');
+            
             this.SquadLists.forEach(function (SquadList) {
                 domContainer.appendChild(SquadList.render().el);
             });
-
-            var playerListContainer = this.$('#player_list');
+            
             playerListContainer.fadeOut('fast', function () {
                 playerListContainer.html(domContainer).fadeIn();
             });
