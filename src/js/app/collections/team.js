@@ -57,7 +57,7 @@ define([
             if (!App.usersTeamCollection.contains(model)) {
 
                 // Cant have more than 4 players
-                if ((App.usersTeamCollection.length + 1) <= 11) {
+                if ((App.usersTeamCollection.length) >= 11) {
 
                     if ((App.usersTeamCollection.where({
                             'position': model.get('position')
