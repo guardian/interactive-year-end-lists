@@ -38,7 +38,7 @@ define([
                 var squadPitch = new SquadPitchView({
                     model: this.filterModel
                 });
-                this.$el.find('#squad-pitch').html(squadPitch.render().$el);
+                this.$el.find('#squad-pitch').replaceWith(squadPitch.render().$el);
             }
         },
 
