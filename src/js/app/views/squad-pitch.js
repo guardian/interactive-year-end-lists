@@ -97,7 +97,7 @@ define([
             App.usersTeamCollection.removeAllPlayersFromCollection();
             return false;
         },
-        
+
         render: function () {
 
             var playerPositions = {

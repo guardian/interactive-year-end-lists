@@ -41,7 +41,7 @@ define([
         App.playerCollection.fetchLocal();
     }
 
-    Backbone.on('dataReady', function() {
+    Backbone.on('dataReady', function () {
         console.log('All done. Render all');
         App.usersTeamCollection = new TeamCollection();
         App.player1TeamCollection = new TeamCollection();

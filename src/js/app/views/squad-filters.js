@@ -123,7 +123,7 @@ define([
                 }, 1000);
             }
         },
-        
+
         viewSquad: function () {
             $('html, body').animate({
                 scrollTop: $('#squad-pitch').offset().top + 2
@@ -133,13 +133,13 @@ define([
         renderSquadListViews: function () {
             var domContainer = document.createDocumentFragment(),
                 playerListContainer = this.$('#player_list');
-            
-            if(!_.isEmpty(this.SquadLists)) {
+
+            if (!_.isEmpty(this.SquadLists)) {
                 this.SquadLists.forEach(function (SquadList) {
                     domContainer.appendChild(SquadList.render().el);
                 });
             }
-            
+
             this.$el.toggleClass('showClearFilterButton', _.isEmpty(this.SquadLists));
 
             playerListContainer.fadeOut('fast', function () {

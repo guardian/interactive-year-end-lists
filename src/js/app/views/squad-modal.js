@@ -4,13 +4,13 @@ define([
     'underscore',
     'data/players',
     'text!templates/squad-modal.html'
-], function(
+], function (
     App,
     Backbone,
     _,
     PlayerData,
     SquadModalTemplate
-){
+) {
 
     return Backbone.View.extend({
 
@@ -24,13 +24,16 @@ define([
             'click .close': 'closeCard'
         },
 
-        initialize: function() {
-            this.templateData = {"playerSelected": '', 'validation': {}};
+        initialize: function () {
+            this.templateData = {
+                "playerSelected": '',
+                'validation': {}
+            };
             App.playerSelected.on('change', this.openCard, this);
         },
 
-        openCard: function() {
-            if(App.playerSelected.get('highlighted')) {
+        openCard: function () {
+            if (App.playerSelected.get('highlighted')) {
                 this.playerModel = App.playerCollection.get(App.playerSelected.get('highlighted'));
 
                 this.templateData.validation = App.usersTeamCollection.validateAddingPlayer(this.playerModel);
@@ -42,34 +45,34 @@ define([
             }
         },
 
-        closeCard: function() {
+        closeCard: function () {
             this.$el.fadeOut('fast');
             App.playerSelected.set('highlighted', 0);
             return false;
         },
 
-        addToSquad: function() {
+        addToSquad: function () {
 
             this.closeCard();
 
-            if(!App.userDetails.get('username')) {
+            if (!App.userDetails.get('username')) {
                 App.visualPrompt.set({
                     'message': 'Please login first',
-                    'closePrompt' : true
+                    'closePrompt': true
                 });
                 return;
             }
             var response = App.usersTeamCollection.addPlayerToCollection(this.playerModel, true);
-            if(response.status == 'fail') {
+            if (response.status === 'fail') {
                 App.visualPrompt.set({
                     'message': response.message,
-                    'closePrompt' : true
+                    'closePrompt': true
                 });
             }
             return false;
         },
 
-        render: function() {
+        render: function () {
             this.$el.html(this.template(this.templateData));
             return this;
         }
