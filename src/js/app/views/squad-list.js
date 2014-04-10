@@ -4,13 +4,13 @@ define([
     'underscore',
     'data/players',
     'text!templates/squad-list.html'
-], function(
+], function (
     App,
     Backbone,
     _,
     PlayerData,
     SquadListTemplate
-){
+) {
 
     return Backbone.View.extend({
 
@@ -23,28 +23,28 @@ define([
             'click .removePlayer': 'removePlayerFromSquad'
         },
 
-        initialize: function() {
+        initialize: function () {
             this.$el.attr('id', 'player_profile_' + this.model.cid);
             App.playerSelected.on('change', this.openCard, this);
             this.listenTo(App.usersTeamCollection, 'add remove reset', this.showSelectedPlayer);
             this.showSelectedPlayer();
         },
 
-        showSelectedPlayer: function() {
+        showSelectedPlayer: function () {
             this.$el.toggleClass('selected', App.usersTeamCollection.contains(this.model));
         },
 
-        openPlayerCard: function() {
+        openPlayerCard: function () {
             App.playerSelected.set('highlighted', this.model.cid);
         },
 
-        removePlayerFromSquad: function() {
+        removePlayerFromSquad: function () {
             App.usersTeamCollection.removePlayerFromCollection(this.model);
             this.showSelectedPlayer();
             return false;
         },
 
-        render: function() {
+        render: function () {
             this.$el.html(this.template(this.model.attributes));
             return this;
         }

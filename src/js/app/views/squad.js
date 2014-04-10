@@ -7,7 +7,7 @@ define([
     'views/squad-modal',
     'views/visual-prompt',
     'text!templates/squad.html'
-], function(
+], function (
     App,
     _,
     Backbone,
@@ -26,37 +26,48 @@ define([
             'click #signIn': 'beginSignIn'
         },
 
-        initialize: function() {
+        initialize: function () {
             this.listenTo(App.userDetails, 'change:teamSelection', this.prePopulateTeam);
-            this.listenTo(this.collection, 'reset', this.render);
+            this.filterModel = new Backbone.Model();
         },
 
-        prePopulateTeam: function() {
-            if(App.userDetails.get('username')) {
+        prePopulateTeam: function () {
+            if (App.userDetails.get('username')) {
                 App.userDetails.fetchUserTeamFromStorage();
 
-                var squadPitch = new SquadPitchView();
+                var squadPitch = new SquadPitchView({
+                    model: this.filterModel
+                });
                 this.$el.find('#squad-pitch').html(squadPitch.render().$el);
             }
         },
 
-        beginSignIn: function() {
+        beginSignIn: function () {
             App.userDetails.loginUser();
             return false;
         },
 
-        render: function() {
+        render: function () {
+
             this.$el.empty();
-            this.$el.html(this.template({ "userDetails": App.userDetails.toJSON() }));
+
+            this.$el.html(this.template({
+                "userDetails": App.userDetails.toJSON()
+            }));
+
             this.$el.append('<div id="team-screen" class="row"></div>');
 
-            // Push visualPrompt to view
-            var visualPrompt = new VisualPromptView();
-            this.$el.find('#team-screen').html(visualPrompt.render().$el);
+            var visualPrompt = new VisualPromptView(),
+                squadPitch = new SquadPitchView({
+                    model: this.filterModel
+                }),
+                squadFilters = new SquadFiltersView({
+                    model: this.filterModel
+                }),
+                squadModal = new SquadModalView();
 
-            var squadPitch = new SquadPitchView();
-            var squadFilters = new SquadFiltersView();
-            var squadModal = new SquadModalView();
+            // Push visualPrompt to view
+            this.$el.find('#team-screen').html(visualPrompt.render().$el);
 
             this.$el.find('#team-screen').append(squadPitch.render().$el);
             this.$el.find('#team-screen').append(squadFilters.render().$el);

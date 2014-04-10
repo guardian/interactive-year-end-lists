@@ -77,7 +77,7 @@ define([
         },
 
         saveUserTeamToStorage: function() {
-            if(App.environment == 'development') {
+            if(App.inDevMode()) {
                 App.userDetails.set({teamSelection: this.parseTeamIntoArray()});
                 App.userDetails.save();
             } else {

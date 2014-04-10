@@ -4,382 +4,414 @@
  */
 
 .noscroll {
-	overflow: hidden;
+    overflow: hidden;
 }
-
 /* Ovewrite Bootstrap for NGW */
+
 figure.interactive .container {
-	padding-left: 0;
-	padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 @media (min-width: 46.25em) {
-  figure.interactive .container {
-    width: auto;
-  }
+    figure.interactive .container {
+        width: auto;
+    }
 }
 @media (min-width: 61.25em) {
-  figure.interactive .container {
-    width: auto;
-  }
+    figure.interactive .container {
+        width: auto;
+    }
 }
 @media (min-width: 81.25em) {
-  figure.interactive .container {
-    width: auto;
-  }
+    figure.interactive .container {
+        width: auto;
+    }
 }
-
 figure.interactive {
-
-	$buttonColor : #005689;
-
-	button {
-		background: $buttonColor;
-		border: 0 none;
-		color: #ffffff;
-		cursor: pointer;
-		display: inline-block;
-		font-size: 14px;
-		font-size: 1.4rem;
-		margin: 0 20px 0 0;
-		min-width: 140px;
-		outline: none;
-		padding: 11px 8px;
-		text-align: center;
-	}
-	button.disabled {
-		background: lighten($buttonColor, 20%);
-	}
-
-	.visual-prompt {
-		position: fixed;
-		width: 300px;
-		left: 50%;
-		margin-left: -150px;
-		top: 50%;
-		margin-top: -30px;
-		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-		background: #fff;
-		z-index: 9999;
-	}
-	.visual-prompt .inner {
-		text-align: center;
-		padding: 40px;
-		font-size: 17px;
-	}
-	.visual-prompt .loading {
-		width : 10px;
-		margin-right: 7px;
-	}
-
-	#squad-filters {
-		position: relative;
-		padding-top: 75px;
-	}
-	/**
+    $buttonColor: #005689;
+    button {
+        background: $buttonColor;
+        border: 0 none;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 14px;
+        font-size: 1.4rem;
+        margin: 0 20px 0 0;
+        min-width: 140px;
+        outline: none;
+        padding: 11px 8px;
+        text-align: center;
+    }
+    button.disabled {
+        background: lighten($buttonColor, 20%);
+    }
+    .visual-prompt {
+        position: fixed;
+        width: 300px;
+        left: 50%;
+        margin-left: -150px;
+        top: 50%;
+        margin-top: -30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        background: #fff;
+        z-index: 9999;
+    }
+    .visual-prompt .inner {
+        text-align: center;
+        padding: 40px;
+        font-size: 17px;
+    }
+    .visual-prompt .loading {
+        width: 10px;
+        margin-right: 7px;
+    }
+    #squad-filters {
+        position: relative;
+        padding-top: 75px;
+    }
+    /**
 	 * Player selection
 	 */
-	 @media (min-width: 56.25em) {
-		#squad-filters {
-			width: 100%;
-			margin-right: -400px;
-			padding-right: 430px;
-		}
-		#squad-pitch {
-			width: 400px;
-			float: right;
-		}
-	}
-
-	button#clearSelection {
-		float: right;
-		margin: 0;
-	}
-
-	 #squad-filters form {
-	 	position: absolute;
-		top: 0;
-		left: 15px;
-		right: 15px;
-		z-index: 3;
-	 }
-	 #squad-filters form.squad-filters-fixed {
-	 	position: fixed;
-	 	left: 0;
-		right: 0;
-	 }
-	 #squad-filters form .inner {
-	 	padding: 10px 5px;
-		float: left;
-		background: #fff;
-		width: 100%;
-	 }
-	 #squad-filters form.squad-filters-fixed .inner {
-	 	padding: 10px;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-	 }
-	 @media (min-width: 56.25em) {
-		#squad-filters form {
-			padding-right: 415px;
-		}
-	}
-	 #squad-filters form .form-group select {
-	   background: transparent;
-	   padding: 11px 8px;
-	   font-size: 13px;
-	   line-height: 1;
-	   border: 0;
-	   border-radius: 0;
-	   -webkit-appearance: none;
-	   margin-right: 3%;
-	   width: 100%;
-	 }
-	 #squad-filters form .form-group {
-		float: left;
-		width: 31.3%;
-		background: url(../images/down_arrow.png) no-repeat right #f4f4ee;
-		margin-right: 3%;
-	 }
-	  .player_profile {
-	  	text-align: center;
-	  	margin-bottom: 7px;
-	  	cursor: pointer;
-	  }
-	  .player_profile p {
-	  	margin: 8px 0 0;
-	  	font-size: 14px;
-	  }
-	  .player_profile .flag {
-	  	position: absolute;
-		width: 35px;
-		height: 35px;
-		background-size: cover;
-		top: 3px;
-		left: 3px;
-		border-radius: 0 0 50px;
-	  }
-	  .player_profile .removePlayer {
-	  	display:none;
-	  }
-	  .player_profile.selected .removePlayer {
-	  	display: block;
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		left: 0;
-		right: 0;
-		padding-top: 50px;
-		font-size: 22px;
-		font-weight: bold;
-		z-index: 2;
-	  }
-	  .player_profile.selected img {
-	  	opacity: 0.5;
-	}
-	  .player_profile .inner {
-	  	position: relative;
-	  	padding: 3px;
-	  	margin-bottom: 15px;
-	  	box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.1);
-	  	background-image: url(../images/bg_card.png)
-	  }
-	img.player-image, .player_profile img {
-	 	width: 100%;
-	 }
-
-	 #playerSelectedModal .modal-content {
-	 	height: 480px;
-	 }
-
-	 /* Player card (Modal) */
-	 .close {
-	 	float: right;
-		color: #888;
-		font-size: 30px;
-		line-height: 1;
-		cursor: pointer;
-	 }
-	 .giwc-player-card {
-	 	position: fixed;
-		display: none;
-		left: 50%;
-		margin-left: -275px;
-		top: 50px;
-		border-radius: 8px;
-		width: 600px;
-		z-index: 3000;
-	 }
-	 .giwc-player-card .front-name {
-	 	color: #fff;
-		padding: 30px;
-		margin: 0;
-	 }
-	 .giwc-player-card .player-bio {
-	 	max-height: 350px;
-	 	overflow: scroll;
-	 }
-	 .giwc-player-card img.flag {
-		width: 20px;
-		float: left;
-		margin: 0 5px;
-	 }
-	 .giwc-player-card .table {
-	 	font-size: 12px;
-	 	margin: 20px 0 0;
-	 }
-	 .giwc-player-card .selection-warning {
-	 	color: red;
-	 }
-	 .giwc-player-card td, .giwc-player-card th {
-	 	padding: 8px;
-		padding: 0.8rem;
-	 }
-
-	/* Modal Flip */
-	/* simple */
-	.flip-container {
-		perspective: 2500;
-		transform-style: preserve-3d;
-	}
-
-	/* START: Accommodating for IE */
-	.flip-container:hover .back, .flip-container.hover .back {
-		transform: rotateY(0deg);
-	}
-	.flip-container:hover .front, .flip-container.hover .front {
-	    transform: rotateY(180deg);
-	}
-	/* END: Accommodating for IE */
-
-	.flip-container, .front, .back {
-		height: 550px;
-		border-radius: 8px;
-	}
-	.front, .back {
-		width: 100%;
-	}
-	.back {
-		padding: 20px;
-	}
-	.front, .back {
-		backface-visibility: hidden;
-	    transition: 0.6s;
-	    transform-style: preserve-3d;
-		box-shadow: 0 5px 15px rgba(0,0,0,.5);
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
-
-	.front {
-		transform: rotateY(0deg);
-		background: #000;
-		z-index: 3;
-		background-size: cover;
-		background-position: 50% 50%;
-	}
-
-	.back {
-		z-index: 2;
-		background: #fff;
-	    transform: rotateY(-180deg);
-	}
-
-	@media(max-width:46.25em){
-	 	.giwc-player-card {
-			margin-left: -150px;
-			width: 300px;
-			top: 20px;
-		 }
-		 .flip-container, .front, .back {
-			height: 450px;
-		}
-	 }
-
-	 /**
-	  * Pitch view
-	  */
-	 .pitch {
-	 	overflow: hidden;
-	 	margin: 20px auto;
-	 	padding: 0;
-	 	background: url('http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/images/pitch.jpg');
-	 	height: 400px;
-	 	width: 300px;
-	 	background-size: contain;
-	 	background-repeat: no-repeat;
-	 	list-style: none;
-	 	position: relative;
-	 	clear:both;
-	 }
-	 @media(max-width:740px){
-	  .pitch {
-	    clear:none;
-	  }
-	}
-	 .pitch span {
-	 	width: 45px;
-	 	height: 45px;
-	 	border-radius: 50%;
-	 	box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.5);
-	 	display: block;
-	 	margin-bottom: 3px;
-	 	border: 2px solid #fff;
-	 	background-size: cover;
-	 	background-color: #ccc;
-	 }
-	 .pitch_player {
-	 	position: absolute;
-		max-width: 80px;
-		font-size: 11px;
-		color: #fff;
-		text-align: center;
-	 }
-
-	 /* Strikers */
-	 .pitch_player.position-st {
-	 	left: 95px;
-	 	top: 40px;
-	 }
-	 .pitch_player.position-st.second {
-	 	left: 165px;
-	 }
-	 /* Midfielders */
-	 .pitch_player.position-ml, .pitch_player.position-mr, .pitch_player.position-mc {
-	 	top: 140px;
-	 	left: 20px;
- 	 }
- 	 .pitch_player.position-mr {
- 	 	left: 230px;
- 	 }
- 	 .pitch_player.position-mc {
-	 	left: 90px;
-	 }
-	 .pitch_player.position-mc.second {
-	 	left: 160px;
-	 }
-	  /* Defenders */
-	 .pitch_player.position-lb, .pitch_player.position-rb, .pitch_player.position-cb {
-	 	left: 20px;
-	 	top: 245px;
-	 }
-	 .pitch_player.position-rb {
-	 	left: 230px;
-	 }
-	 .pitch_player.position-cb {
-	 	left: 90px;
-	 }
-	 .pitch_player.position-cb.second {
-	 	left: 160px;
-	 }
-	 /* Goalkeepers */
-	 .pitch_player.position-gk {
-	 	top: 335px;
-	 	left: 125px;
-	 }
-
-
-	 /* Country Colours */
-	 /*
+    @media (min-width: 56.25em) {
+        #squad-filters {
+            width: 100%;
+            margin-right: -400px;
+            padding-right: 430px;
+        }
+        #squad-pitch {
+            width: 400px;
+            float: right;
+        }
+    }
+    button#clearSelection {
+        float: right;
+        margin: 0;
+    }
+    #squad-filters form {
+        position: absolute;
+        top: 0;
+        left: 15px;
+        right: 15px;
+        z-index: 3;
+    }
+    #squad-filters form.squad-filters-fixed {
+        position: fixed;
+        left: 0;
+        right: 0;
+    }
+    #squad-filters form .inner {
+        padding: 10px 5px;
+        float: left;
+        background: #fff;
+        width: 100%;
+    }
+    #squad-filters form.squad-filters-fixed .inner {
+        padding: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    @media (min-width: 56.25em) {
+        #squad-filters form {
+            padding-right: 415px;
+        }
+    }
+    #squad-filters form .form-group select {
+        background: transparent;
+        padding: 11px 8px;
+        font-size: 13px;
+        line-height: 1;
+        border: 0;
+        border-radius: 0;
+        -webkit-appearance: none;
+        margin-right: 3%;
+        width: 100%;
+    }
+    #squad-filters form .form-group {
+        float: left;
+        width: 31.3%;
+        background: url(../images/down_arrow.png) no-repeat right #f4f4ee;
+        margin-right: 3%;
+    }
+    #squad-filters p#clearLink {
+        display: none;
+        margin: 20px auto 10px;
+        clear: both;
+        text-align: center;
+        color: #005689;
+        float: left;
+        width: 100%;
+        cursor: pointer;
+    }
+    #squad-filters.showClearFilterButton p#clearLink {
+        display: block;
+    }
+    .player_profile {
+        text-align: center;
+        margin-bottom: 7px;
+        cursor: pointer;
+    }
+    .player_profile p {
+        margin: 8px 0 0;
+        font-size: 14px;
+    }
+    .player_profile .flag {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        background-size: cover;
+        top: 3px;
+        left: 3px;
+        border-radius: 0 0 50px;
+    }
+    .player_profile .removePlayer {
+        display: none;
+    }
+    .player_profile.selected .removePlayer {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        right: 0;
+        padding-top: 50px;
+        font-size: 22px;
+        font-weight: bold;
+        z-index: 2;
+    }
+    .player_profile.selected img {
+        opacity: 0.5;
+    }
+    .player_profile .inner {
+        position: relative;
+        padding: 3px;
+        margin-bottom: 15px;
+        box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.1);
+        background-image: url(../images/bg_card.png)
+    }
+    img.player-image,
+    .player_profile img {
+        width: 100%;
+    }
+    #playerSelectedModal .modal-content {
+        height: 480px;
+    }
+    /* Player card (Modal) */
+    .close {
+        float: right;
+        color: #888;
+        font-size: 30px;
+        line-height: 1;
+        cursor: pointer;
+    }
+    .giwc-player-card {
+        position: fixed;
+        display: none;
+        left: 50%;
+        margin-left: -275px;
+        top: 50px;
+        border-radius: 8px;
+        width: 600px;
+        z-index: 3000;
+    }
+    .giwc-player-card .front-name {
+        color: #fff;
+        padding: 30px;
+        margin: 0;
+    }
+    .giwc-player-card .player-bio {
+        max-height: 350px;
+        overflow: scroll;
+    }
+    .giwc-player-card img.flag {
+        width: 20px;
+        float: left;
+        margin: 0 5px;
+    }
+    .giwc-player-card .table {
+        font-size: 12px;
+        margin: 20px 0;
+    }
+    .giwc-player-card .selection-warning {
+        color: red;
+    }
+    .giwc-player-card td,
+    .giwc-player-card th {
+        padding: 8px;
+        padding: 0.8rem;
+    }
+    /* Modal Flip */
+    /* simple */
+    .flip-container {
+        perspective: 2500;
+        transform-style: preserve-3d;
+    }
+    /* START: Accommodating for IE */
+    .flip-container:hover .back,
+    .flip-container.hover .back {
+        transform: rotateY(0deg);
+    }
+    .flip-container:hover .front,
+    .flip-container.hover .front {
+        transform: rotateY(180deg);
+    }
+    /* END: Accommodating for IE */
+    .flip-container,
+    .front,
+    .back {
+        height: 550px;
+        border-radius: 8px;
+    }
+    .front,
+    .back {
+        width: 100%;
+    }
+    .back {
+        padding: 20px;
+    }
+    .front,
+    .back {
+        backface-visibility: hidden;
+        transition: 0.6s;
+        transform-style: preserve-3d;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .front {
+        transform: rotateY(0deg);
+        background: #000;
+        z-index: 3;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+    .back {
+        z-index: 2;
+        background: #fff;
+        transform: rotateY(-180deg);
+    }
+    @media(max-width:46.25em) {
+        .giwc-player-card {
+            margin-left: -150px;
+            width: 300px;
+            top: 20px;
+        }
+        .flip-container,
+        .front,
+        .back {
+            height: 450px;
+        }
+    }
+    /**
+  * Pitch view
+  */
+    .playerOptions {
+        display: none;
+        background: #fff;
+        width: 200px;
+        padding: 10px;
+        border-radius: 5px;
+        position: absolute;
+        left: 50px;
+        top: 120px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+    .playerOptions h4 {
+        margin: 5px 0 15px;
+        text-align: center;
+    }
+    .playerOptions button {
+        float: left;
+        width: 47%;
+        min-width: 0;
+        margin: 0;
+    }
+    .playerOptions button#replacePlayer {
+        margin-right: 6%;
+    }
+    .pitch {
+        overflow: hidden;
+        margin: 20px auto;
+        padding: 0;
+        background: url('../images/pitch.jpg');
+        height: 400px;
+        width: 300px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        list-style: none;
+        position: relative;
+        clear: both;
+    }
+    @media(max-width:740px) {
+        .pitch {
+            clear: none;
+        }
+    }
+    .pitch span.player-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.5);
+        display: block;
+        margin-bottom: 3px;
+        border: 2px solid #fff;
+        background-size: cover;
+        background-color: #ccc;
+    }
+    .pitch_player {
+        position: absolute;
+        max-width: 80px;
+        font-size: 11px;
+        color: #fff;
+        text-align: center;
+    }
+    /* Strikers */
+    .pitch_player.position-st {
+        left: 95px;
+        top: 40px;
+    }
+    .pitch_player.position-st.second {
+        left: 165px;
+    }
+    /* Midfielders */
+    .pitch_player.position-ml,
+    .pitch_player.position-mr,
+    .pitch_player.position-mc {
+        top: 140px;
+        left: 20px;
+    }
+    .pitch_player.position-mr {
+        left: 230px;
+    }
+    .pitch_player.position-mc {
+        left: 90px;
+    }
+    .pitch_player.position-mc.second {
+        left: 160px;
+    }
+    /* Defenders */
+    .pitch_player.position-lb,
+    .pitch_player.position-rb,
+    .pitch_player.position-cb {
+        left: 20px;
+        top: 245px;
+    }
+    .pitch_player.position-rb {
+        left: 230px;
+    }
+    .pitch_player.position-cb {
+        left: 90px;
+    }
+    .pitch_player.position-cb.second {
+        left: 160px;
+    }
+    /* Goalkeepers */
+    .pitch_player.position-gk {
+        top: 335px;
+        left: 125px;
+    }
+    /* Country Colours */
+    /*
 	 .bg-italy {
 	 	background: #0E64B8;
 	 }
@@ -398,65 +430,60 @@ figure.interactive {
 	 	color: #fff;
 	 }
 	 */
-
-
-	 // Match screen
-
-	 #match-screen .pitch {
-	 	width: 100%;
-	 }
-
-	 h1.score {
-	 	font-size: 3em;
-	 	text-align: center;
-	 }
-
-	 h2.time {
-	 	font-size: 3em;
-		line-height: 1.1;
-		margin-bottom: 30px;
-		border-bottom: 1px dotted #ccc;
-		padding-bottom: 30px;
-	 }
-	 h2.time span {
-	 	display: block;
-	 	font-size: 40%;
-	 }
-	 .match-highlights {
-	 	text-align: center;
-	 }
-	 .match-details {
-	 	text-align: left;
-	 }
-	 .match-details .moment {
-		display: block;
-		float: left;
-		width: 100%;
-		margin: 0 0 25px;
-		display:none;
- 	}
- 	.match-details .action {
- 		font-size: 14px;
-		background: #f7f7f7;
-		padding: 11px 15px;
-		margin-left: 40px;
-		border-left: 3px solid #ccc;
-	 }
-	 .match-details .action.action-goal b.key-event {
-	 	color: #e47a39;
-	}
-	 .match-details .action-title {
-	 	font-family: "EgyptianHeadline",georgia,serif;
-		font-size: 16px;
-		float: left;
-		width: 100%;
-		margin-bottom: 10px;
-		color: #333;
-		font-weight: bold;
-	 }
-	 .match-details .moment .action-time {
-	 	float: left;
-	 	width: 40px;
-	 	margin-top: 10px;
-	 }
+    // Match screen
+    #match-screen .pitch {
+        width: 100%;
+    }
+    h1.score {
+        font-size: 3em;
+        text-align: center;
+    }
+    h2.time {
+        font-size: 3em;
+        line-height: 1.1;
+        margin-bottom: 30px;
+        border-bottom: 1px dotted #ccc;
+        padding-bottom: 30px;
+    }
+    h2.time span {
+        display: block;
+        font-size: 40%;
+    }
+    .match-highlights {
+        text-align: center;
+    }
+    .match-details {
+        text-align: left;
+    }
+    .match-details .moment {
+        display: block;
+        float: left;
+        width: 100%;
+        margin: 0 0 25px;
+        display: none;
+    }
+    .match-details .action {
+        font-size: 14px;
+        background: #f7f7f7;
+        padding: 11px 15px;
+        margin-left: 40px;
+        border-left: 3px solid #ccc;
+    }
+    .match-details .action.action-goal b.key-event {
+        color: #e47a39;
+    }
+    .match-details .action-title {
+        font-family: "EgyptianHeadline", georgia, serif;
+        font-size: 16px;
+        float: left;
+        width: 100%;
+        margin-bottom: 10px;
+        color: #333;
+        font-weight: bold;
+    }
+    .match-details .moment .action-time {
+        float: left;
+        width: 40px;
+        margin-top: 10px;
+    }
 }

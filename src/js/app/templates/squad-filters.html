@@ -3,7 +3,7 @@
     <div class="inner">
         <div class="form-group">
             <select id="players_position" class="form-control" data-filter-name="position">
-                <option value="">Position</option>
+                <option value="all">Position</option>
                 <% _.each(positions, function(position) { %>
                     <option value="<%= position %>"><%= position %></option>
                 <% }) %>
@@ -11,7 +11,7 @@
         </div>
         <div class="form-group">
             <select id="players_country" class="form-control" data-filter-name="countryname">
-                <option value="">Country</option>
+                <option value="all">Country</option>
                 <% _.each(countries, function(country) { %>
                     <option value="<%= country %>"><%= country %></option>
                 <% }) %>
@@ -19,7 +19,7 @@
         </div>
         <div class="form-group" style="margin-right: 0;">
             <select id="players_era" class="form-control" data-filter-name="era">
-                <option value="">Era</option>
+                <option value="all">Era</option>
                 <option value="1940">1940s</option>
                 <option value="1950">1950s</option>
                 <option value="1960">1960s</option>
@@ -29,13 +29,12 @@
                 <option value="2000">2000s</option>
             </select>
         </div>
+        <p id="clearLink">No players found! Click here to browse all players.</p>
     </div>
-<!--    <button id="resetTeam" class="btn btn-default">Reset</button> -->
 </form>
 
 <div class="alert alert-warning alert-dismissable selection-error" style="display:none">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-
 </div>
 
 <div id="player_list" class="row"></div>

@@ -3,7 +3,7 @@ define([
     'backbone',
     'underscore',
     'text!templates/squad-pitch.html'
-], function(
+], function (
     App,
     Backbone,
     _,
@@ -16,28 +16,79 @@ define([
         template: _.template(SquadPitchTemplate),
 
         events: {
-            'click li': 'swapPlayer',
+            'click li.pitch_player': 'showOptions',
+            'click button#dropPlayer': 'dropPlayer',
+            'click button#replacePlayer': 'replacePlayer',
+            'click .playerOptions .close': 'closeOptions',
             'click #clearSelection': 'clearSelection'
         },
 
-        initialize: function() {
+        initialize: function () {
 
         },
 
-        swapPlayer: function(event) {
-            var target = $(event.currentTarget);
-            var playerModel = App.playerCollection.findWhere({'uid': target.data('uid')});
-            target.fadeOut('slow', function() {
+        showOptions: function (event) {
+
+            var target = this.$el.find(event.currentTarget),
+                playerOptions = this.$el.find('.playerOptions');
+
+            playerOptions.find('h4').text(target.text());
+            playerOptions.find('button').attr('data-uid', target.data('uid'));
+            playerOptions.show();
+        },
+
+        closeOptions: function () {
+            this.$el.find('.playerOptions').hide();
+        },
+
+        dropPlayer: function (event, uid) {
+            this.closeOptions();
+
+            if (!uid) {
+                uid = parseInt(this.$el.find(event.currentTarget).data('uid'), 10);
+            }
+
+            var playerModel = App.playerCollection.findWhere({
+                'uid': uid
+            });
+            this.$el.find('li[data-uid="' + uid + '"]').fadeOut('slow', function () {
                 App.usersTeamCollection.removePlayerFromCollection(playerModel);
+            });
+            return false;
+        },
+
+        replacePlayer: function (event) {
+            this.closeOptions();
+
+            var uid = parseInt(this.$el.find(event.currentTarget).data('uid'), 10),
+                playerModel = App.playerCollection.findWhere({
+                    'uid': uid
+                });
+
+            this.setFilterToPosition(playerModel.get('position'));
+            this.dropPlayer(null, uid);
+
+            return false;
+        },
+
+        setFilterToPosition: function (suggestedPosition) {
+            $('#squad-filters select').val('all');
+            $('select#players_position').val(suggestedPosition);
+
+            this.model.clear({
+                silent: true
+            }).set({
+                'position': suggestedPosition
             });
         },
 
-        clearSelection: function() {
+        clearSelection: function () {
             App.usersTeamCollection.removeAllPlayersFromCollection();
             return false;
         },
 
-        render: function() {
+        render: function () {
+
             this.$el.html(this.template({
                 players: App.usersTeamCollection.toJSON(),
                 userDetails: App.userDetails.toJSON()

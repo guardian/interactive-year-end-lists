@@ -9,7 +9,7 @@ define([
     'views/squad',
     'views/match-screen',
     'routes'
-], function(
+], function (
     App,
     $,
     Backbone,
@@ -60,8 +60,8 @@ define([
 
     });
 
-//    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');
-//    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
+    //    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');
+    //    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
 
     /**
      * Bootstrap loader
