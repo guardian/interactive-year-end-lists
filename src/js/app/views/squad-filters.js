@@ -89,7 +89,7 @@ define([
             var modelValues = this.model.toJSON();
             var whereQuery = {};
             for(var i in modelValues) {
-                if(modelValues[i]) {
+                if(modelValues[i] && modelValues[i] !== 'all') {
                     whereQuery[i] = modelValues[i];
                 }
             }
