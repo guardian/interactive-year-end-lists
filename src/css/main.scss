@@ -341,6 +341,7 @@ figure.interactive {
         list-style: none;
         position: relative;
         clear: both;
+        z-index: 2;
     }
     @media(max-width:740px) {
         .pitch {
@@ -364,6 +365,7 @@ figure.interactive {
         font-size: 11px;
         color: #fff;
         text-align: center;
+        cursor: pointer;
     }
     .pitch-player-hidden {
         display: none;
