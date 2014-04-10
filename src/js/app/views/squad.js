@@ -56,19 +56,18 @@ define([
             }));
 
             this.$el.append('<div id="team-screen" class="row"></div>');
-
+            
+            var visualPrompt = new VisualPromptView(),
+                squadPitch = new SquadPitchView({
+                    model: this.filterModel
+                }),
+                squadFilters = new SquadFiltersView({
+                    model: this.filterModel
+                }),
+                squadModal = new SquadModalView();
+            
             // Push visualPrompt to view
-            var visualPrompt = new VisualPromptView();
             this.$el.find('#team-screen').html(visualPrompt.render().$el);
-
-            var squadPitch = new SquadPitchView({
-                model: this.filterModel
-            });
-            var squadFilters = new SquadFiltersView({
-                model: this.filterModel
-            });
-
-            var squadModal = new SquadModalView();
 
             this.$el.find('#team-screen').append(squadPitch.render().$el);
             this.$el.find('#team-screen').append(squadFilters.render().$el);
