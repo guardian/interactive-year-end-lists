@@ -64,8 +64,7 @@ define([
             $('#squad-filters select').val('');
             $('select#players_position').val(playerModel.get('position'));
 
-            this.model.clear({silent:true});
-            this.model.set({'position': playerModel.get('position')});
+            this.model.clear({silent:true}).set({'position': playerModel.get('position')});
 
             this.dropPlayer(null, uid);
 
