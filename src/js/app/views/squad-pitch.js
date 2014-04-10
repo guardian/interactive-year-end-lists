@@ -97,7 +97,7 @@ define([
             App.usersTeamCollection.removeAllPlayersFromCollection();
             return false;
         },
-
+        
         render: function () {
 
             var playerPositions = {
@@ -149,7 +149,8 @@ define([
 
             this.$el.html(this.template({
                 players: playerPositions,
-                userDetails: App.userDetails.toJSON()
+                userDetails: App.userDetails.toJSON(),
+                usersPlayers: App.usersTeamCollection.toJSON()
             }));
             return this;
         }

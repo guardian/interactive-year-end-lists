@@ -1,7 +1,7 @@
 
-<button id="goToMatch" class="<%= !userDetails.username ?  'disabled' : '' %>">Go to match</button>
+<button id="goToMatch" class="<%= usersPlayers.length === 11 ? 'enabled' : 'disabled' %>"><%= usersPlayers.length === 11 ? 'Go play a match!' : 'Pick 11 players to play!' %></button>
 
-<% if(0 < players.length && userDetails.username) { %>
+<% if(usersPlayers.length > 0) { %>
 	<button id="clearSelection">Clear selection</button>
 <% } %>
 

@@ -87,8 +87,15 @@ figure.interactive {
             float: right;
         }
     }
+    #squad-pitch button {
+        float: left;
+        width: 47%;
+        min-width: 0;
+        margin: 0;
+        margin-right: 6%;
+        margin-bottom: 20px;
+    }
     button#clearSelection {
-        float: right;
         margin: 0;
     }
     #squad-filters form {
