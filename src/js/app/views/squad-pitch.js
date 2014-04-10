@@ -49,7 +49,7 @@ define([
             }
 
             var playerModel = App.playerCollection.findWhere({'uid': uid});
-            $('li[data-uid="' + uid + '"]').fadeOut('slow', function() {
+            this.$el.find('li[data-uid="' + uid + '"]').fadeOut('slow', function() {
                 App.usersTeamCollection.removePlayerFromCollection(playerModel);
             });
             return false;
