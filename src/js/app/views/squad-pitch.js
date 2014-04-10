@@ -68,10 +68,6 @@ define([
 
             this.dropPlayer(null, uid);
 
-            $('html, body').animate({
-                scrollTop: $("#squad-filters").offset().top
-            }, 1000);
-
             return false;
         },
 
