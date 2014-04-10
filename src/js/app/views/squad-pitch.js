@@ -61,8 +61,11 @@ define([
             var uid = parseInt($(event.currentTarget).data('uid'));
             var playerModel = App.playerCollection.findWhere({'uid': uid});
 
+            $('#squad-filters select').val('');
             $('select#players_position').val(playerModel.get('position'));
-            App.filterValues.set('position', playerModel.get('position'));
+
+            this.model.clear({silent:true});
+            this.model.set({'position': playerModel.get('position')});
 
             this.dropPlayer(null, uid);
 

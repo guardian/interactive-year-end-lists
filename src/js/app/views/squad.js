@@ -28,13 +28,14 @@ define([
 
         initialize: function() {
             this.listenTo(App.userDetails, 'change:teamSelection', this.prePopulateTeam);
+            this.filterModel = new Backbone.Model();
         },
 
         prePopulateTeam: function() {
             if(App.userDetails.get('username')) {
                 App.userDetails.fetchUserTeamFromStorage();
 
-                var squadPitch = new SquadPitchView({model: App.filterValues});
+                var squadPitch = new SquadPitchView({model: this.filterModel});
                 this.$el.find('#squad-pitch').html(squadPitch.render().$el);
             }
         },
@@ -56,8 +57,8 @@ define([
             var visualPrompt = new VisualPromptView();
             this.$el.find('#team-screen').html(visualPrompt.render().$el);
 
-            var squadPitch = new SquadPitchView({model: App.filterValues});
-            var squadFilters = new SquadFiltersView({model: App.filterValues});
+            var squadPitch = new SquadPitchView({model: this.filterModel});
+            var squadFilters = new SquadFiltersView({model: this.filterModel});
 
             var squadModal = new SquadModalView();
 

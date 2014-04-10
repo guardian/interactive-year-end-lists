@@ -27,7 +27,7 @@ define([
             this.templateData = this.createFilterOptions();
             this.updateSquadListViews();
 
-            this.listenTo(App.filterValues, 'change', this.filterChange);
+            this.listenTo(this.model, 'change', this.updateSquadListViews);
 
             this.navigationPosition = 0;
             this.windowSize = 0;
@@ -69,17 +69,13 @@ define([
         },
 
         filterChange: function() {
-
-            App.filterValues.clear({silent:true});
-
-            var filterOptions = {};
+            var newOptions = {};
             $('#squad-filters select').each(function( index ) {
                 if($(this).val()) {
-                    console.log($(this).val());
-                    filterOptions[$(this).data('filter-name')] = $(this).val();
+                    newOptions[$(this).data('filter-name')] = $(this).val();
                 }
             });
-            this.updateSquadListViews(filterOptions);
+            this.model.set(newOptions);
         },
 
         resetTeam: function() {
@@ -88,12 +84,23 @@ define([
             return false;
         },
 
-        updateSquadListViews: function(filterOptions) {
+        updateSquadListViews: function() {
+
+            var modelValues = this.model.toJSON();
+            var whereQuery = {};
+            for(var i in modelValues) {
+                if(modelValues[i]) {
+                    whereQuery[i] = modelValues[i];
+                }
+            }
+
             this.SquadLists = [];
             var playersFiltered = App.playerCollection;
-            if(!_.isEmpty(filterOptions)) {
-                playersFiltered = App.playerCollection.where(filterOptions);
+
+            if(!_.isEmpty(whereQuery)) {
+                playersFiltered = App.playerCollection.where(whereQuery);
             }
+
             playersFiltered.map(function(playerModel) {
                 this.SquadLists.push(new SquadListView({ model : playerModel }));
             }, this);

@@ -34,7 +34,6 @@ define([
     // Variables for listeners
     App.playerSelected = new Backbone.Model(); // Opens the player card
     App.visualPrompt = new Backbone.Model(); // Shows a prompt to the user (loading etc)
-    App.filterValues = new Backbone.Model(); // Filters
 
     // Collections
     App.playerCollection = new Backbone.Collection(PlayerData);
