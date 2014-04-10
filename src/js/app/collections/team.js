@@ -13,7 +13,7 @@ define([
         model: PlayerModel,
 
         validateAddingPlayer: function (model) {
-            var response = {
+            var res = {
                 status: 'fail',
                 message: ''
             },
@@ -62,28 +62,28 @@ define([
                     if ((App.usersTeamCollection.where({
                             'position': model.get('position')
                         }).length + 1) <= positionsValidation[model.get('position')].allowed) {
-                        response.status = 'success';
+                        res.status = 'success';
                     } else {
-                        response.message = 'Cant have more than ' + positionsValidation[model.get('position')].allowed + ' ' + positionsValidation[model.get('position')].name;
+                        res.message = 'Cant have more than ' + positionsValidation[model.get('position')].allowed + ' ' + positionsValidation[model.get('position')].name;
                     }
                 } else {
-                    response.message = 'Cant have more than 11 players!';
+                    res.message = 'Cant have more than 11 players!';
                 }
             } else {
-                response.message = model.get('name') + ' is aleady in your squad!';
+                res.message = model.get('name') + ' is aleady in your squad!';
             }
-            return response;
+            return res;
         },
 
         addPlayerToCollection: function (model, saveToStorage) {
-            var response = this.validateAddingPlayer(model);
-            if (response.status === 'success') {
+            var res = this.validateAddingPlayer(model);
+            if (res.status === 'success') {
                 App.usersTeamCollection.add(model);
                 if (saveToStorage) {
                     App.userDetails.saveUserTeamToStorage();
                 }
             }
-            return response;
+            return res;
         },
 
         removePlayerFromCollection: function (model) {
