@@ -9,7 +9,7 @@ define([
     'views/match-screen',
     'data/players',
     'routes'
-], function(
+], function (
     App,
     $,
     Backbone,
@@ -44,11 +44,13 @@ define([
 
     // Views
     App.userView = new UserView();
-    App.squadView = new SquadView({ collection: App.playerCollection });
+    App.squadView = new SquadView({
+        collection: App.playerCollection
+    });
     App.matchView = new MatchScreenView();
 
-//    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');
-//    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
+    //    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');
+    //    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
 
     /**
      * Bootstrap loader

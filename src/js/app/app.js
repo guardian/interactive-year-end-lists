@@ -1,6 +1,6 @@
 define([
-    'backbone',
-], function(
+    'backbone'
+], function (
     Backbone
 ) {
     var app = {};

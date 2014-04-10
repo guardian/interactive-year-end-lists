@@ -56,7 +56,7 @@ define([
             }));
 
             this.$el.append('<div id="team-screen" class="row"></div>');
-            
+
             var visualPrompt = new VisualPromptView(),
                 squadPitch = new SquadPitchView({
                     model: this.filterModel
@@ -65,7 +65,7 @@ define([
                     model: this.filterModel
                 }),
                 squadModal = new SquadModalView();
-            
+
             // Push visualPrompt to view
             this.$el.find('#team-screen').html(visualPrompt.render().$el);
 
