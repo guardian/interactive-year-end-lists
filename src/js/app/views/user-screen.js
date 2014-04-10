@@ -3,15 +3,15 @@ define([
     'backbone',
     'underscore',
     'text!templates/user-screen.html'
-], function(
+], function (
     App,
     Backbone,
     _,
     UserTemplate
-){
+) {
 
     return Backbone.View.extend({
-        
+
         tagName: 'div',
         className: '',
         template: _.template(UserTemplate),
@@ -20,11 +20,11 @@ define([
 
         },
 
-        initialize: function() {
-            
+        initialize: function () {
+
         },
 
-        render: function() {
+        render: function () {
             this.$el.html(this.template());
             return this;
         }

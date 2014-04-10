@@ -3,7 +3,7 @@ define([
     'backbone',
     'underscore',
     'text!templates/squad-pitch.html'
-], function(
+], function (
     App,
     Backbone,
     _,
@@ -23,11 +23,11 @@ define([
             'click #clearSelection': 'clearSelection'
         },
 
-        initialize: function() {
+        initialize: function () {
 
         },
 
-        showOptions: function(event) {
+        showOptions: function (event) {
 
             var target = $(event.currentTarget);
 
@@ -37,46 +37,54 @@ define([
             playerOptions.show();
         },
 
-        closeOptions: function() {
+        closeOptions: function () {
             $('.playerOptions').hide();
         },
 
-        dropPlayer: function(event, uid) {
+        dropPlayer: function (event, uid) {
             this.closeOptions();
 
-            if(!uid) {
+            if (!uid) {
                 uid = parseInt($(event.currentTarget).data('uid'));
             }
 
-            var playerModel = App.playerCollection.findWhere({'uid': uid});
-            this.$el.find('li[data-uid="' + uid + '"]').fadeOut('slow', function() {
+            var playerModel = App.playerCollection.findWhere({
+                'uid': uid
+            });
+            this.$el.find('li[data-uid="' + uid + '"]').fadeOut('slow', function () {
                 App.usersTeamCollection.removePlayerFromCollection(playerModel);
             });
             return false;
         },
 
-        replacePlayer: function(event) {
+        replacePlayer: function (event) {
             this.closeOptions();
 
             var uid = parseInt($(event.currentTarget).data('uid'));
-            var playerModel = App.playerCollection.findWhere({'uid': uid});
+            var playerModel = App.playerCollection.findWhere({
+                'uid': uid
+            });
 
             $('#squad-filters select').val('all');
             $('select#players_position').val(playerModel.get('position'));
 
-            this.model.clear({silent:true}).set({'position': playerModel.get('position')});
+            this.model.clear({
+                silent: true
+            }).set({
+                'position': playerModel.get('position')
+            });
 
             this.dropPlayer(null, uid);
 
             return false;
         },
 
-        clearSelection: function() {
+        clearSelection: function () {
             App.usersTeamCollection.removeAllPlayersFromCollection();
             return false;
         },
 
-        render: function() {
+        render: function () {
             this.$el.html(this.template({
                 players: App.usersTeamCollection.toJSON(),
                 userDetails: App.userDetails.toJSON()

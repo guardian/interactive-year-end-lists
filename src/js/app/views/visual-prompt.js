@@ -3,7 +3,7 @@ define([
     'underscore',
     'backbone',
     'text!templates/visual-prompt.html'
-], function(
+], function (
     App,
     _,
     Backbone,
@@ -13,23 +13,23 @@ define([
 
         className: 'visual-prompt',
         template: _.template(VisualPromptTemplate),
-        
+
         events: {
             'click #closePrompt': 'closePrompt'
         },
 
-        initialize: function() {
+        initialize: function () {
             App.visualPrompt.on('change', this.render, this);
         },
 
-        closePrompt: function() {
+        closePrompt: function () {
             App.visualPrompt.set({
                 'message': null,
-                'closePrompt' : null
+                'closePrompt': null
             });
         },
 
-        render: function() {
+        render: function () {
             this.$el.html(this.template({
                 message: App.visualPrompt.get('message'),
                 closePrompt: App.visualPrompt.get('closePrompt')
