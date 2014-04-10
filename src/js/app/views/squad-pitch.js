@@ -29,23 +29,23 @@ define([
 
         showOptions: function (event) {
 
-            var target = $(event.currentTarget);
-
-            var playerOptions = $('.playerOptions');
+            var target = this.$el.find(event.currentTarget),
+                playerOptions = this.$el.find('.playerOptions');
+            
             playerOptions.find('h4').text(target.text());
             playerOptions.find('button').attr('data-uid', target.data('uid'));
             playerOptions.show();
         },
 
         closeOptions: function () {
-            $('.playerOptions').hide();
+            this.$el.find('.playerOptions').hide();
         },
 
         dropPlayer: function (event, uid) {
             this.closeOptions();
 
             if (!uid) {
-                uid = parseInt($(event.currentTarget).data('uid'));
+                uid = parseInt(this.$el.find(event.currentTarget).data('uid'));
             }
 
             var playerModel = App.playerCollection.findWhere({
@@ -60,7 +60,7 @@ define([
         replacePlayer: function (event) {
             this.closeOptions();
 
-            var uid = parseInt($(event.currentTarget).data('uid'));
+            var uid = parseInt(this.$el.find(event.currentTarget).data('uid'));
             var playerModel = App.playerCollection.findWhere({
                 'uid': uid
             });
