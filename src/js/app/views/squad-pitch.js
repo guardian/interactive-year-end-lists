@@ -65,18 +65,21 @@ define([
                     'uid': uid
                 });
 
+            this.setFilterToPosition(playerModel.get('position'));
+            this.dropPlayer(null, uid);
+
+            return false;
+        },
+
+        setFilterToPosition: function (suggestedPosition) {
             $('#squad-filters select').val('all');
-            $('select#players_position').val(playerModel.get('position'));
+            $('select#players_position').val(suggestedPosition);
 
             this.model.clear({
                 silent: true
             }).set({
-                'position': playerModel.get('position')
+                'position': suggestedPosition
             });
-
-            this.dropPlayer(null, uid);
-
-            return false;
         },
 
         clearSelection: function () {
@@ -85,6 +88,7 @@ define([
         },
 
         render: function () {
+
             this.$el.html(this.template({
                 players: App.usersTeamCollection.toJSON(),
                 userDetails: App.userDetails.toJSON()
