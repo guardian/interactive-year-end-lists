@@ -29,6 +29,7 @@ figure.interactive .container {
 }
 figure.interactive {
     $buttonColor: #005689;
+
     button {
         background: $buttonColor;
         border: 0 none;
@@ -88,7 +89,8 @@ figure.interactive {
             float: right;
         }
     }
-    #squad-pitch button {
+    #squad-pitch button#goToMatch, 
+    #squad-pitch button#clearSelection {
         float: left;
         width: 47%;
         min-width: 0;
@@ -96,8 +98,8 @@ figure.interactive {
         margin-right: 6%;
         margin-bottom: 20px;
     }
-    button#clearSelection {
-        margin: 0;
+    #squad-pitch button#clearSelection {
+        margin-right: 0;
     }
     #squad-filters form {
         position: absolute;
@@ -148,13 +150,33 @@ figure.interactive {
         margin: 20px auto 10px;
         clear: both;
         text-align: center;
-        color: #005689;
+        color: $buttonColor;
         float: left;
         width: 100%;
         cursor: pointer;
     }
     #squad-filters.showClearFilterButton p#clearLink {
         display: block;
+    }
+    .viewSquad {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        right: 20px;
+        background: #fff;
+        z-index: 5;
+        padding: 20px;
+        max-width: 110px;
+        text-align: center;
+        border: 1px solid #efefef;
+        border-radius: 7px 7px 0 0;
+    }
+    .viewSquad.viewSquad-show {
+        display: block;
+    }
+    .viewSquad p {
+        color: $buttonColor;
+        margin: 0;
     }
     .player_profile {
         text-align: center;

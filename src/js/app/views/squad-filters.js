@@ -20,7 +20,8 @@ define([
 
         events: {
             'change select': 'filterChange',
-            'click #clearLink': 'clearFilters'
+            'click #clearLink': 'clearFilters',
+            'click .viewSquad': 'viewSquad'
         },
 
         initialize: function () {
@@ -46,6 +47,7 @@ define([
                 this.windowSize = 0;
             }
             if (this.navigationPosition) {
+                $('.viewSquad').toggleClass('viewSquad-show', $(document).scrollTop() >= this.navigationPosition);
                 $('#squad-filters form').toggleClass('squad-filters-fixed', $(document).scrollTop() >= this.navigationPosition);
             }
         },
@@ -120,6 +122,12 @@ define([
                     scrollTop: this.$el.offset().top + 2
                 }, 1000);
             }
+        },
+        
+        viewSquad: function () {
+            $('html, body').animate({
+                scrollTop: $('#squad-pitch').offset().top + 2
+            }, 1000);
         },
 
         renderSquadListViews: function () {
