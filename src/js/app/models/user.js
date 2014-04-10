@@ -1,7 +1,7 @@
 define([
     'app',
     'backbone'
-], function(
+], function (
     App,
     Backbone
 ) {
@@ -17,20 +17,24 @@ define([
             teamSelection: ''
         },
 
-        fetchByGuardianId: function(_options) {
+        fetchByGuardianId: function (_options) {
             var options = _options || {};
-            options.data = { guardianID: this.get('guardianID') };
+            options.data = {
+                guardianID: this.get('guardianID')
+            };
             return this.fetch(options);
         },
 
-        checkUserStatus: function() {
+        checkUserStatus: function () {
 
-            if(App.inDevMode()) {
+            if (App.inDevMode()) {
 
-                App.userDetails.set({'guardianID': '002'});
+                App.userDetails.set({
+                    'guardianID': '002'
+                });
                 App.userDetails.fetchByGuardianId({
                     success: function (user) {
-                        if(!user.username) {
+                        if (!user.username) {
                             // Create new user, dont bother fetching team.
                             // user.username from Cookie
                             //App.userDetails.set('username', 'hamlet');
@@ -43,15 +47,15 @@ define([
                         Backbone.trigger('loaded:userData');
 
                     },
-                    error: function(err) {
+                    error: function (err) {
                         console.error('fetchByGuardianId failed: ', err);
                     }
                 });
             } else {
-                require(["common/modules/identity/api"], function(api) {
-                    require(["common/modules/identity/api"], function(api) {
+                require(["common/modules/identity/api"], function (api) {
+                    require(["common/modules/identity/api"], function (api) {
                         var loggedIn = api.getUserFromCookie();
-                        if(loggedIn) {
+                        if (loggedIn) {
                             App.userDetails.set('username', loggedIn.id);
                             this.fetchUserTeamFromStorage();
                             return true;
@@ -63,34 +67,38 @@ define([
             }
         },
 
-        loginUser: function() {
-            if(App.inDevMode()) {
+        loginUser: function () {
+            if (App.inDevMode()) {
 
             } else {
-                require(["common/modules/identity/api"], function(api) {
+                require(["common/modules/identity/api"], function (api) {
                     var loggedIn = api.getUserOrSignIn();
-                    if(loggedIn) {
+                    if (loggedIn) {
                         App.userDetails.set('username', loggedIn.id);
                     }
                 });
             }
         },
 
-        saveUserTeamToStorage: function() {
-            if(App.inDevMode()) {
-                App.userDetails.set({teamSelection: this.parseTeamIntoArray()});
+        saveUserTeamToStorage: function () {
+            if (App.inDevMode()) {
+                App.userDetails.set({
+                    teamSelection: this.parseTeamIntoArray()
+                });
                 App.userDetails.save();
             } else {
 
             }
         },
 
-        fetchUserTeamFromStorage: function() {
+        fetchUserTeamFromStorage: function () {
 
-            if(App.userDetails.get('teamSelection')) {
+            if (App.userDetails.get('teamSelection')) {
                 var playerArr = [];
-                App.userDetails.get('teamSelection').split(',').map(function(playerUID) {
-                    var playerModel = App.playerCollection.findWhere({'uid': playerUID});
+                App.userDetails.get('teamSelection').split(',').map(function (playerUID) {
+                    var playerModel = App.playerCollection.findWhere({
+                        'uid': playerUID
+                    });
                     if (playerModel) {
                         playerArr.push(playerModel);
                     }
@@ -104,9 +112,9 @@ define([
             return;
         },
 
-        parseTeamIntoArray: function() {
+        parseTeamIntoArray: function () {
             var team = [];
-            App.usersTeamCollection.each(function(player) {
+            App.usersTeamCollection.each(function (player) {
                 team.push(player.get('uid'));
             });
             return team.join(',');
