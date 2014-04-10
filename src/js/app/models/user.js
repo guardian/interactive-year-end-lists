@@ -25,9 +25,9 @@ define([
 
         checkUserStatus: function() {
 
-            if(App.environment === 'development') {
+            if(App.inDevMode()) {
 
-                App.userDetails.set({'guardianID': '0530'});
+                App.userDetails.set({'guardianID': '002'});
                 App.userDetails.fetchByGuardianId({
                     success: function (user) {
                         if(!user.username) {
@@ -40,6 +40,7 @@ define([
                             // this.fetchUserTeamFromStorage
                         }
                         App.userDetails.set(user.toJSON());
+                        Backbone.trigger('loaded:userData');
 
                     },
                     error: function(err) {
@@ -63,7 +64,7 @@ define([
         },
 
         loginUser: function() {
-            if(App.environment === 'development') {
+            if(App.inDevMode()) {
 
             } else {
                 require(["common/modules/identity/api"], function(api) {
@@ -87,11 +88,12 @@ define([
         fetchUserTeamFromStorage: function() {
 
             if(App.userDetails.get('teamSelection')) {
-
                 var playerArr = [];
                 App.userDetails.get('teamSelection').split(',').map(function(playerUID) {
-                    var playerModel = App.playerCollection.findWhere({'uid': parseInt(playerUID)});
-                    playerArr.push(playerModel);
+                    var playerModel = App.playerCollection.findWhere({'uid': playerUID});
+                    if (playerModel) {
+                        playerArr.push(playerModel);
+                    }
                 });
                 App.usersTeamCollection.reset(playerArr);
 

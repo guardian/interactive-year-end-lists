@@ -52,8 +52,8 @@ define([
                 if($.inArray(player.get('position'), positions) < 0) {
                     positions.push(player.get('position'));
                 }
-                if($.inArray(player.get('country'), countries) < 0) {
-                    countries.push(player.get('country'));
+                if($.inArray(player.get('countryname'), countries) < 0) {
+                    countries.push(player.get('countryname'));
                 }
             });
             var filterOptions = {};

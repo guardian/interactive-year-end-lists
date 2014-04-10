@@ -48,7 +48,7 @@ define([
 
         addPlayerToCollection: function(model, saveToStorage) {
 			var response = this.validateAddingPlayer(model);
-			if(response.status == 'success') {
+			if(response.status === 'success') {
 				App.usersTeamCollection.add(model);
                 if(saveToStorage) {
                     App.userDetails.saveUserTeamToStorage();

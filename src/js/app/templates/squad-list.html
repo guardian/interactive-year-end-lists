@@ -1,6 +1,7 @@
-<div class="inner bg-<%= country.toLowerCase() %>">
+<div class="inner bg-<%= countryname.toLowerCase() %>">
 	<span class="removePlayer">Unpick</span>
-	<span class="flag" alt="<%= country %>" title="<%= country %>" style="background-image:url('images/flags/<%= countrycode %>.png')"></span>
-	<img src="/images/players/player<%= uid %>.jpg" alt="<%= name %>" title="<%= name %>" />
+	<span class="flag" alt="<%= countryname %>" title="<%= countryname %>" style="background-image:url('images/flags/<%= countrycode %>.png')"></span>
+	<!-- <img src="/images/players/player<%= uid %>.jpg" alt="<%= name %>" title="<%= name %>" /> -->
+    <img src="/images/players/placeholder_player.png" alt="<%= name %>" title="<%= name %>" />
 	<p><%= name.substring(name.lastIndexOf(" ")+1) %></p>
 </div>

@@ -103,7 +103,7 @@ define([
                 // TODO: Should be 11, for testing allow less than 11
                 if(selection.length <= 11) {
                     selection.map(function(playerUID) {
-                        var playerModel = App.playerCollection.findWhere({'uid': parseInt(playerUID)});
+                        var playerModel = App.playerCollection.findWhere({'uid':playerUID});
                         if(player.get('startingUser') == 1) {
                             App.player1TeamCollection.add(playerModel);
                         } else {

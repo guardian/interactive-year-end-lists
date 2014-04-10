@@ -59,7 +59,6 @@ define([
                 });
                 return;
             }
-
             var response = App.usersTeamCollection.addPlayerToCollection(this.playerModel, true);
             if(response.status == 'fail') {
                 App.visualPrompt.set({

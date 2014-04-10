@@ -10,7 +10,7 @@ define([
             name: null,
             imageSrc: null,
             position: null,
-            country: null,
+            countryname: null,
             careerStart: null,
             careerEnd: null,
 

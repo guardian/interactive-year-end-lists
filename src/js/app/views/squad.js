@@ -28,6 +28,7 @@ define([
 
         initialize: function() {
             this.listenTo(App.userDetails, 'change:teamSelection', this.prePopulateTeam);
+            this.listenTo(this.collection, 'reset', this.render);
         },
 
         prePopulateTeam: function() {
@@ -45,11 +46,8 @@ define([
         },
 
         render: function() {
-
             this.$el.empty();
-
             this.$el.html(this.template({ "userDetails": App.userDetails.toJSON() }));
-
             this.$el.append('<div id="team-screen" class="row"></div>');
 
             // Push visualPrompt to view

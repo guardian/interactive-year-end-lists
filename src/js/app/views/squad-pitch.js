@@ -26,7 +26,7 @@ define([
 
         swapPlayer: function(event) {
             var target = $(event.currentTarget);
-            var playerModel = App.playerCollection.findWhere({'uid': parseInt(target.data('uid'))});
+            var playerModel = App.playerCollection.findWhere({'uid': target.data('uid')});
             target.fadeOut('slow', function() {
                 App.usersTeamCollection.removePlayerFromCollection(playerModel);
             });

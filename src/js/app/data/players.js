@@ -1,6 +1,6 @@
 define([], function() {
 
-    var players = [{"uid":1,"country":"Russia","name":"Lev Yashin","position":"GK","attack":0,"defense":18,"discipline":20,"creativity":0,"unpredictability":3,"volatility":0,"star quality":18},
+    return [{"uid":1,"country":"Russia","name":"Lev Yashin","position":"GK","attack":0,"defense":18,"discipline":20,"creativity":0,"unpredictability":3,"volatility":0,"star quality":18},
 {"uid":2,"country":"Germany","name":"Sepp Maier","position":"GK","attack":0,"defense":15,"discipline":18,"creativity":0,"unpredictability":10,"volatility":5,"star quality":16},
 {"uid":3,"country":"Germany","name":"Oliver Kahn","position":"GK","attack":0,"defense":15,"discipline":13,"creativity":0,"unpredictability":15,"volatility":12,"star quality":14},
 {"uid":4,"country":"Italy","name":"Dino Zoff","position":"GK","attack":0,"defense":18,"discipline":17,"creativity":0,"unpredictability":5,"volatility":3,"star quality":19},
@@ -125,49 +125,4 @@ define([], function() {
 {"uid":123,"country":"Cameroon","name":"Roger Milla","position":"ST","attack":14,"defense":10,"discipline":15,"creativity":11,"unpredictability":18,"volatility":10,"star quality":14},
 {"uid":124,"country":"Germany","name":"Karl-Heinz Rumenigge","position":"ST","attack":17,"defense":12,"discipline":15,"creativity":13,"unpredictability":10,"volatility":5,"star quality":15}];
 
-	var uniquePlayers = [];
-
-	players.map(function(player) {
-        if(player.name) {
-			player.countrycode = getCountryName(player.country);
-			uniquePlayers.push(player);
-        }
-    });
-    return uniquePlayers;
-
 });
-
-// Get the country name for a given code.
-function getCountryName(CountryName) {
-	var countries = [
-		{name: 'Argentina', code: 'AR'},
-		{name: 'Austria', code: 'AT'},
-		{name: 'Brazil', code: 'BR'},
-		{name: 'Bulgaria', code: 'BG'},
-		{name: 'Cameroon', code: 'CM'},
-		{name: 'Czech Republic', code: 'CZ'},
-		{name: 'Denmark', code: 'DK'},
-		{name: 'England', code: 'EN'},
-		{name: 'France', code: 'FR'},
-		{name: 'Germany', code: 'DE'},
-		{name: 'Hungary', code: 'HU'},
-		{name: 'Ireland', code: 'IE'},
-		{name: 'Italy', code: 'IT'},
-		{name: 'Netherlands', code: 'NL'},
-		{name: 'Peru', code: 'PE'},
-		{name: 'Poland', code: 'PL'},
-		{name: 'Portugal', code: 'PT'},
-		{name: 'Romania', code: 'RO'},
-		{name: 'Russia', code: 'RU'},
-		{name: 'South Korea', code: 'KP'},
-		{name: 'Spain', code: 'ES'},
-		{name: 'Sweden', code: 'SE'},
-		{name: 'Turkey', code: 'TR'},
-		{name: 'Uruguay', code: 'UY'}
-	];
-    for (var i = 0; i < countries.length; i++) {
-        if (CountryName.toLowerCase() == countries[i].name.toLowerCase()) {
-            return countries[i].code.toLowerCase();
-        }
-    }
-}

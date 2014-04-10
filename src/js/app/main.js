@@ -21,9 +21,6 @@ define([
     MatchScreenView,
     Routes
 ) {
-
-    App.environment = 'development';
-
     // Models
     App.userDetails = new UserModel();
     App.userDetails.checkUserStatus();
@@ -38,22 +35,30 @@ define([
     // Collections
     App.playerCollection = new PlayersCollection();
 
-    if (App.isDev()) {
+    if (App.inDevMode()) {
         App.playerCollection.fetchGoogleData();
     } else {
         App.playerCollection.fetchLocal();
     }
 
-    App.usersTeamCollection = new TeamCollection();
+    Backbone.on('dataReady', function() {
+        console.log('All done. Render all');
+        App.usersTeamCollection = new TeamCollection();
+        App.player1TeamCollection = new TeamCollection();
+        App.player2TeamCollection = new TeamCollection();
+        // FIXME: Better place to populate team selection
+        App.userDetails.fetchUserTeamFromStorage();
 
+        // Views
+        App.userView = new UserView();
+        App.squadView = new SquadView({ collection: App.playerCollection });
+        App.matchView = new MatchScreenView();
 
-    App.player1TeamCollection = new TeamCollection();
-    App.player2TeamCollection = new TeamCollection();
+         // Setup routing
+        var appRoutes = new Routes();
+        Backbone.history.start();
 
-    // Views
-    App.userView = new UserView();
-    App.squadView = new SquadView({ collection: App.playerCollection });
-    App.matchView = new MatchScreenView();
+    });
 
 //    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');
 //    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
@@ -63,12 +68,7 @@ define([
      * @param  {element} el DOM element provided from the page ie. <figure>
      */
     function boot(el) {
-        // Store DOM target
         App.$el = $(el);
-
-        // Setup routing
-        var appRoutes = new Routes();
-        Backbone.history.start();
     }
 
     return {
