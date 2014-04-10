@@ -31,7 +31,7 @@ define([
 
             var target = this.$el.find(event.currentTarget),
                 playerOptions = this.$el.find('.playerOptions');
-            
+
             playerOptions.find('h4').text(target.text());
             playerOptions.find('button').attr('data-uid', target.data('uid'));
             playerOptions.show();
@@ -45,7 +45,7 @@ define([
             this.closeOptions();
 
             if (!uid) {
-                uid = parseInt(this.$el.find(event.currentTarget).data('uid'));
+                uid = parseInt(this.$el.find(event.currentTarget).data('uid'), 10);
             }
 
             var playerModel = App.playerCollection.findWhere({
@@ -60,10 +60,10 @@ define([
         replacePlayer: function (event) {
             this.closeOptions();
 
-            var uid = parseInt(this.$el.find(event.currentTarget).data('uid'));
-            var playerModel = App.playerCollection.findWhere({
-                'uid': uid
-            });
+            var uid = parseInt(this.$el.find(event.currentTarget).data('uid'), 10),
+                playerModel = App.playerCollection.findWhere({
+                    'uid': uid
+                });
 
             $('#squad-filters select').val('all');
             $('select#players_position').val(playerModel.get('position'));
