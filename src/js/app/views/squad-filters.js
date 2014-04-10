@@ -20,7 +20,7 @@ define([
 
         events: {
             'change select': 'filterChange',
-            'click #clearFilters': 'clearFilters'
+            'click #clearLink': 'clearFilters'
         },
 
         initialize: function () {
@@ -83,7 +83,7 @@ define([
         },
 
         clearFilters: function () {
-            this.updateSquadListViews();
+            this.model.clear();
             this.$el.find('select').val('all');
             return false;
         },
@@ -94,7 +94,7 @@ define([
                 whereQuery = {},
                 i = 0,
                 playersFiltered = App.playerCollection;
-            
+
             for (i in modelValues) {
                 if (modelValues[i] && modelValues[i] !== 'all') {
                     whereQuery[i] = modelValues[i];
@@ -126,10 +126,14 @@ define([
             var domContainer = document.createDocumentFragment(),
                 playerListContainer = this.$('#player_list');
             
-            this.SquadLists.forEach(function (SquadList) {
-                domContainer.appendChild(SquadList.render().el);
-            });
+            if(!_.isEmpty(this.SquadLists)) {
+                this.SquadLists.forEach(function (SquadList) {
+                    domContainer.appendChild(SquadList.render().el);
+                });
+            }
             
+            this.$el.toggleClass('showClearFilterButton', _.isEmpty(this.SquadLists));
+
             playerListContainer.fadeOut('fast', function () {
                 playerListContainer.html(domContainer).fadeIn();
             });

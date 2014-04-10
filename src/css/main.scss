@@ -132,6 +132,19 @@ figure.interactive {
         background: url(../images/down_arrow.png) no-repeat right #f4f4ee;
         margin-right: 3%;
     }
+    #squad-filters p#clearLink {
+        display: none;
+        margin: 20px auto 10px;
+        clear: both;
+        text-align: center;
+        color: #005689;
+        float: left;
+        width: 100%;
+        cursor: pointer;
+    }
+    #squad-filters.showClearFilterButton p#clearLink {
+        display: block;
+    }
     .player_profile {
         text-align: center;
         margin-bottom: 7px;
