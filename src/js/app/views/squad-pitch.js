@@ -16,10 +16,11 @@ define([
         template: _.template(SquadPitchTemplate),
 
         events: {
-            'click li.pitch_player': 'showOptions',
+            'click li.pitch-player-taken': 'showOptions',
             'click button#dropPlayer': 'dropPlayer',
             'click button#replacePlayer': 'replacePlayer',
             'click .playerOptions .close': 'closeOptions',
+            'click li.pitch-player-available': 'showAvailablePlayersInPosition',
             'click #clearSelection': 'clearSelection'
         },
 
@@ -41,11 +42,14 @@ define([
             this.$el.find('.playerOptions').hide();
         },
 
-        dropPlayer: function (event, uid) {
+        dropPlayer: function (event, uid, posClass) {
             this.closeOptions();
 
             if (!uid) {
-                uid = parseInt(this.$el.find(event.currentTarget).data('uid'), 10);
+                uid = this.$el.find(event.currentTarget).data('uid');
+            }
+            if (!posClass) {
+                posClass = this.$el.find('li[data-uid="' + uid + '"]').data('position');
             }
 
             var playerModel = App.playerCollection.findWhere({
@@ -54,21 +58,28 @@ define([
             this.$el.find('li[data-uid="' + uid + '"]').fadeOut('slow', function () {
                 App.usersTeamCollection.removePlayerFromCollection(playerModel);
             });
+            this.$el.find('li.pitch-player-hidden[data-position="' + posClass + '"]').fadeIn('slow');
             return false;
         },
 
         replacePlayer: function (event) {
             this.closeOptions();
 
-            var uid = parseInt(this.$el.find(event.currentTarget).data('uid'), 10),
+            var uid = this.$el.find(event.currentTarget).data('uid'),
+                posClass = this.$el.find(event.currentTarget).data('position'),
                 playerModel = App.playerCollection.findWhere({
                     'uid': uid
                 });
 
             this.setFilterToPosition(playerModel.get('position'));
-            this.dropPlayer(null, uid);
+            this.dropPlayer(null, uid, null);
 
             return false;
+        },
+
+        showAvailablePlayersInPosition: function (event) {
+            var posClass = this.$el.find(event.currentTarget).data('position').replace(/\d+/g, '').toUpperCase();
+            this.setFilterToPosition(posClass);
         },
 
         setFilterToPosition: function (suggestedPosition) {
@@ -89,11 +100,57 @@ define([
 
         render: function () {
 
+            var playerPositions = {
+                'ST': {
+                    containerClass: 'st'
+                },
+                'ST2': {
+                    containerClass: 'st2'
+                },
+                'MR': {
+                    containerClass: 'mr'
+                },
+                'MC': {
+                    containerClass: 'mc'
+                },
+                'MC2': {
+                    containerClass: 'mc2'
+                },
+                'ML': {
+                    containerClass: 'ml'
+                },
+                'RB': {
+                    containerClass: 'rb'
+                },
+                'CB': {
+                    containerClass: 'cb'
+                },
+                'CB2': {
+                    containerClass: 'cb2'
+                },
+                'LB': {
+                    containerClass: 'lb'
+                },
+                'GK': {
+                    containerClass: 'gk'
+                }
+            },
+                usersPlayers = App.usersTeamCollection.toJSON();
+
+            usersPlayers.forEach(function (player) {
+                var indexToUse = player.position;
+
+                if (!_.isEmpty(playerPositions[indexToUse].name)) {
+                    indexToUse = indexToUse + '2'; // Second ST, MC, DC
+                }
+                playerPositions[indexToUse] = player;
+                playerPositions[indexToUse].containerClass = indexToUse.toLowerCase();
+            });
+
             this.$el.html(this.template({
-                players: App.usersTeamCollection.toJSON(),
+                players: playerPositions,
                 userDetails: App.userDetails.toJSON()
             }));
-            this.$el.find('.pitch_player.position-cb:eq(1), .pitch_player.position-mc:eq(1), .pitch_player.position-st:eq(1)').addClass('second');
             return this;
         }
 

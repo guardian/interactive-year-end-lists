@@ -358,55 +358,61 @@ figure.interactive {
         background-size: cover;
         background-color: #ccc;
     }
-    .pitch_player {
+    .pitch-player {
         position: absolute;
         max-width: 80px;
         font-size: 11px;
         color: #fff;
         text-align: center;
     }
+    .pitch-player-hidden {
+        display: none;
+    }
     /* Strikers */
-    .pitch_player.position-st {
+    .pitch-player.position-st,
+    .pitch-player.position-st2 {
         left: 95px;
         top: 40px;
     }
-    .pitch_player.position-st.second {
+    .pitch-player.position-st2 {
         left: 165px;
     }
     /* Midfielders */
-    .pitch_player.position-ml,
-    .pitch_player.position-mr,
-    .pitch_player.position-mc {
+    .pitch-player.position-ml,
+    .pitch-player.position-mr,
+    .pitch-player.position-mc,
+    .pitch-player.position-mc2 {
         top: 140px;
         left: 20px;
     }
-    .pitch_player.position-mr {
+    .pitch-player.position-mr {
         left: 230px;
     }
-    .pitch_player.position-mc {
+    .pitch-player.position-mc {
         left: 90px;
     }
-    .pitch_player.position-mc.second {
+    .pitch-player.position-mc2 {
         left: 160px;
     }
     /* Defenders */
-    .pitch_player.position-lb,
-    .pitch_player.position-rb,
-    .pitch_player.position-cb {
+    .pitch-player.position-lb,
+    .pitch-player.position-rb,
+    .pitch-player.position-cb,
+    .pitch-player.position-cb2 {
         left: 20px;
         top: 245px;
     }
-    .pitch_player.position-rb {
+    .pitch-player.position-rb {
         left: 230px;
     }
-    .pitch_player.position-cb {
+    .pitch-player.position-cb {
         left: 90px;
     }
-    .pitch_player.position-cb.second {
+    .pitch-player.position-cb2 {
         left: 160px;
     }
     /* Goalkeepers */
-    .pitch_player.position-gk {
+    .pitch-player.position-gk {
         top: 335px;
         left: 125px;
     }
