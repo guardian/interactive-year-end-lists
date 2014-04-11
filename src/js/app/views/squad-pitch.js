@@ -16,6 +16,7 @@ define([
         template: _.template(SquadPitchTemplate),
 
         events: {
+            'click #goToMatch': 'goToMatch',
             'click li.pitch-player-taken': 'showOptions',
             'click button#dropPlayer': 'dropPlayer',
             'click button#replacePlayer': 'replacePlayer',
@@ -26,6 +27,10 @@ define([
 
         initialize: function () {
 
+        },
+
+        goToMatch: function () {
+            App.appRoutes.navigate('match/' + App.userDetails.get('guardianID') + '/002', { trigger: true });
         },
 
         showOptions: function (event) {
