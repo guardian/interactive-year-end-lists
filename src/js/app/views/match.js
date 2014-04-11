@@ -24,8 +24,8 @@ define([
         },
 
         initialize: function (options) {
-            this.listenTo(App.player1, 'change', this.isReady);
-            this.listenTo(App.player2, 'change', this.isReady);
+            this.listenTo(App.player1, 'change', this.render);
+            this.listenTo(App.player2, 'change', this.render);
 
             this.templateData = {
                 player1: {
@@ -42,33 +42,21 @@ define([
         },
 
         isReady: function () {
-
             if (this.userValidForMatch(App.player1) && this.userValidForMatch(App.player2)) {
-
-                this.templateData = {
-                    player1: {
-                        details: App.player1.toJSON()
-                    },
-                    player2: {
-                        details: App.player2.toJSON()
-                    }
-                };
-
-                this.render();
-
-                this.renderTeams();
+                return true;
             }
-
+            return false;
         },
 
         userValidForMatch: function (player) {
-            var playerVal = this.validateUser(player);
-            if (playerVal.status == 'success') {
-                playerVal = this.validateTeamSelection(player);
-                if (playerVal.status == 'success') {
+            var res = this.validateUser(player);
+            if (res.status === 'success') {
+                res = this.validateTeamSelection(player);
+                if (res.status === 'success') {
                     return true;
                 }
             }
+            console.log(res);
             return false;
         },
 
@@ -89,12 +77,10 @@ define([
             var res = {
                 status: 'fail',
                 message: ''
-            };
+            },
+                playerArr = [];
             if (user.get('teamSelection')) {
-
                 if (user.get('teamSelection').split(',').length === 11) {
-
-                    var playerArr = [];
                     user.get('teamSelection').split(',').map(function (player) {
                         var playerSplit = player.split(':'),
                             playerModel = App.playerCollection.findWhere({
@@ -105,7 +91,7 @@ define([
                             playerArr.push(playerModel);
                         }
                     });
-                    if (user.get('startingUser') == 1) {
+                    if (user.get('startingUser') === 1) {
                         App.player1TeamCollection.reset(playerArr);
                     } else {
                         App.player2TeamCollection.reset(playerArr);
@@ -122,17 +108,36 @@ define([
 
 
         render: function () {
+
+            var readyForMatch = this.isReady();
+
+            if (readyForMatch) {
+                this.templateData = {
+                    player1: {
+                        details: App.player1.toJSON()
+                    },
+                    player2: {
+                        details: App.player2.toJSON()
+                    }
+                };
+            }
+
             this.$el.empty();
             this.$el.html(this.template(this.templateData));
             this.$el.append('<div id="match-pitches" class="row"></div>');
+
+            if (readyForMatch) {
+                this.renderTeams();
+            }
+
             return this;
         },
 
         renderTeams: function () {
 
             var user1Pitch = new MatchLineupView({
-                    collection: App.player1TeamCollection
-                }),
+                collection: App.player1TeamCollection
+            }),
                 user1Stats = new MatchStatsView({
                     collection: App.player1TeamCollection
                 }),
