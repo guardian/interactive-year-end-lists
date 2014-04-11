@@ -3,12 +3,14 @@ define([
     'underscore',
     'backbone',
     'views/match-lineup',
+    'views/match-stats',
     'text!templates/match.html'
 ], function (
     App,
     _,
     Backbone,
     MatchLineupView,
+    MatchStatsView,
     MatchTemplate
 ) {
     return Backbone.View.extend({
@@ -131,13 +133,22 @@ define([
             var user1Pitch = new MatchLineupView({
                     collection: App.player1TeamCollection
                 }),
+                user1Stats = new MatchStatsView({
+                    collection: App.player1TeamCollection
+                }),
                 user2Pitch = new MatchLineupView({
+                    collection: App.player2TeamCollection
+                }),
+                user2Stats = new MatchStatsView({
                     collection: App.player2TeamCollection
                 });
 
             // Push visualPrompt to view
             this.$el.find('#user1-pitch').html(user1Pitch.render().$el);
             this.$el.find('#user2-pitch').html(user2Pitch.render().$el);
+
+            this.$el.find('#user1-pitch').append(user1Stats.render().$el);
+            this.$el.find('#user2-pitch').append(user2Stats.render().$el);
 
             return this;
         }

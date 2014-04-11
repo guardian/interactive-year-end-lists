@@ -493,7 +493,7 @@ figure.interactive {
 	 */
     // Match screen
 
-    #match-screen .pitch {
+    #match-screen .match-pitch-container .pitch {
         display: none;
     }
     #match-screen button#startMatch {
@@ -502,12 +502,21 @@ figure.interactive {
         clear: both;
     }
     @media (min-width: 56.25em) {
-        #match-screen .pitch {
+        #match-screen .match-pitch-container .pitch {
             display: block;
         }
-        #match-screen .table {
+        #match-screen .match-pitch-container .table {
             display: none;
         }
+    }
+
+    #match-screen .match-stats-container .table {
+        margin: 0 auto;
+        max-width: 300px;
+    }
+    #match-screen .match-stats-container .table td {
+        font-size: 13px;
+        text-transform: capitalize;
     }
 
 
