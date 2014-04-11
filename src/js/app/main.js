@@ -7,7 +7,7 @@ define([
     'collections/players',
     'views/user-screen',
     'views/squad',
-    'views/match-screen',
+    'views/match',
     'routes'
 ], function (
     App,
@@ -18,7 +18,7 @@ define([
     PlayersCollection,
     UserView,
     SquadView,
-    MatchScreenView,
+    MatchView,
     Routes
 ) {
     // Models
@@ -52,7 +52,7 @@ define([
         // Views
         App.userView = new UserView();
         App.squadView = new SquadView({ collection: App.playerCollection });
-        App.matchView = new MatchScreenView();
+        App.matchView = new MatchView();
 
          // Setup routing
         var appRoutes = new Routes();
