@@ -58,6 +58,10 @@ define([
         },
 
 
+        /**
+         * Drag and drop listeners
+         * https://gist.github.com/Rob-ot/1488561
+         */
 
         _dragStartEvent: function (e) {
 
