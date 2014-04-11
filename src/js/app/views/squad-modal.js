@@ -62,7 +62,9 @@ define([
                 });
                 return;
             }
-            var response = App.usersTeamCollection.addPlayerToCollection(this.playerModel, true);
+            this.playerModel.set('wantedPosition', this.playerModel.get('position'));
+            var response = App.usersTeamCollection.addPlayerToCollection(this.playerModel);
+
             if (response.status === 'fail') {
                 App.visualPrompt.set({
                     'message': response.message,

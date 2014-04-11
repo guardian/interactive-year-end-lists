@@ -101,50 +101,22 @@ define([
         render: function () {
 
             var playerPositions = {
-                'ST': {
-                    containerClass: 'st'
-                },
-                'ST2': {
-                    containerClass: 'st2'
-                },
-                'MR': {
-                    containerClass: 'mr'
-                },
-                'MC': {
-                    containerClass: 'mc'
-                },
-                'MC2': {
-                    containerClass: 'mc2'
-                },
-                'ML': {
-                    containerClass: 'ml'
-                },
-                'RB': {
-                    containerClass: 'rb'
-                },
-                'CB': {
-                    containerClass: 'cb'
-                },
-                'CB2': {
-                    containerClass: 'cb2'
-                },
-                'LB': {
-                    containerClass: 'lb'
-                },
-                'GK': {
-                    containerClass: 'gk'
-                }
+                'ST': {},
+                'ST2': {},
+                'MR': {},
+                'MC': {},
+                'MC2': {},
+                'ML': {},
+                'RB': {},
+                'CB': {},
+                'CB2': {},
+                'LB': {},
+                'GK': {}
             },
                 usersPlayers = App.usersTeamCollection.toJSON();
 
             usersPlayers.forEach(function (player) {
-                var indexToUse = player.position;
-
-                if (!_.isEmpty(playerPositions[indexToUse].name)) {
-                    indexToUse = indexToUse + '2'; // Second ST, MC, DC
-                }
-                playerPositions[indexToUse] = player;
-                playerPositions[indexToUse].containerClass = indexToUse.toLowerCase();
+                playerPositions[player.wantedPosition] = player;
             });
 
             this.$el.html(this.template({

@@ -95,10 +95,12 @@ define([
 
             if (App.userDetails.get('teamSelection')) {
                 var playerArr = [];
-                App.userDetails.get('teamSelection').split(',').map(function (playerUID) {
-                    var playerModel = App.playerCollection.findWhere({
-                        'uid': playerUID
-                    });
+                App.userDetails.get('teamSelection').split(',').map(function (player) {
+                    var playerSplit = player.split(':'),
+                        playerModel = App.playerCollection.findWhere({
+                            'uid': playerSplit[0]
+                        });
+                    playerModel.set('wantedPosition', playerSplit[1]);
                     if (playerModel) {
                         playerArr.push(playerModel);
                     }
@@ -115,7 +117,7 @@ define([
         parseTeamIntoArray: function () {
             var team = [];
             App.usersTeamCollection.each(function (player) {
-                team.push(player.get('uid'));
+                team.push(player.get('uid') + ':' + player.get('wantedPosition'));
             });
             return team.join(',');
         }

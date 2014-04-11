@@ -57,7 +57,7 @@ define([
             if (!App.usersTeamCollection.contains(model)) {
 
                 // Cant have more than 4 players
-                if ((App.usersTeamCollection.length) >= 11) {
+                if ((App.usersTeamCollection.length) <= 11) {
 
                     if ((App.usersTeamCollection.where({
                             'position': model.get('position')
@@ -75,18 +75,26 @@ define([
             return res;
         },
 
-        addPlayerToCollection: function (model, saveToStorage) {
+        addPlayerToCollection: function (model) {
             var res = this.validateAddingPlayer(model);
             if (res.status === 'success') {
-                App.usersTeamCollection.add(model);
-                if (saveToStorage) {
-                    App.userDetails.saveUserTeamToStorage();
+                if (_.contains(['ST', 'MC', 'CB'], model.get('wantedPosition'))) {
+                    if (App.usersTeamCollection.where({
+                            'wantedPosition': model.get('wantedPosition')
+                        }).length) {
+                        model.set('wantedPosition', model.get('wantedPosition') + '2');
+                    }
                 }
+                App.usersTeamCollection.add(model);
+                App.userDetails.saveUserTeamToStorage();
             }
             return res;
         },
 
         removePlayerFromCollection: function (model) {
+            model.unset('wantedPosition', {
+                silent: true
+            });
             App.usersTeamCollection.remove(model);
             App.userDetails.saveUserTeamToStorage();
         },

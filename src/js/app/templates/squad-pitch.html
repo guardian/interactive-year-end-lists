@@ -6,20 +6,20 @@
 <% } %>
 
 <ol class="pitch">
-	<% _.each(players, function(player) { %>
-	    
+	<% _.each(players, function(player, position) { %>
+
 	    <% if (!_.isEmpty(player.name)) { %>
-            <li data-uid="<%= player.uid %>" data-position="<%= player.containerClass %>" class="pitch-player pitch-player-taken position-<%= player.containerClass %>">
+            <li data-uid="<%= player.uid %>" data-position="<%= position %>" class="pitch-player pitch-player-taken position-<%= position.toLowerCase() %>">
                 <span class="player-icon" style="background-image:url(/images/players/placeholder_player.png)" title="Drop <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>"></span>
                 <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
             </li>
-	    <% } %>
-	    
-        <li class="pitch-player pitch-player-available <%= !_.isEmpty(player.name) ?  'pitch-player-hidden' : '' %> position-<%= player.containerClass %>" data-position="<%= player.containerClass %>">
-            <span class="player-icon" style="background-image:url(http://placehold.it/50x50)"></span>
-            <%= player.containerClass.toUpperCase() %>
-        </li>
-        
+	    <% } else { %>
+            <li class="pitch-player pitch-player-available position-<%= position.toLowerCase() %><%= !_.isEmpty(player.name) ? ' pitch-player-hidden' : '' %>" data-position="<%= position %>">
+                <span class="player-icon" style="background-image:url(http://placehold.it/50x50)"></span>
+                <%= position.replace(/[0-9]/g, '').toUpperCase() %>
+            </li>
+        <% } %>
+
 	<% }) %>
 	<li class="playerOptions">
 		<span class="close">&times;</span>
