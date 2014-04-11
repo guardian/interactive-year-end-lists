@@ -222,9 +222,12 @@ define([
                 target = target.closest('.pitch-player');
             }
             if (playerModel.get('position') === target.data('position').replace(/\d+/g, '')) {
-                var response = App.usersTeamCollection.addPlayerToCollection(playerModel, target.data('position'));
+                App.usersTeamCollection.addPlayerToCollection(playerModel, target.data('position'));
             } else {
-                console.log('Cant put player into ' + target.data('position').replace(/\d+/g, '') + ', he is a ' + playerModel.get('position'));
+                App.visualPrompt.set({
+                    'message': playerModel.get('name') + ' is a ' + playerModel.get('position') + ', he can\'t play ' + target.data('position').replace(/\d+/g, ''),
+                    'closePrompt': true
+                });
             }
         }
 

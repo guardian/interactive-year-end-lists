@@ -95,8 +95,6 @@ define([
                 newTarget = '.pitch-player.position-' + positionTarget.replace(/[0-9]/g);
             $((newTarget + ', ' + newTarget + '2').toLowerCase()).addClass('dragTarget');
 
-            console.log('Important: ' + target.data('uid'));
-
             return target.data('uid');
         }
     });

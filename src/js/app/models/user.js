@@ -82,10 +82,13 @@ define([
 
         saveUserTeamToStorage: function () {
             if (App.inDevMode()) {
-                App.userDetails.set({
+
+                App.userDetails.save({
                     teamSelection: this.parseTeamIntoArray()
+                }, {
+                    wait: true
                 });
-                App.userDetails.save();
+
             } else {
 
             }

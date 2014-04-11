@@ -56,7 +56,7 @@ define([
             // Cannot already be in squad
             if (!App.usersTeamCollection.contains(model)) {
 
-                // Cant have more than 4 players
+                // Cant have more than 11 players
                 if ((App.usersTeamCollection.length) <= 11) {
 
                     if ((App.usersTeamCollection.where({
@@ -77,10 +77,16 @@ define([
 
 
         addPlayerToCollection: function (model, forcePosition) {
-            if(forcePosition) {
+
+            if (forcePosition) {
+
+                if (App.usersTeamCollection.contains(model)) {
+                    this.removePlayerFromCollection(model, true);
+                }
+
                 this.removePlayerFromCollection(App.usersTeamCollection.findWhere({
                     'wantedPosition': forcePosition
-                }));
+                }), true);
                 model.set('wantedPosition', forcePosition);
             }
 
@@ -99,12 +105,18 @@ define([
             return res;
         },
 
-        removePlayerFromCollection: function (model) {
+        removePlayerFromCollection: function (model, skipSave) {
+            skipSave = typeof skipSave !== 'undefined' ? skipSave : false;
+
             if (model) {
                 model.unset('wantedPosition', {
                     silent: true
                 });
                 App.usersTeamCollection.remove(model);
+
+                if (skipSave) {
+                    return;
+                }
                 App.userDetails.saveUserTeamToStorage();
             }
         },
