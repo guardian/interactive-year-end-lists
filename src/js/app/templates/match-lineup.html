@@ -1,5 +1,4 @@
 
-<!--
 <ol class="pitch">
 	<% _.each(players, function(player, position) { %>
 
@@ -10,12 +9,13 @@
 
     <% }) %>
 </ol>
--->
 
-<table>
-	<% _.each(players, function(player, position) { %>
-        <tr>
-            <td><%= player.name %></td>
-        </tr>
-    <% }) %>
+<table class="table">
+	<tbody>
+        <% _.each(players, function(player, position) { %>
+            <tr>
+                <td><%= player.name %></td>
+            </tr>
+        <% }) %>
+    </tbody>
 </table>
