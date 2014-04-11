@@ -124,8 +124,91 @@ define([
                 userDetails: App.userDetails.toJSON(),
                 usersPlayers: App.usersTeamCollection.toJSON()
             }));
+
+            // Start hover event bindings
+
+            var dragDropTarget = this.$el.find('li');
+            dragDropTarget.bind("dragover", _.bind(this._dragOverEvent, this));
+            dragDropTarget.bind("dragenter", _.bind(this._dragEnterEvent, this));
+            dragDropTarget.bind("dragleave", _.bind(this._dragLeaveEvent, this));
+            dragDropTarget.bind("drop", _.bind(this._dropEvent, this));
+
             return this;
-        }
+        },
+
+
+
+        _dragOverEvent: function (e) {
+            if (e.originalEvent) {
+                e = e.originalEvent;
+            }
+            var data = this._getCurrentDragData(e);
+
+            if (this.dragOver(data, e.dataTransfer, e) !== false) {
+                if (e.preventDefault) {
+                    e.preventDefault();
+                }
+                e.dataTransfer.dropEffect = 'copy'; // default
+            }
+        },
+
+        _dragEnterEvent: function (e) {
+            if (e.originalEvent) {
+                e = e.originalEvent;
+            }
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+        },
+
+        _dragLeaveEvent: function (e) {
+            if (e.originalEvent) {
+                e = e.originalEvent;
+            }
+            var data = this._getCurrentDragData(e);
+            this.dragLeave(data, e.dataTransfer, e);
+        },
+
+        _dropEvent: function (e) {
+
+            if (e.originalEvent) {
+                e = e.originalEvent;
+            }
+            var data = this._getCurrentDragData(e);
+
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            if (e.stopPropagation) {
+                e.stopPropagation(); // stops the browser from redirecting
+            }
+
+            this.drop(data, e.dataTransfer, e);
+        },
+
+        _getCurrentDragData: function (e) {
+            var data = null;
+            if (window._backboneDragDropObject) {
+                data = window._backboneDragDropObject;
+            }
+            return data;
+        },
+
+        dragOver: function (data, dataTransfer, e) {
+            var target = $(e.target);
+            if (!target.hasClass('pitch-player')) {
+                target = target.closest('.pitch-player');
+            }
+            target.addClass("draghover");
+        },
+
+        dragLeave: function (data, dataTransfer, e) {
+            this.$el.find('.draghover').removeClass("draghover");
+        },
+
+        drop: function (data, dataTransfer, e) {
+            console.log(e);
+        } // overide me!  if the draggable class returned some data on 'dragStart' it will be the first argument
 
     });
 });

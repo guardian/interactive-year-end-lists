@@ -89,7 +89,7 @@ figure.interactive {
             float: right;
         }
     }
-    #squad-pitch button#goToMatch, 
+    #squad-pitch button#goToMatch,
     #squad-pitch button#clearSelection {
         float: left;
         width: 47%;
@@ -380,7 +380,15 @@ figure.interactive {
             clear: none;
         }
     }
-    .pitch span.player-icon {
+    .pitch-player {
+        position: absolute;
+        max-width: 80px;
+        font-size: 11px;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+    }
+    .pitch-player span.player-icon {
         width: 45px;
         height: 45px;
         border-radius: 50%;
@@ -391,14 +399,14 @@ figure.interactive {
         background-size: cover;
         background-color: #ccc;
     }
-    .pitch-player {
-        position: absolute;
-        max-width: 80px;
-        font-size: 11px;
-        color: #fff;
-        text-align: center;
-        cursor: pointer;
+    .pitch-player.dragTarget span.player-icon {
+        border: 2px solid black;
     }
+
+    .pitch-player.dragTarget.draghover span.player-icon {
+        border: 2px dotted black;
+    }
+
     .pitch-player-hidden {
         display: none;
     }
