@@ -55,7 +55,7 @@ define([
         App.matchView = new MatchView();
 
          // Setup routing
-        var appRoutes = new Routes();
+        App.appRoutes = new Routes();
         Backbone.history.start();
 
     });
