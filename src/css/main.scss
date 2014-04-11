@@ -182,6 +182,7 @@ figure.interactive {
         text-align: center;
         margin-bottom: 7px;
         cursor: pointer;
+        transition: transform 0.2s ease-out;
     }
     .player_profile p {
         margin: 8px 0 0;
@@ -211,6 +212,12 @@ figure.interactive {
         font-weight: bold;
         z-index: 2;
     }
+
+    .player_profile.isDragging {
+        transform:scale(0.8);
+        opacity: 0.4;
+    }
+
     .player_profile.selected img {
         opacity: 0.5;
     }
@@ -387,6 +394,7 @@ figure.interactive {
         color: #fff;
         text-align: center;
         cursor: pointer;
+        transition: transform 0.2s ease-out;
     }
     .pitch-player span.player-icon {
         width: 45px;
@@ -399,12 +407,17 @@ figure.interactive {
         background-size: cover;
         background-color: #ccc;
     }
-    .pitch-player.dragTarget span.player-icon {
-        border: 2px solid black;
+
+    .pitch.isDragging .pitch-player {
+        opacity: 0.4;
+    }
+    .pitch.isDragging .pitch-player.dragTarget {
+        opacity: 1;
     }
 
+
     .pitch-player.dragTarget.draghover span.player-icon {
-        border: 2px dotted black;
+        border: 2px dotted $buttonColor;
     }
 
     .pitch-player-hidden {

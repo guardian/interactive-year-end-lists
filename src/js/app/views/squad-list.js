@@ -72,7 +72,7 @@ define([
                 e = e.originalEvent;
             }
             // default to copy
-            e.dataTransfer.effectAllowed = "copy";
+            e.dataTransfer.effectAllowed = 'copy';
             data = this.dragStart(e.dataTransfer, e);
 
             window._backboneDragDropObject = null;
@@ -83,7 +83,7 @@ define([
         },
 
         _dragEndEvent: function (e) {
-            $('.draghover, .dragTarget').removeClass("draghover dragTarget");
+            $('.draghover, .dragTarget, .isDragging').removeClass('draghover dragTarget isDragging');
         },
 
         dragStart: function (dataTransfer, e) {
@@ -94,6 +94,9 @@ define([
             var positionTarget = target.data('position'),
                 newTarget = '.pitch-player.position-' + positionTarget.replace(/[0-9]/g);
             $((newTarget + ', ' + newTarget + '2').toLowerCase()).addClass('dragTarget');
+
+            $('.pitch').addClass('isDragging');
+            target.addClass('isDragging');
 
             return target.data('uid');
         }
