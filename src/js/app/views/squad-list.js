@@ -24,18 +24,20 @@ define([
         },
 
         initialize: function () {
-            this.$el.attr('id', 'player_profile_' + this.model.cid);
+
+            this.$el.attr({
+                'id': 'player_profile_' + this.model.cid,
+                'data-uid': this.model.attributes.uid,
+                'data-position': this.model.attributes.position
+            });
 
             App.playerSelected.on('change', this.openCard, this);
             this.listenTo(App.usersTeamCollection, 'add remove reset', this.showSelectedPlayer);
             this.showSelectedPlayer();
 
-            if (!App.usersTeamCollection.contains(this.model)) {
-                this.$el.attr('data-position', this.model.attributes.position);
-                this.$el.attr("draggable", "true");
-                this.$el.bind("dragstart", _.bind(this._dragStartEvent, this));
-                this.$el.bind("dragend", _.bind(this._dragEndEvent, this));
-            }
+            this.$el.attr("draggable", "true");
+            this.$el.bind("dragstart", _.bind(this._dragStartEvent, this));
+            this.$el.bind("dragend", _.bind(this._dragEndEvent, this));
         },
 
         showSelectedPlayer: function () {
@@ -81,7 +83,6 @@ define([
         },
 
         _dragEndEvent: function (e) {
-            console.log('Drag end!');
             $('.draghover, .dragTarget').removeClass("draghover dragTarget");
         },
 
@@ -93,6 +94,10 @@ define([
             var positionTarget = target.data('position'),
                 newTarget = '.pitch-player.position-' + positionTarget.replace(/[0-9]/g);
             $((newTarget + ', ' + newTarget + '2').toLowerCase()).addClass('dragTarget');
-        } // override me, return data to be bound to drag
+
+            console.log('Important: ' + target.data('uid'));
+
+            return target.data('uid');
+        }
     });
 });

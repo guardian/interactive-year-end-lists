@@ -212,8 +212,21 @@ define([
         },
 
         drop: function (data, dataTransfer, e) {
-            console.log(e);
-        } // overide me!  if the draggable class returned some data on 'dragStart' it will be the first argument
+
+            var target = $(e.target),
+                playerModel = App.playerCollection.findWhere({
+                    'uid': data
+                });
+
+            if (!target.hasClass('pitch-player')) {
+                target = target.closest('.pitch-player');
+            }
+            if (playerModel.get('position') === target.data('position').replace(/\d+/g, '')) {
+                var response = App.usersTeamCollection.addPlayerToCollection(playerModel, target.data('position'));
+            } else {
+                console.log('Cant put player into ' + target.data('position').replace(/\d+/g, '') + ', he is a ' + playerModel.get('position'));
+            }
+        }
 
     });
 });

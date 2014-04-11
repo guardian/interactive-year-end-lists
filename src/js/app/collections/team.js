@@ -75,7 +75,15 @@ define([
             return res;
         },
 
-        addPlayerToCollection: function (model) {
+
+        addPlayerToCollection: function (model, forcePosition) {
+            if(forcePosition) {
+                this.removePlayerFromCollection(App.usersTeamCollection.findWhere({
+                    'wantedPosition': forcePosition
+                }));
+                model.set('wantedPosition', forcePosition);
+            }
+
             var res = this.validateAddingPlayer(model);
             if (res.status === 'success') {
                 if (_.contains(['ST', 'MC', 'CB'], model.get('wantedPosition'))) {
@@ -92,11 +100,13 @@ define([
         },
 
         removePlayerFromCollection: function (model) {
-            model.unset('wantedPosition', {
-                silent: true
-            });
-            App.usersTeamCollection.remove(model);
-            App.userDetails.saveUserTeamToStorage();
+            if (model) {
+                model.unset('wantedPosition', {
+                    silent: true
+                });
+                App.usersTeamCollection.remove(model);
+                App.userDetails.saveUserTeamToStorage();
+            }
         },
 
         removeAllPlayersFromCollection: function () {
