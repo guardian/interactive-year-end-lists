@@ -8,7 +8,7 @@ define([
     'views/user',
     'views/squad',
     'views/match',
-    'views/FIND',
+    'views/find',
     'routes'
 ], function (
     App,

@@ -7,7 +7,8 @@ define([
 ) {
     return Backbone.Model.extend({
 
-        urlRoot: "http://localhost:3000/users",
+        urlRoot: "http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users",
+        //urlRoot: 'http://localhost:3000/users',
 
         idAttribute: '_id',
 

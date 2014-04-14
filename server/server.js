@@ -14,8 +14,6 @@ var whitelist = ['http://localhost:9000', 'http://www.theguardian.com'],
 
 // Setup
 app.use(cors(corsOptions));
-app.use(express.bodyParser());
-app.use(app.router);
 mongoose.connect("mongodb://localhost/test");
 
 
