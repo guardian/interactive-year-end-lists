@@ -28,19 +28,19 @@ define([
 
         initialize: function () {
             this.listenTo(App.userDetails, 'change:username', this.render);
+
+
             this.listenTo(App.userDetails, 'change:teamSelection', this.prePopulateTeam);
+            this.listenTo(App.usersTeamCollection, 'change', this.prePopulateTeam);
+
             this.filterModel = new Backbone.Model();
         },
 
         prePopulateTeam: function () {
-            if (App.userDetails.get('username')) {
-                App.userDetails.fetchUserTeamFromStorage();
-
-                var squadPitch = new SquadPitchView({
-                    model: this.filterModel
-                });
-                this.$el.find('#squad-pitch').replaceWith(squadPitch.render().$el);
-            }
+            var squadPitch = new SquadPitchView({
+                model: this.filterModel
+            });
+            this.$el.find('#squad-pitch').replaceWith(squadPitch.render().$el);
         },
 
         beginSignIn: function () {

@@ -35,9 +35,9 @@ define([
                             if (!user.username) {
                                 App.userDetails.set('username', loggedIn.displayName);
                                 App.userDetails.save();
+                            } else {
+                                App.userDetails.set(user.toJSON());
                             }
-                            App.userDetails.set(user.toJSON());
-                            this.fetchUserTeamFromStorage();
                             Backbone.trigger('loaded:userData');
                         },
                         error: function (err) {
@@ -59,11 +59,10 @@ define([
                             if (!user.username) {
                                 App.userDetails.set('username', loggedIn.displayName);
                                 App.userDetails.save();
+                            } else {
+                                App.userDetails.set(user.toJSON());
                             }
-                            App.userDetails.set(user.toJSON());
-                            this.fetchUserTeamFromStorage();
                             Backbone.trigger('loaded:userData');
-
                         },
                         error: function (err) {
                             console.error('fetchByGuardianId failed: ', err);
@@ -83,6 +82,7 @@ define([
 
         fetchUserTeamFromStorage: function () {
             if (App.userDetails.get('teamSelection')) {
+
                 var playerArr = [];
                 App.userDetails.get('teamSelection').split(',').map(function (player) {
                     var playerSplit = player.split(':'),
@@ -95,7 +95,6 @@ define([
                     }
                 });
                 App.usersTeamCollection.reset(playerArr);
-
                 App.visualPrompt.set({
                     'message': null
                 });

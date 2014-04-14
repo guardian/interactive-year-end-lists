@@ -49,6 +49,8 @@ define([
         App.player1TeamCollection = new TeamCollection();
         App.player2TeamCollection = new TeamCollection();
 
+        App.userDetails.fetchUserTeamFromStorage();
+
         // Views
         App.userView = new UserView();
         App.squadView = new SquadView({
