@@ -31,7 +31,7 @@ define([
 
         goToMatch: function () {
             // TODO: Any url helpers?
-            App.appRoutes.navigate('match/' + App.userDetails.get('guardianID') + '/002', { trigger: true });
+            App.appRoutes.navigate('user/' + App.userDetails.get('guardianID'), { trigger: true });
         },
 
         showOptions: function (event) {
