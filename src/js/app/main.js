@@ -5,7 +5,7 @@ define([
     'models/user',
     'collections/team',
     'collections/players',
-    'views/user-screen',
+    'views/user',
     'views/squad',
     'views/match',
     'routes'

@@ -2,7 +2,7 @@ define([
     'app',
     'backbone',
     'underscore',
-    'text!templates/user-screen.html'
+    'text!templates/user.html'
 ], function (
     App,
     Backbone,
