@@ -14,19 +14,11 @@ define([
         className: 'match-stats-container',
         template: _.template(MatchStatsTemplate),
 
-        events: {
-
-        },
-
         initialize: function () {
 
         },
 
-        render: function () {
-
-            if (!this.collection) {
-                return;
-            }
+        getTeamStats: function () {
 
             var usersPlayers = this.collection.toJSON(),
                 stats = {
@@ -48,8 +40,18 @@ define([
                 stats[key] = value;
             });
 
+            return stats;
+
+        },
+
+        render: function () {
+
+            if (!this.collection) {
+                return;
+            }
+
             this.$el.html(this.template({
-                stats: stats
+                stats: this.getTeamStats()
             }));
 
             return this;

@@ -20,7 +20,7 @@ define([
         template: _.template(MatchTemplate),
 
         events: {
-            'click .start': 'startMatchTextGenerator'
+            'click #startMatch': 'startMatchTextGenerator'
         },
 
         initialize: function (options) {
@@ -39,6 +39,36 @@ define([
 
         startMatchTextGenerator: function () {
 
+            var user1Stats = new MatchStatsView({
+                    collection: App.player1TeamCollection
+                }).getTeamStats(),
+                user2Stats = new MatchStatsView({
+                    collection: App.player2TeamCollection
+                }).getTeamStats(),
+                matchOutput = '<table class="table"><thead><tr><th>Stat</th><th>Winner</th><th>Dif</th></tr></thead><tbody>';
+
+            $.each(user1Stats, function(key, value) {
+                matchOutput += '<tr>';
+                matchOutput += '    <td>' + key + '</td>';
+                if(user1Stats[key] ===  user2Stats[key]) {
+                    matchOutput += '    <td>Draw</td>';
+                    matchOutput += '    <td>-</td>';
+                } else if (user1Stats[key] > user2Stats[key]) {
+                    matchOutput += '    <td>' + App.player1.get('username') + '</td>';
+                    matchOutput += '    <td>+' + (user1Stats[key] - user2Stats[key]) + '</td>';
+                } else {
+                    matchOutput += '    <td>' + App.player2.get('username') + '</td>';
+                    matchOutput += '    <td>+' + (user2Stats[key] - user1Stats[key]) + '</td>';
+                }
+                matchOutput += '</tr>';
+            });
+            matchOutput += '<tbody></table>';
+
+            this.$el.find('#match-details').html(matchOutput);
+
+            this.$el.find('#startMatch').hide();
+
+            return false;
         },
 
         isReady: function () {
@@ -136,8 +166,8 @@ define([
         renderTeams: function () {
 
             var user1Pitch = new MatchLineupView({
-                collection: App.player1TeamCollection
-            }),
+                    collection: App.player1TeamCollection
+                }),
                 user1Stats = new MatchStatsView({
                     collection: App.player1TeamCollection
                 }),

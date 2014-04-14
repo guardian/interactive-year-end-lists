@@ -528,8 +528,11 @@ figure.interactive {
         font-size: 13px;
         text-transform: capitalize;
     }
-    #match-screen td {
-        padding: 7px 10px;
+    #match-screen td, #match-screen th {
+        padding: 5px 6px;
+    }
+    #match-details .table {
+        margin-bottom: 20px;
     }
     h3 {
         text-align: center;
