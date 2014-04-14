@@ -35,7 +35,6 @@ define([
 
         render: function () {
 
-            console.log(App.viewingPlayer.toJSON());
             this.templateData = {
                 details: App.viewingPlayer.toJSON()
             };
