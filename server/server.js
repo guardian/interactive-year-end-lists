@@ -1,16 +1,16 @@
-var express = require('express');
-var mongoose = require('mongoose');
-var cors = require('cors');
-var app = express();
+var express = require('express'),
+    mongoose = require('mongoose'),
+    cors = require('cors'),
+    app = express();
 
 // Restrict requests to known good domains
-var whitelist = ['http://localhost:9000', 'http://www.theguardian.com'];
-var corsOptions = {
-    origin: function(origin, callback){
-        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
-        callback(null, originIsWhitelisted);
-    }
-};
+var whitelist = ['http://localhost:9000', 'http://www.theguardian.com'],
+    corsOptions = {
+        origin: function (origin, callback) {
+            var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+            callback(null, originIsWhitelisted);
+        }
+    };
 
 // Setup
 app.use(cors(corsOptions));
@@ -38,38 +38,38 @@ app.options('*', cors(corsOptions));
 
 // DEV LIST ALL USERS!
 // FIXME: DELETE THIS ROUTE
-app.get("/allusers", function(req, res) {
-    User.find({} ,function(err,docs){
-        if(err) { throw err; }
+app.get("/allusers", function (req, res) {
+    User.find({}, function (err, docs) {
+        if (err) { throw err; }
         res.send(docs);
     });
 });
 
 // Fetch a single user
-app.get("/users/:_id", function(req, res) {
-    User.findById(req.params._id, function(err, user) {
-        if(err) { throw err; }
+app.get("/users/:_id", function (req, res) {
+    User.findById(req.params._id, function (err, user) {
+        if (err) { throw err; }
         res.jsonp(user);
     });
 });
 
-app.get('/users', function(req, res) {
+app.get('/users', function (req, res) {
     var guardianID = req.param('guardianID');
-     User.findOne({ 'guardianID': guardianID }, function(err, user) {
-        if(err) { throw err; }
+    User.findOne({ 'guardianID': guardianID }, function (err, user) {
+        if (err) { throw err; }
         res.jsonp(user);
     });
 });
 
 
 // Create new user
-app.post('/users', function(req, res) {
+app.post('/users', function (req, res) {
     var newUser = new User({
         guardianID: req.body.guardianID,
         username: req.body.username
     });
 
-    newUser.save(function(err, product) {
+    newUser.save(function (err, product) {
         // If save failed send error response
         if (err) {
             res.status(409);
@@ -84,14 +84,14 @@ app.post('/users', function(req, res) {
 
 
 // Update existing user data
-app.put("/users/:_id", function(req, res, next){
+app.put("/users/:_id", function (req, res, next) {
     var userData = {
         guardianID: req.body.guardianID,
         username: req.body.username,
         teamSelection: req.body.teamSelection
     };
 
-    User.findByIdAndUpdate(req.params._id, userData, function(err, doc) {
+    User.findByIdAndUpdate(req.params._id, userData, function (err, doc) {
         if (err) {
             res.status(500);
             res.jsonp(err);
@@ -103,9 +103,9 @@ app.put("/users/:_id", function(req, res, next){
 
 
 // Delete a user
-app.del("/users/:guardianID", function(req, res, next){
-    User.findByIdAndRemove(req.params.guardianID, function(err, user) {
-        if(err) {
+app.del("/users/:guardianID", function (req, res, next) {
+    User.findByIdAndRemove(req.params.guardianID, function (err, user) {
+        if (err) {
             res.status(500);
             res.jsonp(err);
         }
@@ -116,6 +116,6 @@ app.del("/users/:guardianID", function(req, res, next){
 
 
 // Start server
-var server = app.listen(3000, function() {
+var server = app.listen(3000, function () {
     console.log('Listening on port %d', server.address().port);
 });
