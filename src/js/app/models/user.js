@@ -65,7 +65,6 @@ define([
                                 App.userDetails.set(user.toJSON());
                                 this.fetchUserTeamFromStorage();
                                 Backbone.trigger('loaded:userData');
-
                             },
                             error: function (err) {
                                 console.error('fetchByGuardianId failed: ', err);
@@ -107,15 +106,17 @@ define([
 
         saveUserTeamToStorage: function () {
             if (App.inDevMode()) {
-
                 App.userDetails.save({
                     teamSelection: this.parseTeamIntoArray()
                 }, {
                     wait: true
                 });
-
             } else {
-
+                App.userDetails.save({
+                    teamSelection: this.parseTeamIntoArray()
+                }, {
+                    wait: true
+                });
             }
         },
 
