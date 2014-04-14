@@ -5,7 +5,7 @@ define([
 ) {
     // Mediator
     var app = {
-        env: 'dev',
+        env: 'testingCookie',
         ready: false,
         userDataReady: false,
         playerDataReady: false

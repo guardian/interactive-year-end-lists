@@ -7,14 +7,14 @@ define([
 ) {
     return Backbone.Model.extend({
 
-        urlRoot: "http://localhost:3000/users",
+        urlRoot: "http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users",
 
         idAttribute: '_id',
 
         defaults: {
             guardianID: null,
-            username: 'Anon',
-            teamSelection: ''
+            username: null,
+            teamSelection: null
         },
 
         fetchByGuardianId: function (_options) {
@@ -53,16 +53,26 @@ define([
                 });
             } else {
                 require(["common/modules/identity/api"], function (api) {
-                    require(["common/modules/identity/api"], function (api) {
-                        var loggedIn = api.getUserFromCookie();
-                        if (loggedIn) {
-                            App.userDetails.set('username', loggedIn.id);
-                            this.fetchUserTeamFromStorage();
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    });
+                    var loggedIn = api.getUserFromCookie();
+                    if (loggedIn) {
+                        App.userDetails.set('guardianID', loggedIn.id);
+                        App.userDetails.fetchByGuardianId({
+                            success: function (user) {
+                                if (!user.username) {
+                                    App.userDetails.set('username', loggedIn.displayName);
+                                    App.userDetails.save();
+                                }
+                                App.userDetails.set(user.toJSON());
+                                this.fetchUserTeamFromStorage();
+                                Backbone.trigger('loaded:userData');
+
+                            },
+                            error: function (err) {
+                                console.error('fetchByGuardianId failed: ', err);
+                            }
+                        });
+                    }
+                    Backbone.trigger('loaded:userData');
                 });
             }
         },
@@ -72,9 +82,24 @@ define([
 
             } else {
                 require(["common/modules/identity/api"], function (api) {
-                    var loggedIn = api.getUserOrSignIn();
+                    var loggedIn = api.getUserOrSignIn('http://test.theguardian.com:9000/ngw.html');
                     if (loggedIn) {
-                        App.userDetails.set('username', loggedIn.id);
+                        App.userDetails.set('guardianID', loggedIn.id);
+                        App.userDetails.fetchByGuardianId({
+                            success: function (user) {
+                                if (!user.username) {
+                                    App.userDetails.set('username', loggedIn.displayName);
+                                    App.userDetails.save();
+                                }
+                                App.userDetails.set(user.toJSON());
+                                this.fetchUserTeamFromStorage();
+                                Backbone.trigger('loaded:userData');
+
+                            },
+                            error: function (err) {
+                                console.error('fetchByGuardianId failed: ', err);
+                            }
+                        });
                     }
                 });
             }

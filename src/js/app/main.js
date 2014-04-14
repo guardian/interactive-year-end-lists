@@ -41,17 +41,17 @@ define([
     if (App.inDevMode()) {
         App.playerCollection.fetchGoogleData();
     } else {
-        App.playerCollection.fetchLocal();
+        App.playerCollection.fetchGoogleData();
+//        App.playerCollection.fetchLocal();
     }
 
     Backbone.on('dataReady', function () {
+
         console.log('All done. Render all');
         App.usersTeamCollection = new TeamCollection();
         App.viewingPlayerTeamCollection = new TeamCollection();
         App.player1TeamCollection = new TeamCollection();
         App.player2TeamCollection = new TeamCollection();
-        // FIXME: Better place to populate team selection
-        App.userDetails.fetchUserTeamFromStorage();
 
         // Views
         App.userView = new UserView();
