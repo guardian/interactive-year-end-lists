@@ -29,6 +29,11 @@ figure.interactive .container {
 }
 figure.interactive {
     $buttonColor: #005689;
+
+    td, th {
+        padding: 5px 6px;
+    }
+
     button {
         background: $buttonColor;
         border: 0 none;
@@ -504,7 +509,8 @@ figure.interactive {
     }
 
     // Match screen
-    #match-screen .match-pitch-container .pitch {
+    #match-screen .match-pitch-container .pitch,
+    #users-screen .match-pitch-container .pitch {
         display: none;
     }
     #match-screen button#startMatch {
@@ -513,10 +519,12 @@ figure.interactive {
         clear: both;
     }
     @media (min-width: 56.25em) {
-        #match-screen .match-pitch-container .pitch {
+        #match-screen .match-pitch-container .pitch,
+        #users-screen .match-pitch-container .pitch {
             display: block;
         }
-        #match-screen .match-pitch-container .table {
+        #match-screen .match-pitch-container .table,
+        #users-screen .match-pitch-container .table {
             display: none;
         }
     }
@@ -527,9 +535,6 @@ figure.interactive {
     #match-screen .match-stats-container .table td {
         font-size: 13px;
         text-transform: capitalize;
-    }
-    #match-screen td, #match-screen th {
-        padding: 5px 6px;
     }
     #match-details .table {
         margin-bottom: 20px;
