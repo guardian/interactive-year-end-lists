@@ -4,34 +4,42 @@ define([
 ],
 function(
     App,
-    Backbone
-){
+     Backbone
+) {
     return Backbone.Router.extend({
+
+
         routes: {
-            'user/:player1id':              'showUser',    // dreamteam#user/andrew
-            'match/:player1id/:player2id': 'showMatch',   // dreamteam#match/andrew/daan
-            '*other':                      'defaultRoute' // dreamteam#
+            'match':                       'showMatch',   // dreamteam#match/andrew/daan
+            'match/:player1id':             'showMatch',   // dreamteam#match/andrew/daan
+            'match/:player1id/:player2id':  'showMatch',   // dreamteam#match/andrew/daan
+            '*other':                       'defaultRoute' // dreamteam#
         },
 
         showMatch: function(player1id, player2id) {
 
             App.$el.empty();
 
-            App.player1.set({guardianID: player1id}).fetchByGuardianId();
-            App.player1.set('startingUser', 1);
+            if (!player1id && !player2id) {
 
-            App.player2.set({guardianID: player2id}).fetchByGuardianId();
-            App.player2.set('startingUser', 2);
+                console.log('Find users screen');
 
-            App.$el.html(App.matchView.render().$el);
-        },
+            } else if (!player2id) {
 
-        showUser: function(player1id) {
+                // No player 2 so render single user page
+                App.viewingPlayer.set({guardianID: player1id}).fetchByGuardianId();
+                App.$el.html(App.userView.render().$el);
 
-            App.player1.set({guardianID: player1id}).fetchByGuardianId();
+            } else {
 
-            App.$el.empty();
-            App.$el.html(App.userView.render().$el);
+                App.player1.set({guardianID: player1id}).fetchByGuardianId();
+                App.player1.set('startingUser', 1);
+                App.player2.set({guardianID: player2id}).fetchByGuardianId();
+                App.player2.set('startingUser', 2);
+
+                App.$el.html(App.matchView.render().$el);
+
+            }
         },
 
         showSquad: function(username) {

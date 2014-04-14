@@ -25,6 +25,7 @@ define([
     App.userDetails = new UserModel();
     App.userDetails.checkUserStatus();
 
+    App.viewingPlayer = new UserModel();
     App.player1 = new UserModel();
     App.player2 = new UserModel();
 
@@ -44,6 +45,7 @@ define([
     Backbone.on('dataReady', function () {
         console.log('All done. Render all');
         App.usersTeamCollection = new TeamCollection();
+        App.viewingPlayerTeamCollection = new TeamCollection();
         App.player1TeamCollection = new TeamCollection();
         App.player2TeamCollection = new TeamCollection();
         // FIXME: Better place to populate team selection
@@ -51,10 +53,12 @@ define([
 
         // Views
         App.userView = new UserView();
-        App.squadView = new SquadView({ collection: App.playerCollection });
+        App.squadView = new SquadView({
+            collection: App.playerCollection
+        });
         App.matchView = new MatchView();
 
-         // Setup routing
+        // Setup routing
         App.appRoutes = new Routes();
         Backbone.history.start();
 
