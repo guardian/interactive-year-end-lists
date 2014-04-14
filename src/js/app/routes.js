@@ -1,22 +1,20 @@
 define([
     'app',
     'backbone'
-],
-function(
+], function (
     App,
-     Backbone
+    Backbone
 ) {
     return Backbone.Router.extend({
 
-
         routes: {
-            'match':                       'showMatch',   // dreamteam#match/andrew/daan
+            'match':                        'showMatch',   // dreamteam#match/andrew/daan
             'match/:player1id':             'showMatch',   // dreamteam#match/andrew/daan
             'match/:player1id/:player2id':  'showMatch',   // dreamteam#match/andrew/daan
             '*other':                       'defaultRoute' // dreamteam#
         },
 
-        showMatch: function(player1id, player2id) {
+        showMatch: function (player1id, player2id) {
 
             App.$el.empty();
 
@@ -46,13 +44,14 @@ function(
             }
         },
 
-        showSquad: function(username) {
+        showSquad: function (username) {
             App.$el.empty();
             App.$el.html(App.squadView.render().$el);
         },
 
-        defaultRoute: function(other){
+        defaultRoute: function (other) {
             this.showSquad();
         }
+
     });
 });
