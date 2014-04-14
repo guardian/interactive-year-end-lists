@@ -26,102 +26,62 @@ define([
         },
 
         checkUserStatus: function () {
-
-            if (App.inDevMode()) {
-
-                App.userDetails.set({
-                    'guardianID': '8888'
-                });
-                App.userDetails.fetchByGuardianId({
-                    success: function (user) {
-                        if (!user.username) {
-                            // Create new user, dont bother fetching team.
-                            // user.username from Cookie
-                            //App.userDetails.set('username', 'hamlet');
-                            //App.userDetails.save();
-                        } else {
-
-                            // this.fetchUserTeamFromStorage
-                        }
-                        App.userDetails.set(user.toJSON());
-                        Backbone.trigger('loaded:userData');
-
-                    },
-                    error: function (err) {
-                        console.error('fetchByGuardianId failed: ', err);
-                    }
-                });
-            } else {
-                require(["common/modules/identity/api"], function (api) {
-                    var loggedIn = api.getUserFromCookie();
-                    if (loggedIn) {
-                        App.userDetails.set('guardianID', loggedIn.id);
-                        App.userDetails.fetchByGuardianId({
-                            success: function (user) {
-                                if (!user.username) {
-                                    App.userDetails.set('username', loggedIn.displayName);
-                                    App.userDetails.save();
-                                }
-                                App.userDetails.set(user.toJSON());
-                                this.fetchUserTeamFromStorage();
-                                Backbone.trigger('loaded:userData');
-                            },
-                            error: function (err) {
-                                console.error('fetchByGuardianId failed: ', err);
+            require(["common/modules/identity/api"], function (api) {
+                var loggedIn = api.getUserFromCookie();
+                if (loggedIn) {
+                    App.userDetails.set('guardianID', loggedIn.id);
+                    App.userDetails.fetchByGuardianId({
+                        success: function (user) {
+                            if (!user.username) {
+                                App.userDetails.set('username', loggedIn.displayName);
+                                App.userDetails.save();
                             }
-                        });
-                    }
-                    Backbone.trigger('loaded:userData');
-                });
-            }
+                            App.userDetails.set(user.toJSON());
+                            this.fetchUserTeamFromStorage();
+                            Backbone.trigger('loaded:userData');
+                        },
+                        error: function (err) {
+                            console.error('fetchByGuardianId failed: ', err);
+                        }
+                    });
+                }
+                Backbone.trigger('loaded:userData');
+            });
         },
 
         loginUser: function () {
-            if (App.inDevMode()) {
-
-            } else {
-                require(["common/modules/identity/api"], function (api) {
-                    var loggedIn = api.getUserOrSignIn('http://test.theguardian.com:9000/ngw.html');
-                    if (loggedIn) {
-                        App.userDetails.set('guardianID', loggedIn.id);
-                        App.userDetails.fetchByGuardianId({
-                            success: function (user) {
-                                if (!user.username) {
-                                    App.userDetails.set('username', loggedIn.displayName);
-                                    App.userDetails.save();
-                                }
-                                App.userDetails.set(user.toJSON());
-                                this.fetchUserTeamFromStorage();
-                                Backbone.trigger('loaded:userData');
-
-                            },
-                            error: function (err) {
-                                console.error('fetchByGuardianId failed: ', err);
+            require(["common/modules/identity/api"], function (api) {
+                var loggedIn = api.getUserOrSignIn('http://test.theguardian.com:9000/ngw.html');
+                if (loggedIn) {
+                    App.userDetails.set('guardianID', loggedIn.id);
+                    App.userDetails.fetchByGuardianId({
+                        success: function (user) {
+                            if (!user.username) {
+                                App.userDetails.set('username', loggedIn.displayName);
+                                App.userDetails.save();
                             }
-                        });
-                    }
-                });
-            }
+                            App.userDetails.set(user.toJSON());
+                            this.fetchUserTeamFromStorage();
+                            Backbone.trigger('loaded:userData');
+
+                        },
+                        error: function (err) {
+                            console.error('fetchByGuardianId failed: ', err);
+                        }
+                    });
+                }
+            });
         },
 
         saveUserTeamToStorage: function () {
-            if (App.inDevMode()) {
-                App.userDetails.save({
-                    teamSelection: this.parseTeamIntoArray()
-                }, {
-                    wait: true
-                });
-            } else {
-                App.userDetails.save({
-                    teamSelection: this.parseTeamIntoArray()
-                }, {
-                    wait: true
-                });
-            }
+            App.userDetails.save({
+                teamSelection: this.parseTeamIntoArray()
+            }, {
+                wait: true
+            });
         },
 
         fetchUserTeamFromStorage: function () {
-
             if (App.userDetails.get('teamSelection')) {
                 var playerArr = [];
                 App.userDetails.get('teamSelection').split(',').map(function (player) {

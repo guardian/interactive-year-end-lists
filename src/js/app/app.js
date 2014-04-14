@@ -5,16 +5,10 @@ define([
 ) {
     // Mediator
     var app = {
-        env: 'testingCookie',
         ready: false,
         userDataReady: false,
         playerDataReady: false
     };
-
-    app.inDevMode = function () {
-        return app.env === 'dev';
-    };
-
 
     // Listen for async success events
     app.checkIfReady = function () {

@@ -38,12 +38,8 @@ define([
     // Collections
     App.playerCollection = new PlayersCollection();
 
-    if (App.inDevMode()) {
-        App.playerCollection.fetchGoogleData();
-    } else {
-        App.playerCollection.fetchGoogleData();
-//        App.playerCollection.fetchLocal();
-    }
+    App.playerCollection.fetchGoogleData();
+    //App.playerCollection.fetchLocal(); // TODO: Enable in prod
 
     Backbone.on('dataReady', function () {
 
