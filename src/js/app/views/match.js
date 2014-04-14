@@ -47,10 +47,10 @@ define([
                 }).getTeamStats(),
                 matchOutput = '<table class="table"><thead><tr><th>Stat</th><th>Winner</th><th>Dif</th></tr></thead><tbody>';
 
-            $.each(user1Stats, function(key, value) {
+            $.each(user1Stats, function (key, value) {
                 matchOutput += '<tr>';
                 matchOutput += '    <td>' + key + '</td>';
-                if(user1Stats[key] ===  user2Stats[key]) {
+                if (user1Stats[key] ===  user2Stats[key]) {
                     matchOutput += '    <td>Draw</td>';
                     matchOutput += '    <td>-</td>';
                 } else if (user1Stats[key] > user2Stats[key]) {
