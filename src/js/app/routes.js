@@ -20,7 +20,7 @@ define([
 
             if (!player1id && !player2id) {
 
-                console.log('Find users screen');
+                App.$el.html(App.findView.render().$el);
 
             } else if (!player2id) {
 
