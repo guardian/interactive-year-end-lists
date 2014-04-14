@@ -1,7 +1,10 @@
 <div class="inner bg-<%= countryname.toLowerCase() %>">
-	<span class="removePlayer">Unpick</span>
-	<span class="flag" alt="<%= countryname %>" title="<%= countryname %>" style="background-image:url('images/flags/<%= countrycode %>.png')"></span>
-	<!-- <img src="/images/players/player<%= uid %>.jpg" alt="<%= name %>" title="<%= name %>" /> -->
-    <img src="/images/players/placeholder_player.png" alt="<%= name %>" title="<%= name %>" />
-	<p><%= name.substring(name.lastIndexOf(" ")+1) %></p>
+	<div class="innercard">
+        <span class="removePlayer">Unpick</span>
+        <span class="flag" alt="<%= countryname %>" title="<%= countryname %>" style="background-image:url('images/flags/<%= countrycode %>.png')"></span>
+        <!-- <img src="/images/players/player<%= uid %>.jpg" alt="<%= name %>" title="<%= name %>" /> -->
+        <img src="/images/players/placeholder_player.png" alt="<%= name %>" title="<%= name %>" />
+        <p><%= name.substring(name.lastIndexOf(" ")+1) %></p>
+        <p class="player-short-info"><%= countryname %> 1942 - 1950</p>
+	</div>
 </div>

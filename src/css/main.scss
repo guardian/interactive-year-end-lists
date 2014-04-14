@@ -29,7 +29,6 @@ figure.interactive .container {
 }
 figure.interactive {
     $buttonColor: #005689;
-
     button {
         background: $buttonColor;
         border: 0 none;
@@ -184,14 +183,44 @@ figure.interactive {
         cursor: pointer;
         transition: transform 0.2s ease-out;
     }
+    .player_profile .inner {
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+    .player_profile .inner .innercard {
+        position: relative;
+        padding: 3px;
+        background: #fff;
+    }
+    img.player-image,
+    .player_profile img {
+        width: 100%;
+        border: 1px solid #aeaeae;
+    }
     .player_profile p {
         margin: 8px 0 0;
-        font-size: 14px;
+        font-size: 12px;
+        font-family: helvetica;
+        font-weight: bold;
+        color: #333;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+    }
+    .player_profile p.player-short-info {
+        font-size: 11px;
+        color: #888;
+        letter-spacing: -0.1px;
+        font-weight: normal;
+        margin: 0 0 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-transform: none;
     }
     .player_profile .flag {
         position: absolute;
-        width: 35px;
-        height: 35px;
+        width: 25%;
+        height: 17%;
         background-size: cover;
         top: 3px;
         left: 3px;
@@ -212,25 +241,12 @@ figure.interactive {
         font-weight: bold;
         z-index: 2;
     }
-
     .player_profile.isDragging {
-        transform:scale(0.8);
+        transform: scale(0.8);
         opacity: 0.4;
     }
-
     .player_profile.selected img {
         opacity: 0.5;
-    }
-    .player_profile .inner {
-        position: relative;
-        padding: 3px;
-        margin-bottom: 15px;
-        box-shadow: -1px 2px 5px rgba(0, 0, 0, 0.1);
-        background-image: url(../images/bg_card.png)
-    }
-    img.player-image,
-    .player_profile img {
-        width: 100%;
     }
     #playerSelectedModal .modal-content {
         height: 480px;
@@ -407,19 +423,15 @@ figure.interactive {
         background-size: cover;
         background-color: #ccc;
     }
-
     .pitch.isDragging .pitch-player {
         opacity: 0.4;
     }
     .pitch.isDragging .pitch-player.dragTarget {
         opacity: 1;
     }
-
-
     .pitch-player.dragTarget.draghover span.player-icon {
         border: 2px dotted $buttonColor;
     }
-
     .pitch-player-hidden {
         display: none;
     }
@@ -471,28 +483,27 @@ figure.interactive {
         top: 365px;
         left: 125px;
     }
+
+
     /* Country Colours */
-    /*
-	 .bg-italy {
-	 	background: #0E64B8;
-	 }
-	 .bg-brazil {
-	 	background: #e8e316;
-	 }
-	 .bg-england {
-	 	background: #fff;
-	 }
-	 .bg-germany {
-	 	background: green;
-	 }
+    $colorItaly: #31c6df;
+    .bg-italy {
+        background: $colorItaly;
+    }
+    .bg-italy > .innercard {
+        border: 1px solid darken($colorItaly, 20%);
+    }
+    .bg-brazil {
+        background: #e8e316;
+    }
+    .bg-england {
+        background: #fff;
+    }
+    .bg-germany {
+        background: green;
+    }
 
-	 // Countries white text
-	 .bg-italy, .bg-germany {
-	 	color: #fff;
-	 }
-	 */
     // Match screen
-
     #match-screen .match-pitch-container .pitch {
         display: none;
     }
@@ -509,7 +520,6 @@ figure.interactive {
             display: none;
         }
     }
-
     #match-screen .match-stats-container .table {
         margin: 0 auto;
         max-width: 300px;
@@ -518,8 +528,6 @@ figure.interactive {
         font-size: 13px;
         text-transform: capitalize;
     }
-
-
     #match-screen td {
         padding: 7px 10px;
     }
