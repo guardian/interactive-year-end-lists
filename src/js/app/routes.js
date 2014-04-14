@@ -27,10 +27,14 @@ function(
             } else if (!player2id) {
 
                 // No player 2 so render single user page
+                App.viewingPlayer.clear();
                 App.viewingPlayer.set({guardianID: player1id}).fetchByGuardianId();
                 App.$el.html(App.userView.render().$el);
 
             } else {
+
+                App.player1.clear();
+                App.player2.clear();
 
                 App.player1.set({guardianID: player1id}).fetchByGuardianId();
                 App.player1.set('startingUser', 1);
