@@ -79,6 +79,11 @@ figure.interactive {
         z-index: 5;
         margin-top: 10px;
     }
+    .table-players {
+        max-width: 300px;
+        margin: 20px auto;
+        display: none;
+    }
     /**
 	 * Player selection
 	 */
@@ -403,9 +408,16 @@ figure.interactive {
         position: relative;
         clear: both;
     }
+    #team-screen .pitch {
+        display: block;
+    }
     @media(max-width:740px) {
         .pitch {
             clear: none;
+            display: none;
+        }
+        .table-players {
+            display: block;
         }
     }
     .pitch-player {
@@ -509,10 +521,6 @@ figure.interactive {
     }
 
     // Match screen
-    #match-screen .match-pitch-container .pitch,
-    #users-screen .match-pitch-container .pitch {
-        display: none;
-    }
     #match-screen button#startMatch {
         display: block;
         margin: 0 auto 20px;
@@ -528,19 +536,12 @@ figure.interactive {
             display: none;
         }
     }
-    #match-screen .match-stats-container .table {
-        margin: 0 auto;
-        max-width: 300px;
-    }
     #match-screen .match-stats-container .table td {
         font-size: 13px;
         text-transform: capitalize;
     }
     #match-details .table {
         margin-bottom: 20px;
-    }
-    h3 {
-        text-align: center;
     }
     h1.score {
         font-size: 3em;

@@ -17,12 +17,14 @@
     <% }) %>
 </ol>
 
-<table class="table">
+<table class="table table-players">
 	<tbody>
         <% _.each(players, function(player, position) { %>
-            <tr>
-                <td><%= player.name %></td>
-            </tr>
+            <% if (!_.isEmpty(player.name)) { %>
+                <tr>
+                    <td><%= player.name %></td>
+                </tr>
+            <% } %>
         <% }) %>
     </tbody>
 </table>
