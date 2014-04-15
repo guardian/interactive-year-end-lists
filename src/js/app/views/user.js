@@ -43,8 +43,6 @@ define([
 
         render: function () {
 
-            console.log('Do team!');
-
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON()
@@ -66,7 +64,6 @@ define([
                         playerArr.push(playerModel);
                     }
                 });
-                console.log('Get team!');
                 App.viewingPlayerTeamCollection.reset(playerArr);
 
                 var userPitch = new MatchLineupView({
