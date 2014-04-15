@@ -9,15 +9,24 @@ function decodeBase64UrlSafe() {
     paddedBase64=$(printf -vch "%-${paddedLength}s" "$unpaddedBase64"; printf "%s" "${ch// /=}")
     paddedChunkedBase64=$(echo "$paddedBase64" | sed -r 's/(.{77})/\1\n/g')
 
-    echo "$paddedChunkedBase64" | $opensslCommand enc -d -base64 2>/dev/null
+    #echo "$paddedChunkedBase64" | $opensslCommand enc -d -base64
+    echo $paddedChunkedBase64
 }
 
-signatureFile=$(mktemp)
 
-decodeBase64UrlSafe "$(echo "$1" | cut -d "." -f 2)" > "$signatureFile"
-decodeBase64UrlSafe "$(echo "$1" | cut -d "." -f 1)" | $opensslCommand dgst -sha256 -verify $2 -signature "$signatureFile" 2>/dev/null
-returnValue=$?
 
-rm "$signatureFile"
+decodeBase64UrlSafe "$(echo "$1" | cut -d "." -f 1)" | echo $2
+exit
+# signatureFile=$(mktemp)
 
-exit $returnValue
+# decodeBase64UrlSafe "$(echo "$1" | cut -d "." -f 2)" > "$signatureFile"
+# cat "$signatureFile" > openout
+# decodeBase64UrlSafe "$(echo "$1" | cut -d "." -f 1)" | $opensslCommand dgst -sha256 -verify $2 -signature "$signatureFile" 2>/dev/null
+# returnValue=$?
+
+# rm "$signatureFile"
+#
+#
+
+# exit $returnValue
+# exit

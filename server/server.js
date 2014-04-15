@@ -1,11 +1,15 @@
-var express = require('express'),
-    mongoose = require('mongoose'),
-    cors = require('cors'),
-    app = express();
+var express = require('express');
+var mongoose = require('mongoose');
+var cookieParser = require('cookie-parser');
+var fs = require('fs');
+var crypto = require('crypto');
+var base64url = require('base64url');
+var cors = require('cors');
+var app = express();
 
 // Restrict requests to known good domains
-var whitelist = ['http://localhost:9000', 'http://www.theguardian.com'],
-    corsOptions = {
+var whitelist = ['http://localhost:9000', 'http://www.theguardian.com'];
+var corsOptions = {
         origin: function (origin, callback) {
             var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
             callback(null, originIsWhitelisted);
@@ -14,7 +18,20 @@ var whitelist = ['http://localhost:9000', 'http://www.theguardian.com'],
 
 // Setup
 app.use(cors(corsOptions));
+app.use(cookieParser());
 mongoose.connect("mongodb://localhost/test");
+
+
+function isCookieValid(cookieValue) {
+    var cookieDataBase64 = base64url.toBase64(cookieValue.split('.')[0]);
+    var cookieSigBase64 = base64url.toBase64(cookieValue.split('.')[1]);
+    var verifier = crypto.createVerify('sha256');
+    var buffer = new Buffer(cookieDataBase64, 'base64');
+
+    verifier.update(buffer);
+    return verifier.verify(pubKey, cookieSigBase64, 'base64');
+}
+
 
 
 // DB model
@@ -45,6 +62,7 @@ app.get("/allusers", function (req, res) {
 
 // Fetch a single user
 app.get("/users/:_id", function (req, res) {
+    console.log(req.cookie);
     User.findById(req.params._id, function (err, user) {
         if (err) { throw err; }
         res.jsonp(user);
