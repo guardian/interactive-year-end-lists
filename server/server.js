@@ -1,14 +1,10 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var cookieParser = require('cookie-parser');
-var fs = require('fs');
-var crypto = require('crypto');
-var base64url = require('base64url');
 var cors = require('cors');
 var app = express();
 
 // Restrict requests to known good domains
-var whitelist = ['http://localhost:9000', 'http://www.theguardian.com'];
+var whitelist = ['http://localhost:9000', 'http://www.theguardian.com', 'http://localdev.theguardian.com'];
 var corsOptions = {
         origin: function (origin, callback) {
             var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
@@ -18,9 +14,13 @@ var corsOptions = {
 
 // Setup
 app.use(cors(corsOptions));
-app.use(cookieParser());
 mongoose.connect("mongodb://localhost/test");
 
+
+var crypto = require('crypto');
+var base64url = require('base64url');
+var fs = require('fs');
+var pubKey = fs.readFileSync(__dirname +'/gu_prod_key.pub');
 
 function isCookieValid(cookieValue) {
     var cookieDataBase64 = base64url.toBase64(cookieValue.split('.')[0]);
@@ -62,17 +62,25 @@ app.get("/allusers", function (req, res) {
 
 // Fetch a single user
 app.get("/users/:_id", function (req, res) {
-    console.log(req.cookie);
     User.findById(req.params._id, function (err, user) {
-        if (err) { throw err; }
-        res.jsonp(user);
+        if (err || user === null) {
+            res.status(404);
+            res.jsonp(err);
+        }
+
+        res.jsonp('bob');
     });
 });
 
 app.get('/users', function (req, res) {
     var guardianID = req.param('guardianID');
+
     User.findOne({ 'guardianID': guardianID }, function (err, user) {
-        if (err) { throw err; }
+        if (err || user === null) {
+            res.status(404);
+            res.jsonp(err);
+        }
+
         res.jsonp(user);
     });
 });
@@ -101,6 +109,12 @@ app.post('/users', function (req, res) {
 
 // Update existing user data
 app.put("/users/:_id", function (req, res, next) {
+    // var GU_U = req.body.GU_U;
+    // if (!GU_U || false === isCookieValid(GU_U)) {
+    //     res.status(401);
+    //     res.jsonp({'msg': 'user not logged in.'});
+    // }
+
     var userData = {
         guardianID: req.body.guardianID,
         username: req.body.username,
