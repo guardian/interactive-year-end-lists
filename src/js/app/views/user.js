@@ -13,7 +13,6 @@ define([
     MatchLineupView,
     UserTemplate
 ) {
-
     return Backbone.View.extend({
 
         id: 'user-screen',
@@ -26,10 +25,8 @@ define([
         },
 
         initialize: function () {
-
             this.listenTo(App.viewingPlayer, 'change', this.render);
             this.listenTo(App.viewingPlayerTeamCollection, 'change', this.render);
-
             this.templateData = {
                 details: null
             };
@@ -49,13 +46,13 @@ define([
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON()
             };
-
             this.$el.html(this.template(this.templateData));
 
-            var playerArr = [];
+            var playerArr = [],
+                userPitch = new MatchLineupView(),
+                userFind = new UserFindView();
 
             if (App.viewingPlayer.get('teamSelection')) {
-
                 App.viewingPlayer.get('teamSelection').split(',').map(function (player) {
                     var playerSplit = player.split(':'),
                         playerModel = App.playerCollection.findWhere({
@@ -67,17 +64,13 @@ define([
                     }
                 });
                 App.viewingPlayerTeamCollection.reset(playerArr);
-
-                var userPitch = new MatchLineupView({
+                userPitch = new MatchLineupView({
                     collection: App.viewingPlayerTeamCollection
                 });
-
                 this.$el.find('#users-team').html(userPitch.render().$el);
-
             }
 
             if (App.viewingPlayer.get('guardianID') === App.viewingPlayer.get('guardianID')) {
-                var userFind = new UserFindView();
                 this.$el.find('#users-find').html(userFind.render().$el);
             }
             return this;
