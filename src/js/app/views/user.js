@@ -38,7 +38,7 @@ define([
         },
 
         playAgainst: function () {
-            App.appRoutes.navigate('/match', { trigger: true });
+            App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID') + '/' + App.viewingPlayer.get('guardianID'), { trigger: true });
         },
 
         render: function () {
