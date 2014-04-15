@@ -8,7 +8,6 @@ define([
     'views/user',
     'views/squad',
     'views/match',
-    'views/find',
     'routes'
 ], function (
     App,
@@ -20,7 +19,6 @@ define([
     UserView,
     SquadView,
     MatchView,
-    FindView,
     Routes
 ) {
     // Models
@@ -57,7 +55,6 @@ define([
             collection: App.playerCollection
         });
         App.matchView = new MatchView();
-        App.findView = new FindView();
 
         // Setup routing
         App.appRoutes = new Routes();
