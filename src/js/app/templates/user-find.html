@@ -1,0 +1,23 @@
+<h3>Find some teams to play against</h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, nam, minima delectus corporis nostrum eligendi atque perspiciatis consectetur voluptate eius commodi repudiandae deleniti eveniet esse cumque omnis necessitatibus architecto dolores.</p>
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        <h3>Guardian Writers</h3>
+        <table class="table">
+            <% _.each(users, function(user) { %>
+                <tr>
+                    <td><%= user.username  %></td>
+                    <td>
+                        <button id="playAgainst" data-guardian-id="<%= user.guardianID %>">Play</button>
+                    </td>
+                </tr>
+            <% }) %>
+        </table>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <h3>Search</h3>
+        <input type="text" id="q" class="form-control" placeholder="Search for a username">
+        <div id="search-results"></div>
+    </div>
+</div>

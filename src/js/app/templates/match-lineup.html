@@ -2,20 +2,29 @@
 <ol class="pitch">
 	<% _.each(players, function(player, position) { %>
 
-        <li class="pitch-player position-<%= position.toLowerCase() %>">
-            <span class="player-icon" style="background-image:url(/images/players/placeholder_player.png)" title="<%= player.name %>"></span>
-            <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
-        </li>
+	    <% if (!_.isEmpty(player.name)) { %>
+            <li class="pitch-player position-<%= position.toLowerCase() %>">
+                <span class="player-icon" style="background-image:url(/images/players/placeholder_player.png)" title="<%= player.name %>"></span>
+                <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
+            </li>
+	    <% } else { %>
+            <li class="pitch-player position-<%= position.toLowerCase() %>">
+                <span class="player-icon" style="background-image:url(http://placehold.it/50x50)"></span>
+                <%= position.replace(/[0-9]/g, '').toUpperCase() %>
+            </li>
+        <% } %>
 
     <% }) %>
 </ol>
 
-<table class="table">
+<table class="table table-players">
 	<tbody>
         <% _.each(players, function(player, position) { %>
-            <tr>
-                <td><%= player.name %></td>
-            </tr>
+            <% if (!_.isEmpty(player.name)) { %>
+                <tr>
+                    <td><%= player.name %></td>
+                </tr>
+            <% } %>
         <% }) %>
     </tbody>
 </table>
