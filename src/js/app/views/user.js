@@ -2,12 +2,14 @@ define([
     'app',
     'backbone',
     'underscore',
+    'views/user-find',
     'views/match-lineup',
     'text!templates/user.html'
 ], function (
     App,
     Backbone,
     _,
+    UserFindView,
     MatchLineupView,
     UserTemplate
 ) {
@@ -72,6 +74,11 @@ define([
 
                 this.$el.find('#users-team').html(userPitch.render().$el);
 
+            }
+
+            if (App.viewingPlayer.get('guardianID') === App.viewingPlayer.get('guardianID')) {
+                var userFind = new UserFindView();
+                this.$el.find('#users-find').html(userFind.render().$el);
             }
             return this;
         }
