@@ -4,24 +4,19 @@
 	</div>
 </div>
 
-<div class="row">
+<div id="users-team-container">
+    <div id="users-team"></div>
+    <% if (details.username === currentUser.username) { %>
+        <button id="goEdit">Edit your team</button>
+    <% } %>
+</div>
 
-    <div class="col-xs-6">
-        <div id="users-team"></div>
-        <% if (details.username === currentUser.username) { %>
-            <button id="goEdit">Edit your team</button>
-        <% } %>
-    </div>
-
-    <div class="col-xs-6">
-
-        <% if (details.username === currentUser.username) { %>
-            <div id="users-find"></div>
-        <% } else { %>
-            <button id="playAgainst" data-guardian-id="<%= details.guardianID %>">Play against this team</button>
-            <hr>
-            <p>Game history</p>
-        <% } %>
-    </div>
-
+<div id="users-find-container">
+    <% if (details.username === currentUser.username) { %>
+        <div id="users-find"></div>
+    <% } else { %>
+        <button id="playAgainst" data-guardian-id="<%= details.guardianID %>">Play against this team</button>
+        <hr>
+        <p>Game history</p>
+    <% } %>
 </div>
