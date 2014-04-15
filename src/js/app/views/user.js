@@ -19,7 +19,8 @@ define([
         template: _.template(UserTemplate),
 
         events: {
-            'click #goEdit': 'editSelection'
+            'click #goEdit': 'editSelection',
+            'click #playAgainst': 'playAgainst'
         },
 
         initialize: function () {
@@ -34,6 +35,10 @@ define([
 
         editSelection: function () {
             App.appRoutes.navigate('/', { trigger: true });
+        },
+
+        playAgainst: function () {
+            App.appRoutes.navigate('/match', { trigger: true });
         },
 
         render: function () {
