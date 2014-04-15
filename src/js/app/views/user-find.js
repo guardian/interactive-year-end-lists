@@ -33,7 +33,6 @@ define([
             $.ajax({
                 url: "http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/allusers"
             }).done(function (data) {
-                // Has user got a valid team?
                 var userArr = [];
                 $.each(data, function (k, v) {
                     if (v.teamSelection.split(',').length === 11 && App.userDetails.get('guardianID') !== v.guardianID) {
