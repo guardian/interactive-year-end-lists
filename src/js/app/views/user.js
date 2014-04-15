@@ -49,8 +49,8 @@ define([
             this.$el.html(this.template(this.templateData));
 
             var playerArr = [],
-                userPitch = new MatchLineupView(),
-                userFind = new UserFindView();
+                userPitch,
+                userFind;
 
             if (App.viewingPlayer.get('teamSelection')) {
                 App.viewingPlayer.get('teamSelection').split(',').map(function (player) {
@@ -71,6 +71,7 @@ define([
             }
 
             if (App.viewingPlayer.get('guardianID') === App.viewingPlayer.get('guardianID')) {
+                userFind = new UserFindView();
                 this.$el.find('#users-find').html(userFind.render().$el);
             }
             return this;
