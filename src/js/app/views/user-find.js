@@ -28,8 +28,7 @@ define([
         },
 
         getAllUsers: function () {
-            var templateData = {users: null};
-            var thisView = this;
+            var _thisView = this;
             $.ajax({
                 url: "http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/allusers"
             }).done(function (data) {
@@ -39,8 +38,8 @@ define([
                         userArr.push(v);
                     }
                 });
-                thisView.templateData.users = userArr;
-                thisView.render();
+                _thisView.templateData.users = userArr;
+                _thisView.render();
             });
         },
 
