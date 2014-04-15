@@ -158,6 +158,7 @@ define([
 
             if (readyForMatch) {
                 this.renderTeams();
+                this.startMatchTextGenerator();
             }
 
             return this;
