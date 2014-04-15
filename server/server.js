@@ -1,11 +1,11 @@
-var express = require('express'),
-    mongoose = require('mongoose'),
-    cors = require('cors'),
-    app = express();
+var express = require('express');
+var mongoose = require('mongoose');
+var cors = require('cors');
+var app = express();
 
 // Restrict requests to known good domains
-var whitelist = ['http://localhost:9000', 'http://www.theguardian.com'],
-    corsOptions = {
+var whitelist = ['http://localhost:9000', 'http://www.theguardian.com', 'http://localdev.theguardian.com'];
+var corsOptions = {
         origin: function (origin, callback) {
             var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
             callback(null, originIsWhitelisted);
@@ -15,6 +15,23 @@ var whitelist = ['http://localhost:9000', 'http://www.theguardian.com'],
 // Setup
 app.use(cors(corsOptions));
 mongoose.connect("mongodb://localhost/test");
+
+
+var crypto = require('crypto');
+var base64url = require('base64url');
+var fs = require('fs');
+var pubKey = fs.readFileSync(__dirname +'/gu_prod_key.pub');
+
+function isCookieValid(cookieValue) {
+    var cookieDataBase64 = base64url.toBase64(cookieValue.split('.')[0]);
+    var cookieSigBase64 = base64url.toBase64(cookieValue.split('.')[1]);
+    var verifier = crypto.createVerify('sha256');
+    var buffer = new Buffer(cookieDataBase64, 'base64');
+
+    verifier.update(buffer);
+    return verifier.verify(pubKey, cookieSigBase64, 'base64');
+}
+
 
 
 // DB model
@@ -46,15 +63,24 @@ app.get("/allusers", function (req, res) {
 // Fetch a single user
 app.get("/users/:_id", function (req, res) {
     User.findById(req.params._id, function (err, user) {
-        if (err) { throw err; }
-        res.jsonp(user);
+        if (err || user === null) {
+            res.status(404);
+            res.jsonp(err);
+        }
+
+        res.jsonp('bob');
     });
 });
 
 app.get('/users', function (req, res) {
     var guardianID = req.param('guardianID');
+
     User.findOne({ 'guardianID': guardianID }, function (err, user) {
-        if (err) { throw err; }
+        if (err || user === null) {
+            res.status(404);
+            res.jsonp(err);
+        }
+
         res.jsonp(user);
     });
 });
@@ -83,6 +109,12 @@ app.post('/users', function (req, res) {
 
 // Update existing user data
 app.put("/users/:_id", function (req, res, next) {
+    // var GU_U = req.body.GU_U;
+    // if (!GU_U || false === isCookieValid(GU_U)) {
+    //     res.status(401);
+    //     res.jsonp({'msg': 'user not logged in.'});
+    // }
+
     var userData = {
         guardianID: req.body.guardianID,
         username: req.body.username,
