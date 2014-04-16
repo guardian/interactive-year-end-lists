@@ -21,44 +21,56 @@ define([
     MatchView,
     Routes
 ) {
+
     // Models
     App.userDetails = new UserModel();
-    App.userDetails.checkUserStatus();
+    App.userDetails.setToolKitObject();
 
-    App.viewingPlayer = new UserModel();
-    App.player1 = new UserModel();
-    App.player2 = new UserModel();
+    Backbone.on('toolkitReady', function () {
 
-    // Variables for listeners
-    App.playerSelected = new Backbone.Model(); // Opens the player card
-    App.visualPrompt = new Backbone.Model(); // Shows a prompt to the user (loading etc)
+        console.log('Loaded: tookitObject');
 
-    // Collections
-    App.playerCollection = new PlayersCollection();
+        console.log(App.toolkitObj);
 
-    App.playerCollection.fetchGoogleData();
-    //App.playerCollection.fetchLocal(); // TODO: Enable in prod
+        App.userDetails.checkUserStatus(); // Automatic login
 
-    Backbone.on('dataReady', function () {
+        App.viewingPlayer = new UserModel();
+        App.player1 = new UserModel();
+        App.player2 = new UserModel();
 
-        console.log('All done. Render all');
-        App.usersTeamCollection = new TeamCollection();
-        App.viewingPlayerTeamCollection = new TeamCollection();
-        App.player1TeamCollection = new TeamCollection();
-        App.player2TeamCollection = new TeamCollection();
+        // Variables for listeners
+        App.playerSelected = new Backbone.Model(); // Opens the player card
+        App.visualPrompt = new Backbone.Model(); // Shows a prompt to the user (loading etc)
 
-        App.userDetails.fetchUserTeamFromStorage();
+        // Collections
+        App.playerCollection = new PlayersCollection();
 
-        // Views
-        App.userView = new UserView();
-        App.squadView = new SquadView({
-            collection: App.playerCollection
+        App.playerCollection.fetchGoogleData();
+        //App.playerCollection.fetchLocal(); // TODO: Enable in prod
+
+        Backbone.on('dataReady', function () {
+
+            console.log('All done. Render all');
+
+            App.usersTeamCollection = new TeamCollection();
+            App.viewingPlayerTeamCollection = new TeamCollection();
+            App.player1TeamCollection = new TeamCollection();
+            App.player2TeamCollection = new TeamCollection();
+
+            App.userDetails.fetchUserTeamFromStorage();
+
+            // Views
+            App.userView = new UserView();
+            App.squadView = new SquadView({
+                collection: App.playerCollection
+            });
+            App.matchView = new MatchView();
+
+            // Setup routing
+            App.appRoutes = new Routes();
+            Backbone.history.start();
         });
-        App.matchView = new MatchView();
 
-        // Setup routing
-        App.appRoutes = new Routes();
-        Backbone.history.start();
     });
 
     $('head').append('<link rel="stylesheet" href="https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/css/vendor.css" type="text/css" />');
@@ -68,7 +80,8 @@ define([
      * Bootstrap loader
      * @param  {element} el DOM element provided from the page ie. <figure>
      */
-    function boot(el) {
+    function boot(el, config) {
+
         App.$el = $(el);
     }
 
