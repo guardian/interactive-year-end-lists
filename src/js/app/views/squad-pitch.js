@@ -31,7 +31,7 @@ define([
 
         goToMatch: function (e) {
             if (!$(e.target).hasClass('disabled')) {
-                App.appRoutes.navigate('user/' + App.userDetails.get('guardianID'), { trigger: true });
+                App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID'), { trigger: true });
             }
         },
 

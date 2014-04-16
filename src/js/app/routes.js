@@ -8,7 +8,7 @@ define([
     return Backbone.Router.extend({
 
         routes: {
-            'user/:player1id':              'showUser',   // dreamteam#match/andrew/daan
+            'match/:player1id':             'showUser',   // dreamteam#match/andrew/daan
             'match/:player1id/:player2id':  'showMatch',   // dreamteam#match/andrew/daan
             '*other':                       'defaultRoute' // dreamteam#
         },
