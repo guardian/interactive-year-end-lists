@@ -1,9 +1,8 @@
 <div class="inner bg-<%= countryname.toLowerCase() %>">
 	<div class="innercard">
         <span class="removePlayer">Unpick</span>
-        <span class="flag" alt="<%= countryname %>" title="<%= countryname %>" style="background-image:url('images/flags/<%= countrycode %>.png')"></span>
-        <!-- <img src="/images/players/player<%= uid %>.jpg" alt="<%= name %>" title="<%= name %>" /> -->
-        <img src="/images/players/placeholder_player.png" alt="<%= name %>" title="<%= name %>" />
+        <span class="flag" alt="<%= countryname %>" title="<%= countryname %>" style="background-image:url('https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/flags/<%= countrycode %>.png')"></span>
+        <img src="https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/players/placeholder_player.png" alt="<%= name %>" title="<%= name %>" />
         <p><%= name.substring(name.lastIndexOf(" ")+1) %></p>
         <p class="player-short-info"><%= countryname %> 1942 - 1950</p>
 	</div>
