@@ -3,33 +3,70 @@ world-cup-2014-dream-team
 
 Choose your World Cup 2014 dream team
 
-PLAYER DB
+FOOTBALL PLAYER DATABASE
+    The football player database is hosted on Google spreadsheets and is loaded
+    into the application while in development. The data will be downloaded and
+    included within the final production build.
+
     https://docs.google.com/a/guardian.co.uk/spreadsheet/ccc?key=0AkRR3zKqdlUHdFE5SjJtS3gyUHF3ZEcwYlF0SHgxbkE
 
 
+URLs
+    The client side URL's are part of the guardina.com domain and use hash
+    fragments for routing.
 
-MONGO SETUP
+    The base folder will act as the default route and will display the primary
+    team edit view.
+
+    A player's current team can be views on the 'match' route when their ID is
+    specified.
+
+    A match takes place between two players when two valid IDs are provided.
+
+    /                           - Team construction and edit page
+    /#match/:userID             - Player's team view
+    /#match/:userID/:userID2    - Match view between two players
+    /#result/:matchID           - (preliminary) past match result
+
+    Creation and updating of a user's team is handles by the data-store
+    server. The server is a REST based API to a Mongo DB.
+
+    http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/
+   
+    The server accepts the following end-points:
+
+    GET  /allusers          - DEBUG: Get all registered users
+    GET  /users/?guardianID - Get user data by ID
+    GET  /users/:userid     - Get user data by 
+    POST /users/:userid     - Create user
+    PUT  /users/:userid     - Update user data
+
+
+USER DATASTORE
+    User's teams are stored in a Mongo database hosted on an Amazon EC2
+    instance.
+
+    InstanceID: i-b701e6f4 (interactive:world-cup dream dream datastore)
+    URL:        ec2-54-195-231-244.eu-west-1.compute.amazonaws.com
+
+
+    As part of the database set-up, ensure the user's Guardian ID is unique.
+
     db.users.ensureIndex( { 'guardianID': 1 }, { unique: true });
+
+
 
 USER DATA STRUCTURE
     {
-        guardianID: String,
-        username: String,
-        teamSelection: String - comma seperated player IDs
+        guardianID: String,     - User's Guardian ID
+        username: String,       - Is this needed? Can use use identity API?
+        teamSelection: String   - Comma separated list of player IDs
     }
 
 
-
-MATCH DATA STRUCUTRE
-    {
-        date:                   'Mon Apr 07 2014 17:21:29 GMT+0100 (BST)'
-        user_1_id:              '001',
-        user_1_teamSelection:   ['player_id', 'player_id', ...],
-        user_1_goals:           2,
-
-
-        user_2_id:              '002',
-        user_2_teamSelection:   ['player_id', 'player_id', ...]
-        user_2_goals:           1
-    }
-
+MATCH RESULTS
+    WIP
+    * What is stored in a result?
+    * How are results generated?
+    * Who can create results?
+    * How are results viewed and listed?

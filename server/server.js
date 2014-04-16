@@ -1,10 +1,16 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var cors = require('cors');
 var app = express();
 
 // Restrict requests to known good domains
-var whitelist = ['http://localhost:9000', 'http://www.theguardian.com', 'http://localdev.theguardian.com'];
+var whitelist = [
+    'http://localhost:9000',
+    'http://www.theguardian.com',
+    'http://localdev.theguardian.com',
+    'http://www.code.dev-theguardian.com'
+];
 var corsOptions = {
         origin: function (origin, callback) {
             var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
@@ -14,6 +20,7 @@ var corsOptions = {
 
 // Setup
 app.use(cors(corsOptions));
+app.use(bodyParser());
 mongoose.connect("mongodb://localhost/test");
 
 
@@ -31,7 +38,6 @@ function isCookieValid(cookieValue) {
     verifier.update(buffer);
     return verifier.verify(pubKey, cookieSigBase64, 'base64');
 }
-
 
 
 // DB model
@@ -62,13 +68,13 @@ app.get("/allusers", function (req, res) {
 
 // Fetch a single user
 app.get("/users/:_id", function (req, res) {
-    User.findById(req.params._id, function (err, user) {
-        if (err || user === null) {
+    User.findById(req.param('_id'), function (err, user) {
+        if (err) {
             res.status(404);
             res.jsonp(err);
+        } else {
+            res.jsonp(user);
         }
-
-        res.jsonp('bob');
     });
 });
 
@@ -76,12 +82,12 @@ app.get('/users', function (req, res) {
     var guardianID = req.param('guardianID');
 
     User.findOne({ 'guardianID': guardianID }, function (err, user) {
-        if (err || user === null) {
+        if (err) {
             res.status(404);
             res.jsonp(err);
+        } else {
+            res.jsonp(user);
         }
-
-        res.jsonp(user);
     });
 });
 
@@ -98,10 +104,10 @@ app.post('/users', function (req, res) {
         if (err) {
             res.status(409);
             res.jsonp(err);
+        } else {
+            // Send back saved data with new mongo UID
+            res.jsonp(product);
         }
-
-        // Send back saved data with new mongo UID
-        res.jsonp(product);
     });
 
 });
@@ -114,38 +120,24 @@ app.put("/users/:_id", function (req, res, next) {
     //     res.status(401);
     //     res.jsonp({'msg': 'user not logged in.'});
     // }
-
     var userData = {
         guardianID: req.body.guardianID,
         username: req.body.username,
         teamSelection: req.body.teamSelection
     };
 
-    User.findByIdAndUpdate(req.params._id, userData, function (err, doc) {
+    User.findByIdAndUpdate(req.param('_id'), userData, function (err, doc) {
         if (err) {
             res.status(500);
             res.jsonp(err);
+        } else {
+            res.jsonp(doc);
         }
-
-        res.jsonp(doc);
     });
 });
-
-
-// Delete a user
-app.del("/users/:guardianID", function (req, res, next) {
-    User.findByIdAndRemove(req.params.guardianID, function (err, user) {
-        if (err) {
-            res.status(500);
-            res.jsonp(err);
-        }
-
-        res.status(200);
-    });
-});
-
 
 // Start server
 var server = app.listen(3000, function () {
     console.log('Listening on port %d', server.address().port);
 });
+

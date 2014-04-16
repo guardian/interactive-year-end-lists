@@ -16,6 +16,14 @@ define([
             teamSelection: null
         },
 
+        getCookie: function(name) {
+            var value = '; ' + document.cookie;
+            var parts = value.split('; ' + name + '=');
+            if (parts.length == 2) {
+                return parts.pop().split(';').shift();
+            }
+        },
+
         setToolKitObject: function () {
             if (typeof require() === 'function') {
                 require(['guardian_idToolkit'], function (toolkit) {
