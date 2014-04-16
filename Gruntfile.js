@@ -62,12 +62,12 @@ module.exports = function(grunt) {
               'text': '../libs/text'
           },
           optimize: 'none',
-          name: 'main',
+          name: 'dreamTeam',
           out: 'build/js/boot.js',
           // FIXME: Is there a better way to do this?
           wrap: {
               start: "define([], function() {",
-              end: " return { boot: function(el) { require(['main'], function(app) { app.boot(el); });  }}} );"
+              end: " return { boot: function(el) { require(['dreamTeam'], function(app) { app.boot(el); });  }}} );"
           }
         }
       }
