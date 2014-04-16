@@ -18,7 +18,16 @@ define([
             teamSelection: null
         },
 
-        fetchByGuardianId: function (_options) {
+        getCookie: function(name) {
+            var value = '; ' + document.cookie;
+            var parts = value.split('; ' + name + '=');
+            if (parts.length == 2) {
+                return parts.pop().split(';').shift();
+            }
+        },
+
+
+        fetchByGuardianId: function(_options) {
             var options = _options || {};
             options.data = {
                 guardianID: this.get('guardianID')
