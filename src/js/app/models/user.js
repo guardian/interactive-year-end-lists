@@ -46,7 +46,13 @@ define([
                 App.userDetails.fetchByGuardianId({
                     success: function (user) {
                         if (!user.username) {
-                            App.userDetails.set('username', loggedIn.displayName);
+                            var username = null;
+                            if (App.toolkitObj.version === 1) {
+                               username = loggedIn. publicFields.displayName;
+                            } else {
+                               username = loggedIn.displayName;
+                            }
+                            App.userDetails.set('username', username);
                             App.userDetails.save();
                         } else {
                             App.userDetails.set(user.toJSON());
