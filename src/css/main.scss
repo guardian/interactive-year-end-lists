@@ -49,7 +49,7 @@ figure.interactive {
         text-align: center;
     }
     button.disabled {
-        background: lighten($buttonColor, 20%);
+        background: #dfdfdf;
     }
 
     input {

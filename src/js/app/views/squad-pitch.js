@@ -29,9 +29,10 @@ define([
 
         },
 
-        goToMatch: function () {
-            // TODO: Any url helpers?
-            App.appRoutes.navigate('user/' + App.userDetails.get('guardianID'), { trigger: true });
+        goToMatch: function (e) {
+            if (!$(e.target).hasClass('disabled')) {
+                App.appRoutes.navigate('user/' + App.userDetails.get('guardianID'), { trigger: true });
+            }
         },
 
         showOptions: function (event) {
