@@ -59,11 +59,7 @@ define([
         // Setup routing
         App.appRoutes = new Routes();
         Backbone.history.start();
-
     });
-
-    //    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/vendor.css" type="text/css" />');
-    //    $('head').append('<link rel="stylesheet" href="http://interactive.guim.co.uk/next-gen/football/ng-interactive/football-test-1/main.css" type="text/css" />');
 
     /**
      * Bootstrap loader

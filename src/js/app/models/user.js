@@ -52,7 +52,7 @@ define([
 
         loginUser: function () {
             require(["common/modules/identity/api"], function (api) {
-                var loggedIn = api.getUserOrSignIn('http://test.theguardian.com:9000/ngw.html');
+                var loggedIn = api.getUserOrSignIn('http://interactive.guim.co.uk/next-gen/football/ng-interactive/dream-team-test/ngw.html');
                 if (loggedIn) {
                     App.userDetails.set('guardianID', loggedIn.id);
                     App.userDetails.fetchByGuardianId({
