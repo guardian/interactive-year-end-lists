@@ -1,12 +1,14 @@
 // Squad selection
 define([
     'app',
+    'jquery',
     'underscore',
     'backbone',
     'views/squad-list',
     'text!templates/squad-filters.html'
 ], function (
     App,
+    $,
     _,
     Backbone,
     SquadListView,

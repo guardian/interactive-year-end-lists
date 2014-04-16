@@ -1,10 +1,12 @@
 define([
     'app',
+    'jquery',
     'backbone',
     'underscore',
     'text!templates/squad-pitch.html'
 ], function (
     App,
+    $,
     Backbone,
     _,
     SquadPitchTemplate
@@ -29,9 +31,10 @@ define([
 
         },
 
-        goToMatch: function () {
-            // TODO: Any url helpers?
-            App.appRoutes.navigate('user/' + App.userDetails.get('guardianID'), { trigger: true });
+        goToMatch: function (e) {
+            if (!$(e.target).hasClass('disabled')) {
+                App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID'), { trigger: true });
+            }
         },
 
         showOptions: function (event) {
@@ -133,12 +136,13 @@ define([
 
             // Start hover event bindings
 
-            var dragDropTarget = this.$el.find('li');
-            dragDropTarget.bind("dragover", _.bind(this._dragOverEvent, this));
-            dragDropTarget.bind("dragenter", _.bind(this._dragEnterEvent, this));
-            dragDropTarget.bind("dragleave", _.bind(this._dragLeaveEvent, this));
-            dragDropTarget.bind("drop", _.bind(this._dropEvent, this));
-
+            if (App.userDetails.get('username')) {
+                var dragDropTarget = this.$el.find('li');
+                dragDropTarget.bind("dragover", _.bind(this._dragOverEvent, this));
+                dragDropTarget.bind("dragenter", _.bind(this._dragEnterEvent, this));
+                dragDropTarget.bind("dragleave", _.bind(this._dragLeaveEvent, this));
+                dragDropTarget.bind("drop", _.bind(this._dropEvent, this));
+            }
             return this;
         },
 

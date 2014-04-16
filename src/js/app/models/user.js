@@ -8,8 +8,6 @@ define([
     return Backbone.Model.extend({
 
         urlRoot: "http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users",
-        //urlRoot: 'http://localhost:3000/users',
-
         idAttribute: '_id',
 
         defaults: {
@@ -26,8 +24,21 @@ define([
             }
         },
 
+        setToolKitObject: function () {
+            if (typeof require() === 'function') {
+                require(['guardian_idToolkit'], function (toolkit) {
+                    App.toolkitObj = {api: toolkit, version: 1};
+                    Backbone.trigger('toolkitReady');
+                });
+            } else {
+                require([ 'common/modules/identity/api' ]).then(function (toolkit) {
+                    App.toolkitObj = {api: toolkit, version: 2};
+                    Backbone.trigger('toolkitReady');
+                });
+            }
+        },
 
-        fetchByGuardianId: function(_options) {
+        fetchByGuardianId: function (_options) {
             var options = _options || {};
             options.data = {
                 guardianID: this.get('guardianID')
@@ -36,50 +47,34 @@ define([
         },
 
         checkUserStatus: function () {
-            require(["common/modules/identity/api"], function (api) {
-                var loggedIn = api.getUserFromCookie();
-                if (loggedIn) {
-                    App.userDetails.set('guardianID', loggedIn.id);
-                    App.userDetails.fetchByGuardianId({
-                        success: function (user) {
-                            if (!user.username) {
-                                App.userDetails.set('username', loggedIn.displayName);
-                                App.userDetails.save();
-                            } else {
-                                App.userDetails.set(user.toJSON());
-                            }
-                            Backbone.trigger('loaded:userData');
-                        },
-                        error: function (err) {
-                            console.error('fetchByGuardianId failed: ', err);
+
+            var loggedIn = this.isUserLoggedIn();
+            if (loggedIn) {
+                App.userDetails.set('guardianID', loggedIn.id);
+                App.userDetails.fetchByGuardianId({
+                    success: function (user) {
+                        if (!user.username) {
+                            App.userDetails.set('username', loggedIn.displayName);
+                            App.userDetails.save();
+                        } else {
+                            App.userDetails.set(user.toJSON());
                         }
-                    });
-                }
-                Backbone.trigger('loaded:userData');
-            });
+                        Backbone.trigger('loaded:userData');
+                    },
+                    error: function (err) {
+                        console.error('fetchByGuardianId failed: ', err);
+                    }
+                });
+            }
+            Backbone.trigger('loaded:userData');
         },
 
         loginUser: function () {
-            require(["common/modules/identity/api"], function (api) {
-                var loggedIn = api.getUserOrSignIn('http://test.theguardian.com:9000/ngw.html');
-                if (loggedIn) {
-                    App.userDetails.set('guardianID', loggedIn.id);
-                    App.userDetails.fetchByGuardianId({
-                        success: function (user) {
-                            if (!user.username) {
-                                App.userDetails.set('username', loggedIn.displayName);
-                                App.userDetails.save();
-                            } else {
-                                App.userDetails.set(user.toJSON());
-                            }
-                            Backbone.trigger('loaded:userData');
-                        },
-                        error: function (err) {
-                            console.error('fetchByGuardianId failed: ', err);
-                        }
-                    });
-                }
-            });
+            if (App.toolkitObj.version === 1) {
+                App.toolkitObj.api.showLoginIfNotLoggedIn();
+            } else {
+                App.toolkitObj.api.getUserOrSignIn('www.gucode.gnl/sport/interactive/2014/apr/16/1');
+            }
         },
 
         saveUserTeamToStorage: function () {
@@ -118,6 +113,24 @@ define([
                 team.push(player.get('uid') + ':' + player.get('wantedPosition'));
             });
             return team.join(',');
+        },
+
+        isUserLoggedIn: function () {
+            var isloggedIn = false;
+            if (App.toolkitObj.version === 1) {
+
+                // R2
+                if (App.toolkitObj.api.isLoggedIn()) {
+                    isloggedIn = App.toolkitObj.api.localUserData();
+                }
+            } else {
+
+                // Next-gen
+                if (App.toolkitObj.api.isUserLoggedIn()) {
+                    isloggedIn = App.toolkitObj.api.getUserFromCookie();
+                }
+            }
+            return isloggedIn;
         }
 
     });

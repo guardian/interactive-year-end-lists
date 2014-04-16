@@ -981,17 +981,13 @@ Current version
 </noscript>
 <img src="//beacon.www.theguardian.com/count/pv.gif" alt="" style="display: none;" rel="nofollow"/>
 
-
-
-<link href="http://localhost:9000/css/vendor.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="http://localhost:9000/css/main.css" media="screen" rel="stylesheet" type="text/css" />
- <script>
-            var el = document.querySelector('.interactive');
-            setTimeout(function() {
-            require(['http://localhost:9000/js/boot.js'], function(app) {
-                app.boot(el);
-            });
-        }, 1000);
-        </script>
+    <script>
+        var el = document.querySelector('.interactive');
+        setTimeout(function() {
+        require(['https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/js/boot.js'], function(app) {
+            app.boot(el);
+        });
+    }, 1000);
+    </script>
 </body>
 </html>

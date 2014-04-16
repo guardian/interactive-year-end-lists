@@ -30,8 +30,8 @@ define([
                     volatility: 0,
                     starquality: 0
                 };
-
-            $.each(stats, function(key, value) {
+// TODO: perhaps change to underscore or include jquery
+            _.each(stats, function(key, value) {
                 usersPlayers.forEach(function (player) {
                     if(player[key]) {
                         value = parseInt(value, 10) + parseInt(player[key], 10);

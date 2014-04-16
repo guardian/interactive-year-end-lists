@@ -49,7 +49,24 @@ figure.interactive {
         text-align: center;
     }
     button.disabled {
-        background: lighten($buttonColor, 20%);
+        background: #dfdfdf;
+    }
+
+    input {
+        border: 1px solid #dcdcdc;
+        box-shadow: none;
+        box-sizing: border-box;
+        color: #545454;
+        display: inline-block;
+        font-family: "AgateSans","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+        font-size: 16px;
+        font-size: 1.6rem;
+        line-height: 1.4;
+        outline: none;
+        padding: 8px 8px 7px;
+        border-radius: 0;
+        width: 100%;
+        -webkit-appearance: none;
     }
     .visual-prompt {
         position: fixed;
@@ -84,6 +101,10 @@ figure.interactive {
         margin: 20px auto;
         display: none;
     }
+    #users-team-container {
+        margin-bottom: 20px;
+        display: none;
+    }
     /**
 	 * Player selection
 	 */
@@ -91,11 +112,23 @@ figure.interactive {
         #squad-filters {
             width: 100%;
             margin-right: -400px;
-            padding-right: 430px;
+            padding-right: 429px;
         }
         #squad-pitch {
             width: 400px;
             float: right;
+        }
+
+        #users-team-container {
+            width: 300px;
+            float: left;
+            display: block;
+        }
+        #users-find-container {
+            width: 100%;
+            margin-left: -300px;
+            padding-left: 340px;
+            float: left;
         }
     }
     #squad-pitch button#goToMatch,
@@ -123,7 +156,7 @@ figure.interactive {
         right: 0;
     }
     #squad-filters form .inner {
-        padding: 10px 5px;
+        padding: 10px 0;
         float: left;
         background: #fff;
         width: 100%;
@@ -192,6 +225,7 @@ figure.interactive {
         margin-bottom: 7px;
         cursor: pointer;
         transition: transform 0.2s ease-out;
+        overflow: hiden;
     }
     .player_profile .inner {
         padding: 5px;
@@ -397,7 +431,7 @@ figure.interactive {
     }
     .pitch {
         overflow: hidden;
-        margin: 20px auto;
+        margin: 0 auto 20px;
         padding: 0;
         background: url('../images/pitch.jpg');
         height: 445px;
