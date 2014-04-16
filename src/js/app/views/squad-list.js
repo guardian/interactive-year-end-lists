@@ -1,11 +1,13 @@
 define([
     'app',
+    'jquery',
     'backbone',
     'underscore',
     'data/players',
     'text!templates/squad-list.html'
 ], function (
     App,
+    $,
     Backbone,
     _,
     PlayerData,

@@ -1,10 +1,12 @@
 define([
     'app',
+    'jquery',
     'backbone',
     'underscore',
     'text!templates/squad-pitch.html'
 ], function (
     App,
+    $,
     Backbone,
     _,
     SquadPitchTemplate

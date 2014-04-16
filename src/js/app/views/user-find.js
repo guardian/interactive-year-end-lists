@@ -1,10 +1,12 @@
 define([
     'app',
+    'jquery',
     'backbone',
     'underscore',
     'text!templates/user-find.html'
 ], function (
     App,
+    $,
     Backbone,
     _,
     UserFindTemplate

@@ -1,5 +1,6 @@
 define([
     'app',
+    'jquery',
     'underscore',
     'backbone',
     'views/squad-pitch',
@@ -9,6 +10,7 @@ define([
     'text!templates/squad.html'
 ], function (
     App,
+    $,
     _,
     Backbone,
     SquadPitchView,
