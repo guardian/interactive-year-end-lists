@@ -134,12 +134,13 @@ define([
 
             // Start hover event bindings
 
-            var dragDropTarget = this.$el.find('li');
-            dragDropTarget.bind("dragover", _.bind(this._dragOverEvent, this));
-            dragDropTarget.bind("dragenter", _.bind(this._dragEnterEvent, this));
-            dragDropTarget.bind("dragleave", _.bind(this._dragLeaveEvent, this));
-            dragDropTarget.bind("drop", _.bind(this._dropEvent, this));
-
+            if (App.userDetails.get('username')) {
+                var dragDropTarget = this.$el.find('li');
+                dragDropTarget.bind("dragover", _.bind(this._dragOverEvent, this));
+                dragDropTarget.bind("dragenter", _.bind(this._dragEnterEvent, this));
+                dragDropTarget.bind("dragleave", _.bind(this._dragLeaveEvent, this));
+                dragDropTarget.bind("drop", _.bind(this._dropEvent, this));
+            }
             return this;
         },
 

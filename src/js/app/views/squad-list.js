@@ -35,9 +35,11 @@ define([
             this.listenTo(App.usersTeamCollection, 'add remove reset', this.showSelectedPlayer);
             this.showSelectedPlayer();
 
-            this.$el.attr("draggable", "true");
-            this.$el.bind("dragstart", _.bind(this._dragStartEvent, this));
-            this.$el.bind("dragend", _.bind(this._dragEndEvent, this));
+            if (App.userDetails.get('username')) {
+                this.$el.attr("draggable", "true");
+                this.$el.bind("dragstart", _.bind(this._dragStartEvent, this));
+                this.$el.bind("dragend", _.bind(this._dragEndEvent, this));
+            }
         },
 
         showSelectedPlayer: function () {
