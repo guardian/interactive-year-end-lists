@@ -61,6 +61,9 @@ define([
         Backbone.history.start();
     });
 
+    $('head').append('<link rel="stylesheet" href="https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/css/vendor.css" type="text/css" />');
+    $('head').append('<link rel="stylesheet" href="https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/css/main.css" type="text/css" />');
+
     /**
      * Bootstrap loader
      * @param  {element} el DOM element provided from the page ie. <figure>
