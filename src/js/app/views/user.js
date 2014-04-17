@@ -23,7 +23,7 @@ define([
 
         events: {
             'click #goEdit': 'editSelection',
-            'click #playAgainst': 'playAgainst'
+            'click .playAgainst': 'playAgainst'
         },
 
         initialize: function () {
@@ -39,7 +39,8 @@ define([
         },
 
         playAgainst: function (e) {
-            App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID') + '/' + $(e.target).data('guardian-id'), { trigger: true });
+            var guardianIDOpponent = $(e.target).data('guardian-id');
+            App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID') + '/' + guardianIDOpponent, { trigger: true });
         },
 
         render: function () {

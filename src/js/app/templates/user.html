@@ -15,7 +15,7 @@
     <% if (details.username === currentUser.username) { %>
         <div id="users-find"></div>
     <% } else { %>
-        <button id="playAgainst" data-guardian-id="<%= details.guardianID %>">Play against this team</button>
+        <button class="playAgainst" data-guardian-id="<%= details.guardianID %>">Play against this team</button>
         <hr>
         <p>Game history</p>
     <% } %>
