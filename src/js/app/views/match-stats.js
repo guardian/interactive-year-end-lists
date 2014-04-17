@@ -31,7 +31,7 @@ define([
                     starquality: 0
                 };
 // TODO: perhaps change to underscore or include jquery
-            _.each(stats, function(key, value) {
+            _.each(stats, function(value, key) {
                 usersPlayers.forEach(function (player) {
                     if(player[key]) {
                         value = parseInt(value, 10) + parseInt(player[key], 10);
@@ -40,6 +40,7 @@ define([
                 stats[key] = value;
             });
 
+            console.log(stats);
             return stats;
 
         },

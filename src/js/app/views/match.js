@@ -47,7 +47,7 @@ define([
                 }).getTeamStats(),
                 matchOutput = '<table class="table"><thead><tr><th>Stat</th><th>Winner</th><th>Dif</th></tr></thead><tbody>';
 
-            _.each(user1Stats, function (key, value) {
+            _.each(user1Stats, function (value, key) {
                 matchOutput += '<tr>';
                 matchOutput += '    <td>' + key + '</td>';
                 if (user1Stats[key] ===  user2Stats[key]) {
