@@ -45,26 +45,27 @@ define([
                 user2Stats = new MatchStatsView({
                     collection: App.player2TeamCollection
                 }).getTeamStats(),
-                matchOutput = '<table class="table"><thead><tr><th>Stat</th><th>Winner</th><th>Dif</th></tr></thead><tbody>';
+                tableItems = [],
+                row;
 
             _.each(user1Stats, function (value, key) {
-                matchOutput += '<tr>';
-                matchOutput += '    <td>' + key + '</td>';
+                row = [];
+                row.push(key);
                 if (user1Stats[key] ===  user2Stats[key]) {
-                    matchOutput += '    <td>Draw</td>';
-                    matchOutput += '    <td>-</td>';
+                    row.push('Draw');
+                    row.push('-');
                 } else if (user1Stats[key] > user2Stats[key]) {
-                    matchOutput += '    <td>' + App.player1.get('username') + '</td>';
-                    matchOutput += '    <td>+' + (user1Stats[key] - user2Stats[key]) + '</td>';
+                    row.push(App.player1.get('username'));
+                    row.push('+' + (user1Stats[key] - user2Stats[key]));
                 } else {
-                    matchOutput += '    <td>' + App.player2.get('username') + '</td>';
-                    matchOutput += '    <td>+' + (user2Stats[key] - user1Stats[key]) + '</td>';
+                    row.push(App.player2.get('username'));
+                    row.push('+' + (user2Stats[key] - user1Stats[key]));
                 }
-                matchOutput += '</tr>';
+                tableItems.push('<td>' + row.join('</td><td>') + '</td>');
             });
-            matchOutput += '<tbody></table>';
+            tableItems = '<tr>' + tableItems.join('</tr><tr>') + '</tr>';
 
-            this.$el.find('#match-details').html(matchOutput);
+            this.$el.find('#match-details table tbody').html(tableItems);
 
             this.$el.find('#startMatch').hide();
 

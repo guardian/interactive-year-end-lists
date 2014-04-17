@@ -1,42 +1,55 @@
-
 <% if(player1.details && player2.details) { %>
+
     <div class="row" style="clear:both;">
 
         <div class="col-xs-12">
-			<div class="row" style="clear:both;">
-				<div class="col-xs-4">
-					<h1 class="score"></h1>
-				</div>
-				<div class="col-xs-4">
-					<h2 class="time">90 <span>minutes</span></h2>
-				</div>
-				<div class="col-xs-4">
-					<h1 class="score"></h1>
-				</div>
-			</div>
+            <div class="row" style="clear:both;">
+                <div class="col-xs-4">
+                    <h1 class="score"></h1>
+                </div>
+                <div class="col-xs-4">
+                    <h2 class="time">90
+                        <span>minutes</span>
+                    </h2>
+                </div>
+                <div class="col-xs-4">
+                    <h1 class="score"></h1>
+                </div>
+            </div>
 
-			<button id="startMatch">Start Match</button>
+            <button id="startMatch">Start Match</button>
 
-			<div id="match-details"></div>
+            <div id="match-details">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Stat</th>
+                            <th>Winner</th>
+                            <th>Dif</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
 
-		</div>
+        </div>
 
-		<div class="col-xs-6">
-		    <h3><%= player1.details.username %></h3>
-			<div id="user1-pitch"></div>
-		</div>
-		<div class="col-xs-6">
-		    <h3><%= player2.details.username %></h3>
-			<div id="user2-pitch"></div>
-		</div>
-	</div>
+        <div class="col-xs-6">
+            <h3><%= player1.details.username %></h3>
+            <div id="user1-pitch"></div>
+        </div>
+        <div class="col-xs-6">
+            <h3><%= player2.details.username %></h3>
+            <div id="user2-pitch"></div>
+        </div>
+    </div>
 
 <% } else { %>
 
     <div class="row" style="clear:both;">
-		<div class="col-xs-12">
-		    <h1>Players warming up!</h1>
-		</div>
+        <div class="col-xs-12">
+            <h1>Players warming up!</h1>
+        </div>
     </div>
 
 <% } %>
