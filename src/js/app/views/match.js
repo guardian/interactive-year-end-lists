@@ -24,8 +24,8 @@ define([
         },
 
         initialize: function (options) {
-            this.listenTo(App.player1, 'change', this.render);
-            this.listenTo(App.player2, 'change', this.render);
+            this.listenTo(App.player1, 'change:teamSelection', this.render);
+            this.listenTo(App.player2, 'change:teamSelection', this.render);
 
             this.templateData = {
                 player1: {
@@ -46,7 +46,7 @@ define([
                     collection: App.player2TeamCollection
                 }).getTeamStats(),
                 matchOutput = '<table class="table"><thead><tr><th>Stat</th><th>Winner</th><th>Dif</th></tr></thead><tbody>';
-// TODO: perhaps change to underscore or include jquery
+
             _.each(user1Stats, function (key, value) {
                 matchOutput += '<tr>';
                 matchOutput += '    <td>' + key + '</td>';
@@ -86,7 +86,6 @@ define([
                     return true;
                 }
             }
-            console.log(res);
             return false;
         },
 
@@ -121,6 +120,7 @@ define([
                             playerArr.push(playerModel);
                         }
                     });
+                    console.log(playerArr);
                     if (user.get('startingUser') === 1) {
                         App.player1TeamCollection.reset(playerArr);
                     } else {
