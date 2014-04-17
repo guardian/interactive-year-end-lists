@@ -3,6 +3,18 @@ world-cup-2014-dream-team
 
 Choose your World Cup 2014 dream team
 
+REQUIREMENTS
+    * nodejs
+    * mongodb (for local db development)
+
+SETUP
+    Running locally will use a simulation of the Guardian next-gen site with a
+    debug user. Data is read and written to the live server so an internet
+    connection is required. 
+
+    > npm install
+    > grunt
+
 FOOTBALL PLAYER DATABASE
     The football player database is hosted on Google spreadsheets and is loaded
     into the application while in development. The data will be downloaded and

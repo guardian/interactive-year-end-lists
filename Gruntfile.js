@@ -1,6 +1,12 @@
 module.exports = function(grunt) {
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
+    settings: {
+      localWebServer:   'http://localhost:9000/',
+      remoteWebServer:  'http://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/'
+    },
 
     // Local web server
     connect: {
@@ -90,7 +96,7 @@ module.exports = function(grunt) {
         options: {
             replacements: [{
                 pattern: '\'@@useLocalEndpoint\'',
-                replacement: 'false'
+                replacement: grunt.option('localdb') ? 'true' : 'false'
             }]
         }
       },
@@ -99,7 +105,16 @@ module.exports = function(grunt) {
         options: {
             replacements: [{
                 pattern: '\'@@useDebugUser\'',
-                replacement: 'true'
+                replacement: 'true' 
+            }]
+        }
+      },
+      assetPath: {
+        files: { 'build/js/boot.js': 'build/js/boot.js' },
+        options: {
+            replacements: [{
+                pattern: /@@assetPath/gi,
+                replacement: '<%= settings.localWebServer %>'
             }]
         }
       }
