@@ -19,7 +19,6 @@ define([
         },
 
         getTeamStats: function () {
-
             var usersPlayers = this.collection.toJSON(),
                 stats = {
                     attack: 0,
@@ -39,22 +38,17 @@ define([
                 });
                 stats[key] = value;
             });
-
-            console.log(stats);
             return stats;
 
         },
 
         render: function () {
-
             if (!this.collection) {
                 return;
             }
-
             this.$el.html(this.template({
                 stats: this.getTeamStats()
             }));
-
             return this;
         }
 
