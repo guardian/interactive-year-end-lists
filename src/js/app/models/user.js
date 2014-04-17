@@ -93,7 +93,6 @@ define([
 
         fetchUserTeamFromStorage: function () {
             if (App.userDetails.get('teamSelection')) {
-
                 var playerArr = [];
                 App.userDetails.get('teamSelection').split(',').map(function (player) {
                     var playerSplit = player.split(':'),

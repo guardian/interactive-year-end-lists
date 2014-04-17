@@ -120,7 +120,6 @@ define([
                             playerArr.push(playerModel);
                         }
                     });
-                    console.log(playerArr);
                     if (user.get('startingUser') === 1) {
                         App.player1TeamCollection.reset(playerArr);
                     } else {
