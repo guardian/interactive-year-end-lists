@@ -47,7 +47,6 @@ define([
         },
 
         checkUserStatus: function () {
-
             var loggedIn = this.isUserLoggedIn();
             if (loggedIn) {
                 App.userDetails.set('guardianID', loggedIn.id);
