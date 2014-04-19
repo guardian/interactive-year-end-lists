@@ -1,0 +1,6 @@
+.table-players {
+    font-size: 12px;
+}
+td.total, tr.total {
+    font-weight: bold;
+}
