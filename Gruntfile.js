@@ -1,14 +1,19 @@
 module.exports = function(grunt) {
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
+    settings: {
+      localWebServer:   'http://localhost:9000/',
+      remoteWebServer:  'http://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/'
+    },
 
     // Local web server
     connect: {
       server: {
         options: {
           port: 9000,
-          base: 'build',
-          keepalive: true
+          base: 'build'
         }
       }
     },
@@ -75,7 +80,7 @@ module.exports = function(grunt) {
 
     // Fix to remove 'text!' AMD module names as CurlJS has problems them
     'string-replace': {
-      dist: {
+      requireFix: {
         files: {
           'build/js/boot.js': 'build/js/boot.js'
         },
@@ -84,6 +89,33 @@ module.exports = function(grunt) {
             pattern: /text!/ig,
             replacement: ''
           }]
+        }
+      },
+      enpoint: {
+        files: { 'build/js/boot.js': 'build/js/boot.js' },
+        options: {
+            replacements: [{
+                pattern: '\'@@useLocalEndpoint\'',
+                replacement: grunt.option('localdb') ? 'true' : 'false'
+            }]
+        }
+      },
+      debugUser: {
+        files: { 'build/js/boot.js': 'build/js/boot.js' },
+        options: {
+            replacements: [{
+                pattern: '\'@@useDebugUser\'',
+                replacement: 'true' 
+            }]
+        }
+      },
+      assetPath: {
+        files: { 'build/js/boot.js': 'build/js/boot.js' },
+        options: {
+            replacements: [{
+                pattern: /@@assetPath/gi,
+                replacement: '<%= settings.localWebServer %>'
+            }]
         }
       }
     },
@@ -159,5 +191,6 @@ module.exports = function(grunt) {
 
   // Tasks
   grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
-  grunt.registerTask('default', ['build', 'concurrent:watchers']);
+  grunt.registerTask('local-db', ['build', 'concurrent:watchers']);
+  grunt.registerTask('default', ['build', 'connect', 'watch']);
 };

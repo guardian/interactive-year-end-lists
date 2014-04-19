@@ -73,8 +73,8 @@ define([
 
     });
 
-    $('head').append('<link rel="stylesheet" href="https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/css/vendor.css" type="text/css" />');
-    $('head').append('<link rel="stylesheet" href="https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/css/main.css" type="text/css" />');
+    $('head').append('<link rel="stylesheet" href="@@assetPathcss/vendor.css" type="text/css" />');
+    $('head').append('<link rel="stylesheet" href="@@assetPathcss/main.css" type="text/css" />');
 
     /**
      * Bootstrap loader

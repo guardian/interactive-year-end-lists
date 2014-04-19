@@ -7,7 +7,7 @@ define([
 ) {
     return Backbone.Model.extend({
 
-        urlRoot: "http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users",
+        urlRoot: App.getEndpoint,
         idAttribute: '_id',
 
         defaults: {
@@ -48,6 +48,17 @@ define([
 
         checkUserStatus: function () {
             var loggedIn = this.isUserLoggedIn();
+
+            if (App.useDebugUser) {
+                loggedIn = {
+                    id: '000000000',
+                    displayName: 'DebugUser',
+                    publicFields: {
+                        displayName: 'DebugUser'
+                    }
+                };
+            }
+
             if (loggedIn) {
                 App.userDetails.set('guardianID', loggedIn.id);
                 App.userDetails.fetchByGuardianId({
