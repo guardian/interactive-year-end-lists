@@ -1,6 +1,47 @@
+dt {
+    margin-top: 10px;
+    display: block;
+    float: left;
+    width: 100%;
+    margin-bottom: 2px;
+    font-weight: normal;
+}
 .table-players {
     font-size: 12px;
 }
 td.total, tr.total {
     font-weight: bold;
+}
+h2 {
+    text-align: center;
+}
+#myChart {
+    width: 100px;
+    height: 100px;
+}
+
+.bar-fight dd {
+    float:left;
+    color: #fff;
+}
+.bar-fight dd.home, .bar-fight dd.away {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    padding: 3px 8px 0;
+    padding: 0.3rem 0.8rem 0;
+    background-color: #767676;
+    color: #ffffff;
+    font-weight: bold;
+    float: left;
+    margin: 0;
+    text-align: right;
+}
+.bar-fight dd.home {
+    text-align: left;
+    background: #005CA4;
+}
+.bar-fight dd.away {
+    background: #D51022;
 }
