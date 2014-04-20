@@ -221,14 +221,21 @@ function printStatistics() {
     $('.score-1').text(moments[1].goals.length);
     $('.score-2').text(moments[2].goals.length);
 
+    jQuery.each(moments[1].goals, function (userID, goalScorer) {
+        $('.incidents').append('<tr><td colspan="2">' + goalScorer + '</td></tr>');
+    });
+    jQuery.each(moments[2].goals, function (userID, goalScorer) {
+        $('.incidents').append('<tr><td></td><td>' + goalScorer + '</td></tr>');
+    });
+
     var possession = randomIntFromInterval(35, 65);
     var data = [{
-            value: possession,
-            color: "#F7464A"
+            value: (100 - possession),
+            color: "#D51022"
         },
         {
-            value: (100 - possession),
-            color: "#E2EAE9"
+            value: possession,
+            color: "#005CA4"
         }];
     var ctx = document.getElementById("myChart").getContext("2d");
     var myNewChart = new Chart(ctx).Doughnut(data);
@@ -306,7 +313,6 @@ function randomIntFromInterval(min, max) {
 
 function createTablesForView(timePeriods) {
     var container = $('#algors');
-    container.append('<div class="row"><div class="col-sm-6 match-stats"><h2><span class="score-1"></span> - <span class="score-2"></span></h2>   <dl class="bar-fight"></dl> </div> <div class="col-sm-6"> <canvas id="myChart"></canvas> </div> </div><hr>');
     jQuery.each(timePeriods, function (portion, timePeriod) {
         container.append('<div class="row timePeriod' + timePeriod + '"> <div class="col-sm-12"><h4 class="text-center">' + timePeriod + ' minutes gone</h4><br></div> <div class="col-sm-6"> <table class="players-1 table table-players table-bordered table-condensed "> <thead> <tr></tr> </thead> <tbody></tbody> </table> </div> <div class="col-sm-6"> <table class="players-2 table table-players table-bordered table-condensed "> <thead> <tr></tr> </thead> <tbody></tbody> </table> </div> </div><hr>');
     });

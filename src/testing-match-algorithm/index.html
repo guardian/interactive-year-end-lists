@@ -10,7 +10,7 @@
 
     <title>Testing Match</title>
 
-    <meta name = "viewport" content = "initial-scale = 1, user-scalable = no">
+    <meta name="viewport" content="initial-scale = 1, user-scalable = no">
 
     <link href="bootstrap.css" rel="stylesheet">
     <link href="theme.css" rel="stylesheet">
@@ -26,7 +26,25 @@
             <p>Colours are based on user 1 performance</p>
         </div>
 
-        <div id="algors"></div>
+        <div id="algors">
+
+            <div class="row">
+                <div class="col-sm-6 match-stats">
+                    <h2>
+                        <span class="score-1"></span>-
+                        <span class="score-2"></span>
+                    </h2>
+                    <table class="table table-condensed incidents">
+                    </table>
+                    <dl class="bar-fight"></dl>
+                </div>
+                <div class="col-sm-6">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            <hr>
+
+        </div>
 
     </div>
     <!-- /container -->

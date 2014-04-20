@@ -15,6 +15,9 @@ td.total, tr.total {
 h2 {
     text-align: center;
 }
+.incidents td {
+    width: 50%;
+}
 #myChart {
     width: 100px;
     height: 100px;
