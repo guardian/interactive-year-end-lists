@@ -291,7 +291,7 @@ function printStatistics() {
         shotsOnHome = randomIntFromInterval(moments[1].goals.length, moments[1].goals.length + 5),
         shotsOnAway = randomIntFromInterval(moments[2].goals.length, moments[2].goals.length + 5),
         shotsOffHome = randomIntFromInterval(shotsOnHome, shotsOnHome + 5),
-        shotsOffAway = randomIntFromInterval(shotsOffAway, shotsOnHome + 5),
+        shotsOffAway = randomIntFromInterval(shotsOnAway, shotsOnAway + 5),
         cornerHomePercentage,
         foulsHomePercentage,
         offsideHomePercentage;
@@ -354,9 +354,6 @@ function sortHighestAttack(a, b) {
 }
 
 function randomIntFromInterval(min, max) {
-    if (!min) {
-        min = 0;
-    }
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -368,10 +365,11 @@ function createTablesForView(timePeriods) {
 }
 
 function mode(array) {
-    if (array.length == 0)
+    if (array.length === 0) {
         return null;
-    var modeMap = {};
-    var maxEl = array[0],
+    }
+    var modeMap = {},
+        maxEl = array[0],
         maxCount = 1;
     for (var i = 0; i < array.length; i++) {
         var el = array[i];
