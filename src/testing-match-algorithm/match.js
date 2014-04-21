@@ -36,7 +36,7 @@ createTablesForView(timePeriods);
 
 $(function () {
 
-    jQuery.each(timePeriods, function (portion, timePeriod) {
+    $.each(timePeriods, function (portion, timePeriod) {
 
         var container = $('.timePeriod' + timePeriod),
             endOfPeriodStats = {
@@ -54,7 +54,7 @@ $(function () {
                 2: []
             };
 
-        jQuery.each(users, function (userID, players) {
+        $.each(users, function (userID, players) {
 
             var table = container.find('.players-' + userID),
                 theadItems = ['Position', 'name', 'unpredictability', 'attack', 'defense'],
@@ -64,19 +64,19 @@ $(function () {
                 },
                 tableItems = [],
                 total = [],
-                tmStats = jQuery.extend({}, tStats);
+                tmStats = $.extend({}, tStats);
 
             theadItems = '<td>' + theadItems.join('</td><td>') + '</td>';
             table.find('thead tr').html(theadItems);
 
-            jQuery.each(players, function (key, player) {
+            $.each(players, function (key, player) {
 
                 if (player.attack) {
 
                     var playerEffectedByUnpredictability = false,
                         positiveOrNegativeEffect = true,
                         row = [],
-                        modified = jQuery.extend({}, tStats),
+                        modified = $.extend({}, tStats),
                         decimalUnpredictability = (player.unpredictability / 100);
 
                     // Determines if player is even effected by his unpredictability
@@ -223,7 +223,7 @@ function calculateEndofPeriodScores(timePeriod, endOfPeriodStats, endOfPeriodPla
 function chanceFellTo(arrPlayers) {
     arrPlayers.sort(sortHighestAttack);
     var playerChances = [];
-    jQuery.each(arrPlayers, function (userID, players) {
+    $.each(arrPlayers, function (userID, players) {
         var i = 0,
             noOfArrayInstances = players.attack;
         while (i !== noOfArrayInstances) {
@@ -251,10 +251,10 @@ function printStatistics() {
         $('.incidents').after('<p>Man of the match: ' + mode(motm[rand]) + '</p>');
     }
 
-    jQuery.each(moments[1].goals, function (userID, goalScorer) {
+    $.each(moments[1].goals, function (userID, goalScorer) {
         $('.incidents').append('<tr><td colspan="2">' + goalScorer.name + ' <span>' + goalScorer.time + '</span></td></tr>');
     });
-    jQuery.each(moments[2].goals, function (userID, goalScorer) {
+    $.each(moments[2].goals, function (userID, goalScorer) {
         $('.incidents').append('<tr><td></td><td>' + goalScorer.name + ' <span>' + goalScorer.time + '</span></td></tr>');
     });
 
@@ -359,7 +359,7 @@ function randomIntFromInterval(min, max) {
 
 function createTablesForView(timePeriods) {
     var container = $('#algors');
-    jQuery.each(timePeriods, function (portion, timePeriod) {
+    $.each(timePeriods, function (portion, timePeriod) {
         container.append('<div class="row timePeriod' + timePeriod + '"> <div class="col-sm-12"><h4 class="text-center">' + timePeriod + ' minutes gone</h4><br></div> <div class="col-sm-6"> <table class="players-1 table table-players table-bordered table-condensed "> <thead> <tr></tr> </thead> <tbody></tbody> </table> </div> <div class="col-sm-6"> <table class="players-2 table table-players table-bordered table-condensed "> <thead> <tr></tr> </thead> <tbody></tbody> </table> </div> </div><hr>');
     });
 }
