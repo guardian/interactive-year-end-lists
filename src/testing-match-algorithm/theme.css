@@ -18,6 +18,13 @@ h2 {
 .incidents td {
     width: 50%;
 }
+.incidents span {
+    font-size: 11px;
+    color: #ccc;
+}
+.incidents span:after {
+    content: " min";
+}
 #myChart {
     width: 100px;
     height: 100px;

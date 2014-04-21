@@ -174,6 +174,7 @@ function calculateEndofPeriodScores(timePeriod, endOfPeriodStats, endOfPeriodPla
     var difAttack = (parseInt(endOfPeriodStats[1].attack, 10) - parseInt(endOfPeriodStats[2].attack, 10)),
         difDefense = (parseInt(endOfPeriodStats[1].defense, 10) - parseInt(endOfPeriodStats[2].defense, 10)),
         endTimeTotal = (difAttack + difDefense),
+        incidentTime = randomIntFromInterval((timePeriod - 15), timePeriod),
         scorer;
 
     if (endTimeTotal === 0) {
@@ -181,19 +182,19 @@ function calculateEndofPeriodScores(timePeriod, endOfPeriodStats, endOfPeriodPla
     } else if (endTimeTotal > 0) {
         scorer = chanceFellTo(endOfPeriodPlayers[1]);
         if (Math.random() >= 0.5) {
-            moments[1].goals.push(scorer);
+            moments[1].goals.push({name: scorer, time: incidentTime});
         } else {
             if (Math.random() >= 0.5) {
-                moments[1].missedChance.push(scorer);
+                moments[1].missedChance.push({name: scorer, time: incidentTime});
             }
         }
     } else {
         scorer = chanceFellTo(endOfPeriodPlayers[2]);
         if (Math.random() >= 0.5) {
-            moments[2].goals.push(scorer);
+            moments[2].goals.push({name: scorer, time: incidentTime});
         } else {
             if (Math.random() >= 0.5) {
-                moments[2].missedChance.push(scorer);
+                moments[2].missedChance.push({name: scorer, time: incidentTime});
             }
         }
     }
@@ -222,10 +223,10 @@ function printStatistics() {
     $('.score-2').text(moments[2].goals.length);
 
     jQuery.each(moments[1].goals, function (userID, goalScorer) {
-        $('.incidents').append('<tr><td colspan="2">' + goalScorer + '</td></tr>');
+        $('.incidents').append('<tr><td colspan="2">' + goalScorer.name + ' <span>' + goalScorer.time + '</span></td></tr>');
     });
     jQuery.each(moments[2].goals, function (userID, goalScorer) {
-        $('.incidents').append('<tr><td></td><td>' + goalScorer + '</td></tr>');
+        $('.incidents').append('<tr><td></td><td>' + goalScorer.name + ' <span>' + goalScorer.time + '</span></td></tr>');
     });
 
     var possession = randomIntFromInterval(35, 65);
