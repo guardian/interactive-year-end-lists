@@ -268,13 +268,19 @@ function printStatistics() {
             color: "#005CA4"
         }];
     var ctx = document.getElementById("myChart").getContext("2d");
-    var myNewChart = new Chart(ctx).Doughnut(data);
+    var myNewChart = new Chart(ctx).Doughnut(data, {
+        animation: false,
+        onAnimationComplete: function () {
+            ctx.fillStyle = '#888';
+            ctx.font = '30px sans-serif';
+            ctx.textBaseline = 'bottom';
+            ctx.fillText('%', 136, 93);
+            ctx.fillText(possession, 33, 93);
+            ctx.fillText((100 - possession), 230, 93);
+        }
+    });
 
     var barFight = $('.bar-fight');
-
-    barFight.append('<dt class="caption">Possession</dt>');
-    barFight.append('<dd class="home" style="width:' + possession + '%">' + possession + '%</dd>');
-    barFight.append('<dd class="away" style="width:' + (100 - possession) + '%">' + (100 - possession) + '%</dd>');
 
     var cornerHome = randomIntFromInterval(1, 9),
         cornerAway = randomIntFromInterval(1, 9),
@@ -282,9 +288,19 @@ function printStatistics() {
         foulsAway = randomIntFromInterval(1, 15),
         offsideHome = randomIntFromInterval(1, 7),
         offsideAway = randomIntFromInterval(1, 7),
+        shotsOnHome = randomIntFromInterval(moments[1].goals.length, moments[1].goals.length + 5),
+        shotsOnAway = randomIntFromInterval(moments[2].goals.length, moments[2].goals.length + 5),
+        shotsOffHome = randomIntFromInterval(shotsOnHome, shotsOnHome + 5),
+        shotsOffAway = randomIntFromInterval(shotsOffAway, shotsOnHome + 5),
         cornerHomePercentage,
         foulsHomePercentage,
         offsideHomePercentage;
+
+    barFight.append('<dt class="caption">Goal attempts</dt>');
+    barFight.append('<dd class="home off-target">' + shotsOffHome + '</dd>');
+    barFight.append('<dd class="away off-target">' + shotsOffAway + '</dd>');
+    barFight.append('<dd class="home on-target">' + shotsOnHome + '</dd>');
+    barFight.append('<dd class="away on-target">' + shotsOnAway + '</dd>');
 
     if (cornerHome === cornerAway) {
         cornerHomePercentage = 50;
@@ -338,6 +354,9 @@ function sortHighestAttack(a, b) {
 }
 
 function randomIntFromInterval(min, max) {
+    if (!min) {
+        min = 0;
+    }
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
