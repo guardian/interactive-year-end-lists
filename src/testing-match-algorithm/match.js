@@ -26,11 +26,15 @@ var matchContainer = $('.match-stats'),
             'redCard': [],
             'yellowCard': []
         }
+    },
+    motm = {
+        1: [],
+        2: []
     };
 
 createTablesForView(timePeriods);
 
-$(function() {
+$(function () {
 
     jQuery.each(timePeriods, function (portion, timePeriod) {
 
@@ -101,6 +105,10 @@ $(function() {
                     modified.attack = (player.attack * decimalUnpredictability).toFixed();
                     modified.defense = (player.defense * decimalUnpredictability).toFixed();
 
+                    if (decimalUnpredictability && positiveOrNegativeEffect) {
+                        motm[userID].push(player.name);
+                    }
+
                     if (!positiveOrNegativeEffect) {
                         if (Math.random() >= 0.5) {
 
@@ -165,7 +173,7 @@ $(function() {
 
 });
 
-$(window).load(function() {
+$(window).load(function () {
     printStatistics();
 });
 
@@ -182,19 +190,31 @@ function calculateEndofPeriodScores(timePeriod, endOfPeriodStats, endOfPeriodPla
     } else if (endTimeTotal > 0) {
         scorer = chanceFellTo(endOfPeriodPlayers[1]);
         if (Math.random() >= 0.5) {
-            moments[1].goals.push({name: scorer, time: incidentTime});
+            moments[1].goals.push({
+                name: scorer,
+                time: incidentTime
+            });
         } else {
             if (Math.random() >= 0.5) {
-                moments[1].missedChance.push({name: scorer, time: incidentTime});
+                moments[1].missedChance.push({
+                    name: scorer,
+                    time: incidentTime
+                });
             }
         }
     } else {
         scorer = chanceFellTo(endOfPeriodPlayers[2]);
         if (Math.random() >= 0.5) {
-            moments[2].goals.push({name: scorer, time: incidentTime});
+            moments[2].goals.push({
+                name: scorer,
+                time: incidentTime
+            });
         } else {
             if (Math.random() >= 0.5) {
-                moments[2].missedChance.push({name: scorer, time: incidentTime});
+                moments[2].missedChance.push({
+                    name: scorer,
+                    time: incidentTime
+                });
             }
         }
     }
@@ -221,6 +241,15 @@ function printStatistics() {
 
     $('.score-1').text(moments[1].goals.length);
     $('.score-2').text(moments[2].goals.length);
+
+    if (moments[1].goals.length > moments[2].goals.length) {
+        $('.incidents').after('<p>Man of the match: ' + mode(motm[1]) + '</p>');
+    } else if (moments[2].goals.length > moments[1].goals.length) {
+        $('.incidents').after('<p>Man of the match: ' + mode(motm[2]) + '</p>');
+    } else {
+        var rand = randomIntFromInterval(1, 2);
+        $('.incidents').after('<p>Man of the match: ' + mode(motm[rand]) + '</p>');
+    }
 
     jQuery.each(moments[1].goals, function (userID, goalScorer) {
         $('.incidents').append('<tr><td colspan="2">' + goalScorer.name + ' <span>' + goalScorer.time + '</span></td></tr>');
@@ -317,4 +346,24 @@ function createTablesForView(timePeriods) {
     jQuery.each(timePeriods, function (portion, timePeriod) {
         container.append('<div class="row timePeriod' + timePeriod + '"> <div class="col-sm-12"><h4 class="text-center">' + timePeriod + ' minutes gone</h4><br></div> <div class="col-sm-6"> <table class="players-1 table table-players table-bordered table-condensed "> <thead> <tr></tr> </thead> <tbody></tbody> </table> </div> <div class="col-sm-6"> <table class="players-2 table table-players table-bordered table-condensed "> <thead> <tr></tr> </thead> <tbody></tbody> </table> </div> </div><hr>');
     });
+}
+
+function mode(array) {
+    if (array.length == 0)
+        return null;
+    var modeMap = {};
+    var maxEl = array[0],
+        maxCount = 1;
+    for (var i = 0; i < array.length; i++) {
+        var el = array[i];
+        if (modeMap[el] == null)
+            modeMap[el] = 1;
+        else
+            modeMap[el]++;
+        if (modeMap[el] > maxCount) {
+            maxEl = el;
+            maxCount = modeMap[el];
+        }
+    }
+    return maxEl;
 }
