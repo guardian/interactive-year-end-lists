@@ -1,0 +1,22 @@
+{
+  "name": "world-cup-2014-dream-team-server",
+  "version": "0.0.1",
+  "description": "World Cup 2014 dream team server",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/GuardianInteractive/world-cup-2014-dream-team.git"
+  },
+  "author": "Guardian Interactive",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/GuardianInteractive/world-cup-2014-dream-team/issues"
+  },
+  "homepage": "https://github.com/GuardianInteractive/world-cup-2014-dream-team",
+  "devDependencies": {
+    "express": "^4.0.0",
+    "mongoose": "^3.8.8",
+    "cors": "^2.2.0",
+    "base64url": "0.0.6",
+    "body-parser": "^1.0.2"
+  }
+}

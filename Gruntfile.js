@@ -172,6 +172,19 @@ module.exports = function(grunt) {
             logConcurrentOutput: true
         }
       }
+    },
+
+    shell: {
+        deployServer: {
+            command: [
+                'cd ./server',
+                'scp server.js package.json ubuntu@ec2-54-195-231-244.eu-west-1.compute.amazonaws.com:/home/ubuntu/world-cup-2014-dreamteam/',
+                'ssh ubuntu@ec2-54-195-231-244.eu-west-1.compute.amazonaws.com "cd /home/ubuntu/world-cup-2014-dreamteam/ && ./afterDeploy.sh"'
+            ].join('&&'),
+            options: {
+                stdout: true
+            }
+        }
     }
 
   });
@@ -188,9 +201,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-string-replace');
+  grunt.loadNpmTasks('grunt-shell');
 
   // Tasks
   grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
   grunt.registerTask('local-db', ['build', 'concurrent:watchers']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
+  grunt.registerTask('deploy-server', 'shell');
 };
