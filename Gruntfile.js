@@ -11,10 +11,17 @@ module.exports = function(grunt) {
 
     // Local web server
     connect: {
-      server: {
+      server1: {
         options: {
           port: 9000,
           base: 'build'
+        }
+      },
+      server2: {
+        options: {
+            port: 9000,
+            base: 'build',
+            keepalive: true
         }
       }
     },
@@ -168,7 +175,7 @@ module.exports = function(grunt) {
     concurrent: {
       assets: ['requirejs', 'sass'],
       watchers: {
-        tasks: ['connect', 'nodemon', 'watch'],
+        tasks: ['connect:server2', 'nodemon', 'watch'],
         options: {
             logConcurrentOutput: true
         }
@@ -246,7 +253,7 @@ module.exports = function(grunt) {
   // Tasks
   grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
   grunt.registerTask('local-db', ['build', 'concurrent:watchers']);
-  grunt.registerTask('default', ['build', 'connect', 'watch']);
+  grunt.registerTask('default', ['build', 'connect:server1', 'watch']);
   grunt.registerTask('deploy-server', 'shell');
   grunt.registerTask('deploy-s3', 's3:prod');
   grunt.registerTask('deploy-s3-test', 's3:test');
