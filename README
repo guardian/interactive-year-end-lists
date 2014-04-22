@@ -15,6 +15,11 @@ SETUP
     > npm install
     > grunt
 
+GRUNT COMMANDS
+    > grunt                 - Start local web server using remote DB
+    > grunt local-db        - Use local mongoDB and test user
+    > grunt deploy-server   - Deploys and restarts EC2 server
+
 FOOTBALL PLAYER DATABASE
     The football player database is hosted on Google spreadsheets and is loaded
     into the application while in development. The data will be downloaded and
