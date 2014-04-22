@@ -24,10 +24,6 @@ define([
     Routes
 ) {
 
-
-    App.matchModel = new MatchModel();
-    App.matchModel.beginMatch();
-
     // Models
     App.userDetails = new UserModel();
     App.userDetails.setToolKitObject();
