@@ -5,7 +5,8 @@ module.exports = function(grunt) {
 
     settings: {
       localWebServer:   'http://localhost:9000/',
-      remoteWebServer:  'http://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/'
+      remoteWebServer:  'http://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/',
+      s3Folder: '/next-gen/football/ng-interactive/dream-team-test/'
     },
 
     // Local web server
@@ -185,6 +186,44 @@ module.exports = function(grunt) {
                 stdout: true
             }
         }
+    },
+
+    s3: {
+      test: {
+        options: {
+            bucket: 'gdn-cdn',
+            region: 'us-east-1',
+            access: 'public-read',
+            headers: {
+              'Cache-Control': 'max-age=60, public',
+            },
+            debug: true
+        },
+        upload: [
+          {
+            src: 'build/**/*',
+            dest: '<%= settings.s3Folder %>',
+            rel: 'build'
+          }
+        ]
+      },
+      prod: {
+        options: {
+            bucket: 'gdn-cdn',
+            region: 'us-east-1',
+            access: 'public-read',
+            headers: {
+              'Cache-Control': 'max-age=60, public',
+            }
+        },
+        upload: [
+          {
+            src: 'build/**/*',
+            dest: '<%= settings.s3Folder %>',
+            rel: 'build'
+          }
+        ]
+      }
     }
 
   });
@@ -202,10 +241,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-string-replace');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-s3');
 
   // Tasks
   grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
   grunt.registerTask('local-db', ['build', 'concurrent:watchers']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
   grunt.registerTask('deploy-server', 'shell');
+  grunt.registerTask('deploy-s3', 's3:prod');
+  grunt.registerTask('deploy-s3-test', 's3:test');
 };

@@ -21,6 +21,8 @@ GRUNT COMMANDS
     > grunt                 - Start local web server using remote DB
     > grunt local-db        - Use local mongoDB and test user
     > grunt deploy-server   - Deploys and restarts EC2 server
+    > grunt deploy-s3-test  - Test deploy to static assets to S3
+    > grunt deploy-s3       - Real deploy of static assets to S3
 
 FOOTBALL PLAYER DATABASE
     The football player database is hosted on Google spreadsheets and is loaded
