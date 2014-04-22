@@ -24,7 +24,7 @@ FOOTBALL PLAYER DATABASE
 
 
 URLs
-    The client side URL's are part of the guardina.com domain and use hash
+    The client side URL's are part of the guardinan.com domain and use hash
     fragments for routing.
 
     The base folder will act as the default route and will display the primary
@@ -66,8 +66,6 @@ USER DATASTORE
 
     db.users.ensureIndex( { 'guardianID': 1 }, { unique: true });
 
-
-
 USER DATA STRUCTURE
     {
         guardianID: String,     - User's Guardian ID
@@ -77,8 +75,23 @@ USER DATA STRUCTURE
 
 
 MATCH RESULTS
-    WIP
-    * What is stored in a result?
-    * How are results generated?
-    * Who can create results?
-    * How are results viewed and listed?
+    When a match is played against two users the result is stored in the
+    results collection. The initialising user needs to be logged in to create a
+    match result. A user can create new match results by playing the match
+    again. Each match result has an addressable ID that can be shared. The total
+    number of matches that two users have played against each over is displayed.
+
+    POST /results           - Create a new match result
+    GET  /results/:resultid - Get a result by ID
+
+RESULT MODEL
+    {
+        resultID: String    - Unique ID used to reference match result
+        user1: String       - User one's unique ID (Mongo object ID)
+        user2: String       - User two's unqiue ID (Mongo object ID)
+        user1Lineup: String - User one's team line-up
+        user2Lineup: String - User two's team line-up
+        user1Score: String  - User one score
+        user2Score: String  - User two score
+    }
+
