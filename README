@@ -5,6 +5,8 @@ Choose your World Cup 2014 dream team
 
 REQUIREMENTS
     * nodejs
+    * ssh
+    * scp
     * mongodb (for local db development)
 
 SETUP
