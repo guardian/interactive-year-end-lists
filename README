@@ -54,13 +54,42 @@ URLs
     PUT  /users/:userid     - Update user data
 
 
-USER DATASTORE
-    User's teams are stored in a Mongo database hosted on an Amazon EC2
-    instance.
+DATASTORE
+    User's team and match results are stored in a Mongo database hosted on an
+    Amazon EC2 instance.
 
     InstanceID: i-b701e6f4 (interactive:world-cup dream dream datastore)
     URL:        ec2-54-195-231-244.eu-west-1.compute.amazonaws.com
 
+    Access to the server is via the PEM file or by adding your SSH public key to
+    the authorized list.
+
+    The server is running a nodejs powered web server, expressJS, which talks to
+    a locally hosted monogo instance. The node script runs via the forever
+    launcher and will restart the process on error or file changes.
+
+    You can see the status of the server by logging in and running:
+
+    > forever list
+
+    info:    Forever processes running
+    data:    uid  command    script    forever pid  logfile    uptime         
+    data:    [0] uham /usr/bin/nodejs server.js 9960    9968
+             /home/ubuntu/.forever/uham.log 5:19:50:11.494i
+
+    The list command will show the status of the running process, how long its
+    been running for and the uid for manually stopping or restart it.
+
+    To start the server:
+
+    > forever --watch start server.js
+    
+    To stop or restart the server:
+
+    > forever stop [uid]
+    > forever restart [uid]
+
+    Any changed to required server modules will need fresh npm install.
 
     As part of the database set-up, ensure the user's Guardian ID is unique.
 
