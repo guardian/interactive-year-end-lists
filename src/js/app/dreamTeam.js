@@ -8,6 +8,7 @@ define([
     'views/user',
     'views/squad',
     'views/match',
+    'models/match',
     'routes'
 ], function (
     App,
@@ -19,8 +20,13 @@ define([
     UserView,
     SquadView,
     MatchView,
+    MatchModel,
     Routes
 ) {
+
+
+    App.matchModel = new MatchModel();
+    App.matchModel.beginMatch();
 
     // Models
     App.userDetails = new UserModel();
