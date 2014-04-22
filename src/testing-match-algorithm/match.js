@@ -258,31 +258,30 @@ function printStatistics() {
         $('.incidents').append('<tr><td></td><td>' + goalScorer.name + ' <span>' + goalScorer.time + '</span></td></tr>');
     });
 
-    var possession = randomIntFromInterval(35, 65);
-    var data = [{
+    var possession = randomIntFromInterval(35, 65),
+        data = [{
             value: (100 - possession),
             color: "#D51022"
         },
         {
             value: possession,
             color: "#005CA4"
-        }];
-    var ctx = document.getElementById("myChart").getContext("2d");
-    var myNewChart = new Chart(ctx).Doughnut(data, {
-        animation: false,
-        onAnimationComplete: function () {
-            ctx.fillStyle = '#888';
-            ctx.font = '30px sans-serif';
-            ctx.textBaseline = 'bottom';
-            ctx.fillText('%', 136, 93);
-            ctx.fillText(possession, 33, 93);
-            ctx.fillText((100 - possession), 230, 93);
-        }
-    });
+        }],
+        ctx = document.getElementById("myChart").getContext("2d"),
+        myNewChart = new Chart(ctx).Doughnut(data, {
+            animation: false,
+            onAnimationComplete: function () {
+                ctx.fillStyle = '#888';
+                ctx.font = '30px sans-serif';
+                ctx.textBaseline = 'bottom';
+                ctx.fillText('%', 136, 93);
+                ctx.fillText(possession, 33, 93);
+                ctx.fillText((100 - possession), 230, 93);
+            }
+        }),
+        barFight = $('.bar-fight'),
 
-    var barFight = $('.bar-fight');
-
-    var cornerHome = randomIntFromInterval(1, 9),
+        cornerHome = randomIntFromInterval(1, 9),
         cornerAway = randomIntFromInterval(1, 9),
         foulsHome = randomIntFromInterval(1, 15),
         foulsAway = randomIntFromInterval(1, 15),
@@ -384,5 +383,3 @@ function mode(array) {
     }
     return maxEl;
 }
-
-console.log(moments);
