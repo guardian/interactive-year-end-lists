@@ -87,7 +87,7 @@ $(function () {
                         row.push('<b>' + player.name + '</b>'); // Show bold so effected
 
                         // Player is effected, good or bad?
-                        if (Math.random() <= 0.5) {
+                        if (Math.random() >= 0.5) {
 
                             // Bad game!
                             positiveOrNegativeEffect = false;
@@ -384,3 +384,5 @@ function mode(array) {
     }
     return maxEl;
 }
+
+console.log(moments);
