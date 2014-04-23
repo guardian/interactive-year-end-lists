@@ -63,66 +63,69 @@ module.exports = {
                 for (var key in players) {
                     var player = players[key];
 
-                    var playerEffectedByUnpredictability = false,
-                        positiveOrNegativeEffect = true,
-                        modified = JSON.parse(JSON.stringify(tStats)),
-                        decimalUnpredictability = (player.unpredictability / 100);
+                    if (player.attack) {
 
-                    // Determines if player is even effected by his unpredictability
-                    if (Math.random() >= 0.5) {
-                        decimalUnpredictability = 0;
-                    } else {
-                        // Player is effected, good or bad?
+                        var playerEffectedByUnpredictability = false,
+                            positiveOrNegativeEffect = true,
+                            modified = JSON.parse(JSON.stringify(tStats)),
+                            decimalUnpredictability = (player.unpredictability / 100);
+
+                        // Determines if player is even effected by his unpredictability
                         if (Math.random() >= 0.5) {
-                            // Bad game!
-                            positiveOrNegativeEffect = false;
-                            if (player.starquality >= 18 && Math.random() >= 0.5) {
-                                // Star player given a second chance to redeem
-                                positiveOrNegativeEffect = true;
-                            }
-                        }
-                    }
-
-                    // Modified stats
-                    modified.attack = (player.attack * decimalUnpredictability).toFixed();
-                    modified.defense = (player.defense * decimalUnpredictability).toFixed();
-
-                    if (decimalUnpredictability && positiveOrNegativeEffect) {
-                        motmArr[userID].push(player.name);
-                    }
-
-                    if (!positiveOrNegativeEffect) {
-                        if (Math.random() >= 0.5) {
-
-                            // Effected both attack and defense
-                            modified.attack = -modified.attack;
-                            modified.defense = -modified.defense;
-
+                            decimalUnpredictability = 0;
                         } else {
-
-                            // Effected only attack or defense
+                            // Player is effected, good or bad?
                             if (Math.random() >= 0.5) {
-                                modified.attack = -modified.attack;
-                            } else {
-                                modified.defense = -modified.defense;
+                                // Bad game!
+                                positiveOrNegativeEffect = false;
+                                if (player.starquality >= 18 && Math.random() >= 0.5) {
+                                    // Star player given a second chance to redeem
+                                    positiveOrNegativeEffect = true;
+                                }
                             }
                         }
+
+                        // Modified stats
+                        modified.attack = (player.attack * decimalUnpredictability).toFixed();
+                        modified.defense = (player.defense * decimalUnpredictability).toFixed();
+
+                        if (decimalUnpredictability && positiveOrNegativeEffect) {
+                            motmArr[userID].push(player.name);
+                        }
+
+                        if (!positiveOrNegativeEffect) {
+                            if (Math.random() >= 0.5) {
+
+                                // Effected both attack and defense
+                                modified.attack = -modified.attack;
+                                modified.defense = -modified.defense;
+
+                            } else {
+
+                                // Effected only attack or defense
+                                if (Math.random() >= 0.5) {
+                                    modified.attack = -modified.attack;
+                                } else {
+                                    modified.defense = -modified.defense;
+                                }
+                            }
+                        }
+
+                        // Total them
+                        tStats.attack = parseInt(tStats.attack, 10) + parseInt(player.attack, 10);
+                        tStats.defense = parseInt(tStats.defense, 10) + parseInt(player.defense, 10);
+                        tmStats.attack = parseInt(tmStats.attack, 10) + parseInt(modified.attack, 10);
+                        tmStats.defense = parseInt(tmStats.defense, 10) + parseInt(modified.defense, 10);
+
+                        endOfPeriodPlayers[userID].push({
+                            name: player.name,
+                            attack: parseInt(player.attack, 10) + parseInt(modified.attack, 10)
+                        });
                     }
 
-                    // Total them
-                    tStats.attack = parseInt(tStats.attack, 10) + parseInt(player.attack, 10);
-                    tStats.defense = parseInt(tStats.defense, 10) + parseInt(player.defense, 10);
-                    tmStats.attack = parseInt(tmStats.attack, 10) + parseInt(modified.attack, 10);
-                    tmStats.defense = parseInt(tmStats.defense, 10) + parseInt(modified.defense, 10);
-
-                    endOfPeriodPlayers[userID].push({
-                        name: player.name,
-                        attack: parseInt(player.attack, 10) + parseInt(modified.attack, 10)
-                    });
+                    endOfPeriodStats[userID].attack = (parseInt(tStats.attack, 10) + parseInt(tmStats.attack, 10));
+                    endOfPeriodStats[userID].defense = (parseInt(tStats.defense, 10) + parseInt(tmStats.defense, 10));
                 }
-
-                endOfPeriodStats[userID].attack = (parseInt(tStats.attack, 10) + parseInt(tmStats.attack, 10));
-                endOfPeriodStats[userID].defense = (parseInt(tStats.defense, 10) + parseInt(tmStats.defense, 10));
             }
 
             moments = module.exports.calculateEndofPeriodScores(moments, timePeriod, endOfPeriodStats, endOfPeriodPlayers);
@@ -179,7 +182,6 @@ module.exports = {
     chanceFellTo: function (arrPlayers) {
         arrPlayers.sort(module.exports.sortHighestAttack);
         var playerChances = [];
-
         for (var key in arrPlayers) {
             var players = arrPlayers[key],
                 i = 0,
