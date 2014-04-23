@@ -104,6 +104,9 @@ DATASTORE
 
     db.users.ensureIndex( { 'guardianID': 1 }, { unique: true });
 
+    The datastore is backed-up on a nightly cronjob and uploaded to gdn-backup
+    bucket on S3.
+
 USER DATA STRUCTURE
     {
         guardianID: String,     - User's Guardian ID
