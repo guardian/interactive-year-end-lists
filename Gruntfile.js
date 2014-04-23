@@ -11,17 +11,11 @@ module.exports = function(grunt) {
 
     // Local web server
     connect: {
-      server1: {
+      server: {
         options: {
           port: 9000,
-          base: 'build'
-        }
-      },
-      server2: {
-        options: {
-            port: 9000,
-            base: 'build',
-            keepalive: true
+          base: 'build',
+          keepalive: true
         }
       }
     },
@@ -88,44 +82,44 @@ module.exports = function(grunt) {
 
     // Fix to remove 'text!' AMD module names as CurlJS has problems them
     'string-replace': {
-      requireFix: {
-        files: {
-          'build/js/boot.js': 'build/js/boot.js'
+        requireFix: {
+          files: {
+            'build/js/boot.js': 'build/js/boot.js'
+          },
+          options: {
+            replacements: [{
+              pattern: /text!/ig,
+              replacement: ''
+            }]
+          }
         },
-        options: {
-          replacements: [{
-            pattern: /text!/ig,
-            replacement: ''
-          }]
+        enpoint: {
+          files: { 'build/js/boot.js': 'build/js/boot.js' },
+          options: {
+              replacements: [{
+                  pattern: '\'@@useLocalEndpoint\'',
+                  replacement: (grunt.option('prod') || grunt.option('remotedb')) ? 'false' : 'true'
+              }]
+          }
+        },
+        debugUser: {
+          files: { 'build/js/boot.js': 'build/js/boot.js' },
+          options: {
+              replacements: [{
+                  pattern: '\'@@useDebugUser\'',
+                  replacement: grunt.option('prod') ? 'false' : 'true'
+              }]
+          }
+        },
+        assetPath: {
+          files: { 'build/js/boot.js': 'build/js/boot.js' },
+          options: {
+              replacements: [{
+                  pattern: /@@assetPath/gi,
+                  replacement: grunt.option('prod') ? '<%= settings.remoteWebServer %>' : '<%= settings.localWebServer %>'
+              }]
+          }
         }
-      },
-      enpoint: {
-        files: { 'build/js/boot.js': 'build/js/boot.js' },
-        options: {
-            replacements: [{
-                pattern: '\'@@useLocalEndpoint\'',
-                replacement: grunt.option('localdb') ? 'true' : 'false'
-            }]
-        }
-      },
-      debugUser: {
-        files: { 'build/js/boot.js': 'build/js/boot.js' },
-        options: {
-            replacements: [{
-                pattern: '\'@@useDebugUser\'',
-                replacement: 'true' 
-            }]
-        }
-      },
-      assetPath: {
-        files: { 'build/js/boot.js': 'build/js/boot.js' },
-        options: {
-            replacements: [{
-                pattern: /@@assetPath/gi,
-                replacement: '<%= settings.localWebServer %>'
-            }]
-        }
-      }
     },
 
     // Listen to file changes
@@ -175,7 +169,7 @@ module.exports = function(grunt) {
     concurrent: {
       assets: ['requirejs', 'sass'],
       watchers: {
-        tasks: ['connect:server2', 'nodemon', 'watch'],
+        tasks: ['connect:server', 'nodemon', 'watch'],
         options: {
             logConcurrentOutput: true
         }
@@ -252,9 +246,9 @@ module.exports = function(grunt) {
 
   // Tasks
   grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
-  grunt.registerTask('local-db', ['build', 'concurrent:watchers']);
-  grunt.registerTask('default', ['build', 'connect:server1', 'watch']);
-  grunt.registerTask('deploy-server', 'shell');
-  grunt.registerTask('deploy-s3', 's3:prod');
-  grunt.registerTask('deploy-s3-test', 's3:test');
+  grunt.registerTask('default', ['build', 'concurrent:watchers']);
+  grunt.registerTask('deploy-server', ['shell']);
+  grunt.registerTask('deploy-s3', ['build', 's3:prod']);
+  grunt.registerTask('deploy-s3-test', ['build', 's3:test']);
 };
+

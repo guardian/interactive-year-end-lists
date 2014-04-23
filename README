@@ -12,17 +12,17 @@ REQUIREMENTS
 SETUP
     Running locally will use a simulation of the Guardian next-gen site with a
     debug user. Data is read and written to the live server so an internet
-    connection is required. 
+    connection is required.
 
     > npm install
     > grunt
 
 GRUNT COMMANDS
-    > grunt                 - Start local web server using remote DB
-    > grunt local-db        - Use local mongoDB and test user
-    > grunt deploy-server   - Deploys and restarts EC2 server
-    > grunt deploy-s3-test  - Test deploy to static assets to S3
-    > grunt deploy-s3       - Real deploy of static assets to S3
+    > grunt                         - Start local web server using local DB
+    > grunt --remotedb              - Start local web server using remote DB
+    > grunt deploy-server           - Deploys and restarts EC2 server
+    > grunt deploy-s3-test --prod   - Test deploy to static assets to S3
+    > grunt deploy-s3 --prod        - Real deploy of static assets to S3
 
 FOOTBALL PLAYER DATABASE
     The football player database is hosted on Google spreadsheets and is loaded
@@ -53,12 +53,12 @@ URLs
     server. The server is a REST based API to a Mongo DB.
 
     http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/
-   
+
     The server accepts the following end-points:
 
     GET  /allusers          - DEBUG: Get all registered users
     GET  /users/?guardianID - Get user data by ID
-    GET  /users/:userid     - Get user data by 
+    GET  /users/:userid     - Get user data by
     POST /users/:userid     - Create user
     PUT  /users/:userid     - Update user data
 
@@ -82,7 +82,7 @@ DATASTORE
     > forever list
 
     info:    Forever processes running
-    data:    uid  command    script    forever pid  logfile    uptime         
+    data:    uid  command    script    forever pid  logfile    uptime
     data:    [0] uham /usr/bin/nodejs server.js 9960    9968
              /home/ubuntu/.forever/uham.log 5:19:50:11.494i
 
@@ -92,7 +92,7 @@ DATASTORE
     To start the server:
 
     > forever --watch start server.js
-    
+
     To stop or restart the server:
 
     > forever stop [uid]

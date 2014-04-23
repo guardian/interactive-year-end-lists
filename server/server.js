@@ -3,6 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var cors = require('cors');
+var verifyGuardianCookie = require('./verifyGuardianCookie');
 var app = express();
 
 // Restrict requests to known good domains
@@ -24,23 +25,6 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser());
 mongoose.connect("mongodb://localhost/test");
-
-
-var crypto = require('crypto');
-var base64url = require('base64url');
-var fs = require('fs');
-var pubKey = fs.readFileSync(__dirname +'/gu_prod_key.pub');
-
-function isCookieValid(cookieValue) {
-    var cookieDataBase64 = base64url.toBase64(cookieValue.split('.')[0]);
-    var cookieSigBase64 = base64url.toBase64(cookieValue.split('.')[1]);
-    var verifier = crypto.createVerify('sha256');
-    var buffer = new Buffer(cookieDataBase64, 'base64');
-
-    verifier.update(buffer);
-    return verifier.verify(pubKey, cookieSigBase64, 'base64');
-}
-
 
 // DB model
 var UserSchema = mongoose.Schema({
