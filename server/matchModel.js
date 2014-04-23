@@ -19,10 +19,13 @@ module.exports = {
                 2: JSON.parse(JSON.stringify(incidents)),
                 stats: {
                     possessionHome: 0,
+                    cornerHomePercent: 0,
                     cornerHome: 0,
                     cornerAway: 0,
+                    foulsHomePercent: 0,
                     foulsHome: 0,
                     foulsAway: 0,
+                    offsideHomePercent: 0,
                     offsideHome: 0,
                     offsideAway: 0,
                     shotsOnHome: 0,
@@ -222,6 +225,11 @@ module.exports = {
             shotsOffHome: module.exports.randBetween(moments.stats.shotsOnHome, moments.stats.shotsOnHome + 5),
             shotsOffAway: module.exports.randBetween(moments.stats.shotsOnAway, moments.stats.shotsOnAway + 5)
         };
+
+        moments.stats.cornerHomePercent = moments.stats.cornerHome / (moments.stats.cornerHome + moments.stats.cornerAway) * 100;
+        moments.stats.foulsHomePercent = moments.stats.foulsHome / (moments.stats.foulsHome + moments.stats.foulsAway) * 100;
+        moments.stats.offsideHomePercent = moments.stats.offsideHome / (moments.stats.offsideHome + moments.stats.offsideAway) * 100;
+
         return moments;
     },
 
