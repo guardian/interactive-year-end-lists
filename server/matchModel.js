@@ -1,68 +1,71 @@
 
-require(['jquery'], function( $ ) {
+module.exports = {
 
-    var attackDefenseScores = {
-            'attack': 0,
-            'defense': 0
-        },
-        incidents = {
-            injuries: [],
-            goals: [],
-            missedChance: [],
-            redCard: [],
-            yellowCard: []
-        },
-        moments = {
-            1: $.extend(true, {}, incidents),
-            2: $.extend(true, {}, incidents),
-            stats: {
-                possessionHome: 0,
-                cornerHome: 0,
-                cornerAway: 0,
-                foulsHome: 0,
-                foulsAway: 0,
-                offsideHome: 0,
-                offsideAway: 0,
-                shotsOnHome: 0,
-                shotsOnAway: 0,
-                shotsOffHome: 0,
-                shotsOffAway: 0
+    beginMatch: function (user1Players, user2Players) {
+
+        'use strict';
+
+        var attackDefenseScores = {
+                'attack': 0,
+                'defense': 0
             },
-            motm: null
-        },
-        motmArr = {
-            1: [],
-            2: []
-        };
+            incidents = {
+                injuries: [],
+                goals: [],
+                missedChance: [],
+                redCard: [],
+                yellowCard: []
+            },
+            moments = {
+                1: JSON.parse(JSON.stringify(incidents)),
+                2: JSON.parse(JSON.stringify(incidents)),
+                stats: {
+                    possessionHome: 0,
+                    cornerHome: 0,
+                    cornerAway: 0,
+                    foulsHome: 0,
+                    foulsAway: 0,
+                    offsideHome: 0,
+                    offsideAway: 0,
+                    shotsOnHome: 0,
+                    shotsOnAway: 0,
+                    shotsOffHome: 0,
+                    shotsOffAway: 0
+                },
+                motm: null
+            },
+            motmArr = {
+                1: [],
+                2: []
+            },
+            users = {
+                1: user1Players,
+                2: user2Players
+            };
 
-    function beginMatch(user1Players, user2Players) {
-
-        var users = {
-            1: user1Players,
-            2: user2Players
-        };
-
-        $.each([15, 30, 45, 60, 75, 90], function (index, timePeriod) {
+        [15, 30, 45, 60, 75, 90].forEach(function (timePeriod) {
 
             var endOfPeriodStats = {
-                1: $.extend(true, {}, attackDefenseScores),
-                2: $.extend(true, {}, attackDefenseScores)
+                1: JSON.parse(JSON.stringify(attackDefenseScores)),
+                2: JSON.parse(JSON.stringify(attackDefenseScores))
             },
                 endOfPeriodPlayers = {
                     1: [],
                     2: []
                 };
 
-            $.each(users, function (userID, players) {
+            for (var userID in users) {
+                var players = users[userID];
 
-                var tStats = $.extend(true, {}, attackDefenseScores),
-                    tmStats = $.extend(true, {}, attackDefenseScores);
+                var tStats = JSON.parse(JSON.stringify(attackDefenseScores)),
+                    tmStats = JSON.parse(JSON.stringify(attackDefenseScores));
 
-                $.each(players, function (key, player) {
+                for (var key in players) {
+                    var player = players[key];
 
                     var playerEffectedByUnpredictability = false,
                         positiveOrNegativeEffect = true,
-                        modified = $.extend({}, tStats),
+                        modified = JSON.parse(JSON.stringify(tStats)),
                         decimalUnpredictability = (player.unpredictability / 100);
 
                     // Determines if player is even effected by his unpredictability
@@ -116,31 +119,31 @@ require(['jquery'], function( $ ) {
                         name: player.name,
                         attack: parseInt(player.attack, 10) + parseInt(modified.attack, 10)
                     });
-                });
+                }
 
                 endOfPeriodStats[userID].attack = (parseInt(tStats.attack, 10) + parseInt(tmStats.attack, 10));
                 endOfPeriodStats[userID].defense = (parseInt(tStats.defense, 10) + parseInt(tmStats.defense, 10));
-            });
+            }
 
-            calculateEndofPeriodScores(timePeriod, endOfPeriodStats, endOfPeriodPlayers);
+            moments = module.exports.calculateEndofPeriodScores(moments, timePeriod, endOfPeriodStats, endOfPeriodPlayers);
         });
 
-        return finalStatistics();
-    }
+        return this.finalStatistics(moments, motmArr);
+    },
 
 
-    function calculateEndofPeriodScores(timePeriod, endOfPeriodStats, endOfPeriodPlayers) {
+    calculateEndofPeriodScores: function (moments, timePeriod, endOfPeriodStats, endOfPeriodPlayers) {
 
         var difAttack = (parseInt(endOfPeriodStats[1].attack, 10) - parseInt(endOfPeriodStats[2].attack, 10)),
             difDefense = (parseInt(endOfPeriodStats[1].defense, 10) - parseInt(endOfPeriodStats[2].defense, 10)),
             endTimeTotal = (difAttack + difDefense),
-            incidentTime = randBetween((timePeriod - 15), timePeriod),
+            incidentTime = module.exports.randBetween((timePeriod - 15), timePeriod),
             scorer;
 
         if (endTimeTotal === 0) {
 
         } else if (endTimeTotal > 0) {
-            scorer = chanceFellTo(endOfPeriodPlayers[1]);
+            scorer = module.exports.chanceFellTo(endOfPeriodPlayers[1]);
             if (Math.random() >= 0.5) {
                 moments[1].goals.push({
                     name: scorer,
@@ -155,7 +158,7 @@ require(['jquery'], function( $ ) {
                 }
             }
         } else {
-            scorer = chanceFellTo(endOfPeriodPlayers[2]);
+            scorer = module.exports.chanceFellTo(endOfPeriodPlayers[2]);
             if (Math.random() >= 0.5) {
                 moments[2].goals.push({
                     name: scorer,
@@ -170,50 +173,53 @@ require(['jquery'], function( $ ) {
                 }
             }
         }
-    }
+        return moments;
+    },
 
-    function chanceFellTo(arrPlayers) {
-        arrPlayers.sort(sortHighestAttack);
+    chanceFellTo: function (arrPlayers) {
+        arrPlayers.sort(module.exports.sortHighestAttack);
         var playerChances = [];
-        $.each(arrPlayers, function (userID, players) {
-            var i = 0,
+
+        for (var key in arrPlayers) {
+            var players = arrPlayers[key],
+                i = 0,
                 noOfArrayInstances = players.attack;
             while (i !== noOfArrayInstances) {
                 playerChances.push(players.name);
                 i++;
             }
-        });
+        }
         var idx = Math.floor(Math.random() * playerChances.length);
         return playerChances[idx];
-    }
+    },
 
-    function finalStatistics() {
+    finalStatistics: function (moments, motmArr) {
 
         // Man of the Match should be a member of the winning team
         if (moments[1].goals.length > moments[2].goals.length) {
-            moments.motm = mode(motmArr[1]);
+            moments.motm = module.exports.mode(motmArr[1]);
         } else if (moments[2].goals.length > moments[1].goals.length) {
-            moments.motm = mode(motmArr[2]);
+            moments.motm = module.exports.mode(motmArr[2]);
         } else {
-            moments.motm = mode(motmArr[randBetween(1, 2)]);
+            moments.motm = module.exports.mode(motmArr[module.exports.randBetween(1, 2)]);
         }
         moments.stats = {
-            possessionHome: randBetween(35, 65),
-            cornerHome: randBetween(1, 9),
-            cornerAway: randBetween(1, 9),
-            foulsHome: randBetween(1, 15),
-            foulsAway: randBetween(1, 15),
-            offsideHome: randBetween(1, 7),
-            offsideAway: randBetween(1, 7),
-            shotsOnHome: randBetween(moments[1].goals.length, moments[1].goals.length + 5),
-            shotsOnAway: randBetween(moments[2].goals.length, moments[2].goals.length + 5),
-            shotsOffHome: randBetween(moments.stats.shotsOnHome, moments.stats.shotsOnHome + 5),
-            shotsOffAway: randBetween(moments.stats.shotsOnAway, moments.stats.shotsOnAway + 5)
+            possessionHome: module.exports.randBetween(35, 65),
+            cornerHome: module.exports.randBetween(1, 9),
+            cornerAway: module.exports.randBetween(1, 9),
+            foulsHome: module.exports.randBetween(1, 15),
+            foulsAway: module.exports.randBetween(1, 15),
+            offsideHome: module.exports.randBetween(1, 7),
+            offsideAway: module.exports.randBetween(1, 7),
+            shotsOnHome: module.exports.randBetween(moments[1].goals.length, moments[1].goals.length + 5),
+            shotsOnAway: module.exports.randBetween(moments[2].goals.length, moments[2].goals.length + 5),
+            shotsOffHome: module.exports.randBetween(moments.stats.shotsOnHome, moments.stats.shotsOnHome + 5),
+            shotsOffAway: module.exports.randBetween(moments.stats.shotsOnAway, moments.stats.shotsOnAway + 5)
         };
         return moments;
-    }
+    },
 
-    function sortHighestAttack(a, b) {
+    sortHighestAttack: function (a, b) {
         if (a.attack < b.attack) {
             return -1;
         }
@@ -221,13 +227,13 @@ require(['jquery'], function( $ ) {
             return 1;
         }
         return 0;
-    }
+    },
 
-    function randBetween(min, max) {
+    randBetween: function (min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
-    }
+    },
 
-    function mode(array) {
+    mode: function (array) {
         if (array.length === 0) {
             return null;
         }
@@ -248,4 +254,4 @@ require(['jquery'], function( $ ) {
         return maxEl;
     }
 
-});
+};
