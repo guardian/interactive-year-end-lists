@@ -34,7 +34,13 @@
 
                     <h3 class="component__heading article__meta-heading">Match stats</h3>
 
-                    <h4 class="match-stats__caption">Possession</h4>
+                    <dl class="u-cf match-stats bar-fight">
+                        <dt class="match-stats__caption">Possession</dt>
+                            <dd class="bar-fight__bar bar-fight__bar--home" style="background-color: #eb121a; width: <%= matchDetails.stats.possessionHome %>%;"><%= matchDetails.stats.possessionHome %>%</dd>
+                            <dd class="bar-fight__bar bar-fight__bar--away" style="background-color: #005ca4; width: <%= 100 - matchDetails.stats.possessionHome %>%;"><%= 100 - matchDetails.stats.possessionHome %>%</dd>
+                    </dl>
+
+                    <br>
 
                     <h4 class="match-stats__caption">Goal attempts</h4>
                     <dl class="match-stats goal-attempts u-cf">
