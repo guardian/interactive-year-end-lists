@@ -50,6 +50,8 @@ define([
         App.playerCollection.fetchGoogleData();
         //App.playerCollection.fetchLocal(); // TODO: Enable in prod
 
+        App.matchModel = new MatchModel();
+
         Backbone.on('dataReady', function () {
 
             console.log('All done. Render all');

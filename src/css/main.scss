@@ -583,17 +583,22 @@ figure.interactive {
     h1.score {
         font-size: 3em;
         text-align: center;
+        margin: 0;
     }
-    h2.time {
-        font-size: 3em;
-        line-height: 1.1;
-        margin-bottom: 30px;
-        border-bottom: 1px dotted #ccc;
-        padding-bottom: 30px;
-        text-align: center;
+    p.scorer {
+        background: #efefef;
+        padding: 3px 6px;
+        margin: 0 0 7px 0;
+        float: left;
+        clear: both;
     }
-    h2.time span {
-        display: block;
-        font-size: 40%;
+    .home p.scorer {
+        float: right;
+    }
+    p.scorer span.time {
+        margin-left: 2px;
+    }
+    p.scorer span.time:before {
+        content: "'";
     }
 }

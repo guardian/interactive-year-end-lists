@@ -33,43 +33,19 @@ define([
                 },
                 player2: {
                     details: null
-                }
+                },
+                matchDetails: null
             };
         },
 
         startMatchTextGenerator: function () {
-
-            var user1Stats = new MatchStatsView({
-                    collection: App.player1TeamCollection
-                }).getTeamStats(),
-                user2Stats = new MatchStatsView({
-                    collection: App.player2TeamCollection
-                }).getTeamStats(),
-                tableItems = [],
-                row;
-
-            _.each(user1Stats, function (value, key) {
-                row = [];
-                row.push(key);
-                if (user1Stats[key] ===  user2Stats[key]) {
-                    row.push('Draw');
-                    row.push('-');
-                } else if (user1Stats[key] > user2Stats[key]) {
-                    row.push(App.player1.get('username'));
-                    row.push('+' + (user1Stats[key] - user2Stats[key]));
-                } else {
-                    row.push(App.player2.get('username'));
-                    row.push('+' + (user2Stats[key] - user1Stats[key]));
+            var _this = this;
+            App.matchModel.set({_id: 45}).fetch({
+                success: function() {
+                    _this.templateData.matchDetails = App.matchModel.toJSON();
+                    _this.render();
                 }
-                tableItems.push('<td>' + row.join('</td><td>') + '</td>');
             });
-            tableItems = '<tr>' + tableItems.join('</tr><tr>') + '</tr>';
-
-            this.$el.find('#match-details table tbody').html(tableItems);
-
-            this.$el.find('#startMatch').hide();
-
-            return false;
         },
 
         isReady: function () {
@@ -142,13 +118,11 @@ define([
             var readyForMatch = this.isReady();
 
             if (readyForMatch) {
-                this.templateData = {
-                    player1: {
-                        details: App.player1.toJSON()
-                    },
-                    player2: {
-                        details: App.player2.toJSON()
-                    }
+                this.templateData.player2 = {
+                    details: App.player2.toJSON()
+                };
+                this.templateData.player1 = {
+                    details: App.player1.toJSON()
                 };
             }
 
@@ -158,7 +132,6 @@ define([
 
             if (readyForMatch) {
                 this.renderTeams();
-                this.startMatchTextGenerator();
             }
 
             return this;
@@ -167,8 +140,8 @@ define([
         renderTeams: function () {
 
             var user1Pitch = new MatchLineupView({
-                    collection: App.player1TeamCollection
-                }),
+                collection: App.player1TeamCollection
+            }),
                 user1Stats = new MatchStatsView({
                     collection: App.player1TeamCollection
                 }),

@@ -3,8 +3,6 @@ module.exports = {
 
     beginMatch: function (user1Players, user2Players) {
 
-        'use strict';
-
         var attackDefenseScores = {
                 'attack': 0,
                 'defense': 0
@@ -21,10 +19,13 @@ module.exports = {
                 2: JSON.parse(JSON.stringify(incidents)),
                 stats: {
                     possessionHome: 0,
+                    cornerHomePercent: 0,
                     cornerHome: 0,
                     cornerAway: 0,
+                    foulsHomePercent: 0,
                     foulsHome: 0,
                     foulsAway: 0,
+                    offsideHomePercent: 0,
                     offsideHome: 0,
                     offsideAway: 0,
                     shotsOnHome: 0,
@@ -42,6 +43,10 @@ module.exports = {
                 1: user1Players,
                 2: user2Players
             };
+
+            users[1] = [{uid:"P015",countryname:"Brazil",name:"Roberto Carlos",position:"LB",attack:15,defense:10,discipline:10,creativity:12,unpredictability:14,volatility:8,starquality:15,rowNumber:15,countrycode:"br",imageSrc:null,wantedPosition:"LB"},{uid:"P029",countryname:"France",name:"Marcel Desailly",position:"CB",attack:6,defense:17,discipline:20,creativity:3,unpredictability:3,volatility:9,starquality:6,rowNumber:29,countrycode:"fr",imageSrc:null,wantedPosition:"CB"},{uid:"P026",countryname:"Italy",name:"Franco Baresi",position:"CB",attack:8,defense:20,discipline:20,creativity:6,unpredictability:3,volatility:2,starquality:20,rowNumber:26,countrycode:"it",imageSrc:null,wantedPosition:"CB"},{uid:"P052",countryname:"Germany",name:"Paul Breitner",position:"RB",attack:17,defense:18,discipline:20,creativity:12,unpredictability:10,volatility:5,starquality:17,rowNumber:52,countrycode:"de",imageSrc:null,wantedPosition:"RB"},{uid:"P092",countryname:"Portgual",name:"Cristiano Ronaldo",position:"MR",attack:19,defense:17,discipline:17,creativity:19,unpredictability:18,volatility:15,starquality:20,rowNumber:92,imageSrc:null,wantedPosition:"MR"},{uid:"P069",countryname:"France",name:"Michel Platini",position:"MC",attack:"",defense:"",discipline:"",creativity:"",unpredictability:"",volatility:"",starquality:"",rowNumber:69,countrycode:"fr",imageSrc:null,wantedPosition:"MC2"},{uid:"P070",countryname:"France",name:"Alain Giresse",position:"MC",attack:"",defense:"",discipline:"",creativity:"",unpredictability:"",volatility:"",starquality:"",rowNumber:70,countrycode:"fr",imageSrc:null,wantedPosition:"MC2"},{uid:"P058",countryname:"Holland",name:"Johan Cruyff",position:"ML",attack:"",defense:"",discipline:"",creativity:"",unpredictability:"",volatility:"",starquality:"",rowNumber:58,imageSrc:null,wantedPosition:"ML"},{uid:"P101",countryname:"Argentina",name:"Diego Maradona",position:"ST",attack:20,defense:12,discipline:7,creativity:20,unpredictability:20,volatility:20,starquality:20,rowNumber:101,countrycode:"ar",imageSrc:null,wantedPosition:"ST2"},{uid:"P107",countryname:"Argentina",name:"Mario Kempes",position:"ST",attack:17,defense:10,discipline:10,creativity:15,unpredictability:15,volatility:14,starquality:16,rowNumber:107,countrycode:"ar",imageSrc:null,wantedPosition:"ST2"},{uid:"P009",countryname:"Russia",name:"Rinat Dasayev",position:"GK",attack:0,defense:16,discipline:16,creativity:0,unpredictability:7,volatility:5,starquality:7,rowNumber:9,countrycode:"ru",imageSrc:null,wantedPosition:"GK"}];
+
+            users[2] = [{uid:"P026",countryname:"Italy",name:"Franco Baresi",position:"CB",attack:8,defense:20,discipline:20,creativity:6,unpredictability:3,volatility:2,starquality:20,rowNumber:26,countrycode:"it",imageSrc:null,wantedPosition:"CB"},{uid:"P100",countryname:"Brazil",name:"Pelé",position:"ST",attack:20,defense:12,discipline:7,creativity:20,unpredictability:20,volatility:17,starquality:20,rowNumber:100,countrycode:"br",imageSrc:null,wantedPosition:"ST"},{uid:"P101",countryname:"Argentina",name:"Diego Maradona",position:"ST",attack:20,defense:12,discipline:7,creativity:20,unpredictability:20,volatility:20,starquality:20,rowNumber:101,countrycode:"ar",imageSrc:null,wantedPosition:"ST2"},{uid:"P073",countryname:"Argentina",name:"Luis Monti",position:"MC",attack:12,defense:20,discipline:18,creativity:10,unpredictability:5,volatility:20,starquality:15,rowNumber:73,countrycode:"ar",imageSrc:null,wantedPosition:"MC"},{uid:"P063",countryname:"Hungary",name:"Zoltan Czibor",position:"ML",attack:"",defense:"",discipline:"",creativity:"",unpredictability:"",volatility:"",starquality:"",rowNumber:63,countrycode:"hu",imageSrc:null,wantedPosition:"ML"},{uid:"P069",countryname:"France",name:"Michel Platini",position:"MC",attack:"",defense:"",discipline:"",creativity:"",unpredictability:"",volatility:"",starquality:"",rowNumber:69,countrycode:"fr",imageSrc:null,wantedPosition:"MC2"},{uid:"P092",countryname:"Portgual",name:"Cristiano Ronaldo",position:"MR",attack:19,defense:17,discipline:17,creativity:19,unpredictability:18,volatility:15,starquality:20,rowNumber:92,imageSrc:null,wantedPosition:"MR"},{uid:"P050",countryname:"Brazil",name:"Djalma Santos",position:"RB",attack:"",defense:"",discipline:"",creativity:"",unpredictability:"",volatility:"",starquality:"",rowNumber:50,countrycode:"br",imageSrc:null,wantedPosition:"RB"},{uid:"P028",countryname:"Chile",name:"Elías Figueroa",position:"CB",attack:6,defense:17,discipline:20,creativity:3,unpredictability:3,volatility:9,starquality:6,rowNumber:28,imageSrc:null,wantedPosition:"CB2"},{uid:"P013",countryname:"Italy",name:"Paolo Maldini",position:"LB",attack:13,defense:19,discipline:18,creativity:10,unpredictability:7,volatility:3,starquality:12,rowNumber:13,countrycode:"it",imageSrc:null,wantedPosition:"LB"},{uid:"P007",countryname:"Italy",name:"Gianluigi Buffon",position:"GK",attack:0,defense:17,discipline:18,creativity:0,unpredictability:3,volatility:5,starquality:17,rowNumber:7,countrycode:"it",imageSrc:null,wantedPosition:"GK"}];
 
         [15, 30, 45, 60, 75, 90].forEach(function (timePeriod) {
 
@@ -131,7 +136,9 @@ module.exports = {
             moments = module.exports.calculateEndofPeriodScores(moments, timePeriod, endOfPeriodStats, endOfPeriodPlayers);
         });
 
-        return this.finalStatistics(moments, motmArr);
+        moments = this.finalStatistics(moments, motmArr);
+
+        return moments;
     },
 
 
@@ -218,6 +225,11 @@ module.exports = {
             shotsOffHome: module.exports.randBetween(moments.stats.shotsOnHome, moments.stats.shotsOnHome + 5),
             shotsOffAway: module.exports.randBetween(moments.stats.shotsOnAway, moments.stats.shotsOnAway + 5)
         };
+
+        moments.stats.cornerHomePercent = moments.stats.cornerHome / (moments.stats.cornerHome + moments.stats.cornerAway) * 100;
+        moments.stats.foulsHomePercent = moments.stats.foulsHome / (moments.stats.foulsHome + moments.stats.foulsAway) * 100;
+        moments.stats.offsideHomePercent = moments.stats.offsideHome / (moments.stats.offsideHome + moments.stats.offsideAway) * 100;
+
         return moments;
     },
 
