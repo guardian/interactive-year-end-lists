@@ -2,37 +2,30 @@
 
     <div class="row" style="clear:both;">
 
-        <div class="col-xs-12">
-            <div class="row" style="clear:both;">
-                <div class="col-xs-4">
-                    <h1 class="score"></h1>
+        <% if (matchDetails) { %>
+
+            <div class="col-xs-12">
+                <div class="row" style="clear:both;">
+                    <div class="col-xs-12">
+                        <h1 class="score"><%= matchDetails[1].goals.length %> - <%= matchDetails[2].goals.length %></h1>
+                    </div>
+                    <div class="col-xs-6 home">
+                        <% _.each(matchDetails[1].goals, function(player) { %>
+                            <p class="scorer"><%= player.name %><span class="time"><%= player.time %></span></p>
+                        <% }) %>
+                    </div>
+                    <div class="col-xs-6 away">
+                        <% _.each(matchDetails[2].goals, function(player) { %>
+                            <p class="scorer"><span class="time"><%= player.time %></span><%= player.name %></p>
+                        <% }) %>
+                    </div>
                 </div>
-                <div class="col-xs-4">
-                    <h2 class="time">90
-                        <span>minutes</span>
-                    </h2>
-                </div>
-                <div class="col-xs-4">
-                    <h1 class="score"></h1>
-                </div>
+
             </div>
 
-            <button id="startMatch">Start Match</button>
+        <% } %>
 
-            <div id="match-details">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Stat</th>
-                            <th>Winner</th>
-                            <th>Dif</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-
-        </div>
+        <button id="startMatch">Start Match</button>
 
         <div class="col-xs-6">
             <h3><%= player1.details.username %></h3>
