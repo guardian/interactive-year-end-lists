@@ -40,12 +40,18 @@ define([
 
         startMatchTextGenerator: function () {
             var _this = this;
-            App.matchModel.set({_id: 45}).fetch({
+
+            var matchDetails = {
+                user1: App.player1.get('guardianID'),
+                user2: App.player2.get('guardianID')
+            };
+
+            App.matchModel.save(matchDetails, {
                 success: function() {
                     _this.templateData.matchDetails = App.matchModel.toJSON();
                     _this.render();
                 }
-            });
+            }, {wait: true});
         },
 
         isReady: function () {

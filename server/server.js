@@ -15,11 +15,11 @@ var whitelist = [
     'http://test.theguardian.com:9000'
 ];
 var corsOptions = {
-        origin: function (origin, callback) {
-            var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
-            callback(null, originIsWhitelisted);
-        }
-    };
+    origin: function (origin, callback) {
+        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+        callback(null, originIsWhitelisted);
+    }
+};
 
 // Setup
 app.use(cors(corsOptions));
@@ -35,9 +35,36 @@ var UserSchema = mongoose.Schema({
 var User = mongoose.model('User', UserSchema);
 
 var MatchSchema = mongoose.Schema({
-    1: Array,
-    2: Array,
-    stats: Array,
+    1: {
+        injuries: Array,
+        goals: Array,
+        missedChance: Array,
+        redCard: Array,
+        yellowCard: Array
+    },
+    2: {
+        injuries: Array,
+        goals: Array,
+        missedChance: Array,
+        redCard: Array,
+        yellowCard: Array
+    },
+    stats: {
+        possessionHome: Number,
+        cornerHome: Number,
+        cornerAway: Number,
+        foulsHome: Number,
+        foulsAway: Number,
+        offsideHome: Number,
+        offsideAway: Number,
+        shotsOnHome: Number,
+        shotsOnAway: Number,
+        shotsOffHome: Number,
+        shotsOffAway: Number,
+        cornerHomePercent: Number,
+        foulsHomePercent: Number,
+        offsideHomePercent: Number
+    },
     motm: String
 });
 var Match = mongoose.model('Match', MatchSchema);
@@ -55,7 +82,9 @@ app.options('*', cors(corsOptions));
 // FIXME: DELETE THIS ROUTE
 app.get("/allusers", function (req, res) {
     User.find({}, function (err, docs) {
-        if (err) { throw err; }
+        if (err) {
+            throw err;
+        }
         res.send(docs);
     });
 });
@@ -74,8 +103,9 @@ app.get("/users/:_id", function (req, res) {
 
 app.get('/users', function (req, res) {
     var guardianID = req.param('guardianID');
-
-    User.findOne({ 'guardianID': guardianID }, function (err, user) {
+    User.findOne({
+        'guardianID': guardianID
+    }, function (err, user) {
         if (err) {
             res.status(404);
             res.jsonp(err);
@@ -92,7 +122,6 @@ app.post('/users', function (req, res) {
         guardianID: req.body.guardianID,
         username: req.body.username
     });
-
     newUser.save(function (err, product) {
         // If save failed send error response
         if (err) {
@@ -119,7 +148,6 @@ app.put("/users/:_id", function (req, res, next) {
         username: req.body.username,
         teamSelection: req.body.teamSelection
     };
-
     User.findByIdAndUpdate(req.param('_id'), userData, function (err, doc) {
         if (err) {
             res.status(500);
@@ -131,15 +159,73 @@ app.put("/users/:_id", function (req, res, next) {
 });
 
 
+app.get("/allmatches", function (req, res) {
+    Match.find({}, function (err, docs) {
+        if (err) {
+            throw err;
+        }
+        res.send(docs);
+    });
+});
+
 app.get("/match/:_id", function (req, res) {
+    Match.findById(req.param('_id'), function (err, user) {
+        if (err) {
+            res.status(404);
+            res.jsonp(err);
+        } else {
+            res.jsonp(user);
+        }
+    });
+});
 
-    var data = matchModel.beginMatch(1, 2);
-    res.jsonp(data);
+app.post("/match", function (req, res) {
 
+    User.find({
+        guardianID: {
+            $in: [req.param('user1'), req.param('user2')]
+        }
+    }, function (err, users) {
+        if (err) {
+            res.status(404);
+            res.jsonp(err);
+        } else {
+            if (users.length === 2) {
+                var teams = {
+                    1: null,
+                    2: null
+                };
+
+                users.forEach(function (user, key) {
+                    if (user.guardianID === req.param('user1')) {
+                        teams[1] = matchModel.getPlayersFromSelection(user.teamSelection);
+                    }
+                    if (user.guardianID === req.param('user2')) {
+                        teams[2] = matchModel.getPlayersFromSelection(user.teamSelection);
+                    }
+                });
+
+                var data = matchModel.beginMatch(teams[1], teams[2]);
+                var newMatch = new Match(data);
+                /*
+                newMatch.save(function (err, product) {
+                    // If save failed send error response
+                    if (err) {
+                        res.status(409);
+                        res.jsonp(err);
+                    } else {
+                        // Send back saved data with new mongo UID
+                        res.jsonp(product);
+                    }
+                });
+                */
+                res.jsonp(data);
+            }
+        }
+    });
 });
 
 // Start server
 var server = app.listen(3000, function () {
     console.log('Listening on port %d', server.address().port);
 });
-
