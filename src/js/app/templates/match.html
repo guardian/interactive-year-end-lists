@@ -18,6 +18,17 @@
                 </div>
 
                 <div class="col-xs-6 home">
+                    <% _.each(matchDetails[1].redCard, function(player) { %>
+                        <p class="scorer carded red"><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
+                    <% }) %>
+                </div>
+                <div class="col-xs-6 away">
+                    <% _.each(matchDetails[2].redCard, function(player) { %>
+                        <p class="scorer carded red"><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
+                    <% }) %>
+                </div>
+
+                <div class="col-xs-6 home">
                     <% _.each(matchDetails[1].yellowCard, function(player) { %>
                         <p class="scorer carded"><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
                     <% }) %>

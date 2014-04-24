@@ -613,5 +613,9 @@ figure.interactive {
     .home p.scorer.carded {
         margin: 0 0 4px 3px;
     }
+    p.scorer.carded.red {
+        background: red;
+        color: #fff;
+    }
 
 }

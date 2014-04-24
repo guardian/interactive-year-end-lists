@@ -49,6 +49,8 @@ module.exports = {
         moments[2].guardianID = user2.guardianID;
         moments[2].teamSelection = user2.teamSelection;
 
+        console.log('\n -------- NEW GAME --------');
+
         [15, 30, 45, 60, 75, 90].forEach(function (timePeriod) {
 
             var endOfPeriodStats = {
@@ -69,49 +71,55 @@ module.exports = {
                         tStats = JSON.parse(JSON.stringify(attackDefenseScores)),
                         tmStats = JSON.parse(JSON.stringify(attackDefenseScores));
 
+                    // 2% chance of red card
+                    if (Math.random() >= 0.99) {
+                        var playerName = module.exports.selectPlayerBasedOnProbability(players, 'volatility'),
+                            idx = module.exports.arrayObjectIndexOf(players, playerName, 'name');
+
+                        users[userID].splice(idx, 1);
+
+                        moments[userID].redCard.push({
+                            name: playerName,
+                            time: module.exports.randBetween((timePeriod - 15), timePeriod)
+                        });
+                    }
+
                     for (key in players) {
                         if (players.hasOwnProperty(key)) {
                             var player = players[key];
 
-                            if (player.attack) {
+                            if (player.name) {
 
-                                var playerEffectedByUnpredictability = false,
-                                    positiveOrNegativeEffect = true,
+                                var positiveEffect = true,
                                     modified = JSON.parse(JSON.stringify(tStats)),
-                                    decimalUnpredictability = (player.unpredictability / 100);
+                                    unpredictability = (player.unpredictability / 100);
 
                                 // Determines if player is even effected by his unpredictability
                                 if (Math.random() >= 0.5) {
-                                    decimalUnpredictability = 0;
+                                    unpredictability = 0;
                                 } else {
                                     // Player is effected, good or bad?
                                     if (Math.random() >= 0.5) {
                                         // Bad game!
-                                        positiveOrNegativeEffect = false;
-                                        if (player.starquality >= 18 && Math.random() >= 0.5) {
-                                            // Star player given a second chance to redeem
-                                            positiveOrNegativeEffect = true;
+                                        positiveEffect = false;
+                                        if (player.discipline >= 18 && Math.random() >= 0.5) {
+                                            // Disciplined player given a second chance to redeem
+                                            positiveEffect = true;
                                         }
                                     }
                                 }
 
                                 // Modified stats
-                                modified.attack = (player.attack * decimalUnpredictability).toFixed();
-                                modified.defense = (player.defense * decimalUnpredictability).toFixed();
+                                modified.attack = (player.attack * unpredictability).toFixed();
+                                modified.defense = (player.defense * unpredictability).toFixed();
 
-                                if (decimalUnpredictability && positiveOrNegativeEffect) {
-                                    motmArr[userID].push(player.name);
-                                }
-
-                                if (!positiveOrNegativeEffect) {
+                                if (!positiveEffect) {
                                     if (Math.random() >= 0.5) {
-
                                         // Effected both attack and defense
                                         modified.attack = -modified.attack;
                                         modified.defense = -modified.defense;
 
                                     } else {
-
                                         // Effected only attack or defense
                                         if (Math.random() >= 0.5) {
                                             modified.attack = -modified.attack;
@@ -137,6 +145,7 @@ module.exports = {
                         endOfPeriodStats[userID].attack = (parseInt(tStats.attack, 10) + parseInt(tmStats.attack, 10));
                         endOfPeriodStats[userID].defense = (parseInt(tStats.defense, 10) + parseInt(tmStats.defense, 10));
                     }
+                    console.log(timePeriod, 'mins', userID, ' - ', endOfPeriodStats[userID].attack, '/', endOfPeriodStats[userID].defense);
                 }
             }
 
@@ -155,33 +164,24 @@ module.exports = {
             difDefense = (parseInt(endOfPeriodStats[1].defense, 10) - parseInt(endOfPeriodStats[2].defense, 10)),
             endTimeTotal = (difAttack + difDefense),
             incidentTime = module.exports.randBetween((timePeriod - 15), timePeriod),
+            userID = 1,
             scorer;
 
-        if (endTimeTotal > 0) {
-            scorer = module.exports.chanceFellTo(endOfPeriodPlayers[1]);
+        if (endTimeTotal !== 0) {
+
+            if (endTimeTotal < 0) {
+                // User 2 won the period
+                userID = 2;
+            }
+            scorer = module.exports.selectPlayerBasedOnProbability(endOfPeriodPlayers[userID], 'attack');
             if (Math.random() >= 0.5) {
-                moments[1].goals.push({
+                moments[userID].goals.push({
                     name: scorer,
                     time: incidentTime
                 });
             } else if (endTimeTotal < 0) {
                 if (Math.random() >= 0.5) {
-                    moments[1].missedChance.push({
-                        name: scorer,
-                        time: incidentTime
-                    });
-                }
-            }
-        } else {
-            scorer = module.exports.chanceFellTo(endOfPeriodPlayers[2]);
-            if (Math.random() >= 0.5) {
-                moments[2].goals.push({
-                    name: scorer,
-                    time: incidentTime
-                });
-            } else {
-                if (Math.random() >= 0.5) {
-                    moments[2].missedChance.push({
+                    moments[userID].missedChance.push({
                         name: scorer,
                         time: incidentTime
                     });
@@ -191,15 +191,15 @@ module.exports = {
         return moments;
     },
 
-    chanceFellTo: function (arrPlayers) {
-        arrPlayers.sort(module.exports.sortHighestAttack);
+    selectPlayerBasedOnProbability: function (arrPlayers, statistic) {
+        arrPlayers.sort(module.exports.sortHighest(statistic));
         var playerChances = [],
             key;
         for (key in arrPlayers) {
             if (arrPlayers.hasOwnProperty(key)) {
                 var players = arrPlayers[key],
                     i = 0,
-                    noOfArrayInstances = players.attack;
+                    noOfArrayInstances = players[statistic];
                 while (i !== noOfArrayInstances) {
                     playerChances.push(players.name);
                     i += 1;
@@ -243,7 +243,6 @@ module.exports = {
             i = 0,
             idx,
             userID;
-
         while (i !== totalYellows) {
             userID = 1;
             if (Math.random() >= 0.5) {
@@ -264,14 +263,10 @@ module.exports = {
         return Math.floor(Math.random() * arr.length);
     },
 
-    sortHighestAttack: function (a, b) {
-        if (a.attack < b.attack) {
-            return -1;
-        }
-        if (a.attack > b.attack) {
-            return 1;
-        }
-        return 0;
+    sortHighest: function (prop) {
+        return function(a, b) {
+            return a[prop] - b[prop];
+        };
     },
 
     randBetween: function (min, max) {
@@ -302,6 +297,12 @@ module.exports = {
         return maxEl;
     },
 
+    arrayObjectIndexOf: function (myArray, searchTerm, property) {
+        for(var i = 0, len = myArray.length; i < len; i++) {
+            if (myArray[i][property] === searchTerm) return i;
+        }
+        return -1;
+    },
 
     getPlayersFromSelection: function (selection) {
         var playerCollection = [
