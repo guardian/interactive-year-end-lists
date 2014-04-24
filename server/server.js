@@ -36,6 +36,8 @@ var User = mongoose.model('User', UserSchema);
 
 var MatchSchema = mongoose.Schema({
     1: {
+        guardianID: String,
+        teamSelection: String,
         injuries: Array,
         goals: Array,
         missedChance: Array,
@@ -43,6 +45,8 @@ var MatchSchema = mongoose.Schema({
         yellowCard: Array
     },
     2: {
+        guardianID: String,
+        teamSelection: String,
         injuries: Array,
         goals: Array,
         missedChance: Array,
@@ -191,21 +195,25 @@ app.post("/match", function (req, res) {
             res.jsonp(err);
         } else {
             if (users.length === 2) {
-                var teams = {
-                    1: null,
-                    2: null
-                };
+                var userData = {
+                        1: {guardianID: null, teamSelection: null, players: null},
+                        2: {guardianID: null, teamSelection: null, players: null}
+                    };
 
                 users.forEach(function (user, key) {
                     if (user.guardianID === req.param('user1')) {
-                        teams[1] = matchModel.getPlayersFromSelection(user.teamSelection);
+                        userData[1].players = matchModel.getPlayersFromSelection(user.teamSelection);
+                        userData[1].guardianID = user.guardianID;
+                        userData[1].teamSelection = user.teamSelection;
                     }
                     if (user.guardianID === req.param('user2')) {
-                        teams[2] = matchModel.getPlayersFromSelection(user.teamSelection);
+                        userData[2].players = matchModel.getPlayersFromSelection(user.teamSelection);
+                        userData[2].guardianID = user.guardianID;
+                        userData[2].teamSelection = user.teamSelection;
                     }
                 });
 
-                var data = matchModel.beginMatch(teams[1], teams[2]);
+                var data = matchModel.beginMatch(userData[1], userData[2]);
                 var newMatch = new Match(data);
                 newMatch.save(function (err, product) {
                     // If save failed send error response

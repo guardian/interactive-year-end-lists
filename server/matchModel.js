@@ -1,7 +1,7 @@
 
 module.exports = {
 
-    beginMatch: function (user1Players, user2Players) {
+    beginMatch: function (user1, user2) {
 
         var attackDefenseScores = {
                 'attack': 0,
@@ -40,9 +40,14 @@ module.exports = {
                 2: []
             },
             users = {
-                1: user1Players,
-                2: user2Players
+                1: user1.players,
+                2: user2.players
             };
+
+        moments[1].guardianID = user1.guardianID;
+        moments[1].teamSelection = user1.teamSelection;
+        moments[2].guardianID = user2.guardianID;
+        moments[2].teamSelection = user2.teamSelection;
 
         [15, 30, 45, 60, 75, 90].forEach(function (timePeriod) {
 
