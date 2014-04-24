@@ -8,6 +8,7 @@ define([
     'views/user',
     'views/squad',
     'views/match',
+    'views/create-match',
     'models/match',
     'routes'
 ], function (
@@ -20,6 +21,7 @@ define([
     UserView,
     SquadView,
     MatchView,
+    CreateMatchView,
     MatchModel,
     Routes
 ) {
@@ -51,6 +53,7 @@ define([
         //App.playerCollection.fetchLocal(); // TODO: Enable in prod
 
         App.matchModel = new MatchModel();
+        App.createMatch = new CreateMatchView();
 
         Backbone.on('dataReady', function () {
 
