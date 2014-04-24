@@ -193,7 +193,6 @@ module.exports = function(grunt) {
       test: {
         options: {
             bucket: 'gdn-cdn',
-            region: 'us-east-1',
             access: 'public-read',
             headers: {
               'Cache-Control': 'max-age=60, public',
@@ -211,7 +210,6 @@ module.exports = function(grunt) {
       prod: {
         options: {
             bucket: 'gdn-cdn',
-            region: 'us-east-1',
             access: 'public-read',
             headers: {
               'Cache-Control': 'max-age=60, public',
