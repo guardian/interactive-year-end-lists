@@ -207,7 +207,6 @@ app.post("/match", function (req, res) {
 
                 var data = matchModel.beginMatch(teams[1], teams[2]);
                 var newMatch = new Match(data);
-                /*
                 newMatch.save(function (err, product) {
                     // If save failed send error response
                     if (err) {
@@ -218,8 +217,6 @@ app.post("/match", function (req, res) {
                         res.jsonp(product);
                     }
                 });
-                */
-                res.jsonp(data);
             }
         }
     });
