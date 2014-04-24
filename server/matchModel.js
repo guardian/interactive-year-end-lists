@@ -143,7 +143,7 @@ module.exports = {
             moments = module.exports.calculateEndofPeriodScores(moments, timePeriod, endOfPeriodStats, endOfPeriodPlayers);
         });
 
-        moments = this.finalStatistics(moments, motmArr);
+        moments = this.finalStatistics(moments, motmArr, users);
 
         return moments;
     },
@@ -194,9 +194,7 @@ module.exports = {
     chanceFellTo: function (arrPlayers) {
         arrPlayers.sort(module.exports.sortHighestAttack);
         var playerChances = [],
-            idx,
             key;
-
         for (key in arrPlayers) {
             if (arrPlayers.hasOwnProperty(key)) {
                 var players = arrPlayers[key],
@@ -208,11 +206,10 @@ module.exports = {
                 }
             }
         }
-        idx = Math.floor(Math.random() * playerChances.length);
-        return playerChances[idx];
+        return playerChances[module.exports.getRandItem(playerChances)];
     },
 
-    finalStatistics: function (moments, motmArr) {
+    finalStatistics: function (moments, motmArr, players) {
 
         // Man of the Match should be a member of the winning team
         if (moments[1].goals.length > moments[2].goals.length) {
@@ -222,6 +219,8 @@ module.exports = {
         } else {
             moments.motm = module.exports.mode(motmArr[module.exports.randBetween(1, 2)]);
         }
+
+        // Generate random stats
         moments.stats = {
             possessionHome: module.exports.randBetween(35, 65),
             cornerHome: module.exports.randBetween(1, 9),
@@ -235,12 +234,34 @@ module.exports = {
             shotsOffHome: module.exports.randBetween(moments.stats.shotsOnHome, moments.stats.shotsOnHome + 5),
             shotsOffAway: module.exports.randBetween(moments.stats.shotsOnAway, moments.stats.shotsOnAway + 5)
         };
-
         moments.stats.cornerHomePercent = (moments.stats.cornerHome / (moments.stats.cornerHome + moments.stats.cornerAway) * 100).toFixed();
         moments.stats.foulsHomePercent = (moments.stats.foulsHome / (moments.stats.foulsHome + moments.stats.foulsAway) * 100).toFixed();
         moments.stats.offsideHomePercent = (moments.stats.offsideHome / (moments.stats.offsideHome + moments.stats.offsideAway) * 100).toFixed();
 
+        // Generate yellow cards
+        var totalYellows = module.exports.randBetween(1, 6),
+            i = 0,
+            idx,
+            userID;
+
+        while (i !== totalYellows) {
+            userID = 1;
+            if (Math.random() >= 0.5) {
+                userID = 2;
+            }
+            idx = module.exports.getRandItem(players[userID]);
+            moments[userID].yellowCard.push({
+                name: players[userID][idx].name,
+                time: module.exports.randBetween(3, 94)
+            });
+            players[userID].splice(idx, 1);
+            i += 1;
+        }
         return moments;
+    },
+
+    getRandItem: function (arr) {
+        return Math.floor(Math.random() * arr.length);
     },
 
     sortHighestAttack: function (a, b) {

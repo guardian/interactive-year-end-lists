@@ -555,11 +555,13 @@ figure.interactive {
     }
 
     // Match screen
-    #match-screen button#startMatch {
-        display: block;
-        margin: 0 auto 20px;
-        clear: both;
+
+    #matchInfo {
+        float: left;
+        background: #66CD00;
+        margin: 0 15px 30px;
     }
+
     @media (min-width: 56.25em) {
         #match-screen .match-pitch-container .pitch,
         #users-screen .match-pitch-container .pitch {
@@ -601,4 +603,15 @@ figure.interactive {
     p.scorer span.time:before {
         content: "'";
     }
+
+    p.scorer.carded {
+        background: yellow;
+        font-size: 12px;
+        clear: none;
+        margin: 0 3px 4px 0;
+    }
+    .home p.scorer.carded {
+        margin: 0 0 4px 3px;
+    }
+
 }
