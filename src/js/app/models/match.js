@@ -9,7 +9,7 @@ define([
 ) {
     return Backbone.Model.extend({
 
-        urlRoot: 'http://test.theguardian.com:3000/match',
+        urlRoot: App.getEndpoint + 'match',
         idAttribute: '_id',
         defaults: {
             1: null,
