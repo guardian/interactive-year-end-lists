@@ -106,7 +106,7 @@ module.exports = {
                             if (player.name) {
 
                                 var positiveEffect = true,
-                                    modified = JSON.parse(JSON.stringify(tStats)),
+                                    modified = JSON.parse(JSON.stringify(attDef)),
                                     unpredictability = (player.unpredictability / 100);
 
                                 // Determines if player is even effected by his unpredictability
@@ -144,7 +144,7 @@ module.exports = {
                                     }
                                 }
 
-                                if (positiveEffect) {
+                                if (unpredictability && positiveEffect) {
                                     motmArr[userID].push(player.name);
                                 }
 
