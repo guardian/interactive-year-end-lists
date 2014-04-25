@@ -307,10 +307,13 @@ figure.interactive {
         height: 100%;
         left: 0;
         right: 0;
-        padding-top: 50px;
+        top: 0;
+        padding-top: 90px;
         font-size: 22px;
         font-weight: bold;
         z-index: 2;
+        color: #fff;
+        background: rgba(0,0,0,0.5);
     }
     .player_profile.isDragging {
         transform: scale(0.8);
@@ -579,7 +582,9 @@ figure.interactive {
     }
 
     @include do-country-gradient('england', #CF142B);
-    @include do-country-gradient('italy', #31c6df);
+    @include do-country-gradient('italy', #31C6DF);
+    @include do-country-gradient('germany', #FFCC00);
+
 
     // Match screen
 
