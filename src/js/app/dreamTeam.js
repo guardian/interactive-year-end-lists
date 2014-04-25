@@ -80,8 +80,8 @@ define([
 
     });
 
-    $('head').append('<link rel="stylesheet" href="@@assetPathcss/css/vendor.css" type="text/css" />');
-    $('head').append('<link rel="stylesheet" href="@@assetPathcss/css/main.css" type="text/css" />');
+    $('head').append('<link rel="stylesheet" href="@@assetPathcss/vendor.css" type="text/css" />');
+    $('head').append('<link rel="stylesheet" href="@@assetPathcss/main.css" type="text/css" />');
 
     /**
      * Bootstrap loader
