@@ -19,7 +19,7 @@ module.exports = {
     // Start match generator
     beginMatch: function (user1, user2) {
 
-        var attackDefenseScores = {
+        var attDef = {
                 'attack': 0,
                 'defense': 0
             },
@@ -69,11 +69,11 @@ module.exports = {
 
         [15, 30, 45, 60, 75, 90].forEach(function (timePeriod) {
 
-            var endOfPeriodStats = {
-                    1: JSON.parse(JSON.stringify(attackDefenseScores)),
-                    2: JSON.parse(JSON.stringify(attackDefenseScores))
+            var eopStats = {
+                    1: JSON.parse(JSON.stringify(attDef)),
+                    2: JSON.parse(JSON.stringify(attDef))
                 },
-                endOfPeriodPlayers = {
+                eopPlayers = {
                     1: [],
                     2: []
                 },
@@ -84,12 +84,12 @@ module.exports = {
                 if (users.hasOwnProperty(userID)) {
 
                     var players = users[userID],
-                        tStats = JSON.parse(JSON.stringify(attackDefenseScores)),
-                        tmStats = JSON.parse(JSON.stringify(attackDefenseScores));
+                        tStats = JSON.parse(JSON.stringify(attDef)),
+                        tmStats = JSON.parse(JSON.stringify(attDef));
 
                     // 2% chance of red card
                     if (Math.random() <= module.exports.getOdds('redCardGiven')) {
-                        var playerName = module.exports.selectPlayerBasedOnProbability(players, 'volatility'),
+                        var playerName = module.exports.fetchMostLikelyOn(players, 'volatility'),
                             idx = module.exports.arrayObjectIndexOf(players, playerName, 'name');
                         users[userID].splice(idx, 1);
 
@@ -154,21 +154,21 @@ module.exports = {
                                 tmStats.attack = parseInt(tmStats.attack, 10) + parseInt(modified.attack, 10);
                                 tmStats.defense = parseInt(tmStats.defense, 10) + parseInt(modified.defense, 10);
 
-                                endOfPeriodPlayers[userID].push({
+                                eopPlayers[userID].push({
                                     name: player.name,
                                     attack: parseInt(player.attack, 10) + parseInt(modified.attack, 10)
                                 });
                             }
                         }
 
-                        endOfPeriodStats[userID].attack = (parseInt(tStats.attack, 10) + parseInt(tmStats.attack, 10));
-                        endOfPeriodStats[userID].defense = (parseInt(tStats.defense, 10) + parseInt(tmStats.defense, 10));
+                        eopStats[userID].attack = (parseInt(tStats.attack, 10) + parseInt(tmStats.attack, 10));
+                        eopStats[userID].defense = (parseInt(tStats.defense, 10) + parseInt(tmStats.defense, 10));
                     }
-                    console.log(timePeriod, 'mins', userID, ' - ', endOfPeriodStats[userID].attack, '/', endOfPeriodStats[userID].defense);
+                    console.log(timePeriod, 'mins', userID, ' - ', eopStats[userID].attack, '/', eopStats[userID].defense);
                 }
             }
 
-            moments = module.exports.calculateEndofPeriodScores(moments, timePeriod, endOfPeriodStats, endOfPeriodPlayers);
+            moments = module.exports.fetchEopScores(moments, timePeriod, eopStats, eopPlayers);
         });
 
         moments = this.finalStatistics(moments, motmArr, users);
@@ -176,10 +176,9 @@ module.exports = {
         return moments;
     },
 
-    calculateEndofPeriodScores: function (moments, timePeriod, endOfPeriodStats, endOfPeriodPlayers) {
-
-        var difAttack = (parseInt(endOfPeriodStats[1].attack, 10) - parseInt(endOfPeriodStats[2].attack, 10)),
-            difDefense = (parseInt(endOfPeriodStats[1].defense, 10) - parseInt(endOfPeriodStats[2].defense, 10)),
+    fetchEopScores: function (moments, timePeriod, eopStats, eopPlayers) {
+        var difAttack = (parseInt(eopStats[1].attack, 10) - parseInt(eopStats[2].attack, 10)),
+            difDefense = (parseInt(eopStats[1].defense, 10) - parseInt(eopStats[2].defense, 10)),
             endTimeTotal = (difAttack + difDefense),
             incidentTime = module.exports.randBetween((timePeriod - 15), timePeriod),
             userID = 1,
@@ -191,7 +190,7 @@ module.exports = {
                 // User 2 won the period
                 userID = 2;
             }
-            scorer = module.exports.selectPlayerBasedOnProbability(endOfPeriodPlayers[userID], 'attack');
+            scorer = module.exports.fetchMostLikelyOn(eopPlayers[userID], 'attack');
             if (Math.random() <= module.exports.getOdds('chanceConversion')) {
                 moments[userID].goals.push({
                     name: scorer,
@@ -209,7 +208,7 @@ module.exports = {
         return moments;
     },
 
-    selectPlayerBasedOnProbability: function (arrPlayers, statistic) {
+    fetchMostLikelyOn: function (arrPlayers, statistic) {
         arrPlayers.sort(module.exports.sortHighest(statistic));
         var playerChances = [],
             key;
@@ -282,7 +281,7 @@ module.exports = {
     },
 
     sortHighest: function (prop) {
-        return function(a, b) {
+        return function (a, b) {
             return a[prop] - b[prop];
         };
     },
@@ -316,7 +315,7 @@ module.exports = {
     },
 
     arrayObjectIndexOf: function (myArray, searchTerm, property) {
-        for(var i = 0, len = myArray.length; i < len; i++) {
+        for (var i = 0, len = myArray.length; i < len; i++) {
             if (myArray[i][property] === searchTerm) return i;
         }
         return -1;
