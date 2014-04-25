@@ -144,6 +144,10 @@ module.exports = {
                                     }
                                 }
 
+                                if (positiveEffect) {
+                                    motmArr[userID].push(player.name);
+                                }
+
                                 // Total them
                                 tStats.attack = parseInt(tStats.attack, 10) + parseInt(player.attack, 10);
                                 tStats.defense = parseInt(tStats.defense, 10) + parseInt(player.defense, 10);
