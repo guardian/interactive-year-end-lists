@@ -1,6 +1,22 @@
 
 module.exports = {
 
+    /**
+     * Tweak algorithms here
+     */
+    getOdds: function (prop) {
+        // Percentages
+        var odds = {
+            playerEffected: 50,
+            playerEffectedBadly: 50,
+            chanceConversion: 50,
+            redCardGiven: 2
+        };
+        return (odds[prop] / 100);
+    },
+
+
+    // Start match generator
     beginMatch: function (user1, user2) {
 
         var attackDefenseScores = {
@@ -72,10 +88,9 @@ module.exports = {
                         tmStats = JSON.parse(JSON.stringify(attackDefenseScores));
 
                     // 2% chance of red card
-                    if (Math.random() >= 0.99) {
+                    if (Math.random() <= module.exports.getOdds('redCardGiven')) {
                         var playerName = module.exports.selectPlayerBasedOnProbability(players, 'volatility'),
                             idx = module.exports.arrayObjectIndexOf(players, playerName, 'name');
-
                         users[userID].splice(idx, 1);
 
                         moments[userID].redCard.push({
@@ -95,11 +110,11 @@ module.exports = {
                                     unpredictability = (player.unpredictability / 100);
 
                                 // Determines if player is even effected by his unpredictability
-                                if (Math.random() >= 0.5) {
+                                if (Math.random() <= module.exports.getOdds('playerEffected')) {
                                     unpredictability = 0;
                                 } else {
                                     // Player is effected, good or bad?
-                                    if (Math.random() >= 0.5) {
+                                    if (Math.random() <= module.exports.getOdds('playerEffectedBadly')) {
                                         // Bad game!
                                         positiveEffect = false;
                                         if (player.discipline >= 18 && Math.random() >= 0.5) {
@@ -157,7 +172,6 @@ module.exports = {
         return moments;
     },
 
-
     calculateEndofPeriodScores: function (moments, timePeriod, endOfPeriodStats, endOfPeriodPlayers) {
 
         var difAttack = (parseInt(endOfPeriodStats[1].attack, 10) - parseInt(endOfPeriodStats[2].attack, 10)),
@@ -174,13 +188,13 @@ module.exports = {
                 userID = 2;
             }
             scorer = module.exports.selectPlayerBasedOnProbability(endOfPeriodPlayers[userID], 'attack');
-            if (Math.random() >= 0.5) {
+            if (Math.random() <= module.exports.getOdds('chanceConversion')) {
                 moments[userID].goals.push({
                     name: scorer,
                     time: incidentTime
                 });
             } else if (endTimeTotal < 0) {
-                if (Math.random() >= 0.5) {
+                if (Math.random() <= module.exports.getOdds('chanceConversion')) {
                     moments[userID].missedChance.push({
                         name: scorer,
                         time: incidentTime
