@@ -65,8 +65,6 @@ module.exports = {
         moments[2].guardianID = user2.guardianID;
         moments[2].teamSelection = user2.teamSelection;
 
-        console.log('\n -------- NEW GAME --------');
-
         [15, 30, 45, 60, 75, 90].forEach(function (timePeriod) {
 
             var eopStats = {
@@ -87,7 +85,7 @@ module.exports = {
                         tStats = JSON.parse(JSON.stringify(attDef)),
                         tmStats = JSON.parse(JSON.stringify(attDef));
 
-                    // 2% chance of red card
+                    // Red card generator
                     if (Math.random() <= module.exports.getOdds('redCardGiven')) {
                         var playerName = module.exports.fetchMostLikelyOn(players, 'volatility'),
                             idx = module.exports.arrayObjectIndexOf(players, playerName, 'name');
@@ -103,77 +101,66 @@ module.exports = {
                         if (players.hasOwnProperty(key)) {
                             var player = players[key];
 
-                            if (player.name) {
+                            var positiveEffect = true,
+                                modified = JSON.parse(JSON.stringify(attDef)),
+                                unpredictability = (player.unpredictability / 100);
 
-                                var positiveEffect = true,
-                                    modified = JSON.parse(JSON.stringify(attDef)),
-                                    unpredictability = (player.unpredictability / 100);
-
-                                // Determines if player is even effected by his unpredictability
-                                if (Math.random() <= module.exports.getOdds('playerEffected')) {
-                                    unpredictability = 0;
-                                } else {
-                                    // Player is effected, good or bad?
-                                    if (Math.random() <= module.exports.getOdds('playerEffectedBadly')) {
-                                        // Bad game!
-                                        positiveEffect = false;
-                                        if (player.discipline >= 18 && Math.random() >= 0.5) {
-                                            // Disciplined player given a second chance to redeem
-                                            positiveEffect = true;
-                                        }
+                            // Determines if player is even effected by his unpredictability
+                            if (Math.random() <= module.exports.getOdds('playerEffected')) {
+                                unpredictability = 0;
+                            } else {
+                                // Player is effected, good or bad?
+                                if (Math.random() <= module.exports.getOdds('playerEffectedBadly')) {
+                                    // Bad game!
+                                    positiveEffect = false;
+                                    if (player.discipline >= 18 && Math.random() >= 0.5) {
+                                        // Disciplined player given a second chance to redeem
+                                        positiveEffect = true;
                                     }
                                 }
-
                                 // Modified stats
                                 modified.attack = (player.attack * unpredictability).toFixed();
                                 modified.defense = (player.defense * unpredictability).toFixed();
+                            }
 
-                                if (!positiveEffect) {
+                            if (!positiveEffect) {
+                                if (Math.random() >= 0.5) {
+                                    // Effected both attack and defense
+                                    modified.attack = -modified.attack;
+                                    modified.defense = -modified.defense;
+
+                                } else {
+                                    // Effected only attack or defense
                                     if (Math.random() >= 0.5) {
-                                        // Effected both attack and defense
                                         modified.attack = -modified.attack;
-                                        modified.defense = -modified.defense;
-
                                     } else {
-                                        // Effected only attack or defense
-                                        if (Math.random() >= 0.5) {
-                                            modified.attack = -modified.attack;
-                                        } else {
-                                            modified.defense = -modified.defense;
-                                        }
+                                        modified.defense = -modified.defense;
                                     }
                                 }
-
-                                if (unpredictability && positiveEffect) {
-                                    motmArr[userID].push(player.name);
-                                }
-
-                                // Total them
-                                tStats.attack = parseInt(tStats.attack, 10) + parseInt(player.attack, 10);
-                                tStats.defense = parseInt(tStats.defense, 10) + parseInt(player.defense, 10);
-                                tmStats.attack = parseInt(tmStats.attack, 10) + parseInt(modified.attack, 10);
-                                tmStats.defense = parseInt(tmStats.defense, 10) + parseInt(modified.defense, 10);
-
-                                eopPlayers[userID].push({
-                                    name: player.name,
-                                    attack: parseInt(player.attack, 10) + parseInt(modified.attack, 10)
-                                });
                             }
-                        }
 
-                        eopStats[userID].attack = (parseInt(tStats.attack, 10) + parseInt(tmStats.attack, 10));
-                        eopStats[userID].defense = (parseInt(tStats.defense, 10) + parseInt(tmStats.defense, 10));
+                            if (unpredictability && positiveEffect) {
+                                motmArr[userID].push(player.name);
+                            }
+
+                            tmStats.attack += (parseInt(player.attack, 10) + parseInt(modified.attack, 10));
+                            tmStats.defense += (parseInt(player.defense, 10) + parseInt(modified.defense, 10));
+
+                            eopPlayers[userID].push({
+                                name: player.name,
+                                attack: parseInt(player.attack, 10) + parseInt(modified.attack, 10)
+                            });
+
+                        }
+                        eopStats[userID].attack = tmStats.attack;
+                        eopStats[userID].defense = tmStats.defense;
                     }
-                    console.log(timePeriod, 'mins', userID, ' - ', eopStats[userID].attack, '/', eopStats[userID].defense);
                 }
             }
-
             moments = module.exports.fetchEopScores(moments, timePeriod, eopStats, eopPlayers);
         });
 
-        moments = this.finalStatistics(moments, motmArr, users);
-
-        return moments;
+        return this.finalStatistics(moments, motmArr, users);
     },
 
     fetchEopScores: function (moments, timePeriod, eopStats, eopPlayers) {
@@ -185,7 +172,6 @@ module.exports = {
             scorer;
 
         if (endTimeTotal !== 0) {
-
             if (endTimeTotal < 0) {
                 // User 2 won the period
                 userID = 2;
@@ -255,7 +241,7 @@ module.exports = {
         moments.stats.foulsHomePercent = (moments.stats.foulsHome / (moments.stats.foulsHome + moments.stats.foulsAway) * 100).toFixed();
         moments.stats.offsideHomePercent = (moments.stats.offsideHome / (moments.stats.offsideHome + moments.stats.offsideAway) * 100).toFixed();
 
-        // Generate yellow cards
+        // Yellow card generator
         var totalYellows = module.exports.randBetween(1, 6),
             i = 0,
             idx,
