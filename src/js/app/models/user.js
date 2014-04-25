@@ -7,7 +7,7 @@ define([
 ) {
     return Backbone.Model.extend({
 
-        urlRoot: App.getEndpoint + 'user',
+        urlRoot: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users',
         idAttribute: '_id',
 
         defaults: {

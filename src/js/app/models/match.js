@@ -9,7 +9,7 @@ define([
 ) {
     return Backbone.Model.extend({
 
-        urlRoot: App.getEndpoint + 'match',
+        urlRoot: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/match',
         idAttribute: '_id',
         defaults: {
             1: null,
