@@ -10,7 +10,7 @@
 
 	    <% if (!_.isEmpty(player.name)) { %>
             <li data-uid="<%= player.uid %>" data-position="<%= position %>" class="pitch-player pitch-player-taken position-<%= position.toLowerCase() %>">
-                <span class="player-icon" style="background-image:url('https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/players/placeholder_player.png')" title="Drop <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>"></span>
+                <span class="player-icon" style="background-image:url('https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/players/pele.jpg')" title="Drop <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>"></span>
                 <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
             </li>
 	    <% } else { %>
