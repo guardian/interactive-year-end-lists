@@ -2,12 +2,14 @@ define([
     'app',
     'backbone',
     'underscore',
+    'transit',
     'data/players',
     'text!templates/squad-modal.html'
 ], function (
     App,
     Backbone,
     _,
+    Transit,
     PlayerData,
     SquadModalTemplate
 ) {
@@ -41,12 +43,24 @@ define([
 
                 this.render();
 
-                this.$el.fadeIn('fast');
+                var _this = this;
+                this.$el.show().transition({
+                    scale: 1
+                }, function () {
+                    _this.$el.find('.flip-container').addClass('hover');
+                });
             }
         },
 
         closeCard: function () {
-            this.$el.fadeOut('fast');
+
+            var _this = this;
+            this.$el.transition({
+                scale: 0.001
+            }, function () {
+                _this.$el.find('.flip-container').addClass('hover');
+                _this.$el.hide();
+            });
             App.playerSelected.set('highlighted', 0);
             return false;
         },
