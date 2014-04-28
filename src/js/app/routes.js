@@ -16,10 +16,15 @@ define([
 
         showUser: function (playerid) {
             App.viewingPlayer.clear();
-            App.viewingPlayer.set({guardianID: playerid}).fetchByGuardianId();
-            App.$el.html(App.userView.render().$el);
-
-            App.userView.addToRecentlyViewed();
+            App.viewingPlayer.set({guardianID: playerid}).fetchByGuardianId({
+                success: (function () {
+                    App.$el.html(App.userView.render().$el);
+                    App.userView.addToRecentlyViewed();
+                }),
+                error: (function (e) {
+                    console.log('No user found!');
+                })
+            });
         },
 
         createMatch: function (player1id, player2id) {
