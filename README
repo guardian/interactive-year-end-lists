@@ -5,15 +5,24 @@ Choose your World Cup 2014 dream team
 
 REQUIREMENTS
     * nodejs
+    * ssh
+    * scp
     * mongodb (for local db development)
 
 SETUP
     Running locally will use a simulation of the Guardian next-gen site with a
     debug user. Data is read and written to the live server so an internet
-    connection is required. 
+    connection is required.
 
     > npm install
     > grunt
+
+GRUNT COMMANDS
+    > grunt                         - Start local web server using local DB
+    > grunt --remotedb              - Start local web server using remote DB
+    > grunt deploy-server           - Deploys and restarts EC2 server
+    > grunt deploy-s3-test --prod   - Test deploy to static assets to S3
+    > grunt deploy-s3 --prod        - Real deploy of static assets to S3
 
 FOOTBALL PLAYER DATABASE
     The football player database is hosted on Google spreadsheets and is loaded
@@ -24,7 +33,7 @@ FOOTBALL PLAYER DATABASE
 
 
 URLs
-    The client side URL's are part of the guardina.com domain and use hash
+    The client side URL's are part of the guardinan.com domain and use hash
     fragments for routing.
 
     The base folder will act as the default route and will display the primary
@@ -44,29 +53,59 @@ URLs
     server. The server is a REST based API to a Mongo DB.
 
     http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/
-   
+
     The server accepts the following end-points:
 
     GET  /allusers          - DEBUG: Get all registered users
     GET  /users/?guardianID - Get user data by ID
-    GET  /users/:userid     - Get user data by 
+    GET  /users/:userid     - Get user data by
     POST /users/:userid     - Create user
     PUT  /users/:userid     - Update user data
 
 
-USER DATASTORE
-    User's teams are stored in a Mongo database hosted on an Amazon EC2
-    instance.
+DATASTORE
+    User's team and match results are stored in a Mongo database hosted on an
+    Amazon EC2 instance.
 
     InstanceID: i-b701e6f4 (interactive:world-cup dream dream datastore)
     URL:        ec2-54-195-231-244.eu-west-1.compute.amazonaws.com
 
+    Access to the server is via the PEM file or by adding your SSH public key to
+    the authorized list.
+
+    The server is running a nodejs powered web server, expressJS, which talks to
+    a locally hosted monogo instance. The node script runs via the forever
+    launcher and will restart the process on error or file changes.
+
+    You can see the status of the server by logging in and running:
+
+    > forever list
+
+    info:    Forever processes running
+    data:    uid  command    script    forever pid  logfile    uptime
+    data:    [0] uham /usr/bin/nodejs server.js 9960    9968
+             /home/ubuntu/.forever/uham.log 5:19:50:11.494i
+
+    The list command will show the status of the running process, how long its
+    been running for and the uid for manually stopping or restart it.
+
+    To start the server:
+
+    > forever --watch start server.js
+
+    To stop or restart the server:
+
+    > forever stop [uid]
+    > forever restart [uid]
+
+    Any changed to required server modules will need fresh npm install.
 
     As part of the database set-up, ensure the user's Guardian ID is unique.
 
     db.users.ensureIndex( { 'guardianID': 1 }, { unique: true });
 
-
+    The datastore is backed-up on a nightly cronjob and uploaded to gdn-backup
+    bucket on S3.
 
 USER DATA STRUCTURE
     {
@@ -77,8 +116,23 @@ USER DATA STRUCTURE
 
 
 MATCH RESULTS
-    WIP
-    * What is stored in a result?
-    * How are results generated?
-    * Who can create results?
-    * How are results viewed and listed?
+    When a match is played against two users the result is stored in the
+    results collection. The initialising user needs to be logged in to create a
+    match result. A user can create new match results by playing the match
+    again. Each match result has an addressable ID that can be shared. The total
+    number of matches that two users have played against each over is displayed.
+
+    POST /results           - Create a new match result
+    GET  /results/:resultid - Get a result by ID
+
+RESULT MODEL
+    {
+        resultID: String    - Unique ID used to reference match result
+        user1: String       - User one's unique ID (Mongo object ID)
+        user2: String       - User two's unqiue ID (Mongo object ID)
+        user1Lineup: String - User one's team line-up
+        user2Lineup: String - User two's team line-up
+        user1Score: String  - User one score
+        user2Score: String  - User two score
+    }
+

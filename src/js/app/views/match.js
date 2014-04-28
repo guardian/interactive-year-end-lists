@@ -2,8 +2,8 @@ define([
     'app',
     'underscore',
     'backbone',
-    'views/match-lineup',
     'views/match-stats',
+    'views/match-lineup',
     'text!templates/match.html'
 ], function (
     App,
@@ -19,153 +19,45 @@ define([
         className: 'container',
         template: _.template(MatchTemplate),
 
-        events: {
-            'click #startMatch': 'startMatchTextGenerator'
-        },
-
-        initialize: function (options) {
-            this.listenTo(App.player1, 'change:teamSelection', this.render);
-            this.listenTo(App.player2, 'change:teamSelection', this.render);
-
-            this.templateData = {
-                player1: {
-                    details: null
-                },
-                player2: {
-                    details: null
-                }
-            };
-        },
-
-        startMatchTextGenerator: function () {
-
-            var user1Stats = new MatchStatsView({
-                    collection: App.player1TeamCollection
-                }).getTeamStats(),
-                user2Stats = new MatchStatsView({
-                    collection: App.player2TeamCollection
-                }).getTeamStats(),
-                tableItems = [],
-                row;
-
-            _.each(user1Stats, function (value, key) {
-                row = [];
-                row.push(key);
-                if (user1Stats[key] ===  user2Stats[key]) {
-                    row.push('Draw');
-                    row.push('-');
-                } else if (user1Stats[key] > user2Stats[key]) {
-                    row.push(App.player1.get('username'));
-                    row.push('+' + (user1Stats[key] - user2Stats[key]));
-                } else {
-                    row.push(App.player2.get('username'));
-                    row.push('+' + (user2Stats[key] - user1Stats[key]));
-                }
-                tableItems.push('<td>' + row.join('</td><td>') + '</td>');
-            });
-            tableItems = '<tr>' + tableItems.join('</tr><tr>') + '</tr>';
-
-            this.$el.find('#match-details table tbody').html(tableItems);
-
-            this.$el.find('#startMatch').hide();
-
-            return false;
-        },
-
-        isReady: function () {
-            if (this.userValidForMatch(App.player1) && this.userValidForMatch(App.player2)) {
-                return true;
-            }
-            return false;
-        },
-
-        userValidForMatch: function (player) {
-            var res = this.validateUser(player);
-            if (res.status === 'success') {
-                res = this.validateTeamSelection(player);
-                if (res.status === 'success') {
-                    return true;
-                }
-            }
-            return false;
-        },
-
-        validateUser: function (player) {
-            var res = {
-                status: 'fail',
-                message: ''
-            };
-            if (player.get('username')) {
-                res.status = 'success';
-            } else {
-                res.message = 'ID ' + player.get('guardianID') + ': data not in Mongo!';
-            }
-            return res;
-        },
-
-        validateTeamSelection: function (user) {
-            var res = {
-                status: 'fail',
-                message: ''
-            },
-                playerArr = [];
-            if (user.get('teamSelection')) {
-                if (user.get('teamSelection').split(',').length === 11) {
-                    user.get('teamSelection').split(',').map(function (player) {
-                        var playerSplit = player.split(':'),
-                            playerModel = App.playerCollection.findWhere({
-                                'uid': playerSplit[0]
-                            });
-                        playerModel.set('wantedPosition', playerSplit[1]);
-                        if (playerModel) {
-                            playerArr.push(playerModel);
-                        }
-                    });
-                    if (user.get('startingUser') === 1) {
-                        App.player1TeamCollection.reset(playerArr);
-                    } else {
-                        App.player2TeamCollection.reset(playerArr);
-                    }
-                    res.status = 'success';
-                } else {
-                    res.message = 'ID ' + user.get('guardianID') + ': not enough players!';
-                }
-            } else {
-                res.message = 'ID ' + user.get('guardianID') + ': Has no team selection!';
-            }
-            return res;
-        },
-
-
         render: function () {
 
-            var readyForMatch = this.isReady();
+            var matchDetails = App.matchModel.toJSON();
 
-            if (readyForMatch) {
-                this.templateData = {
-                    player1: {
-                        details: App.player1.toJSON()
-                    },
-                    player2: {
-                        details: App.player2.toJSON()
-                    }
-                };
-            }
+            this.placeTeamsIntoCollection(matchDetails[1].teamSelection, 1);
+            this.placeTeamsIntoCollection(matchDetails[2].teamSelection, 2);
+
+            this.templateData = {
+                matchDetails: matchDetails
+            };
 
             this.$el.empty();
             this.$el.html(this.template(this.templateData));
-            this.$el.append('<div id="match-pitches" class="row"></div>');
 
-            if (readyForMatch) {
-                this.renderTeams();
-                this.startMatchTextGenerator();
-            }
+            this.renderTeams();
 
             return this;
         },
 
-        renderTeams: function () {
+        placeTeamsIntoCollection: function (teamSelection, startingUser) {
+            var playerArr = [];
+            teamSelection.split(',').map(function (player) {
+                var playerSplit = player.split(':'),
+                    playerModel = App.playerCollection.findWhere({
+                        'uid': playerSplit[0]
+                    });
+                playerModel.set('wantedPosition', playerSplit[1]);
+                if (playerModel) {
+                    playerArr.push(playerModel);
+                }
+            });
+            if (startingUser === 1) {
+                App.player1TeamCollection.reset(playerArr);
+            } else {
+                App.player2TeamCollection.reset(playerArr);
+            }
+        },
 
+        renderTeams: function () {
             var user1Pitch = new MatchLineupView({
                     collection: App.player1TeamCollection
                 }),
@@ -180,16 +72,14 @@ define([
                 });
 
             // Push visualPrompt to view
-            this.$el.find('#user1-pitch').html(user1Pitch.render().$el);
-            this.$el.find('#user2-pitch').html(user2Pitch.render().$el);
+            this.$el.find('#user1-pitch').html(user1Stats.render().$el);
+            this.$el.find('#user2-pitch').html(user2Stats.render().$el);
 
-            this.$el.find('#user1-pitch').append(user1Stats.render().$el);
-            this.$el.find('#user2-pitch').append(user2Stats.render().$el);
+            this.$el.find('#user1-pitch').append(user1Pitch.render().$el);
+            this.$el.find('#user2-pitch').append(user2Pitch.render().$el);
 
             return this;
         }
-
-
 
     });
 });

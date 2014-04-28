@@ -1,55 +1,107 @@
-<% if(player1.details && player2.details) { %>
+<div class="row">
 
-    <div class="row" style="clear:both;">
+    <div class="col-xs-12 col-sm-8">
+        <div class="row">
+            <div id="matchInfo">
+                <div class="col-xs-12">
+                    <h1 class="score"><%= matchDetails[1].goals.length %> - <%= matchDetails[2].goals.length %></h1>
+                </div>
+                <div class="col-xs-6 home">
+                    <% _.each(matchDetails[1].goals, function(player) { %>
+                        <p class="scorer"><%= player.name %> <span class="time"><%= player.time %></span></p>
+                    <% }) %>
+                </div>
+                <div class="col-xs-6 away">
+                    <% _.each(matchDetails[2].goals, function(player) { %>
+                        <p class="scorer"><%= player.name %> <span class="time"><%= player.time %></span></p>
+                    <% }) %>
+                </div>
 
-        <div class="col-xs-12">
-            <div class="row" style="clear:both;">
-                <div class="col-xs-4">
-                    <h1 class="score"></h1>
+                <div class="col-xs-6 home">
+                    <% _.each(matchDetails[1].redCard, function(player) { %>
+                        <p class="scorer carded red"><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
+                    <% }) %>
                 </div>
-                <div class="col-xs-4">
-                    <h2 class="time">90
-                        <span>minutes</span>
-                    </h2>
+                <div class="col-xs-6 away">
+                    <% _.each(matchDetails[2].redCard, function(player) { %>
+                        <p class="scorer carded red"><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
+                    <% }) %>
                 </div>
-                <div class="col-xs-4">
-                    <h1 class="score"></h1>
+
+                <div class="col-xs-6 home">
+                    <% _.each(matchDetails[1].yellowCard, function(player) { %>
+                        <p class="scorer carded"><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
+                    <% }) %>
+                </div>
+                <div class="col-xs-6 away">
+                    <% _.each(matchDetails[2].yellowCard, function(player) { %>
+                        <p class="scorer carded"><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
+                    <% }) %>
+                </div>
+
+                <div class="col-xs-12">
+                    <p style="margin:15px 0;text-align:center;">Man of the match: <b><%= matchDetails.motm %></b></p>
                 </div>
             </div>
 
-            <button id="startMatch">Start Match</button>
-
-            <div id="match-details">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Stat</th>
-                            <th>Winner</th>
-                            <th>Dif</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <div class="col-xs-6">
+                <h3 style="text-align: center;"></h3>
+                <div id="user1-pitch"></div>
+            </div>
+            <div class="col-xs-6">
+                <h3 style="text-align: center;"></h3>
+                <div id="user2-pitch"></div>
             </div>
 
         </div>
 
-        <div class="col-xs-6">
-            <h3><%= player1.details.username %></h3>
-            <div id="user1-pitch"></div>
-        </div>
-        <div class="col-xs-6">
-            <h3><%= player2.details.username %></h3>
-            <div id="user2-pitch"></div>
+    </div>
+
+    <div class="col-xs-12 col-sm-4">
+        <div class="c-match-stats">
+
+            <h3 class="component__heading article__meta-heading">Match stats</h3>
+
+            <dl class="u-cf match-stats bar-fight">
+                <dt class="match-stats__caption">Possession</dt>
+                    <dd class="bar-fight__bar bar-fight__bar--home" style="background-color: #eb121a; width: <%= matchDetails.stats.possessionHome %>%;"><%= matchDetails.stats.possessionHome %>%</dd>
+                    <dd class="bar-fight__bar bar-fight__bar--away" style="background-color: #005ca4; width: <%= 100 - matchDetails.stats.possessionHome %>%;"><%= 100 - matchDetails.stats.possessionHome %>%</dd>
+            </dl>
+
+            <br>
+
+            <h4 class="match-stats__caption">Goal attempts</h4>
+            <dl class="match-stats goal-attempts u-cf">
+                <dt class="goal-attempts__label goal-attempts__label--off-target-home"><span class="u-h"></span>Off target</dt>
+                <dd class="goal-attempts__off-target goal-attempts__off-target--home" style="background-color: #eb121a;"><%= matchDetails.stats.shotsOffHome %></dd>
+                <dt class="goal-attempts__label goal-attempts__label--off-target-away"><span class="u-h"></span>Off target</dt>
+                <dd class="goal-attempts__off-target goal-attempts__off-target--away" style="background-color: #005ca4;"><%= matchDetails.stats.shotsOffAway %></dd>
+
+                <dt class="goal-attempts__label goal-attempts__label--on-target-home"><span class="u-h"></span>On target</dt>
+                <dd class="goal-attempts__on-target goal-attempts__on-target--home" style="background-color: #eb121a;"><%= matchDetails.stats.shotsOnHome %></dd>
+                <dt class="goal-attempts__label goal-attempts__label--on-target-away"><span class="u-h"></span>On target</dt>
+                <dd class="goal-attempts__on-target goal-attempts__on-target--away" style="background-color: #005ca4;"><%= matchDetails.stats.shotsOnAway %></dd>
+            </dl>
+
+            <dl class="u-cf match-stats bar-fight">
+                <dt class="match-stats__caption">Corners</dt>
+
+                    <dd class="bar-fight__bar bar-fight__bar--home" style="background-color: #eb121a; width: <%= matchDetails.stats.cornerHomePercent %>%;"><%= matchDetails.stats.cornerHome %></dd>
+                    <dd class="bar-fight__bar bar-fight__bar--away" style="background-color: #005ca4; width: <%= 100 - matchDetails.stats.cornerHomePercent %>%;"><%= matchDetails.stats.cornerAway %></dd>
+
+                <dt class="match-stats__caption">Fouls</dt>
+
+                    <dd class="bar-fight__bar bar-fight__bar--home" style="background-color: #eb121a; width: <%= matchDetails.stats.foulsHomePercent %>%;"><%= matchDetails.stats.foulsHome %></dd>
+                    <dd class="bar-fight__bar bar-fight__bar--away" style="background-color: #005ca4; width: <%= 100 - matchDetails.stats.foulsHomePercent %>%;"><%= matchDetails.stats.foulsAway %></dd>
+
+
+                <dt class="match-stats__caption">Offsides</dt>
+
+                    <dd class="bar-fight__bar bar-fight__bar--home" style="background-color: #eb121a; width: <%= matchDetails.stats.offsideHomePercent %>%;"><%= matchDetails.stats.offsideHome %></dd>
+                    <dd class="bar-fight__bar bar-fight__bar--away" style="background-color: #005ca4; width: <%= 100 - matchDetails.stats.offsideHomePercent %>%;"><%= matchDetails.stats.offsideAway %></dd>
+
+            </dl>
         </div>
     </div>
 
-<% } else { %>
-
-    <div class="row" style="clear:both;">
-        <div class="col-xs-12">
-            <h1>Players warming up!</h1>
-        </div>
-    </div>
-
-<% } %>
+</div>

@@ -5,7 +5,8 @@ module.exports = function(grunt) {
 
     settings: {
       localWebServer:   'http://localhost:9000/',
-      remoteWebServer:  'http://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/'
+      remoteWebServer:  'http://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/',
+      s3Folder: '/next-gen/football/ng-interactive/dream-team-test/'
     },
 
     // Local web server
@@ -13,7 +14,8 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 9000,
-          base: 'build'
+          base: 'build',
+          keepalive: true
         }
       }
     },
@@ -80,44 +82,44 @@ module.exports = function(grunt) {
 
     // Fix to remove 'text!' AMD module names as CurlJS has problems them
     'string-replace': {
-      requireFix: {
-        files: {
-          'build/js/boot.js': 'build/js/boot.js'
+        requireFix: {
+          files: {
+            'build/js/boot.js': 'build/js/boot.js'
+          },
+          options: {
+            replacements: [{
+              pattern: /text!/ig,
+              replacement: ''
+            }]
+          }
         },
-        options: {
-          replacements: [{
-            pattern: /text!/ig,
-            replacement: ''
-          }]
+        enpoint: {
+          files: { 'build/js/boot.js': 'build/js/boot.js' },
+          options: {
+              replacements: [{
+                  pattern: '\'@@useLocalEndpoint\'',
+                  replacement: (grunt.option('prod') || grunt.option('remotedb')) ? 'false' : 'true'
+              }]
+          }
+        },
+        debugUser: {
+          files: { 'build/js/boot.js': 'build/js/boot.js' },
+          options: {
+              replacements: [{
+                  pattern: '\'@@useDebugUser\'',
+                  replacement: grunt.option('prod') ? 'false' : 'true'
+              }]
+          }
+        },
+        assetPath: {
+          files: { 'build/js/boot.js': 'build/js/boot.js' },
+          options: {
+              replacements: [{
+                  pattern: /@@assetPath/gi,
+                  replacement: grunt.option('prod') ? '<%= settings.remoteWebServer %>' : '<%= settings.localWebServer %>'
+              }]
+          }
         }
-      },
-      enpoint: {
-        files: { 'build/js/boot.js': 'build/js/boot.js' },
-        options: {
-            replacements: [{
-                pattern: '\'@@useLocalEndpoint\'',
-                replacement: grunt.option('localdb') ? 'true' : 'false'
-            }]
-        }
-      },
-      debugUser: {
-        files: { 'build/js/boot.js': 'build/js/boot.js' },
-        options: {
-            replacements: [{
-                pattern: '\'@@useDebugUser\'',
-                replacement: 'true' 
-            }]
-        }
-      },
-      assetPath: {
-        files: { 'build/js/boot.js': 'build/js/boot.js' },
-        options: {
-            replacements: [{
-                pattern: /@@assetPath/gi,
-                replacement: '<%= settings.localWebServer %>'
-            }]
-        }
-      }
     },
 
     // Listen to file changes
@@ -167,10 +169,59 @@ module.exports = function(grunt) {
     concurrent: {
       assets: ['requirejs', 'sass'],
       watchers: {
-        tasks: ['connect', 'nodemon', 'watch'],
+        tasks: ['connect:server', 'nodemon', 'watch'],
         options: {
             logConcurrentOutput: true
         }
+      }
+    },
+
+    shell: {
+        deployServer: {
+            command: [
+                'cd ./server',
+                'rsync -vt ./* ubuntu@ec2-54-195-231-244.eu-west-1.compute.amazonaws.com:/home/ubuntu/world-cup-2014-dreamteam/',
+                'ssh ubuntu@ec2-54-195-231-244.eu-west-1.compute.amazonaws.com "cd /home/ubuntu/world-cup-2014-dreamteam/ && ./afterDeploy.sh"'
+            ].join('&&'),
+            options: {
+                stdout: true
+            }
+        }
+    },
+
+    s3: {
+      test: {
+        options: {
+            bucket: 'gdn-cdn',
+            access: 'public-read',
+            headers: {
+              'Cache-Control': 'max-age=60, public',
+            },
+            debug: true
+        },
+        upload: [
+          {
+            src: 'build/**/*',
+            dest: '<%= settings.s3Folder %>',
+            rel: 'build'
+          }
+        ]
+      },
+      prod: {
+        options: {
+            bucket: 'gdn-cdn',
+            access: 'public-read',
+            headers: {
+              'Cache-Control': 'max-age=60, public',
+            }
+        },
+        upload: [
+          {
+            src: 'build/**/*',
+            dest: '<%= settings.s3Folder %>',
+            rel: 'build'
+          }
+        ]
       }
     }
 
@@ -188,9 +239,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-string-replace');
+  grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-s3');
 
   // Tasks
   grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
-  grunt.registerTask('local-db', ['build', 'concurrent:watchers']);
-  grunt.registerTask('default', ['build', 'connect', 'watch']);
+  grunt.registerTask('default', ['build', 'concurrent:watchers']);
+  grunt.registerTask('deploy-server', ['shell']);
+  grunt.registerTask('deploy-s3', ['build', 's3:prod']);
+  grunt.registerTask('deploy-s3-test', ['build', 's3:test']);
 };
+

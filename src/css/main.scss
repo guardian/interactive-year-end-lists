@@ -222,53 +222,80 @@ figure.interactive {
     }
     .player_profile {
         text-align: center;
-        margin-bottom: 7px;
+        margin-bottom: 25px;
         cursor: pointer;
         transition: transform 0.2s ease-out;
         overflow: hiden;
-    }
-    .player_profile .inner {
-        padding: 5px;
-        margin-bottom: 20px;
     }
     .player_profile .inner .innercard {
         position: relative;
         padding: 3px;
         background: #fff;
+        border: 1px solid #efefef;
     }
-    img.player-image,
-    .player_profile img {
+    .player-image {
         width: 100%;
+        min-height: 215px;
+        background-size: cover;
+        background-position: top center;
         border: 1px solid #aeaeae;
     }
-    .player_profile p {
-        margin: 4px 0 0;
-        font-size: 10px;
+    .player-name {
+        position: absolute;
+        bottom: 0px;
+        margin: 0;
+        left: 0;
+        width: 100%;
+        text-align: left;
+        padding: 4px;
+    }
+    .player-name p {
+        font-size: 13px;
         font-family: helvetica;
         font-weight: bold;
-        color: #333;
+        color: #fff;
         letter-spacing: 0.6px;
         text-transform: uppercase;
+        background: rgba(0, 0, 0, 0.8);
+        margin: 0;
+        padding: 4px 5px;
     }
-    .player_profile p.player-short-info {
-        font-size: 11px;
-        color: #888;
-        letter-spacing: -0.1px;
-        font-weight: normal;
-        margin: 0 0 1px;
-        white-space: nowrap;
+    .player-country {
+        text-align: right;
+        color: #fff;
+        position: absolute;
+        transform: rotate(-90deg);
+        left: -31px;
+        margin: 0;
+        line-height: 2.3;
+        top: 64px;
+        font-size: 13px;
+        height: 30px;
+        width: 100px;
+        padding: 0 9px;
         overflow: hidden;
-        text-overflow: ellipsis;
-        text-transform: none;
+        font-family: helvetica;
+        background: -webkit-linear-gradient(left, rgba(0, 85, 164, 0) 0%, rgba(0, 85, 164, 0.6) 65%, rgba(0, 85, 164, 0.8) 100%);
     }
     .player_profile .flag {
         position: absolute;
-        width: 25%;
-        height: 17%;
+        width: 30px;
+        height: 25px;
         background-size: cover;
+        top: 4px;
+        left: 4px;
+        border-bottom: 4px solid #000;
+    }
+    .player-position {
+        position: absolute;
+        right: 3px;
+        padding: 3px 3px 0 0;
+        font-size: 13px;
+        background: #fff;
         top: 3px;
-        left: 3px;
-        border-radius: 0 0 50px;
+        width: 30px;
+        height: 30px;
+        text-align: right;
     }
     .player_profile .removePlayer {
         display: none;
@@ -280,10 +307,13 @@ figure.interactive {
         height: 100%;
         left: 0;
         right: 0;
-        padding-top: 50px;
+        top: 0;
+        padding-top: 90px;
         font-size: 22px;
         font-weight: bold;
         z-index: 2;
+        color: #fff;
+        background: rgba(0,0,0,0.5);
     }
     .player_profile.isDragging {
         transform: scale(0.8);
@@ -537,29 +567,33 @@ figure.interactive {
 
 
     /* Country Colours */
-    $colorItaly: #31c6df;
-    .bg-italy {
-        background: $colorItaly;
-    }
-    .bg-italy > .innercard {
-        border: 1px solid darken($colorItaly, 20%);
-    }
-    .bg-brazil {
-        background: #e8e316;
-    }
-    .bg-england {
-        background: #fff;
-    }
-    .bg-germany {
-        background: green;
+    @mixin do-country-gradient($country, $color) {
+
+        $gradient1: rgba($color, 0);
+        $gradient2: rgba($color, 0.6);
+        $gradient3: rgba($color, 0.8);
+
+        .bg-#{$country} {
+            background: $color;
+        }
+        .bg-#{$country} .player-country {
+            background: -webkit-linear-gradient(left, $gradient1 0%, $gradient2 65%, $gradient3 100%);
+        }
     }
 
+    @include do-country-gradient('england', #CF142B);
+    @include do-country-gradient('italy', #31C6DF);
+    @include do-country-gradient('germany', #FFCC00);
+
+
     // Match screen
-    #match-screen button#startMatch {
-        display: block;
-        margin: 0 auto 20px;
-        clear: both;
+
+    #matchInfo {
+        float: left;
+        background: #66CD00;
+        margin: 0 15px 30px;
     }
+
     @media (min-width: 56.25em) {
         #match-screen .match-pitch-container .pitch,
         #users-screen .match-pitch-container .pitch {
@@ -583,17 +617,37 @@ figure.interactive {
     h1.score {
         font-size: 3em;
         text-align: center;
+        margin: 0;
     }
-    h2.time {
-        font-size: 3em;
-        line-height: 1.1;
-        margin-bottom: 30px;
-        border-bottom: 1px dotted #ccc;
-        padding-bottom: 30px;
-        text-align: center;
+    p.scorer {
+        background: #efefef;
+        padding: 3px 6px;
+        margin: 0 0 7px 0;
+        float: left;
+        clear: both;
     }
-    h2.time span {
-        display: block;
-        font-size: 40%;
+    .home p.scorer {
+        float: right;
     }
+    p.scorer span.time {
+        margin-left: 2px;
+    }
+    p.scorer span.time:before {
+        content: "'";
+    }
+
+    p.scorer.carded {
+        background: yellow;
+        font-size: 12px;
+        clear: none;
+        margin: 0 3px 4px 0;
+    }
+    .home p.scorer.carded {
+        margin: 0 0 4px 3px;
+    }
+    p.scorer.carded.red {
+        background: red;
+        color: #fff;
+    }
+
 }

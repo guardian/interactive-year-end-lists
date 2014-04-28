@@ -10,12 +10,12 @@ define([
         playerDataReady: false,
         useDebugUser: '@@useDebugUser',
         useLocalEndpoint: '@@useLocalEndpoint',
-        localEndpoint: 'http://localhost:3000/users',
-        remoteEnpoint: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users' 
+        localEndpoint: 'http://localhost:3000/',
+        remoteEnpoint: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/'
     };
 
     app.getEndpoint = function() {
-        return (app.useLocalEndpoint) ? app.localEndpoint : app.remoteEnpoint; 
+        return (app.useLocalEndpoint) ? app.localEndpoint : app.remoteEnpoint;
     };
 
     // Listen for async success events
