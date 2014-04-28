@@ -66,7 +66,8 @@ module.exports = function(grunt) {
               'underscore': '../libs/underscore',
               'jquery': '../libs/jquery',
               'backbone': '../libs/backbone',
-              'text': '../libs/text'
+              'text': '../libs/text',
+              'transit': '../libs/transit'
           },
           optimize: 'none',
           name: 'dreamTeam',
