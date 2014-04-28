@@ -44,23 +44,33 @@ define([
                 this.render();
 
                 var _this = this;
+
+                /*
                 this.$el.show().transition({
                     scale: 1
                 }, function () {
                     _this.$el.find('.flip-container').addClass('hover');
                 });
+                */
+                this.$el.show();
+                this.$el.find('.flip-container').addClass('hover');
             }
         },
 
         closeCard: function () {
 
             var _this = this;
+            /*
             this.$el.transition({
                 scale: 0.001
             }, function () {
                 _this.$el.find('.flip-container').addClass('hover');
                 _this.$el.hide();
             });
+            */
+            this.$el.find('.flip-container').addClass('hover');
+            this.$el.hide();
+
             App.playerSelected.set('highlighted', 0);
             return false;
         },
