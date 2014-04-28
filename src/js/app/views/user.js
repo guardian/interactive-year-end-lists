@@ -34,6 +34,16 @@ define([
             };
         },
 
+        addToRecentlyViewed: function () {
+            var recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed'));
+            if (!recentlyViewed) {
+                recentlyViewed = [];
+            }
+            recentlyViewed.push(App.viewingPlayer.get('guardianID'));
+            _.uniq(recentlyViewed);
+            localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+        },
+
         editSelection: function () {
             App.appRoutes.navigate('/', { trigger: true });
         },

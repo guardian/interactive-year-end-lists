@@ -18,6 +18,8 @@ define([
             App.viewingPlayer.clear();
             App.viewingPlayer.set({guardianID: playerid}).fetchByGuardianId();
             App.$el.html(App.userView.render().$el);
+
+            App.userView.addToRecentlyViewed();
         },
 
         createMatch: function (player1id, player2id) {
