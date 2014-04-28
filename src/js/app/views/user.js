@@ -40,7 +40,7 @@ define([
                 recentlyViewed = [];
             }
             recentlyViewed.push(App.viewingPlayer.get('guardianID'));
-            _.uniq(recentlyViewed);
+            recentlyViewed = _.uniq(recentlyViewed);
             localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
         },
 

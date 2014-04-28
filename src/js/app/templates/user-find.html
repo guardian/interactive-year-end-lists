@@ -3,7 +3,7 @@
 <hr>
 <div class="row">
     <div class="col-xs-12 col-sm-6">
-        <h3>Guardian Writers</h3>
+        <h3>All teams</h3>
         <table class="table">
             <% _.each(users, function(user) { %>
                 <tr>
@@ -16,8 +16,16 @@
         </table>
     </div>
     <div class="col-xs-12 col-sm-6">
-        <h3>Search</h3>
-        <input type="text" id="q" class="form-control" placeholder="Search for a username">
-        <div id="search-results"></div>
+        <h3>Recently Viewed</h3>
+        <table class="table">
+            <% _.each(recentUsers, function(user) { %>
+                <tr>
+                    <td><%= user.username  %></td>
+                    <td>
+                        <button class="playAgainst" data-guardian-id="<%= user.guardianID %>">Play</button>
+                    </td>
+                </tr>
+            <% }) %>
+        </table>
     </div>
 </div>
