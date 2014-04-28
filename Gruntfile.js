@@ -69,6 +69,9 @@ module.exports = function(grunt) {
               'text': '../libs/text',
               'transit': '../libs/transit'
           },
+          shim: {
+              'transit': ['jquery']
+          },
           optimize: 'none',
           name: 'dreamTeam',
           out: 'build/js/boot.js',
