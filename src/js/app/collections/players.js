@@ -34,7 +34,7 @@ define([
         },
 
         fetchLocalData: function () {
-            this.parsePlayers(PlayerData);
+            this.parsePlayers(PlayerData['Player data']);
         },
 
 

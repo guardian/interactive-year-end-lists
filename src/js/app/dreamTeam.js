@@ -50,7 +50,7 @@ define([
         App.playerCollection = new PlayersCollection();
 
         App.playerCollection.fetchGoogleData();
-        //App.playerCollection.fetchLocal(); // TODO: Enable in prod
+        // App.playerCollection.fetchLocalData(); // TODO: Enable in prod
 
         App.matchModel = new MatchModel();
         App.createMatch = new CreateMatchView();

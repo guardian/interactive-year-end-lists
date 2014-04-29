@@ -31,6 +31,7 @@
     "base64url": "0.0.6",
     "body-parser": "^1.0.2",
     "grunt-shell": "^0.6.4",
-    "grunt-s3": "^0.2.0-alpha.3"
+    "grunt-s3": "^0.2.0-alpha.3",
+    "grunt-gss-fetch" : "GuardianInteractive/grunt-gss-fetch"
   }
 }
