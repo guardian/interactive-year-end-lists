@@ -29,7 +29,6 @@ define([
         },
 
         initialize: function () {
-            this.listenTo(App.viewingPlayer, 'change', this.render);
             this.listenTo(App.viewingPlayerTeamCollection, 'change', this.render);
             this.templateData = {
                 details: null,
@@ -74,7 +73,8 @@ define([
 
             var playerArr = [],
                 userPitch,
-                userFind;
+                userFind,
+                userRecord;
 
             if (App.viewingPlayer.get('teamSelection')) {
                 App.viewingPlayer.get('teamSelection').split(',').map(function (player) {
@@ -100,7 +100,7 @@ define([
                 this.$el.find('#users-find').empty();
                 this.$el.find('#users-find').append(userFind.render().$el);
             } else {
-                var userRecord = new UserRecordView({userID: App.viewingPlayer.get('guardianID')});
+                userRecord = new UserRecordView({userID: App.viewingPlayer.get('guardianID')});
                 this.$el.find('#usersRecord').empty();
                 this.$el.find('#usersRecord').append(userRecord.render().$el);
             }
