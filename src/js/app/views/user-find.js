@@ -34,11 +34,15 @@ define([
             App.appRoutes.navigate('/match/' + guardianIDOpponent, { trigger: true });
         },
 
+        getCookie: function (sKey) {
+            return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+        },
+
         getRecentlyViewed: function () {
             var _thisView = this;
             var recentUsersArr = [];
 
-            var recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed'));
+            var recentlyViewed = JSON.parse(this.getCookie('recentlyViewed'));
             if (recentlyViewed) {
                 recentlyViewed = _.uniq(recentlyViewed);
                 recentlyViewed.forEach(function (guardianID) {

@@ -35,22 +35,26 @@ define([
         },
 
         addToRecentlyViewed: function () {
-            var recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed'));
+            var recentlyViewed = JSON.parse(this.getCookie('recentlyViewed'));
             if (!recentlyViewed) {
                 recentlyViewed = [];
             }
             recentlyViewed.push(App.viewingPlayer.get('guardianID'));
             recentlyViewed = _.uniq(recentlyViewed);
-            localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+            this.setCookie('recentlyViewed', JSON.stringify(recentlyViewed));
         },
 
         editSelection: function () {
-            App.appRoutes.navigate('/', { trigger: true });
+            App.appRoutes.navigate('/', {
+                trigger: true
+            });
         },
 
         playAgainst: function (e) {
             var guardianIDOpponent = $(e.target).data('guardian-id');
-            App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID') + '/' + guardianIDOpponent, { trigger: true });
+            App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID') + '/' + guardianIDOpponent, {
+                trigger: true
+            });
         },
 
         render: function () {
@@ -88,6 +92,32 @@ define([
                 this.$el.find('#users-find').html(userFind.render().$el);
             }
             return this;
-        }
+        },
+
+        getCookie: function (sKey) {
+            return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+        },
+
+        setCookie: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+            if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
+                return false;
+            }
+            var sExpires = "";
+            if (vEnd) {
+                switch (vEnd.constructor) {
+                case Number:
+                    sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+                    break;
+                case String:
+                    sExpires = "; expires=" + vEnd;
+                    break;
+                case Date:
+                    sExpires = "; expires=" + vEnd.toUTCString();
+                    break;
+                }
+            }
+            document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+            return true;
+        },
     });
 });
