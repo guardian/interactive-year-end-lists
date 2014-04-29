@@ -10,6 +10,9 @@
         <div class="row">
             <div id="matchInfo">
                 <div class="col-xs-12">
+                    <p style="margin:15px 0 0;text-align:center;"><%= matchDetails.venue.maxAttendance %></p>
+                    <p style="margin:0 0 15px 0;text-align:center;"><%= matchDetails.venue.stadium %>, <%= matchDetails.venue.location %></p>
+                    <hr>
                     <h1 class="score"><%= matchDetails[1].goals.length %> - <%= matchDetails[2].goals.length %></h1>
                 </div>
                 <div class="col-xs-6 home">
