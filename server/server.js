@@ -204,9 +204,17 @@ app.post("/match", function (req, res) {
         } else {
             if (users.length === 2) {
                 var userData = {
-                        1: {guardianID: null, teamSelection: null, players: null},
-                        2: {guardianID: null, teamSelection: null, players: null}
-                    };
+                    1: {
+                        guardianID: null,
+                        teamSelection: null,
+                        players: null
+                    },
+                    2: {
+                        guardianID: null,
+                        teamSelection: null,
+                        players: null
+                    }
+                };
 
                 users.forEach(function (user, key) {
                     if (user.guardianID === req.param('user1')) {
