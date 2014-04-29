@@ -84,12 +84,12 @@ define([
                 userPitch = new MatchLineupView({
                     collection: App.viewingPlayerTeamCollection
                 });
-                this.$el.find('#users-team').html(userPitch.render().$el);
+                this.$el.find('#users-team').empty().append(userPitch.render().$el);
             }
 
             if (App.userDetails.get('guardianID') === App.viewingPlayer.get('guardianID')) {
                 userFind = new UserFindView();
-                this.$el.find('#users-find').html(userFind.render().$el);
+                this.$el.find('#users-find').empty().append(userFind.render().$el);
             }
             return this;
         },
