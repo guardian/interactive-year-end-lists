@@ -29,7 +29,6 @@ define([
         },
 
         initialize: function () {
-            this.listenTo(App.viewingPlayerTeamCollection, 'change', this.render);
             this.templateData = {
                 details: null,
                 currentUser: null
@@ -61,22 +60,9 @@ define([
             });
         },
 
-        render: function () {
-
-            this.templateData = {
-                details: App.viewingPlayer.toJSON(),
-                currentUser: App.userDetails.toJSON()
-            };
-
-            this.$el.empty();
-            this.$el.append(this.template(this.templateData));
-
-            var playerArr = [],
-                userPitch,
-                userFind,
-                userRecord;
-
+        renderPitch: function () {
             if (App.viewingPlayer.get('teamSelection')) {
+                var playerArr = [];
                 App.viewingPlayer.get('teamSelection').split(',').map(function (player) {
                     var playerSplit = player.split(':'),
                         playerModel = App.playerCollection.findWhere({
@@ -88,21 +74,43 @@ define([
                     }
                 });
                 App.viewingPlayerTeamCollection.reset(playerArr);
-                userPitch = new MatchLineupView({
+                var userPitch = new MatchLineupView({
                     collection: App.viewingPlayerTeamCollection
                 });
                 this.$el.find('#users-team').empty();
                 this.$el.find('#users-team').append(userPitch.render().$el);
             }
+        },
+
+        renderGameHistory: function () {
+            var userRecord = new UserRecordView({
+                userID: App.viewingPlayer.get('guardianID')
+            });
+            this.$el.find('#usersRecord').empty();
+            this.$el.find('#usersRecord').append(userRecord.render().$el);
+        },
+
+        renderFindUsers: function () {
+            var userFind = new UserFindView();
+            this.$el.find('#users-find').empty();
+            this.$el.find('#users-find').append(userFind.render().$el);
+        },
+
+        render: function () {
+            this.templateData = {
+                details: App.viewingPlayer.toJSON(),
+                currentUser: App.userDetails.toJSON()
+            };
+
+            this.$el.empty();
+            this.$el.append(this.template(this.templateData));
+
+            this.renderPitch();
 
             if (App.userDetails.get('guardianID') === App.viewingPlayer.get('guardianID')) {
-                userFind = new UserFindView();
-                this.$el.find('#users-find').empty();
-                this.$el.find('#users-find').append(userFind.render().$el);
+                this.renderFindUsers();
             } else {
-                userRecord = new UserRecordView({userID: App.viewingPlayer.get('guardianID')});
-                this.$el.find('#usersRecord').empty();
-                this.$el.find('#usersRecord').append(userRecord.render().$el);
+                this.renderGameHistory();
             }
             return this;
         },
@@ -131,6 +139,6 @@ define([
             }
             document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
             return true;
-        },
+        }
     });
 });
