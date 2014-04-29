@@ -88,6 +88,15 @@ figure.interactive {
         width: 10px;
         margin-right: 7px;
     }
+    .visual-prompt #closePrompt {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        font-size: 25px;
+        font-weight: bold;
+        color: #999;
+    }
     #squad-filters {
         position: relative;
         padding-top: 75px;
