@@ -16,6 +16,8 @@ define([
             2: null,
             stats: null,
             motm: null
+            venue: null,
+            time: null
         }
 
     });
