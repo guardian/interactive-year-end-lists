@@ -87,7 +87,7 @@ define([
                 this.$el.find('#users-team').html(userPitch.render().$el);
             }
 
-            if (App.viewingPlayer.get('guardianID') === App.viewingPlayer.get('guardianID')) {
+            if (App.userDetails.get('guardianID') === App.viewingPlayer.get('guardianID')) {
                 userFind = new UserFindView();
                 this.$el.find('#users-find').html(userFind.render().$el);
             }
