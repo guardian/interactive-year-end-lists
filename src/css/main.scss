@@ -118,6 +118,11 @@ figure.interactive {
             width: 400px;
             float: right;
         }
+        #squad-pitch.fix-right {
+            position: fixed;
+            right: 0;
+            top: 0;
+        }
 
         #users-team-container {
             width: 300px;

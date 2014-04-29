@@ -51,6 +51,7 @@ define([
             if (this.navigationPosition) {
                 $('.viewSquad').toggleClass('viewSquad-show', $(document).scrollTop() >= this.navigationPosition);
                 $('#squad-filters form').toggleClass('squad-filters-fixed', $(document).scrollTop() >= this.navigationPosition);
+                $('#squad-pitch').toggleClass('fix-right', $(document).scrollTop() >= this.navigationPosition);
             }
         },
 
