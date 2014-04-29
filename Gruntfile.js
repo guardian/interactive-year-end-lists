@@ -227,6 +227,16 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+
+    gss_fetch: {
+        options: {
+            amd: true
+        },
+        prod: {
+            url: 'https://docs.google.com/spreadsheet/pub?key=0AkRR3zKqdlUHdFE5SjJtS3gyUHF3ZEcwYlF0SHgxbkE&output=html',
+            dest: 'src/js/app/data/players.js'
+        }
     }
 
   });
@@ -245,6 +255,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-string-replace');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-s3');
+  grunt.loadNpmTasks('grunt-gss-fetch');
 
   // Tasks
   grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
