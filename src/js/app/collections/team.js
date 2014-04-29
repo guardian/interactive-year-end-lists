@@ -50,13 +50,6 @@ define([
 
             var res = this.validateAddingPlayer(model);
             if (res.status === 'success') {
-                if (_.contains(['ST', 'MC', 'CB'], model.get('wantedPosition'))) {
-                    if (App.usersTeamCollection.where({
-                            'wantedPosition': model.get('wantedPosition')
-                        }).length) {
-                        model.set('wantedPosition', model.get('wantedPosition') + '2');
-                    }
-                }
                 App.usersTeamCollection.add(model);
                 App.userDetails.saveUserTeamToStorage();
             }

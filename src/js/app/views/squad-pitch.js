@@ -87,11 +87,14 @@ define([
         },
 
         showAvailablePlayersInPosition: function (event) {
-            var posClass = this.$el.find(event.currentTarget).data('position').replace(/\d+/g, '').toUpperCase();
+            var posClass = this.$el.find(event.currentTarget).data('area');
             this.setFilterToPosition(posClass);
         },
 
         setFilterToPosition: function (suggestedPosition) {
+
+            suggestedPosition = this.ucwords(suggestedPosition);
+
             $('#squad-filters select').val('all');
             $('select#players_position').val(suggestedPosition);
 
@@ -110,22 +113,22 @@ define([
         render: function () {
 
             var playerPositions = {
-                'ST': {},
-                'ST2': {},
-                'MR': {},
-                'MC': {},
-                'MC2': {},
-                'ML': {},
-                'RB': {},
-                'CB': {},
-                'CB2': {},
-                'LB': {},
-                'GK': {}
+                'ST': {player: null, area: 'attack' },
+                'ST2': {player: null, area: 'attack' },
+                'MR': {player: null, area: 'midfield' },
+                'MC': {player: null, area: 'midfield' },
+                'MC2': {player: null, area: 'midfield' },
+                'ML': {player: null, area: 'midfield' },
+                'RB': {player: null, area: 'defence' },
+                'CB': {player: null, area: 'defence' },
+                'CB2': {player: null, area: 'defence' },
+                'LB': {player: null, area: 'defence' },
+                'GK': {player: null, area: 'goalkeeper' }
             },
                 usersPlayers = App.usersTeamCollection.toJSON();
 
             usersPlayers.forEach(function (player) {
-                playerPositions[player.wantedPosition] = player;
+                playerPositions[player.wantedPosition].player = player;
             });
 
             this.$el.html(this.template({
@@ -144,6 +147,12 @@ define([
                 dragDropTarget.bind("drop", _.bind(this._dropEvent, this));
             }
             return this;
+        },
+
+        ucwords: function (str) {
+            return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
+                return $1.toUpperCase();
+            });
         },
 
 
@@ -231,11 +240,11 @@ define([
             if (!target.hasClass('pitch-player')) {
                 target = target.closest('.pitch-player');
             }
-            if (playerModel.get('position') === target.data('position').replace(/\d+/g, '')) {
+            if (playerModel.get('position').toLowerCase() === target.data('area')) {
                 App.usersTeamCollection.addPlayerToCollection(playerModel, target.data('position'));
             } else {
                 App.visualPrompt.set({
-                    'message': playerModel.get('name') + ' is a ' + playerModel.get('position') + ', he can\'t play ' + target.data('position').replace(/\d+/g, ''),
+                    'message': playerModel.get('name') + ' cant play ' + target.data('area'),
                     'closePrompt': true
                 });
             }

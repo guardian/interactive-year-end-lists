@@ -30,7 +30,7 @@ define([
             this.$el.attr({
                 'id': 'player_profile_' + this.model.cid,
                 'data-uid': this.model.attributes.uid,
-                'data-position': this.model.attributes.position
+                'data-position': this.model.attributes.position.toLowerCase()
             });
 
             App.playerSelected.on('change', this.openCard, this);
@@ -96,8 +96,9 @@ define([
                 target = target.closest('.player_profile');
             }
             var positionTarget = target.data('position'),
-                newTarget = '.pitch-player.position-' + positionTarget.replace(/[0-9]/g);
-            $((newTarget + ', ' + newTarget + '2').toLowerCase()).addClass('dragTarget');
+                newTarget = '.pitch-player[data-area="' + positionTarget + '"]';
+
+            $(newTarget + ', ' + newTarget).addClass('dragTarget');
 
             $('.pitch').addClass('isDragging');
             target.addClass('isDragging');
