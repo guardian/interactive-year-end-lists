@@ -15,7 +15,7 @@ define([
             1: null,
             2: null,
             stats: null,
-            motm: null
+            motm: null,
             venue: null,
             time: null
         }
