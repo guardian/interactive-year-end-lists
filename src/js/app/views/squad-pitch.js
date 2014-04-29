@@ -19,6 +19,7 @@ define([
 
         events: {
             'click #goToMatch': 'goToMatch',
+            'click .selectTeamPop': 'setTeamToSelection',
             'click li.pitch-player-taken': 'showOptions',
             'click button#dropPlayer': 'dropPlayer',
             'click button#replacePlayer': 'replacePlayer',
@@ -35,6 +36,17 @@ define([
             if (!$(e.target).hasClass('disabled')) {
                 App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID'), { trigger: true });
             }
+        },
+
+        setTeamToSelection: function (event) {
+            var teamSelection = this.$el.find(event.currentTarget).data('team');
+
+            App.userDetails.set({teamSelection: teamSelection}, {silent: true});
+            App.userDetails.fetchUserTeamFromStorage();
+            App.userDetails.save();
+            this.render();
+
+            return false;
         },
 
         showOptions: function (event) {
