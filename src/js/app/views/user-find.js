@@ -17,7 +17,7 @@ define([
         template: _.template(UserFindTemplate),
 
         events: {
-            'click .playAgainst': 'playAgainst'
+            'click .viewTeam': 'viewTeam'
         },
 
         initialize: function () {
@@ -29,9 +29,9 @@ define([
             this.getRecentlyViewed();
         },
 
-        playAgainst: function (e) {
+        viewTeam: function (e) {
             var guardianIDOpponent = $(e.target).data('guardian-id');
-            App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID') + '/' + guardianIDOpponent, { trigger: true });
+            App.appRoutes.navigate('/match/' + guardianIDOpponent, { trigger: true });
         },
 
         getRecentlyViewed: function () {
