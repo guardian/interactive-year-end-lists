@@ -1,0 +1,34 @@
+
+<%
+console.log(record);
+
+if (record) { %>
+
+    <hr>
+
+    <p>Game history</p>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td>Games Played</td>
+                <td>Won</td>
+                <td>Drawn</td>
+                <td>Lost</td>
+                <td>Goals For</td>
+                <td>Goals Against</td>
+                <td>Goals Diff</td>
+            </tr>
+            <tr>
+                <td><%= record.gamesPlayed %></td>
+                <td><%= record.gamesWon %></td>
+                <td><%= record.gamesDrawn %></td>
+                <td><%= record.gamesLost %></td>
+                <td><%= record.goalsFor %></td>
+                <td><%= record.goalsAgainst %></td>
+                <td><%= record.goalsDiff %></td>
+            </tr>
+        </tbody>
+    </table>
+
+<% } %>

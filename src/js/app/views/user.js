@@ -4,6 +4,7 @@ define([
     'backbone',
     'underscore',
     'views/user-find',
+    'views/user-record',
     'views/match-lineup',
     'text!templates/user.html'
 ], function (
@@ -12,6 +13,7 @@ define([
     Backbone,
     _,
     UserFindView,
+    UserRecordView,
     MatchLineupView,
     UserTemplate
 ) {
@@ -30,7 +32,8 @@ define([
             this.listenTo(App.viewingPlayer, 'change', this.render);
             this.listenTo(App.viewingPlayerTeamCollection, 'change', this.render);
             this.templateData = {
-                details: null
+                details: null,
+                currentUser: null
             };
         },
 
@@ -67,7 +70,6 @@ define([
             };
 
             this.$el.empty();
-            this.delegateEvents();
             this.$el.append(this.template(this.templateData));
 
             var playerArr = [],
@@ -97,6 +99,10 @@ define([
                 userFind = new UserFindView();
                 this.$el.find('#users-find').empty();
                 this.$el.find('#users-find').append(userFind.render().$el);
+            } else {
+                var userRecord = new UserRecordView({userID: App.viewingPlayer.get('guardianID')});
+                this.$el.find('#usersRecord').empty();
+                this.$el.find('#usersRecord').append(userRecord.render().$el);
             }
             return this;
         },
