@@ -183,22 +183,27 @@ app.get("/matches", function (req, res) {
     var query = {};
     if (req.param('userID') && req.param('opponentID')) {
         query = {
-            $and: {
-                $or: [
-                    {
-                        '1.guardianID': req.param('userID')
+            $and: [{
+                    $or: [
+                        {
+                            '1.guardianID': req.param('userID')
                     },
-                    {
-                        '2.guardianID': req.param('userID')
+                        {
+                            '2.guardianID': req.param('userID')
+                    }
+                ]
+            },
+                {
+                    $or: [
+                        {
+                            '1.guardianID': req.param('opponentID')
                     },
-                    {
-                        '1.guardianID': req.param('opponentID')
-                    },
-                    {
-                        '2.guardianID': req.param('opponentID')
+                        {
+                            '2.guardianID': req.param('opponentID')
                     }
                 ]
             }
+          ]
         };
     } else if (req.param('userID')) {
         query = {
