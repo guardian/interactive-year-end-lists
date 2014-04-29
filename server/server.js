@@ -178,6 +178,50 @@ app.get("/allmatches", function (req, res) {
     });
 });
 
+app.get("/matches", function (req, res) {
+
+    var query = {};
+    if (req.param('userID') && req.param('opponentID')) {
+        query = {
+            $and: {
+                $or: [
+                    {
+                        '1.guardianID': req.param('userID')
+                    },
+                    {
+                        '2.guardianID': req.param('userID')
+                    },
+                    {
+                        '1.guardianID': req.param('opponentID')
+                    },
+                    {
+                        '2.guardianID': req.param('opponentID')
+                    }
+                ]
+            }
+        };
+    } else if (req.param('userID')) {
+        query = {
+            $or: [
+                {
+                    '1.guardianID': req.param('userID')
+                },
+                {
+                    '2.guardianID': req.param('userID')
+                }
+            ]
+        };
+    }
+    if (query) {
+        Match.find(query, function (err, docs) {
+            if (err) {
+                throw err;
+            }
+            res.send(docs);
+        });
+    }
+});
+
 app.get("/match/:_id", function (req, res) {
     Match.findById(req.param('_id'), function (err, user) {
         if (err) {
