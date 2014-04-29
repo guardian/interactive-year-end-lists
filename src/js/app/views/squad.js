@@ -54,7 +54,7 @@ define([
 
             this.$el.empty();
 
-            this.$el.html(this.template({
+            this.$el.append(this.template({
                 "userDetails": App.userDetails.toJSON()
             }));
 
@@ -70,8 +70,7 @@ define([
                 squadModal = new SquadModalView();
 
             // Push visualPrompt to view
-            this.$el.find('#team-screen').html(visualPrompt.render().$el);
-
+            this.$el.find('#team-screen').append(visualPrompt.render().$el);
             this.$el.find('#team-screen').append(squadPitch.render().$el);
             this.$el.find('#team-screen').append(squadFilters.render().$el);
             this.$el.find('#team-screen').append(squadModal.render().$el);

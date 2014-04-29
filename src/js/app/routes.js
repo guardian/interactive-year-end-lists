@@ -18,7 +18,9 @@ define([
             App.viewingPlayer.clear();
             App.viewingPlayer.set({guardianID: playerid}).fetchByGuardianId({
                 success: (function () {
-                    App.$el.html(App.userView.render().$el);
+
+                    App.$el.empty();
+                    App.$el.append(App.userView.render().$el);
                     App.userView.addToRecentlyViewed();
                 }),
                 error: (function (e) {
@@ -41,7 +43,8 @@ define([
         showMatch: function (player1id, player2id, matchID) {
             App.matchModel.set({_id: matchID}, {silent: true}).fetch({
                 success: (function () {
-                    App.$el.html(App.matchView.render().$el);
+                    App.$el.empty();
+                    App.$el.append(App.matchView.render().$el);
                 }),
                 error: (function (e) {
                     console.log('No match found!');
@@ -50,7 +53,8 @@ define([
         },
 
         showSquad: function (username) {
-            App.$el.html(App.squadView.render().$el);
+            App.$el.empty();
+            App.$el.append(App.squadView.render().$el);
         },
 
         defaultRoute: function (other) {

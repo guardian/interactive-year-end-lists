@@ -143,7 +143,8 @@ define([
                 playerPositions[player.wantedPosition].player = player;
             });
 
-            this.$el.html(this.template({
+            this.$el.empty();
+            this.$el.append(this.template({
                 players: playerPositions,
                 userDetails: App.userDetails.toJSON(),
                 usersPlayers: App.usersTeamCollection.toJSON()

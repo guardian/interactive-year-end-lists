@@ -72,8 +72,11 @@ define([
                 });
 
             // Push visualPrompt to view
-            this.$el.find('#user1-pitch').html(user1Stats.render().$el);
-            this.$el.find('#user2-pitch').html(user2Stats.render().$el);
+            this.$el.find('#user1-pitch').empty();
+            this.$el.find('#user1-pitch').append(user1Stats.render().$el);
+
+            this.$el.find('#user2-pitch').empty();
+            this.$el.find('#user2-pitch').append(user2Stats.render().$el);
 
             this.$el.find('#user1-pitch').append(user1Pitch.render().$el);
             this.$el.find('#user2-pitch').append(user2Pitch.render().$el);

@@ -47,7 +47,8 @@ define([
                 playerPositions[player.wantedPosition] = player;
             });
 
-            this.$el.html(this.template({
+            this.$el.empty();
+            this.$el.append(this.template({
                 players: playerPositions
             }));
 

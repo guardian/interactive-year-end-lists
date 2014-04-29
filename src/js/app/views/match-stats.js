@@ -46,7 +46,8 @@ define([
             if (!this.collection) {
                 return;
             }
-            this.$el.html(this.template({
+            this.$el.empty();
+            this.$el.append(this.template({
                 stats: this.getTeamStats()
             }));
             return this;

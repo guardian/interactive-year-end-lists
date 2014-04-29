@@ -151,7 +151,8 @@ define([
         },
 
         render: function () {
-            this.$el.html(this.template(this.templateData));
+            this.$el.empty();
+            this.$el.append(this.template(this.templateData));
             this.renderSquadListViews();
             return this;
         }
