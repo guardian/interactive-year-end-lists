@@ -268,7 +268,7 @@ figure.interactive {
         left: -31px;
         margin: 0;
         line-height: 2.3;
-        top: 64px;
+        top: 66px;
         font-size: 13px;
         height: 30px;
         width: 100px;
@@ -280,8 +280,9 @@ figure.interactive {
     .player_profile .flag {
         position: absolute;
         width: 30px;
-        height: 25px;
-        background-size: cover;
+        height: 27px;
+        background-size: contain;
+        background-repeat: no-repeat;
         top: 4px;
         left: 4px;
         border-bottom: 4px solid #000;
