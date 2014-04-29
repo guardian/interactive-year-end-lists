@@ -69,7 +69,12 @@ var MatchSchema = mongoose.Schema({
         foulsHomePercent: Number,
         offsideHomePercent: Number
     },
-    motm: String
+    motm: String,
+    venue: {
+        stadium: String,
+        location: String,
+        maxAttendance: String
+    }
 });
 var Match = mongoose.model('Match', MatchSchema);
 
@@ -184,6 +189,8 @@ app.get("/match/:_id", function (req, res) {
 });
 
 app.post("/match", function (req, res) {
+
+    //Match.find({}).remove().exec();
 
     User.find({
         guardianID: {
