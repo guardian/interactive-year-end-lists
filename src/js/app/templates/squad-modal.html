@@ -29,13 +29,29 @@
 						</tbody>
 					</table>
 
-					<% if (validation.status === 'fail') { %>
-						<hr>
-						<span class="selection-warning"><%= validation.message %></span>
-						<hr>
-					<% } else { %>
-						<button type="button" class="addToSquad">Add to squad</button>
+					<% if(playerSelected.position === 'Goalkeeper') { %>
+    					<button type="button" data-wanted-pos="GK" class="addToSquad">Goalkeeper</button>
 					<% } %>
+
+                    <% if(playerSelected.position === 'Defence') { %>
+    					<button type="button" data-wanted-pos="DL" class="addToSquad">Defence</button>
+    					<button type="button" data-wanted-pos="DC" class="addToSquad">Defence</button>
+    					<button type="button" data-wanted-pos="DC2" class="addToSquad">Defence</button>
+    					<button type="button" data-wanted-pos="DR" class="addToSquad">Defence</button>
+					<% } %>
+
+                    <% if(playerSelected.position === 'Midfield') { %>
+    					<button type="button" data-wanted-pos="ML" class="addToSquad">Midfield</button>
+    					<button type="button" data-wanted-pos="MC" class="addToSquad">Midfield</button>
+    					<button type="button" data-wanted-pos="MC2" class="addToSquad">Midfield</button>
+    					<button type="button" data-wanted-pos="MR" class="addToSquad">Midfield</button>
+					<% } %>
+
+                    <% if(playerSelected.position === 'Attack') { %>
+    					<button type="button" data-wanted-pos="ST" class="addToSquad">Striker</button>
+    					<button type="button" data-wanted-pos="ST2" class="addToSquad">Striker</button>
+					<% } %>
+
 				</div>
 			</div> <!-- .back -->
 		</div> <!-- .flipper -->

@@ -22,7 +22,7 @@ define([
         template: _.template(SquadModalTemplate),
 
         events: {
-            'click button.addToSquad, .removeFromSquad': 'addToSquad',
+            'click button.addToSquad': 'addToSquad',
             'click .close': 'closeCard'
         },
 
@@ -44,38 +44,31 @@ define([
                 this.render();
 
                 var _this = this;
-
-                /*
                 this.$el.show().transition({
                     scale: 1
                 }, function () {
                     _this.$el.find('.flip-container').addClass('hover');
                 });
-                */
-                this.$el.show();
-                this.$el.find('.flip-container').addClass('hover');
             }
         },
 
         closeCard: function () {
 
             var _this = this;
-            /*
             this.$el.transition({
                 scale: 0.001
             }, function () {
                 _this.$el.find('.flip-container').addClass('hover');
                 _this.$el.hide();
             });
-            */
-            this.$el.find('.flip-container').addClass('hover');
-            this.$el.hide();
 
             App.playerSelected.set('highlighted', 0);
             return false;
         },
 
-        addToSquad: function () {
+        addToSquad: function (e) {
+
+            var target = $(e.target);
 
             this.closeCard();
 
@@ -86,8 +79,7 @@ define([
                 });
                 return;
             }
-            this.playerModel.set('wantedPosition', this.playerModel.get('position'));
-            var response = App.usersTeamCollection.addPlayerToCollection(this.playerModel);
+            var response = App.usersTeamCollection.addPlayerToCollection(this.playerModel, target.data('wantedPos'));
 
             if (response.status === 'fail') {
                 App.visualPrompt.set({
