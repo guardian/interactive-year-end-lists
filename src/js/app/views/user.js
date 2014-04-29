@@ -39,8 +39,10 @@ define([
             if (!recentlyViewed) {
                 recentlyViewed = [];
             }
-            recentlyViewed.push(App.viewingPlayer.get('guardianID'));
-            recentlyViewed = _.uniq(recentlyViewed);
+            if (App.userDetails.get('guardianID') !== App.viewingPlayer.get('guardianID')) {
+                recentlyViewed.push(App.viewingPlayer.get('guardianID'));
+                recentlyViewed = _.uniq(recentlyViewed);
+            }
             this.setCookie('recentlyViewed', JSON.stringify(recentlyViewed));
         },
 
