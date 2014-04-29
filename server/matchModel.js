@@ -50,7 +50,8 @@ module.exports = {
                     shotsOffAway: 0
                 },
                 motm: null,
-                venue: null
+                venue: null,
+                time: null
             },
             motmArr = {
                 1: [],
@@ -60,6 +61,8 @@ module.exports = {
                 1: user1.players,
                 2: user2.players
             };
+
+        moments.time = new Date().getTime();
 
         moments[1].guardianID = user1.guardianID;
         moments[1].teamSelection = user1.teamSelection;

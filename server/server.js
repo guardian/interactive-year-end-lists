@@ -74,7 +74,8 @@ var MatchSchema = mongoose.Schema({
         stadium: String,
         location: String,
         maxAttendance: String
-    }
+    },
+    time: Number
 });
 var Match = mongoose.model('Match', MatchSchema);
 
