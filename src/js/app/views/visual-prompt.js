@@ -41,7 +41,7 @@ define([
         },
 
         render: function () {
-            this.$el.html(this.template({
+            this.$el.append(this.template({
                 message: App.visualPrompt.get('message'),
                 closePrompt: App.visualPrompt.get('closePrompt')
             }));

@@ -15,27 +15,31 @@ define([
         },
 
         defaultRoute: function (other) {
-            App.$el.empty();
-            App.$el.append(App.squadView.render().$el);
+            App.superView.empty();
+            App.superView.append(App.squadView.render().$el);
         },
 
         showUser: function (playerid) {
+
+            var _this = this;
 
             App.viewingPlayer.clear(this.silently);
             App.viewingPlayer.set({
                 guardianID: playerid
             }).fetchByGuardianId({
                 success: function () {
-                    App.$el.empty();
-                    App.$el.append(App.userView.render().$el);
+                    App.superView.empty();
+                    App.superView.append(App.userView.render().$el);
                 },
                 error: function (e) {
-                    console.log('No user found!');
+                    _this.showErrorAndRedirect('No user found!');
                 }
             });
         },
 
         createMatch: function (player1id, player2id) {
+
+            var _this = this;
 
             // Clear all models
             App.matchModel.clear(this.silently);
@@ -60,27 +64,42 @@ define([
                             App.createMatch.createMatchAndNavigate();
                         },
                         error: function (e) {
-                            console.log('User 2 not found!');
+                            _this.showErrorAndRedirect('User 2 not found!');
                         }
                     });
                 },
                 error: function (e) {
-                    console.log('User 1 not found!');
+                    _this.showErrorAndRedirect('User 1 not found!');
                 }
             });
         },
 
         showMatch: function (player1id, player2id, matchID) {
+
+            var _this = this;
+
             App.matchModel.set({
                 _id: matchID
             }, this.silently).fetch({
                 success: function () {
-                    App.$el.empty();
-                    App.$el.append(App.matchView.render().$el);
+                    App.superView.empty();
+                    App.superView.append(App.matchView.render().$el);
                 },
                 error: function (e) {
-                    console.log('No match found!');
+                    _this.showErrorAndRedirect('No match found!');
                 }
+            });
+        },
+
+        showErrorAndRedirect: function (msg) {
+
+            App.appRoutes.navigate('/', {
+                trigger: true
+            });
+
+            App.visualPrompt.set({
+                'message': msg,
+                'closePrompt': true
             });
         },
 
