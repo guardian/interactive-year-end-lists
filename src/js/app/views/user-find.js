@@ -3,7 +3,8 @@ define([
     'jquery',
     'backbone',
     'underscore',
-    'text!templates/user-find.html'
+    'text!templates/user-find.html',
+    'jquery.cookie'
 ], function (
     App,
     $,
@@ -38,28 +39,25 @@ define([
 
         // Render of recently viewed users on user page
         getRecentlyViewed: function () {
-            var _thisView = this,
-                recentUsersArr = [],
-                recentlyViewed = JSON.parse(this.getCookie('recentlyViewed'));
+            var recentlyViewed;
+            var cookieVal = $.cookie('dreamteam_recent');
+
+            if (!cookieVal) {
+                return;
+            }
+
+            try {
+                recentlyViewed = JSON.parse(cookieVal);
+            } catch(err) {
+                console.error('Error parsing cookie value', err);
+            }
 
             if (recentlyViewed) {
-                recentlyViewed = _.uniq(recentlyViewed);
-                recentlyViewed.forEach(function (guardianID) {
-                    $.ajax({
-                        // FIXME: Use config for url
-                        url: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users',
-                        data: {
-                            guardianID: guardianID
-                        }
-                    }).done(function (data) {
-                        recentUsersArr.push(data);
-                    });
-                });
-                _thisView.templateData.recentUsers = recentUsersArr;
-                _thisView.render();
+                this.templateData.recentUsers = recentlyViewed;
             }
         },
 
+        // FIXME: Replace with hardcoded list.
         getAllUsers: function () {
             var _thisView = this;
             $.ajax({
@@ -84,21 +82,5 @@ define([
             this.$el.append(this.template(this.templateData));
             return this;
         },
-
-        /**
-         *
-         * Code below is from Mozilla to get and set Cookies
-         * for the recently viewed users array.
-         *
-         * TODO: would be cleaner split into a separate plugin
-         *
-         * https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
-         *
-         */
-
-        getCookie: function (sKey) {
-            return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
-        }
-
     });
 });

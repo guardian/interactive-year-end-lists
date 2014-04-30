@@ -6,7 +6,8 @@ define([
     'views/user-find',
     'views/user-record',
     'views/match-lineup',
-    'text!templates/user.html'
+    'text!templates/user.html',
+    'jquery.cookie'
 ], function (
     App,
     $,
@@ -50,15 +51,33 @@ define([
 
         // Adds the user to a cookie to display in a recently viewed list
         addToRecentlyViewed: function () {
-            var recentlyViewed = JSON.parse(this.getCookie('recentlyViewed'));
-            if (!recentlyViewed) {
-                recentlyViewed = [];
+            var COOKIE_NAME = 'dreamteam_recent';
+            var uID = App.userDetails.get('guardianID');
+            var vID = App.viewingPlayer.get('guardianID');
+            var cookieVal = $.cookie(COOKIE_NAME);
+
+            var recentlyViewed = [];
+            if (cookieVal) {
+                recentlyViewed = JSON.parse($.cookie(COOKIE_NAME));
             }
-            if (App.userDetails.get('guardianID') !== App.viewingPlayer.get('guardianID')) {
-                recentlyViewed.push(App.viewingPlayer.get('guardianID'));
-                recentlyViewed = _.uniq(recentlyViewed);
+
+            if (_.findWhere(recentlyViewed, {id: uID})  ||
+                _.findWhere(recentlyViewed, {id: vID}) ||
+                uID === vID) {
+                return;
             }
-            this.setCookie('recentlyViewed', JSON.stringify(recentlyViewed));
+            
+            recentlyViewed.unshift({
+                un: App.viewingPlayer.get('username'),
+                id: vID
+            });
+
+            // Set cookie
+            $.cookie(
+                'dreamteam_recent',
+                JSON.stringify(recentlyViewed),
+                { expires: 7 }
+            );
         },
 
         renderPitch: function () {

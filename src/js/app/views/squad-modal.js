@@ -2,14 +2,12 @@ define([
     'app',
     'backbone',
     'underscore',
-    'transit',
     'data/players',
     'text!templates/squad-modal.html'
 ], function (
     App,
     Backbone,
     _,
-    Transit,
     PlayerData,
     SquadModalTemplate
 ) {

@@ -67,10 +67,12 @@ module.exports = function(grunt) {
               'jquery': '../libs/jquery',
               'backbone': '../libs/backbone',
               'text': '../libs/text',
-              'transit': '../libs/transit'
+              'jquery.cookie': '../libs/jquery.cookie'
           },
           shim: {
-              'transit': ['jquery']
+              'jquery.cookie': {
+                  deps: ['jquery']
+              }
           },
           optimize: 'none',
           name: 'dreamTeam',
