@@ -1,0 +1,34 @@
+<% if (record) { %>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td>
+                    <%= record.gamesPlayed %><br>Previous Meetings</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" style="background-color:#eb121a; width: <%= record.gamesWon / record.gamesPlayed * 100 %>%">
+                            <span class="sr-only"></span>
+                        </div>
+                        <div class="progress-bar" style="background-color: #ccc; width: <%= record.gamesDrawn / record.gamesPlayed * 100 %>%">
+                            <span class="sr-only"></span>
+                        </div>
+                        <div class="progress-bar" style="background-color:#005ca4; width: <%= record.gamesLost / record.gamesPlayed * 100 %>%">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+
+                    <span class="label" style="background-color:#eb121a;"><%= record.gamesWon %></span> User 1 wins
+
+                    <span class="label" style="margin-left:10px;background-color:#ccc;"><%= record.gamesDrawn %></span> Draws
+
+                    <span class="label" style="margin-left:10px;background-color:#005ca4;"><%= record.gamesLost %></span> User 2 wins
+
+
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+<% } %>

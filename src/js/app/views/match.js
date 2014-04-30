@@ -4,6 +4,7 @@ define([
     'backbone',
     'views/match-stats',
     'views/match-lineup',
+    'views/match-record',
     'text!templates/match.html'
 ], function (
     App,
@@ -11,6 +12,7 @@ define([
     Backbone,
     MatchLineupView,
     MatchStatsView,
+    MatchRecordView,
     MatchTemplate
 ) {
     return Backbone.View.extend({
@@ -34,6 +36,7 @@ define([
             this.$el.html(this.template(this.templateData));
 
             this.renderTeams();
+            this.renderMatchHistory(matchDetails[1].guardianID, matchDetails[2].guardianID);
 
             return this;
         },
@@ -55,6 +58,15 @@ define([
             } else {
                 App.player2TeamCollection.reset(playerArr);
             }
+        },
+
+        renderMatchHistory: function (userID, opponentID) {
+            var matchRecord = new MatchRecordView({
+                userID: userID,
+                opponentID: opponentID
+            });
+            this.$el.find('#matchRecord').empty();
+            this.$el.find('#matchRecord').append(matchRecord.render().$el);
         },
 
         renderTeams: function () {
