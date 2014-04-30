@@ -27,9 +27,13 @@ define([
             App.viewingPlayer.set({
                 guardianID: playerid
             }).fetchByGuardianId({
-                success: function () {
-                    App.superView.empty();
-                    App.superView.append(App.userView.render().$el);
+                success: function (data) {
+                    if (data.get('username')) {
+                        App.superView.empty();
+                        App.superView.append(App.userView.render().$el);
+                    } else {
+                        _this.showErrorAndRedirect('No user found!');
+                    }
                 },
                 error: function (e) {
                     _this.showErrorAndRedirect('No user found!');
