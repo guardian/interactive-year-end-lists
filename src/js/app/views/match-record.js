@@ -31,7 +31,7 @@ define([
                     data: {
                         userID: this.options.userID,
                         opponentID: this.options.opponentID
-                    },
+                    }
                 }).done(function (data) {
                     var recArr = {
                         gamesPlayed: data.length,
