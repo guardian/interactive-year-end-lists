@@ -6,8 +6,6 @@ if (record) { %>
 
     <hr>
 
-    <p>Game history</p>
-
     <table class="table table-bordered">
         <tbody>
             <tr>
@@ -15,9 +13,9 @@ if (record) { %>
                 <td>Won</td>
                 <td>Drawn</td>
                 <td>Lost</td>
-                <td>Goals For</td>
-                <td>Goals Against</td>
-                <td>Goals Diff</td>
+                <td>F</td>
+                <td>A</td>
+                <td>GD</td>
             </tr>
             <tr>
                 <td><%= record.gamesPlayed %></td>
@@ -26,9 +24,39 @@ if (record) { %>
                 <td><%= record.gamesLost %></td>
                 <td><%= record.goalsFor %></td>
                 <td><%= record.goalsAgainst %></td>
-                <td><%= record.goalsDiff %></td>
+                <td>
+                    <%= (record.goalsDiff > 0) ? '+' : '' %><%= record.goalsDiff %>
+                </td>
             </tr>
         </tbody>
     </table>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <h3>Top scorers</h3>
+            <table class="table table-bordered">
+                <tbody>
+                    <% _.each(record.topScorers, function(player) { %>
+                        <tr>
+                            <td><%= player.name %></td>
+                            <td><%= player.goals %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-6">
+            <h3 style="margin-bottom:0">Average goals per match</h3>
+            <h4 style="margin-bottom:10px"><%= record.goalsAverage %></h4>
+
+            <h3 style="margin-bottom:0">Average reds per match</h3>
+            <h4 style="margin-bottom:10px"><%= record.redAverage %></h4>
+
+            <h3 style="margin-bottom:0">Average yellows per match</h3>
+            <h4 style="margin-bottom:10px"><%= record.yellowAverage %></h4>
+        </div>
+    </div>
 
 <% } %>
