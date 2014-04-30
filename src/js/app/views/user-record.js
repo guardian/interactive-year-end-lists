@@ -23,6 +23,10 @@ define([
             };
         },
 
+        formatToDecimal: function (num) {
+            return Math.round(num * 100) / 100;
+        },
+
         render: function () {
 
             if (this.options.userID) {
@@ -33,7 +37,7 @@ define([
                         userID: this.options.userID
                     }
                 }).done(function (data) {
-                    var record = {
+                    var recArr = {
                         gamesPlayed: data.length,
                         gamesWon: 0,
                         gamesLost: 0,
@@ -60,36 +64,35 @@ define([
                             userTeam = v[2];
                             opponent = v[1];
                         }
-                        record.goalsFor += userTeam.goals.length;
-                        record.goalsAgainst += opponent.goals.length;
+                        recArr.goalsFor += userTeam.goals.length;
+                        recArr.goalsAgainst += opponent.goals.length;
 
-                        record.yellowTotal += userTeam.yellowCard.length;
-                        record.redTotal += userTeam.redCard.length;
+                        recArr.yellowTotal += userTeam.yellowCard.length;
+                        recArr.redTotal += userTeam.redCard.length;
 
                         if (userTeam.goals.length) {
                             userTeam.goals.forEach(function (v, k) {
-                                record.goalScorers.push(v.name);
+                                recArr.goalScorers.push(v.name);
                             });
                         }
 
                         if (userTeam.goals.length > opponent.goals.length) {
-                            record.gamesWon += 1;
+                            recArr.gamesWon += 1;
                         } else if (userTeam.goals.length < opponent.goals.length) {
-                            record.gamesLost += 1;
+                            recArr.gamesLost += 1;
                         } else {
-                            record.gamesDrawn += 1;
+                            recArr.gamesDrawn += 1;
                         }
                     });
-                    record.goalsDiff = record.goalsFor - record.goalsAgainst;
-                    record.goalsAverage = (record.goalsFor / record.gamesPlayed).toFixed(2);
-
-                    record.yellowAverage = (record.yellowTotal / record.gamesPlayed).toFixed(2);
-                    record.redAverage = (record.redTotal / record.gamesPlayed).toFixed(2);
+                    recArr.goalsDiff = recArr.goalsFor - recArr.goalsAgainst;
+                    recArr.goalsAverage = _this.formatToDecimal(recArr.goalsFor / recArr.gamesPlayed);
+                    recArr.yellowAverage = _this.formatToDecimal(recArr.yellowTotal / recArr.gamesPlayed);
+                    recArr.redAverage = _this.formatToDecimal(recArr.redTotal / recArr.gamesPlayed);
 
                     var scorers = {},
                         topScorers = [];
-                    for (var i = 0, j = record.goalScorers.length; i < j; i++) {
-                        scorers[record.goalScorers[i]] = (scorers[record.goalScorers[i]] || 0) + 1;
+                    for (var i = 0, j = recArr.goalScorers.length; i < j; i++) {
+                        scorers[recArr.goalScorers[i]] = (scorers[recArr.goalScorers[i]] || 0) + 1;
                     }
                     for (var key in scorers) {
                         if (scorers.hasOwnProperty(key)) {
@@ -102,12 +105,11 @@ define([
                     topScorers.sort(function (a, b) {
                         return b.goals - a.goals;
                     });
-                    record.topScorers = topScorers.slice(0, 7);
+                    recArr.topScorers = topScorers.slice(0, 7);
 
                     _this.templateData = {
-                        record: record
+                        record: recArr
                     };
-
                     _this.$el.empty();
                     _this.$el.append(_this.template(_this.templateData));
                     return _this;
