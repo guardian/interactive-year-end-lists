@@ -38,9 +38,11 @@ define([
 
         // Render of recently viewed users on user page
         getRecentlyViewed: function () {
+
             var _thisView = this,
                 recentUsersArr = [],
-                recentlyViewed = JSON.parse(this.getCookie('recentlyViewed'));
+                cookieData = this.getCookie('recentlyViewed'),
+                recentlyViewed = (cookieData) ? cookieData.split('.')  : [];
 
             if (recentlyViewed) {
                 recentlyViewed = _.uniq(recentlyViewed);

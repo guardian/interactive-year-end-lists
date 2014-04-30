@@ -50,15 +50,13 @@ define([
 
         // Adds the user to a cookie to display in a recently viewed list
         addToRecentlyViewed: function () {
-            var recentlyViewed = JSON.parse(this.getCookie('recentlyViewed'));
-            if (!recentlyViewed) {
-                recentlyViewed = [];
-            }
+            var cookieData = this.getCookie('recentlyViewed'),
+                recentlyViewed = (cookieData) ? cookieData.split('.')  : [];
             if (App.userDetails.get('guardianID') !== App.viewingPlayer.get('guardianID')) {
                 recentlyViewed.push(App.viewingPlayer.get('guardianID'));
                 recentlyViewed = _.uniq(recentlyViewed);
             }
-            this.setCookie('recentlyViewed', JSON.stringify(recentlyViewed));
+            this.setCookie('recentlyViewed', recentlyViewed.join('.'));
         },
 
         renderPitch: function () {
