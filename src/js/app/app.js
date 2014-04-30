@@ -39,7 +39,6 @@ define([
         app.checkIfReady();
     };
 
-
     Backbone.on('loaded:userData', app.loadedUserData);
     Backbone.on('loaded:playerData', app.loadedPlayerData);
 
