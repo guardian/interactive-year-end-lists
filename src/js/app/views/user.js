@@ -24,8 +24,8 @@ define([
         template: _.template(UserTemplate),
 
         events: {
-            'click #goEdit': 'editSelection',
-            'click .playAgainst': 'playAgainst'
+            'click #goEdit': 'navigateHome',
+            'click .playAgainst': 'navigateCreateMatch'
         },
 
         initialize: function () {
@@ -35,6 +35,20 @@ define([
             };
         },
 
+        navigateHome: function () {
+            App.appRoutes.navigate('/', {
+                trigger: true
+            });
+        },
+
+        navigateCreateMatch: function (e) {
+            var opponentID = $(e.target).data('guardian-id');
+            App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID') + '/' + opponentID, {
+                trigger: true
+            });
+        },
+
+        // Adds the user to a cookie to display in a recently viewed list
         addToRecentlyViewed: function () {
             var recentlyViewed = JSON.parse(this.getCookie('recentlyViewed'));
             if (!recentlyViewed) {
@@ -47,41 +61,32 @@ define([
             this.setCookie('recentlyViewed', JSON.stringify(recentlyViewed));
         },
 
-        editSelection: function () {
-            App.appRoutes.navigate('/', {
-                trigger: true
-            });
-        },
-
-        playAgainst: function (e) {
-            var guardianIDOpponent = $(e.target).data('guardian-id');
-            App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID') + '/' + guardianIDOpponent, {
-                trigger: true
-            });
-        },
-
         renderPitch: function () {
-            if (App.viewingPlayer.get('teamSelection')) {
-                var playerArr = [];
-                App.viewingPlayer.get('teamSelection').split(',').map(function (player) {
-                    var playerSplit = player.split(':'),
-                        playerModel = App.playerCollection.findWhere({
-                            'uid': playerSplit[0]
-                        });
-                    playerModel.set('wantedPosition', playerSplit[1]);
-                    if (playerModel) {
-                        playerArr.push(playerModel);
-                    }
-                });
-                App.viewingPlayerTeamCollection.reset(playerArr);
-                var userPitch = new MatchLineupView({
-                    collection: App.viewingPlayerTeamCollection
-                });
-                this.$el.find('#users-team').empty();
-                this.$el.find('#users-team').append(userPitch.render().$el);
+            if (!App.viewingPlayer.get('teamSelection')) {
+
+                // No team, no pitch
+                return;
             }
+            var playerArr = [];
+            App.viewingPlayer.get('teamSelection').split(',').map(function (player) {
+                var playerSplit = player.split(':'),
+                    playerModel = App.playerCollection.findWhere({
+                        'uid': playerSplit[0]
+                    });
+                playerModel.set('wantedPosition', playerSplit[1]);
+                if (playerModel) {
+                    playerArr.push(playerModel);
+                }
+            });
+            App.viewingPlayerTeamCollection.reset(playerArr);
+            var userPitch = new MatchLineupView({
+                collection: App.viewingPlayerTeamCollection
+            });
+            this.$el.find('#users-team').empty();
+            this.$el.find('#users-team').append(userPitch.render().$el);
         },
 
+        // view/user-record.js
         renderGameHistory: function () {
             var userRecord = new UserRecordView({
                 userID: App.viewingPlayer.get('guardianID')
@@ -90,6 +95,7 @@ define([
             this.$el.find('#usersRecord').append(userRecord.render().$el);
         },
 
+        // view/user-find.js
         renderFindUsers: function () {
             var userFind = new UserFindView();
             this.$el.find('#users-find').empty();
@@ -112,10 +118,25 @@ define([
             // If user viewing own page, show Guardian writers & recently viewed
             if (App.userDetails.get('guardianID') === App.viewingPlayer.get('guardianID')) {
                 this.renderFindUsers();
-            }
+            } else {
 
+                // Add to recently viewed if not (regardless of logged in status)
+                this.addToRecentlyViewed();
+            }
             return this;
         },
+
+
+        /**
+         *
+         * Code below is from Mozilla to get and set Cookies
+         * for the recently viewed users array.
+         *
+         * TODO: would be cleaner split into a separate plugin
+         *
+         * https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
+         *
+         */
 
         getCookie: function (sKey) {
             return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;

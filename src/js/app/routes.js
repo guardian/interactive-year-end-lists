@@ -22,7 +22,6 @@ define([
                 success: (function () {
                     App.$el.empty();
                     App.$el.append(App.userView.render().$el);
-                    App.userView.addToRecentlyViewed();
                 }),
                 error: (function (e) {
                     console.log('No user found!');
