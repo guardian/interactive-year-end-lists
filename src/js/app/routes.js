@@ -70,6 +70,7 @@ define([
                                     App.createMatch.createMatchAndNavigate();
                                 } else {
                                    _this.showErrorAndRedirect('User 2 not found!');
+                                }
                             },
                             error: function (e) {
                                 _this.showErrorAndRedirect('User 2 not found!');
