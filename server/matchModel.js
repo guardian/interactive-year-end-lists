@@ -1943,106 +1943,112 @@ module.exports = {
         return team;
     },
 
-    getVenue: function() {
+    getVenue: function () {
         var venues = [
-          {
-            stadium:"Estadio Centenario",
-            location:"Montevideo, Uruguay",
-            maxAttendance:"80,000"
+        {
+            stadium: "Estadio Centenario",
+            location: "Montevideo, Uruguay",
+            maxAttendance: 80000
           },
-          {
-            stadium:"Stadio Nazionale PNF",
-            location:"Rome, Italy",
-            maxAttendance:"50,000"
+        {
+            stadium: "Stadio Nazionale PNF",
+            location: "Rome, Italy",
+            maxAttendance: 50000
           },
-          {
-            stadium:"Stade Olympique de Colombes",
-            location:"Paris, France",
-            maxAttendance:"45,000"
+        {
+            stadium: "Stade Olympique de Colombes",
+            location: "Paris, France",
+            maxAttendance: 45000
           },
-          {
-            stadium:"Estádio do Maracanã",
-            location:"Rio de Janeiro, Brazil",
-            maxAttendance:"174,000"
+        {
+            stadium: "Estádio do Maracanã",
+            location: "Rio de Janeiro, Brazil",
+            maxAttendance: 74000
           },
-          {
-            stadium:"Wankdorf Stadium",
-            location:"Bern, Switzerland",
-            maxAttendance:"60,000"
+        {
+            stadium: "Wankdorf Stadium",
+            location: "Bern, Switzerland",
+            maxAttendance: 60000
           },
-          {
-            stadium:"Råsunda Stadium",
-            location:"Solna, Sweden",
-            maxAttendance:"51,800"
+        {
+            stadium: "Råsunda Stadium",
+            location: "Solna, Sweden",
+            maxAttendance: 51800
           },
-          {
-            stadium:"Estadio Nacional",
-            location:"Santiago, Chile",
-            maxAttendance:"69,000"
+        {
+            stadium: "Estadio Nacional",
+            location: "Santiago, Chile",
+            maxAttendance: 69000
           },
-          {
-            stadium:"Wembley Stadium",
-            location:"London, England",
-            maxAttendance:"93,000"
+        {
+            stadium: "Wembley Stadium",
+            location: "London, England",
+            maxAttendance: 93000
           },
-          {
-            stadium:"Estadio Azteca",
-            location:"Mexico City, Mexico",
-            maxAttendance:"107,412"
+        {
+            stadium: "Estadio Azteca",
+            location: "Mexico City, Mexico",
+            maxAttendance: 107412
           },
-          {
-            stadium:"Olympiastadion",
-            location:"Munich, West Germany",
-            maxAttendance:"75,200"
+        {
+            stadium: "Olympiastadion",
+            location: "Munich, West Germany",
+            maxAttendance: 75200
           },
-          {
-            stadium:"Estadio Monumental",
-            location:"Buenos Aires, Argentina",
-            maxAttendance:"71,483"
+        {
+            stadium: "Estadio Monumental",
+            location: "Buenos Aires, Argentina",
+            maxAttendance: 71483
           },
-          {
-            stadium:"Santiago Bernabéu",
-            location:"Madrid, Spain",
-            maxAttendance:"90,000"
+        {
+            stadium: "Santiago Bernabéu",
+            location: "Madrid, Spain",
+            maxAttendance: 90000
           },
-          {
-            stadium:"Estadio Azteca",
-            location:"Mexico City, Mexico",
-            maxAttendance:"114,600"
+        {
+            stadium: "Estadio Azteca",
+            location: "Mexico City, Mexico",
+            maxAttendance: 114600
           },
-          {
-            stadium:"Stadio Olimpico",
-            location:"Rome, Italy",
-            maxAttendance:"73,603"
+        {
+            stadium: "Stadio Olimpico",
+            location: "Rome, Italy",
+            maxAttendance: 73603
           },
-          {
-            stadium:"Rose Bowl",
-            location:"Pasadena, California, United States",
-            maxAttendance:"94,194"
+        {
+            stadium: "Rose Bowl",
+            location: "Pasadena, California, United States",
+            maxAttendance: 94194
           },
-          {
-            stadium:"Stade de France",
-            location:"Saint-Denis, France",
-            maxAttendance:"80,000"
+        {
+            stadium: "Stade de France",
+            location: "Saint-Denis, France",
+            maxAttendance: 80000
           },
-          {
-            stadium:"International Stadium Yokohama",
-            location:"Yokohama, Japan",
-            maxAttendance:"69,029"
+        {
+            stadium: "International Stadium Yokohama",
+            location: "Yokohama, Japan",
+            maxAttendance: 69029
           },
-          {
-            stadium:"Olympiastadion",
-            location:"Berlin, Germany",
-            maxAttendance:"69,000"
+        {
+            stadium: "Olympiastadion",
+            location: "Berlin, Germany",
+            maxAttendance: 69000
           },
-          {
-            stadium:"Soccer City",
-            location:"Johannesburg, South Africa",
-            maxAttendance:"84,490"
+        {
+            stadium: "Soccer City",
+            location: "Johannesburg, South Africa",
+            maxAttendance: 84490
           }
         ];
-        console.log(venues[Math.floor(Math.random() * venues.length)]);
-        return venues[Math.floor(Math.random() * venues.length)];
+
+        var chosenVenue = venues[Math.floor(Math.random() * venues.length)];
+        chosenVenue.push({attendance: chosenVenue.maxAttendance});
+        /*
+         * TODO: Choose a random number between 90% and 100% of maxAttendance and set as attendance
+        chosenVenue.push({attendance: module.exports.randBetween((chosenVenue.maxAttendance / 90 * 100), chosenVenue.maxAttendance)});
+        */
+        return chosenVenue;
     }
 
 };

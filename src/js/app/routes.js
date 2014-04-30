@@ -27,9 +27,13 @@ define([
             App.viewingPlayer.set({
                 guardianID: playerid
             }).fetchByGuardianId({
-                success: function () {
-                    App.superView.empty();
-                    App.superView.append(App.userView.render().$el);
+                success: function (data) {
+                    if (data.get('username')) {
+                        App.superView.empty();
+                        App.superView.append(App.userView.render().$el);
+                    } else {
+                        _this.showErrorAndRedirect('No user found!');
+                    }
                 },
                 error: function (e) {
                     _this.showErrorAndRedirect('No user found!');
@@ -50,23 +54,31 @@ define([
             App.player1.set({
                 guardianID: player1id
             }).fetchByGuardianId({
-                success: function () {
-                    App.player1.set('startingUser', 1, this.silently);
+                success: function (data) {
+                    if (data.get('username')) {
+                        App.player1.set('startingUser', 1, this.silently);
 
-                    // Load player 2
-                    App.player2.set({
-                        guardianID: player2id
-                    }).fetchByGuardianId({
-                        success: function () {
-                            App.player2.set('startingUser', 2, this.silently);
+                        // Load player 2
+                        App.player2.set({
+                            guardianID: player2id
+                        }).fetchByGuardianId({
+                            success: function (data) {
+                                if (data.get('username')) {
+                                    App.player2.set('startingUser', 2, this.silently);
 
-                            // Create match and navigate
-                            App.createMatch.createMatchAndNavigate();
-                        },
-                        error: function (e) {
-                            _this.showErrorAndRedirect('User 2 not found!');
-                        }
-                    });
+                                    // Create match and navigate
+                                    App.createMatch.createMatchAndNavigate();
+                                } else {
+                                   _this.showErrorAndRedirect('User 2 not found!');
+                                }
+                            },
+                            error: function (e) {
+                                _this.showErrorAndRedirect('User 2 not found!');
+                            }
+                        });
+                    } else {
+                        _this.showErrorAndRedirect('User 1 not found!');
+                    }
                 },
                 error: function (e) {
                     _this.showErrorAndRedirect('User 1 not found!');

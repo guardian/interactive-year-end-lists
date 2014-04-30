@@ -81,6 +81,6 @@ define([
             this.$el.empty();
             this.$el.append(this.template(this.templateData));
             return this;
-        },
+        }
     });
 });
