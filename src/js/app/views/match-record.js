@@ -23,6 +23,11 @@ define([
             };
         },
 
+        /**
+         * This is a simpler version mimicking 'user-record.js'
+         *
+         * Simply shows stats for user1 vs user2
+         */
         render: function () {
             if (this.options.userID && this.options.opponentID) {
                 var _this = this;

@@ -18,7 +18,7 @@ define([
         template: _.template(SquadPitchTemplate),
 
         events: {
-            'click #goToMatch': 'goToMatch',
+            'click #goToMatch': 'navigateToMatch',
             'click .selectTeamPop': 'setTeamToSelection',
             'click li.pitch-player-taken': 'showOptions',
             'click button#dropPlayer': 'dropPlayer',
@@ -28,7 +28,9 @@ define([
             'click #clearSelection': 'clearSelection'
         },
 
-        goToMatch: function (e) {
+        navigateToMatch: function (e) {
+
+            // button might be disabled due to not having 11 players selected
             if (!$(e.target).hasClass('disabled')) {
                 App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID'), {
                     trigger: true
@@ -51,8 +53,13 @@ define([
             return false;
         },
 
+        /**
+         * These functions are for the little menu that appears
+         * when you click on the player icon on the pitch.
+         *
+         * ie Replace or Drop
+         */
         showOptions: function (event) {
-
             var target = this.$el.find(event.currentTarget),
                 playerOptions = this.$el.find('.playerOptions');
 
@@ -61,10 +68,12 @@ define([
             playerOptions.show();
         },
 
+        // Close menu
         closeOptions: function () {
             this.$el.find('.playerOptions').hide();
         },
 
+        // Remove player from team
         dropPlayer: function (event, uid, posClass) {
             this.closeOptions();
 
@@ -85,6 +94,7 @@ define([
             return false;
         },
 
+        // Remove player from team AND show available players for that position in list
         replacePlayer: function (event) {
             this.closeOptions();
 
@@ -100,11 +110,13 @@ define([
             return false;
         },
 
+        // See function below for more details
         showAvailablePlayersInPosition: function (event) {
             var posClass = this.$el.find(event.currentTarget).data('area');
             this.setFilterToPosition(posClass);
         },
 
+        // Set the filter options for that position
         setFilterToPosition: function (suggestedPosition) {
             suggestedPosition = this.ucwords(suggestedPosition);
 
@@ -118,6 +130,7 @@ define([
             });
         },
 
+        // Reset the teamCollection and wipe the pitch
         clearSelection: function () {
             App.usersTeamCollection.removeAllPlayersFromCollection();
             return false;
@@ -194,6 +207,7 @@ define([
             return this;
         },
 
+        // Simple function to turn goalkeeper => Goalkeeper
         ucwords: function (str) {
             return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
                 return $1.toUpperCase();
@@ -201,8 +215,15 @@ define([
         },
 
         /**
-         * Drag and drop listeners
+         *
+         * Drag and drop listeners ported from:
          * https://gist.github.com/Rob-ot/1488561
+         *
+         * When starting to drag a player, the available position on the pitch
+         * has a class 'dragTarget'. This is coded in 'squad-list.js'
+         *
+         * These functions handle the drop.
+         *
          */
         _dragOverEvent: function (e) {
             if (e.originalEvent) {
@@ -280,6 +301,9 @@ define([
             if (!target.hasClass('pitch-player')) {
                 target = target.closest('.pitch-player');
             }
+
+            // Prevent Goalkeepers being Strikers
+            // TODO: If you want Pele in goal remove this if statement.
             if (playerModel.get('position').toLowerCase() === target.data('area')) {
                 App.usersTeamCollection.addPlayerToCollection(playerModel, target.data('position'));
             } else {

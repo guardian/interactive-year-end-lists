@@ -25,17 +25,20 @@ define([
         template: _.template(SquadTemplate),
 
         events: {
-            'click #signIn': 'beginSignIn'
+            'click #signIn': 'navigateSignin'
         },
 
         initialize: function () {
             this.listenTo(App.userDetails, 'change:username', this.render);
-
-
             this.listenTo(App.userDetails, 'change:teamSelection', this.prePopulateTeam);
             this.listenTo(App.usersTeamCollection, 'change', this.prePopulateTeam);
 
             this.filterModel = new Backbone.Model();
+        },
+
+        navigateSignin: function () {
+            App.userDetails.loginUser();
+            return false;
         },
 
         prePopulateTeam: function () {
@@ -43,11 +46,6 @@ define([
                 model: this.filterModel
             });
             this.$el.find('#squad-pitch').replaceWith(squadPitch.render().$el);
-        },
-
-        beginSignIn: function () {
-            App.userDetails.loginUser();
-            return false;
         },
 
         render: function () {

@@ -23,12 +23,12 @@ define([
             };
         },
 
+        // 1 => 1, 1.454 => 1.45, 0 => 0
         formatToDecimal: function (num) {
             return Math.round(num * 100) / 100;
         },
 
         render: function () {
-
             if (this.options.userID) {
                 var _this = this;
                 $.ajax({
@@ -54,6 +54,7 @@ define([
                         goalScorers: []
                     };
 
+                    // Calculate game history, goals, scorers etc
                     data.forEach(function (v, k) {
                         var userTeam,
                             opponent;
@@ -89,6 +90,7 @@ define([
                     recArr.yellowAverage = _this.formatToDecimal(recArr.yellowTotal / recArr.gamesPlayed);
                     recArr.redAverage = _this.formatToDecimal(recArr.redTotal / recArr.gamesPlayed);
 
+                    // Build array of all scorers and sort on totals
                     var scorers = {},
                         topScorers = [];
                     for (var i = 0, j = recArr.goalScorers.length; i < j; i++) {

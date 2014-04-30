@@ -17,7 +17,7 @@ define([
         template: _.template(UserFindTemplate),
 
         events: {
-            'click .viewTeam': 'viewTeam'
+            'click .viewTeam': 'navigateToUser'
         },
 
         initialize: function () {
@@ -29,22 +29,19 @@ define([
             this.getRecentlyViewed();
         },
 
-        viewTeam: function (e) {
+        navigateToUser: function (e) {
             var guardianIDOpponent = $(e.target).data('guardian-id');
             App.appRoutes.navigate('/match/' + guardianIDOpponent, {
                 trigger: true
             });
         },
 
-        getCookie: function (sKey) {
-            return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
-        },
-
+        // Render of recently viewed users on user page
         getRecentlyViewed: function () {
-            var _thisView = this;
-            var recentUsersArr = [];
+            var _thisView = this,
+                recentUsersArr = [],
+                recentlyViewed = JSON.parse(this.getCookie('recentlyViewed'));
 
-            var recentlyViewed = JSON.parse(this.getCookie('recentlyViewed'));
             if (recentlyViewed) {
                 recentlyViewed = _.uniq(recentlyViewed);
                 recentlyViewed.forEach(function (guardianID) {
@@ -84,6 +81,21 @@ define([
             this.$el.empty();
             this.$el.append(this.template(this.templateData));
             return this;
+        },
+
+        /**
+         *
+         * Code below is from Mozilla to get and set Cookies
+         * for the recently viewed users array.
+         *
+         * TODO: would be cleaner split into a separate plugin
+         *
+         * https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
+         *
+         */
+
+        getCookie: function (sKey) {
+            return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
         }
 
     });

@@ -32,6 +32,10 @@ define([
 
             this.listenTo(this.model, 'change', this.updateSquadListViews);
 
+            /**
+             * This code below is to set the select inputs to be fixed position
+             * as the user scrolls down
+             */
             this.navigationPosition = 0;
             this.windowSize = 0;
 
@@ -126,7 +130,12 @@ define([
             }
         },
 
+        // Scroll back up to pitch
         viewSquad: function () {
+
+            /**
+             * FIXME: This would not be needed if pitch is fixed pos
+             */
             $('html, body').animate({
                 scrollTop: $('#squad-pitch').offset().top + 2
             }, 1000);

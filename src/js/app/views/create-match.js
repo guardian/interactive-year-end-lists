@@ -16,6 +16,12 @@ define([
             };
         },
 
+        /**
+         * No view for this file.
+         *
+         * Hitting the function below will create a match and navigate to the url.
+         *
+         */
         createMatchAndNavigate: function () {
             var readyForMatch = this.isReady();
             if (readyForMatch) {
@@ -38,6 +44,7 @@ define([
             }
         },
 
+        // Validation for match creation
         isReady: function () {
             if (this.userValidForMatch(App.player1) && this.userValidForMatch(App.player2)) {
                 return true;

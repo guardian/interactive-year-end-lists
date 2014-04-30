@@ -21,6 +21,7 @@ define([
         className: 'container',
         template: _.template(MatchTemplate),
 
+        // Populate the teamCollections for user
         placeTeamsIntoCollection: function (teamSelection, startingUser) {
             var playerArr = [];
             teamSelection.split(',').map(function (player) {
@@ -40,6 +41,7 @@ define([
             }
         },
 
+        // Renders 'match-record.js'
         renderMatchHistory: function (userID, opponentID) {
             var matchRecord = new MatchRecordView({
                 userID: userID,
@@ -49,7 +51,12 @@ define([
             this.$el.find('#matchRecord').append(matchRecord.render().$el);
         },
 
+        // Renders 'match-record.js'
         renderTeams: function () {
+
+            /**
+             * TODO: Team stats will not be present in prod
+             */
             var user1Pitch = new MatchLineupView({
                 collection: App.player1TeamCollection
             }),
@@ -63,11 +70,10 @@ define([
                     collection: App.player2TeamCollection
                 });
 
-            // Push visualPrompt to view
             this.$el.find('#user1-pitch').empty();
-            this.$el.find('#user1-pitch').append(user1Stats.render().$el);
-
             this.$el.find('#user2-pitch').empty();
+
+            this.$el.find('#user1-pitch').append(user1Stats.render().$el);
             this.$el.find('#user2-pitch').append(user2Stats.render().$el);
 
             this.$el.find('#user1-pitch').append(user1Pitch.render().$el);
