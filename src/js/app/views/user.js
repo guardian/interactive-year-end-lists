@@ -105,13 +105,15 @@ define([
             this.$el.empty();
             this.$el.append(this.template(this.templateData));
 
+            // Render extra parts of the user page, eg pitch, record etc.
             this.renderPitch();
+            this.renderGameHistory();
 
+            // If user viewing own page, show Guardian writers & recently viewed
             if (App.userDetails.get('guardianID') === App.viewingPlayer.get('guardianID')) {
                 this.renderFindUsers();
-            } else {
-                this.renderGameHistory();
             }
+
             return this;
         },
 

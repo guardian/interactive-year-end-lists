@@ -18,13 +18,15 @@
 
 <div id="users-find-container">
     <% if (details.username === currentUser.username) { %>
+
         <div id="users-find"></div>
+
     <% } else { %>
+
         <button class="playAgainst" data-guardian-id="<%= details.guardianID %>">Play against this team</button>
 
-        <div id="usersRecord">
-
-        </div>
-
     <% } %>
+
+    <div id="usersRecord"></div>
+
 </div>
