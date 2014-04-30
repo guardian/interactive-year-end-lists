@@ -32,6 +32,7 @@ define([
             if (this.options.userID && this.options.opponentID) {
                 var _this = this;
                 $.ajax({
+                    // FIXME: Use config for url
                     url: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/matches',
                     data: {
                         userID: this.options.userID,

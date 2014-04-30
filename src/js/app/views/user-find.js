@@ -46,6 +46,7 @@ define([
                 recentlyViewed = _.uniq(recentlyViewed);
                 recentlyViewed.forEach(function (guardianID) {
                     $.ajax({
+                        // FIXME: Use config for url
                         url: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users',
                         data: {
                             guardianID: guardianID
@@ -62,6 +63,7 @@ define([
         getAllUsers: function () {
             var _thisView = this;
             $.ajax({
+                // FIXME: Use config for url
                 url: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/allusers'
             }).done(function (data) {
                 var userArr = [];
