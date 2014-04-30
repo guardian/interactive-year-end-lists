@@ -14,18 +14,16 @@ define([
                 status: 'fail',
                 message: ''
             };
-            this.listenTo(App.player1, 'change:teamSelection', this.createMatchAndNavigate);
-            this.listenTo(App.player2, 'change:teamSelection', this.createMatchAndNavigate);
         },
 
         createMatchAndNavigate: function () {
             var readyForMatch = this.isReady();
             if (readyForMatch) {
-                var _this = this;
-                var matchUsers = {
-                    user1: App.player1.get('guardianID'),
-                    user2: App.player2.get('guardianID')
-                };
+                var _this = this,
+                    matchUsers = {
+                        user1: App.player1.get('guardianID'),
+                        user2: App.player2.get('guardianID')
+                    };
                 App.matchModel.save(matchUsers, {
                     success: function () {
                         var url = ['match', matchUsers.user1, matchUsers.user2, App.matchModel.get('_id')];
