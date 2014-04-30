@@ -2041,7 +2041,6 @@ module.exports = {
             maxAttendance:"84,490"
           }
         ];
-        console.log(venues[Math.floor(Math.random() * venues.length)]);
         return venues[Math.floor(Math.random() * venues.length)];
     }
 
