@@ -240,8 +240,6 @@ app.get("/match/:_id", function (req, res) {
 
 app.post("/match", function (req, res) {
 
-    //Match.find({}).remove().exec();
-
     User.find({
         guardianID: {
             $in: [req.param('user1'), req.param('user2')]
