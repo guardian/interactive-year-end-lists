@@ -6,7 +6,6 @@ define([
     'views/squad-pitch',
     'views/squad-filters',
     'views/squad-modal',
-    'views/visual-prompt',
     'text!templates/squad.html'
 ], function (
     App,
@@ -16,7 +15,6 @@ define([
     SquadPitchView,
     SquadFiltersView,
     SquadModalView,
-    VisualPromptView,
     SquadTemplate
 ) {
     return Backbone.View.extend({
@@ -57,8 +55,7 @@ define([
 
             this.$el.append('<div id="team-screen" class="row"></div>');
 
-            var visualPrompt = new VisualPromptView(),
-                squadPitch = new SquadPitchView({
+            var squadPitch = new SquadPitchView({
                     model: this.filterModel
                 }),
                 squadFilters = new SquadFiltersView({
@@ -66,8 +63,6 @@ define([
                 }),
                 squadModal = new SquadModalView();
 
-            // Push visualPrompt to view
-            this.$el.find('#team-screen').append(visualPrompt.render().$el);
             this.$el.find('#team-screen').append(squadPitch.render().$el);
             this.$el.find('#team-screen').append(squadFilters.render().$el);
             this.$el.find('#team-screen').append(squadModal.render().$el);

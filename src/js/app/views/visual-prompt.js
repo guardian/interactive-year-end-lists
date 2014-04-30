@@ -14,12 +14,15 @@ define([
         className: 'visual-prompt',
         template: _.template(VisualPromptTemplate),
 
-        events: {
-            'click #closePrompt': 'closePrompt'
-        },
-
         initialize: function () {
             App.visualPrompt.on('change', this.render, this);
+        },
+
+        /**
+         * This displays a message to the user
+         */
+        events: {
+            'click #closePrompt': 'closePrompt'
         },
 
         closePrompt: function () {

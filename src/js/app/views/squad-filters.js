@@ -97,6 +97,9 @@ define([
             return false;
         },
 
+        /**
+         * TODO: Era not coded into filters, just position and country.
+         */
         updateSquadListViews: function () {
             var modelValues = this.model.toJSON(),
                 whereQuery = {},
