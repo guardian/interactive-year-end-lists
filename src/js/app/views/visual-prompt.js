@@ -14,13 +14,21 @@ define([
         className: 'visual-prompt',
         template: _.template(VisualPromptTemplate),
 
+        /**
+         * This displays a message to the user.
+         *
+         * Example usage:
+         *
+            App.visualPrompt.set({
+                'message': 'You must be logged in to perform that action',
+                'closePrompt': true
+            });
+         *
+         */
         initialize: function () {
             App.visualPrompt.on('change', this.render, this);
         },
 
-        /**
-         * This displays a message to the user
-         */
         events: {
             'click #closePrompt': 'closePrompt'
         },
