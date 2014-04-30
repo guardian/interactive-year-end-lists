@@ -9,14 +9,13 @@ define([
 
         urlRoot: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users',
         idAttribute: '_id',
-
         defaults: {
             guardianID: null,
             username: null,
             teamSelection: null
         },
 
-        getCookie: function(name) {
+        getCookie: function (name) {
             var value = '; ' + document.cookie;
             var parts = value.split('; ' + name + '=');
             if (parts.length == 2) {
@@ -27,12 +26,18 @@ define([
         setToolKitObject: function () {
             if (typeof require() === 'function') {
                 require(['guardian_idToolkit'], function (toolkit) {
-                    App.toolkitObj = {api: toolkit, version: 1};
+                    App.toolkitObj = {
+                        api: toolkit,
+                        version: 1
+                    };
                     Backbone.trigger('toolkitReady');
                 });
             } else {
-                require([ 'common/modules/identity/api' ]).then(function (toolkit) {
-                    App.toolkitObj = {api: toolkit, version: 2};
+                require(['common/modules/identity/api']).then(function (toolkit) {
+                    App.toolkitObj = {
+                        api: toolkit,
+                        version: 2
+                    };
                     Backbone.trigger('toolkitReady');
                 });
             }
@@ -58,7 +63,6 @@ define([
                     }
                 };
             }
-
             if (loggedIn) {
                 App.userDetails.set('guardianID', loggedIn.id);
                 App.userDetails.fetchByGuardianId({
@@ -66,9 +70,9 @@ define([
                         if (!user.username) {
                             var username = null;
                             if (App.toolkitObj.version === 1) {
-                               username = loggedIn. publicFields.displayName;
+                                username = loggedIn.publicFields.displayName;
                             } else {
-                               username = loggedIn.displayName;
+                                username = loggedIn.displayName;
                             }
                             App.userDetails.set('username', username);
                             App.userDetails.save();

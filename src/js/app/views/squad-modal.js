@@ -74,7 +74,6 @@ define([
         },
 
         addToSquad: function (e) {
-
             var target = $(e.target);
 
             this.closeCard();
@@ -102,5 +101,6 @@ define([
             this.$el.append(this.template(this.templateData));
             return this;
         }
+
     });
 });

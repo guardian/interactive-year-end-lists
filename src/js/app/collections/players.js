@@ -37,7 +37,6 @@ define([
             this.parsePlayers(PlayerData['Player data']);
         },
 
-
         parsePlayers: function (_data) {
             _data.map(function (player) {
                 player.countrycode = this.getCountryCode(player.countryname);
@@ -153,5 +152,6 @@ define([
                 }
             }
         }
+
     });
 });

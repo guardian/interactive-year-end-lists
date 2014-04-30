@@ -31,7 +31,9 @@ define([
 
         viewTeam: function (e) {
             var guardianIDOpponent = $(e.target).data('guardian-id');
-            App.appRoutes.navigate('/match/' + guardianIDOpponent, { trigger: true });
+            App.appRoutes.navigate('/match/' + guardianIDOpponent, {
+                trigger: true
+            });
         },
 
         getCookie: function (sKey) {
@@ -47,7 +49,10 @@ define([
                 recentlyViewed = _.uniq(recentlyViewed);
                 recentlyViewed.forEach(function (guardianID) {
                     $.ajax({
-                        url: "http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users?guardianID=" + guardianID
+                        url: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users',
+                        data: {
+                            guardianID: guardianID
+                        }
                     }).done(function (data) {
                         recentUsersArr.push(data);
                     });
@@ -60,7 +65,7 @@ define([
         getAllUsers: function () {
             var _thisView = this;
             $.ajax({
-                url: "http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/allusers"
+                url: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/allusers'
             }).done(function (data) {
                 var userArr = [];
                 $.each(data, function (k, v) {

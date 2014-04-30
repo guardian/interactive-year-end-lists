@@ -26,7 +26,6 @@ define([
         },
 
         initialize: function () {
-
             this.$el.attr({
                 'id': 'player_profile_' + this.model.cid,
                 'data-uid': this.model.attributes.uid,
@@ -69,7 +68,6 @@ define([
          * Drag and drop listeners
          * https://gist.github.com/Rob-ot/1488561
          */
-
         _dragStartEvent: function (e) {
 
             var data;
@@ -106,5 +104,6 @@ define([
 
             return target.data('uid');
         }
+
     });
 });

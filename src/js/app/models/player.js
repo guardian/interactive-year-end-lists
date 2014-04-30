@@ -13,7 +13,6 @@ define([
             countryname: null,
             careerStart: null,
             careerEnd: null,
-
             selected: false,
             active: false
         }

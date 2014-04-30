@@ -21,26 +21,6 @@ define([
         className: 'container',
         template: _.template(MatchTemplate),
 
-        render: function () {
-
-            var matchDetails = App.matchModel.toJSON();
-
-            this.placeTeamsIntoCollection(matchDetails[1].teamSelection, 1);
-            this.placeTeamsIntoCollection(matchDetails[2].teamSelection, 2);
-
-            this.templateData = {
-                matchDetails: matchDetails
-            };
-
-            this.$el.empty();
-            this.$el.html(this.template(this.templateData));
-
-            this.renderTeams();
-            this.renderMatchHistory(matchDetails[1].guardianID, matchDetails[2].guardianID);
-
-            return this;
-        },
-
         placeTeamsIntoCollection: function (teamSelection, startingUser) {
             var playerArr = [];
             teamSelection.split(',').map(function (player) {
@@ -71,8 +51,8 @@ define([
 
         renderTeams: function () {
             var user1Pitch = new MatchLineupView({
-                    collection: App.player1TeamCollection
-                }),
+                collection: App.player1TeamCollection
+            }),
                 user1Stats = new MatchStatsView({
                     collection: App.player1TeamCollection
                 }),
@@ -92,6 +72,25 @@ define([
 
             this.$el.find('#user1-pitch').append(user1Pitch.render().$el);
             this.$el.find('#user2-pitch').append(user2Pitch.render().$el);
+
+            return this;
+        },
+
+        render: function () {
+            var matchDetails = App.matchModel.toJSON();
+
+            this.placeTeamsIntoCollection(matchDetails[1].teamSelection, 1);
+            this.placeTeamsIntoCollection(matchDetails[2].teamSelection, 2);
+
+            this.templateData = {
+                matchDetails: matchDetails
+            };
+
+            this.$el.empty();
+            this.$el.html(this.template(this.templateData));
+
+            this.renderTeams();
+            this.renderMatchHistory(matchDetails[1].guardianID, matchDetails[2].guardianID);
 
             return this;
         }

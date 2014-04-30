@@ -51,7 +51,6 @@ define([
         },
 
         render: function () {
-
             this.$el.empty();
 
             this.$el.append(this.template({

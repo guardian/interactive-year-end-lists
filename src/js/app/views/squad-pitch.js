@@ -28,20 +28,22 @@ define([
             'click #clearSelection': 'clearSelection'
         },
 
-        initialize: function () {
-
-        },
-
         goToMatch: function (e) {
             if (!$(e.target).hasClass('disabled')) {
-                App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID'), { trigger: true });
+                App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID'), {
+                    trigger: true
+                });
             }
         },
 
         setTeamToSelection: function (event) {
             var teamSelection = this.$el.find(event.currentTarget).data('team');
 
-            App.userDetails.set({teamSelection: teamSelection}, {silent: true});
+            App.userDetails.set({
+                teamSelection: teamSelection
+            }, {
+                silent: true
+            });
             App.userDetails.fetchUserTeamFromStorage();
             App.userDetails.save();
             this.render();
@@ -104,7 +106,6 @@ define([
         },
 
         setFilterToPosition: function (suggestedPosition) {
-
             suggestedPosition = this.ucwords(suggestedPosition);
 
             $('#squad-filters select').val('all');
@@ -123,19 +124,51 @@ define([
         },
 
         render: function () {
-
             var playerPositions = {
-                'ST': {player: null, area: 'attack' },
-                'ST2': {player: null, area: 'attack' },
-                'MR': {player: null, area: 'midfield' },
-                'MC': {player: null, area: 'midfield' },
-                'MC2': {player: null, area: 'midfield' },
-                'ML': {player: null, area: 'midfield' },
-                'RB': {player: null, area: 'defence' },
-                'CB': {player: null, area: 'defence' },
-                'CB2': {player: null, area: 'defence' },
-                'LB': {player: null, area: 'defence' },
-                'GK': {player: null, area: 'goalkeeper' }
+                'ST': {
+                    player: null,
+                    area: 'attack'
+                },
+                'ST2': {
+                    player: null,
+                    area: 'attack'
+                },
+                'MR': {
+                    player: null,
+                    area: 'midfield'
+                },
+                'MC': {
+                    player: null,
+                    area: 'midfield'
+                },
+                'MC2': {
+                    player: null,
+                    area: 'midfield'
+                },
+                'ML': {
+                    player: null,
+                    area: 'midfield'
+                },
+                'RB': {
+                    player: null,
+                    area: 'defence'
+                },
+                'CB': {
+                    player: null,
+                    area: 'defence'
+                },
+                'CB2': {
+                    player: null,
+                    area: 'defence'
+                },
+                'LB': {
+                    player: null,
+                    area: 'defence'
+                },
+                'GK': {
+                    player: null,
+                    area: 'goalkeeper'
+                }
             },
                 usersPlayers = App.usersTeamCollection.toJSON();
 
@@ -151,7 +184,6 @@ define([
             }));
 
             // Start hover event bindings
-
             if (App.userDetails.get('username')) {
                 var dragDropTarget = this.$el.find('li');
                 dragDropTarget.bind("dragover", _.bind(this._dragOverEvent, this));
@@ -168,13 +200,10 @@ define([
             });
         },
 
-
-
         /**
          * Drag and drop listeners
          * https://gist.github.com/Rob-ot/1488561
          */
-
         _dragOverEvent: function (e) {
             if (e.originalEvent) {
                 e = e.originalEvent;
@@ -207,7 +236,6 @@ define([
         },
 
         _dropEvent: function (e) {
-
             if (e.originalEvent) {
                 e = e.originalEvent;
             }
@@ -244,7 +272,6 @@ define([
         },
 
         drop: function (data, dataTransfer, e) {
-
             var target = $(e.target),
                 playerModel = App.playerCollection.findWhere({
                     'uid': data

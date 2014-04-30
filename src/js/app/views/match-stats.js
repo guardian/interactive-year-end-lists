@@ -14,10 +14,6 @@ define([
         className: 'match-stats-container',
         template: _.template(MatchStatsTemplate),
 
-        initialize: function () {
-
-        },
-
         getTeamStats: function () {
             var usersPlayers = this.collection.toJSON(),
                 stats = {
@@ -29,10 +25,9 @@ define([
                     volatility: 0,
                     starquality: 0
                 };
-// TODO: perhaps change to underscore or include jquery
-            _.each(stats, function(value, key) {
+            _.each(stats, function (value, key) {
                 usersPlayers.forEach(function (player) {
-                    if(player[key]) {
+                    if (player[key]) {
                         value = parseInt(value, 10) + parseInt(player[key], 10);
                     }
                 });

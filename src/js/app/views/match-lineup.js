@@ -14,14 +14,6 @@ define([
         className: 'match-pitch-container',
         template: _.template(MatchPitchTemplate),
 
-        events: {
-
-        },
-
-        initialize: function () {
-
-        },
-
         render: function () {
 
             if (!this.collection) {

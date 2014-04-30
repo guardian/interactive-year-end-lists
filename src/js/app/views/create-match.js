@@ -29,7 +29,10 @@ define([
                 App.matchModel.save(matchUsers, {
                     success: function () {
                         var url = ['match', matchUsers.user1, matchUsers.user2, App.matchModel.get('_id')];
-                        App.appRoutes.navigate(url.join('/'), {trigger: true, replace: true});
+                        App.appRoutes.navigate(url.join('/'), {
+                            trigger: true,
+                            replace: true
+                        });
                     }
                 }, {
                     wait: true

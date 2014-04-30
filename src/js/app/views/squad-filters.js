@@ -94,7 +94,6 @@ define([
         },
 
         updateSquadListViews: function () {
-
             var modelValues = this.model.toJSON(),
                 whereQuery = {},
                 i = 0,

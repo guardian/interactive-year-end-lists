@@ -35,13 +35,10 @@ define([
 
 
         addPlayerToCollection: function (model, forcePosition) {
-
             if (forcePosition) {
-
                 if (App.usersTeamCollection.contains(model)) {
                     this.removePlayerFromCollection(model, true);
                 }
-
                 this.removePlayerFromCollection(App.usersTeamCollection.findWhere({
                     'wantedPosition': forcePosition
                 }), true);
@@ -58,7 +55,6 @@ define([
 
         removePlayerFromCollection: function (model, skipSave) {
             skipSave = typeof skipSave !== 'undefined' ? skipSave : false;
-
             if (model) {
                 model.unset('wantedPosition', {
                     silent: true
