@@ -24,7 +24,6 @@ define([
         },
 
         render: function () {
-
             if (this.options.userID && this.options.opponentID) {
                 var _this = this;
                 $.ajax({
@@ -34,7 +33,7 @@ define([
                         opponentID: this.options.opponentID
                     },
                 }).done(function (data) {
-                    var record = {
+                    var recArr = {
                         gamesPlayed: data.length,
                         gamesWon: 0,
                         gamesLost: 0,
@@ -53,16 +52,16 @@ define([
                         }
 
                         if (userTeam.goals.length > opponent.goals.length) {
-                            record.gamesWon += 1;
+                            recArr.gamesWon += 1;
                         } else if (userTeam.goals.length < opponent.goals.length) {
-                            record.gamesLost += 1;
+                            recArr.gamesLost += 1;
                         } else {
-                            record.gamesDrawn += 1;
+                            recArr.gamesDrawn += 1;
                         }
                     });
 
                     _this.templateData = {
-                        record: record
+                        record: recArr
                     };
 
                     _this.$el.empty();
