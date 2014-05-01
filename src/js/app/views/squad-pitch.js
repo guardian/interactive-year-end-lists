@@ -307,10 +307,9 @@ define([
             if (playerModel.get('position').toLowerCase() === target.data('area')) {
                 App.usersTeamCollection.addPlayerToCollection(playerModel, target.data('position'));
             } else {
-                App.visualPrompt.set({
-                    'message': playerModel.get('name') + ' cant play ' + target.data('area'),
-                    'closePrompt': true
-                });
+                App.notify.showMsg(
+                    playerModel.get('name') + ' cant play ' + target.data('area')
+                );
             }
         }
 

@@ -1,9 +1,15 @@
 define([
     'app',
-    'backbone'
+    'backbone',
+    'views/user',
+    'views/squad',
+    'views/match'
 ], function (
     App,
-    Backbone
+    Backbone,
+    UserView,
+    SquadView,
+    MatchView
 ) {
     return Backbone.Router.extend({
 
@@ -16,7 +22,8 @@ define([
 
         defaultRoute: function (other) {
             App.superView.empty();
-            App.superView.append(App.squadView.render().$el);
+            var squadView = new SquadView({ collection: App.playerCollection });
+            App.superView.append(squadView.render().el);
         },
 
         showUser: function (playerid) {
@@ -29,8 +36,10 @@ define([
             }).fetchByGuardianId({
                 success: function (data) {
                     if (data.get('username')) {
+                        //App.superView.html(App.userView.render().$el);
                         App.superView.empty();
-                        App.superView.append(App.userView.render().$el);
+                        var userView = new UserView();
+                        App.superView.append(userView.render().el);
                     } else {
                         _this.showErrorAndRedirect('No user found!');
                     }
@@ -95,7 +104,8 @@ define([
             }, this.silently).fetch({
                 success: function () {
                     App.superView.empty();
-                    App.superView.append(App.matchView.render().$el);
+                    var matchView = new MatchView();
+                    App.superView.append(matchView.render().el);
                 },
                 error: function (e) {
                     _this.showErrorAndRedirect('No match found!');
@@ -109,10 +119,7 @@ define([
                 trigger: true
             });
 
-            App.visualPrompt.set({
-                'message': msg,
-                'closePrompt': true
-            });
+            App.notify.showMsg(msg);
         },
 
         /**

@@ -1,7 +1,8 @@
 define([
     'backbone'
 ], function (
-    Backbone
+    Backbone,
+    NotificationView
 ) {
     // Mediator
     var app = {

@@ -1,8 +1,4 @@
-<% if(message) { %>
-    <div class="inner">
-        <% if(closePrompt) { %>
-            <span id="closePrompt">&times;</span>
-        <% } %>
-        <%= message %>
-    </div>
-<% } %>
+<div class="inner">
+    <span class="closePrompt">&times;</span>
+    <p class="notifyMsg"> <%= message %> </p>
+</div>

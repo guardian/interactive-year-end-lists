@@ -72,14 +72,12 @@ define([
                         }
                     }
                 });
-                _thisView.templateData.users = userArr;
-                _thisView.render();
-            });
+                this.templateData.users = userArr;
+                this.$el.append(this.template(this.templateData));
+            }.bind(this));
         },
 
         render: function () {
-            this.$el.empty();
-            this.$el.append(this.template(this.templateData));
             return this;
         }
     });

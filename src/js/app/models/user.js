@@ -120,9 +120,6 @@ define([
                     }
                 });
                 App.usersTeamCollection.reset(playerArr);
-                App.visualPrompt.set({
-                    'message': null
-                });
             }
             return;
         },

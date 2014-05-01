@@ -9,7 +9,7 @@ define([
     'views/squad',
     'views/match',
     'views/create-match',
-    'views/visual-prompt',
+    'views/notification',
     'models/match',
     'routes'
 ], function (
@@ -23,7 +23,7 @@ define([
     SquadView,
     MatchView,
     CreateMatchView,
-    VisualPromptView,
+    NotificationView,
     MatchModel,
     Routes
 ) {
@@ -47,7 +47,6 @@ define([
 
         // Variables for listeners
         App.playerSelected = new Backbone.Model(); // Opens the player modal
-        App.visualPrompt = new Backbone.Model(); // Shows a prompt to the user (error etc)
 
         // Collections
         App.playerCollection = new PlayersCollection();
@@ -70,13 +69,6 @@ define([
             // Load the current users team
             App.userDetails.fetchUserTeamFromStorage();
 
-            // Views
-            App.userView = new UserView();
-            App.squadView = new SquadView({
-                collection: App.playerCollection
-            });
-            App.matchView = new MatchView();
-
             // Setup routing
             App.appRoutes = new Routes();
             Backbone.history.start();
@@ -98,10 +90,8 @@ define([
          * App.$el is the superView, add Error messages, intros etc.
          * App.superView is used in the router to render top level pages.
          */
-
         App.$el = $(el);
-        App.visualPromptView = new VisualPromptView();
-        App.$el.append(App.visualPromptView.render().$el);
+        App.notify = new NotificationView();
 
         App.$el.append('<div id="dream-team-interactive"></div>');
         App.superView = App.$el.find('#dream-team-interactive');

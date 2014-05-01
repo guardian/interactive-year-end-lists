@@ -89,24 +89,22 @@ define([
         // Add to squad and into a specific position ('data-wantedPos="ST"')
         addToSquad: function (e) {
             var target = $(e.target);
-
             this.closeCard();
 
             if (!App.userDetails.get('username')) {
-                App.visualPrompt.set({
-                    'message': 'Please login first',
-                    'closePrompt': true
-                });
+                App.notify.showMsg('Please login first');
                 return;
             }
-            var response = App.usersTeamCollection.addPlayerToCollection(this.playerModel, target.data('wantedPos'));
+            
+            var response = App.usersTeamCollection.addPlayerToCollection(
+                this.playerModel,
+                target.data('wantedPos')
+            );
 
             if (response.status === 'fail') {
-                App.visualPrompt.set({
-                    'message': response.message,
-                    'closePrompt': true
-                });
+                App.notify.showMsg(response.message);
             }
+
             return false;
         },
 
