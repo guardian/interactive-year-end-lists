@@ -33,7 +33,8 @@ define([
                 'LB': {},
                 'GK': {}
             },
-                usersPlayers = this.collection.toJSON();
+            
+            usersPlayers = this.collection.toJSON();
 
             usersPlayers.forEach(function (player) {
                 playerPositions[player.wantedPosition] = player;

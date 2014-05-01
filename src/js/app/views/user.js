@@ -82,7 +82,6 @@ define([
 
         renderPitch: function () {
             if (!App.viewingPlayer.get('teamSelection')) {
-
                 // No team, no pitch
                 return;
             }
@@ -101,24 +100,15 @@ define([
             var userPitch = new MatchLineupView({
                 collection: App.viewingPlayerTeamCollection
             });
-            this.$el.find('#users-team').empty();
-            this.$el.find('#users-team').append(userPitch.render().$el);
-        },
-
-        // view/user-record.js
-        renderGameHistory: function () {
-            var userRecord = new UserRecordView({
-                userID: App.viewingPlayer.get('guardianID')
-            });
-            this.$el.find('#usersRecord').empty();
-            this.$el.find('#usersRecord').append(userRecord.render().$el);
+            userPitch.setElement(this.$('#users-team')).render();
         },
 
         // view/user-find.js
         renderFindUsers: function () {
             var userFind = new UserFindView();
-            this.$el.find('#users-find').empty();
-            this.$el.find('#users-find').append(userFind.render().$el);
+            userFind.setElement(this.$('#users-find')).render();
+            //this.$('#users-find').empty();
+            //this.$('#users-find').append(userFind.render().$el);
         },
 
         render: function () {
@@ -127,61 +117,24 @@ define([
                 currentUser: App.userDetails.toJSON()
             };
 
-            this.$el.empty();
             this.$el.append(this.template(this.templateData));
-
-            // Render extra parts of the user page, eg pitch, record etc.
             this.renderPitch();
-            this.renderGameHistory();
+            
+            var userRecord = new UserRecordView({
+                userID: App.viewingPlayer.get('guardianID')
+            });
+            this.$('#usersRecord').html(userRecord.render().el);
+ 
+
 
             // If user viewing own page, show Guardian writers & recently viewed
             if (App.userDetails.get('guardianID') === App.viewingPlayer.get('guardianID')) {
                 this.renderFindUsers();
             } else {
-
                 // Add to recently viewed if not (regardless of logged in status)
-                this.addToRecentlyViewed();
+                //this.addToRecentlyViewed();
             }
             return this;
         },
-
-
-        /**
-         *
-         * Code below is from Mozilla to get and set Cookies
-         * for the recently viewed users array.
-         *
-         * TODO: would be cleaner split into a separate plugin
-         *
-         * https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
-         *
-         */
-
-        getCookie: function (sKey) {
-            return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
-        },
-
-        setCookie: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
-            if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
-                return false;
-            }
-            var sExpires = "";
-            if (vEnd) {
-                switch (vEnd.constructor) {
-                case Number:
-                    sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
-                    break;
-                case String:
-                    sExpires = "; expires=" + vEnd;
-                    break;
-                case Date:
-                    sExpires = "; expires=" + vEnd.toUTCString();
-                    break;
-                }
-            }
-            document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
-            return true;
-        }
-
     });
 });
