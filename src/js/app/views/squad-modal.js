@@ -16,7 +16,7 @@ define([
 
         tagName: 'div',
         id: 'playerSelectedModal',
-        className: 'giwc-player-card',
+        className: 'player-card',
         template: _.template(SquadModalTemplate),
 
         events: {
