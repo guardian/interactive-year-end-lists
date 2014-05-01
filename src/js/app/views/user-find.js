@@ -3,7 +3,8 @@ define([
     'jquery',
     'backbone',
     'underscore',
-    'text!templates/user-find.html'
+    'text!templates/user-find.html',
+    'jquery.cookie'
 ], function (
     App,
     $,
@@ -17,7 +18,7 @@ define([
         template: _.template(UserFindTemplate),
 
         events: {
-            'click .viewTeam': 'viewTeam'
+            'click .viewTeam': 'navigateToUser'
         },
 
         initialize: function () {
@@ -29,42 +30,38 @@ define([
             this.getRecentlyViewed();
         },
 
-        viewTeam: function (e) {
+        navigateToUser: function (e) {
             var guardianIDOpponent = $(e.target).data('guardian-id');
             App.appRoutes.navigate('/match/' + guardianIDOpponent, {
                 trigger: true
             });
         },
 
-        getCookie: function (sKey) {
-            return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
-        },
-
+        // Render of recently viewed users on user page
         getRecentlyViewed: function () {
-            var _thisView = this;
-            var recentUsersArr = [];
+            var recentlyViewed;
+            var cookieVal = $.cookie('dreamteam_recent');
 
-            var recentlyViewed = JSON.parse(this.getCookie('recentlyViewed'));
+            if (!cookieVal) {
+                return;
+            }
+
+            try {
+                recentlyViewed = JSON.parse(cookieVal);
+            } catch(err) {
+                console.error('Error parsing cookie value', err);
+            }
+
             if (recentlyViewed) {
-                recentlyViewed = _.uniq(recentlyViewed);
-                recentlyViewed.forEach(function (guardianID) {
-                    $.ajax({
-                        url: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users',
-                        data: {
-                            guardianID: guardianID
-                        }
-                    }).done(function (data) {
-                        recentUsersArr.push(data);
-                    });
-                });
-                _thisView.templateData.recentUsers = recentUsersArr;
-                _thisView.render();
+                this.templateData.recentUsers = recentlyViewed;
             }
         },
 
+        // FIXME: Replace with hardcoded list.
         getAllUsers: function () {
             var _thisView = this;
             $.ajax({
+                // FIXME: Use config for url
                 url: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/allusers'
             }).done(function (data) {
                 var userArr = [];
@@ -85,6 +82,5 @@ define([
             this.$el.append(this.template(this.templateData));
             return this;
         }
-
     });
 });

@@ -14,12 +14,23 @@ define([
         className: 'visual-prompt',
         template: _.template(VisualPromptTemplate),
 
-        events: {
-            'click #closePrompt': 'closePrompt'
-        },
-
+        /**
+         * This displays a message to the user.
+         *
+         * Example usage:
+         *
+            App.visualPrompt.set({
+                'message': 'You must be logged in to perform that action',
+                'closePrompt': true
+            });
+         *
+         */
         initialize: function () {
             App.visualPrompt.on('change', this.render, this);
+        },
+
+        events: {
+            'click #closePrompt': 'closePrompt'
         },
 
         closePrompt: function () {
@@ -30,7 +41,7 @@ define([
         },
 
         render: function () {
-            this.$el.html(this.template({
+            this.$el.append(this.template({
                 message: App.visualPrompt.get('message'),
                 closePrompt: App.visualPrompt.get('closePrompt')
             }));

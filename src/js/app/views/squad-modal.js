@@ -2,14 +2,12 @@ define([
     'app',
     'backbone',
     'underscore',
-    'transit',
     'data/players',
     'text!templates/squad-modal.html'
 ], function (
     App,
     Backbone,
     _,
-    Transit,
     PlayerData,
     SquadModalTemplate
 ) {
@@ -31,6 +29,8 @@ define([
                 "playerSelected": '',
                 'validation': {}
             };
+
+            // Listening to model changes (in 'squad-list.js')
             App.playerSelected.on('change', this.openCard, this);
         },
 
@@ -38,11 +38,21 @@ define([
             if (App.playerSelected.get('highlighted')) {
                 this.playerModel = App.playerCollection.get(App.playerSelected.get('highlighted'));
 
+                /**
+                 * TODO: This validation check might be worth removing, it was mainly
+                 * used to prevent Stikers being placed into Goalkeeper positions
+                 *
+                 */
+
                 this.templateData.validation = App.usersTeamCollection.validateAddingPlayer(this.playerModel);
+
                 this.templateData.playerSelected = this.playerModel.toJSON();
 
                 this.render();
 
+                /*
+                 * FIXME: Use transit jquery plugin so we can determine CSS transition end
+                 */
                 /*
                 var _this = this;
                 this.$el.show().transition({
@@ -57,6 +67,9 @@ define([
         },
 
         closeCard: function () {
+            /*
+             * FIXME: Use transit jquery plugin so we can determine CSS transition end
+             */
             /*
             var _this = this;
             this.$el.transition({
@@ -73,6 +86,7 @@ define([
             return false;
         },
 
+        // Add to squad and into a specific position ('data-wantedPos="ST"')
         addToSquad: function (e) {
             var target = $(e.target);
 

@@ -26,6 +26,8 @@ define([
         },
 
         initialize: function () {
+
+            // Set list item attributes
             this.$el.attr({
                 'id': 'player_profile_' + this.model.cid,
                 'data-uid': this.model.attributes.uid,
@@ -33,6 +35,8 @@ define([
             });
 
             App.playerSelected.on('change', this.openCard, this);
+
+            // This is listening to changes in the team so we can show that in the list
             this.listenTo(App.usersTeamCollection, 'add remove reset', this.showSelectedPlayer);
             this.showSelectedPlayer();
 
@@ -43,14 +47,18 @@ define([
             }
         },
 
+        // List items may have class 'selected' (ie ticked so we can untick them)
         showSelectedPlayer: function () {
             this.$el.toggleClass('selected', App.usersTeamCollection.contains(this.model));
         },
 
+        // 'squad-modal.js' listens to this App.playerSelected and opens the modal based
+        // on the cid (backbones internal ID system)
         openPlayerCard: function () {
             App.playerSelected.set('highlighted', this.model.cid);
         },
 
+        // Remove and also check the list items for 'selected' class toggle
         removePlayerFromSquad: function () {
             App.usersTeamCollection.removePlayerFromCollection(this.model);
             this.showSelectedPlayer();
@@ -65,8 +73,13 @@ define([
 
 
         /**
-         * Drag and drop listeners
+         *
+         * Drag and drop listeners ported from:
          * https://gist.github.com/Rob-ot/1488561
+         *
+         * These functions are for the begining of the drag,
+         * the drop is coded in 'squad-pitch.js'
+         *
          */
         _dragStartEvent: function (e) {
 
@@ -80,7 +93,6 @@ define([
 
             window._backboneDragDropObject = null;
             if (data !== undefined) {
-                // we cant bind an object directly because it has to be a string, json just won't do
                 window._backboneDragDropObject = data;
             }
         },

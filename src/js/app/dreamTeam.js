@@ -9,6 +9,7 @@ define([
     'views/squad',
     'views/match',
     'views/create-match',
+    'views/visual-prompt',
     'models/match',
     'routes'
 ], function (
@@ -22,6 +23,7 @@ define([
     SquadView,
     MatchView,
     CreateMatchView,
+    VisualPromptView,
     MatchModel,
     Routes
 ) {
@@ -45,7 +47,7 @@ define([
 
         // Variables for listeners
         App.playerSelected = new Backbone.Model(); // Opens the player modal
-        App.visualPrompt = new Backbone.Model(); // Shows a prompt to the user (loading etc)
+        App.visualPrompt = new Backbone.Model(); // Shows a prompt to the user (error etc)
 
         // Collections
         App.playerCollection = new PlayersCollection();
@@ -91,7 +93,18 @@ define([
      * @param  {element} el DOM element provided from the page ie. <figure>
      */
     function boot(el, config) {
+
+        /**
+         * App.$el is the superView, add Error messages, intros etc.
+         * App.superView is used in the router to render top level pages.
+         */
+
         App.$el = $(el);
+        App.visualPromptView = new VisualPromptView();
+        App.$el.append(App.visualPromptView.render().$el);
+
+        App.$el.append('<div id="dream-team-interactive"></div>');
+        App.superView = App.$el.find('#dream-team-interactive');
     }
 
     return {

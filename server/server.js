@@ -73,7 +73,7 @@ var MatchSchema = mongoose.Schema({
     venue: {
         stadium: String,
         location: String,
-        maxAttendance: String
+        attendance: Number
     },
     time: Number
 });

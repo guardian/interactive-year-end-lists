@@ -14,6 +14,9 @@ define([
         className: 'match-stats-container',
         template: _.template(MatchStatsTemplate),
 
+        /**
+         * TODO: Match stats likely not needed in prod
+         */
         getTeamStats: function () {
             var usersPlayers = this.collection.toJSON(),
                 stats = {
