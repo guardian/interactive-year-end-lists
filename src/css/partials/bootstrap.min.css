@@ -51,8 +51,17 @@ figure.interactive dfn {
   font-style: italic;
 }
 figure.interactive h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+  font-size: 28px;
+font-size: 2.8rem;
+line-height: 32px;
+line-height: 3.2rem;
+font-family: "EgyptianHeadline",georgia,serif;
+font-weight: normal;
+-webkit-font-smoothing: antialiased;
+margin-bottom: 24px;
+margin-bottom: 2.4rem;
+padding-top: 8px;
+padding-top: 0.8rem;
 }
 figure.interactive mark {
   background: #ff0;

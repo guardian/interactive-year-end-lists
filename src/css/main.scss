@@ -13,6 +13,8 @@ figure.interactive .container {
     padding-right: 0;
     -webkit-font-smoothing: antialiased;
 }
+
+
 @media (min-width: 46.25em) {
     figure.interactive .container {
         width: auto;
@@ -29,6 +31,33 @@ figure.interactive .container {
     }
 }
 figure.interactive {
+    h1{
+        font-size: 28px;
+        font-size: 2.8rem;
+        line-height: 32px;
+        line-height: 3.2rem;
+        font-family: "EgyptianHeadline",georgia,serif;
+        font-weight: normal;
+        -webkit-font-smoothing: antialiased;
+        margin-bottom: 24px;
+        margin-bottom: 2.4rem;
+        padding-top: 8px;
+        padding-top: 0.8rem;
+    }
+
+    h2{
+        font-size: 22px;
+        font-size: 2.2rem;
+        line-height: 26px;
+        line-height: 2.6rem;
+        font-family: "EgyptianHeadline",georgia,serif;
+        font-weight: normal;
+        -webkit-font-smoothing: antialiased;
+        margin-bottom: 24px;
+        margin-bottom: 2.4rem;
+        padding-top: 8px;
+        padding-top: 0.8rem;
+    }
     $buttonColor: #005689;
 
     td, th {
@@ -531,7 +560,7 @@ figure.interactive {
     #team-screen .pitch {
         display: block;
     }
-    @media(max-width:740px) {
+    @media(max-width:56.25em) {
         .pitch {
             clear: none;
             display: none;
@@ -659,35 +688,40 @@ figure.interactive {
     // Match screen
 
     #matchRecord {
-        margin: 0 15px 20px;
+        margin-top:20px;
     }
     #matchInfo {
         overflow:hidden;
-        background: #66CD00;
+        border-bottom:2px solid black;
         margin: 0 15px 30px;
     }
 
     .teamName{
         margin:0;
+        width:90%;
+        word-break: break-word;
+        color:#545454;
+        font-size:26px;
+    }
+
+    .score{
+        width:10%;
+        color:#545454;
+        font-size:40px;
+        margin:0;
+        padding:0;
     }
 
     .scorers{
         clear:both;
+        margin-bottom:10px;
     }
 
     .teamInfos{
         overflow:hidden;
     }
 
-    .teamInfo1{
-        .teamName{float:left;}
-        .score{float:right;}
-    }
-
-    .teamInfo2{
-        .teamName{float:right;}
-        .score{float:left;}
-    }
+    
     @media (min-width: 56.25em) {
         #match-screen .match-pitch-container .pitch,
         #users-screen .match-pitch-container .pitch {
@@ -697,6 +731,39 @@ figure.interactive {
         #users-screen .match-pitch-container .table {
             display: none;
         }
+
+        #user1-pitch{
+            padding-right:50px;
+        }
+        #user2-pitch{
+            padding-left:50px;
+        }
+
+        .teamInfo1{
+            padding-right:50px;
+            .teamName{float:left;}
+            .score{float:right; text-align:right;}
+
+        }
+
+        .teamInfo2{
+            padding-left:50px;
+            .teamName{float:right; text-align:right;}
+            .score{float:left;}
+            .scorers{text-align:right;}
+            .yellowRedCards{text-align:right;}
+        }
+
+        .scorers{
+        margin-top:50px;
+        min-height:1px;
+        }
+
+        .teamInfos{
+            margin-bottom:30px;
+        }
+
+
     }
     #match-screen .match-stats-container .table td {
         font-size: 13px;
@@ -707,11 +774,6 @@ figure.interactive {
     }
     #users-team .table-players {
         margin-top: 0;
-    }
-    h1.score {
-        font-size: 3em;
-        text-align: center;
-        margin: 0;
     }
     p.scorer { 
         font-family:"AgateSans";
@@ -734,12 +796,12 @@ figure.interactive {
         clear: none;
         margin: 0 3px 4px 0;
         display:inline;
-        &::before{
+        .cardColor{
             width:10px;
             height:12px;
             content:"";
             display:inline-block;
-            background:yellow;
+            background:#FFBB00;
             margin-right:5px;
         }
     }
@@ -747,9 +809,12 @@ figure.interactive {
         margin: 0 0 4px 3px;
     }
     p.scorer.carded.red {
-        background: red;
-        color: #fff;
+        .cardColor{
+            background:#D23E55;
+        }
     }
+
+
 
     .label {
         display: inline;
