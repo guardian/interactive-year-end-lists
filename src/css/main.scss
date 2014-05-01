@@ -11,6 +11,7 @@
 figure.interactive .container {
     padding-left: 0;
     padding-right: 0;
+    -webkit-font-smoothing: antialiased;
 }
 @media (min-width: 46.25em) {
     figure.interactive .container {
@@ -47,6 +48,7 @@ figure.interactive {
         outline: none;
         padding: 11px 8px;
         text-align: center;
+        width:100%;
     }
     button.disabled {
         background: #dfdfdf;
@@ -113,6 +115,8 @@ figure.interactive {
     #users-team-container {
         margin-bottom: 20px;
         clear: both;
+
+
     }
     /**
 	 * Player selection
@@ -134,21 +138,19 @@ figure.interactive {
         }
 
         #users-team-container {
-            width: 300px;
+            width: 40%;
             float: left;
             display: block;
         }
         #users-find-container {
-            width: 100%;
-            margin-left: -300px;
-            padding-left: 340px;
+            width: 60%;
+            padding-left: 40px;
             float: left;
         }
     }
     #squad-pitch button#goToMatch,
     #squad-pitch button#clearSelection {
         float: left;
-        width: 47%;
         min-width: 0;
         margin: 0;
         margin-right: 6%;
@@ -666,11 +668,32 @@ figure.interactive {
         margin: 0 15px 20px;
     }
     #matchInfo {
-        float: left;
+        overflow:hidden;
         background: #66CD00;
         margin: 0 15px 30px;
     }
 
+    .teamName{
+        margin:0;
+    }
+
+    .scorers{
+        clear:both;
+    }
+
+    .teamInfos{
+        overflow:hidden;
+    }
+
+    .teamInfo1{
+        .teamName{float:left;}
+        .score{float:right;}
+    }
+
+    .teamInfo2{
+        .teamName{float:right;}
+        .score{float:left;}
+    }
     @media (min-width: 56.25em) {
         #match-screen .match-pitch-container .pitch,
         #users-screen .match-pitch-container .pitch {
@@ -696,12 +719,12 @@ figure.interactive {
         text-align: center;
         margin: 0;
     }
-    p.scorer {
-        background: #efefef;
-        padding: 3px 6px;
-        margin: 0 0 7px 0;
-        float: left;
-        clear: both;
+    p.scorer { 
+        font-family:"AgateSans";
+        font-size:14px;
+        color:#929497;
+        margin: 0;
+        display:block;
     }
     .home p.scorer {
         float: right;
@@ -714,10 +737,17 @@ figure.interactive {
     }
 
     p.scorer.carded {
-        background: yellow;
-        font-size: 12px;
         clear: none;
         margin: 0 3px 4px 0;
+        display:inline;
+        &::before{
+            width:10px;
+            height:12px;
+            content:"";
+            display:inline-block;
+            background:yellow;
+            margin-right:5px;
+        }
     }
     .home p.scorer.carded {
         margin: 0 0 4px 3px;

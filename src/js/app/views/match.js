@@ -91,7 +91,7 @@ define([
 
             this.renderTeams();
             this.renderMatchHistory(matchDetails[1].guardianID, matchDetails[2].guardianID);
-
+            
             return this;
         }
 
