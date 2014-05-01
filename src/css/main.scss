@@ -11,6 +11,7 @@
 figure.interactive .container {
     padding-left: 0;
     padding-right: 0;
+    -webkit-font-smoothing: antialiased;
 }
 @media (min-width: 46.25em) {
     figure.interactive .container {
@@ -47,6 +48,7 @@ figure.interactive {
         outline: none;
         padding: 11px 8px;
         text-align: center;
+        width:100%;
     }
     button.disabled {
         background: #dfdfdf;
@@ -107,6 +109,8 @@ figure.interactive {
     #users-team-container {
         margin-bottom: 20px;
         clear: both;
+
+
     }
     /**
 	 * Player selection
@@ -128,21 +132,19 @@ figure.interactive {
         }
 
         #users-team-container {
-            width: 300px;
+            width: 40%;
             float: left;
             display: block;
         }
         #users-find-container {
-            width: 100%;
-            margin-left: -300px;
-            padding-left: 340px;
+            width: 60%;
+            padding-left: 40px;
             float: left;
         }
     }
     #squad-pitch button#goToMatch,
     #squad-pitch button#clearSelection {
         float: left;
-        width: 47%;
         min-width: 0;
         margin: 0;
         margin-right: 6%;
@@ -471,15 +473,61 @@ figure.interactive {
         overflow: hidden;
         margin: 0 auto 20px;
         padding: 0;
-        background: url('../images/pitch.jpg');
+        // background: url('../images/pitch.jpg');
+        background-color:#6BA83F;
         height: 445px;
-        width: 300px;
-        background-size: contain;
-        background-repeat: no-repeat;
+        width: 100%;
         list-style: none;
         position: relative;
         clear: both;
     }
+
+    .pitchLines{
+        width:98%;
+        height:98%;
+        position:absolute;
+        border:1px solid #fff;
+        left:1%;
+        top:1%;
+        
+
+        .pitchMiddleLine{
+            width:100%;
+            height:1px;
+            top:50%;
+            margin-top:-1px;
+            background:#fff;
+            position: absolute;
+        }
+
+        .pitchMiddleCircle{
+            width:40%;
+            height:34%;
+            top:33%;
+            left:30%;
+            border-radius:50%;
+            position:absolute;
+            border:1px solid #fff;
+        }
+
+        .pitchPenalty1{
+            width:30%;
+            left:35%;
+            height:40px;
+            position: absolute;
+            top:-1px;
+            border:1px solid #fff;
+        }
+        .pitchPenalty2{
+            width:30%;
+            left:35%;
+            height:40px;
+            position: absolute;
+            bottom:-1px;
+            border:1px solid #fff;
+        }
+    }
+
     #team-screen .pitch {
         display: block;
     }
@@ -497,21 +545,29 @@ figure.interactive {
         max-width: 80px;
         font-size: 11px;
         color: #fff;
+        width:60%;
         text-align: center;
         cursor: pointer;
         transition: transform 0.2s ease-out;
+        font-family:"AgateSans", Helvetica;
     }
     .pitch-player span.player-icon {
         width: 45px;
         height: 45px;
         border-radius: 50%;
-        box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.5);
         display: block;
-        margin-bottom: 3px;
         border: 2px solid #fff;
         background-size: cover;
-        background-color: #ccc;
+        background-color: rgba(0,0,0,0.1);
+        margin: 0 auto 3px;
+        box-shadow: inset 0px 0 8px rgba(50, 50, 50, 0.7);
     }
+
+    .pitch-player.pitch-player-taken span.player-icon{
+        box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.5);
+       
+    }
+
     .pitch.isDragging .pitch-player {
         opacity: 0.4;
     }
@@ -527,50 +583,56 @@ figure.interactive {
     /* Strikers */
     .pitch-player.position-st,
     .pitch-player.position-st2 {
-        left: 95px;
         top: 40px;
     }
+    .pitch-player.position-st{
+        left:26%;
+    }
     .pitch-player.position-st2 {
-        left: 165px;
+        right:26%;
     }
     /* Midfielders */
     .pitch-player.position-ml,
     .pitch-player.position-mr,
     .pitch-player.position-mc,
     .pitch-player.position-mc2 {
-        top: 150px;
-        left: 20px;
+        top: 150px; 
+    }
+    .pitch-player.position-ml{
+        left: 3%;
     }
     .pitch-player.position-mr {
-        left: 230px;
+        right:3%;
     }
     .pitch-player.position-mc {
-        left: 90px;
+        left: 26%;
     }
     .pitch-player.position-mc2 {
-        left: 160px;
+        right:26%
     }
     /* Defenders */
     .pitch-player.position-lb,
     .pitch-player.position-rb,
     .pitch-player.position-cb,
     .pitch-player.position-cb2 {
-        left: 20px;
         top: 270px;
     }
+    .pitch-player.position-lb{
+        left: 3%;
+    }
     .pitch-player.position-rb {
-        left: 230px;
+        right:3%;
     }
     .pitch-player.position-cb {
-        left: 90px;
+        left: 26%;
     }
     .pitch-player.position-cb2 {
-        left: 160px;
+        right:26%;
     }
     /* Goalkeepers */
     .pitch-player.position-gk {
         top: 365px;
-        left: 125px;
+        left: 39%;
     }
 
 
@@ -600,11 +662,32 @@ figure.interactive {
         margin: 0 15px 20px;
     }
     #matchInfo {
-        float: left;
+        overflow:hidden;
         background: #66CD00;
         margin: 0 15px 30px;
     }
 
+    .teamName{
+        margin:0;
+    }
+
+    .scorers{
+        clear:both;
+    }
+
+    .teamInfos{
+        overflow:hidden;
+    }
+
+    .teamInfo1{
+        .teamName{float:left;}
+        .score{float:right;}
+    }
+
+    .teamInfo2{
+        .teamName{float:right;}
+        .score{float:left;}
+    }
     @media (min-width: 56.25em) {
         #match-screen .match-pitch-container .pitch,
         #users-screen .match-pitch-container .pitch {
@@ -630,12 +713,12 @@ figure.interactive {
         text-align: center;
         margin: 0;
     }
-    p.scorer {
-        background: #efefef;
-        padding: 3px 6px;
-        margin: 0 0 7px 0;
-        float: left;
-        clear: both;
+    p.scorer { 
+        font-family:"AgateSans";
+        font-size:14px;
+        color:#929497;
+        margin: 0;
+        display:block;
     }
     .home p.scorer {
         float: right;
@@ -648,10 +731,17 @@ figure.interactive {
     }
 
     p.scorer.carded {
-        background: yellow;
-        font-size: 12px;
         clear: none;
         margin: 0 3px 4px 0;
+        display:inline;
+        &::before{
+            width:10px;
+            height:12px;
+            content:"";
+            display:inline-block;
+            background:yellow;
+            margin-right:5px;
+        }
     }
     .home p.scorer.carded {
         margin: 0 0 4px 3px;
