@@ -10,6 +10,7 @@ define([
     'views/match',
     'views/create-match',
     'views/notification',
+    'views/header',
     'models/match',
     'routes'
 ], function (
@@ -24,6 +25,7 @@ define([
     MatchView,
     CreateMatchView,
     NotificationView,
+    HeaderView,
     MatchModel,
     Routes
 ) {
@@ -57,6 +59,7 @@ define([
 
         App.matchModel = new MatchModel();
         App.createMatch = new CreateMatchView();
+        App.header = new HeaderView();
 
         // Once user and player data is loaded
         Backbone.on('dataReady', function () {
@@ -68,6 +71,8 @@ define([
 
             // Load the current users team
             App.userDetails.fetchUserTeamFromStorage();
+
+            App.header.render();
 
             // Setup routing
             App.appRoutes = new Routes();

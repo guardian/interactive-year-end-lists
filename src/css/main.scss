@@ -259,63 +259,56 @@ figure.interactive {
         color: $buttonColor;
         margin: 0;
     }
+    #player_list{
+        padding:0;
+        overflow:hidden;
+    }
     .player_profile {
         text-align: center;
         margin-bottom: 25px;
+        padding:2px;
         cursor: pointer;
         transition: transform 0.2s ease-out;
         overflow: hiden;
     }
+
+    .bg-goalkeeper{background:red;}
+    .bg-attack{background:green;}
+    .bg-midfield{background:blue;}
+    .bg-defence{background:orange;}
     .player_profile .inner .innercard {
         position: relative;
         padding: 3px;
         background: #fff;
         border: 1px solid #efefef;
     }
-    .player-image {
+    .player-image-container {
         width: 100%;
-        min-height: 215px;
+        min-height: 165px;
         background-size: cover;
         background-position: top center;
         border: 1px solid #aeaeae;
     }
+
     .player-name {
-        position: absolute;
-        bottom: 0px;
         margin: 0;
-        left: 0;
+
         width: 100%;
         text-align: left;
         padding: 4px;
     }
     .player-name p {
-        font-size: 13px;
+        font-size: 10px;
         font-family: helvetica;
         font-weight: bold;
-        color: #fff;
+
         letter-spacing: 0.6px;
         text-transform: uppercase;
-        background: rgba(0, 0, 0, 0.8);
-        margin: 0;
-        padding: 4px 5px;
+        text-align:center;
     }
     .player-country {
-        text-align: right;
-        color: #fff;
-        position: absolute;
-        transform: rotate(-90deg);
-        left: -31px;
-        margin: 0;
-        line-height: 2.3;
-        top: 66px;
-        font-size: 13px;
-        height: 30px;
-        width: 100px;
-        padding: 0 9px;
-        overflow: hidden;
-        font-family: helvetica;
-        background: -webkit-linear-gradient(left, rgba(0, 85, 164, 0) 0%, rgba(0, 85, 164, 0.6) 65%, rgba(0, 85, 164, 0.8) 100%);
-    }
+
+        }
     .player_profile .flag {
         position: absolute;
         width: 30px;

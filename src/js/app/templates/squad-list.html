@@ -1,13 +1,16 @@
-<div class="inner bg-<%= countryname.toLowerCase() %>">
+<div class="inner bg-<%= position.toLowerCase() %>">
 	<div class="innercard">
         <span class="removePlayer">Unpick</span>
 
-        <div class="player-image" style="background-image:url('http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg')">
+        <div class="player-image-container" style="background-image:url(http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg)">
             <span class="flag" alt="<%= countryname %>" title="<%= countryname %>" style="background-image:url('https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/flags/<%= countrycode %>.png')"></span>
-            <div class="player-country"><%= countryname %></div>
+            <span class="player-position"><%= position.toUpperCase() %></span>
+        </div>
+            
             <div class="player-name">
                 <p><%= name.substring(name.lastIndexOf(" ")+1) %></p>
             </div>
+            <div class="player-country"><%= countryname %></div>
         </div>
 
 	</div>
