@@ -62,7 +62,7 @@ define([
             var _thisView = this;
             $.ajax({
                 // FIXME: Use config for url
-                url: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/allusers'
+                url: App.getEndpoint() + 'allusers'
             }).done(function (data) {
                 var userArr = [];
                 $.each(data, function (k, v) {

@@ -346,14 +346,17 @@ figure.interactive {
     }
     
     .player-card {
+        display: block;
         background: #fff;
         padding: 10px;
         position: fixed;
         left: 50%;
         top: 50px;
-        border-radius: 8px;
-        width: 600px;
+        border-radius: 6px;
+        margin-left: -250px;
+        width: 500px;
         z-index: 3000;
+        border: 2px solid rgba(0, 0, 0, 0.4);
     }
 
 
