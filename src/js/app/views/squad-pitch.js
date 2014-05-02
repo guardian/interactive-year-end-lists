@@ -182,12 +182,18 @@ define([
                     player: null,
                     area: 'goalkeeper'
                 }
-            },
-                usersPlayers = App.usersTeamCollection.toJSON();
+            };
 
+            
+            var usersPlayers = App.usersTeamCollection.toJSON();
             usersPlayers.forEach(function (player) {
-                playerPositions[player.wantedPosition].player = player;
+                if (playerPositions.hasOwnProperty(player.wantedPosition)) {
+                    playerPositions[player.wantedPosition].player = player;
+                } else {
+                    console.log(player);
+                }
             });
+            
 
             this.$el.empty();
             this.$el.append(this.template({
@@ -195,7 +201,7 @@ define([
                 userDetails: App.userDetails.toJSON(),
                 usersPlayers: App.usersTeamCollection.toJSON()
             }));
-
+            
             // Start hover event bindings
             if (App.userDetails.get('username')) {
                 var dragDropTarget = this.$el.find('li');
@@ -204,6 +210,7 @@ define([
                 dragDropTarget.bind("dragleave", _.bind(this._dragLeaveEvent, this));
                 dragDropTarget.bind("drop", _.bind(this._dropEvent, this));
             }
+            
             return this;
         },
 

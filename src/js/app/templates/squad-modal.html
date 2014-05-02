@@ -1,60 +1,49 @@
 
 <% if(playerSelected.name) { %>
+<div class="player-bio">
+    <span class="close">&times;</span>
+    <h2><%= playerSelected.name %></h2>
+    <%= playerSelected.bio %>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td>Nation</td>
+                    <td><%= playerSelected.countryname %></td>
+                </tr>
+                <tr>
+                    <td>Apperances</td>
+                    <td><%= playerSelected.apps %></td>
+                </tr>
+                <tr>
+                    <td>Goals</td>
+                    <td><%= playerSelected.gls %></td>
+                </tr>
+            </tbody>
+        </table>
 
-	<div class="flip-container" ontouchstart="this.classList.add('hover');">
-		<div class="flipper">
+        <% if(playerSelected.position === 'Goalkeeper') { %>
+            <button type="button" data-wanted-pos="GK" class="addToSquad">Goalkeeper</button>
+        <% } %>
 
-			<div class="front" style="background-image:url('http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg');">
-			</div>
+        <% if(playerSelected.position === 'Defence') { %>
+            <button type="button" data-wanted-pos="RB" class="addToSquad">Defence</button>
+            <button type="button" data-wanted-pos="CB" class="addToSquad">Defence</button>
+            <button type="button" data-wanted-pos="CB2" class="addToSquad">Defence</button>
+            <button type="button" data-wanted-pos="LB" class="addToSquad">Defence</button>
+        <% } %>
 
-			<div class="back">
-				<div class="player-bio">
-					<span class="close">&times;</span>
-					<h2><%= playerSelected.name %></h2>
-					<%= playerSelected.bio %>
-					<table class="table table-bordered">
-					    <tbody>
-                            <tr>
-                                <td>Nation</td>
-                                <td><%= playerSelected.countryname %></td>
-                            </tr>
-                            <tr>
-                                <td>Apperances</td>
-                                <td><%= playerSelected.apps %></td>
-                            </tr>
-                            <tr>
-                                <td>Goals</td>
-                                <td><%= playerSelected.gls %></td>
-                            </tr>
-						</tbody>
-					</table>
+        <% if(playerSelected.position === 'Midfield') { %>
+            <button type="button" data-wanted-pos="ML" class="addToSquad">Midfield</button>
+            <button type="button" data-wanted-pos="MC" class="addToSquad">Midfield</button>
+            <button type="button" data-wanted-pos="MC2" class="addToSquad">Midfield</button>
+            <button type="button" data-wanted-pos="MR" class="addToSquad">Midfield</button>
+        <% } %>
 
-					<% if(playerSelected.position === 'Goalkeeper') { %>
-    					<button type="button" data-wanted-pos="GK" class="addToSquad">Goalkeeper</button>
-					<% } %>
+        <% if(playerSelected.position === 'Attack') { %>
+            <button type="button" data-wanted-pos="ST" class="addToSquad">Striker</button>
+            <button type="button" data-wanted-pos="ST2" class="addToSquad">Striker</button>
+        <% } %>
 
-                    <% if(playerSelected.position === 'Defence') { %>
-    					<button type="button" data-wanted-pos="DL" class="addToSquad">Defence</button>
-    					<button type="button" data-wanted-pos="DC" class="addToSquad">Defence</button>
-    					<button type="button" data-wanted-pos="DC2" class="addToSquad">Defence</button>
-    					<button type="button" data-wanted-pos="DR" class="addToSquad">Defence</button>
-					<% } %>
-
-                    <% if(playerSelected.position === 'Midfield') { %>
-    					<button type="button" data-wanted-pos="ML" class="addToSquad">Midfield</button>
-    					<button type="button" data-wanted-pos="MC" class="addToSquad">Midfield</button>
-    					<button type="button" data-wanted-pos="MC2" class="addToSquad">Midfield</button>
-    					<button type="button" data-wanted-pos="MR" class="addToSquad">Midfield</button>
-					<% } %>
-
-                    <% if(playerSelected.position === 'Attack') { %>
-    					<button type="button" data-wanted-pos="ST" class="addToSquad">Striker</button>
-    					<button type="button" data-wanted-pos="ST2" class="addToSquad">Striker</button>
-					<% } %>
-
-				</div>
-			</div> <!-- .back -->
-		</div> <!-- .flipper -->
-	</div> <!-- .flip-container -->
+    </div>
 
 <% } %>

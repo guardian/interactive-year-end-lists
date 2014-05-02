@@ -366,17 +366,19 @@ figure.interactive {
         line-height: 1;
         cursor: pointer;
     }
-    .giwc-player-card {
+    
+    .player-card {
+        background: #fff;
+        padding: 10px;
         position: fixed;
-        display: none;
         left: 50%;
-        margin-left: -275px;
         top: 50px;
         border-radius: 8px;
         width: 600px;
         z-index: 3000;
-/*        -webkit-transform: scale(.001); */
     }
+
+
     .giwc-player-card .front-name {
         color: #fff;
         padding: 30px;
@@ -406,22 +408,18 @@ figure.interactive {
     /* Modal Flip */
     /* simple */
     .flip-container {
-        perspective: 2500;
-        transform-style: preserve-3d;
     }
     /* START: Accommodating for IE */
     .flip-container.hover .back {
-        transform: rotateY(0deg);
     }
     .flip-container.hover .front {
-        transform: rotateY(180deg);
     }
     /* END: Accommodating for IE */
     .flip-container,
     .front,
     .back {
         height: 550px;
-        border-radius: 8px;
+        border-radius: 3px;
     }
     .front,
     .back {
@@ -432,25 +430,16 @@ figure.interactive {
     }
     .front,
     .back {
-        backface-visibility: hidden;
-        transition: 0.6s;
-        transform-style: preserve-3d;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
         position: absolute;
         top: 0;
         left: 0;
     }
     .front {
-        transform: rotateY(0deg);
         background: #000;
-        z-index: 3;
         background-size: cover;
         background-position: 50% 50%;
     }
     .back {
-        z-index: 2;
-        background: #fff;
-        transform: rotateY(-180deg);
     }
     @media(max-width:46.25em) {
         .giwc-player-card {

@@ -49,6 +49,8 @@ define([
             if (res.status === 'success') {
                 App.usersTeamCollection.add(model);
                 App.userDetails.saveUserTeamToStorage();
+            } else {
+                console.error('error adding player collection');
             }
             return res;
         },
