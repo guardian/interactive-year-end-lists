@@ -68,7 +68,7 @@ define([
         render: function () {
             this.$el.empty();
             this.$el.append(this.template(this.model.attributes));
-            console.log(this.model.attributes);
+            // console.log(this.model.attributes);
             return this;
         },
 

@@ -22,26 +22,26 @@
         </table>
 
         <% if(playerSelected.position === 'Goalkeeper') { %>
-            <button type="button" data-wanted-pos="GK" class="addToSquad">Goalkeeper</button>
+            <button type="button" data-wanted-pos="GK" class="addToSquad">Select as Goalkeeper</button>
         <% } %>
 
         <% if(playerSelected.position === 'Defence') { %>
-            <button type="button" data-wanted-pos="RB" class="addToSquad">Defence</button>
-            <button type="button" data-wanted-pos="CB" class="addToSquad">Defence</button>
-            <button type="button" data-wanted-pos="CB2" class="addToSquad">Defence</button>
-            <button type="button" data-wanted-pos="LB" class="addToSquad">Defence</button>
+            <button type="button" data-wanted-pos="RB" class="addToSquad">Select as Right Back</button>
+            <button type="button" data-wanted-pos="CB" class="addToSquad">Select as Central Right Back</button>
+            <button type="button" data-wanted-pos="CB2" class="addToSquad">Select as Central Left Back</button>
+            <button type="button" data-wanted-pos="LB" class="addToSquad">Select as Left Back</button>
         <% } %>
 
         <% if(playerSelected.position === 'Midfield') { %>
-            <button type="button" data-wanted-pos="ML" class="addToSquad">Midfield</button>
-            <button type="button" data-wanted-pos="MC" class="addToSquad">Midfield</button>
-            <button type="button" data-wanted-pos="MC2" class="addToSquad">Midfield</button>
-            <button type="button" data-wanted-pos="MR" class="addToSquad">Midfield</button>
+            <button type="button" data-wanted-pos="ML" class="addToSquad">Select as Left Wing</button>
+            <button type="button" data-wanted-pos="MC" class="addToSquad">Select as Central Midfielder (Left)</button>
+            <button type="button" data-wanted-pos="MC2" class="addToSquad">Select as Central Midfielder (Right)</button>
+            <button type="button" data-wanted-pos="MR" class="addToSquad">Select as Right Wing</button>
         <% } %>
 
         <% if(playerSelected.position === 'Attack') { %>
-            <button type="button" data-wanted-pos="ST" class="addToSquad">Striker</button>
-            <button type="button" data-wanted-pos="ST2" class="addToSquad">Striker</button>
+            <button type="button" data-wanted-pos="ST" class="addToSquad">Select as Central Forward (Left)</button>
+            <button type="button" data-wanted-pos="ST2" class="addToSquad">Select as Central Forward (Right)</button>
         <% } %>
 
     </div>

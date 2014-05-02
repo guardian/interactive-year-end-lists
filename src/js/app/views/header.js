@@ -18,14 +18,14 @@ define([
 
         render: function () {
 
-            console.log(App.userDetails.isUserLoggedIn());
+            // console.log(App.userDetails);
 
             var templateHTML = this.template({
                 message: 'TESTING',
-                username: App.userDetails.get('username')
+                username: App.userDetails.get('username'),
+                userID: App.userDetails.get('guardianID')
             });
 
-            console.log(templateHTML);
 
             this.$el.html(templateHTML);
             App.$el.prepend(this.el);

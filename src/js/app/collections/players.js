@@ -69,7 +69,15 @@ define([
                     code: 'CM'
                 },
                 {
+                    name: 'Chile',
+                    code: 'CL'
+                },
+                {
                     name: 'Czech Republic',
+                    code: 'CZ'
+                },
+                {
+                    name: 'Czechoslovakia',
                     code: 'CZ'
                 },
                 {
@@ -101,7 +109,7 @@ define([
                     code: 'IT'
                 },
                 {
-                    name: 'Netherlands',
+                    name: 'Holland',
                     code: 'NL'
                 },
                 {
