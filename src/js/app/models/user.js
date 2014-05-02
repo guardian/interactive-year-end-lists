@@ -8,7 +8,7 @@ define([
     return Backbone.Model.extend({
 
         // FIXME: Use config for url
-        urlRoot: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/users',
+        urlRoot: App.getEndpoint() + 'users',
         idAttribute: '_id',
         defaults: {
             guardianID: null,

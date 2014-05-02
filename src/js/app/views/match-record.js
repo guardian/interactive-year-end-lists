@@ -33,7 +33,7 @@ define([
                 var _this = this;
                 $.ajax({
                     // FIXME: Use config for url
-                    url: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/matches',
+                    url: App.getEndpoint() + 'matches',
                     data: {
                         userID: this.options.userID,
                         opponentID: this.options.opponentID
