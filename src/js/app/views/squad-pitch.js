@@ -304,16 +304,20 @@ define([
         },
 
         drop: function (data, dataTransfer, e) {
-            var target = $(e.target),
-                playerModel = App.playerCollection.findWhere({
-                    'uid': data
-                });
-
-            if (!target.hasClass('pitch-player')) {
-                target = target.closest('.pitch-player');
+            var target = $(e.target).closest('.pitch-player');
+            var position = parseInt(target.data('position'), 10);
+            
+            if (isNaN(position) || position > 11 || position < 0) {
+                console.warn('Invalid player position', position);
+                return;
             }
 
-            console.log(playerModel, target);
+            if (App.userDetails.isPlayerInSquad(data)) {
+                console.warn('Attempting to assign a duplicate player', data);
+                return;
+            }
+            
+            App.userDetails.save('player'+position, data);
 
             // Prevent Goalkeepers being Strikers
             // TODO: If you want Pele in goal remove this if statement.

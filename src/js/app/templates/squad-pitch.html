@@ -11,11 +11,17 @@
 		<div class="pitchPenalty2"></div>
 	</div>
 	<% _.each(players, function(player, index) { %>
-        <%= player.name %> <%= index %>
-        <li class="pitch-player pitch-player-available position-<%= index %>" data-area="<%= index %>" data-position="<%= index %>" data-area="<%= index %>">
-            <span class="player-icon" style=""></span>
-            <%= index %>
-        </li>
+        <% if (player.uid === null) { %>
+             <li class="pitch-player pitch-player-available position-<%= index %>" data-area="<%= index %>" data-position="<%= index %>" data-area="<%= index %>">
+                <span class="player-icon" style=""></span>
+                <%= index %>
+            </li>
+        <% } else { %>
+            <li data-uid="<%= player.uid %>" data-position="<%= index %>" data-area="<%= index %>" class="pitch-player pitch-player-taken position-<%= index %>">
+                <span class="player-icon" style="background-image:url('https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/players/pele.jpg')" title="Drop <%= player.name %>"></span>
+                <%= player.name %>
+            </li>
+        <% } %>
 
 	<% }) %>
 	<li class="playerOptions">

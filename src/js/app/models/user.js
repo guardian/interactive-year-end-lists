@@ -27,17 +27,23 @@ define([
             player10: null
         },
 
-        validation: function(attributes, options) {
-            var playerIDs = [];
-            for (var i=0; i < 11; i++) {
-                if (attributes['player'+i] !== null) {
-                    playerIDs.push(attributes['player'+i]);
-                }
-            }
+        validate: function(attributes, options) {
+            console.log(options, this.getSquad(), arguments);
+            var playerIDs = _.filter(this.getSquad(), function(id) {
+                return id !== null;
+            });
 
             if (playerIDs.length !== _.uniq(playerIDs).length) {
+                console.log('dups');
+                console.log(this.getSquad());
                 return 'Duplicate player IDs detected';
             }
+        },
+
+        isPlayerInSquad: function(playerID) {
+            return _.find(this.getSquad(), function(id) {
+                return id === playerID;
+            });
         },
 
         getSquad: function() {
