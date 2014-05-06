@@ -60,11 +60,11 @@ define([
          * ie Replace or Drop
          */
         showOptions: function (event) {
-            var target = this.$el.find(event.currentTarget),
-                playerOptions = this.$el.find('.playerOptions');
+            var target = this.$el.find(event.currentTarget);
+            var playerOptions = this.$el.find('.playerOptions');
 
             playerOptions.find('h4').text(target.text());
-            playerOptions.find('button').attr('data-uid', target.data('uid'));
+            playerOptions.find('button').attr('data-position', target.data('position'));
             playerOptions.show();
         },
 
@@ -77,9 +77,15 @@ define([
         dropPlayer: function (event, uid, posClass) {
             this.closeOptions();
 
+            var target = $(event.currentTarget);
+            var position = target.data('position');
+
             if (!uid) {
                 uid = this.$el.find(event.currentTarget).data('uid');
             }
+
+            console.log(target.data('position'), target);
+            
             if (!posClass) {
                 posClass = this.$el.find('li[data-uid="' + uid + '"]').data('position');
             }
@@ -87,10 +93,18 @@ define([
             var playerModel = App.playerCollection.findWhere({
                 'uid': uid
             });
+
+
+            App.userDetails.save('player'+position, null, {
+                success: App.userDetails.fetchUserTeamFromStorage.bind(App.userDetails)
+            });
+
+            /*
             this.$el.find('li[data-uid="' + uid + '"]').fadeOut('slow', function () {
                 App.usersTeamCollection.removePlayerFromCollection(playerModel);
             });
             this.$el.find('li.pitch-player-hidden[data-position="' + posClass + '"]').fadeIn('slow');
+            */
             return false;
         },
 

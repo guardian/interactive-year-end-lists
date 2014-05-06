@@ -30,7 +30,17 @@ mongoose.connect("mongodb://localhost/test");
 var UserSchema = mongoose.Schema({
     guardianID: String,
     username: String,
-    teamSelection: String
+    teamSelection: String,
+    player1: String,
+    player2: String,
+    player3: String,
+    player4: String,
+    player5: String,
+    player6: String,
+    player7: String,
+    player8: String,
+    player9: String,
+    player10: String,
 });
 var User = mongoose.model('User', UserSchema);
 
@@ -156,7 +166,17 @@ app.put("/users/:_id", function (req, res, next) {
     var userData = {
         guardianID: req.body.guardianID,
         username: req.body.username,
-        teamSelection: req.body.teamSelection
+        teamSelection: req.body.teamSelection,
+        player1: req.body.player1,
+        player2: req.body.player2,
+        player3: req.body.player3,
+        player4: req.body.player4,
+        player5: req.body.player5,
+        player6: req.body.player6,
+        player7: req.body.player7,
+        player8: req.body.player8,
+        player9: req.body.player9,
+        player10: req.body.player10
     };
     User.findByIdAndUpdate(req.param('_id'), userData, function (err, doc) {
         if (err) {
