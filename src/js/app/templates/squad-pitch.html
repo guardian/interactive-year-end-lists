@@ -1,9 +1,7 @@
 
-<button id="goToMatch" class="<%= usersPlayers.length === 11 ? 'enabled' : 'disabled' %>"><%= usersPlayers.length === 11 ? 'Go play a match!' : 'Pick 11 players to play!' %></button>
+<button id="goToMatch" class="<%= usersPlayers.length === 11 ? 'enabled' : 'disabled' %>"><%= usersPlayers.length === 11 ? 'Go play a match!' : 11-usersPlayers.length+ ' more players to start playing' %></button>
 
-<% if(usersPlayers.length > 0) { %>
-	<button id="clearSelection">Clear selection</button>
-<% } %>
+
 
 <ol class="pitch">
 	<div class="pitchLines">
@@ -35,7 +33,9 @@
 		<button id="dropPlayer" data-uid="">Drop</button>
 	</li>
 </ol>
-
+<% if(usersPlayers.length > 0) { %>
+	<button id="clearSelection">Clear selection</button>
+<% } %>
 <p>Pre-select</p>
 
 <p><a href="#" class="selectTeamPop" data-team="P008:GK,P015:LB,P027:CB,P026:CB2,P048:RB,P070:MC,P069:MC2,P058:ML,P092:MR,P100:ST,P110:ST2">Brazilian flair</a></p>

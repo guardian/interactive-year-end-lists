@@ -65,6 +65,7 @@ figure.interactive {
     }
 
     button {
+        -webkit-font-smoothing:antialiased;
         background: $buttonColor;
         border: 0 none;
         color: #ffffff;
@@ -80,7 +81,7 @@ figure.interactive {
         width:100%;
     }
     button.disabled {
-        background: #dfdfdf;
+        color: rgba(255,255,255,0.5);
     }
 
     input {
@@ -182,9 +183,11 @@ figure.interactive {
         margin: 0;
         margin-right: 6%;
         margin-bottom: 20px;
+        font-size:16px;
     }
     #squad-pitch button#clearSelection {
-        margin-right: 0;
+        margin: 0 auto;
+        width:50%;
     }
     #squad-filters form {
         position: absolute;
@@ -283,6 +286,7 @@ figure.interactive {
         padding:1px;
         background:rgba(0,0,0,0.3);
     }
+
     .bg-goalkeeper{background:#FFBB00;}
     .bg-attack{background:#F5644F;}
     .bg-midfield{background:#4BC6DF;}
@@ -333,15 +337,10 @@ figure.interactive {
         left: 4px;
     }
     .player-position {
-        position: absolute;
-        right: 3px;
-        padding: 3px 3px 0 0;
-        font-size: 13px;
-        background: #fff;
-        top: 3px;
-        width: 30px;
-        height: 30px;
-        text-align: right;
+       font-family: "AgateSans";
+        color:#8d8d8d;
+        font-size:10px;
+        line-height:1em;
     }
     .player_profile .removePlayer {
         display: none;
@@ -362,8 +361,8 @@ figure.interactive {
         background: rgba(0,0,0,0.5);
     }
     .player_profile.isDragging {
-        transform: scale(0.8);
-        opacity: 0.4;
+        // transform: scale(0.8);
+        opacity: 0.2;
     }
     .player_profile.selected img {
         opacity: 0.5;
