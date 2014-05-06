@@ -37,7 +37,8 @@ define([
             App.playerSelected.on('change', this.openCard, this);
 
             // This is listening to changes in the team so we can show that in the list
-            this.listenTo(App.usersTeamCollection, 'add remove reset', this.showSelectedPlayer);
+            //this.listenTo(App.usersTeamCollection, 'add remove reset', this.showSelectedPlayer);
+            App.usersTeamCollection.on('reset', this.showSelectedPlayer, this);
             this.showSelectedPlayer();
 
             if (App.userDetails.get('username')) {
@@ -60,7 +61,15 @@ define([
 
         // Remove and also check the list items for 'selected' class toggle
         removePlayerFromSquad: function () {
-            App.usersTeamCollection.removePlayerFromCollection(this.model);
+            /*console.log(App.usersTeamCollection.remove(this.model));
+            console.log(App.usersTeamCollection.get(this.model)); 
+            */
+            var indexOfPlayer = App.usersTeamCollection.indexOf(this.model);
+            console.log(indexOfPlayer);
+            App.userDetails.save('player'+indexOfPlayer, null, {
+                success: App.userDetails.fetchUserTeamFromStorage.bind(App.userDetails)
+            });
+            console.log('after save');
             this.showSelectedPlayer();
             return false;
         },

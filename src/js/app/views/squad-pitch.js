@@ -317,7 +317,9 @@ define([
                 return;
             }
             
-            App.userDetails.save('player'+position, data);
+            App.userDetails.save('player'+position, data, {
+                success: App.userDetails.fetchUserTeamFromStorage.bind(App.userDetails)                   
+            });
 
             // Prevent Goalkeepers being Strikers
             // TODO: If you want Pele in goal remove this if statement.

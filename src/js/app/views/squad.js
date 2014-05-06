@@ -29,7 +29,7 @@ define([
         initialize: function () {
             this.listenTo(App.userDetails, 'change:username', this.render);
             this.listenTo(App.userDetails, 'change:teamSelection', this.prePopulateTeam);
-            this.listenTo(App.usersTeamCollection, 'change', this.prePopulateTeam);
+            this.listenTo(App.usersTeamCollection, 'reset', this.prePopulateTeam);
 
             this.filterModel = new Backbone.Model();
         },

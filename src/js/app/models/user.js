@@ -28,14 +28,11 @@ define([
         },
 
         validate: function(attributes, options) {
-            console.log(options, this.getSquad(), arguments);
             var playerIDs = _.filter(this.getSquad(), function(id) {
                 return id !== null;
             });
 
             if (playerIDs.length !== _.uniq(playerIDs).length) {
-                console.log('dups');
-                console.log(this.getSquad());
                 return 'Duplicate player IDs detected';
             }
         },
@@ -154,8 +151,9 @@ define([
             }
             */
             var playerModels = [];
-
+            console.log('fetching/building users'); 
             _.each(this.getSquad(), function(playerID) {
+                console.log('players reset', playerID);
                 var playerModel = App.playerCollection.findWhere({
                     'uid': playerID
                 });
