@@ -184,7 +184,10 @@ define([
                 }
             };
 
-            
+            console.log(App.userDetails.toJSON(), App.usersTeamCollection.toJSON());
+            var usersSquad = App.userDetails.getSquad();
+
+            /*
             var usersPlayers = App.usersTeamCollection.toJSON();
             usersPlayers.forEach(function (player) {
                 if (playerPositions.hasOwnProperty(player.wantedPosition)) {
@@ -193,13 +196,14 @@ define([
                     console.log(player);
                 }
             });
-            
+            */
 
             this.$el.empty();
             this.$el.append(this.template({
-                players: playerPositions,
+                //players: playerPositions,
                 userDetails: App.userDetails.toJSON(),
-                usersPlayers: App.usersTeamCollection.toJSON()
+                players: App.usersTeamCollection.toJSON(),
+                squadCount: 0
             }));
             
             // Start hover event bindings
@@ -309,8 +313,11 @@ define([
                 target = target.closest('.pitch-player');
             }
 
+            console.log(playerModel, target);
+
             // Prevent Goalkeepers being Strikers
             // TODO: If you want Pele in goal remove this if statement.
+            /*
             if (playerModel.get('position').toLowerCase() === target.data('area')) {
                 App.usersTeamCollection.addPlayerToCollection(playerModel, target.data('position'));
             } else {
@@ -318,6 +325,7 @@ define([
                     playerModel.get('name') + ' cant play ' + target.data('area')
                 );
             }
+            */
         }
 
     });

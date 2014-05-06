@@ -13,7 +13,39 @@ define([
         defaults: {
             guardianID: null,
             username: null,
-            teamSelection: null
+            teamSelection: null,
+            player0: null,
+            player1: null,
+            player2: null,
+            player3: null,
+            player4: null,
+            player5: null,
+            player6: null,
+            player7: null,
+            player8: null,
+            player9: null,
+            player10: null
+        },
+
+        validation: function(attributes, options) {
+            var playerIDs = [];
+            for (var i=0; i < 11; i++) {
+                if (attributes['player'+i] !== null) {
+                    playerIDs.push(attributes['player'+i]);
+                }
+            }
+
+            if (playerIDs.length !== _.uniq(playerIDs).length) {
+                return 'Duplicate player IDs detected';
+            }
+        },
+
+        getSquad: function() {
+            var usersSquad = [];
+            for (var i=0; i < 11; i++) {
+                usersSquad.push(this.get('player'+i));
+            }
+            return usersSquad;
         },
 
         setToolKitObject: function () {
@@ -99,6 +131,7 @@ define([
         },
 
         fetchUserTeamFromStorage: function () {
+            /*
             if (App.userDetails.get('teamSelection')) {
                 var playerArr = [];
                 App.userDetails.get('teamSelection').split(',').map(function (player) {
@@ -113,7 +146,17 @@ define([
                 });
                 App.usersTeamCollection.reset(playerArr);
             }
-            return;
+            */
+            var playerModels = [];
+
+            _.each(this.getSquad(), function(playerID) {
+                var playerModel = App.playerCollection.findWhere({
+                    'uid': playerID
+                });
+                playerModels.push(playerModel);
+            });
+            
+            App.usersTeamCollection.reset(playerModels);
         },
 
         parseTeamIntoArray: function () {

@@ -22,6 +22,7 @@ define([
             if (!App.usersTeamCollection.contains(model)) {
 
                 // Cant have more than 11 players
+                // TODO: Array is always has a length of 11
                 if ((App.usersTeamCollection.length) <= 11) {
                     res.status = 'success';
                 } else {
@@ -71,7 +72,7 @@ define([
         },
 
         removeAllPlayersFromCollection: function () {
-            App.usersTeamCollection.reset([]);
+            App.usersTeamCollection.reset(Array(11));
             App.userDetails.saveUserTeamToStorage();
         }
 

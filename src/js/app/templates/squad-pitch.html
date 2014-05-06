@@ -1,5 +1,5 @@
 
-<button id="goToMatch" class="<%= usersPlayers.length === 11 ? 'enabled' : 'disabled' %>"><%= usersPlayers.length === 11 ? 'Go play a match!' : 11-usersPlayers.length+ ' more players to start playing' %></button>
+<button id="goToMatch" class="<%= squadCount === 11 ? 'enabled' : 'disabled' %>"><%= squadCount === 11 ? 'Go play a match!' : 11-squadCount+ ' more players to start playing' %></button>
 
 
 
@@ -10,20 +10,12 @@
 		<div class="pitchPenalty1"></div>
 		<div class="pitchPenalty2"></div>
 	</div>
-	<% _.each(players, function(positionDetails, position) { %>
-
-	    <% if (!_.isEmpty(positionDetails.player)) { %>
-            <li data-uid="<%= positionDetails.player.uid %>" data-position="<%= position %>" data-area="<%= positionDetails.area %>" class="pitch-player pitch-player-taken position-<%= position.toLowerCase() %>">
-                <span class="player-icon" style="background-image:url('https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/players/pele.jpg')" title="Drop <%= positionDetails.player.name.substring(positionDetails.player.name.lastIndexOf(" ")+1) %>"></span>
-                <%= positionDetails.player.name.substring(positionDetails.player.name.lastIndexOf(" ")+1) %>
-            </li>
-	    <% } else { %>
-
-            <li class="pitch-player pitch-player-available position-<%= position.toLowerCase() %>" data-area="<%= positionDetails.area %>" data-position="<%= position %>" data-area="<%= positionDetails.area %>">
-                <span class="player-icon" style=""></span>
-                <%= position.replace(/[0-9]/g, '').toUpperCase() %>
-            </li>
-        <% } %>
+	<% _.each(players, function(player, index) { %>
+        <%= player.name %> <%= index %>
+        <li class="pitch-player pitch-player-available position-<%= index %>" data-area="<%= index %>" data-position="<%= index %>" data-area="<%= index %>">
+            <span class="player-icon" style=""></span>
+            <%= index %>
+        </li>
 
 	<% }) %>
 	<li class="playerOptions">
@@ -33,7 +25,7 @@
 		<button id="dropPlayer" data-uid="">Drop</button>
 	</li>
 </ol>
-<% if(usersPlayers.length > 0) { %>
+<% if(squadCount > 0) { %>
 	<button id="clearSelection">Clear selection</button>
 <% } %>
 <p>Pre-select</p>
