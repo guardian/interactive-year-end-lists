@@ -20,12 +20,45 @@ define([
         events: {
             'click #goToMatch': 'navigateToMatch',
             'click .selectTeamPop': 'setTeamToSelection',
-            'click li.pitch-player-taken': 'showOptions',
+            //'click li.pitch-player-taken': 'showOptions',
             'click button#dropPlayer': 'dropPlayer',
-            'click button#replacePlayer': 'replacePlayer',
             'click .playerOptions .close': 'closeOptions',
-            'click li.pitch-player-available': 'showAvailablePlayersInPosition',
+            //'click li.pitch-player-available': 'showAvailablePlayersInPosition',
+            'click .pitch-player' : 'positionSelected',
             'click #clearSelection': 'clearSelection'
+        },
+
+        initialize: function() {
+            console.log('initializing pitch view');
+            this.selectedPlayerModel = null;
+            Backbone.on('player_clicked', this.highlightPositions, this);
+            Backbone.on('playercard_closed', this.removeHighlightPositions, this);
+            App.usersTeamCollection.on('reset', this.render, this);
+        },
+
+        highlightPositions: function(playerModel) {
+            this.selectedPlayerModel = playerModel;
+            //console.log(playerModel);
+        },
+
+        removeHighlightPositions: function() {
+            console.log('Player card is closed');
+            this.selectedPlayerModel = null;
+        },
+
+        positionSelected: function(e) {
+            if (this.selectedPlayerModel === null) {
+                this.showOptions(e);
+                return;
+            }
+
+            var position = $(e.currentTarget).data('position');
+            console.log(position, this.selectedPlayerModel, this);
+            App.userDetails.save(
+                'player'+position,
+                this.selectedPlayerModel.get('uid')
+            );
+            this.selectedPlayerModel = null;
         },
 
         navigateToMatch: function (e) {
@@ -46,7 +79,6 @@ define([
             }, {
                 silent: true
             });
-            App.userDetails.fetchUserTeamFromStorage();
             App.userDetails.save();
             this.render();
 
@@ -61,16 +93,15 @@ define([
          */
         showOptions: function (event) {
             var target = this.$el.find(event.currentTarget);
-            var playerOptions = this.$el.find('.playerOptions');
 
-            playerOptions.find('h4').text(target.text());
-            playerOptions.find('button').attr('data-position', target.data('position'));
-            playerOptions.show();
+            this.$showOptions.find('h4').text(target.text());
+            this.$showOptions.find('button').attr('data-position', target.data('position'));
+            this.$showOptions.show();
         },
 
         // Close menu
         closeOptions: function () {
-            this.$el.find('.playerOptions').hide();
+            this.$showOptions.hide();
         },
 
         // Remove player from team
@@ -95,9 +126,7 @@ define([
             });
 
 
-            App.userDetails.save('player'+position, null, {
-                success: App.userDetails.fetchUserTeamFromStorage.bind(App.userDetails)
-            });
+            App.userDetails.save('player'+position, null);
 
             /*
             this.$el.find('li[data-uid="' + uid + '"]').fadeOut('slow', function () {
@@ -198,7 +227,6 @@ define([
                 }
             };
 
-            console.log(App.userDetails.toJSON(), App.usersTeamCollection.toJSON());
             var usersSquad = App.userDetails.getSquad();
 
             /*
@@ -219,6 +247,8 @@ define([
                 players: App.usersTeamCollection.toJSON(),
                 squadCount: 0
             }));
+
+            this.$showOptions = this.$('.playerOptions');
             
             // Start hover event bindings
             if (App.userDetails.get('username')) {
@@ -331,9 +361,7 @@ define([
                 return;
             }
             
-            App.userDetails.save('player'+position, data, {
-                success: App.userDetails.fetchUserTeamFromStorage.bind(App.userDetails)                   
-            });
+            App.userDetails.save('player'+position, data);
 
             // Prevent Goalkeepers being Strikers
             // TODO: If you want Pele in goal remove this if statement.

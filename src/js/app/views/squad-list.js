@@ -56,7 +56,8 @@ define([
         // 'squad-modal.js' listens to this App.playerSelected and opens the modal based
         // on the cid (backbones internal ID system)
         openPlayerCard: function () {
-            App.playerSelected.set('highlighted', this.model.cid);
+            //App.playerSelected.set('highlighted', this.model.cid);
+            Backbone.trigger('player_clicked', this.model);
         },
 
         // Remove and also check the list items for 'selected' class toggle
@@ -65,11 +66,7 @@ define([
             console.log(App.usersTeamCollection.get(this.model)); 
             */
             var indexOfPlayer = App.usersTeamCollection.indexOf(this.model);
-            console.log(indexOfPlayer);
-            App.userDetails.save('player'+indexOfPlayer, null, {
-                success: App.userDetails.fetchUserTeamFromStorage.bind(App.userDetails)
-            });
-            console.log('after save');
+            App.userDetails.save('player'+indexOfPlayer, null);
             this.showSelectedPlayer();
             return false;
         },

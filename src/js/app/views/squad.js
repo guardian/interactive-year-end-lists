@@ -29,8 +29,6 @@ define([
         initialize: function () {
             this.listenTo(App.userDetails, 'change:username', this.render);
             this.listenTo(App.userDetails, 'change:teamSelection', this.prePopulateTeam);
-            this.listenTo(App.usersTeamCollection, 'reset', this.prePopulateTeam);
-
             this.filterModel = new Backbone.Model();
         },
 
@@ -49,19 +47,17 @@ define([
         render: function () {
             this.$el.empty();
 
+            console.log('rendering entire pitch');
+
             this.$el.append(this.template({
                 "userDetails": App.userDetails.toJSON()
             }));
 
             this.$el.append('<div id="team-screen" class="row"></div>');
 
-            var squadPitch = new SquadPitchView({
-                    model: this.filterModel
-                }),
-                squadFilters = new SquadFiltersView({
-                    model: this.filterModel
-                }),
-                squadModal = new SquadModalView();
+            var squadPitch = new SquadPitchView({ model: this.filterModel });
+            var squadFilters = new SquadFiltersView({ model: this.filterModel });
+            var squadModal = new SquadModalView();
 
             this.$el.find('#team-screen').append(squadPitch.render().$el);
             this.$el.find('#team-screen').append(squadFilters.render().$el);

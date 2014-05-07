@@ -27,6 +27,10 @@ define([
             player10: null
         },
 
+        initialize: function() {
+            this.on('sync', this.fetchUserTeamFromStorage, this);
+        },
+
         validate: function(attributes, options) {
             var playerIDs = _.filter(this.getSquad(), function(id) {
                 return id !== null;
@@ -153,7 +157,6 @@ define([
             var playerModels = [];
             console.log('fetching/building users'); 
             _.each(this.getSquad(), function(playerID) {
-                console.log('players reset', playerID);
                 var playerModel = App.playerCollection.findWhere({
                     'uid': playerID
                 });
