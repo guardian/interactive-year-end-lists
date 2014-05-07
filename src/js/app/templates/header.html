@@ -1,4 +1,15 @@
-<h1>Hello I'm a header: <%= message %> <%= username %> </h1>
+<h1>Guardian Dream Team maker</h1>
 
+<% if(username) { %>
+
+<nav class="navigation logged-in">
 <a href="/">Edit your team</a>
 <a href="/#match/<%= userID %>">Play a match</a>
+</nav>
+
+<% }else{ %>
+<h2>Create your own dream team from all the world cups (logged in as: <%= username %>)</h2>
+<nav class="navigation logged-out">
+<a href="/">Create your own Dream Team</a>
+</nav>
+<% } %>

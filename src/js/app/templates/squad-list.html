@@ -5,6 +5,7 @@
 
         	<div class="player-image-container" style="background-image:url(http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg)">
             <span class="flag" alt="<%= countryname %>" title="<%= countryname %>" style="background-image:url('https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/flags/<%= countrycode %>.png')"></span>
+            <div class="player-countryname"><%= countryname %></div>
             
         </div>
             
@@ -12,7 +13,7 @@
                 <p><%= name.substring(name.lastIndexOf(" ")+1) %></p>
             </div>
             <div class="player-position"><%= position %></div>
-            <!-- <div class="player-country"><%= countryname %></div> -->
+            <div class="quick-add bg-<%= position.toLowerCase() %>">Add to team</div>
         </div>
 
 

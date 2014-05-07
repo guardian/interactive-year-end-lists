@@ -100,7 +100,6 @@ define([
             var userPitch = new MatchLineupView({
                 collection: App.viewingPlayerTeamCollection
             });
-            console.log(playerArr);
             userPitch.setElement(this.$('#users-team')).render();
         },
 
