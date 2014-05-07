@@ -47,6 +47,13 @@ define([
             });
         },
 
+        getSquadCount: function() {
+            return _.reject(this.getSquad(), function(player) {
+                return player === null;
+            }).length;
+
+        },
+
         getSquad: function() {
             var usersSquad = [];
             for (var i=0; i < 11; i++) {

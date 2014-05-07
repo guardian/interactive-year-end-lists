@@ -93,6 +93,13 @@ define([
          */
         showOptions: function (event) {
             var target = this.$el.find(event.currentTarget);
+            var position = target.data('position');
+            var playerID = App.userDetails.get('player' + position);
+            
+            // No player preset so do nothing
+            if (playerID === null) {
+                return;
+            }
 
             this.$showOptions.find('h4').text(target.text());
             this.$showOptions.find('button').attr('data-position', target.data('position'));
@@ -245,7 +252,7 @@ define([
                 //players: playerPositions,
                 userDetails: App.userDetails.toJSON(),
                 players: App.usersTeamCollection.toJSON(),
-                squadCount: 0
+                squadCount: App.userDetails.getSquadCount()
             }));
 
             this.$showOptions = this.$('.playerOptions');
