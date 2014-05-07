@@ -161,6 +161,11 @@ define([
                 App.usersTeamCollection.reset(playerArr);
             }
             */
+                       
+            App.usersTeamCollection.reset(this.getPlayerModels());
+        },
+
+        getPlayerModels: function() {
             var playerModels = [];
             console.log('fetching/building users'); 
             _.each(this.getSquad(), function(playerID) {
@@ -169,8 +174,7 @@ define([
                 });
                 playerModels.push(playerModel);
             });
-            
-            App.usersTeamCollection.reset(playerModels);
+            return playerModels;
         },
 
         parseTeamIntoArray: function () {

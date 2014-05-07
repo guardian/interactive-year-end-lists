@@ -1,31 +1,34 @@
-
 <ol class="pitch">
-<div class="pitchLines">
-        <div class="pitchMiddleLine"></div>
-        <div class="pitchMiddleCircle"></div>
-        <div class="pitchPenalty1"></div>
-        <div class="pitchPenalty2"></div>
-    </div>
-	<% _.each(players, function(player, position) { %>
-
-	    <% if (!_.isEmpty(player.name)) { %>
-            <li class="pitch-player position-<%= position.toLowerCase() %>">
-                <span class="player-icon" style="background-image:url('https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/players/pele.jpg')" title="<%= player.name %>"></span>
-                <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
+	<div class="pitchLines">
+		<div class="pitchMiddleLine"></div>
+		<div class="pitchMiddleCircle"></div>
+		<div class="pitchPenalty1"></div>
+		<div class="pitchPenalty2"></div>
+	</div>
+	<% _.each(players, function(player, index) { %>
+        <% if (player.uid === null) { %>
+             <li class="pitch-player pitch-player-available position-<%= index %>" data-area="<%= index %>" data-position="<%= index %>" data-area="<%= index %>">
+                <span class="player-icon" style=""></span>
+                <%= index %>
             </li>
-	    <% } else { %>
-            <li class="pitch-player position-<%= position.toLowerCase() %>">
-                <span class="player-icon"></span>
-                <%= position.replace(/[0-9]/g, '').toUpperCase() %>
+        <% } else { %>
+            <li data-uid="<%= player.uid %>" data-position="<%= index %>" data-area="<%= index %>" class="pitch-player pitch-player-taken position-<%= index %>">
+                <span class="player-icon" style="background-image:url('https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/players/pele.jpg')" title="Drop <%= player.name %>"></span>
+                <%= player.name %>
             </li>
         <% } %>
 
-    <% }) %>
+	<% }) %>
+	<li class="playerOptions">
+		<span class="close">&times;</span>
+		<h4></h4>
+		<button id="dropPlayer" data-uid="">Drop</button>
+	</li>
 </ol>
 
 <table class="table table-players">
 	<tbody>
-        <% _.each(players, function(player, position) { %>
+        <% _.each(players, function(player, index) { %>
             <% if (!_.isEmpty(player.name)) { %>
                 <tr>
                     <td><%= player.name %></td>

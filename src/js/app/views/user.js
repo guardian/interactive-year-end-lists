@@ -81,11 +81,8 @@ define([
         },
 
         renderPitch: function () {
-            if (!App.viewingPlayer.get('teamSelection')) {
-                // No team, no pitch
-                return;
-            }
-            var playerArr = [];
+            var playerArr = App.viewingPlayer.getPlayerModels();
+            /*
             App.viewingPlayer.get('teamSelection').split(',').map(function (player) {
                 var playerSplit = player.split(':'),
                     playerModel = App.playerCollection.findWhere({
@@ -96,6 +93,7 @@ define([
                     playerArr.push(playerModel);
                 }
             });
+            */
             App.viewingPlayerTeamCollection.reset(playerArr);
             var userPitch = new MatchLineupView({
                 collection: App.viewingPlayerTeamCollection
@@ -113,21 +111,25 @@ define([
         },
 
         render: function () {
+            console.log('render user');
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON()
             };
 
+            console.log('render user1');
             this.$el.append(this.template(this.templateData));
             this.renderPitch();
             
+            console.log('render user2');
             var userRecord = new UserRecordView({
                 userID: App.viewingPlayer.get('guardianID')
             });
             this.$('#usersRecord').html(userRecord.render().el);
  
 
-
+            
+            console.log('render user3');
             // If user viewing own page, show Guardian writers & recently viewed
             if (App.userDetails.get('guardianID') === App.viewingPlayer.get('guardianID')) {
                 this.renderFindUsers();

@@ -83,8 +83,9 @@ define([
         },
 
         render: function () {
+            console.log('render match');
             var matchDetails = App.matchModel.toJSON();
-
+            
             this.placeTeamsIntoCollection(matchDetails[1].teamSelection, 1);
             this.placeTeamsIntoCollection(matchDetails[2].teamSelection, 2);
 
@@ -98,6 +99,7 @@ define([
             this.renderTeams();
             this.renderMatchHistory(matchDetails[1].guardianID, matchDetails[2].guardianID);
             
+            console.log(matchDetails);
             return this;
         }
 

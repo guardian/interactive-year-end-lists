@@ -32,17 +32,12 @@ define([
                 'CB2': {},
                 'LB': {},
                 'GK': {}
-            },
-            
-            usersPlayers = this.collection.toJSON();
-
-            usersPlayers.forEach(function (player) {
-                playerPositions[player.wantedPosition] = player;
-            });
+            };
 
             this.$el.empty();
+            console.log(this.collection.toJSON());
             this.$el.append(this.template({
-                players: playerPositions
+                players: this.collection.toJSON() 
             }));
 
             return this;
