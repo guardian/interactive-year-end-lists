@@ -1,6 +1,8 @@
-<h1>Guardian Dream Team maker</h1>
-
 <% if(username) { %>
+
+<h1><%= username %> F.C.</h1>
+
+
 <!-- <p style="position:absolute; margin-top:40px;">Logged in as <%= username %></p> -->
 <nav class="navigation logged-in">
 
@@ -9,7 +11,9 @@
 </nav>
 
 <% }else{ %>
+<h1>Guardian Dream Team Maker</h1>
 <h2>Create your own dream team from all the world cups (not logged in<%= username %>)</h2>
+<div class="illustration"></div>
 <nav class="navigation logged-out">
 <a href="/">Create your own Dream Team</a>
 </nav>

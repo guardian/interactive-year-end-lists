@@ -1,10 +1,8 @@
-<div class="your-team-details">
+<!-- <div class="your-team-details">
 	<h2>Daan F.C.</h2>
 	<div class="team-picture"><img src="../images/avatar.png"/></div>
 	<button id="goToMatch" class="<%= usersPlayers.length === 11 ? 'enabled' : 'disabled' %>"><%= usersPlayers.length === 11 ? 'Go play a match!' : 11-usersPlayers.length+ ' more players to start playing' %></button>
-</div>
-
-
+</div> -->
 
 
 <ol class="pitch">
@@ -37,7 +35,10 @@
 		<button id="dropPlayer" data-uid="">Drop</button>
 	</li>
 </ol>
-
+<div class="your-team-details">
+<h2>Drag players to the field</h2>
+<h3>Only <%= 11-usersPlayers.length %>  more players to start playing<% if(usersPlayers.length > 0) { %> | <span id="clearSelection">clear selection</span><% } %></h3>
+</div>
 <!-- <% if(usersPlayers.length > 0) { %>
 	<button id="clearSelection">Clear selection</button>
 <% } %> -->

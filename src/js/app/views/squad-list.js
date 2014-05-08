@@ -112,7 +112,7 @@ define([
 
             $(newTarget + ', ' + newTarget).addClass('dragTarget');
 
-            $('.pitch').addClass('isDragging');
+            $('#squad-pitch').addClass('isDragging');
             $('#squad-filters').addClass('isDragging');
             target.addClass('isDragging');
 
