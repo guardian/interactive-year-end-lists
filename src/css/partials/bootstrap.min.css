@@ -524,6 +524,8 @@ figure.interactive .col-xs-offset-1 {
 figure.interactive .col-xs-offset-0 {
   margin-left: 0%;
 }
+
+
 @media (min-width: 46.25em) {
   figure.interactive .col-sm-1,
   figure.interactive .col-sm-2,
