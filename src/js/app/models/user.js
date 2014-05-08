@@ -106,7 +106,7 @@ define([
                 App.userDetails.set('guardianID', loggedIn.id);
                 App.userDetails.fetchByGuardianId({
                     success: function (user) {
-                        if (!user.username) {
+                        if (!user.get('username')) {
                             var username = null;
                             if (App.toolkitObj.version === 1) {
                                 username = loggedIn.publicFields.displayName;

@@ -16,10 +16,16 @@ define([
     MatchTemplate
 ) {
     return Backbone.View.extend({
-
         id: 'match-screen',
+        
         className: 'container',
+        
         template: _.template(MatchTemplate),
+
+        initialize: function() {
+            this.model.on('sync', this.render, this);
+            this.model.fetch();
+        },
 
         // Populate the teamCollections for user
         placeTeamsIntoCollection: function (teamSelection, startingUser) {
@@ -83,7 +89,9 @@ define([
         },
 
         render: function () {
-            console.log('render match');
+            this.$el.html('<textarea>' + JSON.stringify(this.model.toJSON()) + '</textarea>');
+            return this;
+            /*
             var matchDetails = App.matchModel.toJSON();
             
             this.placeTeamsIntoCollection(matchDetails[1].teamSelection, 1);
@@ -101,6 +109,7 @@ define([
             
             console.log(matchDetails);
             return this;
+            */
         }
 
     });

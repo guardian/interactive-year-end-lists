@@ -3,13 +3,15 @@ define([
     'backbone',
     'views/user',
     'views/squad',
-    'views/match'
+    'views/match',
+    'models/match'
 ], function (
     App,
     Backbone,
     UserView,
     SquadView,
-    MatchView
+    MatchView,
+    MatchModel
 ) {
     return Backbone.Router.extend({
 
@@ -98,7 +100,12 @@ define([
         },
         */
 
-        showMatch: function (player1id, player2id, matchID) {
+        showMatch: function (matchID) {
+            var matchModel = new MatchModel({_id: matchID});
+            var matchView = new MatchView({ model: matchModel });
+            App.superView.empty();
+            App.superView.append(matchView.render().el);
+            /*
             var _this = this;
 
             App.matchModel.set({
@@ -113,6 +120,7 @@ define([
                     _this.showErrorAndRedirect('No match found!');
                 }
             });
+            */
         },
 
         showErrorAndRedirect: function (msg) {
