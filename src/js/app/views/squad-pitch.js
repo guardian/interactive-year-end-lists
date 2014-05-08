@@ -65,7 +65,7 @@ define([
 
             // button might be disabled due to not having 11 players selected
             if (!$(e.target).hasClass('disabled')) {
-                App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID'), {
+                App.appRoutes.navigate('user/' + App.userDetails.get('guardianID'), {
                     trigger: true
                 });
             }

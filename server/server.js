@@ -30,7 +30,6 @@ mongoose.connect("mongodb://localhost/test");
 var UserSchema = mongoose.Schema({
     guardianID: String,
     username: String,
-    teamSelection: String,
     player0: String,
     player1: String,
     player2: String,
@@ -41,19 +40,29 @@ var UserSchema = mongoose.Schema({
     player7: String,
     player8: String,
     player9: String,
-    player10: String,
+    player10: String
 });
 var User = mongoose.model('User', UserSchema);
 
 var MatchSchema = mongoose.Schema({
     1: {
         guardianID: String,
-        teamSelection: String,
         injuries: Array,
         goals: Array,
         missedChance: Array,
         redCard: Array,
-        yellowCard: Array
+        yellowCard: Array,
+        player0: String,
+        player1: String,
+        player2: String,
+        player3: String,
+        player4: String,
+        player5: String,
+        player6: String,
+        player7: String,
+        player8: String,
+        player9: String,
+        player10: String
     },
     2: {
         guardianID: String,
@@ -62,7 +71,18 @@ var MatchSchema = mongoose.Schema({
         goals: Array,
         missedChance: Array,
         redCard: Array,
-        yellowCard: Array
+        yellowCard: Array,
+        player0: String,
+        player1: String,
+        player2: String,
+        player3: String,
+        player4: String,
+        player5: String,
+        player6: String,
+        player7: String,
+        player8: String,
+        player9: String,
+        player10: String
     },
     stats: {
         possessionHome: Number,
@@ -167,7 +187,6 @@ app.put("/users/:_id", function (req, res, next) {
     var userData = {
         guardianID: req.body.guardianID,
         username: req.body.username,
-        teamSelection: req.body.teamSelection,
         player0: req.body.player0,
         player1: req.body.player1,
         player2: req.body.player2,
@@ -199,6 +218,35 @@ app.get("/allmatches", function (req, res) {
         res.send(docs);
     });
 });
+
+
+app.post('/result', function(req, res) {
+    var user1 = req.param('user1');
+    var user2 = req.param('user2');
+
+
+    
+    if (!user1 || !user2) {
+        res.status(404);
+        res.jsonp({'msg': 'Missing user ids'});
+    } else {
+        createMatchResult(user1, user2, res);
+    }
+});
+
+
+function createMatchResult(user1, user2, res) {
+    User.find({
+      '_id': { $in: [
+          user1,
+          user2
+      ]}
+    },
+    function(err, docs) {
+        var result = matchModel.createResult(docs[0], docs[1]);
+        res.jsonp(JSON.stringify(result));
+    });
+}
 
 app.get("/matches", function (req, res) {
 
@@ -289,7 +337,7 @@ app.post("/match", function (req, res) {
                     if (user.guardianID === req.param('user1')) {
                         userData[1].players = matchModel.getPlayersFromSelection(user.teamSelection);
                         userData[1].guardianID = user.guardianID;
-                        userData[1].teamSelection = user.teamSelection;
+                        userData[1].player1 = user.guardianID;
                     }
                     if (user.guardianID === req.param('user2')) {
                         userData[2].players = matchModel.getPlayersFromSelection(user.teamSelection);

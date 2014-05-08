@@ -6,6 +6,7 @@ define([
     'views/user-find',
     'views/user-record',
     'views/match-lineup',
+    'models/match',
     'text!templates/user.html',
     'jquery.cookie'
 ], function (
@@ -16,6 +17,7 @@ define([
     UserFindView,
     UserRecordView,
     MatchLineupView,
+    MatchModel,
     UserTemplate
 ) {
     return Backbone.View.extend({
@@ -26,7 +28,7 @@ define([
 
         events: {
             'click #goEdit': 'navigateHome',
-            'click .playAgainst': 'navigateCreateMatch'
+            'click .playAgainst': 'createMatch'
         },
 
         initialize: function () {
@@ -46,6 +48,20 @@ define([
             var opponentID = $(e.target).data('guardian-id');
             App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID') + '/' + opponentID, {
                 trigger: true
+            });
+        },
+
+        createMatch: function() {
+            console.log(App.userDetails.toJSON());
+            var newMatch = new MatchModel({
+                user1: App.userDetails.get('_id'),
+                user2: App.viewingPlayer.get('_id')
+            });
+
+            newMatch.save({}, {
+                success: function() {
+                    console.log('saved', arguments);
+                }
             });
         },
 
@@ -111,17 +127,16 @@ define([
         },
 
         render: function () {
-            console.log('render user');
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON()
             };
 
-            console.log('render user1');
+            console.log(this.templateData);
+
             this.$el.append(this.template(this.templateData));
             this.renderPitch();
             
-            console.log('render user2');
             var userRecord = new UserRecordView({
                 userID: App.viewingPlayer.get('guardianID')
             });
@@ -129,7 +144,6 @@ define([
  
 
             
-            console.log('render user3');
             // If user viewing own page, show Guardian writers & recently viewed
             if (App.userDetails.get('guardianID') === App.viewingPlayer.get('guardianID')) {
                 this.renderFindUsers();

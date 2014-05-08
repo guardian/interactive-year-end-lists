@@ -14,9 +14,10 @@ define([
     return Backbone.Router.extend({
 
         routes: {
-            'match/:player1id(/)': 'showUser',
-            'match/:player1id/:player2id(/)': 'createMatch',
-            'match/:player1id/:player2id/:matchID(/)': 'showMatch',
+            'user/:userid(/)': 'showUser',
+            //'match/:player1id/:player2id(/)': 'createMatch',
+            //'match/:player1id/:player2id/:matchID(/)': 'showMatch',
+            'result/:matchid(/)': 'showMatch',
             '*other': 'defaultRoute'
         },
 

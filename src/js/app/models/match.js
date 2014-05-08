@@ -9,16 +9,13 @@ define([
 ) {
     return Backbone.Model.extend({
 
-        // FIXME: Use config for url
-        urlRoot: App.getEndpoint() + 'match',
+        urlRoot: App.getEndpoint() + 'result',
+        
         idAttribute: '_id',
+
         defaults: {
-            1: null,
-            2: null,
-            stats: null,
-            motm: null,
-            venue: null,
-            time: null
+            user1: null,
+            user2: null
         }
 
     });

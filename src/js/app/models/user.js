@@ -6,10 +6,10 @@ define([
     Backbone
 ) {
     return Backbone.Model.extend({
-
-        // FIXME: Use config for url
         urlRoot: App.getEndpoint() + 'users',
+        
         idAttribute: '_id',
+        
         defaults: {
             guardianID: null,
             username: null,
@@ -95,7 +95,7 @@ define([
 
             if (App.useDebugUser) {
                 loggedIn = {
-                    id: '000000000',
+                    id: '111111111',
                     displayName: 'DebugUser',
                     publicFields: {
                         displayName: 'DebugUser'
