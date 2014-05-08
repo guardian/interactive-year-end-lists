@@ -62,10 +62,14 @@ module.exports = (function Match() {
 
         moments.time = new Date().getTime();
 
+        console.log(users[1].length);
+
         moments[1].guardianID = user1.guardianID;
-        moments[1].teamSelection = user1.teamSelection;
+        moments[1].username = user1.username;
+        moments[1].squad = getSquadIDs(user1);
         moments[2].guardianID = user2.guardianID;
-        moments[2].teamSelection = user2.teamSelection;
+        moments[2].username = user2.username;
+        moments[2].squad = getSquadIDs(user2);
 
         [15, 30, 45, 60, 75, 90].forEach(function (timePeriod) {
             var eopStats = {
@@ -165,13 +169,18 @@ module.exports = (function Match() {
     }
 
     function getSquad(userDetails) {
-        console.log(userDetails);
-        var usersSquad = [];
+        return getSquadIDs(userDetails).map(function(uid) {
+            return getPlayerByID(uid);
+        });
+    }
+
+    function getSquadIDs(userDetails) {
+        var squadIDs = [];
         for (var i=0; i < 11; i++) {
-            var playerID = userDetails['player' + 1];
-            usersSquad.push(getPlayerByID(playerID));
+            var playerID = userDetails['player' + i];
+            squadIDs.push(playerID);
         }
-        return usersSquad;
+        return squadIDs;
     }
 
     function fetchEopScores(moments, timePeriod, eopStats, eopPlayers) {

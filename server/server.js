@@ -223,9 +223,7 @@ app.get("/allmatches", function (req, res) {
 app.post('/result', function(req, res) {
     var user1 = req.param('user1');
     var user2 = req.param('user2');
-
-
-    
+  
     if (!user1 || !user2) {
         res.status(404);
         res.jsonp({'msg': 'Missing user ids'});
@@ -243,8 +241,14 @@ function createMatchResult(user1, user2, res) {
       ]}
     },
     function(err, docs) {
+        if (err || docs.length !== 2) {
+            res.status(404);
+            res.jsonp({'msg': 'Failed to fetch uses', error: err});
+            return;
+        }
+
         var result = matchModel.createResult(docs[0], docs[1]);
-        res.jsonp(JSON.stringify(result));
+        res.jsonp(result);
     });
 }
 

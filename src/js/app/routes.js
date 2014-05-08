@@ -51,6 +51,7 @@ define([
             });
         },
 
+        /*
         createMatch: function (player1id, player2id) {
 
             var _this = this;
@@ -95,9 +96,9 @@ define([
                 }
             });
         },
+        */
 
         showMatch: function (player1id, player2id, matchID) {
-
             var _this = this;
 
             App.matchModel.set({
