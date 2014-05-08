@@ -1,4 +1,4 @@
-var playerData = require('./players');
+var competitionData = require('./competitionData');
 
 module.exports = (function Match() {
     "use strict";
@@ -10,19 +10,9 @@ module.exports = (function Match() {
     };
 
     function getPlayerByID(uid) {
-        return playerData['Player data'].filter(function(player) {
+        return competitionData['Player data'].filter(function(player) {
             return player.uid === uid;
         })[0];
-    }
-
-    function test(user1, user2) {
-        var squad1 = getSquad(user1);
-        var squad2 = getSquad(user2);
-
-        return {
-            a: squad1,
-            b: squad2
-        };
     }
 
     function createResult(user1, user2) {
@@ -66,8 +56,8 @@ module.exports = (function Match() {
             2: []
         };
         var users = {
-            1: user1.players,
-            2: user2.players
+            1: getSquad(user1),
+            2: getSquad(user2)
         };
 
         moments.time = new Date().getTime();
@@ -99,7 +89,7 @@ module.exports = (function Match() {
                     // Red card generator
                     if (Math.random() <= odds.redCardGiven) {
                         var playerName = fetchMostLikelyOn(players, 'volatility');
-                        var idx = this.arrayObjectIndexOf(players, playerName, 'name');
+                        var idx = arrayObjectIndexOf(players, playerName, 'name');
                         users[userID].splice(idx, 1);
 
                         moments[userID].redCard.push({
@@ -175,7 +165,6 @@ module.exports = (function Match() {
     }
 
     function getSquad(userDetails) {
-
         console.log(userDetails);
         var usersSquad = [];
         for (var i=0; i < 11; i++) {
@@ -335,9 +324,8 @@ module.exports = (function Match() {
     }
  
     function getVenue() {
-        var venues = [];
+        var venues = competitionData.stadiums;
         var chosenVenue = venues[Math.floor(Math.random() * venues.length)];
-        chosenVenue.push({attendance: chosenVenue.maxAttendance});
         /*
          * TODO: Choose a random number between 90% and 100% of maxAttendance and set as attendance
         chosenVenue.push({attendance: randBetween((chosenVenue.maxAttendance / 90 * 100), chosenVenue.maxAttendance)});
@@ -346,8 +334,7 @@ module.exports = (function Match() {
     }
 
     return {
-        //createResult: createResult
-        createResult: test
+        createResult: createResult
     };
 }());
 
