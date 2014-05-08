@@ -47,42 +47,23 @@ var User = mongoose.model('User', UserSchema);
 var MatchSchema = mongoose.Schema({
     1: {
         guardianID: String,
+        username: String,
+        squad: Array,
         injuries: Array,
         goals: Array,
         missedChance: Array,
         redCard: Array,
         yellowCard: Array,
-        player0: String,
-        player1: String,
-        player2: String,
-        player3: String,
-        player4: String,
-        player5: String,
-        player6: String,
-        player7: String,
-        player8: String,
-        player9: String,
-        player10: String
     },
     2: {
         guardianID: String,
-        teamSelection: String,
+        username: String,
+        squad: Array,
         injuries: Array,
         goals: Array,
         missedChance: Array,
         redCard: Array,
-        yellowCard: Array,
-        player0: String,
-        player1: String,
-        player2: String,
-        player3: String,
-        player4: String,
-        player5: String,
-        player6: String,
-        player7: String,
-        player8: String,
-        player9: String,
-        player10: String
+        yellowCard: Array
     },
     stats: {
         possessionHome: Number,
@@ -228,12 +209,12 @@ app.post('/result', function(req, res) {
         res.status(404);
         res.jsonp({'msg': 'Missing user ids'});
     } else {
-        createMatchResult(user1, user2, res);
+        fetchUserDetails(user1, user2, res);
     }
 });
 
 
-function createMatchResult(user1, user2, res) {
+function fetchUserDetails(user1, user2, res) {
     User.find({
       '_id': { $in: [
           user1,
@@ -246,11 +227,36 @@ function createMatchResult(user1, user2, res) {
             res.jsonp({'msg': 'Failed to fetch uses', error: err});
             return;
         }
-
-        var result = matchModel.createResult(docs[0], docs[1]);
-        res.jsonp(result);
+        createMatchResult(docs[0], docs[1], res);
     });
 }
+
+function createMatchResult(user1, user2, res) {
+    var resultData = matchModel.createResult(user1, user2);
+    var newMatch = new Match(resultData);
+    newMatch.save(function (err, product) {
+        // If save failed send error response
+        if (err) {
+            res.status(409);
+            res.jsonp(err);
+        } else {
+            // Send back saved data with new mongo UID
+            res.jsonp(product);
+        }
+    });
+}
+
+app.get('/result/:id', function(req, res) {
+    Match.findById(req.params.id, function(err, matchRecord) {
+        if (err) {
+            res.status(404);
+            res.json({'msg': 'Could not find match', err: err });
+            return;
+        }
+
+        res.json(matchRecord);
+    });
+});
 
 app.get("/matches", function (req, res) {
 
