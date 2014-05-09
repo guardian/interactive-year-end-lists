@@ -46,13 +46,9 @@ define([
 
         render: function () {
             this.$el.empty();
-
-            console.log('rendering entire pitch');
-
             this.$el.append(this.template({
                 "userDetails": App.userDetails.toJSON()
             }));
-
             this.$el.append('<div id="team-screen" class="row"></div>');
 
             var squadPitch = new SquadPitchView({ model: this.filterModel });

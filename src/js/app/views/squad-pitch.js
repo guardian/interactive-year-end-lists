@@ -29,7 +29,6 @@ define([
         },
 
         initialize: function() {
-            console.log('initializing pitch view');
             this.selectedPlayerModel = null;
             Backbone.on('player_clicked', this.highlightPositions, this);
             Backbone.on('playercard_closed', this.removeHighlightPositions, this);
@@ -122,8 +121,6 @@ define([
                 uid = this.$el.find(event.currentTarget).data('uid');
             }
 
-            console.log(target.data('position'), target);
-            
             if (!posClass) {
                 posClass = this.$el.find('li[data-uid="' + uid + '"]').data('position');
             }
@@ -187,7 +184,6 @@ define([
         },
 
         render: function () {
-            console.log('render pitch', this);
             var playerPositions = {
                 'ST': {
                     player: null,
@@ -256,13 +252,10 @@ define([
                 players: App.usersTeamCollection.toJSON(),
                 squadCount: App.userDetails.getSquadCount()
             };
-            console.log(data);
             this.$el.append(this.template(data));
 
-            console.log('end of pitch render');            
             this.$showOptions = this.$('.playerOptions');
             
-            console.log('end of pitch render');            
             // Start hover event bindings
             if (App.userDetails.get('username')) {
                 var dragDropTarget = this.$el.find('li');

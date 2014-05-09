@@ -73,9 +73,7 @@ define([
 
         render: function () {
             this.$el.empty();
-            console.log(this.model.attributes);
             this.$el.append(this.template(this.model.attributes));
-            // console.log(this.model.attributes);
             return this;
         },
 
@@ -118,7 +116,6 @@ define([
                 newTarget = '.pitch-player[data-area="' + positionTarget + '"]';
 
             $(newTarget + ', ' + newTarget).addClass('dragTarget');
-
             $('#squad-pitch').addClass('isDragging');
             $('#squad-filters').addClass('isDragging');
             target.addClass('isDragging');

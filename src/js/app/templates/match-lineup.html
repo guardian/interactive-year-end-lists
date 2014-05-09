@@ -13,7 +13,7 @@
             </li>
         <% } else { %>
             <li data-uid="<%= player.uid %>" data-position="<%= index %>" data-area="<%= index %>" class="pitch-player pitch-player-taken position-<%= index %>">
-                <span class="player-icon" style="background-image:url('https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/players/pele.jpg')" title="Drop <%= player.name %>"></span>
+            <span class="player-icon" style="background-image:url(<%= player.picture %>)" title="Drop <%= player.name %>"></span>
                 <%= player.name %>
             </li>
         <% } %>
