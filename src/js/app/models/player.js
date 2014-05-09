@@ -8,7 +8,7 @@ define([
         defaults: {
             uid: null,
             name: null,
-            imageSrc: null,
+            picture: null,
             position: null,
             countryname: null,
             careerStart: null,

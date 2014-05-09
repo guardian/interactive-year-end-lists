@@ -33,7 +33,7 @@ define([
                 var _this = this;
                 $.ajax({
                     // FIXME: Use config for url
-                    url: App.getEndpoint() + 'matches',
+                    url: App.getEndpoint() + 'results',
                     data: {
                         userID: this.options.userID
                     }

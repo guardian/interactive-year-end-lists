@@ -8,6 +8,7 @@ define([
     'views/match-lineup',
     'models/match',
     'text!templates/user.html',
+    'text!templates/squad-list.html',
     'jquery.cookie'
 ], function (
     App,
@@ -18,13 +19,15 @@ define([
     UserRecordView,
     MatchLineupView,
     MatchModel,
-    UserTemplate
+    UserTemplate,
+    SquadTemplate
 ) {
     return Backbone.View.extend({
 
         id: 'user-screen',
         className: 'container',
         template: _.template(UserTemplate),
+        squadTemplate: _.template(SquadTemplate),
 
         events: {
             'click #goEdit': 'navigateHome',
@@ -126,25 +129,35 @@ define([
             //this.$('#users-find').empty();
             //this.$('#users-find').append(userFind.render().$el);
         },
+        renderPlayerCards: function(){
+            App.viewingPlayerTeamCollection.each(function (value, key){
+                var playerCard = this.squadTemplate(value.attributes);
+                var player_card = document.createElement("div");
+                player_card.className = "col-xs-6 col-sm-4 col-lg-3 player_profile";
+                player_card.innerHTML = playerCard;
+                console.log(player_card);
+                this.$('#squad-list').append(player_card);
+            }, this);
+        },
 
         render: function () {
+            console.log('bob');
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON()
             };
 
-            console.log(this.templateData);
-
+            console.log('bob');
             this.$el.append(this.template(this.templateData));
             this.renderPitch();
             
+            console.log('bob');
             var userRecord = new UserRecordView({
                 userID: App.viewingPlayer.get('guardianID')
             });
             this.$('#usersRecord').html(userRecord.render().el);
+            console.log('bob');
  
-
-            
             // If user viewing own page, show Guardian writers & recently viewed
             if (App.userDetails.get('guardianID') === App.viewingPlayer.get('guardianID')) {
                 this.renderFindUsers();
@@ -152,6 +165,7 @@ define([
                 // Add to recently viewed if not (regardless of logged in status)
                 //this.addToRecentlyViewed();
             }
+            console.log('bob');
             return this;
         },
     });

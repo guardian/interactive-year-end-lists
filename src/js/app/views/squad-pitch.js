@@ -239,6 +239,7 @@ define([
 
             /*
             var usersPlayers = App.usersTeamCollection.toJSON();
+            console.log(App.usersTeamCollection);
             usersPlayers.forEach(function (player) {
                 if (playerPositions.hasOwnProperty(player.wantedPosition)) {
                     playerPositions[player.wantedPosition].player = player;
