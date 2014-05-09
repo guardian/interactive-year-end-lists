@@ -13,9 +13,13 @@ define([
         template: _.template(HeaderTemplate),
 
         events: {
-            
+           'click .goHome': 'navigateHome'
         },
-
+        navigateHome: function () {
+            App.appRoutes.navigate('/', {
+                trigger: true
+            });
+        },
         render: function () {
 
             // console.log(App.userDetails);

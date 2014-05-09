@@ -279,19 +279,19 @@ figure.interactive .container {
   padding-left: 15px;
   padding-right: 15px;
 }
-@media (min-width: 46.25em) {
+@media (min-width: 30em) {
   figure.interactive .container {
-    width: 750px;
+    /*width: 750px;*/
   }
 }
-@media (min-width: 61.25em) {
+@media (min-width: 56.25em) {
   figure.interactive .container {
-    width: 970px;
+    /*width: 970px;*/
   }
 }
 @media (min-width: 81.25em) {
   figure.interactive .container {
-    width: 1170px;
+    /*width: 1170px;*/
   }
 }
 figure.interactive .container-fluid {
@@ -524,7 +524,9 @@ figure.interactive .col-xs-offset-1 {
 figure.interactive .col-xs-offset-0 {
   margin-left: 0%;
 }
-@media (min-width: 46.25em) {
+
+
+@media (min-width: 30em) {
   figure.interactive .col-sm-1,
   figure.interactive .col-sm-2,
   figure.interactive .col-sm-3,
@@ -693,7 +695,7 @@ figure.interactive .col-xs-offset-0 {
     margin-left: 0%;
   }
 }
-@media (min-width: 61.25em) {
+@media (min-width: 56.25em) {
   figure.interactive .col-md-1,
   figure.interactive .col-md-2,
   figure.interactive .col-md-3,

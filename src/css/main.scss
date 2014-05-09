@@ -13,6 +13,9 @@ figure.interactive .container {
     padding-right: 0;
     -webkit-font-smoothing: antialiased;
 }
+.container{
+    margin-top:0;
+}
 
 
 @media (min-width: 46.25em) {
@@ -101,8 +104,57 @@ figure.interactive {
         -webkit-appearance: none;
     }
     .dreamteam-header{
-        height:200px;
-        background:#F5644F;
+        height:auto;
+        background:#f4f4ee;
+        margin-bottom:15px;
+        padding:20px;
+        overflow:hidden;
+        h1{
+            font-size:36px;
+            color: #333;
+            margin-bottom:0;
+            width:100%;
+        }
+        h2{
+            font-size:18px;
+            color: #333;
+            width:100%;
+        }
+        
+        nav.navigation{
+            &.logged-out{
+                margin:80px 0 10px;
+            }
+
+            &.logged-in{
+                margin:20px 0 10px;
+                float:none;
+                display:inline-block;
+            }
+
+            .goHome, .goPlay{
+                background:#005689;
+                color:#fff;
+                padding:15px 20px;
+               
+                display:inline-block;
+            }
+        }
+        @media (min-width: 61.25em) {
+            h1,h2{
+                width:50%;
+            }
+            h1{
+                float:left;
+            }
+            nav.navigation.logged-in{
+                float:right;
+                margin-top:0;
+                h1{
+                    
+                }
+            }
+        }
     }
     .visual-prompt {
 
@@ -129,11 +181,22 @@ figure.interactive {
     }
     #squad-filters {
         position: relative;
-        padding-top: 75px;
+        
+        &.isDragging{
+            opacity:0.5;
+        }
+    }
+
+    .squad-filters-inner{
+        overflow: hidden;
+        background: #f4f4ee;
+        padding:20px;
     }
     #squad-pitch {
         z-index: 5;
-        margin-top: 10px;
+        padding:20px 35px 20px 20px;
+        background:#f4f4ee;
+        transition: background 0.5s;
     }
     .table-players {
         max-width: 300px;
@@ -151,12 +214,12 @@ figure.interactive {
 	 */
     @media (min-width: 56.25em) {
         #squad-filters {
-            width: 100%;
-            margin-right: -400px;
-            padding-right: 429px;
+            // width: 100%;
+            // margin-right: -400px;
+            // padding-right: 429px;
         }
         #squad-pitch {
-            width: 400px;
+            // width: 400px;
             float: right;
         }
         #squad-pitch.fix-right {
@@ -178,19 +241,20 @@ figure.interactive {
     }
     #squad-pitch button#goToMatch,
     #squad-pitch button#clearSelection {
-        float: left;
         min-width: 0;
         margin: 0;
-        margin-right: 6%;
-        margin-bottom: 20px;
+        margin:20px auto;
         font-size:16px;
+        font-weight:bold;
+        width:90%;
+        font-family: "AgateSans"
     }
     #squad-pitch button#clearSelection {
         margin: 0 auto;
         width:50%;
     }
     #squad-filters form {
-        position: absolute;
+        margin-bottom:20px;
         top: 0;
         left: 15px;
         right: 15px;
@@ -202,9 +266,7 @@ figure.interactive {
         right: 0;
     }
     #squad-filters form .inner {
-        padding: 10px 0;
-        float: left;
-        background: #fff;
+        padding: 0 0;
         width: 100%;
     }
     #squad-filters form.squad-filters-fixed .inner {
@@ -213,7 +275,7 @@ figure.interactive {
     }
     @media (min-width: 56.25em) {
         #squad-filters form {
-            padding-right: 415px;
+            // padding-right: 415px;
         }
     }
     #squad-filters form .form-group select {
@@ -226,11 +288,12 @@ figure.interactive {
         -webkit-appearance: none;
         margin-right: 3%;
         width: 100%;
+        font-family:"AgateSans", sans-serif;
     }
     #squad-filters form .form-group {
-        float: left;
+        display:inline-block;
         width: 31.3%;
-        background: url(../images/down_arrow.png) no-repeat right #f4f4ee;
+        background: url(../images/down_arrow.png) no-repeat right #fff;
         margin-right: 3%;
     }
     #squad-filters p#clearLink {
@@ -266,17 +329,32 @@ figure.interactive {
         color: $buttonColor;
         margin: 0;
     }
+    .instruction{
+        text-align:center;
+        font-weight:bold;
+        font-size:18px;
+        color:#333;
+        margin:20px 0 40px;
+    }
     #player_list{
         padding:0;
         overflow:hidden;
     }
     .player_profile {
         text-align: center;
-        margin-bottom: 25px;
-        padding:2px;
+        margin-bottom: 10px;
+        padding:0 2px 2px;
         cursor: pointer;
         transition: transform 0.2s ease-out;
         overflow: hiden;
+
+        &.selected{
+            
+        }
+
+        &:hover{
+                    
+        }
     }
     .player_profile .inner{
         padding:5px;
@@ -287,10 +365,34 @@ figure.interactive {
         background:rgba(0,0,0,0.3);
     }
 
-    .bg-goalkeeper{background:#FFBB00;}
-    .bg-attack{background:#F5644F;}
-    .bg-midfield{background:#4BC6DF;}
-    .bg-defence{background:#85C54B;}
+    .bg-goalkeeper{
+        background:#FFBB00; 
+        &:hover{
+            .add-remove-btn{background:darken(#FFBB00,5%);}
+            background:darken(#FFBB00,5%);
+        }
+    }
+    .bg-attack{
+        background:#F5644F; 
+        &:hover{
+            .add-remove-btn{background:darken(#F5644F,8%);}
+            background:darken(#F5644F,8%)
+        }
+    }
+    .bg-midfield{
+        background:#4BC6DF; 
+        &:hover{
+            .add-remove-btn{background:darken(#4BC6DF,10%);}
+            background:darken(#4BC6DF,10%)
+        }
+    }
+    .bg-defence{
+        background:#85C54B; 
+        &:hover{
+            .add-remove-btn{background:darken(#85C54B,10%);}
+            background:darken(#85C54B,10%)
+        }
+    }
     .player_profile .inner .innercard {
         position: relative;
         padding: 3px;
@@ -303,8 +405,27 @@ figure.interactive {
         background-size: cover;
         background-position: top center;
         border: 1px solid #aeaeae;
+        position:relative;
     }
-
+    .player-countryname{
+        position: absolute;
+        background:#fff;
+        top:15px;
+        -webkit-font-smoothing: auto;
+        left:2px;
+        color:#000;
+        text-align:left;
+        padding-top:12px;
+        padding-bottom:5px;
+        width:15px;
+        font-family:"AgateSans",sans-serif;
+        font-size:10px;
+        -ms-writing-mode: lr-tb;
+        -webkit-writing-mode: vertical-lr;
+        -moz-writing-mode: vertical-lr;
+        -ms-writing-mode: vertical-lr;                
+        writing-mode: vertical-lr;
+    }
     .player-name {
         margin: 0;
         width: 100%;
@@ -321,20 +442,39 @@ figure.interactive {
         text-align:center;
         margin:0;
     }
-    .player-country {
+    .quick-add {
         font-family: "AgateSans";
-        color:#8d8d8d;
+        color:#fff;
+        font-weight:bold;
         font-size:10px;
         line-height:1em;
+        margin: 4px -4px -4px;
+        padding: 4px 0;
+        text-transform: uppercase;
+    }
+    .quick-remove{
+        display:none;
+        font-family: "AgateSans";
+        color:#fff;
+        font-weight:bold;
+        font-size:10px;
+        line-height:1em;
+        margin: 4px -4px -4px;
+        padding: 4px 0;
+        text-transform: uppercase;
     }
     .player_profile .flag {
         position: absolute;
-        width: 30px;
-        height: 27px;
-        background-size: contain;
+        width: 24px;
+        height: 24px;
+        background-size: cover;
         background-repeat: no-repeat;
-        top: 4px;
-        left: 4px;
+        background-position:center;
+        top: 2px;
+        left:2px;
+        border:2px solid #fff;
+        border-radius:50%;
+        z-index:5;
     }
     .player-position {
        font-family: "AgateSans";
@@ -345,6 +485,7 @@ figure.interactive {
     .player_profile .removePlayer {
         display: none;
     }
+    
     .player_profile.selected .removePlayer {
         display: block;
         position: absolute;
@@ -354,11 +495,19 @@ figure.interactive {
         right: 0;
         top: 0;
         padding-top: 90px;
-        font-size: 22px;
+        font-size: 16px;
         font-weight: bold;
         z-index: 2;
-        color: #fff;
-        background: rgba(0,0,0,0.5);
+        color: #333;
+        background: rgba(255,255,255,0.8);
+    }
+    .player_profile.selected{
+        .quick-add{
+            display:none;
+        }
+        .quick-remove{
+            display:block;
+        }
     }
     .player_profile.isDragging {
         // transform: scale(0.8);
@@ -366,6 +515,9 @@ figure.interactive {
     }
     .player_profile.selected img {
         opacity: 0.5;
+    }
+    #playerSelectedModal{
+        display:none;
     }
     #playerSelectedModal .modal-content {
         height: 480px;
@@ -495,9 +647,40 @@ figure.interactive {
     .playerOptions button#replacePlayer {
         margin-right: 6%;
     }
+    .your-team-details{
+        text-align:center;
+        margin-top:20px;
+        h2{
+            margin-top:0;
+            padding-top:0;
+            font-size:18px;
+            color:#545454;
+            text-align: center;
+            margin-bottom:0.2em;
+            font-family:"AgateSans";
+            line-height: 1em;
+        }
+        h3{
+            font-size:14px;
+            text-align: center;
+            line-height:1em;
+            font-family:"AgateSans";
+            color:#a6a6a3;
+            margin-bottom:0;
+        }
+        .team-picture img{
+            display:inline-block;
+            margin-bottom:0.5em;
+        }
+        #clearSelection{
+            text-decoration: underline;
+            cursor:pointer;
+            display: inline-block;
+        }
+    }
     .pitch {
         overflow: hidden;
-        margin: 0 auto 20px;
+        margin: 0 auto;
         padding: 0;
         // background: url('../images/pitch.jpg');
         background-color:#6BA83F;
@@ -587,6 +770,7 @@ figure.interactive {
         background-color: rgba(0,0,0,0.1);
         margin: 0 auto 3px;
         box-shadow: inset 0px 0 8px rgba(50, 50, 50, 0.7);
+        transition:transform 0.5s;
     }
 
     .pitch-player span.player-icon:hover {
@@ -597,15 +781,32 @@ figure.interactive {
         box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.5);
        
     }
+    #squad-pitch.isDragging{
+        background:#6BA83F;
 
-    .pitch.isDragging .pitch-player {
+        .your-team-details{
+            h2,h3{
+                color:#fff;
+            }
+        }
+    }
+    #squad-pitch.isDragging .pitch-player {
         opacity: 0.4;
     }
-    .pitch.isDragging .pitch-player.dragTarget {
+    #squad-pitch.isDragging .pitch-player.dragTarget {
         opacity: 1;
+        .player-icon{
+            border:2px dotted #fff;
+            background-color:rgba(0,0,0,0.4);
+            transform: scale(1.2);
+        }
     }
-    .pitch-player.dragTarget.draghover span.player-icon {
-        border: 2px dotted $buttonColor;
+    #squad-pitch.isDragging .pitch-player.dragTarget.pitch-player-taken.draghover span.player-icon {
+        border: 2px dotted rgba(255,255,255,0.1);
+    }
+    #squad-pitch.isDragging .pitch-player.dragTarget.draghover span.player-icon {
+        border: 2px dotted rgba(255,255,255,1);
+        background-color:rgba(0,0,0,0.8);
     }
     .pitch-player-hidden {
         display: none;
@@ -856,4 +1057,17 @@ figure.interactive {
         transition: width .6s ease
     }
 
+}
+
+// addition to the grid
+@media (min-width: 420px) {
+
+  .col-xm-4
+  {
+    float:left;
+  }
+
+  .col-xm-4 {
+    width: 33.33333333%;
+  }
 }

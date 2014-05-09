@@ -14,7 +14,7 @@ define([
     return Backbone.View.extend({
 
         id: 'squad-pitch',
-        className: 'col-xs-12 col-sm-4',
+        className: 'col-xs-12 col-md-5 col-lg-4',
         template: _.template(SquadPitchTemplate),
 
         events: {
@@ -182,11 +182,12 @@ define([
 
         // Reset the teamCollection and wipe the pitch
         clearSelection: function () {
-            App.usersTeamCollection.removeAllPlayersFromCollection();
-            return false;
+            //App.usersTeamCollection.removeAllPlayersFromCollection();
+            App.userDetails.clearSquad();
         },
 
         render: function () {
+            console.log('render pitch', this);
             var playerPositions = {
                 'ST': {
                     player: null,
@@ -248,15 +249,19 @@ define([
             */
 
             this.$el.empty();
-            this.$el.append(this.template({
+            var data = {
                 //players: playerPositions,
                 userDetails: App.userDetails.toJSON(),
                 players: App.usersTeamCollection.toJSON(),
                 squadCount: App.userDetails.getSquadCount()
-            }));
+            };
+            console.log(data);
+            this.$el.append(this.template(data));
 
+            console.log('end of pitch render');            
             this.$showOptions = this.$('.playerOptions');
             
+            console.log('end of pitch render');            
             // Start hover event bindings
             if (App.userDetails.get('username')) {
                 var dragDropTarget = this.$el.find('li');
@@ -265,7 +270,6 @@ define([
                 dragDropTarget.bind("dragleave", _.bind(this._dragLeaveEvent, this));
                 dragDropTarget.bind("drop", _.bind(this._dropEvent, this));
             }
-            
             return this;
         },
 

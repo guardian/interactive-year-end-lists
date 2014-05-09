@@ -131,7 +131,7 @@ module.exports = function(grunt) {
     // Listen to file changes
     watch: {
       scripts: {
-        files: ['src/**/*.js', 'src/**/*.scss', 'src/js/app/templates/*.html'],
+        files: ['src/**/*.js', 'src/**/*.scss','src/**/*.css', 'src/js/app/templates/*.html'],
         tasks: ['jshint', 'requirejs', 'sass', 'autoprefixer', 'string-replace'],
         options: {
           spawn: false

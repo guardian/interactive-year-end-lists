@@ -1,10 +1,11 @@
 <div class="inner bg-<%= position.toLowerCase() %>">
 	<div class="innercard-outline">
 		<div class="innercard">
-        	<span class="removePlayer">Unpick</span>
+        	<span class="removePlayer">Remove from team</span>
 
         	<div class="player-image-container" style="background-image:url(http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg)">
             <span class="flag" alt="<%= countryname %>" title="<%= countryname %>" style="background-image:url('https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/flags/<%= countrycode %>.png')"></span>
+            <div class="player-countryname"><%= countryname %></div>
             
         </div>
             
@@ -12,7 +13,8 @@
                 <p><%= name.substring(name.lastIndexOf(" ")+1) %></p>
             </div>
             <div class="player-position"><%= position %></div>
-            <!-- <div class="player-country"><%= countryname %></div> -->
+            <!-- <div class="add-remove-btn quick-add bg-<%= position.toLowerCase() %>">Add to team</div>
+            <div class="add-remove-btn quick-remove bg-<%= position.toLowerCase() %>">Remove from team</div> -->
         </div>
 
 

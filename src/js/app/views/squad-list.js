@@ -17,7 +17,7 @@ define([
     return Backbone.View.extend({
 
         tagName: 'div',
-        className: 'col-xs-6 col-sm-3 col-lg-2 player_profile',
+        className: 'col-xs-6 col-xm-4 col-sm-4 col-md-3 col-lg-2 player_profile',
         template: _.template(SquadListTemplate),
 
         events: {
@@ -118,7 +118,8 @@ define([
 
             $(newTarget + ', ' + newTarget).addClass('dragTarget');
 
-            $('.pitch').addClass('isDragging');
+            $('#squad-pitch').addClass('isDragging');
+            $('#squad-filters').addClass('isDragging');
             target.addClass('isDragging');
 
             return target.data('uid');

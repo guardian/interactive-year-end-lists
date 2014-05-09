@@ -13,7 +13,6 @@ define([
         defaults: {
             guardianID: null,
             username: null,
-            teamSelection: null,
             player0: null,
             player1: null,
             player2: null,
@@ -60,6 +59,14 @@ define([
                 usersSquad.push(this.get('player'+i));
             }
             return usersSquad;
+        },
+
+        clearSquad: function() {
+            var players = {};
+            for (var i=0; i < 11; i++) {
+                players['player' + i] =  null;
+            }
+            this.save(players);
         },
 
         setToolKitObject: function () {
