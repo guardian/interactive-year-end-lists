@@ -5,7 +5,8 @@ define([
     'views/match-stats',
     'views/match-lineup',
     'views/match-record',
-    'text!templates/match.html'
+    'text!templates/match.html',
+    'text!templates/squad-pitch.html'
 ], function (
     App,
     _,
@@ -13,7 +14,8 @@ define([
     MatchLineupView,
     MatchStatsView,
     MatchRecordView,
-    MatchTemplate
+    MatchTemplate,
+    PitchTemplate
 ) {
     return Backbone.View.extend({
         id: 'match-screen',
@@ -59,20 +61,49 @@ define([
 
         // Renders 'match-record.js'
         renderTeams: function () {
-
-            /**
-             * TODO: Team stats will not be present in prod
-             */
+            App.player1TeamCollection.populateUsingIDs(
+                this.model.get('1').squad);
+            App.player2TeamCollection.populateUsingIDs(
+                this.model.get('2').squad);
+            
             var user1Pitch = new MatchLineupView({
                 collection: App.player1TeamCollection
-            }),
-                user1Stats = new MatchStatsView({
+            });
+            this.$('#user1-pitch').empty();
+
+            var pitchTemplate = _.template(PitchTemplate);
+            this.$('#user1-pitch').append(pitchTemplate({
+                squadCount: null,
+                players: App.player1TeamCollection.toJSON()
+            }));
+            this.$('#user1-pitch').append(user1Pitch.render().$el);
+            
+            
+            var user2Pitch = new MatchLineupView({
+                collection: App.player2TeamCollection
+            });
+            this.$('#user2-pitch').empty();
+
+            this.$('#user2-pitch').append(pitchTemplate({
+                squadCount: null,
+                players: App.player2TeamCollection.toJSON()
+            }));
+            this.$('#user2-pitch').append(user2Pitch.render().$el);
+            
+            
+            /**
+             * TODO: Team stats will not be present in prod
+             
+            var user1Pitch = new MatchLineupView({
                     collection: App.player1TeamCollection
-                }),
-                user2Pitch = new MatchLineupView({
+                });
+            var user1Stats = new MatchStatsView({
+                    collection: App.player1TeamCollection
+                });
+            var user2Pitch = new MatchLineupView({
                     collection: App.player2TeamCollection
-                }),
-                user2Stats = new MatchStatsView({
+                });
+            var user2Stats = new MatchStatsView({
                     collection: App.player2TeamCollection
                 });
 
@@ -84,12 +115,23 @@ define([
 
             this.$el.find('#user1-pitch').append(user1Pitch.render().$el);
             this.$el.find('#user2-pitch').append(user2Pitch.render().$el);
-
+           
             return this;
+            */
         },
 
         render: function () {
-            this.$el.html('<textarea>' + JSON.stringify(this.model.toJSON()) + '</textarea>');
+            if (this.model.has('time')) {
+                var tplHTML = this.template({
+                    matchDetails: this.model.toJSON()
+                });
+                this.$el.html(tplHTML);
+                this.renderTeams(); 
+
+            } else {
+                this.$el.html('<p>Loading...</p>');
+            }
+
             return this;
             /*
             var matchDetails = App.matchModel.toJSON();

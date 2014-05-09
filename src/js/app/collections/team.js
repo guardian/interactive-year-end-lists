@@ -71,6 +71,13 @@ define([
             }
         },
 
+        populateUsingIDs: function(playerIDs) {
+            var playerModels = _.map(playerIDs, function(uid) {
+                return App.playerCollection.findWhere({ uid: uid }); 
+            });
+            this.reset(playerModels);
+        },
+
         removeAllPlayersFromCollection: function () {
             App.usersTeamCollection.reset(Array(11));
             App.userDetails.saveUserTeamToStorage();

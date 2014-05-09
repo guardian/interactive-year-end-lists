@@ -258,6 +258,7 @@ app.get('/result/:id', function(req, res) {
     });
 });
 
+/*
 app.get("/matches", function (req, res) {
 
     var query = {};
@@ -372,6 +373,8 @@ app.post("/match", function (req, res) {
         }
     });
 });
+
+*/
 
 // Start server
 var server = app.listen(3000, function () {
