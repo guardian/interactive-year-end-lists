@@ -16,7 +16,7 @@
 
 	    <% if (!_.isEmpty(positionDetails.player)) { %>
             <li data-uid="<%= positionDetails.player.uid %>" data-position="<%= position %>" data-area="<%= positionDetails.area %>" class="pitch-player pitch-player-taken position-<%= position.toLowerCase() %>">
-                <span class="player-icon" style="background-image:url('https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/players/pele.jpg')" title="Drop <%= positionDetails.player.name.substring(positionDetails.player.name.lastIndexOf(" ")+1) %>"></span>
+                <span class="player-icon" style="background-image:url('<%= positionDetails.player.picture %>')" title="Drop <%= positionDetails.player.name.substring(positionDetails.player.name.lastIndexOf(" ")+1) %>"></span>
                 <%= positionDetails.player.name.substring(positionDetails.player.name.lastIndexOf(" ")+1) %>
             </li>
 	    <% } else { %>

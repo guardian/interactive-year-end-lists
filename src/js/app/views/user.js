@@ -7,6 +7,7 @@ define([
     'views/user-record',
     'views/match-lineup',
     'text!templates/user.html',
+    'text!templates/squad-list.html',
     'jquery.cookie'
 ], function (
     App,
@@ -16,13 +17,15 @@ define([
     UserFindView,
     UserRecordView,
     MatchLineupView,
-    UserTemplate
+    UserTemplate,
+    SquadTemplate
 ) {
     return Backbone.View.extend({
 
         id: 'user-screen',
         className: 'container',
         template: _.template(UserTemplate),
+        squadTemplate: _.template(SquadTemplate),
 
         events: {
             'click #goEdit': 'navigateHome',
@@ -110,16 +113,26 @@ define([
             //this.$('#users-find').empty();
             //this.$('#users-find').append(userFind.render().$el);
         },
+        renderPlayerCards: function(){
+            App.viewingPlayerTeamCollection.each(function (value, key){
+                var playerCard = this.squadTemplate(value.attributes);
+                var player_card = document.createElement("div");
+                player_card.className = "col-xs-6 col-sm-4 col-lg-3 player_profile";
+                player_card.innerHTML = playerCard;
+                console.log(player_card);
+                this.$('#squad-list').append(player_card);
+            }, this);
+        },
 
         render: function () {
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON()
             };
-
+            console.log(this.templateData);
             this.$el.append(this.template(this.templateData));
             this.renderPitch();
-            
+            this.renderPlayerCards();
             var userRecord = new UserRecordView({
                 userID: App.viewingPlayer.get('guardianID')
             });

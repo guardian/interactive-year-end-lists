@@ -18,17 +18,17 @@ figure.interactive .container {
 }
 
 
-@media (min-width: 46.25em) {
+@media (min-width: 30em) {
     figure.interactive .container {
         width: auto;
     }
 }
-@media (min-width: 61.25em) {
+@media (min-width: 56.25em) {
     figure.interactive .container {
         width: auto;
     }
 }
-@media (min-width: 81.25em) {
+@media (min-width: 72.5em) {
     figure.interactive .container {
         width: auto;
     }
@@ -136,11 +136,12 @@ figure.interactive {
                 background:#005689;
                 color:#fff;
                 padding:15px 20px;
-               
+                width: auto;
+                margin-right:0;
                 display:inline-block;
             }
         }
-        @media (min-width: 61.25em) {
+        @media (min-width: 56.25em) {
             h1,h2{
                 width:50%;
             }
@@ -194,7 +195,7 @@ figure.interactive {
     }
     #squad-pitch {
         z-index: 5;
-        padding:20px 35px 20px 20px;
+        padding:20px 35px;
         background:#f4f4ee;
         transition: background 0.5s;
     }
@@ -206,7 +207,8 @@ figure.interactive {
     #users-team-container {
         margin-bottom: 20px;
         clear: both;
-
+        padding:20px;
+        background:#f4f4ee;
 
     }
     /**
@@ -221,22 +223,12 @@ figure.interactive {
         #squad-pitch {
             // width: 400px;
             float: right;
+            padding:20px 35px 20px 20px;
         }
         #squad-pitch.fix-right {
             position: fixed;
             right: 0;
             top: 0;
-        }
-
-        #users-team-container {
-            width: 40%;
-            float: left;
-            display: block;
-        }
-        #users-find-container {
-            width: 60%;
-            padding-left: 40px;
-            float: left;
         }
     }
     #squad-pitch button#goToMatch,
@@ -259,6 +251,14 @@ figure.interactive {
         left: 15px;
         right: 15px;
         z-index: 3;
+        h2{
+            font-size:18px;
+            color:#545454;
+            font-family:"AgateSans";
+            display:inline-block;
+            margin: 0 10px 0 0;
+            padding-top:0;
+        }
     }
     #squad-filters form.squad-filters-fixed {
         position: fixed;
@@ -292,7 +292,7 @@ figure.interactive {
     }
     #squad-filters form .form-group {
         display:inline-block;
-        width: 31.3%;
+        width: 120px;
         background: url(../images/down_arrow.png) no-repeat right #fff;
         margin-right: 3%;
     }
@@ -401,7 +401,8 @@ figure.interactive {
     }
     .player-image-container {
         width: 100%;
-        min-height: 140px;
+        height:0;
+        padding-bottom:120%;
         background-size: cover;
         background-position: top center;
         border: 1px solid #aeaeae;
@@ -608,7 +609,7 @@ figure.interactive {
     }
     .back {
     }
-    @media(max-width:46.25em) {
+    @media(max-width:56.25em) {
         .giwc-player-card {
             margin-left: -150px;
             width: 300px;
@@ -710,10 +711,11 @@ figure.interactive {
         }
 
         .pitchMiddleCircle{
-            width:40%;
-            height:34%;
-            top:33%;
-            left:30%;
+            width:170px;
+            height:170px;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
             border-radius:50%;
             position:absolute;
             border:1px solid #fff;
@@ -740,7 +742,7 @@ figure.interactive {
     #team-screen .pitch {
         display: block;
     }
-    @media(max-width:56.25em) {
+    @media(max-width:1em) {
         .pitch {
             clear: none;
             display: none;
@@ -817,10 +819,12 @@ figure.interactive {
         top: 40px;
     }
     .pitch-player.position-st{
-        left:26%;
+        left:37%;
+        transform:translateX(-50%);
     }
     .pitch-player.position-st2 {
-        right:26%;
+        right:37%;
+        transform:translateX(50%);
     }
     /* Midfielders */
     .pitch-player.position-ml,
@@ -830,16 +834,20 @@ figure.interactive {
         top: 150px; 
     }
     .pitch-player.position-ml{
-        left: 3%;
+        left: 12%;
+        transform:translateX(-50%);
     }
     .pitch-player.position-mr {
-        right:3%;
+        right:12%;
+        transform:translateX(50%);
     }
     .pitch-player.position-mc {
-        left: 26%;
+        left: 37%;
+        transform:translateX(-50%);
     }
     .pitch-player.position-mc2 {
-        right:26%
+        right:37%;
+        transform:translateX(50%);
     }
     /* Defenders */
     .pitch-player.position-lb,
@@ -849,21 +857,26 @@ figure.interactive {
         top: 270px;
     }
     .pitch-player.position-lb{
-        left: 3%;
+        left: 12%;
+        transform:translateX(-50%);
     }
     .pitch-player.position-rb {
-        right:3%;
+        right:12%;
+        transform:translateX(50%);
     }
     .pitch-player.position-cb {
-        left: 26%;
+        left: 37%;
+        transform:translateX(-50%);
     }
     .pitch-player.position-cb2 {
-        right:26%;
+        right:37%;
+        transform:translateX(50%);
     }
     /* Goalkeepers */
     .pitch-player.position-gk {
         top: 365px;
-        left: 39%;
+        left: 50%;
+        transform:translateX(-50%);
     }
 
 

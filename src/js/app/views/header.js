@@ -13,10 +13,17 @@ define([
         template: _.template(HeaderTemplate),
 
         events: {
-           'click .goHome': 'navigateHome'
+           'click .goHome': 'navigateHome',
+           'click .goPlay': 'playMatch'
         },
         navigateHome: function () {
             App.appRoutes.navigate('/', {
+                trigger: true
+            });
+        },
+        playMatch: function () {
+           
+            App.appRoutes.navigate('#match/000000000', {
                 trigger: true
             });
         },
@@ -26,6 +33,7 @@ define([
 
             var templateHTML = this.template({
                 message: 'TESTING',
+                usersPlayers: App.usersTeamCollection.toJSON(),
                 username: App.userDetails.get('username'),
                 userID: App.userDetails.get('guardianID')
             });
