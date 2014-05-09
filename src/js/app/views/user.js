@@ -59,8 +59,10 @@ define([
             });
 
             newMatch.save({}, {
-                success: function() {
-                    console.log('saved', arguments);
+                success: function(matchModel) {
+                    console.log('saved', matchModel.get('_id'));
+                    App.appRoutes.navigate('/result/' + matchModel.get('_id'), 
+                                            {trigger: true});
                 }
             });
         },
