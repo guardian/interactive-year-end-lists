@@ -32,7 +32,14 @@ define([
             this.selectedPlayerModel = null;
             Backbone.on('player_clicked', this.highlightPositions, this);
             Backbone.on('playercard_closed', this.removeHighlightPositions, this);
+            Backbone.on('players_closed', this.showPitch, this);
             App.usersTeamCollection.on('reset', this.render, this);
+        },
+
+        showPitch: function() {
+            if (App.isSmallScreen()) {
+                this.el.scrollIntoView();
+            }
         },
 
         highlightPositions: function(playerModel) {
@@ -46,13 +53,28 @@ define([
         },
 
         positionSelected: function(e) {
+            var target = $(e.currentTarget);
+            var UID = $(e.currentTarget).data('uid');
+            var details = {
+                x: target.offset().left + (target.width() / 2),
+                y: (this.$el.offset().top + this.$el.outerHeight()) - (target.offset().top + target.outerHeight()),
+                model: App.playerCollection.findWhere({ uid: UID })
+            };
+
+            Backbone.trigger('position_clicked', details);
+            
+            if (App.isSmallScreen()) {
+                e.currentTarget.scrollIntoView(true);
+            }
+
+            
             if (this.selectedPlayerModel === null) {
-                this.showOptions(e);
+                //this.showOptions(e);
                 return;
             }
 
+            
             var position = $(e.currentTarget).data('position');
-            console.log(position, this.selectedPlayerModel, this);
             App.userDetails.save(
                 'player'+position,
                 this.selectedPlayerModel.get('uid')
@@ -365,7 +387,7 @@ define([
                 console.warn('Attempting to assign a duplicate player', data);
                 return;
             }
-            
+            console.log(data, position);
             App.userDetails.save('player'+position, data);
 
             // Prevent Goalkeepers being Strikers

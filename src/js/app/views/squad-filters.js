@@ -23,7 +23,8 @@ define([
         events: {
             'change select': 'filterChange',
             'click #clearLink': 'clearFilters',
-            'click .viewSquad': 'viewSquad'
+            'click .viewSquad': 'viewSquad',
+            'click .hidePlayers': 'hidePlayers'
         },
 
         initialize: function () {
@@ -31,6 +32,7 @@ define([
             this.updateSquadListViews();
 
             this.listenTo(this.model, 'change', this.updateSquadListViews);
+            Backbone.on('position_clicked', this.showPlayers, this);
 
             /**
              * This code below is to set the select inputs to be fixed position
@@ -45,16 +47,35 @@ define([
             });
         },
 
+        hidePlayers: function(){
+            this.$el.hide();
+            Backbone.trigger('players_closed');
+        },
+
+        showPlayers: function(details) {
+            if (!App.isSmallScreen()) {
+                return;
+            }
+
+            this.$el.show();
+            var marginTop = (this.$el.offset().top - details.y) * -1;
+            this.$el.css('margin-top', details.y * -1);
+            this.$('.up-arrow').css('left', details.x - 10);
+        },
+
         setNavigationPosition: function () {
+            
             if (!this.navigationPosition || this.windowSize) {
                 if ($('#squad-filters').length) {
                     this.navigationPosition = $('#squad-filters').offset().top;
                 }
                 this.windowSize = 0;
             }
+            
+
             if (this.navigationPosition) {
-                $('.viewSquad').toggleClass('viewSquad-show', $(document).scrollTop() >= this.navigationPosition);
-                $('#squad-filters form').toggleClass('squad-filters-fixed', $(document).scrollTop() >= this.navigationPosition);
+                //$('.viewSquad').toggleClass('viewSquad-show', $(document).scrollTop() >= this.navigationPosition);
+                //$('#squad-filters form').toggleClass('squad-filters-fixed', $(document).scrollTop() >= this.navigationPosition);
                 $('#squad-pitch').toggleClass('fix-right', $(document).scrollTop() >= this.navigationPosition);
             }
         },
@@ -165,6 +186,10 @@ define([
             this.$el.empty();
             this.$el.append(this.template(this.templateData));
             this.renderSquadListViews();
+
+            if (App.isSmallScreen()) {
+                this.$el.hide();
+            }
             return this;
         }
 

@@ -49,16 +49,11 @@ figure.interactive {
     }
 
     h2{
-        font-size: 22px;
-        font-size: 2.2rem;
-        line-height: 26px;
-        line-height: 2.6rem;
+        font-size: 1.6rem;
         font-family: "EgyptianHeadline",georgia,serif;
         font-weight: normal;
         -webkit-font-smoothing: antialiased;
-        margin-bottom: 24px;
-        margin-bottom: 2.4rem;
-        padding-top: 8px;
+        margin: 0.3rem 0;
         padding-top: 0.8rem;
     }
     $buttonColor: #005689;
@@ -181,6 +176,8 @@ figure.interactive {
     }
     #squad-filters {
         position: relative;
+        background: #FFF;
+        z-index: 10;
         
         &.isDragging{
             opacity:0.5;
@@ -188,9 +185,25 @@ figure.interactive {
     }
 
     .squad-filters-inner{
-        overflow: hidden;
         background: #f4f4ee;
         padding:20px;
+
+        .up-arrow {
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 20px solid #F4F4EE;
+            height: 0;
+            width: 0;
+            position: absolute;
+            top: -20px;
+            margin-left: -4px;
+        }
+
+        .hidePlayers {
+            float: right;
+            color: red;
+            font-weight: bold;
+        }
     }
     #squad-pitch {
         z-index: 5;
@@ -264,6 +277,7 @@ figure.interactive {
         position: fixed;
         left: 0;
         right: 0;
+        z-index: 10;
     }
     #squad-filters form .inner {
         padding: 0 0;
@@ -271,7 +285,9 @@ figure.interactive {
     }
     #squad-filters form.squad-filters-fixed .inner {
         padding: 10px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid #999;
+        background: #FFF;
     }
     @media (min-width: 56.25em) {
         #squad-filters form {
@@ -338,7 +354,8 @@ figure.interactive {
     }
     #player_list{
         padding:0;
-        overflow:hidden;
+        float: none;
+        overflow: auto;
     }
     .player_profile {
         text-align: center;
