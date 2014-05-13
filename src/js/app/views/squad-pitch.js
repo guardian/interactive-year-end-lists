@@ -184,6 +184,42 @@ define([
         },
 
         render: function () {
+            var positionNames = [
+                {
+                    "name": "GK",
+                    "position": "goalkeeper"
+                },{
+                    "name": "LB",
+                    "position": "defence"
+                },{
+                    "name": "RB",
+                    "position": "defence"
+                },{
+                    "name": "CB",
+                    "position": "defence"
+                },{
+                    "name": "CB",
+                    "position": "defence"
+                },{
+                    "name": "LM",
+                    "position": "midfield"
+                },{
+                    "name": "RM",
+                    "position": "midfield"
+                },{
+                    "name": "CM",
+                    "position": "midfield"
+                },{
+                    "name": "CM",
+                    "position": "midfield"
+                },{
+                    "name": "ST",
+                    "position": "attack"
+                },{
+                    "name": "ST",
+                    "position": "attack"
+                }
+            ];
             var playerPositions = {
                 'ST': {
                     player: null,
@@ -250,7 +286,8 @@ define([
                 //players: playerPositions,
                 userDetails: App.userDetails.toJSON(),
                 players: App.usersTeamCollection.toJSON(),
-                squadCount: App.userDetails.getSquadCount()
+                squadCount: App.userDetails.getSquadCount(),
+                positionNames: positionNames
             };
             this.$el.append(this.template(data));
 
@@ -264,6 +301,7 @@ define([
                 dragDropTarget.bind("dragleave", _.bind(this._dragLeaveEvent, this));
                 dragDropTarget.bind("drop", _.bind(this._dropEvent, this));
             }
+
             return this;
         },
 

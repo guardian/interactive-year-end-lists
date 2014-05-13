@@ -150,6 +150,7 @@ define([
             console.log('bob');
             this.$el.append(this.template(this.templateData));
             this.renderPitch();
+            this.renderPlayerCards();
             
             console.log('bob');
             var userRecord = new UserRecordView({

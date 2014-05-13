@@ -1,13 +1,16 @@
 <% if(username) { %>
 
-<h1><%= username %> F.C.</h1>
+<h1><%= username %> FC</h1>
 
 
 <!-- <p style="position:absolute; margin-top:40px;">Logged in as <%= username %></p> -->
 <nav class="navigation logged-in">
-
 <button class="goHome">Edit your team</button>
-<button class="goPlay">Play a match</button>
+<% if(squadCount<11){ %>
+	<button class="goPlay notEnoughPlayers" disabled>Play a match <span> <%= 11 - squadCount %> more players</span></button>
+<% }else{ %>
+	<button class="goPlay">Play a match</button>
+<% } %>
 </nav>
 
 <% }else{ %>
