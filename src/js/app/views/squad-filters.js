@@ -5,6 +5,7 @@ define([
     'underscore',
     'backbone',
     'views/squad-list',
+    'views/squad-modal',
     'text!templates/squad-filters.html'
 ], function (
     App,
@@ -12,6 +13,7 @@ define([
     _,
     Backbone,
     SquadListView,
+    SquadModalView,
     SquadFiltersTemplate
 ) {
     return Backbone.View.extend({
@@ -186,6 +188,9 @@ define([
             this.$el.empty();
             this.$el.append(this.template(this.templateData));
             this.renderSquadListViews();
+
+            var squadModalView = new SquadModalView();
+            this.$('.modalWrapper').append(squadModalView.render().el);
 
             if (App.isSmallScreen()) {
                 this.$el.hide();

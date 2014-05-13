@@ -5,7 +5,6 @@ define([
     'backbone',
     'views/squad-pitch',
     'views/squad-filters',
-    'views/squad-modal',
     'text!templates/squad.html'
 ], function (
     App,
@@ -14,7 +13,6 @@ define([
     Backbone,
     SquadPitchView,
     SquadFiltersView,
-    SquadModalView,
     SquadTemplate
 ) {
     return Backbone.View.extend({
@@ -53,11 +51,11 @@ define([
 
             var squadPitch = new SquadPitchView({ model: this.filterModel });
             var squadFilters = new SquadFiltersView({ model: this.filterModel });
-            var squadModal = new SquadModalView();
+            // var squadModal = new SquadModalView();
 
             this.$el.find('#team-screen').append(squadPitch.render().$el);
             this.$el.find('#team-screen').append(squadFilters.render().$el);
-            this.$el.find('#team-screen').append(squadModal.render().$el);
+            //this.$el.find('#team-screen').append(squadModal.render().$el);
 
             return this;
         }

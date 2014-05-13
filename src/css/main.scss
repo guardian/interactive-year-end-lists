@@ -549,17 +549,80 @@ figure.interactive {
     }
     
     .player-card {
-        display: block;
-        background: #fff;
-        padding: 10px;
-        position: fixed;
-        left: 50%;
-        top: 50px;
-        border-radius: 6px;
-        margin-left: -250px;
-        width: 500px;
-        z-index: 3000;
-        border: 2px solid rgba(0, 0, 0, 0.4);
+        display: none;
+
+        .close {
+            display: none;
+        }
+        
+        &.modalMode {
+            display: block;
+            background: #fff;
+            padding: 10px;
+            position: fixed;
+            left: 50%;
+            top: 50px;
+            border-radius: 6px;
+            margin-left: -250px;
+            width: 500px;
+            z-index: 20;
+            border: 2px solid rgba(0, 0, 0, 0.4);
+
+            .close {
+                display: block;
+            }
+
+            .player-bio-footer {
+                display: none;
+            }
+        }
+
+        .player-bio-footer {
+            font-size: 13px;
+            margin: 10px 0;
+            border-top: 1px solid #CCC;
+            padding-top: 10px;
+        }
+
+        .player-bio-add {
+            min-width: 0;
+            padding: 8px 10px;
+
+        }
+
+        .player-bio-col1 {
+            width: 33.3%;
+            float: left;
+            padding-right: 10px;
+        }
+
+        .player-bio-picture {
+            width: 100%;
+            margin-bottom: 8px
+        }
+
+        .player-bio-name {
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            line-height: 1em;
+        }
+
+        .player-bio-metainfo {
+            font-size: 10px;
+            color: rgb(142, 142, 142);
+            margin-top: 2px;
+        }
+
+        .player-bio-copy {
+            font-size: 13px;
+        }
+
+        .player-bio-col2 {
+            margin-left: 33.3%;
+        }
+
+        
     }
 
 
