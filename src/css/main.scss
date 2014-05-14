@@ -186,7 +186,7 @@ figure.interactive {
 
     .squad-filters-inner{
         background: #f4f4ee;
-        padding:20px;
+        padding: 20px 10px 10px;
 
         .up-arrow {
             border-left: 20px solid transparent;
@@ -201,8 +201,6 @@ figure.interactive {
 
         .hidePlayers {
             float: right;
-            color: red;
-            font-weight: bold;
         }
     }
     #squad-pitch {
@@ -550,6 +548,9 @@ figure.interactive {
     
     .player-card {
         display: none;
+        margin:0;
+        padding: 0;
+        border-top: 0;
 
         .close {
             display: none;
@@ -851,6 +852,10 @@ figure.interactive {
         margin: 0 auto 3px;
         box-shadow: inset 0px 0 8px rgba(50, 50, 50, 0.7);
         transition:transform 0.5s;
+    }
+    
+    .pitch-player.selected span.player-icon {
+        border: 4px solid red;
     }
 
     .pitch-player span.player-icon:hover {

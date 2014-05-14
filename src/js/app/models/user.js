@@ -152,35 +152,18 @@ define([
         },
 
         fetchUserTeamFromStorage: function () {
-            /*
-            if (App.userDetails.get('teamSelection')) {
-                var playerArr = [];
-                App.userDetails.get('teamSelection').split(',').map(function (player) {
-                    var playerSplit = player.split(':'),
-                        playerModel = App.playerCollection.findWhere({
-                            'uid': playerSplit[0]
-                        });
-                    playerModel.set('wantedPosition', playerSplit[1]);
-                    if (playerModel) {
-                        playerArr.push(playerModel);
-                    }
-                });
-                App.usersTeamCollection.reset(playerArr);
-            }
-            */
-                       
             App.usersTeamCollection.reset(this.getPlayerModels());
         },
 
         getPlayerModels: function() {
             var playerModels = [];
-            console.log('fetching/building users'); 
             _.each(this.getSquad(), function(playerID) {
                 var playerModel = App.playerCollection.findWhere({
                     'uid': playerID
                 });
                 playerModels.push(playerModel);
             });
+            
             return playerModels;
         },
 

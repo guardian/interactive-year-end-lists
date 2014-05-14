@@ -1,17 +1,23 @@
 <div class="player-bio">
     <span class="close">&times;</span>
     <div class="player-bio-col1">
-        <img class="player-bio-picture" src="<%= picture %>" alt="Photo of <%= name %>" />
+        <img class="player-bio-picture" src="<%= player.picture %>" alt="Photo of <%= player.name %>" />
 
-        <button class="player-bio-add">ADD</button>
+        <% if (position) { %>
+            <% if (canRemove) { %>
+                <button class="player-bio-remove">REMOVE</button>
+            <% } else { %>
+                <button class="player-bio-add">ADD</button>
+            <% } %>
+        <% } %>
     </div>
     <div class="player-bio-col2">
-        <h2 class="player-bio-name"><%= name %></h2>
+        <h2 class="player-bio-name"><%= player.name %></h2>
         <p class="player-bio-metainfo">
-            <%= position %> - <%= countryname %>
+            <%= player.position %> - <%= player.countryname %>
         </p>
         
-        <p class="player-bio-copy"><%= bio %></p>
+        <p class="player-bio-copy"><%= player.bio %></p>
     </div>
 
     <p class="player-bio-footer">

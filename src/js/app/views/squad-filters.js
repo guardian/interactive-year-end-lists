@@ -33,7 +33,7 @@ define([
             this.templateData = this.createFilterOptions();
             this.updateSquadListViews();
 
-            this.listenTo(this.model, 'change', this.updateSquadListViews);
+            App.userDetails.on('change', this.handleSquadChange, this);
             Backbone.on('position_clicked', this.showPlayers, this);
 
             /**
@@ -49,6 +49,15 @@ define([
             });
         },
 
+        handleSquadChange: function() {
+            if (App.isSmallScreen()) {
+               this.hidePlayers();
+               return;
+            }
+
+            this.updateSquadListViews();
+        },
+
         hidePlayers: function(){
             this.$el.hide();
             Backbone.trigger('players_closed');
@@ -59,6 +68,7 @@ define([
                 return;
             }
 
+            this.updateSquadListViews();
             this.$el.show();
             var marginTop = (this.$el.offset().top - details.y) * -1;
             this.$el.css('margin-top', details.y * -1);
@@ -188,7 +198,6 @@ define([
             this.$el.empty();
             this.$el.append(this.template(this.templateData));
             this.renderSquadListViews();
-
             var squadModalView = new SquadModalView();
             this.$('.modalWrapper').append(squadModalView.render().el);
 
