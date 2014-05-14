@@ -129,6 +129,7 @@ define([
             //this.$('#users-find').empty();
             //this.$('#users-find').append(userFind.render().$el);
         },
+        
         renderPlayerCards: function(){
             App.viewingPlayerTeamCollection.each(function (value, key){
                 var playerCard = this.squadTemplate(value.attributes);

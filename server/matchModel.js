@@ -1,3 +1,4 @@
+var venues = require('./stadiums');
 var competitionData = require('./competitionData');
 
 module.exports = (function Match() {
@@ -334,7 +335,6 @@ module.exports = (function Match() {
     }
  
     function getVenue() {
-        var venues = competitionData.stadiums;
         var chosenVenue = venues[Math.floor(Math.random() * venues.length)];
         /*
          * TODO: Choose a random number between 90% and 100% of maxAttendance and set as attendance

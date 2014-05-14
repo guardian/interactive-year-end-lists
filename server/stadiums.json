@@ -1,0 +1,97 @@
+[
+        {
+            "stadium": "Estadio Centenario",
+            "location": "Montevideo, Uruguay",
+            "maxAttendance": 80000
+          },
+        {
+            "stadium": "Stadio Nazionale PNF",
+            "location": "Rome, Italy",
+            "maxAttendance": 50000
+          },
+        {
+            "stadium": "Stade Olympique de Colombes",
+            "location": "Paris, France",
+            "maxAttendance": 45000
+          },
+        {
+            "stadium": "Estádio do Maracanã",
+            "location": "Rio de Janeiro, Brazil",
+            "maxAttendance": 74000
+          },
+        {
+            "stadium": "Wankdorf Stadium",
+            "location": "Bern, Switzerland",
+            "maxAttendance": 60000
+          },
+        {
+            "stadium": "Råsunda Stadium",
+            "location": "Solna, Sweden",
+            "maxAttendance": 51800
+          },
+        {
+            "stadium": "Estadio Nacional",
+            "location": "Santiago, Chile",
+            "maxAttendance": 69000
+          },
+        {
+            "stadium": "Wembley Stadium",
+            "location": "London, England",
+            "maxAttendance": 93000
+          },
+        {
+            "stadium": "Estadio Azteca",
+            "location": "Mexico City, Mexico",
+            "maxAttendance": 107412
+          },
+        {
+            "stadium": "Olympiastadion",
+            "location": "Munich, West Germany",
+            "maxAttendance": 75200
+          },
+        {
+            "stadium": "Estadio Monumental",
+            "location": "Buenos Aires, Argentina",
+            "maxAttendance": 71483
+          },
+        {
+            "stadium": "Santiago Bernabéu",
+            "location": "Madrid, Spain",
+            "maxAttendance": 90000
+          },
+        {
+            "stadium": "Estadio Azteca",
+            "location": "Mexico City, Mexico",
+            "maxAttendance": 114600
+          },
+        {
+            "stadium": "Stadio Olimpico",
+            "location": "Rome, Italy",
+            "maxAttendance": 73603
+          },
+        {
+            "stadium": "Rose Bowl",
+            "location": "Pasadena, California, United States",
+            "maxAttendance": 94194
+          },
+        {
+            "stadium": "Stade de France",
+            "location": "Saint-Denis, France",
+            "maxAttendance": 80000
+          },
+        {
+            "stadium": "International Stadium Yokohama",
+            "location": "Yokohama, Japan",
+            "maxAttendance": 69029
+          },
+        {
+            "stadium": "Olympiastadion",
+            "location": "Berlin, Germany",
+            "maxAttendance": 69000
+          },
+        {
+            "stadium": "Soccer City",
+            "location": "Johannesburg, South Africa",
+            "maxAttendance": 84490
+          }
+]

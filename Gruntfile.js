@@ -232,13 +232,21 @@ module.exports = function(grunt) {
     },
 
     gss_fetch: {
-        options: {
-            amd: true
-        },
-        prod: {
+        client: {
+            options: {
+                amd: true
+            },
             url: 'https://docs.google.com/spreadsheet/pub?key=0AkRR3zKqdlUHdFE5SjJtS3gyUHF3ZEcwYlF0SHgxbkE&output=html',
             dest: 'src/js/app/data/players.js'
+        },
+        server: {
+            options: {
+                amd: false 
+            },
+            url: 'https://docs.google.com/spreadsheet/pub?key=0AkRR3zKqdlUHdFE5SjJtS3gyUHF3ZEcwYlF0SHgxbkE&output=html',
+            dest: 'server/competitionData.json'
         }
+
     }
 
   });
