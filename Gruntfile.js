@@ -76,7 +76,7 @@ module.exports = function(grunt) {
           },
           optimize: 'none',
           name: 'dreamTeam',
-          out: 'build/js/boot.js',
+          out: 'build/boot.js',
           // FIXME: Is there a better way to do this?
           wrap: {
               start: "define([], function() {",
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
     'string-replace': {
         requireFix: {
           files: {
-            'build/js/boot.js': 'build/js/boot.js'
+            'build/boot.js': 'build/boot.js'
           },
           options: {
             replacements: [{
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
           }
         },
         enpoint: {
-          files: { 'build/js/boot.js': 'build/js/boot.js' },
+          files: { 'build/boot.js': 'build/boot.js' },
           options: {
               replacements: [{
                   pattern: '\'@@useLocalEndpoint\'',
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
           }
         },
         debugUser: {
-          files: { 'build/js/boot.js': 'build/js/boot.js' },
+          files: { 'build/boot.js': 'build/boot.js' },
           options: {
               replacements: [{
                   pattern: '\'@@useDebugUser\'',
@@ -118,7 +118,7 @@ module.exports = function(grunt) {
           }
         },
         assetPath: {
-          files: { 'build/js/boot.js': 'build/js/boot.js' },
+          files: { 'build/boot.js': 'build/boot.js' },
           options: {
               replacements: [{
                   pattern: /@@assetPath/gi,
