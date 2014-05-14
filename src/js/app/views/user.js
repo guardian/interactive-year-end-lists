@@ -141,22 +141,19 @@ define([
         },
 
         render: function () {
-            console.log('bob');
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON()
             };
 
-            console.log('bob');
             this.$el.append(this.template(this.templateData));
             this.renderPitch();
+            this.renderPlayerCards();
             
-            console.log('bob');
             var userRecord = new UserRecordView({
                 userID: App.viewingPlayer.get('guardianID')
             });
             this.$('#usersRecord').html(userRecord.render().el);
-            console.log('bob');
  
             // If user viewing own page, show Guardian writers & recently viewed
             if (App.userDetails.get('guardianID') === App.viewingPlayer.get('guardianID')) {
@@ -165,7 +162,6 @@ define([
                 // Add to recently viewed if not (regardless of logged in status)
                 //this.addToRecentlyViewed();
             }
-            console.log('bob');
             return this;
         },
     });

@@ -37,7 +37,9 @@ define([
         storeDetails: function(details) {
             this.position = details.position;
             this.model = details.model;
-            this.render();
+            if (this.model) {
+                this.render();
+            }
         },
 
         openCard: function (playerModel) {

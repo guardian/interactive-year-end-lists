@@ -49,11 +49,16 @@ figure.interactive {
     }
 
     h2{
-        font-size: 1.6rem;
+        font-size: 22px;
+        font-size: 2.2rem;
+        line-height: 26px;
+        line-height: 2.6rem;
         font-family: "EgyptianHeadline",georgia,serif;
         font-weight: normal;
         -webkit-font-smoothing: antialiased;
-        margin: 0.3rem 0;
+        margin-bottom: 24px;
+        margin-bottom: 2.4rem;
+        padding-top: 8px;
         padding-top: 0.8rem;
     }
     $buttonColor: #005689;
@@ -176,8 +181,6 @@ figure.interactive {
     }
     #squad-filters {
         position: relative;
-        background: #FFF;
-        z-index: 10;
         
         &.isDragging{
             opacity:0.5;
@@ -185,8 +188,9 @@ figure.interactive {
     }
 
     .squad-filters-inner{
+        overflow: hidden;
         background: #f4f4ee;
-        padding: 20px 10px 10px;
+        padding:5px;
 
         .up-arrow {
             border-left: 20px solid transparent;
@@ -205,9 +209,17 @@ figure.interactive {
     }
     #squad-pitch {
         z-index: 5;
-        padding:20px 35px 20px 20px;
+        padding:0 15px;
         background:#f4f4ee;
         transition: background 0.5s;
+    }
+    @media (min-width:30em){
+        #squad-pitch{
+            padding:20px 35px;
+        }
+        .squad-filters-inner{
+            padding:20px;
+        }
     }
     .table-players {
         max-width: 300px;
@@ -217,7 +229,8 @@ figure.interactive {
     #users-team-container {
         margin-bottom: 20px;
         clear: both;
-
+        padding:20px;
+        background:#f4f4ee;
 
     }
     /**
@@ -239,16 +252,7 @@ figure.interactive {
             top: 0;
         }
 
-        #users-team-container {
-            width: 40%;
-            float: left;
-            display: block;
-        }
-        #users-find-container {
-            width: 60%;
-            padding-left: 40px;
-            float: left;
-        }
+        
     }
     #squad-pitch button#goToMatch,
     #squad-pitch button#clearSelection {
@@ -258,7 +262,7 @@ figure.interactive {
         font-size:16px;
         font-weight:bold;
         width:90%;
-        font-family: "AgateSans"
+        font-family: "AgateSans";
     }
     #squad-pitch button#clearSelection {
         margin: 0 auto;
@@ -270,6 +274,15 @@ figure.interactive {
         left: 15px;
         right: 15px;
         z-index: 3;
+
+        h2{
+             font-size:18px;
+            color:#545454;
+             font-family:"AgateSans";
+             display:inline-block;
+             margin: 0 10px 0 0;
+             padding-top:0;
+        }
     }
     #squad-filters form.squad-filters-fixed {
         position: fixed;
@@ -283,9 +296,7 @@ figure.interactive {
     }
     #squad-filters form.squad-filters-fixed .inner {
         padding: 10px;
-        // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        border-bottom: 1px solid #999;
-        background: #FFF;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
     @media (min-width: 56.25em) {
         #squad-filters form {
@@ -306,7 +317,7 @@ figure.interactive {
     }
     #squad-filters form .form-group {
         display:inline-block;
-        width: 31.3%;
+        width: 120px;
         background: url(../images/down_arrow.png) no-repeat right #fff;
         margin-right: 3%;
     }
@@ -358,7 +369,7 @@ figure.interactive {
     .player_profile {
         text-align: center;
         margin-bottom: 10px;
-        padding:0 2px 2px;
+        padding:0 5px 2px;
         cursor: pointer;
         transition: transform 0.2s ease-out;
         overflow: hiden;
@@ -373,6 +384,7 @@ figure.interactive {
     }
     .player_profile .inner{
         padding:5px;
+        position:relative;
     }
 
     .player_profile .innercard-outline{
@@ -416,7 +428,8 @@ figure.interactive {
     }
     .player-image-container {
         width: 100%;
-        min-height: 140px;
+        height:0;
+        padding-bottom:120%;
         background-size: cover;
         background-position: top center;
         border: 1px solid #aeaeae;
@@ -509,12 +522,33 @@ figure.interactive {
         left: 0;
         right: 0;
         top: 0;
-        padding-top: 90px;
-        font-size: 16px;
+        padding:33px 10px 0;
+        font-size: 14px;
         font-weight: bold;
-        z-index: 2;
-        color: #333;
-        background: rgba(255,255,255,0.8);
+        line-height:1em;
+        z-index: 6;
+        color: #fff;
+        font-family: "AgateSans";
+        background: rgba(0, 86, 137, 0.9);
+
+        &:hover{
+            .remove-icon{
+                background:transparent;
+                color: #fff;
+            }
+        }
+    }
+    .remove-icon{
+        width:30px;
+        height:30px;
+        border-radius:50%;
+        transform: rotate(45deg);
+        background:#fff;
+        color:#005689;
+        font-size:20px;
+        padding: 1px 0 0 1px;
+        margin:0 auto 5px;
+        line-height:28px;
     }
     .player_profile.selected{
         .quick-add{
@@ -689,7 +723,7 @@ figure.interactive {
     }
     .back {
     }
-    @media(max-width:46.25em) {
+    @media(max-width:56.25em) {
         .giwc-player-card {
             margin-left: -150px;
             width: 300px;
@@ -791,26 +825,27 @@ figure.interactive {
         }
 
         .pitchMiddleCircle{
-            width:40%;
-            height:34%;
-            top:33%;
-            left:30%;
+            width:170px;
+            height:170px;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
             border-radius:50%;
             position:absolute;
             border:1px solid #fff;
         }
 
         .pitchPenalty1{
-            width:30%;
-            left:35%;
+            width:36%;
+            left:32%;
             height:40px;
             position: absolute;
             top:-1px;
             border:1px solid #fff;
         }
         .pitchPenalty2{
-            width:30%;
-            left:35%;
+            width:36%;
+            left:32%;
             height:40px;
             position: absolute;
             bottom:-1px;
@@ -821,7 +856,7 @@ figure.interactive {
     #team-screen .pitch {
         display: block;
     }
-    @media(max-width:56.25em) {
+    @media(max-width:1em) {
         .pitch {
             clear: none;
             display: none;
@@ -902,10 +937,12 @@ figure.interactive {
         top: 40px;
     }
     .pitch-player.position-9 {
-        left:26%;
+        left:37%;
+        transform:translateX(-50%);
     }
     .pitch-player.position-10 {
-        right:26%;
+        right:37%;
+        transform:translateX(50%);
     }
     /* Midfielders */
     .pitch-player.position-5,
@@ -915,16 +952,20 @@ figure.interactive {
         top: 150px; 
     }
     .pitch-player.position-5 {
-        left: 3%;
+        left: 12%;
+        transform:translateX(-50%);
     }
     .pitch-player.position-6 {
-        right:3%;
+        right: 12%;
+        transform:translateX(50%);
     }
     .pitch-player.position-7 {
-        left: 26%;
+        left:37%;
+        transform:translateX(-50%);
     }
     .pitch-player.position-8 {
-        right:26%
+        right:37%;
+        transform:translateX(50%);
     }
     /* Defenders */
     .pitch-player.position-1,
@@ -934,21 +975,26 @@ figure.interactive {
         top: 270px;
     }
     .pitch-player.position-1 {
-        left: 3%;
+        left: 12%;
+        transform:translateX(-50%);
     }
     .pitch-player.position-2 {
-        right:3%;
+        right: 12%;
+        transform:translateX(50%);
     }
     .pitch-player.position-3 {
-        left: 26%;
+        left:37%;
+        transform:translateX(-50%);
     }
     .pitch-player.position-4 {
-        right:26%;
+        right:37%;
+        transform:translateX(50%);
     }
     /* Goalkeepers */
     .pitch-player.position-0 {
         top: 365px;
-        left: 39%;
+        left:50%;
+        transform:translateX(-50%);
     }
 
 

@@ -16,6 +16,11 @@ define([
            'click .goHome': 'navigateHome',
            'click .goPlay': 'playMatch'
         },
+
+        initialize: function () {
+            App.userDetails.on('change', this.render, this);
+        },
+
         navigateHome: function () {
             App.appRoutes.navigate('/', {
                 trigger: true
@@ -27,20 +32,16 @@ define([
                 trigger: true
             });
         },
+
         render: function () {
-
-            // console.log(App.userDetails);
-
             var templateHTML = this.template({
                 message: 'TESTING',
-                usersPlayers: App.usersTeamCollection.toJSON(),
+                squadCount: App.userDetails.getSquadCount(),
                 username: App.userDetails.get('username'),
                 userID: App.userDetails.get('guardianID')
             });
 
-
             this.$el.html(templateHTML);
-            App.$el.prepend(this.el);
             return this;
         }
     });

@@ -73,7 +73,7 @@ App.usersTeamCollection.on('change', function() {
             // Load the current users team
             App.userDetails.fetchUserTeamFromStorage();
 
-            App.header.render();
+            App.$el.prepend(App.header.render().el);
 
             // Setup routing
             App.appRoutes = new Routes();
