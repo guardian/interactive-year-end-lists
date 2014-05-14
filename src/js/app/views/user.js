@@ -160,7 +160,7 @@ define([
                 this.renderFindUsers();
             } else {
                 // Add to recently viewed if not (regardless of logged in status)
-                //this.addToRecentlyViewed();
+                this.addToRecentlyViewed();
             }
             return this;
         },

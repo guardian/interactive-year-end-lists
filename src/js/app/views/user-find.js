@@ -32,7 +32,7 @@ define([
 
         navigateToUser: function (e) {
             var guardianIDOpponent = $(e.target).data('guardian-id');
-            App.appRoutes.navigate('/match/' + guardianIDOpponent, {
+            App.appRoutes.navigate('/user/' + guardianIDOpponent, {
                 trigger: true
             });
         },

@@ -102,7 +102,7 @@ define([
 
             if (App.useDebugUser) {
                 loggedIn = {
-                    id: '111111111',
+                    id: '02',
                     displayName: 'DebugUser',
                     publicFields: {
                         displayName: 'DebugUser'
