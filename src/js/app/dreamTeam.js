@@ -42,7 +42,6 @@ define([
 
         // Automatic login
         App.userDetails.checkUserStatus();
-
         App.viewingPlayer = new UserModel();
         App.player1 = new UserModel();
         App.player2 = new UserModel();
@@ -63,12 +62,14 @@ define([
 
         // Once user and player data is loaded
         Backbone.on('dataReady', function () {
-
+            
             App.usersTeamCollection = new TeamCollection();
             App.viewingPlayerTeamCollection = new TeamCollection();
             App.player1TeamCollection = new TeamCollection();
             App.player2TeamCollection = new TeamCollection();
-
+App.usersTeamCollection.on('change', function() {
+    console.log(this);
+});
             // Load the current users team
             App.userDetails.fetchUserTeamFromStorage();
 

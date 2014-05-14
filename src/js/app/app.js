@@ -1,11 +1,13 @@
 define([
-    'backbone'
+    'backbone',
+    'jquery'
 ], function (
     Backbone,
-    NotificationView
+    $
 ) {
     // Mediator
     var app = {
+        SMALL_SCREEN_WIDTH: 320,
         ready: false,
         userDataReady: false,
         playerDataReady: false,
@@ -35,6 +37,10 @@ define([
     app.loadedPlayerData = function () {
         app.playerDataReady = true;
         app.checkIfReady();
+    };
+
+    app.isSmallScreen = function() {
+        return ($(window).width() <= app.SMALL_SCREEN_WIDTH);
     };
 
     Backbone.on('loaded:userData', app.loadedUserData);

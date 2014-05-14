@@ -19,11 +19,8 @@ define([
 
         events: {
             'click #goToMatch': 'navigateToMatch',
-            'click .selectTeamPop': 'setTeamToSelection',
-            //'click li.pitch-player-taken': 'showOptions',
             'click button#dropPlayer': 'dropPlayer',
             'click .playerOptions .close': 'closeOptions',
-            //'click li.pitch-player-available': 'showAvailablePlayersInPosition',
             'click .pitch-player' : 'positionSelected',
             'click #clearSelection': 'clearSelection'
         },
@@ -32,27 +29,49 @@ define([
             this.selectedPlayerModel = null;
             Backbone.on('player_clicked', this.highlightPositions, this);
             Backbone.on('playercard_closed', this.removeHighlightPositions, this);
+            Backbone.on('players_closed', this.showPitch, this);
             App.usersTeamCollection.on('reset', this.render, this);
+        },
+
+        showPitch: function() {
+            if (App.isSmallScreen()) {
+                this.el.scrollIntoView();
+            }
         },
 
         highlightPositions: function(playerModel) {
             this.selectedPlayerModel = playerModel;
-            //console.log(playerModel);
         },
 
         removeHighlightPositions: function() {
-            console.log('Player card is closed');
             this.selectedPlayerModel = null;
         },
 
         positionSelected: function(e) {
-            if (this.selectedPlayerModel === null) {
-                this.showOptions(e);
-                return;
+            var target = $(e.currentTarget);
+            var UID = target.data('uid');
+            var position = $(e.currentTarget).data('position');
+            
+            var details = {
+                x: target.offset().left + (target.width() / 2),
+                y: (this.$el.offset().top + this.$el.outerHeight()) - (target.offset().top + target.outerHeight()),
+                model: App.playerCollection.findWhere({ uid: UID }),
+                position: position
+            };
+            
+            this.$('.pitch-player').removeClass('selected');
+            target.addClass('selected');
+            Backbone.trigger('position_clicked', details);
+            
+            if (App.isSmallScreen()) {
+                e.currentTarget.scrollIntoView(true);
             }
 
-            var position = $(e.currentTarget).data('position');
-            console.log(position, this.selectedPlayerModel, this);
+            if (this.selectedPlayerModel === null) {
+                //this.showOptions(e);
+                return;
+            }
+            
             App.userDetails.save(
                 'player'+position,
                 this.selectedPlayerModel.get('uid')
@@ -69,21 +88,6 @@ define([
                 });
             }
         },
-
-        setTeamToSelection: function (event) {
-            var teamSelection = this.$el.find(event.currentTarget).data('team');
-
-            App.userDetails.set({
-                teamSelection: teamSelection
-            }, {
-                silent: true
-            });
-            App.userDetails.save();
-            this.render();
-
-            return false;
-        },
-
         /**
          * These functions are for the little menu that appears
          * when you click on the player icon on the pitch.

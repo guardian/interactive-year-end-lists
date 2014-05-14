@@ -5,6 +5,7 @@ define([
     'underscore',
     'backbone',
     'views/squad-list',
+    'views/squad-modal',
     'text!templates/squad-filters.html'
 ], function (
     App,
@@ -12,6 +13,7 @@ define([
     _,
     Backbone,
     SquadListView,
+    SquadModalView,
     SquadFiltersTemplate
 ) {
     return Backbone.View.extend({
@@ -23,14 +25,16 @@ define([
         events: {
             'change select': 'filterChange',
             'click #clearLink': 'clearFilters',
-            'click .viewSquad': 'viewSquad'
+            'click .viewSquad': 'viewSquad',
+            'click .hidePlayers': 'hidePlayers'
         },
 
         initialize: function () {
             this.templateData = this.createFilterOptions();
             this.updateSquadListViews();
 
-            this.listenTo(this.model, 'change', this.updateSquadListViews);
+            App.userDetails.on('change', this.handleSquadChange, this);
+            Backbone.on('position_clicked', this.showPlayers, this);
 
             /**
              * This code below is to set the select inputs to be fixed position
@@ -45,16 +49,45 @@ define([
             });
         },
 
+        handleSquadChange: function() {
+            if (App.isSmallScreen()) {
+               this.hidePlayers();
+               return;
+            }
+
+            this.updateSquadListViews();
+        },
+
+        hidePlayers: function(){
+            this.$el.hide();
+            Backbone.trigger('players_closed');
+        },
+
+        showPlayers: function(details) {
+            if (!App.isSmallScreen()) {
+                return;
+            }
+
+            this.updateSquadListViews();
+            this.$el.show();
+            var marginTop = (this.$el.offset().top - details.y) * -1;
+            this.$el.css('margin-top', details.y * -1);
+            this.$('.up-arrow').css('left', details.x - 10);
+        },
+
         setNavigationPosition: function () {
+            
             if (!this.navigationPosition || this.windowSize) {
                 if ($('#squad-filters').length) {
                     this.navigationPosition = $('#squad-filters').offset().top;
                 }
                 this.windowSize = 0;
             }
+            
+
             if (this.navigationPosition) {
-                $('.viewSquad').toggleClass('viewSquad-show', $(document).scrollTop() >= this.navigationPosition);
-                $('#squad-filters form').toggleClass('squad-filters-fixed', $(document).scrollTop() >= this.navigationPosition);
+                //$('.viewSquad').toggleClass('viewSquad-show', $(document).scrollTop() >= this.navigationPosition);
+                //$('#squad-filters form').toggleClass('squad-filters-fixed', $(document).scrollTop() >= this.navigationPosition);
                 $('#squad-pitch').toggleClass('fix-right', $(document).scrollTop() >= this.navigationPosition);
             }
         },
@@ -165,6 +198,12 @@ define([
             this.$el.empty();
             this.$el.append(this.template(this.templateData));
             this.renderSquadListViews();
+            var squadModalView = new SquadModalView();
+            this.$('.modalWrapper').append(squadModalView.render().el);
+
+            if (App.isSmallScreen()) {
+                this.$el.hide();
+            }
             return this;
         }
 

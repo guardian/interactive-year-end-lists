@@ -11,7 +11,7 @@ define([
     return Backbone.Collection.extend({
 
         model: PlayerModel,
-
+/*
         validateAddingPlayer: function (model) {
             var res = {
                 status: 'fail',
@@ -70,7 +70,7 @@ define([
                 App.userDetails.saveUserTeamToStorage();
             }
         },
-
+*/
         populateUsingIDs: function(playerIDs) {
             var playerModels = _.map(playerIDs, function(uid) {
                 return App.playerCollection.findWhere({ uid: uid }); 

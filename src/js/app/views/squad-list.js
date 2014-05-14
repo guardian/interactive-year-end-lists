@@ -57,6 +57,7 @@ define([
         // on the cid (backbones internal ID system)
         openPlayerCard: function () {
             //App.playerSelected.set('highlighted', this.model.cid);
+            console.log('squad list: opening player card');
             Backbone.trigger('player_clicked', this.model);
         },
 

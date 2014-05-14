@@ -1,25 +1,26 @@
-
-<% if(name) { %>
 <div class="player-bio">
     <span class="close">&times;</span>
-    <h2><%= name %></h2>
-    <%= bio %>
-        <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <td>Nation</td>
-                    <td><%= countryname %></td>
-                </tr>
-                <tr>
-                    <td>Apperances</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Goals</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="player-bio-col1">
+        <img class="player-bio-picture" src="<%= player.picture %>" alt="Photo of <%= player.name %>" />
+
+        <% if (position) { %>
+            <% if (canRemove) { %>
+                <button class="player-bio-remove">REMOVE</button>
+            <% } else { %>
+                <button class="player-bio-add">ADD</button>
+            <% } %>
+        <% } %>
+    </div>
+    <div class="player-bio-col2">
+        <h2 class="player-bio-name"><%= player.name %></h2>
+        <p class="player-bio-metainfo">
+            <%= player.position %> - <%= player.countryname %>
+        </p>
+        
+        <p class="player-bio-copy"><%= player.bio %></p>
     </div>
 
-<% } %>
+    <p class="player-bio-footer">
+        Or select another player:
+    </p>
+</div>
