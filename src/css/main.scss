@@ -160,17 +160,24 @@ figure.interactive {
 
     }
     .visual-prompt .inner {
-        background: #FCC;
+        background-image: url(../images/sad.png);
+        background-repeat: no-repeat;
+        background-position: 20px 20px;
         margin-bottom: 5px;
-        border: 1px solid #ccc;
+        border: 3px solid #ccc;
+        background-color: #EEE;
         padding: 10px;
-        font-size: 15px;
+        font-size: 25px;
+        font-family: sans-serif;
+        padding-left: 130px;
+        position: relative;
+
     }
     .visual-prompt .loading {
         width: 10px;
         margin-right: 7px;
     }
-    .visual-prompt #closePrompt {
+    .visual-prompt .closePrompt {
         cursor: pointer;
         position: absolute;
         right: 10px;

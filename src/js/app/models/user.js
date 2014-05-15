@@ -1,9 +1,11 @@
 define([
     'app',
-    'backbone'
+    'backbone',
+    'underscore',
 ], function (
     App,
-    Backbone
+    Backbone,
+    _
 ) {
     return Backbone.Model.extend({
         urlRoot: App.getEndpoint() + 'users',
@@ -28,6 +30,7 @@ define([
 
         initialize: function() {
             this.on('sync', this.fetchUserTeamFromStorage, this);
+            this.identityDetails = null; 
         },
 
         validate: function(attributes, options) {
@@ -77,6 +80,11 @@ define([
                         version: 1
                     };
                     Backbone.trigger('toolkitReady');
+                }, function(err) {
+                    Backbone.trigger('ERROR', {
+                        msg:'Error loading identity toolkit.',
+                        err: err
+                    });      
                 });
             } else {
                 require(['common/modules/identity/api']).then(function (toolkit) {
@@ -85,6 +93,11 @@ define([
                         version: 2
                     };
                     Backbone.trigger('toolkitReady');
+                }, function(err) {
+                    Backbone.trigger('ERROR', {
+                        msg:'Error loading identity toolkit.',
+                        err: err
+                    });      
                 });
             }
         },
@@ -98,8 +111,7 @@ define([
         },
 
         checkUserStatus: function () {
-            var loggedIn = this.isUserLoggedIn();
-
+            /*
             if (App.useDebugUser) {
                 loggedIn = {
                     id: '02',
@@ -109,24 +121,12 @@ define([
                     }
                 };
             }
-            if (loggedIn) {
-                App.userDetails.set('guardianID', loggedIn.id);
+            */
+
+            if (this.identityDetails) {
+                App.userDetails.set('guardianID', this.identityDetails.id);
                 App.userDetails.fetchByGuardianId({
-                    success: function (user) {
-                        if (!user.get('username')) {
-                            var username = null;
-                            if (App.toolkitObj.version === 1) {
-                                username = loggedIn.publicFields.displayName;
-                            } else {
-                                username = loggedIn.displayName;
-                            }
-                            App.userDetails.set('username', username);
-                            App.userDetails.save();
-                        } else {
-                            App.userDetails.set(user.toJSON());
-                        }
-                        Backbone.trigger('loaded:userData');
-                    },
+                    success: this.handleUserDataResponse,
                     error: function (err) {
                         console.error('fetchByGuardianId failed: ', err);
                     }
@@ -135,20 +135,29 @@ define([
             Backbone.trigger('loaded:userData');
         },
 
+        handleUserDataResponse: function(user) {
+            // Use stored user data or save new user data from identity
+            if (user.get('username')) {
+                App.userDetails.set(user.toJSON());
+            } else {
+                var username = null;
+                if (App.toolkitObj.version === 1) {
+                    username = this.identityDetails.publicFields.displayName;
+                } else {
+                    username = this.identityDetails.displayName;
+                }
+                App.userDetails.set('username', username);
+            }
+
+            Backbone.trigger('loaded:userData');
+        },
+
         loginUser: function () {
             if (App.toolkitObj.version === 1) {
                 App.toolkitObj.api.showLoginIfNotLoggedIn();
             } else {
-                App.toolkitObj.api.getUserOrSignIn('www.gucode.gnl/sport/interactive/2014/apr/16/1');
+                App.toolkitObj.api.getUserOrSignIn(App.publicURL);
             }
-        },
-
-        saveUserTeamToStorage: function () {
-            App.userDetails.save({
-                teamSelection: this.parseTeamIntoArray()
-            }, {
-                wait: true
-            });
         },
 
         fetchUserTeamFromStorage: function () {
@@ -167,30 +176,23 @@ define([
             return playerModels;
         },
 
-        parseTeamIntoArray: function () {
-            var team = [];
-            App.usersTeamCollection.each(function (player) {
-                team.push(player.get('uid') + ':' + player.get('wantedPosition'));
-            });
-            return team.join(',');
+        isLoggedIn: function() {
+            return this.get('username') !== null;
         },
 
-        isUserLoggedIn: function () {
-            var isloggedIn = false;
+        getIdentityDetails: function () {
             if (App.toolkitObj.version === 1) {
-
                 // R2
                 if (App.toolkitObj.api.isLoggedIn()) {
-                    isloggedIn = App.toolkitObj.api.localUserData();
+                    this.identityDetails = App.toolkitObj.api.localUserData();
                 }
             } else {
-
                 // Next-gen
                 if (App.toolkitObj.api.isUserLoggedIn()) {
-                    isloggedIn = App.toolkitObj.api.getUserFromCookie();
+                    this.identityDetails = App.toolkitObj.api.getUserFromCookie();
                 }
             }
-            return isloggedIn;
+            return this.identityDetails;
         }
 
     });

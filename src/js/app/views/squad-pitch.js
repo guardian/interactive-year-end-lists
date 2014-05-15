@@ -224,53 +224,7 @@ define([
                     "position": "attack"
                 }
             ];
-            var playerPositions = {
-                'ST': {
-                    player: null,
-                    area: 'attack'
-                },
-                'ST2': {
-                    player: null,
-                    area: 'attack'
-                },
-                'MR': {
-                    player: null,
-                    area: 'midfield'
-                },
-                'MC': {
-                    player: null,
-                    area: 'midfield'
-                },
-                'MC2': {
-                    player: null,
-                    area: 'midfield'
-                },
-                'ML': {
-                    player: null,
-                    area: 'midfield'
-                },
-                'RB': {
-                    player: null,
-                    area: 'defence'
-                },
-                'CB': {
-                    player: null,
-                    area: 'defence'
-                },
-                'CB2': {
-                    player: null,
-                    area: 'defence'
-                },
-                'LB': {
-                    player: null,
-                    area: 'defence'
-                },
-                'GK': {
-                    player: null,
-                    area: 'goalkeeper'
-                }
-            };
-
+            
             var usersSquad = App.userDetails.getSquad();
 
             /*
@@ -409,18 +363,6 @@ define([
             }
             
             App.userDetails.save('player'+position, data);
-
-            // Prevent Goalkeepers being Strikers
-            // TODO: If you want Pele in goal remove this if statement.
-            /*
-            if (playerModel.get('position').toLowerCase() === target.data('area')) {
-                App.usersTeamCollection.addPlayerToCollection(playerModel, target.data('position'));
-            } else {
-                App.notify.showMsg(
-                    playerModel.get('name') + ' cant play ' + target.data('area')
-                );
-            }
-            */
         }
 
     });

@@ -1,38 +1,41 @@
 define([
     'app',
     'backbone',
-    'text!templates/visual-prompt.html'
+    'text!templates/visual-prompt.html',
+    'underscore'
 ], function (
     App,
     Backbone,
-    VisualPromptTemplate
+    VisualPromptTemplate,
+    _
 ) {
     return Backbone.View.extend({
         className: 'visual-prompt',
         
         template: _.template(VisualPromptTemplate),
 
-        initilaize: function() {
+        initialize: function() {
             this.msg = '';
+            Backbone.on('ERROR', this.showMsg, this);
         },
 
         events: {
             'click .closePrompt': 'closePrompt'
         },
 
-        showMsg: function(msg) {
-            this.msg = msg;
-            this.render();
+        showMsg: function(errObj) {
+            this.$msg.text(errObj.msg);
+            this.$el.show();
         },
 
         closePrompt: function () {
-            this.remove();
+            this.$el.hide();
         },
 
         render: function () {
-            this.$el.html(this.template({ message: this.msg }));
-            App.$el.prepend(this.el);
-            console.trace();
+            this.$el.html(this.template());
+            this.$msg = this.$('.notifyMsg');
+            this.$el.hide();
             return this;
         }
     });

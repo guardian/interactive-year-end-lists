@@ -29,7 +29,8 @@ define([
     MatchModel,
     Routes
 ) {
-
+    
+    function init() {
     /**
      * Create user model and load Guardian identity toolkit,
      * the toolkit might be R2 or Next-Gen
@@ -67,9 +68,6 @@ define([
             App.viewingPlayerTeamCollection = new TeamCollection();
             App.player1TeamCollection = new TeamCollection();
             App.player2TeamCollection = new TeamCollection();
-App.usersTeamCollection.on('change', function() {
-    console.log(this);
-});
             // Load the current users team
             App.userDetails.fetchUserTeamFromStorage();
 
@@ -81,6 +79,8 @@ App.usersTeamCollection.on('change', function() {
         });
 
     });
+
+    }
 
     // Add CSS
     $('head').append('<link rel="stylesheet" href="@@assetPathcss/vendor.css" type="text/css" />');
@@ -97,10 +97,13 @@ App.usersTeamCollection.on('change', function() {
          * App.superView is used in the router to render top level pages.
          */
         App.$el = $(el);
-        App.notify = new NotificationView();
-
-        App.$el.append('<div id="dream-team-interactive"></div>');
+        
+        App.$el.html('<div id="dream-team-interactive"></div>');
         App.superView = App.$el.find('#dream-team-interactive');
+        App.notify = new NotificationView();
+        App.$el.prepend(App.notify.render().el);
+
+        init();
     }
 
     return {

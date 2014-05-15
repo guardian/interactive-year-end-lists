@@ -14,7 +14,8 @@ define([
         useDebugUser: '@@useDebugUser',
         useLocalEndpoint: '@@useLocalEndpoint',
         localEndpoint: 'http://localhost:3000/',
-        remoteEnpoint: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/'
+        remoteEnpoint: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/',
+        publicURL: 'http://www.theguardian.com/XXXXXXXXXXXXXXXX/interactive/PATH/'
     };
 
     app.getEndpoint = function() {
@@ -43,8 +44,13 @@ define([
         return ($(window).width() <= app.SMALL_SCREEN_WIDTH);
     };
 
+    app.logError = function(errObj) {
+        console.error(errObj.msg, errObj.err);  
+    };
+
     Backbone.on('loaded:userData', app.loadedUserData);
     Backbone.on('loaded:playerData', app.loadedPlayerData);
+    Backbone.on('ERROR', app.logError);
 
     return app;
 });
