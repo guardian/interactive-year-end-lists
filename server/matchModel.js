@@ -6,8 +6,8 @@ module.exports = (function Match() {
     var odds = {
         playerEffected: 50,
         playerEffectedBadly: 50,
-        chanceConversion: 50,
-        redCardGiven: 2
+        chanceConversion: 40,
+        redCardGiven: 0.08
     };
 
     function getPlayerByID(uid) {
@@ -184,7 +184,13 @@ module.exports = (function Match() {
         return squadIDs;
     }
 
+
+
     function fetchEopScores(moments, timePeriod, eopStats, eopPlayers) {
+
+// for each team compare (in this period) team1 attack to team2 defence, and if it is better, give it a chance on goal, then proceed as before
+
+
         var difAttack = (parseInt(eopStats[1].attack, 10) - parseInt(eopStats[2].attack, 10));
         var difDefense = (parseInt(eopStats[1].defense, 10) - parseInt(eopStats[2].defense, 10));
         var endTimeTotal = (difAttack + difDefense);
@@ -199,6 +205,10 @@ module.exports = (function Match() {
             }
             scorer = fetchMostLikelyOn(eopPlayers[userID], 'attack');
             if (Math.random() <= odds.chanceConversion) {
+
+                // here we should check whether the team includes a GK; if not, double the odds of conversion
+
+
                 moments[userID].goals.push({
                     name: scorer,
                     time: incidentTime
