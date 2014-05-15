@@ -35,12 +35,12 @@ define([
      * Create user model and load Guardian identity toolkit,
      * the toolkit might be R2 or Next-Gen
      */
+    
     App.userDetails = new UserModel();
     App.userDetails.setToolKitObject();
 
     // Once toolkit is ready
     Backbone.on('toolkitReady', function () {
-
         // Automatic login
         App.userDetails.checkUserStatus();
         App.viewingPlayer = new UserModel();
@@ -97,7 +97,6 @@ define([
          * App.superView is used in the router to render top level pages.
          */
         App.$el = $(el);
-        
         App.$el.html('<div id="dream-team-interactive"></div>');
         App.superView = App.$el.find('#dream-team-interactive');
         App.notify = new NotificationView();

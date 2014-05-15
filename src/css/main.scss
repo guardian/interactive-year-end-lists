@@ -34,6 +34,8 @@ figure.interactive .container {
     }
 }
 figure.interactive {
+    position: relative;
+
     h1{
         font-size: 28px;
         font-size: 2.8rem;
@@ -157,7 +159,10 @@ figure.interactive {
         }
     }
     .visual-prompt {
-
+        position: absolute;
+        width: 100%;
+        left:0;
+        top: 0;
     }
     .visual-prompt .inner {
         background-image: url(../images/sad.png);
@@ -188,6 +193,8 @@ figure.interactive {
     }
     #squad-filters {
         position: relative;
+        z-index: 10;
+        padding: 0;
         
         &.isDragging{
             opacity:0.5;
@@ -207,7 +214,7 @@ figure.interactive {
             width: 0;
             position: absolute;
             top: -20px;
-            margin-left: -4px;
+            margin-left: -42px;
         }
 
         .hidePlayers {
@@ -644,8 +651,8 @@ figure.interactive {
         }
 
         .player-bio-name {
-            font-weight: bold;
             margin: 0;
+            font-size: 1.5em;
             padding: 0;
             line-height: 1em;
         }

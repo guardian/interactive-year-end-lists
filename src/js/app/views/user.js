@@ -144,8 +144,11 @@ define([
         render: function () {
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
-                currentUser: App.userDetails.toJSON()
+                currentUser: App.userDetails.toJSON(),
+                canPlay: App.userDetails.hasFullSquad()
             };
+
+            console.log('app.has full', App.userDetails.hasFullSquad());
 
             this.$el.append(this.template(this.templateData));
             this.renderPitch();

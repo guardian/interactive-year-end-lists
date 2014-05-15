@@ -227,8 +227,24 @@ function fetchUserDetails(user1, user2, res) {
             res.jsonp({'msg': 'Failed to fetch uses', error: err});
             return;
         }
-        createMatchResult(docs[0], docs[1], res);
+
+        if (hasValidSquad(docs[0]) && hasValidSquad(docs[1])) {
+            createMatchResult(docs[0], docs[1], res);
+        } else {
+            res.status(400);
+            res.jsonp({'msg': 'Users don\'t have full squards'});
+        }
     });
+}
+
+function hasValidSquad(user) {
+    for (var key in user) {
+        if (user[key] === null) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 function createMatchResult(user1, user2, res) {
@@ -257,124 +273,6 @@ app.get('/result/:id', function(req, res) {
         res.json(matchRecord);
     });
 });
-
-/*
-app.get("/matches", function (req, res) {
-
-    var query = {};
-    if (req.param('userID') && req.param('opponentID')) {
-        query = {
-            $and: [{
-                    $or: [
-                        {
-                            '1.guardianID': req.param('userID')
-                    },
-                        {
-                            '2.guardianID': req.param('userID')
-                    }
-                ]
-            },
-                {
-                    $or: [
-                        {
-                            '1.guardianID': req.param('opponentID')
-                    },
-                        {
-                            '2.guardianID': req.param('opponentID')
-                    }
-                ]
-            }
-          ]
-        };
-    } else if (req.param('userID')) {
-        query = {
-            $or: [
-                {
-                    '1.guardianID': req.param('userID')
-                },
-                {
-                    '2.guardianID': req.param('userID')
-                }
-            ]
-        };
-    }
-    if (query) {
-        Match.find(query, function (err, docs) {
-            if (err) {
-                throw err;
-            }
-            res.send(docs);
-        });
-    }
-});
-
-app.get("/match/:_id", function (req, res) {
-    Match.findById(req.param('_id'), function (err, user) {
-        if (err) {
-            res.status(404);
-            res.jsonp(err);
-        } else {
-            res.jsonp(user);
-        }
-    });
-});
-
-app.post("/match", function (req, res) {
-
-    User.find({
-        guardianID: {
-            $in: [req.param('user1'), req.param('user2')]
-        }
-    }, function (err, users) {
-        if (err) {
-            res.status(404);
-            res.jsonp(err);
-        } else {
-            if (users.length === 2) {
-                var userData = {
-                    1: {
-                        guardianID: null,
-                        teamSelection: null,
-                        players: null
-                    },
-                    2: {
-                        guardianID: null,
-                        teamSelection: null,
-                        players: null
-                    }
-                };
-
-                users.forEach(function (user, key) {
-                    if (user.guardianID === req.param('user1')) {
-                        userData[1].players = matchModel.getPlayersFromSelection(user.teamSelection);
-                        userData[1].guardianID = user.guardianID;
-                        userData[1].player1 = user.guardianID;
-                    }
-                    if (user.guardianID === req.param('user2')) {
-                        userData[2].players = matchModel.getPlayersFromSelection(user.teamSelection);
-                        userData[2].guardianID = user.guardianID;
-                        userData[2].teamSelection = user.teamSelection;
-                    }
-                });
-
-                var data = matchModel.beginMatch(userData[1], userData[2]);
-                var newMatch = new Match(data);
-                newMatch.save(function (err, product) {
-                    // If save failed send error response
-                    if (err) {
-                        res.status(409);
-                        res.jsonp(err);
-                    } else {
-                        // Send back saved data with new mongo UID
-                        res.jsonp(product);
-                    }
-                });
-            }
-        }
-    });
-});
-
-*/
 
 // Start server
 var server = app.listen(3000, function () {

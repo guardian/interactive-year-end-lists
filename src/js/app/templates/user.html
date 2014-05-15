@@ -11,16 +11,12 @@
 </div>
 
 <div id="users-find-container" class="col-xs-12 col-md-6">
-    <% if (details.guardianID === currentUser.guardianID) { %>
-
-        <div id="users-find"></div>
-
-    <% } else { %>
-
-        <button class="playAgainst" data-guardian-id="<%= details.guardianID %>">Play against this team</button>
-
+    <% if (canPlay) { %>
+        <button class="playAgainst" data-guardian-id="<%= details.guardianID %>">
+            Play against this team
+        </button>
     <% } %>
 
-    
+    <div id="users-find"></div> 
 
 </div>

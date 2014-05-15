@@ -984,7 +984,7 @@ Current version
     <script>
         var el = document.querySelector('.interactive');
         setTimeout(function() {
-        require(['https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/js/boot.js'], function(app) {
+        require(['http://localhost:9000/boot.js'], function(app) {
             app.boot(el);
         });
     }, 1000);

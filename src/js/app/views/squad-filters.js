@@ -203,6 +203,9 @@ define([
 
             if (App.isSmallScreen()) {
                 this.$el.hide();
+            } else {
+                this.$('.up-arrow').hide();
+                this.$('.close').hide();
             }
             return this;
         }

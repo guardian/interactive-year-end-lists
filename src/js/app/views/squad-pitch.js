@@ -51,7 +51,6 @@ define([
             var target = $(e.currentTarget);
             var UID = target.data('uid');
             var position = $(e.currentTarget).data('position');
-            
             var details = {
                 x: target.offset().left + (target.width() / 2),
                 y: (this.$el.offset().top + this.$el.outerHeight()) - (target.offset().top + target.outerHeight()),
@@ -67,11 +66,13 @@ define([
                 e.currentTarget.scrollIntoView(true);
             }
 
-            if (this.selectedPlayerModel === null) {
+            if (this.selectedPlayerModel === null ||
+                !App.userDetails.isLoggedIn())
+            {
                 //this.showOptions(e);
                 return;
             }
-            
+           
             App.userDetails.save(
                 'player'+position,
                 this.selectedPlayerModel.get('uid')

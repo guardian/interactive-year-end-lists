@@ -17,7 +17,6 @@ module.exports = (function Match() {
     }
 
     function createResult(user1, user2) {
-        console.log(user1);
         var attDef = {
                 'attack': 0,
                 'defense': 0

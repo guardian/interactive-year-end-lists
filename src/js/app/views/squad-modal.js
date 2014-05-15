@@ -75,7 +75,7 @@ define([
             var html = this.template({
                 player: this.model.toJSON(),
                 canRemove: this.model.get('uid') === positionUID,
-                position: this.position !== null
+                position: App.userDetails.isLoggedIn() && this.position !== null
             });
 
             this.$el.html(html);

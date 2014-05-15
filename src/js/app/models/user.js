@@ -56,6 +56,10 @@ define([
 
         },
 
+        hasFullSquad: function() {
+            return this.getSquadCount() === 11;
+        },
+
         getSquad: function() {
             var usersSquad = [];
             for (var i=0; i < 11; i++) {
@@ -85,6 +89,8 @@ define([
                         msg:'Error loading identity toolkit.',
                         err: err
                     });      
+
+                    Backbone.trigger('toolkitReady');
                 });
             } else {
                 require(['common/modules/identity/api']).then(function (toolkit) {
@@ -98,6 +104,8 @@ define([
                         msg:'Error loading identity toolkit.',
                         err: err
                     });      
+
+                    Backbone.trigger('toolkitReady');
                 });
             }
         },
@@ -111,19 +119,9 @@ define([
         },
 
         checkUserStatus: function () {
-            /*
-            if (App.useDebugUser) {
-                loggedIn = {
-                    id: '02',
-                    displayName: 'DebugUser',
-                    publicFields: {
-                        displayName: 'DebugUser'
-                    }
-                };
-            }
-            */
-
+            this.getIdentityDetails();
             if (this.identityDetails) {
+                console.log(this.identityDetails);
                 App.userDetails.set('guardianID', this.identityDetails.id);
                 App.userDetails.fetchByGuardianId({
                     success: this.handleUserDataResponse,
@@ -181,6 +179,17 @@ define([
         },
 
         getIdentityDetails: function () {
+            if (App.useDebugUser) {
+                this.identityDetails = {
+                    id: '02',
+                    displayName: 'DebugUser',
+                    publicFields: {
+                        displayName: 'DebugUser'
+                    }
+                };
+                return this.identityDetails;
+            }
+
             if (App.toolkitObj.version === 1) {
                 // R2
                 if (App.toolkitObj.api.isLoggedIn()) {
