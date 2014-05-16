@@ -229,12 +229,55 @@ function fetchUserDetails(user1, user2, res) {
         }
 
         if (hasValidSquad(docs[0]) && hasValidSquad(docs[1])) {
-            createMatchResult(docs[0], docs[1], res);
+            isPlayerAllowedToPlay(docs, res);
         } else {
             res.status(400);
             res.jsonp({'msg': 'Users don\'t have full squards'});
         }
     });
+}
+
+// Users can have a max of 1000 match recors and can only recreate a new record
+// every 10 seconds.
+function isPlayerAllowedToPlay(userDocs, res) {
+    
+    var user1ID = userDocs[0].guardianID;
+
+    // Look-up user1's match history and sort by time
+    Match.find({ '1.guardianID' : user1ID }, {time: 1}, { sort: { 'time': -1} },
+        function(err, docs) {
+
+            if (err) {
+                 res.status(400);
+                 res.jsonp({'msg': 'Error fetching users match history'});
+                 return;
+            }
+            
+            // Check if they've played any matches
+            if (docs.length > 0) {
+                
+                // Not allowed to player more than 1000 matches
+                if (docs.length > 1000) {
+                    res.status(400);
+                    res.jsonp({'msg': 'User has played too many matches'});
+                    return;
+                }
+
+                // Can only play a match every 10 seconds
+                var timeDiff = Date.now() - docs[0].time;
+                if (timeDiff < 10000) {
+                    res.status(400);
+                    res.jsonp({'msg': 'User tried to play again too soon'});
+                    return;
+                }
+
+            }
+            
+            // Everything's good. Let's play a match.
+            createMatchResult(userDocs[0], userDocs[1], res);
+            
+    });
+    //db.matches.find({ "1.guardianID" : "01" }, {time: 1}).sort({time: -1})
 }
 
 function hasValidSquad(user) {
