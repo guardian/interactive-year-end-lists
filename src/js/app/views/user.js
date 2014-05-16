@@ -149,10 +149,14 @@ define([
         },
 
         render: function () {
+
+            var viewingID = App.viewingPlayer.get('guardianID');
+            var userID = App.userDetails.get('guardianID');
+
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON(),
-                canPlay: App.userDetails.hasFullSquad()
+                canPlay: (viewingID !== userID) && App.userDetails.hasFullSquad()
             };
 
             console.log('app.has full', App.userDetails.hasFullSquad());

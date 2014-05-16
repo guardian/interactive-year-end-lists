@@ -3,7 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var cors = require('cors');
-var verifyGuardianCookie = require('./verifyGuardianCookie');
+var verifyGUCookie = require('./verifyGuardianCookie');
 var app = express();
 
 // Restrict requests to known good domains
@@ -25,6 +25,14 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser());
 mongoose.connect("mongodb://localhost/test");
+
+
+// Helper functions
+function isValidUser(req) {
+    var GU_U = req.body.GU_U;
+    return (GU_U && verifyGUCookie(GU_U));
+}
+
 
 // DB model
 var UserSchema = mongoose.Schema({
@@ -160,11 +168,6 @@ app.post('/users', function (req, res) {
 
 // Update existing user data
 app.put("/users/:_id", function (req, res, next) {
-    // var GU_U = req.body.GU_U;
-    // if (!GU_U || false === isCookieValid(GU_U)) {
-    //     res.status(401);
-    //     res.jsonp({'msg': 'user not logged in.'});
-    // }
     var userData = {
         guardianID: req.body.guardianID,
         username: req.body.username,
@@ -202,15 +205,33 @@ app.get("/allmatches", function (req, res) {
 
 
 app.post('/result', function(req, res) {
+    // Check if user is logged in
+    if (!isValidUser(req)) {
+        res.status(401);
+        res.jsonp({'msg': 'User not logged in'});
+        return;
+    }
+
     var user1 = req.param('user1');
     var user2 = req.param('user2');
   
+    // Check we have user IDs
     if (!user1 || !user2) {
         res.status(404);
         res.jsonp({'msg': 'Missing user ids'});
-    } else {
-        fetchUserDetails(user1, user2, res);
+        return;
     }
+
+    // Check user isn't playing against themselves
+    if (user1 === user2) {
+        res.status(400);
+        res.jsonp({'msg': 'Players are the same'});
+        return;
+
+    }
+
+    // All good. Lets play
+    fetchUserDetails(user1, user2, res);
 });
 
 
@@ -228,17 +249,18 @@ function fetchUserDetails(user1, user2, res) {
             return;
         }
 
-        var user1Doc = docs.filter(function(user) {
-            return user._id.toString() === user1;
-        })[0];
-
-        var user2Doc = docs.filter(function(user) {
-            return user._id.toString() === user2;
-        })[0];
-
-
+        // Extract users from DB results to ensure order
+        var user1Doc = docs.filter(function(user) {              
+            return user._id.toString() === user1;                
+        })[0];                                                   
+                                                                 
+        var user2Doc = docs.filter(function(user) {              
+            return user._id.toString() === user2;                
+        })[0];                                                   
+                                                                 
+        // Check if both users have valid squads                                                         
         if (hasValidSquad(user1Doc) && hasValidSquad(user2Doc)) {
-            isPlayerAllowedToPlay(user1Doc, user2Doc, res);
+            isPlayerAllowedToPlay(user1Doc, user2Doc, res);      
         } else {
             res.status(400);
             res.jsonp({'msg': 'Users don\'t have full squards'});
@@ -249,9 +271,9 @@ function fetchUserDetails(user1, user2, res) {
 // Users can have a max of 1000 match recors and can only recreate a new record
 // every 10 seconds.
 function isPlayerAllowedToPlay(user1Doc, user2Doc, res) {
-    // Look-up user1's match history and sort by time
     Match.find({ '1.guardianID' : user1Doc.guardianID }, {time: 1}, { sort: { 'time': -1} },
         function(err, docs) {
+
             if (err) {
                  res.status(400);
                  res.jsonp({'msg': 'Error fetching users match history'});
