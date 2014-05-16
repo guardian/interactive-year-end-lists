@@ -2,7 +2,6 @@ define([
     'app',
     'backbone',
     'models/player',
-    'models/user',
     'underscore'
 ], function (
     App,

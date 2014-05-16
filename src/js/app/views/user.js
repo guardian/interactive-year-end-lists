@@ -55,7 +55,6 @@ define([
         },
 
         createMatch: function() {
-            console.log(App.userDetails.toJSON());
             var newMatch = new MatchModel({
                 user1: App.userDetails.get('_id'),
                 user2: App.viewingPlayer.get('_id')
@@ -66,6 +65,14 @@ define([
                     console.log('saved', matchModel.get('_id'));
                     App.appRoutes.navigate('/result/' + matchModel.get('_id'), 
                                             {trigger: true});
+                },
+                error: function(attributes, err) {
+                    var msg = "Problem creating match.";
+                    if (err && err.responseJSON && err.responseJSON.msg) {
+                        msg = err.responseJSON.msg;
+                    }
+
+                    Backbone.trigger('ERROR', { msg: msg, err: err });
                 }
             });
         },

@@ -52,6 +52,11 @@ define([
 
         // Collections
         App.playerCollection = new PlayersCollection();
+        App.usersTeamCollection = new TeamCollection();
+        App.viewingPlayerTeamCollection = new TeamCollection();
+        App.player1TeamCollection = new TeamCollection();
+        App.player2TeamCollection = new TeamCollection();
+
 
         // TODO: Switch from Google spreadsheet
         App.playerCollection.fetchGoogleData();
@@ -63,14 +68,8 @@ define([
 
         // Once user and player data is loaded
         Backbone.on('dataReady', function () {
-            
-            App.usersTeamCollection = new TeamCollection();
-            App.viewingPlayerTeamCollection = new TeamCollection();
-            App.player1TeamCollection = new TeamCollection();
-            App.player2TeamCollection = new TeamCollection();
             // Load the current users team
             App.userDetails.fetchUserTeamFromStorage();
-
             App.$el.prepend(App.header.render().el);
 
             // Setup routing
