@@ -228,8 +228,17 @@ function fetchUserDetails(user1, user2, res) {
             return;
         }
 
-        if (hasValidSquad(docs[0]) && hasValidSquad(docs[1])) {
-            isPlayerAllowedToPlay(docs, res);
+        var user1Doc = docs.filter(function(user) {
+            return user._id.toString() === user1;
+        })[0];
+
+        var user2Doc = docs.filter(function(user) {
+            return user._id.toString() === user2;
+        })[0];
+
+
+        if (hasValidSquad(user1Doc) && hasValidSquad(user2Doc)) {
+            isPlayerAllowedToPlay(user1Doc, user2Doc, res);
         } else {
             res.status(400);
             res.jsonp({'msg': 'Users don\'t have full squards'});
@@ -239,14 +248,10 @@ function fetchUserDetails(user1, user2, res) {
 
 // Users can have a max of 1000 match recors and can only recreate a new record
 // every 10 seconds.
-function isPlayerAllowedToPlay(userDocs, res) {
-    
-    var user1ID = userDocs[0].guardianID;
-
+function isPlayerAllowedToPlay(user1Doc, user2Doc, res) {
     // Look-up user1's match history and sort by time
-    Match.find({ '1.guardianID' : user1ID }, {time: 1}, { sort: { 'time': -1} },
+    Match.find({ '1.guardianID' : user1Doc.guardianID }, {time: 1}, { sort: { 'time': -1} },
         function(err, docs) {
-
             if (err) {
                  res.status(400);
                  res.jsonp({'msg': 'Error fetching users match history'});
@@ -274,7 +279,7 @@ function isPlayerAllowedToPlay(userDocs, res) {
             }
             
             // Everything's good. Let's play a match.
-            createMatchResult(userDocs[0], userDocs[1], res);
+            createMatchResult(user1Doc, user2Doc, res);
             
     });
     //db.matches.find({ "1.guardianID" : "01" }, {time: 1}).sort({time: -1})
