@@ -2,10 +2,13 @@ define([
     'app',
     'backbone',
     'underscore',
+    'jquery',
+    'jquery.cookie'
 ], function (
     App,
     Backbone,
-    _
+    _,
+    $
 ) {
     return Backbone.Model.extend({
         urlRoot: App.getEndpoint() + 'users',
@@ -74,6 +77,10 @@ define([
                 players['player' + i] =  null;
             }
             this.save(players);
+        },
+
+        getGUCookie: function() {
+            return $.cookie('GU_U');
         },
 
         setToolKitObject: function () {

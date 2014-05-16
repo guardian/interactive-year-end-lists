@@ -57,7 +57,8 @@ define([
         createMatch: function() {
             var newMatch = new MatchModel({
                 user1: App.userDetails.get('_id'),
-                user2: App.viewingPlayer.get('_id')
+                user2: App.viewingPlayer.get('_id'),
+                auth: App.userDetails.getGUCookie()
             });
 
             newMatch.save({}, {

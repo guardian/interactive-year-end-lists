@@ -29,7 +29,7 @@ mongoose.connect("mongodb://localhost/test");
 
 // Helper functions
 function isValidUser(req) {
-    var GU_U = req.body.GU_U;
+    var GU_U = req.body.auth;
     return (GU_U && verifyGUCookie(GU_U));
 }
 

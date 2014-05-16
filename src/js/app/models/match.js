@@ -15,7 +15,8 @@ define([
 
         defaults: {
             user1: null,
-            user2: null
+            user2: null,
+            auth: null
         }
 
     });
