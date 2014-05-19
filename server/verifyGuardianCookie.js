@@ -1,7 +1,7 @@
 var crypto = require('crypto');
 var base64url = require('base64url');
 var fs = require('fs');
-var pubKey = fs.readFileSync(__dirname +'/gu_code_key.pub');
+var pubKey = fs.readFileSync(__dirname +'/gu_prod_key.pub');
 
 module.exports = function(cookieValue) {
     var cookieDataBase64 = base64url.toBase64(cookieValue.split('.')[0]);

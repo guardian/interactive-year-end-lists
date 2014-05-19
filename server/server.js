@@ -12,7 +12,9 @@ var whitelist = [
     'http://www.theguardian.com',
     'http://localdev.theguardian.com',
     'http://www.code.dev-theguardian.com',
-    'http://test.theguardian.com:9000'
+    'http://test.theguardian.com:9000',
+    'http://localdev.theguardian.com:9000',
+    'http://daan.theguardian.com:9000'
 ];
 var corsOptions = {
     origin: function (origin, callback) {
