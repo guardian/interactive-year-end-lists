@@ -27,8 +27,11 @@ define([
     return Backbone.View.extend({
 
         id: 'user-screen',
+        
         className: 'container',
+        
         template: _.template(UserTemplate),
+        
         squadTemplate: _.template(SquadTemplate),
 
         events: {
@@ -151,16 +154,23 @@ define([
             }, this);
         },
 
-        render: function () {
-
+        canUserPlayerMatch: function() {
             var viewingID = App.viewingPlayer.get('guardianID');
             var userID = App.userDetails.get('guardianID');
 
+            return viewingID !== userID &&
+                App.userDetails.hasFullSquad() &&
+                App.viewingPlayer.hasFullSquad();
+        },
+
+        render: function () {
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON(),
-                canPlay: (viewingID !== userID) && App.userDetails.hasFullSquad()
+                canPlay: this.canUserPlayerMatch()
             };
+
+            console.log(App.viewingPlayer.hasFullSquad());
             
             console.log('social result', SocialModel.getShareResultURLs({
                 url: document.location.href,
@@ -173,12 +183,12 @@ define([
             console.log('social team', SocialModel.getShareTeamURLs({
                 url: document.location.href
             }));
-
+            
 
             this.$el.append(this.template(this.templateData));
             this.renderPitch();
-            this.renderPlayerCards();
-            
+            //this.renderPlayerCards();
+
             var userRecord = new UserRecordView({
                 userID: App.viewingPlayer.get('guardianID')
             });

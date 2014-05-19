@@ -15,31 +15,57 @@ define([
         template: _.template(MatchPitchTemplate),
 
         render: function () {
-
             if (!this.collection) {
                 return;
             }
 
-            var playerPositions = {
-                'ST': {},
-                'ST2': {},
-                'MR': {},
-                'MC': {},
-                'MC2': {},
-                'ML': {},
-                'RB': {},
-                'CB': {},
-                'CB2': {},
-                'LB': {},
-                'GK': {}
+            var positionNames = [
+                {
+                    "name": "GK",
+                    "position": "goalkeeper"
+                },{
+                    "name": "LB",
+                    "position": "defence"
+                },{
+                    "name": "RB",
+                    "position": "defence"
+                },{
+                    "name": "CB",
+                    "position": "defence"
+                },{
+                    "name": "CB",
+                    "position": "defence"
+                },{
+                    "name": "LM",
+                    "position": "midfield"
+                },{
+                    "name": "RM",
+                    "position": "midfield"
+                },{
+                    "name": "CM",
+                    "position": "midfield"
+                },{
+                    "name": "CM",
+                    "position": "midfield"
+                },{
+                    "name": "ST",
+                    "position": "attack"
+                },{
+                    "name": "ST",
+                    "position": "attack"
+                }
+            ];
+            
+            var usersSquad = App.userDetails.getSquad();
+            var data = {
+                players: this.collection.toJSON(),
+                positionNames: positionNames
             };
 
             this.$el.empty();
             console.log(this.collection.toJSON());
-            this.$el.append(this.template({
-                players: this.collection.toJSON() 
-            }));
-
+            this.$el.append(this.template(data));
+            
             return this;
         }
 

@@ -126,12 +126,13 @@ app.get("/allusers", function (req, res) {
 // Fetch a single user
 app.get("/users/:_id", function (req, res) {
     User.findById(req.param('_id'), function (err, user) {
-        if (err) {
+        if (err || user === null) {
             res.status(404);
             res.jsonp(err);
-        } else {
-            res.jsonp(user);
+            return;
         }
+
+        res.jsonp(user);
     });
 });
 
@@ -140,12 +141,13 @@ app.get('/users', function (req, res) {
     User.findOne({
         'guardianID': guardianID
     }, function (err, user) {
-        if (err) {
+        if (err || user === null) {
             res.status(404);
             res.jsonp(err);
-        } else {
-            res.jsonp(user);
+            return;
         }
+        
+        res.jsonp(user);
     });
 });
 

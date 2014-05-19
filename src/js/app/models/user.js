@@ -60,6 +60,7 @@ define([
         },
 
         hasFullSquad: function() {
+            console.log(this, this.getSquadCount());
             return this.getSquadCount() === 11;
         },
 

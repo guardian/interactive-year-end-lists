@@ -25,7 +25,6 @@ define([
             'click .close': 'closeCard',
             'click .player-bio-add': 'addPlayer',
             'click .player-bio-remove': 'removePlayer'
-
         },
 
         initialize: function () {

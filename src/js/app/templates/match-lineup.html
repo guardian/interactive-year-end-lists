@@ -8,12 +8,12 @@
 	<% _.each(players, function(player, index) { %>
         <% if (player.uid === null) { %>
              <li class="pitch-player pitch-player-available position-<%= index %>" data-area="<%= index %>" data-position="<%= index %>" data-area="<%= index %>">
-                <span class="player-icon" style=""></span>
-                <%= index %>
+             <span class="player-icon" ></span>
+                <%= positionNames[index].name %>
             </li>
         <% } else { %>
             <li data-uid="<%= player.uid %>" data-position="<%= index %>" data-area="<%= index %>" class="pitch-player pitch-player-taken position-<%= index %>">
-            <span class="player-icon" style="background-image:url(<%= player.picture %>)" title="Drop <%= player.name %>"></span>
+                <span class="player-icon" title="Drop <%= player.name %>" style="background-image: url(<%= player.picture %>)"></span>
                 <%= player.name %>
             </li>
         <% } %>
@@ -25,15 +25,3 @@
 		<button id="dropPlayer" data-uid="">Drop</button>
 	</li>
 </ol>
-
-<table class="table table-players">
-	<tbody>
-        <% _.each(players, function(player, index) { %>
-            <% if (!_.isEmpty(player.name)) { %>
-                <tr>
-                    <td><%= player.name %></td>
-                </tr>
-            <% } %>
-        <% }) %>
-    </tbody>
-</table>
