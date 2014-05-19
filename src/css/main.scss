@@ -749,9 +749,7 @@ figure.interactive {
             height: 450px;
         }
     }
-    /**
-  * Pitch view
-  */
+  /* Pitch view */
     .playerOptions {
         display: none;
         background: #fff;
@@ -1200,6 +1198,23 @@ figure.interactive {
         box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
         -webkit-transition: width .6s ease;
         transition: width .6s ease
+    }
+
+
+
+    .share-link:link,
+    .share-link:visited {
+        background: rgb(0, 86, 137);
+        padding: 10px 20px;
+        line-height: 2em;
+        color: rgb(255, 255, 255);
+        margin-right: 10px;
+    }
+
+    .share-link:active,
+    .share-link:hover {
+        color: #FFF;
+        text-decoration: none;
     }
 
 }

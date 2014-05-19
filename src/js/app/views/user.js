@@ -149,7 +149,6 @@ define([
                 var player_card = document.createElement("div");
                 player_card.className = "col-xs-6 col-sm-4 col-lg-3 player_profile";
                 player_card.innerHTML = playerCard;
-                console.log(player_card);
                 this.$('#squad-list').append(player_card);
             }, this);
         },
@@ -164,30 +163,21 @@ define([
         },
 
         render: function () {
+            var socialLinks = SocialModel.getShareTeamURLs({
+                url: document.location.href
+            });
+
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON(),
-                canPlay: this.canUserPlayerMatch()
+                canPlay: this.canUserPlayerMatch(),
+                twitter_link: socialLinks.twitter,
+                facebook_link: socialLinks.facebook
             };
-
-            console.log(App.viewingPlayer.hasFullSquad());
-            
-            console.log('social result', SocialModel.getShareResultURLs({
-                url: document.location.href,
-                user_1: 'Andrew',
-                user_2: 'Daan',
-                user_1_score: 1,
-                user_2_score: 3,
-            }));
-
-            console.log('social team', SocialModel.getShareTeamURLs({
-                url: document.location.href
-            }));
-            
 
             this.$el.append(this.template(this.templateData));
             this.renderPitch();
-            //this.renderPlayerCards();
+            this.renderPlayerCards();
 
             var userRecord = new UserRecordView({
                 userID: App.viewingPlayer.get('guardianID')

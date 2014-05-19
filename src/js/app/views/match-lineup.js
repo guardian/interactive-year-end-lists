@@ -63,7 +63,6 @@ define([
             };
 
             this.$el.empty();
-            console.log(this.collection.toJSON());
             this.$el.append(this.template(data));
             
             return this;
