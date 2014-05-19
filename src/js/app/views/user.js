@@ -7,6 +7,7 @@ define([
     'views/user-record',
     'views/match-lineup',
     'models/match',
+    'models/social',
     'text!templates/user.html',
     'text!templates/squad-list.html',
     'jquery.cookie'
@@ -19,6 +20,7 @@ define([
     UserRecordView,
     MatchLineupView,
     MatchModel,
+    SocialModel,
     UserTemplate,
     SquadTemplate
 ) {
@@ -159,8 +161,19 @@ define([
                 currentUser: App.userDetails.toJSON(),
                 canPlay: (viewingID !== userID) && App.userDetails.hasFullSquad()
             };
+            
+            console.log('social result', SocialModel.getShareResultURLs({
+                url: document.location.href,
+                user_1: 'Andrew',
+                user_2: 'Daan',
+                user_1_score: 1,
+                user_2_score: 3,
+            }));
 
-            console.log('app.has full', App.userDetails.hasFullSquad());
+            console.log('social team', SocialModel.getShareTeamURLs({
+                url: document.location.href
+            }));
+
 
             this.$el.append(this.template(this.templateData));
             this.renderPitch();
