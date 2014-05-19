@@ -128,10 +128,9 @@ define([
         checkUserStatus: function () {
             this.getIdentityDetails();
             if (this.identityDetails) {
-                console.log(this.identityDetails);
                 App.userDetails.set('guardianID', this.identityDetails.id);
                 App.userDetails.fetchByGuardianId({
-                    success: this.handleUserDataResponse,
+                    success: this.handleUserDataResponse.bind(this),
                     error: function (err) {
                         console.error('fetchByGuardianId failed: ', err);
                     }
@@ -146,7 +145,7 @@ define([
                 App.userDetails.set(user.toJSON());
             } else {
                 var username = null;
-                if (App.toolkitObj.version === 1) {
+                if (App.toolkitObj && App.toolkitObj.version === 1) {
                     username = this.identityDetails.publicFields.displayName;
                 } else {
                     username = this.identityDetails.displayName;
@@ -158,7 +157,7 @@ define([
         },
 
         loginUser: function () {
-            if (App.toolkitObj.version === 1) {
+            if (App.toolkitObj && App.toolkitObj.version === 1) {
                 App.toolkitObj.api.showLoginIfNotLoggedIn();
             } else {
                 App.toolkitObj.api.getUserOrSignIn(App.publicURL);
@@ -188,7 +187,7 @@ define([
         getIdentityDetails: function () {
             if (App.useDebugUser) {
                 this.identityDetails = {
-                    id: '02',
+                    id: '04',
                     displayName: 'DebugUser',
                     publicFields: {
                         displayName: 'DebugUser'

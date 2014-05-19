@@ -152,10 +152,25 @@ app.get('/users', function (req, res) {
 
 // Create new user
 app.post('/users', function (req, res) {
-    var newUser = new User({
+       
+    var userData = {
         guardianID: req.body.guardianID,
-        username: req.body.username
-    });
+        username: req.body.username,
+        player0: req.body.player0,
+        player1: req.body.player1,
+        player2: req.body.player2,
+        player3: req.body.player3,
+        player4: req.body.player4,
+        player5: req.body.player5,
+        player6: req.body.player6,
+        player7: req.body.player7,
+        player8: req.body.player8,
+        player9: req.body.player9,
+        player10: req.body.player10
+    };
+    
+    var newUser = new User(userData);
+
     newUser.save(function (err, product) {
         // If save failed send error response
         if (err) {
