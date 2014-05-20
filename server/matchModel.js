@@ -4,9 +4,9 @@ var competitionData = require('./competitionData');
 module.exports = (function Match() {
     "use strict";
     var odds = {
-        playerEffected: 50,
-        playerEffectedBadly: 50,
-        chanceConversion: 40,
+        playerEffected: 0.5,
+        playerEffectedBadly: 0.5,
+        chanceConversion: 0.3,
         redCardGiven: 0.08
     };
 
@@ -62,9 +62,6 @@ module.exports = (function Match() {
         };
 
         moments.time = new Date().getTime();
-
-        console.log(users[1].length);
-
         moments[1].guardianID = user1.guardianID;
         moments[1].username = user1.username;
         moments[1].squad = getSquadIDs(user1);
@@ -273,7 +270,7 @@ module.exports = (function Match() {
         moments.stats.offsideHomePercent = (moments.stats.offsideHome / (moments.stats.offsideHome + moments.stats.offsideAway) * 100).toFixed();
 
         // Yellow card generator
-        var totalYellows = randBetween(1, 6);
+        var totalYellows = randBetween(0, 4);
         var i = 0;
         var idx;
         var userID;
