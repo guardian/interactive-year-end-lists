@@ -127,16 +127,23 @@ define([
 
         checkUserStatus: function () {
             this.getIdentityDetails();
+            console.log(this.getIdentityDetails());
             if (this.identityDetails) {
-                App.userDetails.set('guardianID', this.identityDetails.id);
+                App.userDetails.set({
+                    'guardianID': this.identityDetails.id,
+                    'username': this.identityDetails.displayName
+                });
+                console.log(this.identityDetails.id);
+                console.log(App.userDetails.get('guardianID'));
                 App.userDetails.fetchByGuardianId({
                     success: this.handleUserDataResponse.bind(this),
                     error: function (err) {
                         console.error('fetchByGuardianId failed: ', err);
+                        console.log(App.userDetails.attributes);
+                        Backbone.trigger('loaded:userData');
                     }
                 });
             }
-            Backbone.trigger('loaded:userData');
         },
 
         handleUserDataResponse: function(user) {
@@ -187,7 +194,7 @@ define([
         getIdentityDetails: function () {
             if (App.useDebugUser) {
                 this.identityDetails = {
-                    id: '04',
+                    id: '02',
                     displayName: 'DebugUser',
                     publicFields: {
                         displayName: 'DebugUser'
