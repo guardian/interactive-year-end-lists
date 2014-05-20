@@ -105,7 +105,9 @@ define([
         },
 
         _dragEndEvent: function (e) {
-            $('.draghover, .dragTarget, .isDragging').removeClass('draghover dragTarget isDragging');
+            $('#squad-pitch').removeClass('goalkeeper defence midfield attack');
+            $('.draghover, .dragTarget, .isDragging')
+                .removeClass('draghover dragTarget isDragging');
         },
 
         dragStart: function (dataTransfer, e) {
@@ -113,9 +115,18 @@ define([
             if (!target.hasClass('player_profile')) {
                 target = target.closest('.player_profile');
             }
-            var positionTarget = target.data('position'),
-                newTarget = '.pitch-player[data-area="' + positionTarget + '"]';
+            
+            var positionTarget = target.data('position');
+            var newTarget = '.pitch-player[data-area="' + positionTarget + '"]';
+            var player = App.playerCollection.findWhere({uid: target.data('uid')});
 
+            var playerPositions = player.get('position').split(',');
+            playerPositions.forEach(function(position, i) {
+                $('#squad-pitch').addClass(position.trim().toLowerCase());
+            });
+
+            console.log(playerPositions);
+            
             $(newTarget + ', ' + newTarget).addClass('dragTarget');
             $('#squad-pitch').addClass('isDragging');
             $('#squad-filters').addClass('isDragging');
