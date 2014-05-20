@@ -33,19 +33,16 @@ define([
                 var _this = this;
                 $.ajax({
                     // FIXME: Use config for url
-                    url: App.getEndpoint() + 'results',
-                    data: {
-                        userID: this.options.userID,
-                        opponentID: this.options.opponentID
-                    }
+                    url: App.getEndpoint() + 'results/' + this.options.userID
                 }).done(function (data) {
                     var recArr = {
-                        gamesPlayed: data.length,
+                        gamesPlayed: data.matchCount,
                         gamesWon: 0,
                         gamesLost: 0,
                         gamesDrawn: 0
                     };
-
+                    
+                    /*
                     data.forEach(function (v, k) {
                         var userTeam,
                             opponent;
@@ -65,7 +62,7 @@ define([
                             recArr.gamesDrawn += 1;
                         }
                     });
-
+                    */
                     _this.templateData = {
                         record: recArr
                     };
