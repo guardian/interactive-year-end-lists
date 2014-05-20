@@ -3,6 +3,23 @@
  * File:    Main SCSS
  */
 
+@mixin dragTarget{
+    opacity: 1;
+    .player-icon{
+        border:2px dotted #fff;
+        background-color:rgba(0,0,0,0.4);
+        transform: scale(1.2);
+    }
+}
+
+@mixin dragTargetAvailable {
+
+}
+
+@mixin dragTargetFilled {
+
+}
+
 .noscroll {
     overflow: hidden;
 }
@@ -194,7 +211,7 @@ figure.interactive {
     #squad-filters {
         position: relative;
         z-index: 10;
-        padding: 0;
+        padding: 0 10px 0 0;
         
         &.isDragging{
             opacity:0.5;
@@ -223,13 +240,20 @@ figure.interactive {
     }
     #squad-pitch {
         z-index: 5;
-        padding:0 15px;
+        
+    }
+    #squad-pitch-inner{
         background:#f4f4ee;
         transition: background 0.5s;
+        padding:0 15px;
     }
     @media (min-width:30em){
-        #squad-pitch{
-            padding:20px 35px;
+        #squad-pitch {
+        padding:0 0 0 10px;
+        
+        }
+        #squad-pitch-inner{
+            padding:20px;
         }
         .squad-filters-inner{
             padding:20px;
@@ -913,7 +937,7 @@ figure.interactive {
         box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.5);
        
     }
-    #squad-pitch.isDragging{
+    #squad-pitch-inner.isDragging{
         background:#6BA83F;
 
         .your-team-details{
@@ -922,21 +946,19 @@ figure.interactive {
             }
         }
     }
-    #squad-pitch.isDragging .pitch-player {
+    #squad-pitch-inner.isDragging .pitch-player {
         opacity: 0.4;
     }
-    #squad-pitch.isDragging .pitch-player.dragTarget {
-        opacity: 1;
-        .player-icon{
-            border:2px dotted #fff;
-            background-color:rgba(0,0,0,0.4);
-            transform: scale(1.2);
-        }
+    #squad-pitch-inner.isDragging .pitch-player.dragTarget {
+        
     }
-    #squad-pitch.isDragging .pitch-player.dragTarget.pitch-player-taken.draghover span.player-icon {
+    #squad-pitch-inner.isDragging .pitch-player.pitch-player-available.draghover span.player-icon {
         border: 2px dotted rgba(255,255,255,0.1);
     }
-    #squad-pitch.isDragging .pitch-player.dragTarget.draghover span.player-icon {
+    #squad-pitch-inner.isDragging .pitch-player.dragTarget.pitch-player-taken.draghover span.player-icon {
+        border: 2px dotted rgba(255,255,255,0.1);
+    }
+    #squad-pitch-inner.isDragging .pitch-player.dragTarget.draghover span.player-icon {
         border: 2px dotted rgba(255,255,255,1);
         background-color:rgba(0,0,0,0.8);
     }

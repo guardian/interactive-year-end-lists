@@ -7,41 +7,42 @@
 </div>
 <% } %>
 -->
+<div id="squad-pitch-inner">
 
+    <ol class="pitch">
+    	<div class="pitchLines">
+    		<div class="pitchMiddleLine"></div>
+    		<div class="pitchMiddleCircle"></div>
+    		<div class="pitchPenalty1"></div>
+    		<div class="pitchPenalty2"></div>
+    	</div>
+    	<% _.each(players, function(player, index) { %>
+            <% if (player.uid === null) { %>
+                 <li class="pitch-player pitch-player-available position-<%= index %>" data-area="<%= index %>" data-position="<%= index %>" data-area="<%= index %>">
+                 <span class="player-icon" ></span>
+                    <%= positionNames[index].name %>
+                </li>
+            <% } else { %>
+                <li data-uid="<%= player.uid %>" data-position="<%= index %>" data-area="<%= index %>" class="pitch-player pitch-player-taken position-<%= index %>">
+                    <span class="player-icon" title="Drop <%= player.name %>" style="background-image: url(<%= player.picture %>)"></span>
+                    <%= player.name %>
+                </li>
+            <% } %>
 
-<ol class="pitch">
-	<div class="pitchLines">
-		<div class="pitchMiddleLine"></div>
-		<div class="pitchMiddleCircle"></div>
-		<div class="pitchPenalty1"></div>
-		<div class="pitchPenalty2"></div>
-	</div>
-	<% _.each(players, function(player, index) { %>
-        <% if (player.uid === null) { %>
-             <li class="pitch-player pitch-player-available position-<%= index %>" data-area="<%= index %>" data-position="<%= index %>" data-area="<%= index %>">
-             <span class="player-icon" ></span>
-                <%= positionNames[index].name %>
-            </li>
-        <% } else { %>
-            <li data-uid="<%= player.uid %>" data-position="<%= index %>" data-area="<%= index %>" class="pitch-player pitch-player-taken position-<%= index %>">
-                <span class="player-icon" title="Drop <%= player.name %>" style="background-image: url(<%= player.picture %>)"></span>
-                <%= player.name %>
-            </li>
-        <% } %>
-
-	<% }) %>
-	<li class="playerOptions">
-		<span class="close">&times;</span>
-		<h4></h4>
-		<button id="dropPlayer" data-uid="">Drop</button>
-	</li>
-</ol>
-<% if(squadCount !== null) { %>
-    <div class="your-team-details">
-    <h2>Drag players to the field</h2>
-    <h3>Only <%= 11-squadCount %>  more players to start playing<% if(squadCount > 0) { %> | <span id="clearSelection">clear selection</span><% } %></h3>
-    </div>
-<% } %>
+    	<% }) %>
+    	<li class="playerOptions">
+    		<span class="close">&times;</span>
+    		<h4></h4>
+    		<button id="dropPlayer" data-uid="">Drop</button>
+    	</li>
+    </ol>
+    <% if(squadCount !== null) { %>
+        <div class="your-team-details">
+        <h2>Drag players to the field</h2>
+        <h3>Only <%= 11-squadCount %>  more players to start playing<% if(squadCount > 0) { %> | <span id="clearSelection">clear selection</span><% } %></h3>
+        </div>
+    <% } %>
+</div>
 <!--
 <p><a href="#" class="selectTeamPop" data-team="P008:GK,P015:LB,P027:CB,P026:CB2,P048:RB,P070:MC,P069:MC2,P058:ML,P092:MR,P100:ST,P110:ST2">Brazilian flair</a></p>
 
