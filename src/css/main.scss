@@ -214,7 +214,6 @@ figure.interactive {
             width: 0;
             position: absolute;
             top: -20px;
-            margin-left: -42px;
         }
 
         .hidePlayers {
@@ -225,7 +224,7 @@ figure.interactive {
         z-index: 5;
         padding:0 15px;
         background:#f4f4ee;
-        transition: background 0.5s;
+        transition: background 0.2s;
     }
     @media (min-width:30em){
         #squad-pitch{
@@ -385,7 +384,7 @@ figure.interactive {
         margin-bottom: 10px;
         padding:0 5px 2px;
         cursor: pointer;
-        transition: transform 0.2s ease-out;
+        //transition: transform 0.2s ease-out;
         overflow: hiden;
 
         &.selected{
@@ -626,6 +625,10 @@ figure.interactive {
             }
         }
 
+        .player-bio {
+            padding: 5px 17px;
+        }
+
         .player-bio-footer {
             font-size: 13px;
             margin: 10px 0;
@@ -636,6 +639,7 @@ figure.interactive {
         .player-bio-add {
             min-width: 0;
             padding: 8px 10px;
+            font-size: 12px;
 
         }
 
@@ -648,6 +652,11 @@ figure.interactive {
         .player-bio-picture {
             width: 100%;
             margin-bottom: 8px
+        }
+
+        .player-bio-remove {
+            min-width: 0;
+            font-size: 12px;
         }
 
         .player-bio-name {
@@ -885,7 +894,7 @@ figure.interactive {
         width:60%;
         text-align: center;
         cursor: pointer;
-        transition: transform 0.2s ease-out;
+        //transition: transform 0.2s ease-out;
         font-family:"AgateSans", Helvetica;
     }
     .pitch-player span.player-icon {
@@ -898,7 +907,7 @@ figure.interactive {
         background-color: rgba(0,0,0,0.1);
         margin: 0 auto 3px;
         box-shadow: inset 0px 0 8px rgba(50, 50, 50, 0.7);
-        transition:transform 0.5s;
+        //transition:transform 0.5s;
     }
     
     .pitch-player.selected span.player-icon {
