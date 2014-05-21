@@ -310,7 +310,8 @@ function isPlayerAllowedToPlay(user1Doc, user2Doc, res) {
                     res.jsonp({'msg': 'User has played too many matches'});
                     return;
                 }
-
+                
+                /* NOTE: Disabling time restriction
                 // Can only play a match every 10 seconds
                 var timeDiff = Date.now() - docs[0].time;
                 if (timeDiff < 10000) {
@@ -318,6 +319,7 @@ function isPlayerAllowedToPlay(user1Doc, user2Doc, res) {
                     res.jsonp({'msg': 'User tried to play again too soon'});
                     return;
                 }
+                */
 
             }
             
@@ -355,7 +357,7 @@ function createMatchResult(user1, user2, res) {
 
 app.get('/result/:id', function(req, res) {
     Match.findById(req.params.id, function(err, matchRecord) {
-        if (err) {
+        if (err || matchRecord === null) {
             res.status(404);
             res.json({'msg': 'Could not find match', err: err });
             return;
@@ -364,6 +366,35 @@ app.get('/result/:id', function(req, res) {
         res.json(matchRecord);
     });
 });
+
+// User's match resuls total
+app.get('/results/:userid', function(req, res) {
+    var userID = req.params.userid;
+
+    if (!userID) {
+        res.status(401);
+        res.jsonp({'msg': 'No user id provided'});
+        return;
+    }
+
+    var query = {
+        '$or': [
+            { '1.guardianID' : userID.toString()},
+            { '2.guardianID' : userID.toString()}
+        ]
+    };
+
+    Match.find(query, {time: 1}, {sort: { 'time': -1}},  function(err, matchRecords) {
+        if (err || matchRecords === null) {
+            res.status(404);
+            res.json({'msg': 'Could not find users matches match', err: err });
+            return;
+        }
+
+        res.json({ matchCount: matchRecords.length });
+    });
+});
+
 
 // Start server
 var server = app.listen(3000, function () {

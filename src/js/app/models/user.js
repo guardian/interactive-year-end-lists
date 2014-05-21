@@ -194,7 +194,7 @@ define([
         getIdentityDetails: function () {
             if (App.useDebugUser) {
                 this.identityDetails = {
-                    id: '02',
+                    id: '01',
                     displayName: 'DebugUser',
                     publicFields: {
                         displayName: 'DebugUser'

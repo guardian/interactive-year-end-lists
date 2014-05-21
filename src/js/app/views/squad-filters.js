@@ -188,10 +188,7 @@ define([
             }
 
             this.$el.toggleClass('showClearFilterButton', _.isEmpty(this.SquadLists));
-
-            playerListContainer.fadeOut('fast', function () {
-                playerListContainer.html(domContainer).fadeIn();
-            });
+            playerListContainer.html(domContainer);
         },
 
         render: function () {

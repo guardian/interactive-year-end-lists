@@ -189,6 +189,7 @@ define([
         },
 
         render: function () {
+            console.log('rendering pitch');
             var positionNames = [
                 {
                     "name": "GK",
@@ -353,6 +354,9 @@ define([
             var target = $(e.target).closest('.pitch-player');
             var position = parseInt(target.data('position'), 10);
             
+            $('.draghover, .dragTarget, .isDragging')
+                .removeClass('draghover dragTarget isDragging');
+
             if (isNaN(position) || position > 11 || position < 0) {
                 console.warn('Invalid player position', position);
                 return;

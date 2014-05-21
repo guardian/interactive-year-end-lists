@@ -2,7 +2,7 @@
 <% if (record) { %>
 
     <hr>
-
+    <!--
     <table class="table table-bordered">
         <tbody>
             <tr>
@@ -28,9 +28,11 @@
         </tbody>
     </table>
 
-    <hr>
+    -->
 
+    <p class="record-total">Total games played: <strong><%= record.gamesPlayed %></strong></p>
 
+        <!--
         <div>
             <h3>Top scorers</h3>
             <table class="table table-bordered">
@@ -44,6 +46,7 @@
                 </tbody>
             </table>
         </div>
+        -->
         <!-- <div class="col-xs-6">
             <h3 style="margin-bottom:0">Average goals per match</h3>
             <h4 style="margin-bottom:10px"><%= record.goalsAverage %></h4>

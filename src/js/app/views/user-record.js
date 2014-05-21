@@ -35,29 +35,18 @@ define([
                 console.log(this.options.userID);
                 $.ajax({
                     // FIXME: Use config for url
-                    url: App.getEndpoint() + 'results',
-                    data: {
-                        userID: this.options.userID
-                    }
+                    url: App.getEndpoint() + 'results/' + this.options.userID
                 }).done(function (data) {
                     var recArr = {
-                        gamesPlayed: data.length,
+                        gamesPlayed: data.matchCount,
                         gamesWon: 0,
                         gamesLost: 0,
                         gamesDrawn: 0,
-                        goalsFor: 0,
-                        goalsAgainst: 0,
-                        goalsDiff: 0,
-                        goalsAverage: 0,
-                        yellowTotal: 0,
-                        yellowAverage: 0,
-                        redTotal: 0,
-                        redAverage: 0,
                         topScorers: [],
-                        goalScorers: []
                     };
-                    console.log(recArr);
-                    console.log("HERE");
+
+                    
+                    /*
 
                     // Calculate game history, goals, scorers etc
                     data.forEach(function (v, k) {
@@ -113,7 +102,7 @@ define([
                         return b.goals - a.goals;
                     });
                     recArr.topScorers = topScorers.slice(0, 7);
-
+                    */
                     _this.templateData = {
                         record: recArr
                     };
