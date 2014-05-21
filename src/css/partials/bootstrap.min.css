@@ -301,8 +301,8 @@ figure.interactive .container-fluid {
   padding-right: 15px;
 }
 figure.interactive .row {
-  margin-left: -15px;
-  margin-right: -15px;
+  /*margin-left: -15px;
+  margin-right: -15px;*/
 }
 figure.interactive .col-xs-1,
 figure.interactive .col-sm-1,

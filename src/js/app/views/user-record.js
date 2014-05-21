@@ -31,6 +31,8 @@ define([
         render: function () {
             if (this.options.userID) {
                 var _this = this;
+                console.log('hoi');
+                console.log(this.options.userID);
                 $.ajax({
                     // FIXME: Use config for url
                     url: App.getEndpoint() + 'results',
@@ -54,6 +56,8 @@ define([
                         topScorers: [],
                         goalScorers: []
                     };
+                    console.log(recArr);
+                    console.log("HERE");
 
                     // Calculate game history, goals, scorers etc
                     data.forEach(function (v, k) {
@@ -118,6 +122,7 @@ define([
                     return _this;
                 });
             }
+            // console.log(this);
             return this;
         }
 
