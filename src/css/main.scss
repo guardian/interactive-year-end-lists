@@ -57,7 +57,7 @@ figure.interactive {
         line-height: 32px;
         line-height: 3.2rem;
         font-family: "EgyptianHeadline",georgia,serif;
-        font-weight: normal;
+        font-weight: 200;
         -webkit-font-smoothing: antialiased;
         margin-bottom: 24px;
         margin-bottom: 2.4rem;
@@ -144,28 +144,36 @@ figure.interactive {
             }
 
             &.logged-in{
-                margin:20px 0 10px;
+                margin:20px 0 0;
                 float:none;
                 display:inline-block;
             }
 
             .goHome, .goPlay{
-                background:#005689;
-                color:#fff;
+                background:transparent;
+                color:#005689;
                 padding:15px 20px;
                 display:inline-block;
                 width:auto;
                 vertical-align: top;
+                font-size:16px;
+                font-family:EgyptianHeadline;
+                font-weight:900;
+                line-height: 1em;
+
+                &.current{
+                    border-bottom: 2px solid;
+                }
             }
 
             .goPlay.notEnoughPlayers{
-                color:rgba(255,255,255,0.5);
+                opacity:0.5;
                 line-height:1em;
-                padding:12px 30px;
                 span{
                     display:block;
-                    font-size:12px;
-                    line-height:1em;
+                    font-size:13px;
+                    line-height:1.2em;
+                    font-weight:normal
                 }
             }
         }
@@ -282,6 +290,75 @@ figure.interactive {
 
     #users-team{
         padding:0;
+        margin-bottom:20px;
+    }
+
+    #usersRecord{
+        padding:0 0 0 0;
+        hr:first-child{
+            margin-top:0;
+        }
+    }
+    #users-find-container{
+        padding-right:0;
+        h3{
+            text-align: center;
+            font-family:EgyptianHeadline;
+            font-size:1.5em;
+            font-weight:200;
+            margin-bottom:1em;
+        }
+
+        h4{
+            font-family:EgyptianHeadline;
+        }
+    }
+
+    #users-find{
+        background: #f8f8f8;
+        padding:20px;
+    }
+    .users-share-container{
+        border-bottom: 1px dotted #ddd;
+        padding-bottom: 40px;
+        text-align: center;
+        
+        padding-top: 40px;
+    }
+
+    .opponentTable{
+        padding:0;
+        margin-bottom:20px;
+        td{
+            vertical-align: middle;
+        }
+    }
+
+    .playAgainst{
+        width:100%;
+        padding:80px 0;
+        background:#005689;
+        font-size:1.8em;
+        color:#fff;
+        text-align: center;
+        font-family: TextSans;
+        font-weight:bold;
+    }
+
+    // .recentlyViewed.col-lg-6{
+    //     padding-right:10px;
+    // }
+
+    .viewTeamCell{
+        background:#005689;
+        padding:10px;
+        max-width:40px;
+        color:#fff;
+        cursor:pointer;
+        
+        &:hover{
+            text-decoration:underline;
+        }
     }
 
 
