@@ -1,6 +1,7 @@
 define([
     'app',
     'jquery',
+    'underscore',
     'backbone',
     'models/user',
     'collections/team',
@@ -16,6 +17,7 @@ define([
 ], function (
     App,
     $,
+    _,
     Backbone,
     UserModel,
     TeamCollection,
@@ -71,6 +73,9 @@ define([
             // Load the current users team
             App.userDetails.fetchUserTeamFromStorage();
             App.$el.prepend(App.header.render().el);
+            
+            // Listen to window resize and trigger event
+            $(window).resize(_.debounce(App.handleResize, 200));
 
             // Setup routing
             App.appRoutes = new Routes();
@@ -78,6 +83,12 @@ define([
         });
 
     });
+
+
+    // Set view class based on width
+    Backbone.on('resize', function() {
+        App.$el.toggleClass('narrow-view', App.isSmallScreen());
+    }, this);
 
     }
 

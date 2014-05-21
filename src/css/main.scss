@@ -218,6 +218,11 @@ figure.interactive {
         font-weight: bold;
         color: #999;
     }
+    
+    &.narrow-view #squad-filters {
+        display: none;
+    }
+    
     #squad-filters {
         position: relative;
         z-index: 10;

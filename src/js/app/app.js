@@ -7,7 +7,7 @@ define([
 ) {
     // Mediator
     var app = {
-        SMALL_SCREEN_WIDTH: 320,
+        SMALL_SCREEN_WIDTH: 480,
         ready: false,
         userDataReady: false,
         playerDataReady: false,
@@ -48,6 +48,12 @@ define([
         console.error(errObj.msg, errObj.err);  
     };
 
+    app.handleResize = function() {
+        var width = $(document).width();
+        Backbone.trigger('resize', width);
+    };
+
+    
     Backbone.on('loaded:userData', app.loadedUserData);
     Backbone.on('loaded:playerData', app.loadedPlayerData);
     Backbone.on('ERROR', app.logError);

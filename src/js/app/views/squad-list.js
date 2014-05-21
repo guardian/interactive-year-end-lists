@@ -89,7 +89,6 @@ define([
          *
          */
         _dragStartEvent: function (e) {
-
             var data;
             if (e.originalEvent) {
                 e = e.originalEvent;

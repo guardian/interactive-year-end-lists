@@ -200,15 +200,10 @@ define([
             this.$el.empty();
             this.$el.append(this.template(this.templateData));
             this.renderSquadListViews();
+            
             var squadModalView = new SquadModalView();
             this.$('.modalWrapper').append(squadModalView.render().el);
 
-            if (App.isSmallScreen()) {
-                this.$el.hide();
-            } else {
-                this.$('.up-arrow').hide();
-                this.$('.close').hide();
-            }
             return this;
         }
 
