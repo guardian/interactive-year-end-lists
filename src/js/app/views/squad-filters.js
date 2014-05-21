@@ -35,6 +35,7 @@ define([
 
             App.userDetails.on('change', this.handleSquadChange, this);
             Backbone.on('position_clicked', this.showPlayers, this);
+            this.model.on('change', this.updateSquadListViews, this);
 
             /**
              * This code below is to set the select inputs to be fixed position
@@ -76,7 +77,6 @@ define([
         },
 
         setNavigationPosition: function () {
-            
             if (!this.navigationPosition || this.windowSize) {
                 if ($('#squad-filters').length) {
                     this.navigationPosition = $('#squad-filters').offset().top;
@@ -93,9 +93,9 @@ define([
         },
 
         createFilterOptions: function () {
-            var countries = [],
-                positions = [],
-                filterOptions = {};
+            var countries = [];
+            var positions = [];
+            var filterOptions = {};
 
             App.playerCollection.each(function (player) {
                 if ($.inArray(player.get('position'), positions) < 0) {
@@ -105,18 +105,22 @@ define([
                     countries.push(player.get('countryname'));
                 }
             });
+            
             if (countries) {
                 filterOptions.countries = countries.sort();
             }
+            
             if (positions) {
                 filterOptions.positions = positions.sort();
             }
+            
             return filterOptions;
         },
 
         filterChange: function () {
             var newOptions = {};
             this.$el.find('select').each(function (index) {
+                console.log($(this).val());
                 if ($(this).val()) {
                     newOptions[$(this).data('filter-name')] = $(this).val();
                 }
@@ -134,10 +138,10 @@ define([
          * TODO: Era not coded into filters, just position and country.
          */
         updateSquadListViews: function () {
-            var modelValues = this.model.toJSON(),
-                whereQuery = {},
-                i = 0,
-                playersFiltered = App.playerCollection;
+            var modelValues = this.model.toJSON();
+            var whereQuery = {};
+            var i = 0;
+            var playersFiltered = App.playerCollection;
 
             for (i in modelValues) {
                 if (modelValues[i] && modelValues[i] !== 'all') {
@@ -150,6 +154,8 @@ define([
                 playersFiltered = App.playerCollection.where(whereQuery);
             }
 
+            console.log('updating list view', this);
+
             playersFiltered.map(function (playerModel) {
                 this.SquadLists.push(new SquadListView({
                     model: playerModel
@@ -159,7 +165,6 @@ define([
 
             if (this.model.hasChanged()) {
                 $('html, body').animate({
-
                     // +2 so that it navigation becomes fixed
                     scrollTop: this.$el.offset().top + 2
                 }, 1000);

@@ -35,36 +35,11 @@ define([
                     // FIXME: Use config for url
                     url: App.getEndpoint() + 'results/' + this.options.userID
                 }).done(function (data) {
-                    var recArr = {
-                        gamesPlayed: data.matchCount,
-                        gamesWon: 0,
-                        gamesLost: 0,
-                        gamesDrawn: 0
-                    };
-                    
-                    /*
-                    data.forEach(function (v, k) {
-                        var userTeam,
-                            opponent;
-                        if (v[1].guardianID === _this.options.userID) {
-                            userTeam = v[1];
-                            opponent = v[2];
-                        } else {
-                            userTeam = v[2];
-                            opponent = v[1];
-                        }
-
-                        if (userTeam.goals.length > opponent.goals.length) {
-                            recArr.gamesWon += 1;
-                        } else if (userTeam.goals.length < opponent.goals.length) {
-                            recArr.gamesLost += 1;
-                        } else {
-                            recArr.gamesDrawn += 1;
-                        }
-                    });
-                    */
+                    if (!data) {
+                        return;
+                    }
                     _this.templateData = {
-                        record: recArr
+                        record: data 
                     };
 
                     _this.$el.empty();

@@ -384,14 +384,48 @@ app.get('/results/:userid', function(req, res) {
         ]
     };
 
-    Match.find(query, {time: 1}, {sort: { 'time': -1}},  function(err, matchRecords) {
+    Match.find(query, {}, {sort: { 'time': -1}},  function(err, matchRecords) {
         if (err || matchRecords === null) {
             res.status(404);
             res.json({'msg': 'Could not find users matches match', err: err });
             return;
         }
 
-        res.json({ matchCount: matchRecords.length });
+        var results = {
+            gamesPlayed: matchRecords.length,
+            gamesWon:    0,
+            gamesDrawn:  0,
+            gamesLost:   0
+        };
+
+        matchRecords.forEach(function(record) {
+            // Find the correct player index
+            var p1, p2;
+            if (record['1'].guardianID === userID) {
+                p1 = record['1'];
+                p2 = record['2'];
+            } else {
+                p1 = record['2'];
+                p2 = record['1'];
+            }
+            
+            // Win
+            if (p1.goals.length > p2.goals.length) {
+                results.gamesWon++;
+            }
+            
+            // Draw
+            if (p1.goals.length === p2.goals.length) {
+                results.gamesDrawn++;
+            }
+            
+            // Lose
+            if (p1.goals.length < p2.goals.length) {
+                results.gamesLost++;
+            }
+        });
+
+        res.json(results);
     });
 });
 

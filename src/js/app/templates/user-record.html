@@ -1,8 +1,5 @@
 
 <% if (record) { %>
-
-    <hr>
-    <!--
     <table class="table table-bordered">
         <tbody>
             <tr>
@@ -10,27 +7,16 @@
                 <td>Won</td>
                 <td>Drawn</td>
                 <td>Lost</td>
-                <td>F</td>
-                <td>A</td>
-                <td>GD</td>
             </tr>
             <tr>
                 <td><%= record.gamesPlayed %></td>
                 <td><%= record.gamesWon %></td>
                 <td><%= record.gamesDrawn %></td>
                 <td><%= record.gamesLost %></td>
-                <td><%= record.goalsFor %></td>
-                <td><%= record.goalsAgainst %></td>
-                <td>
-                    <%= (record.goalsDiff > 0) ? '+' : '' %><%= record.goalsDiff %>
-                </td>
             </tr>
         </tbody>
     </table>
 
-    -->
-
-    <p class="record-total">Total games played: <strong><%= record.gamesPlayed %></strong></p>
 
         <!--
         <div>

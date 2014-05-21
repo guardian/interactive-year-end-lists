@@ -354,6 +354,7 @@ define([
             var target = $(e.target).closest('.pitch-player');
             var position = parseInt(target.data('position'), 10);
             
+            this.$el.removeClass('goalkeeper defence midfield attack');
             $('.draghover, .dragTarget, .isDragging')
                 .removeClass('draghover dragTarget isDragging');
 
