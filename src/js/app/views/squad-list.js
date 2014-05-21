@@ -129,7 +129,7 @@ define([
             console.log(playerPositions);
             
             $(newTarget + ', ' + newTarget).addClass('dragTarget');
-            $('#squad-pitch').addClass('isDragging');
+            $('#squad-pitch-inner').addClass('isDragging');
             $('#squad-filters').addClass('isDragging');
             target.addClass('isDragging');
 

@@ -31,6 +31,8 @@ define([
         render: function () {
             if (this.options.userID) {
                 var _this = this;
+                console.log('hoi');
+                console.log(this.options.userID);
                 $.ajax({
                     // FIXME: Use config for url
                     url: App.getEndpoint() + 'results/' + this.options.userID
@@ -40,19 +42,12 @@ define([
                         gamesWon: 0,
                         gamesLost: 0,
                         gamesDrawn: 0,
-                        goalsFor: 0,
-                        goalsAgainst: 0,
-                        goalsDiff: 0,
-                        goalsAverage: 0,
-                        yellowTotal: 0,
-                        yellowAverage: 0,
-                        redTotal: 0,
-                        redAverage: 0,
                         topScorers: [],
-                        goalScorers: []
                     };
+
                     
                     /*
+
                     // Calculate game history, goals, scorers etc
                     data.forEach(function (v, k) {
                         var userTeam,
@@ -116,6 +111,7 @@ define([
                     return _this;
                 });
             }
+            // console.log(this);
             return this;
         }
 
