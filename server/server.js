@@ -392,10 +392,10 @@ app.get('/results/:userid', function(req, res) {
         }
 
         var results = {
-            matchCount: matchRecords.length,
-            wins:       0,
-            losses:     0,
-            draws:      0
+            gamesPlayed: matchRecords.length,
+            gamesWon:    0,
+            gamesDrawn:  0,
+            gamesLost:   0
         };
 
         matchRecords.forEach(function(record) {
@@ -411,17 +411,17 @@ app.get('/results/:userid', function(req, res) {
             
             // Win
             if (p1.goals.length > p2.goals.length) {
-                results.wins++;
+                results.gamesWon++;
             }
             
             // Draw
             if (p1.goals.length === p2.goals.length) {
-                results.draws++;
+                results.gamesDrawn++;
             }
             
             // Lose
             if (p1.goals.length < p2.goals.length) {
-                results.losses++;
+                results.gamesLost++;
             }
         });
 
