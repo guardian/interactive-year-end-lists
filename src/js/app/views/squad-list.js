@@ -105,7 +105,6 @@ define([
         },
 
         _dragEndEvent: function (e) {
-            console.log('DRAG END!');
             $('#squad-pitch').removeClass('goalkeeper defence midfield attack');
             $('.draghover, .dragTarget, .isDragging')
                 .removeClass('draghover dragTarget isDragging');

@@ -15,7 +15,11 @@
             <div class="teamInfos">
             <div class="col-xs-6 teamInfo1">
                 <h1 class="score"><%= matchDetails[1].goals.length %></h1>
-                <h1 class="teamName"><%= matchDetails[1].guardianID %> F.C.</h1>
+                <h1 class="teamName">
+                    <a href="#user/<%= matchDetails[1].guardianID %>">
+                        <%= matchDetails[1].username %> F.C.
+                    </a>
+                </h1>
                 
                 <div class="scorers">
                     <% _.each(matchDetails[1].goals, function(player) { %>
@@ -37,7 +41,11 @@
             <!-- Team 2 info -->
             <div class="col-xs-6 teamInfo2">
                 <h1 class="score"><%= matchDetails[2].goals.length %></h1>
-                <h1 class="teamName"><%= matchDetails[2].guardianID %> F.C.</h1>
+                <h1 class="teamName">
+                    <a href="#user/<%= matchDetails[2].guardianID %>">
+                        <%= matchDetails[2].username %> F.C.
+                    </a>
+                </h1>
                 
                 <div class="scorers">
                     <% _.each(matchDetails[2].goals, function(player) { %>
