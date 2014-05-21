@@ -25,6 +25,7 @@ define([
             App.superView.empty();
             var squadView = new SquadView({ collection: App.playerCollection });
             App.superView.append(squadView.render().el);
+            Backbone.trigger('pageStateChange', 'editPage');
         },
 
         showUser: function (playerid) {
@@ -39,6 +40,7 @@ define([
                     this.showErrorAndRedirect('No user found!');
                 }.bind(this)
             });
+            Backbone.trigger('pageStateChange', 'userPage');
         },
 
         handleUserData: function(data) {
@@ -57,6 +59,7 @@ define([
             var matchView = new MatchView({ model: matchModel });
             App.superView.empty();
             App.superView.append(matchView.render().el);
+            Backbone.trigger('pageStateChange', 'resultPage');
         },
 
         showErrorAndRedirect: function (msg) {

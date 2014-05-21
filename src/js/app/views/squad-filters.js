@@ -120,7 +120,6 @@ define([
         filterChange: function () {
             var newOptions = {};
             this.$el.find('select').each(function (index) {
-                console.log($(this).val());
                 if ($(this).val()) {
                     newOptions[$(this).data('filter-name')] = $(this).val();
                 }
@@ -153,8 +152,6 @@ define([
             if (!_.isEmpty(whereQuery)) {
                 playersFiltered = App.playerCollection.where(whereQuery);
             }
-
-            console.log('updating list view', this);
 
             playersFiltered.map(function (playerModel) {
                 this.SquadLists.push(new SquadListView({

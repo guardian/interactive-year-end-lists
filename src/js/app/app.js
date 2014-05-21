@@ -53,7 +53,11 @@ define([
         Backbone.trigger('resize', width);
     };
 
-    
+    app.updatePageState = function(state) {
+        app.pageState = state;
+    };
+
+    Backbone.on('pageStateChange', app.updatePageState);
     Backbone.on('loaded:userData', app.loadedUserData);
     Backbone.on('loaded:playerData', app.loadedPlayerData);
     Backbone.on('ERROR', app.logError);

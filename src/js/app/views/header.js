@@ -1,10 +1,12 @@
 define([
     'app',
     'backbone',
+    'underscore',
     'text!templates/header.html'
 ], function (
     App,
     Backbone,
+    _,
     HeaderTemplate
 ) {
     return Backbone.View.extend({
@@ -19,6 +21,7 @@ define([
 
         initialize: function () {
             App.userDetails.on('change', this.render, this);
+            Backbone.on('pageStateChange', this.updateOnPageState, this);
         },
 
         navigateHome: function () {
@@ -26,11 +29,16 @@ define([
                 trigger: true
             });
         },
+        
         playMatch: function () {
            
             App.appRoutes.navigate('#user/' + App.userDetails.get('guardianID'), {
                 trigger: true
             });
+        },
+
+        updateOnPageState: function(pageState) {
+            console.log('Page state = ', pageState);
         },
 
         render: function () {
