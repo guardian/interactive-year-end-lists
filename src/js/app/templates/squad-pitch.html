@@ -35,7 +35,23 @@
     		<h4></h4>
     		<button id="dropPlayer" data-uid="">Drop</button>
     	</li>
+    
     </ol>
+
+
+    <% if(squadCount === null) { %>
+    <table class="table player-table">
+        <tbody>
+            <% _.each(players, function(player, position) { %>
+                <tr>
+                    <td><%= player.name %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <% } %>
+    
+
     <% if(squadCount !== null) { %>
         <div class="your-team-details">
         <h2>Drag players to the field</h2>

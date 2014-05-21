@@ -1211,8 +1211,24 @@ figure.interactive {
         overflow:hidden;
     }
 
+    #match-screen .player-table {
+        display: table;
+    }
+
+    #match-screen .pitch {
+        display: none;
+    }
+
     
     @media (min-width: 56.25em) {
+        #match-screen .player-table {
+            display: none;
+        }
+
+        #match-screen .pitch {
+            display: block;
+        }
+
         #match-screen .match-pitch-container .pitch,
         #users-screen .match-pitch-container .pitch {
             display: block;
