@@ -52,7 +52,8 @@ var UserSchema = mongoose.Schema({
     player7: String,
     player8: String,
     player9: String,
-    player10: String
+    player10: String,
+    teamStarRating: Number
 });
 var User = mongoose.model('User', UserSchema);
 
@@ -66,6 +67,7 @@ var MatchSchema = mongoose.Schema({
         missedChance: Array,
         redCard: Array,
         yellowCard: Array,
+        teamStarRating: Number
     },
     2: {
         guardianID: String,
@@ -75,7 +77,8 @@ var MatchSchema = mongoose.Schema({
         goals: Array,
         missedChance: Array,
         redCard: Array,
-        yellowCard: Array
+        yellowCard: Array,
+        teamStarRating: Number
     },
     stats: {
         possessionHome: Number,
@@ -170,7 +173,10 @@ app.post('/users', function (req, res) {
         player9: req.body.player9,
         player10: req.body.player10
     };
-    
+
+    // Calc and store team star rating
+    userData.teamStarRating = matchModel.calcTeamStarRating(userData);
+   
     var newUser = new User(userData);
 
     newUser.save(function (err, product) {
@@ -204,6 +210,10 @@ app.put("/users/:_id", function (req, res, next) {
         player9: req.body.player9,
         player10: req.body.player10
     };
+
+    // Calc and store team star rating
+    userData.teamStarRating = matchModel.calcTeamStarRating(userData);
+
     User.findByIdAndUpdate(req.param('_id'), userData, function (err, doc) {
         if (err) {
             res.status(500);

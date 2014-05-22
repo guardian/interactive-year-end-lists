@@ -12,42 +12,14 @@ define([
     return Backbone.View.extend({
 
         className: 'match-stats-container',
+        
         template: _.template(MatchStatsTemplate),
-
-        /**
-         * TODO: Match stats likely not needed in prod
-         */
-        getTeamStats: function () {
-            var usersPlayers = this.collection.toJSON(),
-                stats = {
-                    attack: 0,
-                    defense: 0,
-                    discipline: 0,
-                    creativity: 0,
-                    unpredictability: 0,
-                    volatility: 0,
-                    starquality: 0
-                };
-            _.each(stats, function (value, key) {
-                usersPlayers.forEach(function (player) {
-                    if (player[key]) {
-                        value = parseInt(value, 10) + parseInt(player[key], 10);
-                    }
-                });
-                stats[key] = value;
-            });
-            return stats;
-
-        },
-
+        
         render: function () {
             if (!this.collection) {
                 return;
             }
             this.$el.empty();
-            this.$el.append(this.template({
-                stats: this.getTeamStats()
-            }));
             return this;
         }
 

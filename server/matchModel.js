@@ -68,6 +68,8 @@ module.exports = (function Match() {
         moments[2].guardianID = user2.guardianID;
         moments[2].username = user2.username;
         moments[2].squad = getSquadIDs(user2);
+        moments[1].teamStarRating = user1.teamStarRating;
+        moments[2].teamStarRating = user2.teamStarRating;
 
         [15, 30, 45, 60, 75, 90].forEach(function (timePeriod) {
             var eopStats = {
@@ -172,6 +174,18 @@ module.exports = (function Match() {
         });
     }
 
+    function calcTeamStarRating(userDetails) {
+        var players = getSquad(userDetails);
+        var totalStarQuality = 0;
+        players.forEach(function(player) {
+            if (player && player.starquality) {
+                totalStarQuality += player.starquality;
+            }
+        });
+        
+        return 5 * (totalStarQuality * (1/220));    
+    }
+    
     function getSquadIDs(userDetails) {
         var squadIDs = [];
         for (var i=0; i < 11; i++) {
@@ -350,7 +364,8 @@ module.exports = (function Match() {
     }
 
     return {
-        createResult: createResult
+        createResult: createResult,
+        calcTeamStarRating: calcTeamStarRating
     };
 }());
 
