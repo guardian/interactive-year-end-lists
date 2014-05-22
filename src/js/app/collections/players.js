@@ -35,7 +35,7 @@ define([
         },
 
         fetchLocalData: function () {
-            App.specialUsers = PlayerData.sheets.teams;
+            App.specialUsers = PlayerData.teams;
             this.parsePlayers(PlayerData['Player data']);
         },
 

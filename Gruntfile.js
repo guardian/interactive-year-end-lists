@@ -236,7 +236,7 @@ module.exports = function(grunt) {
             options: {
                 amd: true,
                 process: function(data) {
-                    return data['Player data'].map(function(player) {
+                    var players = data['Player data'].map(function(player) {
                         return {
                             uid: player.uid,
                             name: player.name,
@@ -247,6 +247,9 @@ module.exports = function(grunt) {
                             picturecredit: player.picturecredit
                         };
                     });
+                    
+                    data['Player data'] = players;
+                    return data;
                 }
             },
             url: 'https://docs.google.com/spreadsheet/pub?key=0AkRR3zKqdlUHdFE5SjJtS3gyUHF3ZEcwYlF0SHgxbkE&output=html',
