@@ -37,12 +37,11 @@ define([
             });
         },
 
-        updateOnPageState: function(pageState) {
-            console.log(pageState);
-            if(pageState == "editPage"){
+        updateOnPageState: function() {
+            if(App.pageState == "editPage"){
                 $('.goHome').addClass('current');
                 $('.goPlay').removeClass('current');
-            }else if(pageState == "userPage"){
+            } else if(App.pageState == "userPage"){
                 $('.goPlay').addClass('current');
                 $('.goHome').removeClass('current');
             }
@@ -57,6 +56,7 @@ define([
             });
 
             this.$el.html(templateHTML);
+            this.updateOnPageState();            
             return this;
         }
     });

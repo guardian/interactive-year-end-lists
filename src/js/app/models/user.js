@@ -130,7 +130,8 @@ define([
             if (this.identityDetails) {
                 App.userDetails.set({
                     'guardianID': this.identityDetails.id,
-                    'username': this.identityDetails.displayName
+                    'username': this.identityDetails.displayName,
+                    'auth': this.getGUCookie()
                 });
                 
                 App.userDetails.fetchByGuardianId({

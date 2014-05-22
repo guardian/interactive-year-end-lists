@@ -1,4 +1,11 @@
 {
+  "teams": [
+    {
+      "name": "Special user",
+      "guardianid": "xxxxx",
+      "rowNumber": 1
+    }
+  ],
   "Team averages": [
     {
       "_cn6ca": "Arsenal",
@@ -51,8 +58,8 @@
       "volatility": 0,
       "starquality": 18,
       "bio": "Russia's \"Black Spider\" participated in four World Cups, earned 75 caps playing for his country, kept 270 clean sheets and saved around 150 spot-kicks during his career",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400764398019/Russian-Footballers-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 1
     },
     {
@@ -68,8 +75,8 @@
       "volatility": 5,
       "starquality": 16,
       "bio": "The 1974 World Cup winner, who was known for his fast-reflexes, kept four clean sheets out of seven in the tournament. Maier, otherwise known as \"the Cat from Anzing\" is the most-capped German goalkeeper in history with 95",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400764536059/Sepp-Maier-001.jpg",
+      "picturecredit": "Action Images",
       "rowNumber": 2
     },
     {
@@ -85,8 +92,8 @@
       "volatility": 12,
       "starquality": 14,
       "bio": "Khan shined in the 2002 World Cup, was named the tournament's best player and was the first goalkeeper to be awarded with the Golden Ball. He was in the German team for four World Cups, yet only started in one",
-      "picture": "http://www2.pictures.gi.zimbio.com/France+v+Lithuania+FIFA2010+World+Cup+Qualifier+OJk3waVY-pyl.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400764592345/FUSSBALL-NATIONALMANNSCHA-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 3
     },
     {
@@ -102,8 +109,8 @@
       "volatility": 3,
       "starquality": 19,
       "bio": "One of the great European goalkeepers, Zoff holds the record in international tournaments for the longest time without conceding a goal: 1142 minutes, between 1972 and 1974. He became the oldest ever World Cup winner in 1982 at age 40 years",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400764667244/Dino-Zoff-001.jpg",
+      "picturecredit": "Action Images",
       "rowNumber": 4
     },
     {
@@ -119,8 +126,8 @@
       "volatility": 5,
       "starquality": 2,
       "bio": "Played in three World Cups but most remembered for his performance in the 1962 tournament, when he was the hero of the Czech team that stormed to the final, but committed a couple of blunders to hand the game to Brazil",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400764727160/Czech-Soccer-001.jpg",
+      "picturecredit": "Empics",
       "rowNumber": 5
     },
     {
@@ -136,8 +143,8 @@
       "volatility": 0,
       "starquality": 20,
       "bio": "England's greatest goalkeeper was in the 1966 World Cup winning team and made important saves in the 4-2 victory over West Germany. He was also responsible for the \"Save of the Century\" in 1970, denying Brazil's Pelé a goal",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400764770482/Gordon-Banks-001.jpg",
+      "picturecredit": "Rex",
       "rowNumber": 6
     },
     {
@@ -153,8 +160,8 @@
       "volatility": 5,
       "starquality": 17,
       "bio": "Italy's all-time record appearance-maker and vocal shot-stopper made his debut aged 19 in 1997. He has been first choice since 2000, and became a World Cup winner in 2006, where he only conceded two goals",
-      "picture": "http://www.gq.com/images/sports/2010/06/world-cup/players-lionel-messi.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400764830734/Gianluigi-Buffon-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 7
     },
     {
@@ -170,8 +177,8 @@
       "volatility": 10,
       "starquality": 10,
       "bio": " 2002 was Rüştü's year where he had an important role in Turkey finishing third in the World Cup ",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400764881328/Rustu-Recber-of-Turkey-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 8
     },
     {
@@ -187,8 +194,8 @@
       "volatility": 5,
       "starquality": 7,
       "bio": "The outstanding goalkeeper at the 1982 World Cup, and still influential – he was a member of Russia’s bid committee for the 2018 tournament",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400764923231/Rinat-Dasayev-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 9
     },
     {
@@ -204,8 +211,8 @@
       "volatility": 5,
       "starquality": 12,
       "bio": "Dubbed the \"circus clown in gloves\" by Brian Clough, Tomaszewski is memorable for his performance against England in a 1974 World Cup qualifying match. He went on to have an outstanding tournament in Poland's finest ever World Cup team, being named best goalkeeper",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400764958979/Jan-Tomaszewski---1970s-001.jpg",
+      "picturecredit": "Rex",
       "rowNumber": 10
     },
     {
@@ -221,8 +228,8 @@
       "volatility": 7,
       "starquality": 14,
       "bio": "A quietly outstanding presence at the back for Spain in four consecutive World Cups, particularly in 1990 and 1994. But his international career came to an end when he made an error in the 1998 group stage match against Nigeria, and Spain fell in the first round in his last interntaional tournament",
-      "picture": "https://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/dream-team-test/images/players/pele.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400765033438/Sport.-Football.-pic-1980-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 11
     },
     {
@@ -238,8 +245,8 @@
       "volatility": 4,
       "starquality": 16,
       "bio": "Twinkle-toed creator capable of playing in any of the attacking midfield positions, who starred during Holland's run to the 2010 final, scoring five goals and winning four man-of-the-match awards",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400765081538/A-portrait-of-Wesley-Snei-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 12
     },
     {
@@ -255,8 +262,8 @@
       "volatility": 3,
       "starquality": 12,
       "bio": "Widely considered one of the greatest defenders of all time, and certainly one of the most long-serving. First played in 1990, made it to the 1994 final as vice-captain, and was captain in both 1998 and 2002. In all Maldini has spent more time playing in World Cup matches than anyone else – 2,217 minutes",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400765140265/Paolo-Maldini-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 13
     },
     {
@@ -272,8 +279,8 @@
       "volatility": 18,
       "starquality": 4,
       "bio": "A former athlete, Briegel's fitness, pace and stamina saw him initially selected as a striker, until he was converted to full-back. He was in the West German team in 1982 and 1986 that reached and lost successive finals – he conceded a penalty in the first, and was partly responsible for the decisive goal in the second",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400765230648/Soccer---European-Champio-001.jpg",
+      "picturecredit": "Empics",
       "rowNumber": 14
     },
     {
@@ -289,8 +296,8 @@
       "volatility": 8,
       "starquality": 15,
       "bio": "\"The bullet man\" known for his powerful free kicks, speed and immense thighs, and one of the best attacking-minded left-backs, featured in three world cups and reached two finals, winning the second",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400765301648/Roberto-Carlos-001.jpg",
+      "picturecredit": "Action Images",
       "rowNumber": 15
     },
     {
@@ -306,8 +313,8 @@
       "volatility": 11,
       "starquality": 8,
       "bio": "Ultra-dependable, two-footed full-back, free-kick specialist and penalty taker, who scored the decisive spot-kick in the 1990 World Cup final against Argentina.",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400765346488/Andreas-Brehme-of-West-Ge-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 16
     },
     {
@@ -323,8 +330,8 @@
       "volatility": 17,
       "starquality": 10,
       "bio": "Regarded as one of the greatest wing-backs in football history, and certainly one of the first. Santos made no appearances at his first World Cup, in 1950, but was a key member of the Brazilian defence in the following three and won twice, in 1958 and 1962",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400765727013/Soccer---Nilton-Santos-001.jpg",
+      "picturecredit": "PA\n\n",
       "rowNumber": 17
     },
     {
@@ -340,8 +347,8 @@
       "volatility": 4,
       "starquality": 12,
       "bio": "One of the most effective defenders in the history of Italian football, Facchetti went on to win 94 caps for his country. He represented the Azzuri in three world cups, including 1970, where they lost out to Brazil in the final",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400765783315/Giacinto-Facchetti-001.jpg",
+      "picturecredit": "Rex",
       "rowNumber": 18
     },
     {
@@ -357,8 +364,8 @@
       "volatility": 7,
       "starquality": 11,
       "bio": "Leovegildo Lins da Gama Junior – simply known as Junior, played in two world cups. A versatile right-footed left-back who considered midfield his natural position, he was a key player in the 1982 team considered the greatest never to win the World Cup",
-      "picture": "http://img.timeinc.net/time/photoessays/2010/wc_players_to_watch/franck_ribery.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400765833598/Junior-Brazi-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 19
     },
     {
@@ -374,8 +381,8 @@
       "volatility": 4,
       "starquality": 12,
       "bio": "Regarded as one of the greatest wing-backs in football history, and certainly one of the first. Santos made no appearances at his first World Cup, in 1950, but was a key member of the Brazilian defence in the following three and won twice, in 1958 and 1962.",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400765727013/Soccer---Nilton-Santos-001.jpg\n",
+      "picturecredit": "PA",
       "rowNumber": 20
     },
     {
@@ -391,8 +398,8 @@
       "volatility": 3,
       "starquality": 9,
       "bio": "Versatile left- or centre-back who could also comfortably operate in midfield, Krol was voted into the all-star team in successive tournaments. In 1974 he played on the left of defence, and scored a memorable long-range strike against Argentina, while four years later he had switched to sweeper and captained the side to a second final.",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400765918076/Ruud-Krol-001.jpg",
+      "picturecredit": "Action Images",
       "rowNumber": 21
     },
     {
@@ -408,8 +415,8 @@
       "volatility": 6,
       "starquality": 7,
       "bio": "Handsome and stylish attacking left-back and Boca Juniors legend who played three games in 1962 and returned four years later, when the British press voted him the best player of the group stages.",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766313191/Silvio-Marzolini-Argentin-001.jpg",
+      "picturecredit": "PA",
       "rowNumber": 22
     },
     {
@@ -425,8 +432,8 @@
       "volatility": 4,
       "starquality": 12,
       "bio": "A complete winger, whose dribbling, crossing and finishing were all impeccable. Scored a brilliant winner against England in the 1968 European Champioinship semi-finals, and named by Pele among the six best players of all time, who would be considerably more famous had he not spent his entire club career in Yugoslavia",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766370235/Soccer---Yugoslavia-001.jpg",
+      "picturecredit": "Empics",
       "rowNumber": 23
     },
     {
@@ -442,8 +449,8 @@
       "volatility": 3,
       "starquality": 17,
       "bio": "The classy and composed centre-back is famous for captaining England their first and only World Cup success in 1966, and for a magnificent tackle on Pele in England's failed attempt to defend their title four years later. He played every minute for each of the 108 caps he gained",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766428300/Bobby-Moore-001.jpg",
+      "picturecredit": "Corbis",
       "rowNumber": 24
     },
     {
@@ -459,8 +466,8 @@
       "volatility": 4,
       "starquality": 18,
       "bio": "\"The Kaiser\" is considered to be Germany's greatest player. The midfielder turned defender lost in the 1966 final – scoring four goals along the way – and the 1970 semis, in one of the greatest of all World Cup matches, before winning in 1974, he then returned as manager to win it again in 1990",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766466516/West-German-Soccer-Player-001.jpg",
+      "picturecredit": "Corbis",
       "rowNumber": 25
     },
     {
@@ -476,8 +483,8 @@
       "volatility": 2,
       "starquality": 15,
       "bio": "Although part of Italy's 1982 World Cup winning squad, Baresi didn't feature once in the tournament. Nonetheless, he went on to becomes one of Italy's greatest defenders, and captained Italy to the World Cup Final in 1994 where they lost out to Brazil on penalties, one of which he missed",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766517845/Sport.-Football.-pic-circ-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 26
     },
     {
@@ -493,8 +500,8 @@
       "volatility": 5,
       "starquality": 12,
       "bio": "The central defender scored 22 international goals and captained Argentina to World Cup glory on home soil in 1978. Although he didn't play in 1986, Pasarella was the only player to feature in both of Argentina's World Cup winning squads",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766580385/Daniel-Passarella-Argenti-001.jpg",
+      "picturecredit": "Empics",
       "rowNumber": 27
     },
     {
@@ -510,8 +517,8 @@
       "volatility": 9,
       "starquality": 14,
       "bio": "Considered as one of Chile's greatest ever players, who captained the national team when they qualified for three world cups, and in 1974 was named the best central defender of the tournament ",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766619180/Sport.-Football.-pic-circ-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 28
     },
     {
@@ -527,8 +534,8 @@
       "volatility": 9,
       "starquality": 6,
       "bio": "The Ghanaian-born French defender, whose reading of the game and ability to play a simple pass saw him play also in midfield, won 116 caps for France and was a member of their victorious World Cup team in 1998",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766670136/FRANCE-V-ISRAEL-MARCELL-D-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 29
     },
     {
@@ -544,8 +551,8 @@
       "volatility": 4,
       "starquality": 9,
       "bio": "The French defender played in the 1978 and 1982 World Cups and scored four goals in international tournaments ",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766746972/Sport-001.jpg",
+      "picturecredit": "Rex",
       "rowNumber": 30
     },
     {
@@ -561,8 +568,8 @@
       "volatility": 3,
       "starquality": 12,
       "bio": "The first Asian to play in four consecutve World Cups, the resilient sweeper captained his country on home soil at the 2002 FIFA World Cup, and led them to the semi-finals",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766818577/Myung-Bo-Hong-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 31
     },
     {
@@ -578,8 +585,8 @@
       "volatility": 10,
       "starquality": 13,
       "bio": "Often regarded by many as the most influential player Ireland had during their glory days in the early 1990's. The defensive midefielder gnored a painful shoulder injury to play in the 1994 World Cup",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766869075/Paul-McGrath-Republic-of--001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 32
     },
     {
@@ -595,8 +602,8 @@
       "volatility": 18,
       "starquality": 14,
       "bio": "The only player to appear in two finals for two different countries: with Argentina in 1930 and and won the World Cup with Italy in 1934. A rugged and occasionally violent centre-half, who also took a mean free-kick and had the ball skills to move into midfield later in his career",
-      "picture": "http://english.peopledaily.com.cn/200607/11/images/0710_D18.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766938556/Soccer---World-Cup-Urugua-001.jpg",
+      "picturecredit": "Empics",
       "rowNumber": 33
     },
     {
@@ -612,8 +619,8 @@
       "volatility": 6,
       "starquality": 10,
       "bio": "Intelligent and quick-witted centre-half who made up for his lack of physical presence with smart positioning and unerring tackling. Italy's most-capped player with 136, and their winning captain in 2006",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400766988357/FUSSBALL-EM-QUALIFIKATION-001.jpg\n",
+      "picturecredit": "Getty",
       "rowNumber": 34
     },
     {
@@ -629,8 +636,8 @@
       "volatility": 8,
       "starquality": 9,
       "bio": "\"Le President\" was at the heart of the French defence in 1998, and scored the World Cup's first golden goal. He receieved the only red card of his career and missed the final after Croatia's Slaven Bilic convinced the referee he had been elbowed ",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400767038380/FUSSBALL-WM-FRANCE-1998-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 35
     },
     {
@@ -646,8 +653,8 @@
       "volatility": 17,
       "starquality": 14,
       "bio": "\"A monster of a man,\" according to former England forward Alan Smith, Buchwald was at the heart of the German defence that propelled the team to victory in 1990",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400767143870/FUSSBALL-NATIONALMANNSCHA-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 36
     },
     {
@@ -663,8 +670,8 @@
       "volatility": 7,
       "starquality": 9,
       "bio": "Has played in 14 matches during three tournaments as England's first-choice left-back, whose dependable excellence has made the job of successive national managers at least a tiny bit easier.",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400767175961/Ashley-Cole-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 37
     },
     {
@@ -680,8 +687,8 @@
       "volatility": 4,
       "starquality": 11,
       "bio": "Holland's most capped outfield player, whose excellent distribution was perfectly illustrated by the inch-perfect 60-yard pass that allowed Dennis Bergkamp to score one of the World Cup's greatest goals against Argentina in 1998 and whose intelligence, evident on the pitch, has allowed him also to excel in management.",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400767210856/ENGLAND-VERSUS-PORTUGAL-A-001.jpg",
+      "picturecredit": "Rex",
       "rowNumber": 38
     },
     {
@@ -697,8 +704,8 @@
       "volatility": 9,
       "starquality": 12,
       "bio": "Reliable and rugged mainstay of the Spanish defence (and Real Madrid) for a decade, widely considered his nation's finest ever left-back.",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400767268671/Spain-captain-Jose-Antoni-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 39
     },
     {
@@ -714,8 +721,8 @@
       "volatility": 1,
       "starquality": 16,
       "bio": "Right-footed left-back or defensive midfielder who announced himself in his first World Cup game, against Costa Rica in 2006, with a superb sixth-minute goal and captained the side that reached the semi-finals four years later. In both tournaments he was the only German to play every minute of their games.",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "FUSSBALL : NATIONALMANNSCHAFT U-19 EM QUALIFIKATION 2002 , Guetersloh , 25.04.02",
+      "picturecredit": "Getty",
       "rowNumber": 40
     },
     {
@@ -731,8 +738,8 @@
       "volatility": 15,
       "starquality": 7,
       "bio": "Made his international debut in Italy’s first match in 1978, and played every game of their next three tournaments, missing a penalty in the 1982 final. Now manager of Italy’s women’s side.",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400767371592/Sport-Football-Circa-1980-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 41
     },
     {
@@ -748,8 +755,8 @@
       "volatility": 20,
       "starquality": 3,
       "bio": "Centre or right-back who was solely responsible for man-marking Diego Maradona during Italy's 2-1 semi-final win over Argentina at the 1982 FIFA World Cup, after which he famously quipped, \"football is not for ballerinas.\" ",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400767412620/Claudio-Gentile-of-Italy-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 42
     },
     {
@@ -765,8 +772,8 @@
       "volatility": 9,
       "starquality": 10,
       "bio": "Footballer and doctor, Ivkovic was probably the finest defender at the first World Cup, particularly outstanding in a 2-1 win over Brazil. Destined to be killed by the Nazis in 1943, aged just 37, for communist activities.",
-      "picture": "http://4.bp.blogspot.com/-DbtYv9cQIsg/ThL83nCFANI/AAAAAAAAAnA/pP4O6pzGcdc/s400/Higuita11.jpg",
-      "picturecredit": "",
+      "picture": "http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/5/22/1400767454540/Yugoslavia-v-Brazil-001.jpg",
+      "picturecredit": "Getty",
       "rowNumber": 43
     },
     {
