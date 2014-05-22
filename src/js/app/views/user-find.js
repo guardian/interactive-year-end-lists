@@ -24,8 +24,10 @@ define([
         initialize: function () {
             this.templateData = {
                 users: null,
-                recentUsers: null
+                recentUsers: null,
+                specialUsers: App.specialUsers 
             };
+
             this.getAllUsers();
             this.getRecentlyViewed();
         },
@@ -73,11 +75,13 @@ define([
                     }
                 });
                 this.templateData.users = userArr;
-                this.$el.append(this.template(this.templateData));
+                this.render();
             }.bind(this));
         },
 
         render: function () {
+            this.templateData.specialUsers = App.specialUsers;
+            this.$el.html(this.template(this.templateData));
             return this;
         }
     });

@@ -30,10 +30,12 @@ define([
                 return (player.name && player.name.length > 0);
             });
 
+            App.specialUsers = _data.sheets.teams;
             this.parsePlayers(players);
         },
 
         fetchLocalData: function () {
+            App.specialUsers = PlayerData.sheets.teams;
             this.parsePlayers(PlayerData['Player data']);
         },
 
@@ -41,6 +43,7 @@ define([
             _data.map(function (player) {
                 player.countrycode = this.getCountryCode(player.countryname);
             }, this);
+
 
             this.reset(_data);
             Backbone.trigger('loaded:playerData');

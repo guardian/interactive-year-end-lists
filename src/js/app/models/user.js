@@ -127,14 +127,12 @@ define([
 
         checkUserStatus: function () {
             this.getIdentityDetails();
-            console.log(this.getIdentityDetails());
             if (this.identityDetails) {
                 App.userDetails.set({
                     'guardianID': this.identityDetails.id,
                     'username': this.identityDetails.displayName
                 });
-                console.log(this.identityDetails.id);
-                console.log(App.userDetails.get('guardianID'));
+                
                 App.userDetails.fetchByGuardianId({
                     success: this.handleUserDataResponse.bind(this),
                     error: function (err) {

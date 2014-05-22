@@ -19,11 +19,11 @@
     <div class="col-xs-12 col-lg-6 opponentTable">
         <h4>Guardian Opponents</h4>
         <table class="table">
-            <% _.each(recentUsers, function(user) { %>
+            <% _.each(specialUsers, function(user) { %>
                 <tr>
 
-                    <td><%= user.un  %></td>
-                    <td class="viewTeamCell viewTeam" data-guardian-id="<%= user.id %>">
+                    <td><%= user.name  %></td>
+                    <td class="viewTeamCell viewTeam" data-guardian-id="<%= user.guardianid %>">
                         Team &raquo;
                     </td>
 
