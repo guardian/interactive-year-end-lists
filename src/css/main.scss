@@ -122,37 +122,45 @@ figure.interactive {
     }
     .dreamteam-header{
         height:auto;
-        background:$mainGreyColor;
+        background:#005689;
         margin-bottom:15px;
         padding:20px;
         overflow:hidden;
+        .headerIllustration{
+            float:right;
+            img{
+                transform:rotateZ(125deg);
+            }
+        }
         h1{
             font-size:36px;
-            color: #333;
+            color: #fff;
             margin-bottom:0;
             width:100%;
         }
         h2{
             font-size:18px;
-            color: #333;
+            color: #fff;
             width:100%;
         }
         
         nav.navigation{
+            float:left;
+            clear:both;
             &.logged-out{
                 margin:80px 0 10px;
             }
 
             &.logged-in{
                 margin:20px 0 0;
-                float:none;
                 display:inline-block;
             }
 
             .goHome, .goPlay{
                 background:transparent;
-                color:#005689;
-                padding:15px 20px;
+                color:#fff;
+                padding:5px 0;
+                min-width: 0;
                 display:inline-block;
                 width:auto;
                 vertical-align: top;
@@ -163,12 +171,21 @@ figure.interactive {
 
                 &.current{
                     border-bottom: 2px solid;
+                    &:hover{
+                        color: #fff;
+                    }
+                }
+                &:hover{
+                    color:#4490CE;
                 }
             }
 
             .goPlay.notEnoughPlayers{
                 opacity:0.5;
                 line-height:1em;
+                &:hover{
+                        color: #005689;
+                    }
                 span{
                     display:block;
                     font-size:13px;
@@ -185,8 +202,7 @@ figure.interactive {
                 float:left;
             }
             nav.navigation.logged-in{
-                float:right;
-                margin-top:0;
+                margin-top:40px;
                 h1{
                     
                 }
@@ -288,7 +304,7 @@ figure.interactive {
     }
     #users-team-container {
         margin-bottom: 20px;
-        clear: both;
+
         padding:20px;
         background:$mainGreyColor;
     }
@@ -306,6 +322,8 @@ figure.interactive {
     }
     #users-find-container{
         padding-right:0;
+        clear: both;
+        float:right;
         h3{
             text-align: center;
             font-family:EgyptianHeadline;

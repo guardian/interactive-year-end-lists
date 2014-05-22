@@ -25,7 +25,7 @@ define([
         },
 
         navigateHome: function () {
-            App.appRoutes.navigate('/', {
+            App.appRoutes.navigate('#edit-team', {
                 trigger: true
             });
         },
@@ -38,7 +38,14 @@ define([
         },
 
         updateOnPageState: function(pageState) {
-            console.log('Page state = ', pageState);
+            console.log(pageState);
+            if(pageState == "editPage"){
+                $('.goHome').addClass('current');
+                $('.goPlay').removeClass('current');
+            }else if(pageState == "userPage"){
+                $('.goPlay').addClass('current');
+                $('.goHome').removeClass('current');
+            }
         },
 
         render: function () {

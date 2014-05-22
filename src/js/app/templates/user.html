@@ -1,16 +1,3 @@
-
-<div id="users-team-container" class="col-xs-12 col-md-6">
-
-
-
-    <div id="users-team" class="col-xs-12 col-lg-8"></div>
-    <div class="clearfix"></div>
-    <div id="usersRecord" class=""></div>
-    <div class="clearfix"></div>
-    <h3>Playerslist</h3>
-    <div id="squad-list"></div>
-</div>
-
 <div id="users-find-container" class="col-xs-12 col-md-6">
     
 
@@ -34,3 +21,18 @@
     </div>
 
 </div>
+
+<div id="users-team-container" class="col-xs-12 col-md-6">
+
+
+    <% if (canPlay) { %>
+        <h3>Hamburger FC</h3>
+    <% } %>
+    <div id="users-team" class="col-xs-12 col-lg-8"></div>
+    <div class="clearfix"></div>
+    <div id="usersRecord" class=""></div>
+    <div class="clearfix"></div>
+    <h3>Playerslist</h3>
+    <div id="squad-list"></div>
+</div>
+
