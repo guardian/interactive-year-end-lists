@@ -79,7 +79,7 @@ define([
         setNavigationPosition: function () {
             if (!this.navigationPosition || this.windowSize) {
                 if ($('#squad-filters').length) {
-                    this.navigationPosition = $('#squad-filters').offset().top;
+                    this.navigationPosition = $('#squad-filters').offset().top - 10;
                 }
                 this.windowSize = 0;
             }
@@ -89,6 +89,8 @@ define([
                 //$('.viewSquad').toggleClass('viewSquad-show', $(document).scrollTop() >= this.navigationPosition);
                 //$('#squad-filters form').toggleClass('squad-filters-fixed', $(document).scrollTop() >= this.navigationPosition);
                 $('#squad-pitch').toggleClass('fix-right', $(document).scrollTop() >= this.navigationPosition);
+                
+                //$('#squad-pitch-inner').css('width', $('#squad-pitch').width());
             }
         },
 

@@ -1,6 +1,6 @@
 
 <% if (record) { %>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-inline">
         <tbody>
             <tr>
                 <td>Games Played</td>
@@ -12,6 +12,27 @@
                 <td><%= record.gamesPlayed %></td>
                 <td><%= record.gamesWon %></td>
                 <td><%= record.gamesDrawn %></td>
+                <td><%= record.gamesLost %></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-bordered table-list">
+        <tbody>
+            <tr>
+                <td>Played</td>
+                <td><%= record.gamesPlayed %></td>
+            </tr>
+            <tr>
+                <td>Won</td>
+                <td><%= record.gamesWon %></td>
+            </tr>
+            <tr>
+                <td>Drawn</td>
+                <td><%= record.gamesDrawn %></td>
+            </tr>
+            <tr>
+                <td>Lost</td>                
                 <td><%= record.gamesLost %></td>
             </tr>
         </tbody>

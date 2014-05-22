@@ -25,7 +25,7 @@ define([
         },
 
         navigateHome: function () {
-            App.appRoutes.navigate('#edit-team', {
+            App.appRoutes.navigate('/', {
                 trigger: true
             });
         },

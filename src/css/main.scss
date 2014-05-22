@@ -126,6 +126,7 @@ figure.interactive {
         margin-bottom:15px;
         padding:20px;
         overflow:hidden;
+        position: relative;
         .headerIllustration{
             float:right;
             img{
@@ -145,8 +146,10 @@ figure.interactive {
         }
         
         nav.navigation{
-            float:left;
+            position: absolute;
             clear:both;
+            left:20px;
+            bottom:20px;
             &.logged-out{
                 margin:80px 0 10px;
             }
@@ -164,10 +167,11 @@ figure.interactive {
                 display:inline-block;
                 width:auto;
                 vertical-align: top;
-                font-size:16px;
+                font-size:22px;
                 font-family:EgyptianHeadline;
                 font-weight:900;
                 line-height: 1em;
+                margin-right:40px;
 
                 &.current{
                     border-bottom: 2px solid;
@@ -184,7 +188,7 @@ figure.interactive {
                 opacity:0.5;
                 line-height:1em;
                 &:hover{
-                        color: #005689;
+                        color: #fff;
                     }
                 span{
                     display:block;
@@ -320,6 +324,33 @@ figure.interactive {
             margin-top:0;
         }
     }
+    .table-inline{
+        display:table;
+    }
+    .table-list{
+        display:none;
+        margin-left:10px;
+    }
+    
+
+    @media (min-width: 56.25em) {
+        .table-inline{
+            display:none;
+        }
+        .table-list{
+            display:table;
+        }
+    }
+
+    #squad-list{
+        width:auto;
+        margin: 0 -5px;
+        overflow:hidden;
+            .player_profile{
+                cursor:default;
+            }
+    }
+
     #users-find-container{
         padding-right:0;
         clear: both;
@@ -399,9 +430,14 @@ figure.interactive {
             float: right;
         }
         #squad-pitch.fix-right {
-            position: fixed;
+            position: absolute;
             right: 0;
             top: 0;
+
+            #squad-pitch-inner{
+                position:fixed;
+                top:10px;
+            }
         }
 
         
@@ -517,6 +553,8 @@ figure.interactive {
         padding:0;
         float: none;
         overflow: auto;
+        width:auto;
+        margin: 0 -5px;
     }
     .player_profile {
         text-align: center;
