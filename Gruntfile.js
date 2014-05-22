@@ -234,7 +234,20 @@ module.exports = function(grunt) {
     gss_fetch: {
         client: {
             options: {
-                amd: true
+                amd: true,
+                process: function(data) {
+                    return data['Player data'].map(function(player) {
+                        return {
+                            uid: player.uid,
+                            name: player.name,
+                            countryname: player.countryname,
+                            position: player.position,
+                            bio: player.bio,
+                            picture: player.picture,
+                            picturecredit: player.picturecredit
+                        };
+                    });
+                }
             },
             url: 'https://docs.google.com/spreadsheet/pub?key=0AkRR3zKqdlUHdFE5SjJtS3gyUHF3ZEcwYlF0SHgxbkE&output=html',
             dest: 'src/js/app/data/players.js'
