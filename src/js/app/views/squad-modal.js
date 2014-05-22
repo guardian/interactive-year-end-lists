@@ -76,9 +76,9 @@ define([
                 canRemove: this.model.get('uid') === positionUID,
                 position: App.userDetails.isLoggedIn() && this.position !== null
             });
-
             this.$el.html(html);
             this.delegateEvents();
+            this.$el.addClass('border-' + this.model.get('position').toLowerCase());
             this.$el.toggleClass('modalMode', !App.isSmallScreen());
             this.$el.show();
             return this;

@@ -33,6 +33,9 @@ define([
             this.templateData = this.createFilterOptions();
             this.updateSquadListViews();
 
+            Backbone.on('player_clicked', this.blurPlayers, this);
+            Backbone.on('playercard_closed', this.unblurPlayers, this);
+
             App.userDetails.on('change', this.handleSquadChange, this);
             Backbone.on('position_clicked', this.showPlayers, this);
             this.model.on('change', this.updateSquadListViews, this);
@@ -57,6 +60,13 @@ define([
             }
 
             this.updateSquadListViews();
+        },
+        blurPlayers: function(){
+
+            this.$('#player_list').addClass('isDragging');
+        },
+        unblurPlayers: function(){
+            this.$('#player_list').removeClass('isDragging');
         },
 
         hidePlayers: function(){

@@ -71,7 +71,7 @@ figure.interactive {
         line-height: 26px;
         line-height: 2.6rem;
         font-family: "EgyptianHeadline",georgia,serif;
-        font-weight: normal;
+        font-weight: 200;
         -webkit-font-smoothing: antialiased;
         margin-bottom: 24px;
         margin-bottom: 2.4rem;
@@ -280,10 +280,23 @@ figure.interactive {
             float: right;
         }
     }
+    .modalWrapper{
+        position:absolute;
+        left:50%;
+
+    }
     #squad-pitch {
         z-index: 5;
         padding:0 15px;
-        
+        h2{
+            height:35px;
+            margin-bottom:20px;
+            padding:5px 0 0;
+            margin-top:0;
+            text-align: center;
+            font-weight:200;
+            font-family:EgyptianHeadline;
+        }
     }
     #squad-pitch-inner{
         background:$mainGreyColor;
@@ -300,6 +313,9 @@ figure.interactive {
         .squad-filters-inner{
             padding:20px;
         }
+        .hidePlayers {
+            display:none;
+        }
     }
     .table-players {
         max-width: 300px;
@@ -308,7 +324,6 @@ figure.interactive {
     }
     #users-team-container {
         margin-bottom: 20px;
-
         padding:20px;
         background:$mainGreyColor;
     }
@@ -555,6 +570,10 @@ figure.interactive {
         overflow: auto;
         width:auto;
         margin: 0 -5px;
+        &.isDragging{
+            opacity:0.5;
+            -webkit-filter:blur(2px);
+        }
     }
     .player_profile {
         text-align: center;
@@ -589,12 +608,19 @@ figure.interactive {
             background:darken(#FFBB00,5%);
         }
     }
+    .border-goalkeeper{
+        border-color:#FFBB00; 
+    }
+
     .bg-attack{
         background:#F5644F; 
         &:hover{
             .add-remove-btn{background:darken(#F5644F,8%);}
             background:darken(#F5644F,8%)
         }
+    }
+    .border-attack{
+        border-color:#F5644F; 
     }
     .bg-midfield{
         background:#4BC6DF; 
@@ -603,12 +629,18 @@ figure.interactive {
             background:darken(#4BC6DF,10%)
         }
     }
+    .border-midfield{
+        border-color:#4BC6DF; 
+    }
     .bg-defence{
         background:#85C54B; 
         &:hover{
             .add-remove-btn{background:darken(#85C54B,10%);}
             background:darken(#85C54B,10%)
         }
+    }
+    .border-defence{
+        border-color:#85C54B; 
     }
     .player_profile .inner .innercard {
         position: relative;
@@ -774,7 +806,6 @@ figure.interactive {
         display: none;
         margin:0;
         padding: 0;
-        border-top: 0;
 
         .close {
             display: none;
@@ -785,13 +816,14 @@ figure.interactive {
             background: #fff;
             padding: 10px;
             position: fixed;
-            left: 50%;
-            top: 50px;
             border-radius: 6px;
-            margin-left: -250px;
+            transform:translate(-50%,-50%);
+            top:40%;
             width: 500px;
             z-index: 20;
-            border: 2px solid rgba(0, 0, 0, 0.4);
+            border-width:4px;
+            border-style: solid;
+            box-shadow:0 0 15px rgba(0,0,0,0.5);
 
             .close {
                 display: block;
@@ -803,7 +835,7 @@ figure.interactive {
         }
 
         .player-bio {
-            padding: 5px 17px;
+            padding: 5px 5px;
         }
 
         .player-bio-footer {
@@ -844,13 +876,14 @@ figure.interactive {
         }
 
         .player-bio-metainfo {
-            font-size: 10px;
+            font-size: 14px;
             color: rgb(142, 142, 142);
             margin-top: 2px;
         }
 
         .player-bio-copy {
-            font-size: 13px;
+            font-size: 14px;
+            line-height:22px;
         }
 
         .player-bio-col2 {
@@ -960,12 +993,13 @@ figure.interactive {
     .playerOptions button#replacePlayer {
         margin-right: 6%;
     }
-    .your-team-details{
+    #squad-pitch .your-team-details{
         text-align:center;
         margin-top:20px;
         h2{
             margin-top:0;
             padding-top:0;
+            height:auto;
             font-size:18px;
             color:#545454;
             text-align: center;
@@ -989,6 +1023,23 @@ figure.interactive {
             text-decoration: underline;
             cursor:pointer;
             display: inline-block;
+        }
+    }
+    .playMatchBtn{
+        height: 45px;
+        border: 1px solid;
+        border-radius: 3px;
+        color: #aaa;
+        text-align: center;
+        padding-top: 11px;
+        font-family: EgyptianHeadline;
+        font-weight: 900;
+        margin-top:20px;
+
+        &.enoughPlayers{
+            background:#005689;
+            color:#fff;
+            border:1px solid darken(#005689,10%);
         }
     }
     .pitch {
@@ -1066,7 +1117,7 @@ figure.interactive {
     .pitch-player {
         position: absolute;
         max-width: 80px;
-        font-size: 11px;
+        font-size: 13px;
         color: #fff;
         width:60%;
         text-align: center;

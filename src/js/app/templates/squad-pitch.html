@@ -8,7 +8,7 @@
 <% } %>
 -->
 <div id="squad-pitch-inner">
-
+    <h2>Your XI</h2>
     <ol class="pitch">
     	<div class="pitchLines">
     		<div class="pitchMiddleLine"></div>
@@ -25,7 +25,7 @@
             <% } else { %>
                 <li data-uid="<%= player.uid %>" data-position="<%= index %>" data-area="<%= index %>" class="pitch-player pitch-player-taken position-<%= index %>">
                     <span class="player-icon" title="Drop <%= player.name %>" style="background-image: url(<%= player.picture %>)"></span>
-                    <%= player.name %>
+                    <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
                 </li>
             <% } %>
 
@@ -39,7 +39,7 @@
     </ol>
 
 
-    <% if(squadCount === null) { %>
+ <!--    <% if(squadCount === null) { %>
     <table class="table player-table">
         <tbody>
             <% _.each(players, function(player, position) { %>
@@ -49,13 +49,18 @@
             <% }) %>
         </tbody>
     </table>
-    <% } %>
+    <% } %> -->
     
 
     <% if(squadCount !== null) { %>
         <div class="your-team-details">
-        <h2>Drag players to the field</h2>
-        <h3>Only <%= 11-squadCount %>  more players to start playing<% if(squadCount > 0) { %> | <span id="clearSelection">clear selection</span><% } %></h3>
+            <h2>Drag players to the field</h2>
+            <h3>Only <%= 11-squadCount %>  more players to start playing<% if(squadCount > 0) { %> | <span id="clearSelection">clear selection</span><% } %></h3>
+            <% if(squadCount === 11) { %>
+            <div class="playMatchBtn enoughPlayers">Play a match!</div>
+            <% } else { %>
+            <div class="playMatchBtn">Play a match!</div>
+            <% } %>
         </div>
     <% } %>
 </div>

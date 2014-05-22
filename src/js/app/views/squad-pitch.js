@@ -47,10 +47,12 @@ define([
 
         highlightPositions: function(playerModel) {
             this.selectedPlayerModel = playerModel;
+            this.$('#squad-pitch-inner').addClass('isDragging');
         },
 
         removeHighlightPositions: function() {
             this.selectedPlayerModel = null;
+            this.$('.isDragging').removeClass('isDragging');
         },
 
         positionSelected: function(e) {
