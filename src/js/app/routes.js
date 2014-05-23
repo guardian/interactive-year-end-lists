@@ -22,8 +22,8 @@ define([
         },
 
         defaultRoute: function (other) {
-            App.superView.empty();
             var squadView = new SquadView({ collection: App.playerCollection });
+            App.superView.empty();
             App.superView.append(squadView.render().el);
             Backbone.trigger('pageStateChange', 'editPage');
         },
