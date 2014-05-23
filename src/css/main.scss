@@ -146,6 +146,7 @@ figure.interactive {
         }
         
         nav.navigation{
+            display:none !important;
             position: absolute;
             clear:both;
             left:20px;
@@ -322,14 +323,42 @@ figure.interactive {
         margin: 20px auto;
         display: none;
     }
+
+    #user-screen{
+        h3{
+            border-top: 1px dotted #dfdfdf;
+            padding-top:5px;
+            font-size:18px;
+            color:#767676;
+            margin-top:20px;
+            margin-bottom:10px;
+        }
+    }
     #users-team-container {
         margin-bottom: 20px;
-        padding:20px;
-        background:$mainGreyColor;
+        padding:0;
+        
+        h2{
+            font-size:42px;
+            float:left;
+        }    
+    }
+
+    #user-teamrating{
+        float:right;
+    }
+
+    #user-teamshare{
+        font-family:AgateSans;
+        font-size:14px;
+        clear:both;
+        img{
+            display:inline-block;
+        }
     }
 
     #users-team{
-        padding:0;
+        padding:0 20px 0 0;
         margin-bottom:20px;
     }
 
@@ -344,7 +373,6 @@ figure.interactive {
     }
     .table-list{
         display:none;
-        margin-left:10px;
     }
     
 
@@ -995,7 +1023,7 @@ figure.interactive {
     }
     #squad-pitch .your-team-details{
         text-align:center;
-        margin-top:20px;
+        // margin-top:20px;
         h2{
             margin-top:0;
             padding-top:0;
@@ -1026,20 +1054,33 @@ figure.interactive {
         }
     }
     .playMatchBtn{
-        height: 45px;
         border: 1px solid;
-        border-radius: 3px;
+        border-radius: 4px;
         color: #aaa;
         text-align: center;
-        padding-top: 11px;
+        padding: 14px 0 13px;
         font-family: EgyptianHeadline;
         font-weight: 900;
         margin-top:20px;
+        margin-bottom:10px;
+
+        span{
+            display:block;
+            margin:0 auto;
+            font-weight:200;
+            font-size:13px;
+            margin-top:-3px;
+            line-height: 1em;
+        }
 
         &.enoughPlayers{
             background:#005689;
             color:#fff;
-            border:1px solid darken(#005689,10%);
+            padding: 18px 0 17px;
+            cursor:pointer;
+            &:hover{
+                background:#4490CE;
+            }
         }
     }
     .pitch {
@@ -1047,7 +1088,7 @@ figure.interactive {
         margin: 0 auto;
         padding: 0;
         // background: url('../images/pitch.jpg');
-        background-color:#6BA83F;
+        background-color:#C2DC49;
         height: 445px;
         width: 100%;
         list-style: none;
@@ -1062,7 +1103,7 @@ figure.interactive {
         border:1px solid #fff;
         left:1%;
         top:1%;
-        
+        opacity:0.5;
 
         .pitchMiddleLine{
             width:100%;
@@ -1119,6 +1160,8 @@ figure.interactive {
         max-width: 80px;
         font-size: 13px;
         color: #fff;
+        text-shadow: 0 1px 1px #aaa;
+        font-weight:bold;
         width:60%;
         text-align: center;
         cursor: pointer;
@@ -1126,8 +1169,8 @@ figure.interactive {
         font-family:"AgateSans", Helvetica;
     }
     .pitch-player span.player-icon {
-        width: 45px;
-        height: 45px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
         display: block;
         border: 2px solid #fff;
@@ -1151,10 +1194,10 @@ figure.interactive {
        
     }
     #squad-pitch-inner.isDragging{
-        background:#6BA83F;
+        background:#C2DC49;
 
         .your-team-details{
-            h2,h3{
+            h2,h3, .playMatchBtn{
                 color:#fff;
             }
         }

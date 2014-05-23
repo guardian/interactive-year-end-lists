@@ -132,7 +132,7 @@ define([
             var userPitch = new MatchLineupView({
                 collection: App.viewingPlayerTeamCollection
             });
-            userPitch.setElement(this.$('#users-team')).render();
+            userPitch.setElement(this.$('#users-team-inner')).render();
         },
 
         // view/user-find.js
@@ -166,7 +166,7 @@ define([
             var socialLinks = SocialModel.getShareTeamURLs({
                 url: document.location.href
             });
-
+            console.log(App.viewingPlayer.toJSON());
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON(),

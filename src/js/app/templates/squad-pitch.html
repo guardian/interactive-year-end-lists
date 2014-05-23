@@ -8,7 +8,17 @@
 <% } %>
 -->
 <div id="squad-pitch-inner">
-    <h2>Your XI</h2>
+    <% if(squadCount !== null) { %>
+        <div class="your-team-details">
+            <h2>Drag players to the field</h2>
+            <h3><span id="clearSelection">clear selection</span></h3>
+            <% if(squadCount === 11) { %>
+            <div class="playMatchBtn enoughPlayers">Play a match!</div>
+            <% } else { %>
+            <div class="playMatchBtn">Play a match! <span><%= 11-squadCount %> more players</span></div>
+            <% } %>
+        </div>
+    <% } %>
     <ol class="pitch">
     	<div class="pitchLines">
     		<div class="pitchMiddleLine"></div>
@@ -52,17 +62,7 @@
     <% } %> -->
     
 
-    <% if(squadCount !== null) { %>
-        <div class="your-team-details">
-            <h2>Drag players to the field</h2>
-            <h3>Only <%= 11-squadCount %>  more players to start playing<% if(squadCount > 0) { %> | <span id="clearSelection">clear selection</span><% } %></h3>
-            <% if(squadCount === 11) { %>
-            <div class="playMatchBtn enoughPlayers">Play a match!</div>
-            <% } else { %>
-            <div class="playMatchBtn">Play a match!</div>
-            <% } %>
-        </div>
-    <% } %>
+    
 </div>
 <!--
 <p><a href="#" class="selectTeamPop" data-team="P008:GK,P015:LB,P027:CB,P026:CB2,P048:RB,P070:MC,P069:MC2,P058:ML,P092:MR,P100:ST,P110:ST2">Brazilian flair</a></p>

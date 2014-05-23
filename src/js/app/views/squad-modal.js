@@ -43,6 +43,7 @@ define([
 
         openCard: function (playerModel) {
             this.model = playerModel;
+            
             this.render();
             this.$el.show();
         },

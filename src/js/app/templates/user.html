@@ -1,4 +1,4 @@
-<div id="users-find-container" class="col-xs-12 col-md-6">
+<div id="users-find-container" class="col-xs-12 col-md-5">
     
 
 
@@ -22,18 +22,17 @@
 
 </div>
 
-<div id="users-team-container" class="col-xs-12 col-md-6">
+<div id="users-team-container" class="col-xs-12 col-md-7">
 
 
-    <% if (canPlay) { %>
-        <h3>Hamburger FC</h3>
-    <% } %>
-    <div id="users-team" class="col-xs-12 col-md-9"></div>
-
-    <div id="usersRecord" class="col-xs-12 col-md-3"></div>
+  
+    <h2><%= details.username %> FC</h2>
+    <div id="user-teamrating"><%= details.teamStarRating %>/5</div>
+    <div id="user-teamshare"><h3>Share this team:</h3> <img src="images/twitter.svg" /> <img src="images/facebook.svg" /></div>
+    <div id="users-team" class="col-xs-12 col-md-8"><h3>Team XI</h3><div id="users-team-inner"></div></div>
+    <div id="usersRecord" class="col-xs-12 col-md-4"></div>
     <div class="clearfix"></div>
     <h3>Playerslist</h3>
-    <div id="user-teamrating">USER TEAM STAR RATING <%= details.teamStarRating %>/5</div>
     <div id="squad-list"></div>
 </div>
 
