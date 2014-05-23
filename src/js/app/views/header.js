@@ -31,7 +31,6 @@ define([
         },
         
         playMatch: function () {
-           
             App.appRoutes.navigate('#user/' + App.userDetails.get('guardianID'), {
                 trigger: true
             });
@@ -56,7 +55,7 @@ define([
             });
 
             this.$el.html(templateHTML);
-            this.updateOnPageState();            
+            //this.updateOnPageState();            
             return this;
         }
     });

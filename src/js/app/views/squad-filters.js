@@ -172,12 +172,14 @@ define([
             }, this);
             this.renderSquadListViews();
 
+            /*
             if (this.model.hasChanged()) {
                 $('html, body').animate({
                     // +2 so that it navigation becomes fixed
                     scrollTop: this.$el.offset().top + 2
                 }, 1000);
             }
+            */
         },
 
         // Scroll back up to pitch
@@ -186,9 +188,11 @@ define([
             /**
              * FIXME: This would not be needed if pitch is fixed pos
              */
+            /*
             $('html, body').animate({
                 scrollTop: $('#squad-pitch').offset().top + 2
             }, 1000);
+            */
         },
 
         renderSquadListViews: function () {

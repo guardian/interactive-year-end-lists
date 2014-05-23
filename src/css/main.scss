@@ -50,6 +50,7 @@ figure.interactive .container {
 }
 figure.interactive {
     position: relative;
+    min-height: 1000px; // Fix navigation jumping
 
     h1{
         font-size: 28px;
@@ -121,7 +122,8 @@ figure.interactive {
         -webkit-appearance: none;
     }
     .dreamteam-header{
-        height:auto;
+        height: 340px; // Hard-coded to prevent jumping when inner-image is removed
+
         background:#005689;
         margin-bottom:15px;
         padding:20px;
