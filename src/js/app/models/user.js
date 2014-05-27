@@ -127,6 +127,7 @@ define([
 
         checkUserStatus: function () {
             this.getIdentityDetails();
+            
             if (this.identityDetails) {
                 App.userDetails.set({
                     'guardianID': this.identityDetails.id,
@@ -142,6 +143,8 @@ define([
                         Backbone.trigger('loaded:userData');
                     }
                 });
+            } else {
+                Backbone.trigger('loaded:userData');
             }
         },
 
@@ -213,6 +216,7 @@ define([
                     this.identityDetails = App.toolkitObj.api.getUserFromCookie();
                 }
             }
+
             return this.identityDetails;
         }
 

@@ -42,9 +42,9 @@ define([
             this.showSelectedPlayer();
 
             if (App.userDetails.get('username')) {
-                this.$el.attr("draggable", "true");
-                this.$el.bind("dragstart", _.bind(this._dragStartEvent, this));
-                this.$el.bind("dragend", _.bind(this._dragEndEvent, this));
+                this.$el.attr('draggable', 'true')
+                    .bind('dragstart', this._dragStartEvent.bind(this))
+                    .bind('dragend', this._dragEndEvent.bind(this));
             }
         },
 
@@ -88,6 +88,9 @@ define([
          *
          */
         _dragStartEvent: function (e) {
+            var dt = e.originalEvent.dataTransfer;
+            dt.setData('Text', '');
+
             var data;
             if (e.originalEvent) {
                 e = e.originalEvent;
@@ -100,12 +103,14 @@ define([
             if (data !== undefined) {
                 window._backboneDragDropObject = data;
             }
+            return true;
         },
 
         _dragEndEvent: function (e) {
             $('#squad-pitch').removeClass('goalkeeper defence midfield attack');
             $('.draghover, .dragTarget, .isDragging')
                 .removeClass('draghover dragTarget isDragging');
+            return false;
         },
 
         dragStart: function (dataTransfer, e) {
@@ -123,8 +128,6 @@ define([
                 $('#squad-pitch').addClass(position.trim().toLowerCase());
             });
 
-            console.log(playerPositions);
-            
             $(newTarget + ', ' + newTarget).addClass('dragTarget');
             $('#squad-pitch-inner').addClass('isDragging');
             $('#squad-filters').addClass('isDragging');

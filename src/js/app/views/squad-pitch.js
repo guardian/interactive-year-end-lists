@@ -278,7 +278,7 @@ define([
             }
 
             // Update width
-            this.setWidthInPixels();
+            setTimeout(this.setWidthInPixels.bind(this), 200);
 
             return this;
         },

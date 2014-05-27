@@ -642,6 +642,7 @@ figure.interactive {
         margin: 0 -5px;
         &.isDragging{
             opacity:0.5;
+            pointer-event: none;
             -webkit-filter:blur(2px);
         }
     }

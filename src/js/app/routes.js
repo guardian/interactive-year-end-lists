@@ -40,7 +40,6 @@ define([
                     this.showErrorAndRedirect('No user found!');
                 }.bind(this)
             });
-            Backbone.trigger('pageStateChange', 'userPage');
         },
 
         handleUserData: function(data) {
@@ -52,6 +51,7 @@ define([
             App.superView.empty();
             var userView = new UserView({ model: App.viewingPlayer });
             App.superView.append(userView.render().el);
+            Backbone.trigger('pageStateChange', 'userPage');
         },
         
         showMatch: function (matchID) {
