@@ -1,35 +1,30 @@
 <div id="users-find-container" class="col-xs-12 col-md-5">
-    
-
-
     <% if (canPlay) { %>
+        <h2>Play against <%= details.username %></h2>
+        <h3>Select one of the Guardian opponents or any of the other players. To challenge someone, share your team with that person.</h3>
         <div class="playAgainst" data-guardian-id="<%= details.guardianID %>">
-            Play against this team
+            Play a match
         </div>
     <% } else{%>
-
-    <div id="users-find"></div> 
+        <div id="users-find"></div> 
     <% } %>
-    <div class="users-share-container">
-        <h3>Or share your team and invite others</h3>
-        <a class="share-link share-twitter" href="<%= twitter_link %>">
-            Twitter
-        </a>
-        <a class="share-link share-facebook" href="<%= facebook_link %>">
-            Facebook
-        </a>
-    </div>
-
 </div>
 
 <div id="users-team-container" class="col-xs-12 col-md-7">
-
-
-  
     <h2><%= details.username %> FC</h2>
-    <div id="user-teamrating"><%= details.teamStarRating %>/5</div>
-    <div id="user-teamshare"><h3>Share this team:</h3> <img src="images/twitter.svg" /> <img src="images/facebook.svg" /></div>
-    <div id="users-team" class="col-xs-12 col-md-8"><h3>Team XI</h3><div id="users-team-inner"></div></div>
+    <div id="user-teamrating">
+        <div id="stars"></div>
+        <p>Starquality</p>
+    </div>
+    <div id="user-teamshare">
+        <h3>Share this team:</h3> 
+        <img src="images/twitter.svg" /> 
+        <img src="images/facebook.svg" />
+    </div>
+    <div id="users-team" class="col-xs-12 col-md-8">
+        <h3>Team XI</h3>
+        <div id="users-team-inner"></div>
+    </div>
     <div id="usersRecord" class="col-xs-12 col-md-4"></div>
     <div class="clearfix"></div>
     <h3>Playerslist</h3>

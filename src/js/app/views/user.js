@@ -28,7 +28,7 @@ define([
 
         id: 'user-screen',
         
-        className: 'container',
+        className: 'container clearfix',
         
         template: _.template(UserTemplate),
         
@@ -116,18 +116,6 @@ define([
 
         renderPitch: function () {
             var playerArr = App.viewingPlayer.getPlayerModels();
-            /*
-            App.viewingPlayer.get('teamSelection').split(',').map(function (player) {
-                var playerSplit = player.split(':'),
-                    playerModel = App.playerCollection.findWhere({
-                        'uid': playerSplit[0]
-                    });
-                playerModel.set('wantedPosition', playerSplit[1]);
-                if (playerModel) {
-                    playerArr.push(playerModel);
-                }
-            });
-            */
             App.viewingPlayerTeamCollection.reset(playerArr);
             var userPitch = new MatchLineupView({
                 collection: App.viewingPlayerTeamCollection
@@ -147,7 +135,7 @@ define([
             App.viewingPlayerTeamCollection.each(function (value, key){
                 var playerCard = this.squadTemplate(value.attributes);
                 var player_card = document.createElement("div");
-                player_card.className = "col-xs-6 col-sm-4 col-lg-3 player_profile";
+                player_card.className = "col-xs-6 col-sm-3 col-lg-2 player_profile";
                 player_card.innerHTML = playerCard;
                 this.$('#squad-list').append(player_card);
             }, this);
@@ -161,12 +149,21 @@ define([
                 App.userDetails.hasFullSquad() &&
                 App.viewingPlayer.hasFullSquad();
         },
+        renderUserRating: function(){
+            var starRating = Math.round(App.viewingPlayer.toJSON().teamStarRating);
+            for(i=0;i<5;i++){
+                if(i<starRating){
+                    this.$('#user-teamrating #stars').append('<img src="images/starFilled.png" />');
+                }else{
+                    this.$('#user-teamrating #stars').append('<img src="images/starEmpty.png" />');
+                }
+            }
+        },
 
         render: function () {
             var socialLinks = SocialModel.getShareTeamURLs({
                 url: document.location.href
             });
-            console.log(App.viewingPlayer.toJSON());
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON(),
@@ -178,6 +175,7 @@ define([
             this.$el.append(this.template(this.templateData));
             this.renderPitch();
             this.renderPlayerCards();
+            this.renderUserRating();
 
             var userRecord = new UserRecordView({
                 userID: App.viewingPlayer.get('guardianID')

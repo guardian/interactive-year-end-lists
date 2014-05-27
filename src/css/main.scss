@@ -66,6 +66,10 @@ figure.interactive {
         padding-top: 0.8rem;
     }
 
+    .invisible{
+        display:none;
+    }
+
     h2{
         font-size: 22px;
         font-size: 2.2rem;
@@ -122,13 +126,29 @@ figure.interactive {
         -webkit-appearance: none;
     }
     .dreamteam-header{
-        height: 340px; // Hard-coded to prevent jumping when inner-image is removed
+        height: auto; // Hard-coded to prevent jumping when inner-image is removed
 
-        background:#005689;
+        // background:#005689;
         margin-bottom:15px;
-        padding:20px;
+        padding:20px 20px 10px 0;
         overflow:hidden;
         position: relative;
+        border-bottom: 2px solid #DFDFDF;
+        margin-bottom:40px;
+        .backButton{
+            background-image: url(../images/backArrow.png);
+            background-size:40px;
+            background-repeat:no-repeat;
+            background-position:left center;
+            padding:10px 0 10px 50px;
+            color:#005689;
+            font-size:16px;
+            font-family:AgateSans;
+            cursor:pointer;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
         .headerIllustration{
             float:right;
             img{
@@ -327,18 +347,21 @@ figure.interactive {
     }
 
     #user-screen{
+        overflow:visible;
         h3{
             border-top: 1px dotted #dfdfdf;
             padding-top:5px;
             font-size:18px;
-            color:#767676;
+            color:#333;
             margin-top:20px;
             margin-bottom:10px;
+            font-family:"EgyptianHeadline";
+            font-weight:200;
         }
     }
     #users-team-container {
         margin-bottom: 20px;
-        padding:0;
+        padding:0 60px 0 0;
         
         h2{
             font-size:42px;
@@ -348,6 +371,15 @@ figure.interactive {
 
     #user-teamrating{
         float:right;
+        font-size:14px;
+        font-family:"AgateSans";
+        color:#FDAE09;
+
+        #stars img{
+            display:inline-block;
+            width:16px;
+            height:16px;
+        }
     }
 
     #user-teamshare{
@@ -400,22 +432,21 @@ figure.interactive {
         padding-right:0;
         clear: both;
         float:right;
-        h3{
-            text-align: center;
+        margin-top:-40px;
+        padding:40px 20px 20px;
+        background: #f8f8f8;
+        h2{
             font-family:EgyptianHeadline;
             font-size:1.5em;
-            font-weight:200;
-            margin-bottom:1em;
-        }
-
-        h4{
-            font-family:EgyptianHeadline;
+            font-weight:900;
+            padding-top:11px;
+            margin-bottom:0;
         }
     }
 
     #users-find{
-        background: #f8f8f8;
-        padding:20px;
+       
+        
     }
     .users-share-container{
         border-bottom: 1px dotted #ddd;
@@ -430,35 +461,44 @@ figure.interactive {
         margin-bottom:20px;
         td{
             vertical-align: middle;
+            background:#fff;
         }
-    }
-
-    .playAgainst{
-        width:100%;
-        padding:80px 0;
-        background:#005689;
-        font-size:1.8em;
-        color:#fff;
-        text-align: center;
-        font-family: TextSans;
-        font-weight:bold;
-    }
-
-    // .recentlyViewed.col-lg-6{
-    //     padding-right:10px;
-    // }
-
-    .viewTeamCell{
+        .viewTeamCell{
         background:#005689;
         padding:10px;
         max-width:40px;
         color:#fff;
         cursor:pointer;
         
-        &:hover{
-            text-decoration:underline;
+            &:hover{
+                background-color:#4490CE;
+            }
         }
     }
+
+    .playAgainst{
+        width:100%;
+        padding:20px 0 19px 100px;
+        background:#005689;
+        font-family:"EgyptianHeadline";
+        font-weight:900;
+        font-size:1.5em;
+        background: #005689 url(../images/cross.png) no-repeat 20px center;
+        background-size:40px;
+        color:#fff;
+        font-weight:bold;
+        cursor:pointer;
+        margin-top:40px;
+        &:hover{
+            background-color:#4490CE;
+        }
+    }
+
+    // .recentlyViewed.col-lg-6{
+    //     padding-right:10px;
+    // }
+
+    
 
 
     /**
@@ -624,6 +664,7 @@ figure.interactive {
     .player_profile .inner{
         padding:5px;
         position:relative;
+        border-radius:2px;
     }
 
     .player_profile .innercard-outline{
@@ -779,9 +820,9 @@ figure.interactive {
         font-weight: bold;
         line-height:1em;
         z-index: 6;
-        color: #fff;
+        color: #333;
         font-family: "AgateSans";
-        background: rgba(0, 86, 137, 0.9);
+        background: rgba(255,255,255, 0.8);
 
         &:hover{
             .remove-icon{
@@ -796,7 +837,7 @@ figure.interactive {
         border-radius:50%;
         transform: rotate(45deg);
         background:#fff;
-        color:#005689;
+        color:#333;
         font-size:20px;
         padding: 1px 0 0 1px;
         margin:0 auto 5px;
@@ -846,7 +887,6 @@ figure.interactive {
             background: #fff;
             padding: 10px;
             position: fixed;
-            border-radius: 6px;
             transform:translate(-50%,-50%);
             top:40%;
             width: 500px;
@@ -1057,7 +1097,7 @@ figure.interactive {
     }
     .playMatchBtn{
         border: 1px solid;
-        border-radius: 4px;
+        // border-radius: 4px;
         color: #aaa;
         text-align: center;
         padding: 14px 0 13px;
@@ -1167,7 +1207,6 @@ figure.interactive {
         width:60%;
         text-align: center;
         cursor: pointer;
-        //transition: transform 0.2s ease-out;
         font-family:"AgateSans", Helvetica;
     }
     .pitch-player span.player-icon {
@@ -1180,11 +1219,11 @@ figure.interactive {
         background-color: rgba(0,0,0,0.1);
         margin: 0 auto 3px;
         box-shadow: inset 0px 0 8px rgba(50, 50, 50, 0.7);
-        //transition:transform 0.5s;
+        transition:transform 0.5s;
     }
     
     .pitch-player.selected span.player-icon {
-        border: 4px solid red;
+        border: 4px solid #fff;
     }
 
     .pitch-player span.player-icon:hover {

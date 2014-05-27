@@ -1,23 +1,31 @@
 <% if(username) { %>
+	<div class="logged-in">
+		<div class="editPageNav">
+			BIG HEADER THING
+		</div>
 
-<h1 id="edit-team"><%= username %> FC</h1>
+		<div class="yourPageNav">
+			<nav class="navBar">
+				<div class="backButton backToEdit">Edit your team</div>
+			</nav>
+		</div>
 
-
-<!-- <p style="position:absolute; margin-top:40px;">Logged in as <%= username %></p> -->
-<nav class="navigation logged-in">
-<button class="goHome">Edit your team</button>
-<% if(squadCount<11){ %>
-	<button class="goPlay notEnoughPlayers" disabled>Play a match <span> <%= 11 - squadCount %> more players</span></button>
+		<div class="userPageNav">
+			<nav class="navBar">
+				<div class="backButton backToTeam">Back to your team</div>
+			</nav>
+		</div>
+	</div>
 <% }else{ %>
-	<button class="goPlay">Play a match</button>
+	<h1>Guardian Dream Team Maker</h1>
+	<h2>Create your own dream team from all the world cups (not logged in<%= username %>)</h2>
+	<nav class="navigation logged-out">
+		<a href="/">Create your own Dream Team</a>
+	</nav>
 <% } %>
-</nav>
 
-<% }else{ %>
-<h1>Guardian Dream Team Maker</h1>
-<h2>Create your own dream team from all the world cups (not logged in<%= username %>)</h2>
-<nav class="navigation logged-out">
-<a href="/">Create your own Dream Team</a>
-</nav>
-<% } %>
-<div class="headerIllustration"><img src="images/illustration.png" /></div>
+
+
+
+
+<!-- <div class="headerIllustration"><img src="images/illustration.png" /></div> -->

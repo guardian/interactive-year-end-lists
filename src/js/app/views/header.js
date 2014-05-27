@@ -15,7 +15,8 @@ define([
         template: _.template(HeaderTemplate),
 
         events: {
-           'click .goHome': 'navigateHome',
+           'click .backToEdit': 'navigateHome',
+           'click .backToTeam': 'playMatch',
            'click .goPlay': 'playMatch'
         },
 
@@ -36,26 +37,43 @@ define([
             });
         },
 
+
         updateOnPageState: function() {
+            console.log('updated page stage to ' + App.pageState);
             if(App.pageState == "editPage"){
-                $('.goHome').addClass('current');
-                $('.goPlay').removeClass('current');
+                $('.editPageNav').removeClass('invisible');
+                $('.yourPageNav').addClass('invisible');
+                $('.userPageNav').addClass('invisible');
             } else if(App.pageState == "userPage"){
-                $('.goPlay').addClass('current');
-                $('.goHome').removeClass('current');
+                    if(App.viewingPlayer.get('guardianID') === App.userDetails.get('guardianID')){
+                        $('.editPageNav').addClass('invisible');
+                        $('.yourPageNav').removeClass('invisible');
+                        $('.userPageNav').addClass('invisible');
+                    }else{
+                        $('.editPageNav').addClass('invisible');
+                        $('.yourPageNav').addClass('invisible');
+                        $('.userPageNav').removeClass('invisible');
+                    }
+            } else if(App.pageState == "resultPage"){
+                $('.editPageNav').addClass('invisible');
+                $('.yourPageNav').addClass('invisible');
+                $('.userPageNav').removeClass('invisible');
             }
+            
         },
 
         render: function () {
+            console.log('rendered page stage to ' + App.pageState);
             var templateHTML = this.template({
-                message: 'TESTING',
                 squadCount: App.userDetails.getSquadCount(),
                 username: App.userDetails.get('username'),
                 userID: App.userDetails.get('guardianID')
             });
 
             this.$el.html(templateHTML);
-            //this.updateOnPageState();            
+
+            this.updateOnPageState();
+           
             return this;
         }
     });

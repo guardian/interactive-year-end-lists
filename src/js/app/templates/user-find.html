@@ -1,32 +1,40 @@
-
 <div class="row clearfix">
-    <h3>Play against someone else's team</h3>
-    <div class="col-xs-12 col-lg-6 opponentTable recentlyViewed">
-        <h4>Recently Viewed</h4>
+    <h2>Play against someone else's team</h2>
+    <div class="col-xs-12 opponentTable recentlyViewed">
+        <h3>Recently Viewed</h3>
         <table class="table">
             <% _.each(recentUsers, function(user) { %>
                 <tr>
-
                     <td><%= user.un  %></td>
                     <td class="viewTeamCell viewTeam" data-guardian-id="<%= user.id %>">
                         Team &raquo;
                     </td>
-
                 </tr>
             <% }) %>
         </table>
     </div>
-    <div class="col-xs-12 col-lg-6 opponentTable">
-        <h4>Guardian Opponents</h4>
+    <div class="col-xs-12 opponentTable">
+        <h3>Guardian Opponents</h3>
         <table class="table">
             <% _.each(specialUsers, function(user) { %>
                 <tr>
-
                     <td><%= user.name  %></td>
                     <td class="viewTeamCell viewTeam" data-guardian-id="<%= user.guardianid %>">
                         Team &raquo;
                     </td>
-
+                </tr>
+            <% }) %>
+        </table>
+    </div>
+    <div class="col-xs-12 opponentTable">
+        <h3>Recent matches</h3>
+        <table class="table">
+            <% _.each(specialUsers, function(user) { %>
+                <tr>
+                    <td><%= user.name  %></td>
+                    <td class="viewTeamCell viewTeam" data-guardian-id="<%= user.guardianid %>">
+                        Team &raquo;
+                    </td>
                 </tr>
             <% }) %>
         </table>
