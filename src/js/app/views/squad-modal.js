@@ -48,9 +48,11 @@ define([
             this.$el.show();
         },
 
-        closeCard: function () {
+        closeCard: function (e) {
             Backbone.trigger('playercard_closed');
-            this.position = null;
+            if (e.id) {
+                this.position = null;
+            }
             this.model = null;
             this.$el.hide();
         },
@@ -72,10 +74,11 @@ define([
             }
 
             var positionUID = App.userDetails.get('player'+this.position);
+
             var html = this.template({
                 player: this.model.toJSON(),
                 canRemove: this.model.get('uid') === positionUID,
-                position: App.userDetails.isLoggedIn() && this.position !== null
+                position: App.userDetails.isLoggedIn() && !isNaN(parseInt(this.position, 10))
             });
             this.$el.html(html);
             this.delegateEvents();
