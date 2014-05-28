@@ -72,7 +72,7 @@ define([
         Backbone.on('dataReady', function () {
             // Load the current users team
             App.userDetails.fetchUserTeamFromStorage();
-            App.$el.prepend(App.header.render().el);
+            App.$el.prepend(App.header.el);
             
             // Listen to window resize and trigger event
             $(window).resize(_.debounce(App.handleResize, 200));

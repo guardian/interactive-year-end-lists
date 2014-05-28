@@ -21,7 +21,7 @@ define([
         },
 
         initialize: function () {
-            App.userDetails.on('change', this.render, this);
+            App.userDetails.on('playersChanged', this.render, this);
             Backbone.on('pageStateChange', this.updateOnPageState, this);
         },
 
@@ -39,7 +39,6 @@ define([
 
 
         updateOnPageState: function() {
-            console.log('updated page stage to ' + App.pageState);
             if(App.pageState == "editPage"){
                 $('.editPageNav').removeClass('invisible');
                 $('.yourPageNav').addClass('invisible');
@@ -63,7 +62,6 @@ define([
         },
 
         render: function () {
-            console.log('rendered page stage to ' + App.pageState);
             var templateHTML = this.template({
                 squadCount: App.userDetails.getSquadCount(),
                 username: App.userDetails.get('username'),
@@ -71,7 +69,6 @@ define([
             });
 
             this.$el.html(templateHTML);
-
             this.updateOnPageState();
            
             return this;
