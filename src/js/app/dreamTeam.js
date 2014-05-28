@@ -105,8 +105,6 @@ define([
         App.$el = $(el);
         App.superView = new SuperView();
         App.$el.html(App.superView.render().el);
-        //App.$el.prepend(App.notify.render().el);
-
     }
 
     return {

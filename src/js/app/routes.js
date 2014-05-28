@@ -1,16 +1,10 @@
 define([
     'app',
     'backbone',
-    'views/user',
-    'views/squad',
-    'views/match',
     'models/match'
 ], function (
     App,
     Backbone,
-    UserView,
-    SquadView,
-    MatchView,
     MatchModel
 ) {
     return Backbone.Router.extend({
