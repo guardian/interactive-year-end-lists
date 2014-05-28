@@ -1,28 +1,33 @@
+<img src="images/dreamteam_logo.png" class="dreamteamLogo"/>
 <% if(username) { %>
-	<div class="logged-in">
+	<nav class="logged-in">
 		<div class="editPageNav">
-			BIG HEADER THING
+			<p>Create your team first to play against someone else</p>
 		</div>
 
 		<div class="yourPageNav">
-			<nav class="navBar">
 				<div class="backButton backToEdit">Edit your team</div>
-			</nav>
 		</div>
 
 		<div class="userPageNav">
+			<% if(squadCount !== 11) { %>
 			<nav class="navBar">
 				<div class="backButton backToTeam">Back to your team</div>
 			</nav>
+			<% } else{ %>
+				<div class="backButton backToTeam">Back to your team</div>
+			<% } %>
 		</div>
-	</div>
+	</nav>
 <% }else{ %>
-	<h1>Guardian Dream Team Maker</h1>
-	<h2>Create your own dream team from all the world cups (not logged in<%= username %>)</h2>
-	<nav class="navigation logged-out">
-		<a href="/">Create your own Dream Team</a>
+	<nav class="logged-out">
+	<img src="images/illustrations.png" />
+		Login with your Guardian-account to create your own team.
+		<button>Create account</button>
 	</nav>
 <% } %>
+
+
 
 
 

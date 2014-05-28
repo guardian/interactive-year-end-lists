@@ -10,12 +10,13 @@ define([
     HeaderTemplate
 ) {
     return Backbone.View.extend({
-        className: 'dreamteam-header',
+        className: 'dreamteam-header clearfix',
         
         template: _.template(HeaderTemplate),
 
         events: {
            'click .backToEdit': 'navigateHome',
+           'click .dreamteamLogo': 'navigateHome',
            'click .backToTeam': 'playMatch',
            'click .goPlay': 'playMatch'
         },
