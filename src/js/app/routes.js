@@ -12,6 +12,7 @@ define([
         routes: {
             'user/:userid(/)': 'showUser',
             'result/:matchid(/)': 'showMatch',
+            '/': 'defaultRoute',
             '*other': 'defaultRoute'
         },
 
