@@ -22,17 +22,12 @@ define([
         },
 
         defaultRoute: function (other) {
-            var squadView = new SquadView({ collection: App.playerCollection });
-            App.superView.empty();
-            App.superView.append(squadView.render().el);
             Backbone.trigger('pageStateChange', 'editPage');
         },
 
         showUser: function (playerid) {
             App.viewingPlayer.clear({ silent: true });
-            App.viewingPlayer.set(App.viewingPlayer.defaults, {
-
-            });
+            App.viewingPlayer.set(App.viewingPlayer.defaults, {});
             App.viewingPlayer.set({ guardianID: playerid });
             App.viewingPlayer.fetchByGuardianId({
                 success: this.handleUserData,
@@ -48,17 +43,11 @@ define([
                 return;
             }
 
-            App.superView.empty();
-            var userView = new UserView({ model: App.viewingPlayer });
-            App.superView.append(userView.render().el);
             Backbone.trigger('pageStateChange', 'userPage');
         },
         
         showMatch: function (matchID) {
-            var matchModel = new MatchModel({_id: matchID});
-            var matchView = new MatchView({ model: matchModel });
-            App.superView.empty();
-            App.superView.append(matchView.render().el);
+            App.matchModel = new MatchModel({_id: matchID});
             Backbone.trigger('pageStateChange', 'resultPage');
         },
 
@@ -71,3 +60,4 @@ define([
 
     });
 });
+
