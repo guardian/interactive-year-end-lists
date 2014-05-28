@@ -61,10 +61,11 @@ define([
 
             this.updateSquadListViews();
         },
-        blurPlayers: function(){
 
+        blurPlayers: function(model){
             this.$('#player_list').addClass('isDragging');
         },
+
         unblurPlayers: function(){
             this.$('#player_list').removeClass('isDragging');
         },
@@ -75,6 +76,29 @@ define([
         },
 
         showPlayers: function(details) {
+            console.log('player clicked', details.positionName);
+            var positionCode = details.positionName.toUpperCase();
+            var positionName = null;
+
+            if (positionCode.match(/LM|CM|RM/gi)) {
+                positionName = 'Midfield';
+            }
+            
+            if (positionCode.match(/ST/gi)) {
+                positionName = 'Attack';
+            }
+
+            if (positionCode.match(/LB|CB|RB/gi)) {
+                positionName = 'Defence';
+            }
+            
+            if (positionCode.match(/GK/gi)) {
+                positionName = 'Goalkeeper';
+            }
+
+            // Set filter to selection pitch position
+            this.$('#players_position').val(positionName).change();
+
             if (!App.isSmallScreen()) {
                 return;
             }

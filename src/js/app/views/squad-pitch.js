@@ -66,11 +66,13 @@ define([
             var target = $(e.currentTarget);
             var UID = target.data('uid');
             var position = $(e.currentTarget).data('position');
+            var positionName = $(e.currentTarget).data('position-name');
             var details = {
                 x: target.offset().left + (target.width() / 2),
                 y: (this.$el.offset().top + this.$el.outerHeight()) - (target.offset().top + target.outerHeight()),
                 model: App.playerCollection.findWhere({ uid: UID }),
-                position: position
+                position: position,
+                positionName: positionName
             };
             
             this.$('.pitch-player').removeClass('selected');

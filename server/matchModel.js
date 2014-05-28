@@ -7,7 +7,7 @@ module.exports = (function Match() {
         playerEffected: 0.5,
         playerEffectedBadly: 0.5,
         chanceConversion: 0.3,
-        redCardGiven: 0.08
+        redCardGiven: 0.06
     };
 
     function getPlayerByID(uid) {

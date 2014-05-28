@@ -33,6 +33,7 @@ define([
 
         initialize: function() {
             this.on('sync', this.fetchUserTeamFromStorage, this);
+            this.on('change', this.checkPlayerCount, this);
             this.identityDetails = null; 
         },
 
@@ -43,6 +44,16 @@ define([
 
             if (playerIDs.length !== _.uniq(playerIDs).length) {
                 return 'Duplicate player IDs detected';
+            }
+        },
+
+        checkPlayerCount: function(model) {
+            var hasPlayerChange =_.some(model.changed, function(val, key) {
+                return key.match('player') !== null;
+            });
+
+            if (hasPlayerChange) {
+                this.trigger('playersChanged', model);
             }
         },
 

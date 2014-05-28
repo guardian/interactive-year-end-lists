@@ -28,8 +28,9 @@ define([
                 specialUsers: App.specialUsers 
             };
 
-            this.getAllUsers();
             this.getRecentlyViewed();
+
+            App.resultsModel.on('change', this.render, this);
         },
 
         navigateToUser: function (e) {
@@ -37,6 +38,10 @@ define([
             App.appRoutes.navigate('/user/' + guardianIDOpponent, {
                 trigger: true
             });
+        },
+
+        outputResults: function() {
+            
         },
 
         // Render of recently viewed users on user page
@@ -59,28 +64,10 @@ define([
             }
         },
 
-        // FIXME: Replace with hardcoded list.
-        getAllUsers: function () {
-            var _thisView = this;
-            $.ajax({
-                // FIXME: Use config for url
-                url: App.getEndpoint() + 'allusers'
-            }).done(function (data) {
-                var userArr = [];
-                $.each(data, function (k, v) {
-                    if (v.teamSelection) {
-                        if (v.teamSelection.split(',').length === 11 && App.userDetails.get('guardianID') !== v.guardianID) {
-                            userArr.push(v);
-                        }
-                    }
-                });
-                this.templateData.users = userArr;
-                this.render();
-            }.bind(this));
-        },
-
         render: function () {
             this.templateData.specialUsers = App.specialUsers;
+            this.templateData.latestMatches = App.resultsModel.get('latestResults');
+            console.log(App.resultsModel);
             this.$el.html(this.template(this.templateData));
             return this;
         }

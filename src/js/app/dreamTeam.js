@@ -12,6 +12,7 @@ define([
     'views/create-match',
     'views/notification',
     'views/header',
+    'views/super',
     'models/match',
     'routes'
 ], function (
@@ -28,6 +29,7 @@ define([
     CreateMatchView,
     NotificationView,
     HeaderView,
+    SuperView,
     MatchModel,
     Routes
 ) {
@@ -66,13 +68,11 @@ define([
 
         App.matchModel = new MatchModel();
         App.createMatch = new CreateMatchView();
-        App.header = new HeaderView();
 
         // Once user and player data is loaded
         Backbone.on('dataReady', function () {
             // Load the current users team
             App.userDetails.fetchUserTeamFromStorage();
-            App.$el.prepend(App.header.render().el);
             
             // Listen to window resize and trigger event
             $(window).resize(_.debounce(App.handleResize, 200));
@@ -101,18 +101,10 @@ define([
      * @param  {element} el DOM element provided from the page ie. <figure>
      */
     function boot(el, config) {
-
-        /**
-         * App.$el is the superView, add Error messages, intros etc.
-         * App.superView is used in the router to render top level pages.
-         */
-        App.$el = $(el);
-        App.$el.html('<div id="dream-team-interactive"></div>');
-        App.superView = App.$el.find('#dream-team-interactive');
-        App.notify = new NotificationView();
-        App.$el.prepend(App.notify.render().el);
-
         init();
+        App.$el = $(el);
+        App.superView = new SuperView();
+        App.$el.html(App.superView.render().el);
     }
 
     return {
