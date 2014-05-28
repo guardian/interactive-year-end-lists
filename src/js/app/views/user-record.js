@@ -21,6 +21,8 @@ define([
             this.templateData = {
                 record: null
             };
+
+            App.resultsModel.on('change', this.render, this);
         },
 
         // 1 => 1, 1.454 => 1.45, 0 => 0
@@ -29,20 +31,11 @@ define([
         },
 
         render: function () {
-            if (this.options.userID) {
-                $.ajax({
-                    // FIXME: Use config for url
-                    url: App.getEndpoint() + 'results/' + this.options.userID
-                }).done(function (data) {
-                    this.templateData = {
-                        record: data
-                    };
-                    this.$el.empty();
-                    this.$el.append(this.template(this.templateData));
-                    return this;
-                }.bind(this));
-            }
-            // console.log(this);
+            this.templateData = {
+                record: App.resultsModel.toJSON() 
+            };
+            this.$el.empty();
+            this.$el.append(this.template(this.templateData));
             return this;
         }
 
