@@ -96,6 +96,9 @@ define([
                 positionName = 'Goalkeeper';
             }
 
+            // Set filter to selection pitch position
+            this.$('#players_position').val(positionName).change();
+
 
             if (!App.isSmallScreen()) {
                 return;
