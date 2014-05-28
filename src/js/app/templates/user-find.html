@@ -29,10 +29,10 @@
     <div class="col-xs-12 opponentTable">
         <h3>Recent matches</h3>
         <table class="table">
-            <% _.each(specialUsers, function(user) { %>
+            <% _.each(latestMatches, function(match) { %>
                 <tr>
-                    <td><%= user.name  %></td>
-                    <td class="viewTeamCell viewTeam" data-guardian-id="<%= user.guardianid %>">
+                    <td><%= match.id  %></td>
+                    <td class="viewTeamCell viewTeam" data-guardian-id="<%= match.user1ID %>">
                         Team &raquo;
                     </td>
                 </tr>

@@ -177,6 +177,7 @@ define([
             this.renderPlayerCards();
             this.renderUserRating();
 
+            
             var userRecord = new UserRecordView({
                 userID: App.viewingPlayer.get('guardianID')
             });

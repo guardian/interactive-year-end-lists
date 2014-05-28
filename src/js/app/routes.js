@@ -1,11 +1,13 @@
 define([
     'app',
     'backbone',
-    'models/match'
+    'models/match',
+    'models/results'
 ], function (
     App,
     Backbone,
-    MatchModel
+    MatchModel,
+    ResultsModel
 ) {
     return Backbone.Router.extend({
 
@@ -37,7 +39,9 @@ define([
                 this.showErrorAndRedirect('No user found!');
                 return;
             }
-
+            App.resultsModel = new ResultsModel();
+            App.resultsModel.set('guardianID', App.viewingPlayer.get('guardianID'));
+            App.resultsModel.fetch();
             Backbone.trigger('pageStateChange', 'userPage');
         },
         

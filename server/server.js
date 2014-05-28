@@ -401,11 +401,29 @@ app.get('/results/:userid', function(req, res) {
             return;
         }
 
+
+        function latestMatches(matches) {
+            var subSetMatches = matches.slice(0, 9);
+            return subSetMatches.map(function(match) {
+                return {
+                    user1ID: match['1'].guardianID,
+                    user1Name: match['1'].username,
+                    user1Goals: match['1'].goals.length,
+                    user2ID: match['2'].guardianID,
+                    user2Name: match['2'].username,
+                    user2Goals: match['2'].goals.length,
+                    id: match._id,
+                    time: match.time
+                };
+            });
+        }
+
         var results = {
             gamesPlayed: matchRecords.length,
             gamesWon:    0,
             gamesDrawn:  0,
-            gamesLost:   0
+            gamesLost:   0,
+            latestResults: latestMatches(matchRecords) 
         };
 
         matchRecords.forEach(function(record) {
