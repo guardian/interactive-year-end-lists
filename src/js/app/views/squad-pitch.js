@@ -23,7 +23,7 @@ define([
             'click .playerOptions .close': 'closeOptions',
             'click .pitch-player' : 'positionSelected',
             'click #clearSelection': 'clearSelection',
-            'click .playMatchBtn': 'playMatch'
+            'click .playMatchBtn.enoughPlayers': 'playMatch'
         },
 
         initialize: function() {
