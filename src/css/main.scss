@@ -1418,15 +1418,13 @@ figure.interactive {
     #matchInfo {
         overflow:hidden;
         border-bottom:2px solid black;
-        margin: 0 15px 30px;
+        margin: 0 0 30px;
     }
 
     .teamName{
         margin:0;
         width:90%;
         word-break: break-word;
-        color:#545454;
-        font-size:26px;
     }
 
     .score{
@@ -1440,10 +1438,14 @@ figure.interactive {
     .scorers{
         clear:both;
         margin-bottom:10px;
+        border-top:1px dotted #DFDFDF;
     }
 
     .teamInfos{
         overflow:hidden;
+    }
+    .teamInfo1, .teamInfo2{
+        padding:0;
     }
 
     #match-screen .player-table {
@@ -1452,6 +1454,28 @@ figure.interactive {
 
     #match-screen .pitch {
         display: none;
+    }
+    #match-screen{
+        h1{
+            font-size:32px;
+            color:#333;
+            padding-top:0;
+        }
+        h4{
+            font-family:"TextSans";
+            font-size:14px;
+            font-weight:bold;
+            display:inline-block;
+            color:#767676;
+            width:70px;
+        }
+    }
+    .match-teams-wrapper{
+        padding:0;
+    }
+
+    .match-stats-wrapper{
+        padding:0;
     }
 
     
@@ -1475,9 +1499,11 @@ figure.interactive {
 
         #user1-pitch{
             padding-right:50px;
+            padding-left:0;
         }
         #user2-pitch{
             padding-left:50px;
+            padding-right:0;
         }
 
         .teamInfo1{
@@ -1491,12 +1517,12 @@ figure.interactive {
             padding-left:50px;
             .teamName{float:right; text-align:right;}
             .score{float:left;}
-            .scorers{text-align:right;}
-            .yellowRedCards{text-align:right;}
+            .scorers{text-align:left;}
+            .yellowRedCards{text-align:left;}
         }
 
         .scorers{
-        margin-top:50px;
+        margin-top:20px;
         min-height:1px;
         }
 
@@ -1521,7 +1547,8 @@ figure.interactive {
         font-size:14px;
         color:#929497;
         margin: 0;
-        display:block;
+        display:inline;
+        color:#767676;
     }
     .home p.scorer {
         float: right;
