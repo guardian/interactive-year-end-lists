@@ -137,7 +137,7 @@ figure.interactive {
         margin-bottom:20px;
         background:#005689;
         .dreamteamLogo{
-            float:right;
+            float:left;
             cursor:pointer;
         }
         .backButton{
@@ -181,10 +181,17 @@ figure.interactive {
         
         nav{
             float:left;
-            padding-top:25px;
+            padding:15px 0;
         }
-        @media (min-width: 61.25em) {
-
+        @media (min-width: 30em) {
+            .dreamteamLogo{
+                float:right;
+                cursor:pointer;
+            }
+            nav{
+                float:left;
+                padding:25px 0 0 0;
+            }
         }
     }
     .visual-prompt {
@@ -254,7 +261,9 @@ figure.interactive {
     .modalWrapper{
         position:relative;
         left:0;
-
+        .player-bio{
+            // margin-top:50px;
+        }
     }
     #squad-pitch {
         z-index: 5;
@@ -279,6 +288,9 @@ figure.interactive {
         .modalWrapper{
             position:absolute;
             left:50%;
+            .player-bio{
+                margin-top:0;
+            }
         }
         #squad-pitch {
         padding:0 0 0 10px;
@@ -324,14 +336,14 @@ figure.interactive {
     #users-team-container {
         margin-top:20px;
         margin-bottom: 20px;
-        padding:0 60px 0 0;
+        padding:0;
         
         h2{
-            font-size:42px;
+            font-size:28px;
             float:left;
             margin-bottom:0;
             overflow: hidden;
-            width:80%;
+            width:70%;
             line-height: 1em;
             text-overflow: ellipsis;
             padding-top: 0;
@@ -367,7 +379,7 @@ figure.interactive {
     }
 
     #users-team{
-        padding:0 20px 0 0;
+        padding:0 ;
         margin-bottom:20px;
     }
      #users-team-header{
@@ -397,7 +409,21 @@ figure.interactive {
         .table-list{
             display:table;
         }
+        #users-team-container {
+            padding:0 60px 0 0;
+        }
+        #users-team{
+            padding:0 20px 0 0;
+        }
+        #users-team-container {
+            h2{
+                font-size:42px;
+                width:80%;
+            }
+        }
     }
+
+   
 
     #squad-list{
         width:auto;
@@ -413,7 +439,7 @@ figure.interactive {
         clear: both;
         float:right;
         margin-top:-20px;
-        padding:40px 20px 20px;
+        padding:20px 10px;
         background: #f8f8f8;
         h2{
             font-family:EgyptianHeadline;
@@ -486,6 +512,9 @@ figure.interactive {
 	 * Player selection
 	 */
     @media (min-width: 56.25em) {
+        #users-find-container{
+            padding:40px 20px 20px;
+        }
         #squad-filters {
             // width: 100%;
             // margin-right: -400px;
@@ -528,7 +557,7 @@ figure.interactive {
              float:left;
 
              &.playerlist-header{
-                display:none;
+                // display:none;
              }
         }
         .filter-container{
@@ -864,8 +893,9 @@ figure.interactive {
         line-height: 1;
         cursor: pointer;
         position:absolute;
-        top:5px;
-        right:5px;
+        top:20px;
+        right:10px;
+        z-index:10;
         img{
             width:14px;
             height:14px;
@@ -900,18 +930,17 @@ figure.interactive {
 
             .player-bio-footer {
                 display: none;
+                padding-top:15px;
             }
         }
 
         .player-bio {
-            padding: 5px 5px;
+            padding: 10px 0 0;
         }
 
         .player-bio-footer {
-            font-size: 13px;
-            margin: 10px 0;
-            border-top: 1px solid #CCC;
-            padding-top: 10px;
+            margin-bottom:0;
+            border-bottom: 1px solid #CCC;
         }
 
         
@@ -936,7 +965,7 @@ figure.interactive {
             background-repeat: no-repeat;
             background-position: 15px center;
             background-size: 18px;
-            margin-top: 10px;
+            margin-top: 0;
             text-align: left;
 
             &:hover{
@@ -954,6 +983,7 @@ figure.interactive {
             font-size: 1.5em;
             padding: 0;
             line-height: 1em;
+            padding-right:25px;
         }
 
         .player-bio-metainfo {
@@ -980,6 +1010,9 @@ figure.interactive {
                 pointer-event: none;
                 -webkit-filter:blur(2px);
             }
+        }
+        .player-bio {
+            padding: 5px;
         }
     }
 
