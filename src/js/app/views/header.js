@@ -27,9 +27,7 @@ define([
         },
 
         navigateHome: function () {
-            App.appRoutes.navigate('/', {
-                trigger: true
-            });
+            App.appRoutes.navigate('home', { trigger: true });
         },
         
         playMatch: function () {

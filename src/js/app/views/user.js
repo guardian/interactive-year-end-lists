@@ -47,14 +47,14 @@ define([
         },
 
         navigateHome: function () {
-            App.appRoutes.navigate('/', {
+            App.appRoutes.navigate('home', {
                 trigger: true
             });
         },
 
         navigateCreateMatch: function (e) {
             var opponentID = $(e.target).data('guardian-id');
-            App.appRoutes.navigate('/match/' + App.userDetails.get('guardianID') + '/' + opponentID, {
+            App.appRoutes.navigate('match/' + App.userDetails.get('guardianID') + '/' + opponentID, {
                 trigger: true
             });
         },
@@ -69,7 +69,7 @@ define([
             newMatch.save({}, {
                 success: function(matchModel) {
                     console.log('saved', matchModel.get('_id'));
-                    App.appRoutes.navigate('/result/' + matchModel.get('_id'), 
+                    App.appRoutes.navigate('result/' + matchModel.get('_id'), 
                                             {trigger: true});
                 },
                 error: function(attributes, err) {

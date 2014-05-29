@@ -14,8 +14,8 @@ define([
         routes: {
             'user/:userid(/)': 'showUser',
             'result/:matchid(/)': 'showMatch',
-            '/': 'defaultRoute',
-            '*other': 'defaultRoute'
+            'home': 'defaultRoute',
+            '*other': 'showErrorAndRedirect'
         },
 
         defaultRoute: function (other) {
@@ -53,10 +53,10 @@ define([
         },
 
         showErrorAndRedirect: function (msg) {
-            App.appRoutes.navigate('/', {
+            console.log('redirect');
+            App.appRoutes.navigate('home', {
                 trigger: true
             });
-            App.notify.showMsg(msg);
         }
 
     });
