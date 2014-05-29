@@ -80,7 +80,7 @@ define([
             console.log('player clicked', details.positionName);
             this.$('.playerlist-header').html('Click on a player to select him for this position');
             var positionCode = details.positionName.toUpperCase();
-            var positionName = null;
+            var positionName = 'all';
 
             if (positionCode.match(/LM|CM|RM/gi)) {
                 positionName = 'Midfield';

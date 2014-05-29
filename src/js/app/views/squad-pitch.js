@@ -64,6 +64,18 @@ define([
 
         positionSelected: function(e) {
             var target = $(e.currentTarget);
+            
+            // Check if selecting an already selected position
+            if (target.hasClass('selected')) {
+               this.removeHighlightPositions();
+               this.$('.pitch-player').removeClass('selected');
+               Backbone.trigger('position_clicked', {
+                   positionName: 'all'               
+               });
+               return;
+            }
+
+
             var UID = target.data('uid');
             var position = $(e.currentTarget).data('position');
             var positionName = $(e.currentTarget).data('position-name');
