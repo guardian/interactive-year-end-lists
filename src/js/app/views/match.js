@@ -25,8 +25,21 @@ define([
         template: _.template(MatchTemplate),
 
         initialize: function() {
+            App.notify.showMsg({msg: 'Fetching match result'});
             this.model.on('sync', this.render, this);
-            this.model.fetch();
+            this.model.fetch({
+                success: function() {
+                    console.log('success');
+                    App.notify.closePrompt();
+                }.bind(this),
+                error: function(attributes, err) {
+                var msg = "Problem fetching match.";
+                    if (err && err.responseJSON && err.responseJSON.msg) {
+                        msg = err.responseJSON.msg;
+                    }
+
+                Backbone.trigger('ERROR', { msg: msg, err: err });
+            }.bind(this)});
         },
 
         // Populate the teamCollections for user
@@ -77,7 +90,6 @@ define([
                 players: App.player1TeamCollection.toJSON()
             }));
             this.$('#user1-pitch').append(user1Pitch.render().$el);
-            
             
             var user2Pitch = new MatchLineupView({
                 collection: App.player2TeamCollection

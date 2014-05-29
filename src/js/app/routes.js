@@ -23,6 +23,7 @@ define([
         },
 
         showUser: function (playerid) {
+            App.notify.showMsg({ msg: 'Fetching user'});
             App.viewingPlayer.clear({ silent: true });
             App.viewingPlayer.set(App.viewingPlayer.defaults, {});
             App.viewingPlayer.set({ guardianID: playerid });
@@ -42,6 +43,7 @@ define([
             App.resultsModel = new ResultsModel();
             App.resultsModel.set('guardianID', App.viewingPlayer.get('guardianID'));
             App.resultsModel.fetch();
+            App.notify.closePrompt();
             Backbone.trigger('pageStateChange', 'userPage');
         },
         

@@ -42,7 +42,7 @@
                     data-position="<%= index %>"
                     data-area="<%= index %>"
                     class="pitch-player pitch-player-taken position-<%= index %>"
-                    data-position-name="<%= positionNames[index].name %>">
+                    <% if (typeof positionNames !== 'undefined') { %>data-position-name="<%= positionNames[index].name %>"> <% } %>
                     <span class="player-icon" title="Drop <%= player.name %>" style="background-image: url(<%= player.picture %>)"></span>
                     <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
                 </li>

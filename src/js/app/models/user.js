@@ -148,9 +148,11 @@ define([
                 
                 App.userDetails.fetchByGuardianId({
                     success: this.handleUserDataResponse.bind(this),
-                    error: function (err) {
-                        console.error('fetchByGuardianId failed: ', err);
-                        console.log(App.userDetails.attributes);
+                    error: function (attributes, err) {
+                        Backbone.trigger('ERROR', {
+                            msg: 'Failed to fetch users details',
+                            err: err
+                        });
                         Backbone.trigger('loaded:userData');
                     }
                 });
@@ -172,7 +174,7 @@ define([
                 }
                 App.userDetails.set('username', username);
             }
-
+            App.notify.closePrompt();
             Backbone.trigger('loaded:userData');
         },
 
