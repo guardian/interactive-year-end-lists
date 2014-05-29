@@ -54,6 +54,8 @@ define([
         },
 
         handleSquadChange: function() {
+            this.$('.playerlist-header').html('Select 11 players to begin');
+            
             if (App.isSmallScreen()) {
                this.hidePlayers();
                return;
@@ -67,7 +69,6 @@ define([
         },
 
         unblurPlayers: function(){
-            this.$('.playerlist-header').html('Select 11 players to begin');
             this.$('#player_list').removeClass('isDragging');
         },
 
@@ -77,8 +78,12 @@ define([
         },
 
         showPlayers: function(details) {
-            console.log('player clicked', details.positionName);
-            this.$('.playerlist-header').html('Click on a player to select him for this position');
+            if (details.positionName === 'all') {
+                this.$('.playerlist-header').html('Select 11 players to begin');
+            } else { 
+                this.$('.playerlist-header').html('Click on a player to select him for this position');
+            }
+
             var positionCode = details.positionName.toUpperCase();
             var positionName = 'all';
 

@@ -1,11 +1,13 @@
 define([
     'app',
     'backbone',
+    'jquery',
     'underscore',
     'text!templates/header.html'
 ], function (
     App,
     Backbone,
+    $,
     _,
     HeaderTemplate
 ) {
@@ -68,6 +70,11 @@ define([
             });
 
             this.$el.html(templateHTML);
+
+            this.$('.editPageNav').addClass('invisible');
+            this.$('.yourPageNav').addClass('invisible');
+            this.$('.userPageNav').addClass('invisible');
+
             this.updateOnPageState();
            
             return this;

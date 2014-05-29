@@ -24,6 +24,15 @@ define([
 
         showUser: function (playerid) {
             App.notify.showMsg({ msg: 'Fetching user'});
+            
+            // Check if user is viewing their own profile
+            if (App.userDetails.get('guardianID') === playerid) {
+                App.viewingPlayer = App.userDetails.clone();
+                this.handleUserData(App.viewingPlayer);
+                return;
+            }
+            
+            // Different user so fetch from server
             App.viewingPlayer.clear({ silent: true });
             App.viewingPlayer.set(App.viewingPlayer.defaults, {});
             App.viewingPlayer.set({ guardianID: playerid });
