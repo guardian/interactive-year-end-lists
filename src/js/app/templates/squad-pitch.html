@@ -28,12 +28,13 @@
     	</div>
     	<% _.each(players, function(player, index) { %>
             <% if (player.uid === null) { %>
+
             <li class="pitch-player pitch-player-available position-<%= index %>"
                 data-area="<%= index %>"
                 data-position="<%= index %>"
                 data-area="<%= index %>"
                 data-position-name="<%= positionNames[index].name %>">
-                 <span class="player-icon" ></span>
+                 <span class="player-icon" > + </span>
                     <%= positionNames[index].name %>
                 </li>
             <% } else { %>

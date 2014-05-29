@@ -127,21 +127,24 @@ figure.interactive {
     }
     .dreamteam-header{
         height: auto; // Hard-coded to prevent jumping when inner-image is removed
-
-        // background:#005689;
+        color:#fff;
         margin-bottom:15px;
-        padding:20px 20px 10px 0;
+        padding:0 20px 0 20px;
         overflow:hidden;
         position: relative;
-        border-bottom: 2px solid #DFDFDF;
-        margin-bottom:40px;
+        margin-bottom:20px;
+        background:#4490CE;
+        .dreamteamLogo{
+            float:right;
+            cursor:pointer;
+        }
         .backButton{
             background-image: url(../images/backArrow.png);
             background-size:40px;
             background-repeat:no-repeat;
             background-position:left center;
             padding:10px 0 10px 50px;
-            color:#005689;
+            color:#fff;
             font-size:16px;
             font-family:AgateSans;
             cursor:pointer;
@@ -149,12 +152,19 @@ figure.interactive {
                 text-decoration: underline;
             }
         }
-        .headerIllustration{
-            float:right;
+        .navBackground{
+            
+            padding:60px 20px;
             img{
-                transform:rotateZ(125deg);
+                position: absolute;
+                top:-20px;
+            }
+            h1{
+                padding:20px 10% 20px 40%;
+                line-height:1.3em;
             }
         }
+
         h1{
             font-size:36px;
             color: #fff;
@@ -167,73 +177,12 @@ figure.interactive {
             width:100%;
         }
         
-        nav.navigation{
-            display:none !important;
-            position: absolute;
-            clear:both;
-            left:20px;
-            bottom:20px;
-            &.logged-out{
-                margin:80px 0 10px;
-            }
-
-            &.logged-in{
-                margin:20px 0 0;
-                display:inline-block;
-            }
-
-            .goHome, .goPlay{
-                background:transparent;
-                color:#fff;
-                padding:5px 0;
-                min-width: 0;
-                display:inline-block;
-                width:auto;
-                vertical-align: top;
-                font-size:22px;
-                font-family:EgyptianHeadline;
-                font-weight:900;
-                line-height: 1em;
-                margin-right:40px;
-
-                &.current{
-                    border-bottom: 2px solid;
-                    &:hover{
-                        color: #fff;
-                    }
-                }
-                &:hover{
-                    color:#4490CE;
-                }
-            }
-
-            .goPlay.notEnoughPlayers{
-                opacity:0.5;
-                line-height:1em;
-                &:hover{
-                        color: #fff;
-                    }
-                span{
-                    display:block;
-                    font-size:13px;
-                    line-height:1.2em;
-                    font-weight:normal
-                }
-            }
+        nav{
+            float:left;
+            padding-top:25px;
         }
         @media (min-width: 61.25em) {
-            h1,h2{
-                width:50%;
-            }
-            h1{
-                float:left;
-            }
-            nav.navigation.logged-in{
-                margin-top:40px;
-                h1{
-                    
-                }
-            }
+
         }
     }
     .visual-prompt {
@@ -356,6 +305,7 @@ figure.interactive {
         }
     }
     #users-team-container {
+        margin-top:20px;
         margin-bottom: 20px;
         padding:0 60px 0 0;
         
@@ -428,7 +378,7 @@ figure.interactive {
         padding-right:0;
         clear: both;
         float:right;
-        margin-top:-40px;
+        margin-top:-20px;
         padding:40px 20px 20px;
         background: #f8f8f8;
         h2{
@@ -812,7 +762,7 @@ figure.interactive {
         left: 0;
         right: 0;
         top: 0;
-        padding:33px 10px 0;
+        padding:50px 10px 0;
         font-size: 14px;
         font-weight: bold;
         line-height:1em;
@@ -823,20 +773,19 @@ figure.interactive {
 
         &:hover{
             .remove-icon{
-                background:transparent;
-                color: #fff;
+                
             }
         }
     }
     .remove-icon{
-        width:30px;
-        height:30px;
+        width:50px;
+        height:50px;
         border-radius:50%;
         transform: rotate(45deg);
-        background:#fff;
-        color:#333;
+        background:#333;
+        color:#fff;
         font-size:20px;
-        padding: 1px 0 0 1px;
+        padding: 11px 0 0 3px;
         margin:0 auto 5px;
         line-height:28px;
     }
@@ -1217,6 +1166,8 @@ figure.interactive {
         margin: 0 auto 3px;
         box-shadow: inset 0px 0 8px rgba(50, 50, 50, 0.7);
         transition:transform 0.5s;
+        font-size:24px;
+        padding-top:6px;
     }
     
     .pitch-player.selected span.player-icon {
