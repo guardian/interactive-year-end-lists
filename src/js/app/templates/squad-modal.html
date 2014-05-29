@@ -3,21 +3,21 @@
     <div class="player-bio-col1">
         <img class="player-bio-picture" src="<%= player.picture %>" alt="Photo of <%= player.name %>" />
 
-        <% if (position) { %>
-            <% if (canRemove) { %>
-                <button class="player-bio-remove">REMOVE</button>
-            <% } else { %>
-                <button class="player-bio-add">ADD</button>
-            <% } %>
-        <% } %>
+        
     </div>
     <div class="player-bio-col2">
         <h2 class="player-bio-name"><%= player.name %></h2>
         <p class="player-bio-metainfo">
             <%= player.position %> - <%= player.countryname %>
         </p>
-        
         <p class="player-bio-copy"><%= player.bio %></p>
+        <% if (position) { %>
+            <% if (canRemove) { %>
+                <button class="player-bio-remove player-bio-button">Remove <%= player.name.substring(player.name.lastIndexOf(" ")+1) %> from this position</button>
+            <% } else { %>
+                <button class="player-bio-add player-bio-button">Add <%= player.name.substring(player.name.lastIndexOf(" ")+1) %> to this position</button>
+            <% } %>
+        <% } %>
     </div>
 
     <p class="player-bio-footer">

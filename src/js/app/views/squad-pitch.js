@@ -23,7 +23,7 @@ define([
             'click .playerOptions .close': 'closeOptions',
             'click .pitch-player' : 'positionSelected',
             'click #clearSelection': 'clearSelection',
-            'click .playMatchBtn': 'playMatch'
+            'click .playMatchBtn.enoughPlayers': 'playMatch'
         },
 
         initialize: function() {
@@ -90,6 +90,7 @@ define([
             this.$('.pitch-player').removeClass('selected');
             target.addClass('selected');
             Backbone.trigger('position_clicked', details);
+            console.log(this.$('body'));
             
             if (App.isSmallScreen()) {
                 e.currentTarget.scrollIntoView(true);

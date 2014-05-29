@@ -11,21 +11,27 @@
 </div>
 
 <div id="users-team-container" class="col-xs-12 col-md-7">
-    <h2><%= details.username %> FC</h2>
-    <div id="user-teamrating">
-        <div id="stars"></div>
-        <p>Starquality</p>
-    </div>
-    <div id="user-teamshare">
-        <h3>Share this team:</h3> 
-        <img src="@@assetPathimages/twitter.svg" /> 
-        <img src="@@assetPathimages/facebook.svg" />
-    </div>
+<<<<<<< HEAD
+    <header id="users-team-header" class="clearfix">
+        <h2><%= details.username %> FC</h2>
+        <div id="user-teamrating">
+            <div id="stars"></div>
+            <p>Starquality</p>
+        </div>
+    </header>
+
     <div id="users-team" class="col-xs-12 col-md-8">
         <h3>Team XI</h3>
         <div id="users-team-inner"></div>
     </div>
-    <div id="usersRecord" class="col-xs-12 col-md-4"></div>
+    <div class="col-xs-12 col-md-4" id="usersRecordWrapper">
+        <div id="usersRecord" class="col-xs-12"></div>
+        <div id="user-teamshare" class="col-xs-12">
+            <h3>Share this team:</h3> 
+            <img src="@@assetPathimages/twitter.svg" /> 
+        <img src="@@assetPathimages/facebook.svg" />
+        </div>
+    </div>
     <div class="clearfix"></div>
     <h3>Playerslist</h3>
     <div id="squad-list"></div>

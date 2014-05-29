@@ -47,7 +47,7 @@ define([
             this.$el.append(this.template({
                 "userDetails": App.userDetails.toJSON()
             }));
-            this.$el.append('<div id="team-screen" class="row"></div>');
+            this.$el.append('<div id="team-screen" class="row clearfix"></div>');
 
             var squadPitch = new SquadPitchView({ model: this.filterModel });
             var squadFilters = new SquadFiltersView({ model: this.filterModel });
