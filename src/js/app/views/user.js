@@ -153,9 +153,9 @@ define([
             var starRating = Math.round(App.viewingPlayer.toJSON().teamStarRating);
             for(i=0;i<5;i++){
                 if(i<starRating){
-                    this.$('#user-teamrating #stars').append('<img src="images/starFilled.png" />');
+                    this.$('#user-teamrating #stars').append('<img src="@@assetPathimages/starFilled.png" />');
                 }else{
-                    this.$('#user-teamrating #stars').append('<img src="images/starEmpty.png" />');
+                    this.$('#user-teamrating #stars').append('<img src="@@assetPathimages/starEmpty.png" />');
                 }
             }
         },
