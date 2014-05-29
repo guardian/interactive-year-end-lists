@@ -31,10 +31,19 @@
         <table class="table">
             <% _.each(latestMatches, function(match) { %>
                 <tr>
-                    <td><%= match.id  %></td>
-                    <td class="viewTeamCell viewTeam" data-guardian-id="<%= match.user1ID %>">
-                        Team &raquo;
-                    </td>
+                    <td>
+                        <a href="#/user/<%= match.user1ID %>">
+                            <%= match.user1Name %>
+                        </a>
+                        <%= match.user1Goals %> - <%= match.user2Goals %>
+                        <a href="#/user/<%= match.user2ID %>">
+                            <%= match.user2Name %>
+                        </a>                   
+
+                    <a class="viewTeamCell viewResult" href="#/result/<%= match.id %>">
+                        Result &raquo;
+                    </a>
+                </td>
                 </tr>
             <% }) %>
         </table>

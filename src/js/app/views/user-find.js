@@ -18,7 +18,8 @@ define([
         template: _.template(UserFindTemplate),
 
         events: {
-            'click .viewTeam': 'navigateToUser'
+            'click .viewTeam': 'navigateToUser',
+            'click .viewResult': 'navigateToResult'  
         },
 
         initialize: function () {
