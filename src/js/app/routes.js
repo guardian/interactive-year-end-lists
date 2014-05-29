@@ -14,8 +14,8 @@ define([
         routes: {
             'user/:userid(/)': 'showUser',
             'result/:matchid(/)': 'showMatch',
-            '/': 'defaultRoute',
-            '*other': 'defaultRoute'
+            'home': 'defaultRoute',
+            '*other': 'showErrorAndRedirect'
         },
 
         defaultRoute: function (other) {
@@ -23,6 +23,7 @@ define([
         },
 
         showUser: function (playerid) {
+            App.notify.showMsg({ msg: 'Fetching user'});
             App.viewingPlayer.clear({ silent: true });
             App.viewingPlayer.set(App.viewingPlayer.defaults, {});
             App.viewingPlayer.set({ guardianID: playerid });
@@ -42,6 +43,7 @@ define([
             App.resultsModel = new ResultsModel();
             App.resultsModel.set('guardianID', App.viewingPlayer.get('guardianID'));
             App.resultsModel.fetch();
+            App.notify.closePrompt();
             Backbone.trigger('pageStateChange', 'userPage');
         },
         
@@ -51,10 +53,10 @@ define([
         },
 
         showErrorAndRedirect: function (msg) {
-            App.appRoutes.navigate('/', {
+            console.log('redirect');
+            App.appRoutes.navigate('home', {
                 trigger: true
             });
-            App.notify.showMsg(msg);
         }
 
     });

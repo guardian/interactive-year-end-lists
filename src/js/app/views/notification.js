@@ -23,8 +23,8 @@ define([
             'click .closePrompt': 'closePrompt'
         },
 
-        showMsg: function(errObj) {
-            this.$msg.text(errObj.msg);
+        showMsg: function(msgObj) {
+            this.$msg.text(msgObj.msg);
             this.$el.show();
         },
 
