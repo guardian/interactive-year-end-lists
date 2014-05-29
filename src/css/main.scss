@@ -517,7 +517,7 @@ figure.interactive {
         z-index: 3;
         padding-top:10px;
 
-        h2{
+        h2{ 
              font-size:22px;
              color:#545454;
              font-family:"EgyptianHeadline";
@@ -526,14 +526,13 @@ figure.interactive {
              margin: 0 30px 0 0;
              padding-top:0;
              float:left;
-             
-             // &.playerlist-header{
-             //    height:59px;
-             //    margin-bottom:20px;
-             //    padding-top:21px;
-             // }
+
+             &.playerlist-header{
+                display:none;
+             }
         }
         .filter-container{
+            display:none;
             margin-top:10px;
             margin-left:-5px;
             float:left;
@@ -566,6 +565,9 @@ figure.interactive {
         }
         .filter-container{
             float:right;
+        }
+        h2,.filter-container{
+            display:initial;
         }
     }
     #squad-filters form .form-group select {
@@ -635,7 +637,6 @@ figure.interactive {
         width:auto;
         margin: 0 -5px;
         &.isDragging{
-            opacity:0.5;
         }
     }
     .player_profile {
@@ -863,8 +864,12 @@ figure.interactive {
         line-height: 1;
         cursor: pointer;
         position:absolute;
-        top:15px;
+        top:5px;
         right:5px;
+        img{
+            width:14px;
+            height:14px;
+        }
     }
     
     .player-card {
