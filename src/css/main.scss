@@ -252,8 +252,8 @@ figure.interactive {
         }
     }
     .modalWrapper{
-        position:absolute;
-        left:50%;
+        position:relative;
+        left:0;
 
     }
     #squad-pitch {
@@ -276,6 +276,10 @@ figure.interactive {
         padding: 0 0 20px 0;
     }
     @media (min-width:30em){
+        .modalWrapper{
+            position:absolute;
+            left:50%;
+        }
         #squad-pitch {
         padding:0 0 0 10px;
         margin-top:-20px;
@@ -511,7 +515,7 @@ figure.interactive {
         left: 15px;
         right: 15px;
         z-index: 3;
-        
+        padding-top:10px;
 
         h2{
              font-size:22px;
@@ -530,7 +534,9 @@ figure.interactive {
              // }
         }
         .filter-container{
-            float:right;
+            margin-top:10px;
+            margin-left:-5px;
+            float:left;
             h3{
                 color:#545454;
                 font-family:"AgateSans";
@@ -557,6 +563,9 @@ figure.interactive {
         #squad-filters form {
             height:59px;
             padding-top:17px;
+        }
+        .filter-container{
+            float:right;
         }
     }
     #squad-filters form .form-group select {
@@ -627,8 +636,6 @@ figure.interactive {
         margin: 0 -5px;
         &.isDragging{
             opacity:0.5;
-            pointer-event: none;
-            -webkit-filter:blur(2px);
         }
     }
     .player_profile {
@@ -856,7 +863,7 @@ figure.interactive {
         line-height: 1;
         cursor: pointer;
         position:absolute;
-        top:5px;
+        top:15px;
         right:5px;
     }
     
@@ -960,6 +967,15 @@ figure.interactive {
         }
 
         
+    }
+    @media(min-width:30em){
+        #player_list{
+            &.isDragging{
+                opacity:0.5;
+                pointer-event: none;
+                -webkit-filter:blur(2px);
+            }
+        }
     }
 
 
