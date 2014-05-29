@@ -1,12 +1,4 @@
-<!--
-<% if(squadCount !== null) { %>
-<div class="your-team-details">
-	<h2>Daan F.C.</h2>
-	<div class="team-picture"><img src="../images/avatar.png"/></div>
-    <button id="goToMatch" class="<%= squadCount === 11 ? 'enabled' : 'disabled' %>"><%= squadCount === 11 ? 'Go play a match!' : 11-squadCount+ ' more players to start playing' %></button>
-</div>
-<% } %>
--->
+
 <div id="squad-pitch-inner">
     <% if(squadCount !== null) { %>
         <div class="your-team-details">
@@ -32,7 +24,7 @@
                 data-position="<%= index %>"
                 data-area="<%= index %>"
                 data-position-name="<%= positionNames[index].name %>">
-                 <span class="player-icon" > + </span>
+                 <span class="player-icon" > <img src="images/plusIcon.png" /> </span>
                     <%= positionNames[index].name %>
                 </li>
             <% } else { %>
@@ -57,17 +49,7 @@
     <h3><span id="clearSelection">clear selection</span></h3>
 
 
- <!--    <% if(squadCount === null) { %>
-    <table class="table player-table">
-        <tbody>
-            <% _.each(players, function(player, position) { %>
-                <tr>
-                    <td><%= player.name %></td>
-                </tr>
-            <% }) %>
-        </tbody>
-    </table>
-    <% } %> -->
+
     
 
     

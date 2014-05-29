@@ -78,6 +78,7 @@ define([
             this.$('.pitch-player').removeClass('selected');
             target.addClass('selected');
             Backbone.trigger('position_clicked', details);
+            console.log(this.$('body'));
             
             if (App.isSmallScreen()) {
                 e.currentTarget.scrollIntoView(true);
