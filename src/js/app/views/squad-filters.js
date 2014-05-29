@@ -78,7 +78,7 @@ define([
         showPlayers: function(details) {
             console.log('player clicked', details.positionName);
             var positionCode = details.positionName.toUpperCase();
-            var positionName = null;
+            var positionName = 'all';
 
             if (positionCode.match(/LM|CM|RM/gi)) {
                 positionName = 'Midfield';
