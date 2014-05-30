@@ -82,25 +82,25 @@ define([
             var user1Pitch = new MatchLineupView({
                 collection: App.player1TeamCollection
             });
-            this.$('#user1-pitch').empty();
+            this.$('#user1-pitch .pitch-container').empty();
 
             var pitchTemplate = _.template(PitchTemplate);
-            this.$('#user1-pitch').append(pitchTemplate({
+            this.$('#user1-pitch .pitch-container').append(pitchTemplate({
                 squadCount: null,
                 players: App.player1TeamCollection.toJSON()
             }));
-            this.$('#user1-pitch').append(user1Pitch.render().$el);
+            this.$('#user1-pitch .pitch-container').append(user1Pitch.render().$el);
             
             var user2Pitch = new MatchLineupView({
                 collection: App.player2TeamCollection
             });
-            this.$('#user2-pitch').empty();
+            this.$('#user2-pitch .pitch-container').empty();
 
-            this.$('#user2-pitch').append(pitchTemplate({
+            this.$('#user2-pitch .pitch-container').append(pitchTemplate({
                 squadCount: null,
                 players: App.player2TeamCollection.toJSON()
             }));
-            this.$('#user2-pitch').append(user2Pitch.render().$el);
+            this.$('#user2-pitch .pitch-container').append(user2Pitch.render().$el);
             
             
             /**

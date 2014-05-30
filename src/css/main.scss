@@ -154,18 +154,7 @@ figure.interactive {
                 text-decoration: underline;
             }
         }
-        .navBackground{
-            
-            padding:60px 20px;
-            img{
-                position: absolute;
-                top:-20px;
-            }
-            h1{
-                padding:20px 10% 20px 40%;
-                line-height:1.3em;
-            }
-        }
+        
 
         h1{
             font-size:36px;
@@ -183,7 +172,7 @@ figure.interactive {
             float:left;
             padding:15px 0;
         }
-        @media (min-width: 30em) {
+        @media (min-width: 56.25em) {
             .dreamteamLogo{
                 float:right;
                 cursor:pointer;
@@ -284,7 +273,7 @@ figure.interactive {
         transition: background 0.2s;
         padding: 0 0 20px 0;
     }
-    @media (min-width:30em){
+    @media (min-width:56.25em){
         .modalWrapper{
             position:absolute;
             left:50%;
@@ -587,7 +576,7 @@ figure.interactive {
         padding: 10px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
-    @media (min-width: 30em) {
+    @media (min-width: 56.25em) {
         #squad-filters form {
             height:59px;
             padding-top:17px;
@@ -1003,7 +992,7 @@ figure.interactive {
 
         
     }
-    @media(min-width:30em){
+    @media(min-width:56.25em){
         #player_list{
             &.isDragging{
                 opacity:0.5;
@@ -1417,21 +1406,28 @@ figure.interactive {
     }
     #matchInfo {
         overflow:hidden;
-        border-bottom:2px solid black;
-        margin: 0 0 30px;
+        border-bottom: 1px dotted #dfdfdf;
+        margin: 0 0 10px;
+        // text-align: center;
+        padding: 0 0 10px;
+        p{
+            display:block;
+            font-family:"AgateSans";
+        }
+        div{
+            padding:0;
+        }
     }
 
     .teamName{
         margin:0;
-        width:90%;
         word-break: break-word;
     }
 
     .score{
-        width:10%;
         color:#545454;
         font-size:40px;
-        margin:0;
+        margin:0 0 10px;
         padding:0;
     }
 
@@ -1439,13 +1435,19 @@ figure.interactive {
         clear:both;
         margin-bottom:10px;
         border-top:1px dotted #DFDFDF;
+        padding-top:5px;
+        margin-top:10px;
     }
 
     .teamInfos{
         overflow:hidden;
     }
-    .teamInfo1, .teamInfo2{
-        padding:0;
+    .teamInfo1{
+        padding:0 10px 0 0;
+        text-align:right;
+    }
+    .teamInfo2{
+         padding:0 0 0 10px;
     }
 
     #match-screen .player-table {
@@ -1457,9 +1459,23 @@ figure.interactive {
     }
     #match-screen{
         h1{
-            font-size:32px;
+            font-size:28px;
             color:#333;
             padding-top:0;
+            a{
+                color:#333;
+            }
+        }
+        h3{
+            border-top: 1px dotted #dfdfdf;
+            padding-top:5px;
+            font-size:18px;
+            color:#333;
+            margin-top:20px;
+            margin-bottom:10px;
+            font-family:"EgyptianHeadline";
+            font-weight:200;
+            padding-bottom:0;
         }
         h4{
             font-family:"TextSans";
@@ -1468,6 +1484,15 @@ figure.interactive {
             display:inline-block;
             color:#767676;
             width:70px;
+        }
+        #squad-pitch-inner{
+            padding:0;
+            h3{
+                display:none;
+            }
+        }
+        .pitch-player{
+            cursor:default;
         }
     }
     .match-teams-wrapper{
@@ -1478,8 +1503,30 @@ figure.interactive {
         padding:0;
     }
 
+    #user1-pitch{
+        padding-left:0;
+        padding-right:10px;
+    }
+    #user2-pitch{
+        padding-right:0;
+        padding-left:10px;
+    }
+
     
     @media (min-width: 56.25em) {
+        #match-screen{
+            h1{
+                font-size:32px;
+            }
+        }
+        .teamName{
+            width:90%;
+        }
+
+        .score{
+            width:10%;
+            margin:0;
+        }
         #match-screen .player-table {
             display: none;
         }
@@ -1499,15 +1546,14 @@ figure.interactive {
 
         #user1-pitch{
             padding-right:50px;
-            padding-left:0;
         }
         #user2-pitch{
             padding-left:50px;
-            padding-right:0;
         }
 
         .teamInfo1{
             padding-right:50px;
+            text-align: left;
             .teamName{float:left;}
             .score{float:right; text-align:right;}
 
@@ -1527,7 +1573,7 @@ figure.interactive {
         }
 
         .teamInfos{
-            margin-bottom:30px;
+            // margin-bottom:30px;
         }
 
 
