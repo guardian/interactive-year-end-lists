@@ -229,7 +229,6 @@ define([
                     this.identityDetails = App.toolkitObj.api.getUserFromCookie();
                 }
             }
-
             return this.identityDetails;
         }
 

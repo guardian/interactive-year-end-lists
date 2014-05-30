@@ -5,8 +5,8 @@ module.exports = function(grunt) {
 
     settings: {
       localWebServer:   'http://localhost:9000/',
-      remoteWebServer:  'http://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/2014/jun/dreamteam_code_test/',
-      s3Folder: '/next-gen/football/ng-interactive/2014/jun/dreamteam_code_test/'
+      remoteWebServer:  'http://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/2014/jun/world-cup-2014-dream-team/',
+      s3Folder: '/next-gen/football/ng-interactive/2014/jun/world-cup-2014-dream-team/'
     },
 
     // Local web server
@@ -113,7 +113,7 @@ module.exports = function(grunt) {
           options: {
               replacements: [{
                   pattern: '\'@@useDebugUser\'',
-                  replacement: grunt.option('debug') ? 'true' : 'true'
+                  replacement: grunt.option('debug') ? 'false' : 'false'
               }]
           }
         },
@@ -293,10 +293,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-gss-fetch');
 
   // Tasks
-  grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace', 'uglify']);
+  grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
   grunt.registerTask('default', ['build', 'concurrent:watchers']);
   grunt.registerTask('deploy-server', ['shell']);
-  grunt.registerTask('deploy-s3', ['build', 's3:prod']);
+  grunt.registerTask('deploy-s3', ['build','uglify', 's3:prod']);
   grunt.registerTask('deploy-s3-test', ['build', 's3:test']);
 };
 

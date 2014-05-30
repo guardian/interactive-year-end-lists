@@ -63,8 +63,8 @@ define([
 
 
         // TODO: Switch from Google spreadsheet
-        App.playerCollection.fetchGoogleData();
-        // App.playerCollection.fetchLocalData();
+        //App.playerCollection.fetchGoogleData();
+        App.playerCollection.fetchLocalData();
 
         App.matchModel = new MatchModel();
         App.createMatch = new CreateMatchView();
