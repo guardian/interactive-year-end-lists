@@ -20,7 +20,7 @@ define([
     return Backbone.View.extend({
         id: 'match-screen',
         
-        className: 'container',
+        className: 'container clearfix',
         
         template: _.template(MatchTemplate),
 

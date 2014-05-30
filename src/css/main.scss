@@ -137,7 +137,7 @@ figure.interactive {
         margin-bottom:20px;
         background:#005689;
         .dreamteamLogo{
-            float:right;
+            float:left;
             cursor:pointer;
         }
         .backButton{
@@ -181,10 +181,17 @@ figure.interactive {
         
         nav{
             float:left;
-            padding-top:25px;
+            padding:15px 0;
         }
-        @media (min-width: 61.25em) {
-
+        @media (min-width: 30em) {
+            .dreamteamLogo{
+                float:right;
+                cursor:pointer;
+            }
+            nav{
+                float:left;
+                padding:25px 0 0 0;
+            }
         }
     }
     .visual-prompt {
@@ -254,7 +261,9 @@ figure.interactive {
     .modalWrapper{
         position:relative;
         left:0;
-
+        .player-bio{
+            // margin-top:50px;
+        }
     }
     #squad-pitch {
         z-index: 5;
@@ -279,6 +288,9 @@ figure.interactive {
         .modalWrapper{
             position:absolute;
             left:50%;
+            .player-bio{
+                margin-top:0;
+            }
         }
         #squad-pitch {
         padding:0 0 0 10px;
@@ -323,14 +335,14 @@ figure.interactive {
     #users-team-container {
         margin-top:20px;
         margin-bottom: 20px;
-        padding:0 60px 0 0;
+        padding:0;
         
         h2{
-            font-size:42px;
+            font-size:28px;
             float:left;
             margin-bottom:0;
             overflow: hidden;
-            width:80%;
+            width:70%;
             line-height: 1em;
             text-overflow: ellipsis;
             padding-top: 0;
@@ -366,7 +378,7 @@ figure.interactive {
     }
 
     #users-team{
-        padding:0 20px 0 0;
+        padding:0 ;
         margin-bottom:20px;
     }
      #users-team-header{
@@ -396,7 +408,21 @@ figure.interactive {
         .table-list{
             display:table;
         }
+        #users-team-container {
+            padding:0 60px 0 0;
+        }
+        #users-team{
+            padding:0 20px 0 0;
+        }
+        #users-team-container {
+            h2{
+                font-size:42px;
+                width:80%;
+            }
+        }
     }
+
+   
 
     #squad-list{
         width:auto;
@@ -412,7 +438,7 @@ figure.interactive {
         clear: both;
         float:right;
         margin-top:-20px;
-        padding:40px 20px 20px;
+        padding:20px 10px;
         background: #f8f8f8;
         h2{
             font-family:EgyptianHeadline;
@@ -485,6 +511,9 @@ figure.interactive {
 	 * Player selection
 	 */
     @media (min-width: 56.25em) {
+        #users-find-container{
+            padding:40px 20px 20px;
+        }
         #squad-filters {
             // width: 100%;
             // margin-right: -400px;
@@ -516,7 +545,7 @@ figure.interactive {
         z-index: 3;
         padding-top:10px;
 
-        h2{
+        h2{ 
              font-size:22px;
              color:#545454;
              font-family:"EgyptianHeadline";
@@ -525,14 +554,13 @@ figure.interactive {
              margin: 0 30px 0 0;
              padding-top:0;
              float:left;
-             
-             // &.playerlist-header{
-             //    height:59px;
-             //    margin-bottom:20px;
-             //    padding-top:21px;
-             // }
+
+             &.playerlist-header{
+                // display:none;
+             }
         }
         .filter-container{
+            display:none;
             margin-top:10px;
             margin-left:-5px;
             float:left;
@@ -565,6 +593,9 @@ figure.interactive {
         }
         .filter-container{
             float:right;
+        }
+        h2,.filter-container{
+            display:initial;
         }
     }
     #squad-filters form .form-group select {
@@ -634,7 +665,6 @@ figure.interactive {
         width:auto;
         margin: 0 -5px;
         &.isDragging{
-            opacity:0.5;
         }
     }
     .player_profile {
@@ -862,8 +892,13 @@ figure.interactive {
         line-height: 1;
         cursor: pointer;
         position:absolute;
-        top:15px;
-        right:5px;
+        top:20px;
+        right:10px;
+        z-index:10;
+        img{
+            width:14px;
+            height:14px;
+        }
     }
     
     .player-card {
@@ -894,18 +929,17 @@ figure.interactive {
 
             .player-bio-footer {
                 display: none;
+                padding-top:15px;
             }
         }
 
         .player-bio {
-            padding: 5px 5px;
+            padding: 10px 0 0;
         }
 
         .player-bio-footer {
-            font-size: 13px;
-            margin: 10px 0;
-            border-top: 1px solid #CCC;
-            padding-top: 10px;
+            margin-bottom:0;
+            border-bottom: 1px solid #CCC;
         }
 
         
@@ -930,7 +964,7 @@ figure.interactive {
             background-repeat: no-repeat;
             background-position: 15px center;
             background-size: 18px;
-            margin-top: 10px;
+            margin-top: 0;
             text-align: left;
 
             &:hover{
@@ -948,6 +982,7 @@ figure.interactive {
             font-size: 1.5em;
             padding: 0;
             line-height: 1em;
+            padding-right:25px;
         }
 
         .player-bio-metainfo {
@@ -974,6 +1009,9 @@ figure.interactive {
                 pointer-event: none;
                 -webkit-filter:blur(2px);
             }
+        }
+        .player-bio {
+            padding: 5px;
         }
     }
 
@@ -1379,15 +1417,13 @@ figure.interactive {
     #matchInfo {
         overflow:hidden;
         border-bottom:2px solid black;
-        margin: 0 15px 30px;
+        margin: 0 0 30px;
     }
 
     .teamName{
         margin:0;
         width:90%;
         word-break: break-word;
-        color:#545454;
-        font-size:26px;
     }
 
     .score{
@@ -1401,10 +1437,14 @@ figure.interactive {
     .scorers{
         clear:both;
         margin-bottom:10px;
+        border-top:1px dotted #DFDFDF;
     }
 
     .teamInfos{
         overflow:hidden;
+    }
+    .teamInfo1, .teamInfo2{
+        padding:0;
     }
 
     #match-screen .player-table {
@@ -1413,6 +1453,28 @@ figure.interactive {
 
     #match-screen .pitch {
         display: none;
+    }
+    #match-screen{
+        h1{
+            font-size:32px;
+            color:#333;
+            padding-top:0;
+        }
+        h4{
+            font-family:"TextSans";
+            font-size:14px;
+            font-weight:bold;
+            display:inline-block;
+            color:#767676;
+            width:70px;
+        }
+    }
+    .match-teams-wrapper{
+        padding:0;
+    }
+
+    .match-stats-wrapper{
+        padding:0;
     }
 
     
@@ -1440,9 +1502,11 @@ figure.interactive {
 
         #user1-pitch{
             padding-right:50px;
+            padding-left:0;
         }
         #user2-pitch{
             padding-left:50px;
+            padding-right:0;
         }
 
         .teamInfo1{
@@ -1456,12 +1520,12 @@ figure.interactive {
             padding-left:50px;
             .teamName{float:right; text-align:right;}
             .score{float:left;}
-            .scorers{text-align:right;}
-            .yellowRedCards{text-align:right;}
+            .scorers{text-align:left;}
+            .yellowRedCards{text-align:left;}
         }
 
         .scorers{
-        margin-top:50px;
+        margin-top:20px;
         min-height:1px;
         }
 
@@ -1486,7 +1550,8 @@ figure.interactive {
         font-size:14px;
         color:#929497;
         margin: 0;
-        display:block;
+        display:inline;
+        color:#767676;
     }
     .home p.scorer {
         float: right;
