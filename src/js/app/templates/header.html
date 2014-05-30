@@ -1,27 +1,26 @@
-<img src="@@assetPathimages/dreamteam_logo.png" class="dreamteamLogo"/>
+
 <% if(username) { %>
 	<nav class="logged-in">
-		<div class="editPageNav">
-			<!-- <p>Create your team, then share it or play a match</p> -->
+		<div class="editPageNav clearfix">
+			<img src="@@assetPathimages/dreamteam_logo.png" class="dreamteamLogo"/>
 		</div>
 
-		<div class="yourPageNav">
+		<div class="yourPageNav clearfix">
 				<div class="backButton backToEdit">Edit your team</div>
+				<img src="@@assetPathimages/dreamteam_logo.png" class="dreamteamLogo"/>
 		</div>
 
-		<div class="userPageNav">
+		<div class="userPageNav clearfix">
 			<% if(squadCount !== 11) { %>
-			<nav class="navBar">
 				<div class="backButton backToTeam">Back to your team</div>
-			</nav>
 			<% } else{ %>
 				<div class="backButton backToTeam">Back to your team</div>
 			<% } %>
+			<img src="@@assetPathimages/dreamteam_logo.png" class="dreamteamLogo"/>
 		</div>
 	</nav>
 <% }else{ %>
 	<nav class="logged-out">
-	<img src="@@assetPathimages/illustrations.png" />
 		Login with your Guardian account to create your own team.
 		<button>Create account</button>
 	</nav>

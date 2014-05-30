@@ -137,8 +137,8 @@ figure.interactive {
         margin-bottom:20px;
         background:#005689;
         .dreamteamLogo{
-            float:left;
             cursor:pointer;
+            float:right;
         }
         .backButton{
             background-image: url(../images/backArrow.png);
@@ -150,11 +150,12 @@ figure.interactive {
             font-size:16px;
             font-family:AgateSans;
             cursor:pointer;
+            float:left;
+            margin-top:25px;
             &:hover{
                 text-decoration: underline;
             }
         }
-        
 
         h1{
             font-size:36px;
@@ -169,17 +170,24 @@ figure.interactive {
         }
         
         nav{
-            float:left;
-            padding:15px 0;
+            padding:0;
+        }
+
+        .editPageNav{
+            padding:20px 0;
+            width:100%;
+            .dreamteamLogo{   
+                margin:0 auto;
+                display:block;
+                float:none;
+            }
         }
         @media (min-width: 56.25em) {
             .dreamteamLogo{
-                float:right;
                 cursor:pointer;
             }
             nav{
-                float:left;
-                padding:25px 0 0 0;
+                padding:0 0 0 0;
             }
         }
     }
@@ -188,16 +196,23 @@ figure.interactive {
     .visual-prompt .inner {
         background-image: url(../images/sad.png);
         background-repeat: no-repeat;
-        background-position: 20px 20px;
+        background-position: 20px center;
+        background-size:50px;
         margin-bottom: 5px;
-        border: 3px solid #ccc;
-        background-color: #EEE;
-        padding: 10px;
+        border: 2px solid #ccc;
+        background-color: #F6F6F6;
+        padding: 30px;
         font-size: 25px;
-        font-family: sans-serif;
-        padding-left: 130px;
-        position: relative;
-
+        font-family: EgyptianHeadline;
+        font-weight:200;
+        padding-left: 90px;
+        position: absolute;
+        width:50%;
+        z-index:100;
+        left:25%;
+        p{
+            margin:0;
+        }
     }
     .visual-prompt .loading {
         width: 10px;
@@ -290,7 +305,7 @@ figure.interactive {
             padding:20px 20px 20px;
         }
         .squad-filters-inner{
-            padding:0 20px 20px;
+            padding:0 20px 20px 0;
             background-color:transparent;
         }
         #squad-filters{
@@ -310,6 +325,9 @@ figure.interactive {
 
     #user-screen{
         overflow:visible;
+        .table-players{
+            display:none;
+        }
         h3{
             border-top: 1px dotted #dfdfdf;
             padding-top:5px;
@@ -436,6 +454,7 @@ figure.interactive {
             padding-top:0;
             margin-bottom:0;
             min-height:40px;
+            display:block;
         }
     }
 
@@ -470,6 +489,28 @@ figure.interactive {
             }
         }
     }
+    .recentMatches{
+        td{
+            text-align: center;
+            padding:10px;
+        }
+        .viewResult{
+            padding:2px 10px;
+            font-size:14px;
+            margin-bottom:5px;
+            a{
+                display:block;
+                width:100%;
+                color:#fff;
+                &:hover{
+                    text-decoration: none;
+                }
+            }
+        }
+        .tableMargin{
+            height:5px;
+        }
+    }
 
     .playAgainst{
         width:100%;
@@ -483,7 +524,7 @@ figure.interactive {
         color:#fff;
         font-weight:bold;
         cursor:pointer;
-        margin-top:40px;
+        margin-top:20px;
         &:hover{
             background-color:#4490CE;
         }
@@ -536,9 +577,9 @@ figure.interactive {
 
         h2{ 
              font-size:22px;
-             color:#545454;
+             color:#333;
              font-family:"EgyptianHeadline";
-             font-weight:200;
+             font-weight:900;
              display:inline-block;
              margin: 0 30px 0 0;
              padding-top:0;
@@ -550,7 +591,6 @@ figure.interactive {
         }
         .filter-container{
             display:none;
-            margin-top:10px;
             margin-left:-5px;
             float:left;
             h3{
@@ -579,12 +619,22 @@ figure.interactive {
         #squad-filters form {
             height:59px;
             padding-top:17px;
-        }
+        
         .filter-container{
-            float:right;
+            float:left;
+            margin-top:5px;
+            clear:both;
         }
         h2,.filter-container{
             display:initial;
+        }
+        }
+    }
+    @media (min-width: 64em) {
+        #squad-filters form .filter-container{
+            float:right;
+            clear:none;
+            margin-top:0;
         }
     }
     #squad-filters form .form-group select {
@@ -1212,6 +1262,9 @@ figure.interactive {
     #team-screen .pitch {
         display: block;
     }
+    #team-screen .table-players{
+        display:none;
+    }
     @media(max-width:1em) {
         .pitch {
             clear: none;
@@ -1405,10 +1458,9 @@ figure.interactive {
     }
     #matchInfo {
         overflow:hidden;
-        border-bottom: 1px dotted #dfdfdf;
-        margin: 0 0 10px;
+        margin: 0;
         // text-align: center;
-        padding: 0 0 10px;
+        padding: 0;
         p{
             display:block;
             font-family:"AgateSans";
@@ -1418,9 +1470,11 @@ figure.interactive {
         }
     }
 
-    .teamName{
+    #match-screen .teamName{
         margin:0;
         word-break: break-word;
+        font-size:18px;
+        font-weight:bold;
     }
 
     .score{
@@ -1501,6 +1555,17 @@ figure.interactive {
     .match-stats-wrapper{
         padding:0;
     }
+    .match-stats-wrapper-inline{
+        display:none;
+    }
+    @media(min-width:81.25em){
+        .match-stats-wrapper{
+            display:none;
+        }
+        .match-stats-wrapper-inline{
+            display:block;
+        }
+    }
 
     #user1-pitch{
         padding-left:0;
@@ -1517,10 +1582,13 @@ figure.interactive {
             h1{
                 font-size:32px;
             }
+            .teamName{
+                width:90%;
+                font-size:32px;
+                font-weight:normal;
+            }
         }
-        .teamName{
-            width:90%;
-        }
+
 
         .score{
             width:10%;

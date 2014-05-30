@@ -23,7 +23,7 @@ define([
         },
 
         showUser: function (playerid) {
-            App.notify.showMsg({ msg: 'Fetching user'});
+            App.notify.showMsg({ msg: 'We couldn\'t load this player'});
             
             // Check if user is viewing their own profile
             if (App.userDetails.get('guardianID') === playerid) {

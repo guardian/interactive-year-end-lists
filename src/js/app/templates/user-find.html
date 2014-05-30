@@ -1,18 +1,6 @@
 <div class="row clearfix">
     <h2>Play against someone else's team</h2>
-    <div class="col-xs-12 opponentTable recentlyViewed">
-        <h3>Recently Viewed</h3>
-        <table class="table">
-            <% _.each(recentUsers, function(user) { %>
-                <tr>
-                    <td><%= user.un  %></td>
-                    <td class="viewTeamCell viewTeam" data-guardian-id="<%= user.id %>">
-                        Team &raquo;
-                    </td>
-                </tr>
-            <% }) %>
-        </table>
-    </div>
+    
     <div class="col-xs-12 opponentTable">
         <h3>Guardian Opponents</h3>
         <table class="table">
@@ -26,8 +14,21 @@
             <% }) %>
         </table>
     </div>
-    <div class="col-xs-12 opponentTable">
-        <h3>Recent matches</h3>
+    <div class="col-xs-12 opponentTable recentlyViewed">
+        <h3>Recently Viewed</h3>
+        <table class="table">
+            <% _.each(recentUsers, function(user) { %>
+                <tr>
+                    <td><%= user.un  %></td>
+                    <td class="viewTeamCell viewTeam" data-guardian-id="<%= user.id %>">
+                        Team &raquo;
+                    </td>
+                </tr>
+            <% }) %>
+        </table>
+    </div>
+    <div class="col-xs-12 opponentTable recentMatches">
+        <h3>Your recent matches</h3>
         <table class="table">
             <% _.each(latestMatches, function(match) { %>
                 <tr>
@@ -40,11 +41,15 @@
                             <%= match.user2Name %>
                         </a>                   
 
-                    <a class="viewTeamCell viewResult" href="#result/<%= match.id %>">
-                        Result &raquo;
-                    </a>
-                </td>
+                    
+                    </td>
                 </tr>
+                <tr>
+                    <td class="viewTeamCell viewResult">
+                        <a href="#result/<%= match.id %>">See match</a>
+                    </td>
+                </tr>
+                <tr class="tableMargin"></tr>
             <% }) %>
         </table>
     </div>
