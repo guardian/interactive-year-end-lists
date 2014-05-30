@@ -305,7 +305,6 @@ figure.interactive {
     .table-players {
         max-width: 300px;
         margin: 20px auto;
-        display: none;
     }
 
     #user-screen{
@@ -1419,6 +1418,10 @@ figure.interactive {
     
     @media (min-width: 56.25em) {
         #match-screen .player-table {
+            display: none;
+        }
+
+        #match-screen .table-players {
             display: none;
         }
 
