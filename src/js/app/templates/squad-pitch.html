@@ -46,6 +46,20 @@
     	</li>
     
     </ol>
+
+<table class="table table-players">
+       <tbody>
+        <% _.each(players, function(player, index) { %>
+            <% if (!_.isEmpty(player.name)) { %>
+                <tr>
+                    <td><%= player.name %></td>
+                </tr>
+            <% } %>
+        <% }) %>
+    </tbody>
+</table>
+
+
     <h3><span id="clearSelection">clear selection</span></h3>
 
 
