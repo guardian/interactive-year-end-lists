@@ -24,6 +24,16 @@ define([
         
         template: _.template(MatchTemplate),
 
+        events: {
+            'click .playAgain': 'playMatch'
+        },
+
+        playMatch: function () {
+            App.appRoutes.navigate('#user/' + App.userDetails.get('guardianID'), {
+                trigger: true
+            });
+        },
+
         initialize: function() {
             App.notify.showMsg({msg: 'Fetching match result'});
             this.model.on('sync', this.render, this);
@@ -143,7 +153,7 @@ define([
             } else {
                 this.$el.html('<p>Loading...</p>');
             }
-
+            console.log(this.model.toJSON());
             return this;
             /*
             var matchDetails = App.matchModel.toJSON();

@@ -1,9 +1,9 @@
 <div class="col-xs-12 match-teams-wrapper">
     <div class="row">
-            
+            <button class="playAgain">Play again or choose another opponent</button>
         <div class="teamInfos">
             <!-- Team 1 info -->
-            <div class="col-xs-6 teamInfo1">
+            <div class="col-xs-6 col-lg-5 teamInfo1">
                 <h1 class="score"><%= matchDetails[1].goals.length %></h1>
                 <h1 class="teamName">
                     <a href="#user/<%= matchDetails[1].guardianID %>">
@@ -11,26 +11,32 @@
                     </a>
                 </h1>
                 <div class="clearfix"></div>
-                <div class="scorers">
-                    <h4>Scorers</h4>
-                    <% _.each(matchDetails[1].goals, function(player) { %>
-                        <p class="scorer"><%= player.name %> <span class="time"><%= player.time %></span></p>
-                    <% }) %>
-                </div>
-                <div class="yellowRedCards">
-                    <h4>Cards</h4>
-                    <% _.each(matchDetails[1].yellowCard, function(player) { %>
-                        <p class="scorer carded"><span class="cardColor"></span><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
-                    <% }) %>
-                    <% _.each(matchDetails[1].redCard, function(player) { %>
-                        <p class="scorer carded red"><span class="cardColor"></span><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
-                    <% }) %>
-                </div>
+                <div class="match-keyplayers">
+                    <% if(matchDetails[1].goals.length > 0){ %>
+                    <div class="scorers">
+                        <h4>Scorers</h4>
+                        <% _.each(matchDetails[1].goals, function(player) { %>
+                            <p class="scorer"><%= player.name %> <span class="time"><%= player.time %></span></p>
+                        <% }) %>
+                    </div>
+                    <% } %>
                 
+                    <% if(matchDetails[1].yellowCard.length > 0 || matchDetails[1].redCard.length > 0){ %>
+                    <div class="yellowRedCards">
+                        <h4>Cards</h4>
+                        <% _.each(matchDetails[1].yellowCard, function(player) { %>
+                            <p class="scorer carded"><span class="cardColor"></span><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
+                        <% }) %>
+                        <% _.each(matchDetails[1].redCard, function(player) { %>
+                            <p class="scorer carded red"><span class="cardColor"></span><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
+                        <% }) %>
+                    </div>
+                    <% } %>
+                </div>
             </div>
 
             <!-- Team 2 info -->
-            <div class="col-xs-6 teamInfo2">
+            <div class="col-xs-6 col-lg-5 teamInfo2">
                 <h1 class="score"><%= matchDetails[2].goals.length %></h1>
                 <h1 class="teamName">
                     <a href="#user/<%= matchDetails[2].guardianID %>">
@@ -39,26 +45,30 @@
                 </h1>
                 <div class="clearfix"></div>
                 
-                <div class="scorers">
-                <% if(matchDetails[2].goals > 0){ %>
-                    <h4>Scorers</h4>
-                    <% _.each(matchDetails[2].goals, function(player) { %>
-                        <p class="scorer"><%= player.name %> <span class="time"><%= player.time %></span></p>
-                    <% }) %>
-                <% } %>
-                </div>
+                <div class="match-keyplayers">
+                    <% if(matchDetails[2].goals.length > 0){ %>
+                    <div class="scorers">
+                        <h4>Scorers</h4>
+                        <% _.each(matchDetails[2].goals, function(player) { %>
+                            <p class="scorer"><%= player.name %> <span class="time"><%= player.time %></span></p>
+                        <% }) %>
+                         </div>
+                    <% } %>
+
+               
                 
-                <% if(matchDetails[2].yellowCard > 0 || matchDetails[2].redCard > 0){ %>
-                    <div class="yellowRedCards">
-                        <h4>Cards</h4>
-                        <% _.each(matchDetails[2].yellowCard, function(player) { %>
-                            <p class="scorer carded"><span class="cardColor"></span><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
-                        <% }) %>
-                        <% _.each(matchDetails[2].redCard, function(player) { %>
-                            <p class="scorer carded red"><span class="cardColor"></span><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
-                        <% }) %>
-                    </div>
-                <% } %>
+                    <% if(matchDetails[2].yellowCard.length > 0 || matchDetails[2].redCard.length > 0){ %>
+                        <div class="yellowRedCards">
+                            <h4>Cards</h4>
+                            <% _.each(matchDetails[2].yellowCard, function(player) { %>
+                                <p class="scorer carded"><span class="cardColor"></span><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
+                            <% }) %>
+                            <% _.each(matchDetails[2].redCard, function(player) { %>
+                                <p class="scorer carded red"><span class="cardColor"></span><%= player.name.substring(player.name.lastIndexOf(" ")+1) %> <span class="time"><%= player.time %></span></p>
+                            <% }) %>
+                        </div>
+                    <% } %>
+                </div>
             </div>
         </div>
         

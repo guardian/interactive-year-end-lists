@@ -1476,6 +1476,13 @@ figure.interactive {
         font-size:18px;
         font-weight:bold;
     }
+    .playAgain{
+        width:320px;
+        margin:0 auto;font-size:16px;
+        font-weight:bold;
+        font-family:"EgyptianHeadline";
+        display:block;
+    }
 
     .score{
         color:#545454;
@@ -1484,7 +1491,7 @@ figure.interactive {
         padding:0;
     }
 
-    .scorers{
+    .match-keyplayers{
         clear:both;
         margin-bottom:10px;
         border-top:1px dotted #DFDFDF;
@@ -1566,6 +1573,9 @@ figure.interactive {
         .match-stats-wrapper-inline{
             display:block;
         }
+        .teamInfo2{
+            float:right;
+        }
     }
 
     #user1-pitch{
@@ -1640,7 +1650,6 @@ figure.interactive {
         }
 
         .scorers{
-        margin-top:20px;
         min-height:1px;
         }
 
