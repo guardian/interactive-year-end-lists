@@ -113,7 +113,7 @@ module.exports = function(grunt) {
           options: {
               replacements: [{
                   pattern: '\'@@useDebugUser\'',
-                  replacement: grunt.option('debug') ? 'false' : 'true'
+                  replacement: grunt.option('debug') ? 'true' : 'true'
               }]
           }
         },
@@ -261,15 +261,24 @@ module.exports = function(grunt) {
             },
             url: 'https://docs.google.com/spreadsheet/pub?key=0AkRR3zKqdlUHdFE5SjJtS3gyUHF3ZEcwYlF0SHgxbkE&output=html',
             dest: 'server/competitionData.json'
+        },
+    },
+    uglify: {
+        options: {
+          mangle: true 
+        },
+        my_target: {
+          files: {
+            'build/boot.js': ['build/boot.js']
+          }
         }
-
-    }
-
+      }
   });
 
   // Load plugins
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -284,7 +293,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-gss-fetch');
 
   // Tasks
-  grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
+  grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace', 'uglify']);
   grunt.registerTask('default', ['build', 'concurrent:watchers']);
   grunt.registerTask('deploy-server', ['shell']);
   grunt.registerTask('deploy-s3', ['build', 's3:prod']);
