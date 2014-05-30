@@ -149,10 +149,10 @@ define([
                 App.userDetails.fetchByGuardianId({
                     success: this.handleUserDataResponse.bind(this),
                     error: function (attributes, err) {
-                        Backbone.trigger('ERROR', {
+                        /* Backbone.trigger('ERROR', {
                             msg: 'Failed to fetch users details',
                             err: err
-                        });
+                        });*/
                         Backbone.trigger('loaded:userData');
                     }
                 });
@@ -229,7 +229,6 @@ define([
                     this.identityDetails = App.toolkitObj.api.getUserFromCookie();
                 }
             }
-
             return this.identityDetails;
         }
 

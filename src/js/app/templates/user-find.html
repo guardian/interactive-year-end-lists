@@ -28,7 +28,7 @@
         </table>
     </div>
     <div class="col-xs-12 opponentTable recentMatches">
-        <h3>Your recent matches</h3>
+        <h3>Recent matches</h3>
         <table class="table">
             <% _.each(latestMatches, function(match) { %>
                 <tr>
@@ -40,7 +40,6 @@
                         <a href="#/user/<%= match.user2ID %>">
                             <%= match.user2Name %>
                         </a>                   
-
                     
                     </td>
                 </tr>
