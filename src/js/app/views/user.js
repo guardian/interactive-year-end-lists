@@ -182,10 +182,9 @@ define([
                 userID: App.viewingPlayer.get('guardianID')
             });
             this.$('#usersRecord').html(userRecord.render().el);
- 
+            this.renderFindUsers();
             // If user viewing own page, show Guardian writers & recently viewed
             if (App.userDetails.get('guardianID') === App.viewingPlayer.get('guardianID')) {
-                this.renderFindUsers();
             } else {
                 // Add to recently viewed if not (regardless of logged in status)
                 this.addToRecentlyViewed();

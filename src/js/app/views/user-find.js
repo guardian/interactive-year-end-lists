@@ -66,6 +66,7 @@ define([
         },
 
         render: function () {
+            console.log('rending sdklfsdkl lsdkfm ');
             this.templateData.specialUsers = App.specialUsers;
             this.templateData.latestMatches = App.resultsModel.get('latestResults');
             console.log(App.resultsModel);

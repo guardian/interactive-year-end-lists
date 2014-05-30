@@ -90,7 +90,6 @@ define([
             this.$('.pitch-player').removeClass('selected');
             target.addClass('selected');
             Backbone.trigger('position_clicked', details);
-            console.log(this.$('body'));
             
             if (App.isSmallScreen()) {
                 e.currentTarget.scrollIntoView(true);
@@ -219,7 +218,6 @@ define([
         },
 
         render: function () {
-            console.log('rendering pitch');
             var positionNames = [
                 {
                     "name": "GK",
@@ -280,7 +278,6 @@ define([
                 positionNames: positionNames
             };
             this.$el.append(this.template(data));
-
             this.$showOptions = this.$('.playerOptions');
             
             // Start hover event bindings

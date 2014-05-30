@@ -39,8 +39,9 @@ define([
                     this.subView = new MatchView({ model: App.matchModel });
                     break;
                 default:
+                    App.userDetails.fetchUserTeamFromStorage();
                     this.subView = new SquadView({
-                        collection: App.playerCollection
+                        collection: App.usersTeamCollection
                     });
                     break;
             }

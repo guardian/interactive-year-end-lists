@@ -145,7 +145,7 @@ app.get('/users', function (req, res) {
         'guardianID': guardianID
     }, function (err, user) {
         if (err || user === null) {
-            //res.status(404);
+            res.status(404);
             res.jsonp(err);
             return;
         }
