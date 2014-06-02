@@ -66,7 +66,9 @@ define([
             var templateHTML = this.template({
                 squadCount: App.userDetails.getSquadCount(),
                 username: App.userDetails.get('username'),
-                userID: App.userDetails.get('guardianID')
+                userID: App.userDetails.get('guardianID'),
+                isLoggedIn: App.userDetails.isLoggedIn(),
+                hasSavedTeam: App.userDetails.hasSavedTeam()
             });
 
             this.$el.html(templateHTML);

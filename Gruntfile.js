@@ -113,7 +113,7 @@ module.exports = function(grunt) {
           options: {
               replacements: [{
                   pattern: '\'@@useDebugUser\'',
-                  replacement: grunt.option('debug') ? 'false' : 'false'
+                  replacement: grunt.option('remotedb') ? 'true' : 'false'
               }]
           }
         },

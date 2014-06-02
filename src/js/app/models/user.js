@@ -206,10 +206,15 @@ define([
             return this.get('username') !== null;
         },
 
+        hasSavedTeam: function() {
+            console.log(this.id, this.get('id'), this._id);
+            return !!this.get('_id');
+        },
+
         getIdentityDetails: function () {
             if (App.useDebugUser) {
                 this.identityDetails = {
-                    id: '01',
+                    id: '09',
                     displayName: 'DebugUser',
                     publicFields: {
                         displayName: 'DebugUser'
