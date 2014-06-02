@@ -160,6 +160,13 @@ define([
             }
         },
 
+        fetchUserRecord: function() {
+            var userRecord = new UserRecordView({
+                userID: App.viewingPlayer.get('guardianID')
+            });
+            this.$('#usersRecord').html(userRecord.render().el);
+        },
+
         render: function () {
             var socialLinks = SocialModel.getShareTeamURLs({
                 url: document.location.href
@@ -178,14 +185,9 @@ define([
             this.renderUserRating();
 
             
-            var userRecord = new UserRecordView({
-                userID: App.viewingPlayer.get('guardianID')
-            });
-            this.$('#usersRecord').html(userRecord.render().el);
             this.renderFindUsers();
             // If user viewing own page, show Guardian writers & recently viewed
-            if (App.userDetails.get('guardianID') === App.viewingPlayer.get('guardianID')) {
-            } else {
+            if (App.userDetails.get('guardianID') !== App.viewingPlayer.get('guardianID')) {
                 // Add to recently viewed if not (regardless of logged in status)
                 this.addToRecentlyViewed();
             }

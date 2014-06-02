@@ -50,7 +50,7 @@ define([
             }
             App.resultsModel = new ResultsModel();
             App.resultsModel.set('guardianID', App.viewingPlayer.get('guardianID'));
-            App.resultsModel.fetch();
+            //App.resultsModel.fetch();
             App.notify.closePrompt();
             Backbone.trigger('pageStateChange', 'userPage');
         },

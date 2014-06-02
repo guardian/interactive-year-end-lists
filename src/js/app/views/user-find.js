@@ -19,7 +19,8 @@ define([
 
         events: {
             'click .viewTeam': 'navigateToUser',
-            'click .viewResult': 'navigateToResult'  
+            'click .viewResult': 'navigateToResult',
+            'click .view-match-history': 'loadUserResult'
         },
 
         initialize: function () {
@@ -32,6 +33,11 @@ define([
             this.getRecentlyViewed();
 
             App.resultsModel.on('change', this.render, this);
+        },
+
+        loadUserResult: function(e) {
+            $(e.currentTarget).hide();
+            App.resultsModel.fetch(); 
         },
 
         navigateToUser: function (e) {
@@ -66,7 +72,6 @@ define([
         },
 
         render: function () {
-            console.log('rending sdklfsdkl lsdkfm ');
             this.templateData.specialUsers = App.specialUsers;
             this.templateData.latestMatches = App.resultsModel.get('latestResults');
             console.log(App.resultsModel);
