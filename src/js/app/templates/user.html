@@ -1,10 +1,26 @@
 <div id="users-find-container" class="col-xs-12 col-md-5">
     <% if (canPlay) { %>
         <h2>Play against <%= details.username %> FC</h2>
-        <h3>Pit your all-time XI against the squad chosen by <%= details.username %>. Click below to begin</h3>
-        <div class="playAgainst" data-guardian-id="<%= details.guardianID %>">
-            Start this match
-        </div>
+        <% if(hasSavedTeam){ %>
+            <% if(squadCount<11){ %>
+                <h3 class="alertMessage">Your team is not complete yet, so you can't play <%= details.username %>. Click below to complete your team</h3>
+                <div class="playAgainst">
+                Complete your team
+                </div>
+            <% } else{ %>
+                <% if (viewingPlayerLength < 11){ %>
+                    <h3 class="alertMessage"><%= details.username %>'s team is not complete, so you can't play a match against him. <span class="backToTeam">Go back to your team to select another player</span></h3>
+                <% } else{ %>
+                    <h3>Pit your all-time XI against the squad chosen by <%= details.username %>. Click below to begin</h3>
+                    <div class="playAgainst" data-guardian-id="<%= details.guardianID %>">Start this match</div>
+                <% } %>
+            <% } %>
+        <% } else { %>
+            <h3 class="alertMessage">You don't have a team yet, so you can't play against <%= details.username %>. Click below to create your team</h3>
+            <div class="playAgainst">
+            Create your team
+            </div>
+        <% } %>
 
     <% } else{%>
         <div id="users-find"></div> 

@@ -1,77 +1,87 @@
-
+<% isLoggedInTest = true %>
 <div id="squad-pitch-inner">
-    <% if(squadCount !== null) { %>
-        <div class="your-team-details">
-            <% if(squadCount === 11) { %>
-            <div class="playMatchBtn enoughPlayers">Play a match</div>
-            <% } else { %>
-            <div class="playMatchBtn">Play a match <span><%= 11-squadCount %> more players</span></div>
-            <% } %>
-        </div>
-    <% } %>
-    <ol class="pitch">
-    	<div class="pitchLines">
-    		<div class="pitchMiddleLine"></div>
-    		<div class="pitchMiddleCircle"></div>
-    		<div class="pitchPenalty1"></div>
-    		<div class="pitchPenalty2"></div>
-    	</div>
-    	<% _.each(players, function(player, index) { %>
-            <% if (player.uid === null) { %>
+    <% if(isLoggedInTest) { %>
+        <% if(squadCount !== null) { %>
+            <div class="your-team-details">
+                <% if (hasSavedTeam == 'false'){ %>
+                    <div class="playMatchBtn">Select at least 1 player to view your team</div>
+                <% } else if(squadCount === 11) { %>
+                    <div class="playMatchBtn enoughPlayers">View your team and play a match</div>
+                <% } else { %>
+                    <div class="playMatchBtn">View your team <span><%= 11-squadCount %> more to start playing</span></div>
+                <% } %>
+            </div>
+        <% } %>
+        <ol class="pitch">
+        	<div class="pitchLines">
+        		<div class="pitchMiddleLine"></div>
+        		<div class="pitchMiddleCircle"></div>
+        		<div class="pitchPenalty1"></div>
+        		<div class="pitchPenalty2"></div>
+        	</div>
+        	<% _.each(players, function(player, index) { %>
+                <% if (player.uid === null) { %>
 
-            <li class="pitch-player pitch-player-available position-<%= index %>"
-                data-area="<%= index %>"
-                data-position="<%= index %>"
-                data-area="<%= index %>"
-                data-position-name="<%= positionNames[index].name %>">
-                 <span class="player-icon" > <img src="@@assetPathimages/plusIcon.png" /> </span>
-                    <%= positionNames[index].name %>
-                </li>
-            <% } else { %>
-                <li data-uid="<%= player.uid %>"
+                <li class="pitch-player pitch-player-available position-<%= index %>"
+                    data-area="<%= index %>"
                     data-position="<%= index %>"
                     data-area="<%= index %>"
-                    class="pitch-player pitch-player-taken position-<%= index %>"
-                    <% if (typeof positionNames !== 'undefined') { %>data-position-name="<%= positionNames[index].name %>" <% } %>
-                >
+                    data-position-name="<%= positionNames[index].name %>">
+                     <span class="player-icon" > <img src="@@assetPathimages/plusIcon.png" /> </span>
+                        <%= positionNames[index].name %>
+                    </li>
+                <% } else { %>
+                    <li data-uid="<%= player.uid %>"
+                        data-position="<%= index %>"
+                        data-area="<%= index %>"
+                        class="pitch-player pitch-player-taken position-<%= index %>"
+                        <% if (typeof positionNames !== 'undefined') { %>data-position-name="<%= positionNames[index].name %>" <% } %>
+                    >
 
-                    <span class="player-icon" title="Drop <%= player.name %>" style="background-image: url(<%= player.picture %>)"></span>
-                    <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
-                </li>
-            <% } %>
+                        <span class="player-icon" title="Drop <%= player.name %>" style="background-image: url(<%= player.picture %>)"></span>
+                        <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
+                    </li>
+                <% } %>
 
-    	<% }) %>
-    	<li class="playerOptions">
-    		<span class="close">&times;</span>
-    		<h4></h4>
-    		<button id="dropPlayer" data-uid="">Drop</button>
-    	</li>
-    
-    </ol>
+        	<% }) %>
+        	<li class="playerOptions">
+        		<span class="close">&times;</span>
+        		<h4></h4>
+        		<button id="dropPlayer" data-uid="">Drop</button>
+        	</li>
+        
+        </ol>
 
-<table class="table table-players">
-       <tbody>
-        <% _.each(players, function(player, index) { %>
-            <% if (!_.isEmpty(player.name)) { %>
-                <tr>
-                    <td><%= player.name %></td>
-                </tr>
-            <% } %>
-        <% }) %>
-    </tbody>
-</table>
+        <table class="table table-players">
+           <tbody>
+            <% _.each(players, function(player, index) { %>
+                <% if (!_.isEmpty(player.name)) { %>
+                    <tr>
+                        <td><%= player.name %></td>
+                    </tr>
+                <% } %>
+            <% }) %>
+            </tbody>
+        </table>
 
 
     <h3><span id="clearSelection">clear selection</span></h3>
 
 
-
-    
-
+    <% }else{ %>
+        <div class="pitchSignup">
+            <p>You have to <a href="#">login</a> with you Guardian-account to create your own team</p>
+        </div>
+        <div class="otherTeams">
+            <h4>Or take a look at these featured teams</h4>
+            <div class="col-xs-12 opponentTable">
+                <h3>Guardian Opponents</h3>
+                <table class="table">
+                    <!--  -->
+                </table>
+            </div>
+        </div>
+    <% } %>
     
 </div>
-<!--
-<p><a href="#" class="selectTeamPop" data-team="P008:GK,P015:LB,P027:CB,P026:CB2,P048:RB,P070:MC,P069:MC2,P058:ML,P092:MR,P100:ST,P110:ST2">Brazilian flair</a></p>
 
-<p><a href="#" class="selectTeamPop" data-team="P026:CB,P100:ST,P101:ST2,P069:MC2,P092:MR,P013:LB,P006:GK,P058:ML,P067:MC,P034:CB2,P047:RB">Italian discipline</a></p>
--->

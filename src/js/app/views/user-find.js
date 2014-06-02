@@ -69,6 +69,7 @@ define([
             console.log('rending sdklfsdkl lsdkfm ');
             this.templateData.specialUsers = App.specialUsers;
             this.templateData.latestMatches = App.resultsModel.get('latestResults');
+            this.templateData.squadCount = App.userDetails.getSquadCount();
             console.log(App.resultsModel);
             this.$el.html(this.template(this.templateData));
             return this;

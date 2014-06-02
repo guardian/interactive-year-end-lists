@@ -78,7 +78,8 @@ define([
             var html = this.template({
                 player: this.model.toJSON(),
                 canRemove: this.model.get('uid') === positionUID,
-                position: App.userDetails.isLoggedIn() && !isNaN(parseInt(this.position, 10))
+                position: App.userDetails.isLoggedIn() && !isNaN(parseInt(this.position, 10)),
+                isLoggedIn: App.userDetails.isLoggedIn(),
             });
             this.$el.html(html);
             this.delegateEvents();
