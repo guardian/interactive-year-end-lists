@@ -64,6 +64,10 @@ define([
                     code: 'BR'
                 },
                 {
+                    name: 'Belgium',
+                    code: 'BE'
+                },
+                {
                     name: 'Bulgaria',
                     code: 'BG'
                 },
@@ -75,6 +79,11 @@ define([
                     name: 'Chile',
                     code: 'CL'
                 },
+                {
+                    name: 'Croatia',
+                    code: 'HR'
+                },
+
                 {
                     name: 'Czech Republic',
                     code: 'CZ'
@@ -100,6 +109,15 @@ define([
                     code: 'DE'
                 },
                 {
+                    name: 'W Germany',
+                    code: 'DE'
+                },
+                {
+                    name: 'E Germany',
+                    code: 'DD'
+                },
+                
+                {
                     name: 'Hungary',
                     code: 'HU'
                 },
@@ -114,6 +132,10 @@ define([
                 {
                     name: 'Holland',
                     code: 'NL'
+                },
+                {
+                    name: 'Mexico',
+                    code: 'MX'
                 },
                 {
                     name: 'Peru',
@@ -136,6 +158,14 @@ define([
                     code: 'RU'
                 },
                 {
+                    name: 'Soviet Union',
+                    code: 'SU'
+                },
+                {
+                    name: 'Scotland',
+                    code: 'SCO'
+                },
+                {
                     name: 'South Korea',
                     code: 'KP'
                 },
@@ -150,6 +180,10 @@ define([
                 {
                     name: 'Turkey',
                     code: 'TR'
+                },
+                {
+                    name: 'Yugoslavia',
+                    code: 'YU'
                 },
                 {
                     name: 'Uruguay',
