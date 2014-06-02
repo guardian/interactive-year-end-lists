@@ -42,44 +42,50 @@ define([
     
     App.userDetails = new UserModel();
     App.userDetails.setToolKitObject();
+   
+    // Automatic login
+    App.viewingPlayer = new UserModel();
+    App.player1 = new UserModel();
+    App.player2 = new UserModel();
+
+    // Variables for listeners
+    App.playerSelected = new Backbone.Model(); // Opens the player modal
+
+    // Collections
+    App.playerCollection = new PlayersCollection();
+    App.playerCollection.fetchLocalData();
+    
+    
+    App.usersTeamCollection = new TeamCollection();
+    App.viewingPlayerTeamCollection = new TeamCollection();
+    App.player1TeamCollection = new TeamCollection();
+    App.player2TeamCollection = new TeamCollection();
+
+    App.matchModel = new MatchModel();
+    App.createMatch = new CreateMatchView();
+    
+    App.userDetails.fetchUserTeamFromStorage();
+    
+    // Listen to window resize and trigger event
+    $(window).resize(_.debounce(App.handleResize, 200));
+    
+    App.superView = new SuperView();
+    App.$el.html(App.superView.render().el);
+
+    // Setup routing
+    App.appRoutes = new Routes();
+    Backbone.history.start();
+
+    //App.playerCollection.fetchGoogleData();
 
     // Once toolkit is ready
     Backbone.on('toolkitReady', function () {
-        // Automatic login
         App.userDetails.checkUserStatus();
-        App.viewingPlayer = new UserModel();
-        App.player1 = new UserModel();
-        App.player2 = new UserModel();
-
-        // Variables for listeners
-        App.playerSelected = new Backbone.Model(); // Opens the player modal
-
-        // Collections
-        App.playerCollection = new PlayersCollection();
-        App.usersTeamCollection = new TeamCollection();
-        App.viewingPlayerTeamCollection = new TeamCollection();
-        App.player1TeamCollection = new TeamCollection();
-        App.player2TeamCollection = new TeamCollection();
-
-
-        // TODO: Switch from Google spreadsheet
-        //App.playerCollection.fetchGoogleData();
-        App.playerCollection.fetchLocalData();
-
-        App.matchModel = new MatchModel();
-        App.createMatch = new CreateMatchView();
-
+        
         // Once user and player data is loaded
         Backbone.on('dataReady', function () {
             // Load the current users team
-            App.userDetails.fetchUserTeamFromStorage();
             
-            // Listen to window resize and trigger event
-            $(window).resize(_.debounce(App.handleResize, 200));
-
-            // Setup routing
-            App.appRoutes = new Routes();
-            Backbone.history.start();
         });
 
     });
@@ -101,10 +107,8 @@ define([
      * @param  {element} el DOM element provided from the page ie. <figure>
      */
     function boot(el, config) {
-        init();
         App.$el = $(el);
-        App.superView = new SuperView();
-        App.$el.html(App.superView.render().el);
+        init();
     }
 
     return {

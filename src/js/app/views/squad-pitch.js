@@ -213,7 +213,6 @@ define([
 
         // Reset the teamCollection and wipe the pitch
         clearSelection: function () {
-            //App.usersTeamCollection.removeAllPlayersFromCollection();
             App.userDetails.clearSquad();
         },
 
