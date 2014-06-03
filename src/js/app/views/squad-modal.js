@@ -49,6 +49,7 @@ define([
         },
 
         closeCard: function (e) {
+            console.log('modal clicked');
             Backbone.trigger('playercard_closed');
             if (e.id) {
                 this.position = null;

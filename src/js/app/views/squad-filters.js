@@ -35,9 +35,11 @@ define([
 
             Backbone.on('player_clicked', this.blurPlayers, this);
             Backbone.on('playercard_closed', this.unblurPlayers, this);
+            App.playerCollection.on('reset', this.updateSquadListViews, this);
 
             App.userDetails.on('change', this.handleSquadChange, this);
             Backbone.on('position_clicked', this.showPlayers, this);
+            Backbone.on('resize', this.updateOnResize, this);
             this.model.on('change', this.updateSquadListViews, this);
 
             /**
@@ -51,6 +53,12 @@ define([
             $(window).on('resize', function () {
                 this.windowSize = window.innerWidth + window.innerHeight;
             });
+        },
+
+        updateOnResize: function() {
+            if (App.isSmallScreen() === false) {
+                this.$el.removeAttr('style');
+            }
         },
 
         handleSquadChange: function() {
@@ -74,6 +82,7 @@ define([
 
         hidePlayers: function(){
             this.$el.hide();
+            this.squadModalView.$el.hide();
             Backbone.trigger('players_closed');
         },
 
@@ -201,29 +210,8 @@ define([
                     model: playerModel
                 }));
             }, this);
+
             this.renderSquadListViews();
-
-            /*
-            if (this.model.hasChanged()) {
-                $('html, body').animate({
-                    // +2 so that it navigation becomes fixed
-                    scrollTop: this.$el.offset().top + 2
-                }, 1000);
-            }
-            */
-        },
-
-        // Scroll back up to pitch
-        viewSquad: function () {
-
-            /**
-             * FIXME: This would not be needed if pitch is fixed pos
-             */
-            /*
-            $('html, body').animate({
-                scrollTop: $('#squad-pitch').offset().top + 2
-            }, 1000);
-            */
         },
 
         renderSquadListViews: function () {
@@ -245,8 +233,8 @@ define([
             this.$el.append(this.template(this.templateData));
             this.renderSquadListViews();
             
-            var squadModalView = new SquadModalView();
-            this.$('.modalWrapper').append(squadModalView.render().el);
+            this.squadModalView = new SquadModalView();
+            this.$('.modalWrapper').append(this.squadModalView.render().el);
 
             return this;
         }

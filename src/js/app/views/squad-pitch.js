@@ -3,19 +3,22 @@ define([
     'jquery',
     'backbone',
     'underscore',
-    'text!templates/squad-pitch.html'
+    'text!templates/squad-pitch.html',
+    'text!templates/squad-pitch-table.html'
 ], function (
     App,
     $,
     Backbone,
     _,
-    SquadPitchTemplate
+    SquadPitchTemplate,
+    SquadPitchTemplateTable
 ) {
     return Backbone.View.extend({
 
         id: 'squad-pitch',
         className: 'col-xs-12 col-md-5 col-lg-4',
         template: _.template(SquadPitchTemplate),
+        templateTable: _.template(SquadPitchTemplateTable),
 
         events: {
             'click #goToMatch': 'navigateToMatch',
@@ -23,7 +26,8 @@ define([
             'click .playerOptions .close': 'closeOptions',
             'click .pitch-player' : 'positionSelected',
             'click #clearSelection': 'clearSelection',
-            'click .playMatchBtn': 'playMatch'
+            'click .playMatchBtn': 'playMatch',
+            'click .viewTeam': 'viewTeam'
         },
 
         initialize: function() {
@@ -33,6 +37,11 @@ define([
             Backbone.on('players_closed', this.showPitch, this);
             Backbone.on('resize pageStateChange', this.setWidthInPixels, this);
             App.usersTeamCollection.on('reset', this.render, this);
+        },
+
+        viewTeam: function(e) {
+            var teamID = $(e.currentTarget).data('guardian-id');
+            App.appRoutes.navigate('user/' + teamID, { trigger: true });
         },
 
         playMatch: function () {
@@ -213,11 +222,19 @@ define([
 
         // Reset the teamCollection and wipe the pitch
         clearSelection: function () {
-            //App.usersTeamCollection.removeAllPlayersFromCollection();
             App.userDetails.clearSquad();
         },
 
         render: function () {
+
+            if (!App.userDetails.isLoggedIn()) {
+                
+                this.$el.html(this.templateTable({
+                    specialUsers: App.specialUsers
+                }));
+                return this;
+            }
+
             var positionNames = [
                 {
                     "name": "GK",

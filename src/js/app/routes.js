@@ -12,10 +12,15 @@ define([
     return Backbone.Router.extend({
 
         routes: {
+            'soon': 'comingSoon',
             'user/:userid(/)': 'showUser',
             'result/:matchid(/)': 'showMatch',
             'home': 'defaultRoute',
             '*other': 'showErrorAndRedirect'
+        },
+
+        comingSoon: function() {
+            Backbone.trigger('pageStateChange', 'comingSoon');
         },
 
         defaultRoute: function (other) {
@@ -50,7 +55,7 @@ define([
             }
             App.resultsModel = new ResultsModel();
             App.resultsModel.set('guardianID', App.viewingPlayer.get('guardianID'));
-            App.resultsModel.fetch();
+            //App.resultsModel.fetch();
             App.notify.closePrompt();
             Backbone.trigger('pageStateChange', 'userPage');
         },
@@ -61,8 +66,7 @@ define([
         },
 
         showErrorAndRedirect: function (msg) {
-            console.log('redirect');
-            App.appRoutes.navigate('home', {
+            App.appRoutes.navigate('soon', {
                 trigger: true
             });
         }

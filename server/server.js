@@ -14,7 +14,8 @@ var whitelist = [
     'http://www.code.dev-theguardian.com',
     'http://test.theguardian.com:9000',
     'http://localdev.theguardian.com:9000',
-    'http://daan.theguardian.com:9000'
+    'http://daan.theguardian.com:9000',
+    'http://ec2-54-220-127-152.eu-west-1.compute.amazonaws.com:9000'
 ];
 var corsOptions = {
     origin: function (origin, callback) {
@@ -425,7 +426,7 @@ app.get('/results/:userid', function(req, res) {
             gamesLost:   0,
             latestResults: latestMatches(matchRecords) 
         };
-
+        
         matchRecords.forEach(function(record) {
             // Find the correct player index
             var p1, p2;
@@ -452,6 +453,7 @@ app.get('/results/:userid', function(req, res) {
                 results.gamesLost++;
             }
         });
+        
 
         res.json(results);
     });

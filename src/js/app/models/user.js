@@ -83,6 +83,10 @@ define([
         },
 
         clearSquad: function() {
+            if (this.isLoggedIn() === false) {
+                return;
+            }
+
             var players = {};
             for (var i=0; i < 11; i++) {
                 players['player' + i] =  null;
@@ -95,6 +99,7 @@ define([
         },
 
         setToolKitObject: function () {
+            // R2
             if (typeof require() === 'function') {
                 require(['guardian_idToolkit'], function (toolkit) {
                     App.toolkitObj = {
@@ -110,7 +115,8 @@ define([
 
                     Backbone.trigger('toolkitReady');
                 });
-            } else {
+            } else if (typeof require() === 'object') {
+                // Next-gen curljs
                 require(['common/modules/identity/api']).then(function (toolkit) {
                     App.toolkitObj = {
                         api: toolkit,
@@ -125,6 +131,8 @@ define([
 
                     Backbone.trigger('toolkitReady');
                 });
+            } else {
+                Backbone.trigger('ERROR', {msg: 'Problem loading login system'});
             }
         },
 
