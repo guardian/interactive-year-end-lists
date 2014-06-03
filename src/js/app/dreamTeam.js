@@ -74,20 +74,14 @@ define([
 
     // Setup routing
     App.appRoutes = new Routes();
-    Backbone.history.start();
-
-    //App.playerCollection.fetchGoogleData();
+    
+    Backbone.on('loaded:userData', function() { 
+        Backbone.history.start();
+    });
 
     // Once toolkit is ready
     Backbone.on('toolkitReady', function () {
         App.userDetails.checkUserStatus();
-        
-        // Once user and player data is loaded
-        Backbone.on('dataReady', function () {
-            // Load the current users team
-            
-        });
-
     });
 
 

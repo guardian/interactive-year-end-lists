@@ -24,7 +24,7 @@ define([
         },
 
         initialize: function () {
-            App.userDetails.on('playersChange change:username', this.render, this);
+            App.userDetails.on('playersChange change:username sync', this.render, this);
             Backbone.on('pageStateChange', this.updateOnPageState, this);
         },
 

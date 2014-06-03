@@ -44,6 +44,7 @@ define([
         updateView: function(pageState) {
             switch (pageState) {
                 case 'comingSoon':
+                    this.headerContainer.empty();
                     this.subView = new this.ComingSoonView();
                     break;
                 case 'userPage':
