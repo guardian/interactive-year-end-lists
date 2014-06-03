@@ -42,12 +42,12 @@ define([
                     App.notify.closePrompt();
                 }.bind(this),
                 error: function(attributes, err) {
-                var msg = "Problem fetching match.";
-                    if (err && err.responseJSON && err.responseJSON.msg) {
-                        msg = err.responseJSON.msg;
-                    }
-
-                Backbone.trigger('ERROR', { msg: msg, err: err });
+                    var msg = "Problem fetching match.";
+                        if (err && err.responseJSON && err.responseJSON.msg) {
+                            msg = err.responseJSON.msg;
+                        }
+                    Backbone.trigger('ERROR', { msg: msg, err: err });
+                    App.appRoutes.navigate('home', { trigger: true });
             }.bind(this)});
         },
 
