@@ -268,6 +268,47 @@ figure.interactive {
     &.narrow-view #squad-filters {
         display: none;
     }
+    .comingsoon-page{
+        margin-top:40px;
+        h2{
+            font-size:42px;
+            text-align:center;
+            line-height:1em;
+        }
+        h3{
+            max-width:720px;
+            font-size:18px;
+            margin:0 auto;
+            text-align: center;
+        }
+    }
+
+    .comingsoon-player-cards{
+        text-align: center;
+        margin-top:40px;
+        img{
+            display:inline-block;
+            box-shadow:0 0 20px rgba(0,0,0,0.2);
+            &:hover{
+                box-shadow:0 0 20px rgba(0,0,0,0.5);
+            }
+        }
+        .comingsoon-player-1{
+            transform:rotate(5deg);
+        }
+        .comingsoon-player-2{
+            transform:rotate(-10deg);
+        }
+        .comingsoon-player-3{
+            transform:rotate(15deg);
+        }
+        .comingsoon-player-4{
+            transform:rotate(1deg);
+        }
+        .comingsoon-player-5{
+            transform:rotate(-5deg);
+        }
+    }
     
     #squad-filters {
         position: relative;
