@@ -1,8 +1,14 @@
 <div class="row clearfix">
     <h2>Play against someone else's team</h2>
-    
+    <% if(squadCount < 11){ %>
+    <h3 class="alertMessage">Your team is not complete team yet. So you can view other teams, but in order to play against them, you have to finish your team first</h3>
+    <% } %>
+    <div class="playAgainstFriends">
+        <h3>Play against your friends</h3>
+        <p>Share this page with your friends or colleagues, and invite them for a challenge</p>
+    </div>
     <div class="col-xs-12 opponentTable">
-        <h3>Guardian Opponents</h3>
+        <h3>Or play against one of the featured teams</h3>
         <table class="table">
             <% _.each(specialUsers, function(user) { %>
                 <tr>

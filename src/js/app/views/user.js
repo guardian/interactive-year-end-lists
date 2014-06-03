@@ -132,6 +132,7 @@ define([
         },
         
         renderPlayerCards: function(){
+            
             App.viewingPlayerTeamCollection.each(function (value, key){
                 var playerCard = this.squadTemplate(value.attributes);
                 var player_card = document.createElement("div");
@@ -145,9 +146,7 @@ define([
             var viewingID = App.viewingPlayer.get('guardianID');
             var userID = App.userDetails.get('guardianID');
 
-            return viewingID !== userID &&
-                App.userDetails.hasFullSquad() &&
-                App.viewingPlayer.hasFullSquad();
+            return viewingID !== userID;
         },
         renderUserRating: function(){
             var starRating = Math.round(App.viewingPlayer.toJSON().teamStarRating);
@@ -176,7 +175,11 @@ define([
                 currentUser: App.userDetails.toJSON(),
                 canPlay: this.canUserPlayerMatch(),
                 twitter_link: socialLinks.twitter,
-                facebook_link: socialLinks.facebook
+                facebook_link: socialLinks.facebook,
+                isLoggedIn: App.userDetails.isLoggedIn(),
+                hasSavedTeam: App.userDetails.hasSavedTeam(),
+                squadCount: App.userDetails.getSquadCount(),
+                viewingPlayerLength : App.viewingPlayerTeamCollection.length
             };
 
             this.$el.append(this.template(this.templateData));

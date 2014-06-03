@@ -1,35 +1,48 @@
-Loggedin = <%= isLoggedIn %> - has saved team = <%= hasSavedTeam %>
-<% if(username) { %>
-	<nav class="logged-in">
-		<div class="editPageNav clearfix">
-			<img src="@@assetPathimages/dreamteam_logo.png" class="dreamteamLogo"/>
-		</div>
+<% hasSavedTeamTest = true %>
+<% isLoggedInTest = true %>
 
-		<div class="yourPageNav clearfix">
+<!-- <div style="position:absolute;top:0;right:0;">Loggedin = <%= isLoggedIn %> - has saved team = <%= hasSavedTeam %> - <strong>has saved teamtest = <%= hasSavedTeamTest %></strong></div> -->
+
+
+<img src="@@assetPathimages/dreamteam_logo.png" class="dreamteamLogo"/>
+<div class="headerContent">
+	<% if(isLoggedInTest) { %>
+		<% if(hasSavedTeamTest) { %>
+			<div class="editPageNav clearfix">
+				<h2 class="headerUsername"><%= username %> FC</h2>
+				<h3>Create your own all-time XI and challenge others to a match</h3>
+			</div>
+
+			<div class="yourPageNav clearfix">
 				<div class="backButton backToEdit">Edit your team</div>
-				<img src="@@assetPathimages/dreamteam_logo.png" class="dreamteamLogo"/>
-		</div>
+			</div>
 
-		<div class="userPageNav clearfix">
-			<% if(squadCount !== 11) { %>
-				<div class="backButton backToTeam">Back to your team</div>
-			<% } else{ %>
-				<div class="backButton backToTeam">Back to your team</div>
-			<% } %>
-			<img src="@@assetPathimages/dreamteam_logo.png" class="dreamteamLogo"/>
-		</div>
-	</nav>
-<% }else{ %>
-	<nav class="logged-out">
-		Login with your Guardian account to create your own team.
-		<button>Create account</button>
-	</nav>
-<% } %>
+			<div class="userPageNav clearfix">
+				<% if(squadCount !== 11) { %>
+					<div class="backButton backToTeam">Back to your team</div>
+				<% } else{ %>
+					<div class="backButton backToTeam">Back to your team</div>
+				<% } %>
+			</div>
+		<% } else{ %>
+			<div class="editPageNav clearfix">
+				<h2 class="headerUsername"><%= username %> FC</h2>
+				<h3>Create your own all-time XI and challenge others to a match</h3>
+			</div>
 
+			<div class="yourPageNav clearfix">
+				<h2>Create your own all-time XI and challenge <span class="headerOpponentName">others</span> to a match</h2>
+				<button class="backtoEdit">Create <%= username %> FC</button>
+			</div>
 
+			<div class="userPageNav clearfix">
+				<h2>Create your own all-time XI and challenge <span class="headerOpponentName">others</span> to a match</h2>
+				<button class="backtoEdit">Create <%= username %> FC</button>
+			</div>
+		<% } %>
 
-
-
-
-
-<!-- <div class="headerIllustration"><img src="images/illustration.png" /></div> -->
+	<% }else{ %>
+		<h2>Sign in to the Guardian to choose your own all-time XI and challenge <span class="headerOpponentName">others</span> to a match</h2>
+		<button>Create an account</button> <span class="signInBtn">or <a>sign in</a></span>
+	<% } %>
+</div>

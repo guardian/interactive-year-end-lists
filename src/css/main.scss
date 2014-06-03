@@ -131,14 +131,20 @@ figure.interactive {
         height: auto; // Hard-coded to prevent jumping when inner-image is removed
         color:#fff;
         margin-bottom:15px;
-        padding:0 20px 0 20px;
+        padding:20px;
         overflow:hidden;
         position: relative;
         margin-bottom:20px;
         background:#005689;
         .dreamteamLogo{
             cursor:pointer;
-            float:right;
+            margin:0 auto 10px;
+            border-bottom: 1px solid;
+            max-width: 100%;
+            padding-bottom: 17px;
+        }
+        .headerContent{
+            clear:both
         }
         .backButton{
             background-image: url(../images/backArrow.png);
@@ -156,35 +162,71 @@ figure.interactive {
                 text-decoration: underline;
             }
         }
-
-        h1{
-            font-size:36px;
-            color: #fff;
-            margin-bottom:0;
+        button{
             width:100%;
+            background:transparent;
+            border:2px solid #fff;
+            padding:15px 20px;
+            font-size:20px;
+            font-weight:900;
+            font-family:"EgyptianHeadline";
+            margin-top:20px;
+            margin-bottom:10px;
         }
         h2{
+            font-size:22px;
+            line-height:1.3em;
+            color: #fff;
+            margin-bottom:0;
+            padding:0;
+            width:100%;
+            font-weight:200;
+            &.headerUsername{
+                font-size:32px;
+            }
+        }
+        .signInBtn{
+            display:block;
+            font-family:"AgateSans";
+            font-size:20px;
+            -webkit-font-smoothing: antialiased;
+            margin:0 auto;
+            text-align:center;
+        }
+        a{
+            color:#fff;
+            text-decoration:underline;
+        }
+        h3{
             font-size:18px;
             color: #fff;
             width:100%;
-        }
-        
-        nav{
-            padding:0;
+            font-weight:200;
+            font-family:EgyptianHeadline;
         }
 
-        .editPageNav{
-            padding:20px 0;
-            width:100%;
-            .dreamteamLogo{   
-                margin:0 auto;
-                display:block;
-                float:none;
-            }
-        }
         @media (min-width: 56.25em) {
+            button{
+                width:auto;
+                margin-bottom:0;
+            }
+            .signInBtn{
+                display:inline;
+                text-align: left;
+            }
             .dreamteamLogo{
-                cursor:pointer;
+                float:none;
+                position:absolute;
+                right:20px;
+                border:none;
+                padding:0;
+            }
+            .headerContent{
+                margin-right:274px;
+                clear:none;
+                border-right:1px solid rgba(255,255,255,0.4);
+                padding-right:180px;
+                min-height: 92px;
             }
             nav{
                 padding:0 0 0 0;
@@ -241,7 +283,13 @@ figure.interactive {
             opacity:0.5;
         }
     }
-
+    .alertMessage{
+        padding-left:40px;
+        background-image: url(../images/alertIcon.png);
+        background-size:30px;
+        background-repeat:no-repeat;
+        background-position:0 7px;
+    }
     .squad-filters-inner{
         overflow: hidden;
         // background: $mainGreyColor;
@@ -287,6 +335,17 @@ figure.interactive {
         background:$mainGreyColor;
         transition: background 0.2s;
         padding: 0 0 20px 0;
+        .pitchSignup{
+            background:#C2DC49;
+            padding:40px 20px 35px;
+            margin-top:15px;
+            margin-bottom:20px;
+            color:#fff;
+            font-size:18px;
+            a{
+                color:#fff; text-decoration:underline;
+            }
+        }
     }
     @media (min-width:56.25em){
         .modalWrapper{
@@ -1181,13 +1240,17 @@ figure.interactive {
     }
     .playMatchBtn{
         border: 1px solid;
-        // border-radius: 4px;
-        color: #aaa;
-        text-align: center;
-        padding: 14px 0 13px;
+        color: #005689;
+        text-align: left;
+        padding: 18px 14px 17px;
         font-family: EgyptianHeadline;
         font-weight: 900;
         margin-bottom:20px;
+        position:relative;
+        cursor:pointer;
+        &:hover{
+            color:#4490ce;
+        }
 
         span{
             display:block;
@@ -1196,15 +1259,18 @@ figure.interactive {
             font-size:13px;
             margin-top:-3px;
             line-height: 1em;
+            position:absolute;
+            right:14px;
+            top:26px;
         }
 
         &.enoughPlayers{
             background:#005689;
             color:#fff;
-            padding: 18px 0 17px;
             cursor:pointer;
             &:hover{
                 background:#4490CE;
+                color:#fff;
             }
         }
     }
@@ -1212,7 +1278,7 @@ figure.interactive {
         overflow: hidden;
         margin: 0 auto;
         padding: 0;
-        // background: url('../images/pitch.jpg');
+        border-radius:1px;
         background-color:#C2DC49;
         height: 445px;
         width: 100%;

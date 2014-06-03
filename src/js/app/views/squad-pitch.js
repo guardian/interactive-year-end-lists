@@ -26,7 +26,7 @@ define([
             'click .playerOptions .close': 'closeOptions',
             'click .pitch-player' : 'positionSelected',
             'click #clearSelection': 'clearSelection',
-            'click .playMatchBtn.enoughPlayers': 'playMatch'
+            'click .playMatchBtn': 'playMatch'
         },
 
         initialize: function() {
@@ -286,7 +286,9 @@ define([
                 userDetails: App.userDetails.toJSON(),
                 players: App.usersTeamCollection.toJSON(),
                 squadCount: App.userDetails.getSquadCount(),
-                positionNames: positionNames
+                positionNames: positionNames,
+                hasSavedTeam: App.userDetails.hasSavedTeam(),
+                isLoggedIn: App.userDetails.isLoggedIn()
             };
             this.$el.append(this.template(data));
             this.$showOptions = this.$('.playerOptions');
