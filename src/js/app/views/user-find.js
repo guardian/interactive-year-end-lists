@@ -3,6 +3,7 @@ define([
     'jquery',
     'backbone',
     'underscore',
+    'models/social',
     'text!templates/user-find.html',
     'jquery.cookie'
 ], function (
@@ -10,6 +11,7 @@ define([
     $,
     Backbone,
     _,
+    SocialModel,
     UserFindTemplate
 ) {
     return Backbone.View.extend({
@@ -76,9 +78,15 @@ define([
         },
 
         render: function () {
+            var socialLinks = SocialModel.getShareTeamURLs({
+                url: document.location.href
+            });
             this.templateData.specialUsers = App.specialUsers;
             this.templateData.latestMatches = App.resultsModel.get('latestResults');
             this.templateData.squadCount = App.userDetails.getSquadCount();
+            this.templateData.twitter_link = socialLinks.twitter;
+            this.templateData.facebook_link = socialLinks.facebook;
+            this.templateData.email_link = socialLinks.email;
             this.$el.html(this.template(this.templateData));
             return this;
         }
