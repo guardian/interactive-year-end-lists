@@ -652,7 +652,8 @@ figure.interactive {
 
     .playAgainst, .editTeam {
         width:100%;
-        padding:20px 0 19px 80px;
+        line-height:1em;
+        padding:20px 20px 19px 80px;
         background:#005689;
         font-family:"EgyptianHeadline";
         font-weight:900;
@@ -1014,7 +1015,7 @@ figure.interactive {
         left: 0;
         right: 0;
         top: 0;
-        padding:50px 10px 0;
+        padding:70px 10px 0;
         font-size: 14px;
         font-weight: bold;
         line-height:1em;
@@ -1030,16 +1031,24 @@ figure.interactive {
         }
     }
     .remove-icon{
-        width:50px;
-        height:50px;
-        border-radius:50%;
-        transform: rotate(45deg);
+        padding:7px 11px 7px 30px;
+        line-height:1em;
         background:#333;
         color:#fff;
-        font-size:20px;
-        padding: 11px 0 0 3px;
+        font-size:14px;
+        position:relative;
         margin:0 auto 5px;
+        font-family:"TextSans";
         line-height:28px;
+        width:100px;
+        img{
+            opacity:1 !important;
+            position: absolute;
+            width:15px;
+            height:15px;
+            margin-top:6px;
+            left:10px;
+        }
     }
     .player_profile.selected{
         .quick-add{
@@ -1466,7 +1475,7 @@ figure.interactive {
        
     }
     #squad-pitch-inner.isDragging{
-        background:#C2DC49;
+        background:#96BD44;
 
         .your-team-details{
             h2,h3, .playMatchBtn{
