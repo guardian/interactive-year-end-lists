@@ -36,6 +36,7 @@ define([
 
         events: {
             'click #goEdit': 'navigateHome',
+            'click .editTeam': 'navigateHome',
             'click .playAgainst': 'createMatch'
         },
 
@@ -95,12 +96,13 @@ define([
                 recentlyViewed = JSON.parse($.cookie(COOKIE_NAME));
             }
 
-            if (_.findWhere(recentlyViewed, {id: uID})  ||
+            if (
                 _.findWhere(recentlyViewed, {id: vID}) ||
-                uID === vID) {
+                _.findWhere(App.specialUsers, {guardianid: vID}) ||
+                uID === vID) { console.log('exiting');
                 return;
             }
-            
+
             recentlyViewed.unshift({
                 un: App.viewingPlayer.get('username'),
                 id: vID
@@ -134,6 +136,10 @@ define([
         renderPlayerCards: function(){
             
             App.viewingPlayerTeamCollection.each(function (value, key){
+                if (value.get('uid') === null) {
+                    return;
+                }
+                
                 var playerCard = this.squadTemplate(value.attributes);
                 var player_card = document.createElement("div");
                 player_card.className = "col-xs-4 col-sm-3 col-lg-2 player_profile";
