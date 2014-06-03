@@ -244,6 +244,8 @@ figure.interactive {
     .visual-prompt {
     }
     .visual-prompt .inner {
+        margin-bottom: 40px;
+        
         background-color: rgb(234, 234, 234);
         padding: 5px 10px;
         overflow: hidden;
@@ -258,7 +260,6 @@ figure.interactive {
     }
     .visual-prompt .closePrompt {
         cursor: pointer;
-        font-size: 25px;
         font-weight: bold;
         color: #999;
         float: right;
@@ -608,7 +609,7 @@ figure.interactive {
         }
     }
 
-    .playAgainst{
+    .playAgainst, .editTeam {
         width:100%;
         padding:20px 0 19px 80px;
         background:#005689;

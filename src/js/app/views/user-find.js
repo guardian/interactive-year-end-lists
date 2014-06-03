@@ -67,7 +67,11 @@ define([
             }
 
             if (recentlyViewed) {
-                this.templateData.recentUsers = recentlyViewed;
+                var filteredList = _.reject(recentlyViewed, function(userObj) {
+                    return userObj.id === App.userDetails.get('guardianID');
+                });
+                
+                this.templateData.recentUsers = filteredList;
             }
         },
 
