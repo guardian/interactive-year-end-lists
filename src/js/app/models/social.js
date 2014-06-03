@@ -9,7 +9,7 @@ define([
 
         defaults: {
             facebook_id:        'ABABABAB',
-            hashtags:           'football,dreamteam',
+            hashtags:           'dreamteam',
             twitter_account:    'guardian',
             base_link:          App.publicURL,
             share_team_title:   'Here is my World Cup dream team',

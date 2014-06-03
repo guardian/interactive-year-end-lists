@@ -39,16 +39,15 @@ define([
             this.model.on('sync', this.render, this);
             this.model.fetch({
                 success: function() {
-                    console.log('success');
                     App.notify.closePrompt();
                 }.bind(this),
                 error: function(attributes, err) {
-                var msg = "Problem fetching match.";
-                    if (err && err.responseJSON && err.responseJSON.msg) {
-                        msg = err.responseJSON.msg;
-                    }
-
-                Backbone.trigger('ERROR', { msg: msg, err: err });
+                    var msg = "Problem fetching match.";
+                        if (err && err.responseJSON && err.responseJSON.msg) {
+                            msg = err.responseJSON.msg;
+                        }
+                    Backbone.trigger('ERROR', { msg: msg, err: err });
+                    App.appRoutes.navigate('home', { trigger: true });
             }.bind(this)});
         },
 
@@ -153,7 +152,6 @@ define([
             } else {
                 this.$el.html('<p>Loading...</p>');
             }
-            console.log(this.model.toJSON());
             return this;
             /*
             var matchDetails = App.matchModel.toJSON();
