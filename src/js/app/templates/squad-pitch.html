@@ -38,7 +38,7 @@
                         <% if (typeof positionNames !== 'undefined') { %>data-position-name="<%= positionNames[index].name %>" <% } %>
                     >
 
-                        <span class="player-icon" title="Drop <%= player.name %>" style="background-image: url(<%= player.picture %>)"></span>
+                        <span class="player-icon" title="<%= player.name %>" style="background-image: url(<%= player.picture %>)"></span>
                         <%= player.name.substring(player.name.lastIndexOf(" ")+1) %>
                     </li>
                 <% } %>
