@@ -132,13 +132,14 @@ define([
         },
         
         renderPlayerCards: function(){
-            
             App.viewingPlayerTeamCollection.each(function (value, key){
-                var playerCard = this.squadTemplate(value.attributes);
-                var player_card = document.createElement("div");
-                player_card.className = "col-xs-4 col-sm-3 col-lg-2 player_profile";
-                player_card.innerHTML = playerCard;
-                this.$('#squad-list').append(player_card);
+                if(value.attributes.name !== null){
+                    var playerCard = this.squadTemplate(value.attributes);
+                    var player_card = document.createElement("div");
+                    player_card.className = "col-xs-4 col-sm-3 col-lg-2 player_profile";
+                    player_card.innerHTML = playerCard;
+                    this.$('#squad-list').append(player_card);
+                }
             }, this);
         },
 

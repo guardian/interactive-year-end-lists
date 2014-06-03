@@ -138,10 +138,15 @@ figure.interactive {
         background:#005689;
         .dreamteamLogo{
             cursor:pointer;
-            margin:0 auto 10px;
+            margin:0 auto 20px;
             border-bottom: 1px solid;
             max-width: 100%;
+
             padding-bottom: 17px;
+            img{
+                margin:0 auto;
+                width:255px;
+            }
         }
         .headerContent{
             clear:both
@@ -157,7 +162,7 @@ figure.interactive {
             font-family:AgateSans;
             cursor:pointer;
             float:left;
-            margin-top:25px;
+            
             &:hover{
                 text-decoration: underline;
             }
@@ -226,7 +231,10 @@ figure.interactive {
                 clear:none;
                 border-right:1px solid rgba(255,255,255,0.4);
                 padding-right:180px;
-                min-height: 92px;
+                min-height: 68px;   
+            }
+            .backButton{
+                margin-top:14px;
             }
             nav{
                 padding:0 0 0 0;
@@ -446,6 +454,14 @@ figure.interactive {
     #users-team{
         padding:0 ;
         margin-bottom:20px;
+
+        .pitch-player{
+            cursor:default;
+
+            span.player-icon:hover {
+                background-color: rgba(0,0,0,0.1);
+            }
+        }
     }
      #users-team-header{
         min-height:40px;
@@ -530,17 +546,18 @@ figure.interactive {
     }
     .playAgainstFriends{
         padding:17px 20px;
-        margin-top:20px;
-        background:#4BC6DF;
-        color:#fff;
+        border-top: 2px solid #4BC6DF;
+        background:#fff;
+        color:#333;
         h4{
-            color:#fff;
+            color:#333;
             font-weight:900;
             font-family:EgyptianHeadline;
             font-size:24px;
         }
         p{
             margin:0 0 10px;
+            color:#333;
         }
         img{
             display:inline-block;
@@ -1295,7 +1312,7 @@ figure.interactive {
         margin: 0 auto;
         padding: 0;
         border-radius:1px;
-        background-color:#C2DC49;
+        background-color:#B3D56C;
         height: 445px;
         width: 100%;
         list-style: none;
@@ -1364,6 +1381,7 @@ figure.interactive {
         .table-players {
             display: block;
         }
+    
     }
     .pitch-player {
         position: absolute;
@@ -1371,16 +1389,16 @@ figure.interactive {
         font-size: 13px;
         color: #fff;
         text-shadow: 0 1px 1px #aaa;
-        font-weight:bold;
+        font-weight:600;
         width:60%;
         text-align: center;
         cursor: pointer;
-        font-family:"AgateSans", Helvetica;
+        font-family:"TextSans", Helvetica;
 
     }
     .pitch-player span.player-icon {
-        width: 48px;
-        height: 48px;
+        width: 58px;
+        height: 58px;
         border-radius: 50%;
         display: block;
         border: 2px solid #fff;
@@ -1394,7 +1412,7 @@ figure.interactive {
         img{
             width:18px;
             height:18px;
-            margin:13px auto 0;
+            margin:20px auto 0;
         }
     }
     
@@ -1458,7 +1476,7 @@ figure.interactive {
     /* Strikers */
     .pitch-player.position-9,
     .pitch-player.position-10 {
-        top: 40px;
+        top: 30px;
     }
     .pitch-player.position-9 {
         left:37%;
@@ -1473,7 +1491,7 @@ figure.interactive {
     .pitch-player.position-6,
     .pitch-player.position-7,
     .pitch-player.position-8 {
-        top: 150px; 
+        top: 140px; 
     }
     .pitch-player.position-5 {
         left: 12%;
@@ -1496,7 +1514,7 @@ figure.interactive {
     .pitch-player.position-2,
     .pitch-player.position-3,
     .pitch-player.position-4 {
-        top: 270px;
+        top: 260px;
     }
     .pitch-player.position-1 {
         left: 12%;
@@ -1516,7 +1534,7 @@ figure.interactive {
     }
     /* Goalkeepers */
     .pitch-player.position-0 {
-        top: 365px;
+        top: 355px;
         left:50%;
         transform:translateX(-50%);
     }

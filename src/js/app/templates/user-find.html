@@ -3,17 +3,9 @@
     <% if(squadCount < 11){ %>
     <h3 class="alertMessage">Your team is not complete team yet. So you can view other teams, but in order to play against them, you have to finish your team first</h3>
     <% } %>
-    <div class="playAgainstFriends">
-
-        <h4>Play against your friends</h4>
-        <p>Share this page with your friends or colleagues, and challenge them to a match</p>
-        <img class="shareIcon" src="@@assetPathimages/twitter_white.svg" /> 
-        <img class="shareIcon" src="@@assetPathimages/facebook_white.svg" />
-        <img class="shareIcon" src="@@assetPathimages/mail_white.svg" />
-
-    </div>
+    
     <div class="col-xs-12 opponentTable">
-        <h3>Or play against one of the featured teams</h3>
+        <h3>Play against featured teams</h3>
         <table class="table">
             <% _.each(specialUsers, function(user) { %>
                 <tr>
@@ -24,6 +16,15 @@
                 </tr>
             <% }) %>
         </table>
+    </div>
+    <div class="playAgainstFriends col-xs-12">
+
+        <h4>Play against your friends</h4>
+        <p>Share this page with your friends or colleagues, and challenge them to a match</p>
+        <img class="shareIcon" src="@@assetPathimages/twitter.svg" /> 
+        <img class="shareIcon" src="@@assetPathimages/facebook.svg" />
+        <img class="shareIcon" src="@@assetPathimages/mail.svg" />
+
     </div>
     <div class="col-xs-12 opponentTable recentlyViewed">
         <h3>Recently viewed</h3>
