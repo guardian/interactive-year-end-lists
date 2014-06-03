@@ -936,17 +936,14 @@ figure.interactive {
         left:2px;
         color:#000;
         text-align:left;
-        padding-top:12px;
-        padding-bottom:5px;
-        width:15px;
         font-family:"AgateSans",sans-serif;
         font-size:10px;
-        -ms-writing-mode: lr-tb;
-        -webkit-writing-mode: vertical-lr;
-        -moz-writing-mode: vertical-lr;
-        -ms-writing-mode: vertical-lr;                
-        writing-mode: vertical-lr;
-    }
+        transform: rotate(90deg);
+        transform-origin: bottom left;
+        padding-left: 15px;
+        padding-right: 7px;
+        top: 1px;
+       }
     .player-name {
         margin: 0;
         width: 100%;
