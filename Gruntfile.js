@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 
     settings: {
       localWebServer:   'http://localhost:9000/',
-      remoteWebServer:  'http://s3.amazonaws.com/gdn-cdn/next-gen/football/ng-interactive/2014/jun/world-cup-2014-dream-team/',
+      remoteWebServer:  'http://interactive.guim.co.uk/next-gen/football/ng-interactive/2014/jun/world-cup-2014-dream-team/',
       s3Folder: '/next-gen/football/ng-interactive/2014/jun/world-cup-2014-dream-team/'
     },
 

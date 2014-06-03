@@ -117,8 +117,6 @@ define([
         },
 
         renderPitch: function () {
-            var playerArr = App.viewingPlayer.getPlayerModels();
-            App.viewingPlayerTeamCollection.reset(playerArr);
             var userPitch = new MatchLineupView({
                 collection: App.viewingPlayerTeamCollection
             });
@@ -173,11 +171,13 @@ define([
         },
 
         render: function () {
+            var playerArr = App.viewingPlayer.getPlayerModels();
+            App.viewingPlayerTeamCollection.reset(playerArr);
+
             var socialLinks = SocialModel.getShareTeamURLs({
                 url: document.location.href
             });
 
-            console.log(socialLinks);
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON(),

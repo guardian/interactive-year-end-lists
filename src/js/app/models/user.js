@@ -215,7 +215,6 @@ define([
         },
 
         hasSavedTeam: function() {
-            console.log(this.id, this.get('id'), this._id);
             return !!this.get('_id');
         },
 
