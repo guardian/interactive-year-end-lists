@@ -610,7 +610,7 @@ figure.interactive {
 
     .playAgainst{
         width:100%;
-        padding:20px 0 19px 100px;
+        padding:20px 0 19px 80px;
         background:#005689;
         font-family:"EgyptianHeadline";
         font-weight:900;
@@ -1307,7 +1307,7 @@ figure.interactive {
         margin: 0 auto;
         padding: 0;
         border-radius:1px;
-        background-color:#B3D56C;
+        background-color:#96BD44;
         height: 445px;
         width: 100%;
         list-style: none;
@@ -1647,8 +1647,7 @@ figure.interactive {
             font-size:14px;
             font-weight:bold;
             display:inline-block;
-            color:#767676;
-            width:70px;
+            color:#333;
         }
         #squad-pitch-inner{
             padding:0;
@@ -1793,7 +1792,7 @@ figure.interactive {
 
     p.scorer.carded {
         clear: none;
-        margin: 0 3px 4px 0;
+        margin: 0 5px 4px 0;
         display:inline;
         .cardColor{
             width:10px;
@@ -1801,7 +1800,7 @@ figure.interactive {
             content:"";
             display:inline-block;
             background:#FFBB00;
-            margin-right:5px;
+            margin-right:3px;
         }
     }
     .home p.scorer.carded {
