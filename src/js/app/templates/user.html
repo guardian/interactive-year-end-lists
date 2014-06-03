@@ -44,9 +44,16 @@
         <div id="usersRecord" class="col-xs-12"></div>
         <div id="user-teamshare" class="col-xs-12">
             <h3>Share this team:</h3> 
-            <img class="shareIcon" src="@@assetPathimages/twitter.svg" /> 
-            <img class="shareIcon" src="@@assetPathimages/facebook.svg" />
-            <img class="shareIcon" src="@@assetPathimages/mail.svg" />
+            <a href="<%= twitter_link %>" target="_blank">
+                <img class="shareIcon" src="@@assetPathimages/twitter.svg" /> 
+            </a>
+            <a href="<%= facebook_link %>" target="_blank">
+                <img class="shareIcon" src="@@assetPathimages/facebook.svg" />
+            </a>
+            <a href="<%= email_link %>" target="_blank"> 
+                <img class="shareIcon" src="@@assetPathimages/mail.svg" />
+            </a>
+
         <p>If people see your team, they can challenge you for a game</p>
         </div>
     </div>

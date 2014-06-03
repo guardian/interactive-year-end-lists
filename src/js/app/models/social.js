@@ -17,12 +17,15 @@ define([
             share_team_desc:    'INTERACTIVE DESCRIPTION',
             share_result_desc:  'RESULT DESCRIPTION',
             photo:              'PATH_TO_SHARE_IMAGE',
+            emailSubject:       'EMAIL SUBJECT LINE',
+            emailBody:          'Email body message with {link}\n',
             redirect_url:       'REDIRECT PATH URL HERE'
         },
 
         urls: {
             facebook: 'https://www.facebook.com/dialog/feed?app_id={app_id}&link={url}&picture={img}&name={title}&description={desc}&redirect_uri={redirect_url}',
-            twitter: 'https://twitter.com/share?url={url}&text={title}&via={via}&hashtags={hashtags}'
+            twitter: 'https://twitter.com/share?url={url}&text={title}&via={via}&hashtags={hashtags}',
+            email: 'mailto:?subject={subject}&body={body}'
         },
 
         getShareResultURLs: function(options) {
@@ -37,7 +40,8 @@ define([
 
             return {
                 facebook: this.getFacebookURL(options),
-                twitter: this.getTwitterURL(options)
+                twitter: this.getTwitterURL(options),
+                email: this.getEmailURL(options)
             };
         },
 
@@ -47,14 +51,23 @@ define([
 
             return {
                 facebook: this.getFacebookURL(options),
-                twitter: this.getTwitterURL(options)
+                twitter: this.getTwitterURL(options),
+                email: this.getEmailURL(options)
             };
+        },
+
+        getEmailURL: function(options) {
+            var data = {
+                subject: this.get('emailSubject') || '',
+                body: this.get('emailBody').replace('{link}', options.url)
+            };
+            return this.buildURL('email', data);
         },
 
         getFacebookURL: function(options) {
             var data = {
                 app_id:         this.get('facebook_id')   || '',
-                url:            options.url              || '',
+                url:            options.url               || '',
                 img:            this.get('photo')         || '',
                 title:          this.get('title')         || '',
                 desc:           this.get('description')   || '',

@@ -176,12 +176,15 @@ define([
             var socialLinks = SocialModel.getShareTeamURLs({
                 url: document.location.href
             });
+
+            console.log(socialLinks);
             this.templateData = {
                 details: App.viewingPlayer.toJSON(),
                 currentUser: App.userDetails.toJSON(),
                 canPlay: this.canUserPlayerMatch(),
                 twitter_link: socialLinks.twitter,
                 facebook_link: socialLinks.facebook,
+                email_link: socialLinks.email,
                 isLoggedIn: App.userDetails.isLoggedIn(),
                 hasSavedTeam: App.userDetails.hasSavedTeam(),
                 squadCount: App.userDetails.getSquadCount(),
