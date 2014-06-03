@@ -474,7 +474,14 @@ figure.interactive {
         }
     }
 
-   
+    .shareIcon{
+        width:40px;
+        height:40px;
+        cursor:pointer;
+        &:hover{
+            opacity:0.8;
+        }
+    }
 
     #squad-list{
         width:auto;
@@ -506,6 +513,24 @@ figure.interactive {
     #users-find{
        
         
+    }
+    .playAgainstFriends{
+        padding:17px 20px;
+        margin-top:20px;
+        background:#4BC6DF;
+        color:#fff;
+        h4{
+            color:#fff;
+            font-weight:900;
+            font-family:EgyptianHeadline;
+            font-size:24px;
+        }
+        p{
+            margin:0 0 10px;
+        }
+        img{
+            display:inline-block;
+        }
     }
     .users-share-container{
         border-bottom: 1px dotted #ddd;
