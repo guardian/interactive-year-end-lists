@@ -26,7 +26,8 @@ define([
             'click .playerOptions .close': 'closeOptions',
             'click .pitch-player' : 'positionSelected',
             'click #clearSelection': 'clearSelection',
-            'click .playMatchBtn': 'playMatch'
+            'click .playMatchBtn': 'playMatch',
+            'click .viewTeam': 'viewTeam'
         },
 
         initialize: function() {
@@ -36,6 +37,11 @@ define([
             Backbone.on('players_closed', this.showPitch, this);
             Backbone.on('resize pageStateChange', this.setWidthInPixels, this);
             App.usersTeamCollection.on('reset', this.render, this);
+        },
+
+        viewTeam: function(e) {
+            var teamID = $(e.currentTarget).data('guardian-id');
+            App.appRoutes.navigate('user/' + teamID);
         },
 
         playMatch: function () {
