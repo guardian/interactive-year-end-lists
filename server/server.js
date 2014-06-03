@@ -32,10 +32,8 @@ mongoose.connect("mongodb://localhost/test");
 
 // Helper functions
 function isValidUser(req) {
-    // FIXME: DEBUG ALLOW ALL USERS
-    return true;
-    //var GU_U = req.body.auth;
-    //return (GU_U && verifyGUCookie(GU_U));
+    var GU_U = req.body.auth;
+    return (GU_U && verifyGUCookie(GU_U));
 }
 
 
@@ -114,18 +112,6 @@ var Match = mongoose.model('Match', MatchSchema);
 
 // Endpoint HTTP options
 app.options('*', cors(corsOptions));
-
-
-// DEV LIST ALL USERS!
-// FIXME: DELETE THIS ROUTE
-app.get("/allusers", function (req, res) {
-    User.find({}, function (err, docs) {
-        if (err) {
-            throw err;
-        }
-        res.send(docs);
-    });
-});
 
 // Fetch a single user
 app.get("/users/:_id", function (req, res) {
