@@ -6,7 +6,8 @@ define([
     'views/match-lineup',
     'views/match-record',
     'text!templates/match.html',
-    'text!templates/squad-pitch.html'
+    'text!templates/squad-pitch.html',
+    'models/social'
 ], function (
     App,
     _,
@@ -15,7 +16,8 @@ define([
     MatchStatsView,
     MatchRecordView,
     MatchTemplate,
-    PitchTemplate
+    PitchTemplate,
+    SocialModel
 ) {
     return Backbone.View.extend({
         id: 'match-screen',
@@ -96,7 +98,8 @@ define([
             var pitchTemplate = _.template(PitchTemplate);
             this.$('#user1-pitch .pitch-container').append(pitchTemplate({
                 squadCount: null,
-                players: App.player1TeamCollection.toJSON()
+                players: App.player1TeamCollection.toJSON(),
+                isLoggedIn: App.userDetails.isLoggedIn()
             }));
             this.$('#user1-pitch .pitch-container').append(user1Pitch.render().$el);
             
@@ -107,7 +110,8 @@ define([
 
             this.$('#user2-pitch .pitch-container').append(pitchTemplate({
                 squadCount: null,
-                players: App.player2TeamCollection.toJSON()
+                players: App.player2TeamCollection.toJSON(),
+                isLoggedIn: App.userDetails.isLoggedIn()
             }));
             this.$('#user2-pitch .pitch-container').append(user2Pitch.render().$el);
             
@@ -142,9 +146,16 @@ define([
         },
 
         render: function () {
+            var socialLinks = SocialModel.getShareTeamURLs({
+                url: document.location.href
+            });
+
             if (this.model.has('time')) {
                 var tplHTML = this.template({
-                    matchDetails: this.model.toJSON()
+                    matchDetails: this.model.toJSON(),
+                    twitter_link: socialLinks.twitter,
+                    facebook_link: socialLinks.facebook,
+                    email_link: socialLinks.email,
                 });
                 this.$el.html(tplHTML);
                 this.renderTeams(); 

@@ -1621,32 +1621,71 @@ figure.interactive {
             padding:0;
         }
     }
+    #match-screen .teamName.teamAlignRight{
+        text-align:right;
+        a{
+            margin-right:10px;
+            margin-left:0;
+        }
+    }
 
     #match-screen .teamName{
-        margin:0;
+        a{
+            margin:0;
+            font-weight:200;
+        font-family:"EgyptianHeadline";
+        }
         word-break: break-word;
         font-size:18px;
-        font-weight:bold;
+        font-weight:200;
+        font-family:"EgyptianHeadline";
+        margin-bottom:10px;
+
+    }
+    .match-teams{
+        padding:0;
     }
     .playAgain{
-        max-width:320px;
-        margin:0 auto;font-size:16px;
+        width:auto;
+        max-width:280px;
+        margin:0 0 10px 0;
+        font-size:16px;
         font-weight:bold;
         font-family:"EgyptianHeadline";
         display:block;
+        padding:20px 20px 19px;
+        background-image: url(../images/refreshIcon.png);
+        background-size: 30px;
+        text-align: left;
+        padding:20px 20px 20px 60px;
+        background-repeat:no-repeat;
+        background-position:15px center;
+        &:hover{
+            background-color:#4490CE;
+        }
     }
 
     .score{
-        color:#545454;
-        font-size:40px;
-        margin:0 0 10px;
-        padding:0;
+        display:block;
+    }
+    .matchActions{
+        margin-top:40px;
+        padding-bottom:40px;
+        text-align: center;
+        border-bottom: 1px dotted #dfdfdf;
+        button,p{
+            display:inline-block;
+            font-family: "TextSans";
+        }
+        .shareIcon{
+            display:inline;
+        }
     }
 
     .match-keyplayers{
         clear:both;
         margin-bottom:10px;
-        border-top:1px dotted #DFDFDF;
+        // border-top:1px dotted #DFDFDF;
         padding-top:5px;
         margin-top:10px;
     }
@@ -1654,6 +1693,7 @@ figure.interactive {
     .teamInfos{
         overflow:hidden;
         margin-top:20px;
+        clear:both;
     }
     .teamInfo1{
         padding:0 10px 0 0;
@@ -1666,11 +1706,24 @@ figure.interactive {
     #match-screen .player-table {
         display: table;
     }
-
+    #match-screen .matchDetails{
+        text-align:center;
+        p{
+            display:inline;
+            font-size:14px;
+            font-family:"TextSans";
+            margin-right:10px;
+            img{
+                display:inline-block;
+                margin-right:5px;
+            }
+        }
+    }
     #match-screen .pitch {
         display: none;
     }
     #match-screen{
+        margin-top:60px;
         h1{
             font-size:28px;
             color:#333;
@@ -1745,16 +1798,27 @@ figure.interactive {
                 font-size:32px;
             }
             .teamName{
-                width:90%;
                 font-size:32px;
-                font-weight:normal;
+                font-weight:200;
+                padding-left:50px;
+                a{
+                    margin:0 0 0 10px;
+                }
+
+                &.teamAlignRight{
+                    padding-left:0;
+                    padding-right:50px;
+                }
             }
         }
 
-
+        .playAgain{
+        margin:0 10px 0 0;
+        }
         .score{
             width:10%;
             margin:0;
+            display:inline;
         }
         #match-screen .player-table {
             display: none;
@@ -1826,6 +1890,7 @@ figure.interactive {
         color:#929497;
         margin: 0;
         display:inline;
+        margin-right:5px;
         color:#767676;
     }
     .home p.scorer {
