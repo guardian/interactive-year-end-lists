@@ -20,7 +20,8 @@ define([
            'click .backToEdit': 'navigateHome',
            'click .dreamteamLogo': 'navigateHome',
            'click .backToTeam': 'playMatch',
-           'click .goPlay': 'playMatch'
+           'click .goPlay': 'playMatch',
+           'click .createAccount': 'goToCreateAccount'
         },
 
         initialize: function () {
@@ -30,6 +31,10 @@ define([
 
         navigateHome: function () {
             App.appRoutes.navigate('home', { trigger: true });
+        },
+
+        goToCreateAccount: function() {
+            document.location = 'https://profile.theguardian.com/register?returnUrl=http%3A%2F%2Fwww.theguardian.com%2Ffootball%2Fng-interactive%2F2014%2Fjun%2F03%2F-sp-world-cup-dream-team-pick-your-all-time-xi';
         },
         
         playMatch: function () {
