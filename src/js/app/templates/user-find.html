@@ -1,14 +1,16 @@
 <div class="row clearfix">
-    <h2>Play against someone else's team</h2>
+    <h2>See how your team measures up</h2>
     <% if(squadCount < 11){ %>
     <h3 class="alertMessage">Your team is not complete team yet. So you can view other teams, but in order to play against them, you have to finish your team first</h3>
     <% } %>
     <div class="playAgainstFriends">
+
         <h4>Play against your friends</h4>
-        <p>Share this page with your friends or colleagues, and invite them for a challenge</p>
+        <p>Share this page with your friends or colleagues, and challenge them to a match</p>
         <img class="shareIcon" src="@@assetPathimages/twitter_white.svg" /> 
         <img class="shareIcon" src="@@assetPathimages/facebook_white.svg" />
         <img class="shareIcon" src="@@assetPathimages/mail_white.svg" />
+
     </div>
     <div class="col-xs-12 opponentTable">
         <h3>Or play against one of the featured teams</h3>
@@ -24,7 +26,7 @@
         </table>
     </div>
     <div class="col-xs-12 opponentTable recentlyViewed">
-        <h3>Recently Viewed</h3>
+        <h3>Recently viewed</h3>
         <table class="table">
             <% _.each(recentUsers, function(user) { %>
                 <tr>
