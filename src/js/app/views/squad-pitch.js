@@ -41,7 +41,7 @@ define([
 
         viewTeam: function(e) {
             var teamID = $(e.currentTarget).data('guardian-id');
-            App.appRoutes.navigate('user/' + teamID);
+            App.appRoutes.navigate('user/' + teamID, { trigger: true });
         },
 
         playMatch: function () {
