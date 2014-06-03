@@ -29,7 +29,6 @@ define([
          * Simply shows stats for user1 vs user2
          */
         render: function () {
-            console.log('hhhhhhhh');
             if (this.options.userID && this.options.opponentID) {
                 var _this = this;
                 $.ajax({

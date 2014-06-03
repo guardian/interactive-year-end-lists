@@ -63,9 +63,6 @@ define([
 
         // Remove and also check the list items for 'selected' class toggle
         removePlayerFromSquad: function () {
-            /*console.log(App.usersTeamCollection.remove(this.model));
-            console.log(App.usersTeamCollection.get(this.model)); 
-            */
             var indexOfPlayer = App.usersTeamCollection.indexOf(this.model);
             App.userDetails.save('player'+indexOfPlayer, null);
             this.showSelectedPlayer();

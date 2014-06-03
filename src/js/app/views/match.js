@@ -39,7 +39,6 @@ define([
             this.model.on('sync', this.render, this);
             this.model.fetch({
                 success: function() {
-                    console.log('success');
                     App.notify.closePrompt();
                 }.bind(this),
                 error: function(attributes, err) {
@@ -153,7 +152,6 @@ define([
             } else {
                 this.$el.html('<p>Loading...</p>');
             }
-            console.log(this.model.toJSON());
             return this;
             /*
             var matchDetails = App.matchModel.toJSON();

@@ -69,7 +69,6 @@ define([
 
             newMatch.save({}, {
                 success: function(matchModel) {
-                    console.log('saved', matchModel.get('_id'));
                     App.appRoutes.navigate('result/' + matchModel.get('_id'), 
                                             {trigger: true});
                 },
@@ -99,7 +98,7 @@ define([
             if (
                 _.findWhere(recentlyViewed, {id: vID}) ||
                 _.findWhere(App.specialUsers, {guardianid: vID}) ||
-                uID === vID) { console.log('exiting');
+                uID === vID) {
                 return;
             }
 
