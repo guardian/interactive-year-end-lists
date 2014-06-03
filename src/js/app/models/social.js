@@ -12,13 +12,13 @@ define([
             hashtags:           'football,dreamteam',
             twitter_account:    'guardian',
             base_link:          App.publicURL,
-            share_team_title:   'Checkout my dream team',
-            share_result_title: 'Dream-team result: {p1} {score1} - {score2} {p2}',
+            share_team_title:   'Here is my World Cup dream team',
+            share_result_title: 'World Cup dream team result: {p1} {score1} - {score2} {p2}',
             share_team_desc:    'INTERACTIVE DESCRIPTION',
             share_result_desc:  'RESULT DESCRIPTION',
             photo:              'PATH_TO_SHARE_IMAGE',
-            emailSubject:       'EMAIL SUBJECT LINE',
-            emailBody:          'Email body message with {link}\n',
+            emailSubject:       'Here is my World Cup dream team',
+            emailBody:          'I chose an all-time XI on the Guardian site. Check it out and see if your selection can beat it.  {link}\n',
             redirect_url:       'REDIRECT PATH URL HERE'
         },
 
