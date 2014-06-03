@@ -17,6 +17,10 @@
             <% } else { %>
                 <button class="player-bio-add player-bio-button">Add <%= player.name.substring(player.name.lastIndexOf(" ")+1) %> to this position</button>
             <% } %>
+        <% } else{ %>
+            <% if (isLoggedIn){ %>
+            <p class="player-bio-copy">Choose a position to add this player</p>
+            <% } %>
         <% } %>
         <% if (!isLoggedIn){ %>
             <p class="player-bio-copy"><em>Login to add <%= player.name %> to your dream team</em></p>

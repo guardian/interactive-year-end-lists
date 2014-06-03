@@ -1026,7 +1026,7 @@ figure.interactive {
 
         &:hover{
             .remove-icon{
-                
+                background:#666;
             }
         }
     }
@@ -1632,7 +1632,7 @@ figure.interactive {
         font-weight:bold;
     }
     .playAgain{
-        width:320px;
+        max-width:320px;
         margin:0 auto;font-size:16px;
         font-weight:bold;
         font-family:"EgyptianHeadline";
