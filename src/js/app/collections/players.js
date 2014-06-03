@@ -188,11 +188,36 @@ define([
                 {
                     name: 'Uruguay',
                     code: 'UY'
+                },
+                {
+                    name: 'East Germany',
+                    code: 'EG'
+                },
+                {
+                    name: 'West Germany',
+                    code: 'WG'
+                },
+                {
+                    name: 'USSR',
+                    code: 'SU'
+                },
+                {
+                    name: 'Paraguay',
+                    code: 'PG'
+                },
+                {
+                    name: 'Nigeria',
+                    code: 'NI'
                 }
+
+
+
+
+
             ];
 
             for (var i = 0; i < countries.length; i++) {
-                if (countryName.toLowerCase() === countries[i].name.toLowerCase()) {
+                if (countryName.toLowerCase().trim() === countries[i].name.toLowerCase().trim()) {
                     return countries[i].code.toLowerCase();
                 }
             }

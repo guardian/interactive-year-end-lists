@@ -7,7 +7,8 @@ define([
     'views/match',
     'views/header',
     'views/notification',
-    'text!templates/super.html'
+    'text!templates/super.html',
+    'text!templates/comingSoon.html'
 ], function (
     App,
     Backbone,
@@ -17,7 +18,8 @@ define([
     MatchView,
     HeaderView,
     NotificationView,
-    Template
+    Template,
+    ComingSoonTemplate
 ) {
     return Backbone.View.extend({
         className: 'dream-team-interactive',
@@ -25,13 +27,25 @@ define([
         events: {},
 
         initialize: function () {
-           Backbone.on('pageStateChange', this.updateView, this);
-           App.notify = new NotificationView();
-           this.headerView = new HeaderView();
+            Backbone.on('pageStateChange', this.updateView, this);
+            App.notify = new NotificationView();
+            this.headerView = new HeaderView();
+
+            // FIXME: Temp coming soon view.
+            this.ComingSoonView = Backbone.View.extend({
+                render: function() {
+                    this.$el.html(ComingSoonTemplate);
+                    return this;
+                }
+            });
+
         },
 
         updateView: function(pageState) {
             switch (pageState) {
+                case 'comingSoon':
+                    this.subView = new this.ComingSoonView();
+                    break;
                 case 'userPage':
                     this.subView = new UserView({ model: App.viewingPlayer });
                     break;

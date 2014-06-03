@@ -236,23 +236,11 @@ figure.interactive {
     .visual-prompt {
     }
     .visual-prompt .inner {
-        background-image: url(../images/sad.png);
-        background-repeat: no-repeat;
-        background-position: 20px center;
-        background-size:50px;
-        margin-bottom: 5px;
-        border: 2px solid #ccc;
-        background-color: #F6F6F6;
-        padding: 30px;
-        font-size: 25px;
-        font-family: EgyptianHeadline;
-        font-weight:200;
-        padding-left: 90px;
-        position: absolute;
-        width:50%;
-        z-index:100;
-        left:25%;
-        p{
+        background-color: rgb(234, 234, 234);
+        padding: 5px 10px;
+        overflow: hidden;
+
+       p{
             margin:0;
         }
     }
@@ -262,12 +250,10 @@ figure.interactive {
     }
     .visual-prompt .closePrompt {
         cursor: pointer;
-        position: absolute;
-        right: 10px;
-        top: 5px;
         font-size: 25px;
         font-weight: bold;
         color: #999;
+        float: right;
     }
     
     &.narrow-view #squad-filters {

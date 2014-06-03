@@ -12,10 +12,15 @@ define([
     return Backbone.Router.extend({
 
         routes: {
+            'soon': 'comingSoon',
             'user/:userid(/)': 'showUser',
             'result/:matchid(/)': 'showMatch',
             'home': 'defaultRoute',
             '*other': 'showErrorAndRedirect'
+        },
+
+        comingSoon: function() {
+            Backbone.trigger('pageStateChange', 'comingSoon');
         },
 
         defaultRoute: function (other) {
@@ -61,8 +66,7 @@ define([
         },
 
         showErrorAndRedirect: function (msg) {
-            console.log('redirect');
-            App.appRoutes.navigate('home', {
+            App.appRoutes.navigate('soon', {
                 trigger: true
             });
         }
