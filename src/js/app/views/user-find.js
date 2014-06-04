@@ -56,14 +56,20 @@ define([
         // Render of recently viewed users on user page
         getRecentlyViewed: function () {
             var recentlyViewed;
-            var cookieVal = $.cookie('dreamteam_recent');
+            var cookieVal = $.cookie('dreamteam');
 
             if (!cookieVal) {
                 return;
             }
 
             try {
-                recentlyViewed = JSON.parse(cookieVal);
+                var users = cookieVal.split(',');
+                recentlyViewed = users.map(function(user) {
+                    return {
+                        un: user.split('|')[0],
+                        id: user.split('|')[1]
+                    };
+                });
             } catch(err) {
                 console.error('Error parsing cookie value', err);
                 return;
