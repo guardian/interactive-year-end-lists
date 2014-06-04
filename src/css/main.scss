@@ -40,7 +40,7 @@ figure.interactive .container {
         width: auto;
     }
 }
-@media (min-width: 56.25em) {
+@media (min-width: 30em) {
     figure.interactive .container {
         width: auto;
     }
@@ -214,7 +214,7 @@ figure.interactive {
             font-family:EgyptianHeadline;
         }
 
-        @media (min-width: 56.25em) {
+        @media (min-width: 30em) {
             button{
                 width:auto;
                 margin-bottom:0;
@@ -387,7 +387,7 @@ figure.interactive {
             }
         }
     }
-    @media (min-width:56.25em){
+    @media (min-width:30em){
         .modalWrapper{
             position:absolute;
             left:50%;
@@ -516,7 +516,7 @@ figure.interactive {
     }
     
 
-    @media (min-width: 56.25em) {
+    @media (min-width: 30em) {
         #user-teamshare{
             display:block;
         }
@@ -699,7 +699,7 @@ figure.interactive {
     /**
 	 * Player selection
 	 */
-    @media (min-width: 56.25em) {
+    @media (min-width: 30em) {
         .squad-list-title{
             display:block;
         }
@@ -780,7 +780,7 @@ figure.interactive {
         padding: 10px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
-    @media (min-width: 56.25em) {
+    @media (min-width: 30em) {
         #squad-filters form {
             height:59px;
             padding-top:17px;
@@ -1127,6 +1127,7 @@ figure.interactive {
             padding: 10px;
             position: fixed;
             transform:translateX(-50%);
+            left:50%;
             top:20%;
             width: 500px;
             z-index: 20;
@@ -1217,7 +1218,7 @@ figure.interactive {
 
         
     }
-    @media(min-width:56.25em){
+    @media(min-width:30em){
         .player-card .choosePositionCTA{
             display:block;
             border-top:1px dotted #dfdfdf;
@@ -1232,6 +1233,9 @@ figure.interactive {
                 pointer-event: none;
                 -webkit-filter:blur(2px);
             }
+        }
+        .player-card.modalMode{
+            left:initial;
         }
         .player-bio {
             padding: 5px;
@@ -1301,7 +1305,7 @@ figure.interactive {
     }
     .back {
     }
-    @media(max-width:56.25em) {
+    @media(max-width:30em) {
         .giwc-player-card {
             margin-left: -150px;
             width: 300px;
@@ -1847,7 +1851,7 @@ figure.interactive {
     }
 
     
-    @media (min-width: 56.25em) {
+    @media (min-width: 30em) {
         #match-screen{
             h1{
                 font-size:32px;
