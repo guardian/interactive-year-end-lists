@@ -35,7 +35,6 @@ define([
             Backbone.on('player_clicked', this.highlightPositions, this);
             Backbone.on('playercard_closed', this.removeHighlightPositions, this);
             Backbone.on('players_closed', this.showPitch, this);
-            Backbone.on('resize pageStateChange', this.setWidthInPixels, this);
             App.usersTeamCollection.on('reset', this.render, this);
         },
 
@@ -55,12 +54,7 @@ define([
                 this.el.scrollIntoView();
             }
         },
-
-        setWidthInPixels: function() {
-            var width = this.$el.width();
-            this.$('#squad-pitch-inner').css('width', width);
-        },
-
+     
         highlightPositions: function(playerModel) {
             this.selectedPlayerModel = playerModel;
             this.$('#squad-pitch-inner').addClass('isDragging');
@@ -307,9 +301,6 @@ define([
                 dragDropTarget.bind("dragleave", _.bind(this._dragLeaveEvent, this));
                 dragDropTarget.bind("drop", _.bind(this._dropEvent, this));
             }
-
-            // Update width
-            setTimeout(this.setWidthInPixels.bind(this), 200);
 
             return this;
         },

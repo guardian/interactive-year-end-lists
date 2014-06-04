@@ -771,11 +771,31 @@ figure.interactive {
             #squad-pitch-inner{
                 position:fixed;
                 top:0;
+                width: 41.7%;
             }
         }
-
-        
     }
+
+    @media (min-width: 73.75em) {
+        #squad-pitch.fix-right {
+
+            #squad-pitch-inner{
+                position:fixed;
+                width: 30.7%;
+            }
+        }
+    }
+
+    @media (min-width: 81.25em) {
+        #squad-pitch.fix-right {
+
+            #squad-pitch-inner{
+                position:fixed;
+                width: 433px;
+            }
+        }
+    }
+
     
     #squad-filters form {
         margin-bottom:20px;
