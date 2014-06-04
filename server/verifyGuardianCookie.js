@@ -24,7 +24,7 @@ module.exports = function(cookieValue, guardianID) {
     
     // Check guardian IDs match
     if (cookieData[0] !== guardianID) {
-       // return false;
+       return false;
     }
 
     // Check the signature
