@@ -99,7 +99,7 @@ define([
             this.$('#user1-pitch .pitch-container').append(pitchTemplate({
                 squadCount: null,
                 players: App.player1TeamCollection.toJSON(),
-                isLoggedIn: App.userDetails.isLoggedIn()
+                isLoggedIn: true
             }));
             this.$('#user1-pitch .pitch-container').append(user1Pitch.render().$el);
             
@@ -111,7 +111,7 @@ define([
             this.$('#user2-pitch .pitch-container').append(pitchTemplate({
                 squadCount: null,
                 players: App.player2TeamCollection.toJSON(),
-                isLoggedIn: App.userDetails.isLoggedIn()
+                isLoggedIn: true
             }));
             this.$('#user2-pitch .pitch-container').append(user2Pitch.render().$el);
             
