@@ -9,37 +9,41 @@
         <table class="table">
             <% _.each(specialUsers, function(user) { %>
                 <tr>
-                    <td><%= user.name  %></td>
+                    <td><%= user.name  %> FC</td>
                     <td class="viewTeamCell viewTeam" data-guardian-id="<%= user.guardianid %>">
-                        Compare or compete
+                        View this team
                     </td>
                 </tr>
             <% }) %>
         </table>
     </div>
-    <div class="playAgainstFriends col-xs-12">
+    <div class="col-xs-12 opponentTable">
+        <h3>Play against your friends</h3>
+        
+        <div class="playAgainstFriends col-xs-12">
 
-        <h4>Play against your friends</h4>
-        <p>Share this page with your friends or colleagues, and challenge them to a match</p>
-        <a href="<%= twitter_link %>" target="_blank">
-            <img class="shareIcon" src="@@assetPathimages/twitter.svg" /> 
-        </a>
-        <a href="<%= facebook_link %>" target="_blank">
-            <img class="shareIcon" src="@@assetPathimages/facebook.svg" />
-        </a>
-        <a href="<%= email_link %>" target="_blank"> 
-            <img class="shareIcon" src="@@assetPathimages/mail.svg" />
-        </a>
+            
+            <p>Share this page with your friends or colleagues, and challenge them to a match</p>
+            <a href="https://twitter.com/share?url=http%3A%2F%2Flocalhost%3A9000%2Fngw.html%23user%2F09&amp;text=Here%20is%20my%20World%20Cup%20dream%20team&amp;via=guardian&amp;hashtags=dreamteam" target="_blank">
+                <img class="shareIcon" src="http://localhost:9000/images/twitter.svg"> 
+            </a>
+            <a href="https://www.facebook.com/dialog/feed?app_id=ABABABAB&amp;link=http%3A%2F%2Flocalhost%3A9000%2Fngw.html%23user%2F09&amp;picture=PATH_TO_SHARE_IMAGE&amp;name=&amp;description=&amp;redirect_uri=REDIRECT%20PATH%20URL%20HERE" target="_blank">
+                <img class="shareIcon" src="http://localhost:9000/images/facebook.svg">
+            </a>
+            <a href="mailto:?subject=Here%20is%20my%20World%20Cup%20dream%20team&amp;body=I%20chose%20an%20all-time%20XI%20on%20the%20Guardian%20site.%20Check%20it%20out%20and%20see%20if%20your%20selection%20can%20beat%20it.%20%20http%3A%2F%2Flocalhost%3A9000%2Fngw.html%23user%2F09%0A" target="_blank"> 
+                <img class="shareIcon" src="http://localhost:9000/images/mail.svg">
+            </a>
 
+        </div>
     </div>
     <div class="col-xs-12 opponentTable recentlyViewed">
         <h3>Recently viewed</h3>
         <table class="table">
             <% _.each(recentUsers, function(user) { %>
                 <tr>
-                    <td><%= user.un  %></td>
+                    <td><%= user.un  %> FC</td>
                     <td class="viewTeamCell viewTeam" data-guardian-id="<%= user.id %>">
-                        Compare or compete
+                        View this team
                     </td>
                 </tr>
             <% }) %>
@@ -48,7 +52,7 @@
     <div class="col-xs-12 opponentTable recentMatches">
         <h3>Recent matches</h3>
         <% if (latestMatches === undefined) { %>
-        <div class="view-match-history">View match results</div>
+        <div class="view-match-history">View your recent match results</div>
         <% } %>
         <table class="table">
             <% _.each(latestMatches, function(match) { %>

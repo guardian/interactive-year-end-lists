@@ -53,6 +53,10 @@ figure.interactive .container {
 figure.interactive {
     position: relative;
     min-height: 1000px; // Fix navigation jumping
+    margin:0 -10px;
+    @media(min-width:30em){
+        margin:0 -20px;
+    }
 
     h1{
         font-size: 28px;
@@ -141,11 +145,11 @@ figure.interactive {
             margin:0 auto 20px;
             border-bottom: 1px solid;
             max-width: 100%;
-
             padding-bottom: 17px;
             img{
                 margin:0 auto;
-                width:255px;
+                width:100%;
+                max-width:255px;
             }
         }
         .headerContent{
@@ -474,6 +478,7 @@ figure.interactive {
         font-size:14px;
         clear:both;
         padding:0;
+        display:none;
         img{
             display:inline-block;
         }
@@ -512,6 +517,9 @@ figure.interactive {
     
 
     @media (min-width: 56.25em) {
+        #user-teamshare{
+            display:block;
+        }
         .table-inline{
             display:none;
         }
@@ -540,8 +548,11 @@ figure.interactive {
             opacity:0.8;
         }
     }
-
+    .squad-list-title{
+        display:none;
+    }
     #squad-list{
+        display:none;
         width:auto;
         margin: 0 -5px;
         overflow:hidden;
@@ -573,7 +584,7 @@ figure.interactive {
         
     }
     .playAgainstFriends{
-        padding:17px 20px;
+        padding:17px 10px;
         border-top: 2px solid #4BC6DF;
         background:#fff;
         color:#333;
@@ -597,6 +608,11 @@ figure.interactive {
         text-align: center;
         
         padding-top: 40px;
+    }
+
+    .table td{
+        font-size:16px;
+        font-size:1.6rem;
     }
 
     .opponentTable{
@@ -630,6 +646,10 @@ figure.interactive {
             text-align: center;
             padding: 11px 0;
             cursor: pointer;
+            font-family:"AgateSans";
+            &:hover{
+                background:#4490CE;
+            }
         }
 
         .viewResult{
@@ -680,6 +700,12 @@ figure.interactive {
 	 * Player selection
 	 */
     @media (min-width: 56.25em) {
+        .squad-list-title{
+            display:block;
+        }
+        #squad-list{
+            display:block;
+        }
         #users-find-container{
             padding:40px 20px 20px;
         }
@@ -1181,6 +1207,10 @@ figure.interactive {
             line-height:22px;
         }
 
+        .choosePositionCTA{
+            display:none;
+        }
+
         .player-bio-col2 {
             margin-left: 33.3%;
         }
@@ -1188,6 +1218,14 @@ figure.interactive {
         
     }
     @media(min-width:56.25em){
+        .player-card .choosePositionCTA{
+            display:block;
+            border-top:1px dotted #dfdfdf;
+            padding-top:5px;
+            font-weight:900;
+            font-family:"EgyptianHeadline";
+            font-size:16px;
+        }
         #player_list{
             &.isDragging{
                 opacity:0.5;
@@ -1625,17 +1663,32 @@ figure.interactive {
     }
     #match-screen .teamName.teamAlignRight{
         text-align:right;
+        position:relative;
         a{
-            margin-right:10px;
+            margin-right:0;
             margin-left:0;
         }
+
+        .score{
+            float:none;
+        }
+    }
+
+    .teamDivider{
+        position:absolute;
+        right:-19px;
+        top:0;
     }
 
     #match-screen .teamName{
         a{
             margin:0;
             font-weight:200;
-        font-family:"EgyptianHeadline";
+            font-family:"EgyptianHeadline";
+            text-decoration:underline;
+            &:hover{
+                color:#4490CE;
+            }
         }
         word-break: break-word;
         font-size:18px;
@@ -1802,15 +1855,24 @@ figure.interactive {
             .teamName{
                 font-size:32px;
                 font-weight:200;
-                padding-left:50px;
+                padding-left:10px;
                 a{
                     margin:0 0 0 10px;
                 }
 
                 &.teamAlignRight{
                     padding-left:0;
-                    padding-right:50px;
+                    padding-right:10px;
+                    a{
+                        margin-right:12px;
+                    }
+                    .score{
+                        float:right;
+                    }
                 }
+            }
+            .teamDivider{
+                right:-22px;
             }
         }
 
@@ -1818,7 +1880,6 @@ figure.interactive {
         margin:0 10px 0 0;
         }
         .score{
-            width:10%;
             margin:0;
             display:inline;
         }

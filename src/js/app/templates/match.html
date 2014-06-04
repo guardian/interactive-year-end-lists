@@ -3,10 +3,12 @@
         <div class="col-xs-12 match-teams">
             <div class="col-xs-6">
                 <h1 class="teamName teamAlignRight">
+                    <span class="score"><%= matchDetails[1].goals.length %></span>
                     <a href="#user/<%= matchDetails[1].guardianID %>">
                         <%= matchDetails[1].username %> FC
                     </a>
-                    <span class="score"><%= matchDetails[1].goals.length %></span>
+                    
+                    <div class="teamDivider">-</div>
                 </h1>
             </div>
             <div class="col-xs-6">
