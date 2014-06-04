@@ -17,7 +17,7 @@ define([
     return Backbone.View.extend({
 
         tagName: 'div',
-        className: 'col-xs-4 col-xm-4 col-sm-4 col-md-3 col-lg-2 player_profile',
+        className: 'col-xs-4 col-sm-3 col-md-4 col-lg-3 col-xl-2 player_profile',
         template: _.template(SquadListTemplate),
 
         events: {

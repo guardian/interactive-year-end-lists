@@ -19,7 +19,7 @@ define([
     return Backbone.View.extend({
 
         id: 'squad-filters',
-        className: 'col-xs-12 col-md-7 col-lg-8',
+        className: 'col-xs-12 col-md-7 col-lg-7 col-xl-8',
         template: _.template(SquadFiltersTemplate),
 
         events: {

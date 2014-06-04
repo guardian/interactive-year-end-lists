@@ -140,7 +140,7 @@ define([
                 
                 var playerCard = this.squadTemplate(value.attributes);
                 var player_card = document.createElement("div");
-                player_card.className = "col-xs-4 col-sm-3 col-lg-2 player_profile";
+                player_card.className = "col-xs-4 col-sm-4 col-md-2 col-lg-3 col-xl-2 player_profile";
                 player_card.innerHTML = playerCard;
                 this.$('#squad-list').append(player_card);
             }, this);
