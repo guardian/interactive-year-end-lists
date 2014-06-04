@@ -126,8 +126,8 @@ app.get("/users/:_id", function (req, res) {
     });
 });
 
-app.get('/users', function (req, res) {
-    var guardianID = req.param('guardianID');
+app.get('/users/guardianID/:_id', function (req, res) {
+    var guardianID = req.param('_id');
     User.findOne({
         'guardianID': guardianID
     }, function (err, user) {
