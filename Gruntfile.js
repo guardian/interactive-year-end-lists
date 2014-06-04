@@ -196,14 +196,18 @@ module.exports = function(grunt) {
     },
 
     s3: {
-      test: {
         options: {
             bucket: 'gdn-cdn',
             access: 'public-read',
             maxOperations: 10,
             headers: {
               'Cache-Control': 'max-age=60, public',
-            },
+              'Expires' : new Date(Date.now() + 60).toUTCString()
+            }
+        },
+
+      test: {
+        options: {
             debug: true
         },
         upload: [
@@ -214,23 +218,39 @@ module.exports = function(grunt) {
           }
         ]
       },
-      prod: {
+
+      main: {
+        upload: [
+          {
+            src: 'build/*.*',
+            dest: '<%= settings.s3Folder %>',
+            rel: 'build'
+          },
+          {
+            src: 'build/css/*.css',
+            dest: '<%= settings.s3Folder %>',
+            rel: 'build'
+          }
+        ]
+      },
+      
+      images: {
         options: {
-            bucket: 'gdn-cdn',
-            access: 'public-read',
-            maxOperations: 10,
+            // Cache images for one hour
             headers: {
-              'Cache-Control': 'max-age=60, public',
+              'Cache-Control': 'max-age=3600, public',
+              'Expires' : new Date(Date.now() + 3600000).toUTCString()
             }
         },
         upload: [
           {
-            src: 'build/**/*',
+            src: 'build/images/**/*',
             dest: '<%= settings.s3Folder %>',
             rel: 'build'
           }
         ]
       }
+
     },
 
     gss_fetch: {
@@ -298,7 +318,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
   grunt.registerTask('default', ['build', 'concurrent:watchers']);
   grunt.registerTask('deploy-server', ['shell']);
-  grunt.registerTask('deploy-s3', ['build','uglify', 's3:prod']);
+  grunt.registerTask('deploy-s3', ['build','uglify', 's3:main', 's3:images']);
   grunt.registerTask('deploy-s3-test', ['build', 's3:test']);
 };
 
