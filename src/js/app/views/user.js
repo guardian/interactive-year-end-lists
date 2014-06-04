@@ -86,14 +86,20 @@ define([
 
         // Adds the user to a cookie to display in a recently viewed list
         addToRecentlyViewed: function () {
-            var COOKIE_NAME = 'dreamteam_recent';
+            var COOKIE_NAME = 'dreamteam';
             var uID = App.userDetails.get('guardianID');
             var vID = App.viewingPlayer.get('guardianID');
             var cookieVal = $.cookie(COOKIE_NAME);
 
             var recentlyViewed = [];
             if (cookieVal) {
-                recentlyViewed = JSON.parse($.cookie(COOKIE_NAME));
+                var users = cookieVal.split(',');
+                recentlyViewed = _.map(users, function(user) {
+                    return {
+                        un: user.split('|')[0],
+                        id: user.split('|')[1]
+                    };
+                });
             }
 
             if (
@@ -107,11 +113,24 @@ define([
                 un: App.viewingPlayer.get('username'),
                 id: vID
             });
+            
+            // Limit recently viewed users to 6
+            recentlyViewed = recentlyViewed.slice(0, 6);
+
+            var newCookieVal = '';
+            _.each(recentlyViewed, function(user, i, list) {
+                newCookieVal += user.un + '|';
+                newCookieVal += user.id;
+                if (i < list.length - 1) {
+                    newCookieVal += ',';
+                }
+            });
+            console.log(newCookieVal);
 
             // Set cookie
             $.cookie(
-                'dreamteam_recent',
-                JSON.stringify(recentlyViewed),
+                'dreamteam',
+                newCookieVal,
                 { expires: 7 }
             );
         },

@@ -22,6 +22,7 @@ define([
 
         events: {
             'click #goToMatch': 'navigateToMatch',
+            
             'click button#dropPlayer': 'dropPlayer',
             'click .playerOptions .close': 'closeOptions',
             'click .pitch-player' : 'positionSelected',
