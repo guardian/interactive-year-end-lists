@@ -826,7 +826,7 @@ figure.interactive {
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
     @media(min-width:30em){
-        h2.playerlist-header{
+        #squad-filters form h2.playerlist-header{
             display:none;
          }
     }
@@ -1200,6 +1200,7 @@ figure.interactive {
         .player-bio-footer {
             margin-bottom:0;
             border-bottom: 1px solid #CCC;
+            padding-bottom:15px;
         }
 
         

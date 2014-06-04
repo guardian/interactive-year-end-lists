@@ -22,6 +22,7 @@ define([
 
         events: {
             'click #goToMatch': 'navigateToMatch',
+            'click .pitchLines': 'deselectPlayers',
             'click button#dropPlayer': 'dropPlayer',
             'click .playerOptions .close': 'closeOptions',
             'click .pitch-player' : 'positionSelected',
@@ -70,7 +71,9 @@ define([
             this.selectedPlayerModel = null;
             this.$('.isDragging').removeClass('isDragging');
         },
-
+        deselectPlayers: function() {
+            this.$('.selected').removeClass('selected');
+        },
         positionSelected: function(e) {
             var target = $(e.currentTarget);
             
