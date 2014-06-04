@@ -58,6 +58,11 @@ return {
       "name": "Star Strikers",
       "guardianid": "xxx-004",
       "rowNumber": 4
+    },
+    {
+      "name": "Hipster XI",
+      "guardianid": "hipster-002",
+      "rowNumber": 5
     }
   ],
   "Player data": [

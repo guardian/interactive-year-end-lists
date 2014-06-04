@@ -359,7 +359,7 @@ app.get('/result/:id', function(req, res) {
             res.json({'msg': 'Could not find match', err: err });
             return;
         }
-
+        res.header('Cache-Control', 'max-age=3600, public');
         res.json(matchRecord);
     });
 });

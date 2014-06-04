@@ -15,7 +15,7 @@ define([
         useLocalEndpoint: '@@useLocalEndpoint',
         localEndpoint: 'http://localhost:3000/',
         remoteEnpoint: 'http://ec2-54-195-231-244.eu-west-1.compute.amazonaws.com/',
-        publicURL: 'http://www.theguardian.com/XXXXXXXXXXXXXXXX/interactive/PATH/'
+        publicURL: 'http://www.theguardian.com/football/ng-interactive/2014/jun/03/-sp-world-cup-dream-team-pick-your-all-time-xi'
     };
 
     app.getEndpoint = function() {
