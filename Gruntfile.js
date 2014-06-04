@@ -66,7 +66,6 @@ module.exports = function(grunt) {
               'underscore': '../libs/underscore',
               'jquery': '../libs/jquery',
               'backbone': '../libs/backbone',
-              'crossdomain': '../libs/Backbone.CrossDomain',
               'text': '../libs/text',
               'jquery.cookie': '../libs/jquery.cookie'
           },
