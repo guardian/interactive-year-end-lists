@@ -14,6 +14,7 @@ define([
     'views/header',
     'views/super',
     'models/match',
+    'text!templates/unsupported.html',
     'routes'
 ], function (
     App,
@@ -31,10 +32,12 @@ define([
     HeaderView,
     SuperView,
     MatchModel,
+    unsupportedTemplate,
     Routes
 ) {
     
     function init() {
+    
     /**
      * Create user model and load Guardian identity toolkit,
      * the toolkit might be R2 or Next-Gen
@@ -102,6 +105,12 @@ define([
      */
     function boot(el, config) {
         App.$el = $(el);
+        // Check CORS support IE10+, Chrome, Safari, FF
+        if ($.support.cors === false) {
+            App.$el.html(unsupportedTemplate);
+            return;
+        }
+
         init();
     }
 

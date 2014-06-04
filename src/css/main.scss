@@ -52,10 +52,16 @@ figure.interactive .container {
 }
 figure.interactive {
     position: relative;
-    min-height: 1000px; // Fix navigation jumping
+    // min-height: 1000px; // Fix navigation jumping
     margin:0 -10px;
     @media(min-width:42.5em){
         margin:0 -20px;
+    }
+
+    .unsupported {
+        text-align: center;
+        background: #FFC;
+        padding: 7px 10px;
     }
 
     h1{
