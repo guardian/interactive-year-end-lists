@@ -33,7 +33,8 @@ mongoose.connect("mongodb://localhost/test");
 // Helper functions
 function isValidUser(req) {
     var GU_U = req.body.auth;
-    return (GU_U && verifyGUCookie(GU_U));
+    var guardianID = req.body.guardianID;
+    return (GU_U && guardianID && verifyGUCookie(GU_U, guardianID));
 }
 
 
@@ -144,7 +145,11 @@ app.get('/users/guardianID/:_id', function (req, res) {
 
 // Create new user
 app.post('/users', function (req, res) {
-       
+    if (!isValidUser(req)) {
+        res.jsonp(401, {'msg': 'User not logged in'});
+        return;
+    }
+
     var userData = {
         guardianID: req.body.guardianID,
         username: req.body.username,
@@ -182,6 +187,11 @@ app.post('/users', function (req, res) {
 
 // Update existing user data
 app.put("/users/:_id", function (req, res, next) {
+    if (!isValidUser(req)) {
+        res.jsonp(401, {'msg': 'User not logged in'});
+        return;
+    }
+
     var userData = {
         guardianID: req.body.guardianID,
         username: req.body.username,
@@ -225,8 +235,7 @@ app.get("/allmatches", function (req, res) {
 app.post('/result', function(req, res) {
     // Check if user is logged in
     if (!isValidUser(req)) {
-        res.status(401);
-        res.jsonp({'msg': 'User not logged in'});
+        res.jsonp(401, {'msg': 'User not logged in'});
         return;
     }
 

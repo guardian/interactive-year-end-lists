@@ -27,6 +27,7 @@ define([
             if (readyForMatch) {
                 var _this = this,
                     matchUsers = {
+                        guardianID: App.userDetails.get('guardianID'),
                         user1: App.player1.get('guardianID'),
                         user2: App.player2.get('guardianID')
                     };
