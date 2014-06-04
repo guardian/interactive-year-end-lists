@@ -329,6 +329,7 @@ figure.interactive {
         position: relative;
         z-index: 10;
         padding: 0;
+        display:none;
         
         &.isDragging{
             opacity:0.5;
@@ -398,6 +399,11 @@ figure.interactive {
             }
         }
     }
+    @media (min-width:30em){
+        #squad-filters{
+            display:block;
+        }
+    }
     @media (min-width:42.5em){
         .modalWrapper{
             position:absolute;
@@ -408,6 +414,7 @@ figure.interactive {
         }
         #squad-pitch {
         margin-top:-20px;
+        float:right;
         
         }
         #squad-pitch-inner{
@@ -539,7 +546,12 @@ figure.interactive {
     }
 
     @media (min-width: 42.5em) {
-       
+        #users-team{
+            padding:0 20px 0 0;
+        }
+        #usersRecordWrapper{
+            padding:0 ;
+        }
         .table-inline{
             display:none;
         }
@@ -615,7 +627,7 @@ figure.interactive {
         
     }
     .playAgainstFriends{
-        padding:17px 10px;
+        padding:10px 10px;
         border-top: 2px solid #4BC6DF;
         background:#fff;
         color:#333;
@@ -784,7 +796,7 @@ figure.interactive {
              float:left;
 
              &.playerlist-header{
-                // display:none;
+                display:none;
              }
         }
         .filter-container{
@@ -812,6 +824,11 @@ figure.interactive {
     #squad-filters form.squad-filters-fixed .inner {
         padding: 10px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    @media(min-width:30em){
+        h2.playerlist-header{
+            display:none;
+         }
     }
     @media (min-width: 42.5em) {
         #squad-filters form {
@@ -940,6 +957,9 @@ figure.interactive {
     }
     .border-goalkeeper{
         border-color:#FFBB00; 
+        &#playerSelectedModal{
+            border-color:#FFBB00; 
+        }
     }
 
     .bg-attack{
@@ -951,6 +971,9 @@ figure.interactive {
     }
     .border-attack{
         border-color:#F5644F; 
+        &#playerSelectedModal{
+            border-color:#F5644F; 
+        }
     }
     .bg-midfield{
         background:#4BC6DF; 
@@ -961,6 +984,9 @@ figure.interactive {
     }
     .border-midfield{
         border-color:#4BC6DF; 
+        &#playerSelectedModal{
+            border-color:#4BC6DF; 
+        }
     }
     .bg-defence{
         background:#85C54B; 
@@ -971,6 +997,9 @@ figure.interactive {
     }
     .border-defence{
         border-color:#85C54B; 
+        &#playerSelectedModal{
+            border-color:#85C54B; 
+        }
     }
     .player_profile .inner .innercard {
         position: relative;
@@ -1071,11 +1100,12 @@ figure.interactive {
         width:48px;
         height:48px;
         font-size:12px;
-        position:relative;
-        margin:-24px auto 5px;
+        position:absolute;
+        margin:-24px 0 0 -24px;
         font-family:"TextSans", sans-serif;
         line-height:1em;
         border-radius:50%;
+        left:50%;
         top:50%;
         img{
             opacity:1 !important;
@@ -1104,9 +1134,15 @@ figure.interactive {
     }
     #playerSelectedModal{
         display:none;
+        border:none;
     }
     #playerSelectedModal .modal-content {
         height: 480px;
+    }
+    @media(min-width:30em){
+        #playerSelectedModal{
+            border:2px solid #333;
+        }
     }
     /* Player card (Modal) */
     .close {
@@ -1913,6 +1949,9 @@ figure.interactive {
     }
     .match-stats-wrapper-inline{
         display:none;
+    }
+    .goal-attempts{
+        max-width:none;
     }
     @media(min-width:73.75em){
         .match-stats-wrapper{
