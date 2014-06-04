@@ -126,8 +126,8 @@ app.get("/users/:_id", function (req, res) {
     });
 });
 
-app.get('/users', function (req, res) {
-    var guardianID = req.param('guardianID');
+app.get('/users/guardianID/:_id', function (req, res) {
+    var guardianID = req.param('_id');
     User.findOne({
         'guardianID': guardianID
     }, function (err, user) {
@@ -359,7 +359,7 @@ app.get('/result/:id', function(req, res) {
             res.json({'msg': 'Could not find match', err: err });
             return;
         }
-
+        res.header('Cache-Control', 'max-age=3600, public');
         res.json(matchRecord);
     });
 });

@@ -8,7 +8,7 @@ define([
     var SocialModel = Backbone.Model.extend({
 
         defaults: {
-            facebook_id:        'ABABABAB',
+            facebook_id:        '180444840287',
             hashtags:           'dreamteam',
             twitter_account:    'guardian',
             base_link:          App.publicURL,
@@ -16,10 +16,10 @@ define([
             share_result_title: 'World Cup dream team result: {p1} {score1} - {score2} {p2}',
             share_team_desc:    'INTERACTIVE DESCRIPTION',
             share_result_desc:  'RESULT DESCRIPTION',
-            photo:              'PATH_TO_SHARE_IMAGE',
+            photo:              'http://static.guim.co.uk/sys-images/Football/Pix/pictures/2014/6/3/1401831699812/Neymar-Brazil--011.jpg',
             emailSubject:       'Here is my World Cup dream team',
             emailBody:          'I chose an all-time XI on the Guardian site. Check it out and see if your selection can beat it.  {link}\n',
-            redirect_url:       'REDIRECT PATH URL HERE'
+            redirect_url:       'http://www.theguardian.com/football/ng-interactive/2014/jun/03/-sp-world-cup-dream-team-pick-your-all-time-xi'
         },
 
         urls: {

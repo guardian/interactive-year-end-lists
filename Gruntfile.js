@@ -66,6 +66,7 @@ module.exports = function(grunt) {
               'underscore': '../libs/underscore',
               'jquery': '../libs/jquery',
               'backbone': '../libs/backbone',
+              'crossdomain': '../libs/Backbone.CrossDomain',
               'text': '../libs/text',
               'jquery.cookie': '../libs/jquery.cookie'
           },
@@ -318,7 +319,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
   grunt.registerTask('default', ['build', 'concurrent:watchers']);
   grunt.registerTask('deploy-server', ['shell']);
-  grunt.registerTask('deploy-s3', ['build','uglify', 's3:main', 's3:images']);
+  grunt.registerTask('deploy-s3', ['build', 's3:main', 's3:images']);
   grunt.registerTask('deploy-s3-test', ['build', 's3:test']);
 };
 

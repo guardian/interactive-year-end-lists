@@ -138,9 +138,7 @@ define([
 
         fetchByGuardianId: function (_options) {
             var options = _options || {};
-            options.data = {
-                guardianID: this.get('guardianID')
-            };
+            options.url =  this.url() + '/guardianID/' + this.get('guardianID');
             return this.fetch(options);
         },
 
