@@ -123,7 +123,7 @@ define([
             this.$el.show();
             var marginTop = (this.$el.offset().top - details.y) * -1;
             this.$el.css('margin-top', details.y * -1);
-            this.$('.up-arrow').css('left', details.x - 40);
+            this.$('.up-arrow').css('left', details.x - 20);
         },
 
         setNavigationPosition: function () {
