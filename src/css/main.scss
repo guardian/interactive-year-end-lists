@@ -139,19 +139,32 @@ figure.interactive {
     }
     .dreamteam-header{
         height: auto; // Hard-coded to prevent jumping when inner-image is removed
-        color:#fff;
+        color:#333;
         margin-bottom:15px;
-        padding:20px;
+        padding:0;
         overflow:hidden;
         position: relative;
         margin-bottom:20px;
-        background:#005689;
+        border-top:2px solid #4BC6DF;
+        border-bottom:1px solid #DCDCDC;
+        padding-left:85px;
+        padding-bottom:50px;
+        .header-pitch-logo{
+            position:absolute;
+            right:0;
+            top:5px;
+            display:none;
+            width:93px;
+        }
         .dreamteamLogo{
             cursor:pointer;
-            margin:0 auto 20px;
+            margin:5px auto 20px;
             border-bottom: 1px solid;
             max-width: 100%;
-            padding-bottom: 17px;
+            width:65px;
+            height:100%;
+            position:absolute;
+            left:0;
             img{
                 margin:0 auto;
                 width:100%;
@@ -162,12 +175,12 @@ figure.interactive {
             clear:both
         }
         .backButton{
-            background-image: url(../images/backArrow.png);
+            background-image: url(../images/backArrowGrey.png);
             background-size:40px;
             background-repeat:no-repeat;
             background-position:left center;
             padding:10px 0 10px 50px;
-            color:#fff;
+            color:#333;
             font-size:16px;
             font-family:"AgateSans", sans-serif;
             cursor:pointer;
@@ -189,15 +202,14 @@ figure.interactive {
             margin-bottom:10px;
         }
         h2{
-            font-size:22px;
+            font-size:38px;
             line-height:1.3em;
-            color: #fff;
             margin-bottom:0;
             padding:0;
             width:100%;
-            font-weight:200;
+            font-weight:normal;
             &.headerUsername{
-                font-size:32px;
+                // font-size:32px;
             }
         }
         .signInBtn{
@@ -209,18 +221,19 @@ figure.interactive {
             text-align:center;
         }
         a{
-            color:#fff;
             text-decoration:underline;
         }
         h3{
             font-size:18px;
-            color: #fff;
             width:100%;
-            font-weight:200;
+            font-weight:normal;
             font-family:EgyptianHeadline;
         }
 
         @media (min-width: 42.5em) {
+            .header-pitch-logo{
+                display:block;
+            }
             button{
                 width:auto;
                 margin-bottom:0;
@@ -230,9 +243,6 @@ figure.interactive {
                 text-align: left;
             }
             .dreamteamLogo{
-                float:none;
-                position:absolute;
-                right:20px;
                 border:none;
                 padding:0;
             }
@@ -241,10 +251,9 @@ figure.interactive {
                 clear:none;
                 border-right:1px solid rgba(255,255,255,0.4);
                 padding-right:20px;
-                min-height: 68px;   
             }
             .backButton{
-                margin-top:14px;
+                margin-top:0;
             }
             nav{
                 padding:0 0 0 0;
@@ -685,6 +694,47 @@ figure.interactive {
         td{
             text-align: center;
             padding:14px 10px;
+        }
+        .teamcell1{
+            text-align: right;
+            width:50%;
+            padding-right:10px;
+            position: relative;
+            .cellScore{
+                margin-left:5px;
+                display:block;
+            }
+            .cellDivider{
+                position:absolute;
+                right:-2px;
+                top:13px;
+            }
+            a{color:#333;}
+        }
+
+        .teamcell2{
+            text-align: left;
+            padding-left:10px;
+            width:50%;
+             a{color:#333;}
+            .cellScore{
+                margin-right:5px;
+                display:block;
+            }
+        }
+
+        @media(min-width:30em){
+            .teamcell1{
+                .cellScore{
+                    float:right;
+                    display:inline;
+                }
+            }
+            .teamcell2{
+                .cellScore{
+                    display:inline;
+                }
+            }
         }
 
         .view-match-history {

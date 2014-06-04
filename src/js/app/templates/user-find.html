@@ -58,19 +58,27 @@
         <table class="table">
             <% _.each(latestMatches, function(match) { %>
                 <tr>
-                    <td>
+                    <td class="teamcell1">
                         <a href="#/user/<%= match.user1ID %>">
+                        <span class="cellScore"><%= match.user1Goals %></span>
                             <%= match.user1Name %> FC
+                            
+
                         </a>
-                        <%= match.user1Goals %> - <%= match.user2Goals %>
+                        <div class="cellDivider">-</div>
+                    </td>
+                    <td class="teamcell2">
+                         
                         <a href="#/user/<%= match.user2ID %>">
+                            <span class="cellScore"><%= match.user2Goals %></span>
                             <%= match.user2Name %> FC
+
                         </a>                   
                     
                     </td>
                 </tr>
                 <tr>
-                    <td class="viewTeamCell viewResult">
+                    <td colspan="2" class="viewTeamCell viewResult">
                         <a href="#result/<%= match.id %>">See match</a>
                     </td>
                 </tr>
