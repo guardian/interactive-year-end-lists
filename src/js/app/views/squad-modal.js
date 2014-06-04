@@ -43,21 +43,13 @@ define([
 
         openCard: function (playerModel) {
             this.model = playerModel;
-            var positions = this.model.get('position').split(',');
-            positions.forEach(function(position, i) {
-                $('#squad-pitch').addClass(position.trim().toLowerCase());
-            });
+            
             this.render();
             this.$el.show();
         },
 
         closeCard: function (e) {
             Backbone.trigger('playercard_closed');
-            var positions = this.model.get('position').split(',');
-
-            positions.forEach(function(position, i) {
-                $('#squad-pitch').removeClass(position.trim().toLowerCase());
-            });
             if (e.id) {
                 this.position = null;
             }

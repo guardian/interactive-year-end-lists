@@ -22,7 +22,7 @@ define([
 
         events: {
             'click #goToMatch': 'navigateToMatch',
-            'click .pitchLines': 'deselectPlayers',
+            
             'click button#dropPlayer': 'dropPlayer',
             'click .playerOptions .close': 'closeOptions',
             'click .pitch-player' : 'positionSelected',
@@ -36,6 +36,7 @@ define([
             Backbone.on('player_clicked', this.highlightPositions, this);
             Backbone.on('playercard_closed', this.removeHighlightPositions, this);
             Backbone.on('players_closed', this.showPitch, this);
+            Backbone.on('resize pageStateChange', this.setWidthInPixels, this);
             App.usersTeamCollection.on('reset', this.render, this);
         },
 
@@ -55,7 +56,12 @@ define([
                 this.el.scrollIntoView();
             }
         },
-     
+
+        setWidthInPixels: function() {
+            var width = this.$el.width();
+            this.$('#squad-pitch-inner').css('width', width);
+        },
+
         highlightPositions: function(playerModel) {
             this.selectedPlayerModel = playerModel;
             this.$('#squad-pitch-inner').addClass('isDragging');
@@ -65,9 +71,7 @@ define([
             this.selectedPlayerModel = null;
             this.$('.isDragging').removeClass('isDragging');
         },
-        deselectPlayers: function() {
-            this.$('.selected').removeClass('selected');
-        },
+
         positionSelected: function(e) {
             var target = $(e.currentTarget);
             
@@ -304,6 +308,9 @@ define([
                 dragDropTarget.bind("dragleave", _.bind(this._dragLeaveEvent, this));
                 dragDropTarget.bind("drop", _.bind(this._dropEvent, this));
             }
+
+            // Update width
+            setTimeout(this.setWidthInPixels.bind(this), 200);
 
             return this;
         },
