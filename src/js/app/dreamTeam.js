@@ -14,8 +14,7 @@ define([
     'views/header',
     'views/super',
     'models/match',
-    'routes',
-    'crossdomain'
+    'routes'
 ], function (
     App,
     $,
