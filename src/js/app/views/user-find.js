@@ -28,7 +28,7 @@ define([
         initialize: function () {
             this.templateData = {
                 users: null,
-                recentUsers: null,
+                recentUsers: [],
                 specialUsers: App.specialUsers 
             };
 
@@ -66,6 +66,7 @@ define([
                 recentlyViewed = JSON.parse(cookieVal);
             } catch(err) {
                 console.error('Error parsing cookie value', err);
+                return;
             }
 
             if (recentlyViewed) {
