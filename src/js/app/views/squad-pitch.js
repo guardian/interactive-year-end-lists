@@ -16,7 +16,7 @@ define([
     return Backbone.View.extend({
 
         id: 'squad-pitch',
-        className: 'col-xs-12 col-md-5 col-lg-4',
+        className: 'col-xs-12 col-md-5 col-lg-5 col-xl-4',
         template: _.template(SquadPitchTemplate),
         templateTable: _.template(SquadPitchTemplateTable),
 
