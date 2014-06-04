@@ -2,49 +2,42 @@
 <% isLoggedInTest = true %>
 
 <!-- <div style="position:absolute;top:0;right:0;">Loggedin = <%= isLoggedIn %> - has saved team = <%= hasSavedTeam %> - <strong>has saved teamtest = <%= hasSavedTeamTest %></strong></div> -->
-
-<div class="dreamteamLogo">
-	<img src="@@assetPathimages/guardian_wc_logo.png" />
+<div class="headerBand">
+	<div class="dreamteamLogo">
+		<img src="@@assetPathimages/guardian_wc_logo.png" />
+	</div>
+	<% if(isLoggedIn) { %>
+		<% if(hasSavedTeam) { %>
+		<h2 class="headerUsername">World Cup dream team: Pick your all-time XI</h2>
+		<h3>Create your own all-time XI and challenge others to a match</h3>
+		<% }else{ %>
+		<h2 class="headerUsername">World Cup dream team: Pick your all-time XI</h2>
+		<h3>Create your own all-time XI and challenge others to a match</h3>
+		<button class="backToEdit">Create <%= username %> FC</button>
+		<% } %>
+	<% }else{ %>
+		<h2 class="headerUsername">World Cup dream team: Pick your all-time XI</h2>
+		<h3>Sign in to the Guardian to choose your own all-time XI and challenge <span class="headerOpponentName">others</span> to a match</h3>
+		<button class="createAccount">Create an account</button> <span class="signInBtn">or <a href="https://profile.theguardian.com/signin">sign in</a></span>
+	<% } %>
 </div>
-<h2 class="headerUsername">World Cup dream team</h2>
+
+
 <div class="headerContent">
 	<% if(isLoggedIn) { %>
 		<% if(hasSavedTeam) { %>
-			<div class="editPageNav clearfix">
-				<h3>Create your own all-time XI and challenge others to a match</h3>
-			</div>
-
-			<div class="yourPageNav clearfix">
+			<nav class="yourPageNav clearfix">
 				<div class="backButton backToEdit">Edit your team</div>
-			</div>
+			</nav>
 
-			<div class="userPageNav clearfix">
+			<nav class="userPageNav clearfix">
 				<% if(squadCount !== 11) { %>
 					<div class="backButton backToTeam">Back to your team</div>
 				<% } else{ %>
 					<div class="backButton backToTeam">Back to your team</div>
 				<% } %>
-			</div>
-		<% } else { %>
-			<div class="editPageNav clearfix">
-				<h2 class="headerUsername">World Cup dream team</h2>
-				<h3>Create your own all-time XI and challenge others to a match</h3>
-			</div>
-
-			<div class="yourPageNav clearfix">
-				<h2>Create your own all-time XI and challenge <span class="headerOpponentName">others</span> to a match</h2>
-				<button class="backtoEdit">Create <%= username %> FC</button>
-			</div>
-
-			<div class="userPageNav clearfix">
-				<h2>Create your own all-time XI and challenge <span class="headerOpponentName">others</span> to a match</h2>
-				<button class="backtoEdit">Create <%= username %> FC</button>
-			</div>
-		<% } %>
-
-	<% }else{ %>
-		<h2>Sign in to the Guardian to choose your own all-time XI and challenge <span class="headerOpponentName">others</span> to a match</h2>
-		<button class="createAccount">Create an account</button> <span class="signInBtn">or <a href="https://profile.theguardian.com/signin">sign in</a></span>
+			</nav>
+		<% }%>
 	<% } %>
 </div>
-<img class="header-pitch-logo" src="@@assetPathimages/pitch_logo.png" />
+

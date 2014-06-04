@@ -144,11 +144,14 @@ figure.interactive {
         padding:0;
         overflow:hidden;
         position: relative;
-        margin-bottom:20px;
-        border-top:2px solid #4BC6DF;
-        border-bottom:1px solid #DCDCDC;
-        padding-left:85px;
-        padding-bottom:50px;
+        .headerBand{
+             background:#4BC6DF;
+             padding-left:90px;
+             color:#fff;
+             padding-bottom:40px;
+             padding-top:10px;
+             padding-right:10px;
+        }
         .header-pitch-logo{
             position:absolute;
             right:0;
@@ -158,13 +161,13 @@ figure.interactive {
         }
         .dreamteamLogo{
             cursor:pointer;
-            margin:5px auto 20px;
             border-bottom: 1px solid;
             max-width: 100%;
             width:65px;
-            height:100%;
             position:absolute;
-            left:0;
+            left:10px;
+            right:10px;
+            border:none;
             img{
                 margin:0 auto;
                 width:100%;
@@ -172,7 +175,11 @@ figure.interactive {
             }
         }
         .headerContent{
-            clear:both
+            clear:both;
+            nav{
+                    padding:10px 0;
+                    border-bottom:1px solid #ddd;
+                }
         }
         .backButton{
             background-image: url(../images/backArrowGrey.png);
@@ -198,16 +205,17 @@ figure.interactive {
             font-size:20px;
             font-weight:900;
             font-family:"EgyptianHeadline";
-            margin-top:20px;
             margin-bottom:10px;
         }
         h2{
-            font-size:38px;
-            line-height:1.3em;
+            font-size:32px;
+            line-height:1.1em;
             margin-bottom:0;
             padding:0;
+            color:#fff;
             width:100%;
-            font-weight:normal;
+            font-weight:200;
+            max-width:600px;
             &.headerUsername{
                 // font-size:32px;
             }
@@ -219,18 +227,29 @@ figure.interactive {
             -webkit-font-smoothing: antialiased;
             margin:0 auto;
             text-align:center;
+            a{
+                color:#fff;
+            }
         }
         a{
             text-decoration:underline;
         }
         h3{
             font-size:18px;
+            color:#fff;
             width:100%;
             font-weight:normal;
-            font-family:EgyptianHeadline;
+            margin-top:10px;
+            font-family:"AgateSans", Helvetica, sans-serif;
         }
 
         @media (min-width: 42.5em) {
+            h2{
+                font-size:40px;
+            }
+            .headerBand{
+             padding-left:155px;
+            }
             .header-pitch-logo{
                 display:block;
             }
@@ -243,14 +262,12 @@ figure.interactive {
                 text-align: left;
             }
             .dreamteamLogo{
-                border:none;
                 padding:0;
             }
             .headerContent{
-                margin-right:274px;
                 clear:none;
                 border-right:1px solid rgba(255,255,255,0.4);
-                padding-right:20px;
+                
             }
             .backButton{
                 margin-top:0;
@@ -261,7 +278,6 @@ figure.interactive {
         }
         @media (min-width: 56.25em) {
             .headerContent{
-                padding-right:180px;
             }
         }
     }
@@ -422,7 +438,6 @@ figure.interactive {
             }
         }
         #squad-pitch {
-        margin-top:-20px;
         float:right;
         
         }
@@ -619,7 +634,7 @@ figure.interactive {
         padding-right:0;
         clear: both;
         float:right;
-        margin-top:-20px;
+        margin-top:-15px;
         padding:20px 10px;
         background: #f8f8f8;
         h2{
@@ -855,7 +870,6 @@ figure.interactive {
         left: 15px;
         right: 15px;
         z-index: 3;
-        padding-top:10px;
 
         h2{ 
              font-size:22px;
@@ -905,7 +919,8 @@ figure.interactive {
     @media (min-width: 42.5em) {
         #squad-filters form {
             height:59px;
-            padding-top:17px;
+            border-top:2px solid #dfdfdf;
+            padding-top:10px;
         
         .filter-container{
             float:left;
