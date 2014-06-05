@@ -105,7 +105,7 @@ define([
      */
     function boot(el, config) {
         // Hide header
-        $('.content__head .gs-container').hide();
+        $('header.content__head').hide();
 
         App.$el = $(el);
         // Check CORS support IE10+, Chrome, Safari, FF
