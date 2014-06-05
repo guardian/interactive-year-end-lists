@@ -83,6 +83,10 @@ define([
                     name: 'Croatia',
                     code: 'HR'
                 },
+                {
+                    name: 'Colombia',
+                    code: 'CO'
+                },
 
                 {
                     name: 'Czech Republic',

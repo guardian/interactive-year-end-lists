@@ -1653,11 +1653,14 @@ figure.interactive {
     .pitch-player {
         position: absolute;
         max-width: 80px;
-        font-size: 13px;
+        font-size: 10px;
         color: #fff;
         text-shadow: 0 1px 1px #aaa;
         font-weight:600;
+        text-transform:uppercase;
         width:60%;
+        -webkit-font-smoothing: auto;
+        letter-spacing:1px;
         text-align: center;
         cursor: pointer;
         font-family:"TextSans", "AvenirNextCondensed-DemiBold", sans-serif;
@@ -1684,7 +1687,7 @@ figure.interactive {
     }
     @media(max-width:30em){
         .pitch-player{
-            font-size:12px;
+            font-size:10px;
 
             span.player-icon{
                 width:46px;
@@ -1698,7 +1701,7 @@ figure.interactive {
     }
     @media(min-width:42.5em){
         .pitch-player{
-            font-size:12px;
+            font-size:10px;
 
             span.player-icon{
                 width:46px;
@@ -1713,7 +1716,7 @@ figure.interactive {
 
     @media(min-width:51.25em){
         .pitch-player{
-            font-size:13px;
+            font-size:10px;
 
             span.player-icon{
                 width:58px;
