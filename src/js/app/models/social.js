@@ -13,7 +13,7 @@ define([
             twitter_account:    'guardian',
             base_link:          App.publicURL,
             share_team_title:   'I chose my all-time World Cup dream team at the Guardian. Can you beat it?',
-            share_result_title: 'Guardian World Cup dream team latest result: {p1} {score1} - {score2} {p2}. Would your all-time XI do better?',
+            share_result_title: '{p1} {score1} - {score2} {p2}. Can you do better?',
             share_team_desc:    'INTERACTIVE DESCRIPTION',
             share_result_desc:  'RESULT DESCRIPTION',
             photo:              'http://static.guim.co.uk/sys-images/Football/Pix/pictures/2014/6/3/1401831699812/Neymar-Brazil--011.jpg',
@@ -34,9 +34,9 @@ define([
             text = text.replace('{p2}', options.user_2);
             text = text.replace('{score1}', options.user_1_score);
             text = text.replace('{score2}', options.user_2_score);
-
             options.title = text;
             options.desc = this.get('share_result_desc');
+            options.body = text + ' ' + options.url;
 
             return {
                 facebook: this.getFacebookURL(options),
@@ -48,6 +48,7 @@ define([
         getShareTeamURLs: function(options) {
             options.title = this.get('share_team_title');
             options.desc = this.get('share_team_desc');
+            options.body =  this.get('emailBody').replace('{link}', options.url);
 
             return {
                 facebook: this.getFacebookURL(options),
@@ -59,7 +60,8 @@ define([
         getEmailURL: function(options) {
             var data = {
                 subject: this.get('emailSubject') || '',
-                body: this.get('emailBody').replace('{link}', options.url)
+                body: options.body
+                // body: this.get('emailBody').replace('{link}', options.url)
             };
             return this.buildURL('email', data);
         },

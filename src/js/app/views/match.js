@@ -146,10 +146,27 @@ define([
         },
 
         render: function () {
-            var socialLinks = SocialModel.getShareTeamURLs({
-                url: document.location.href
-            });
+            var p1 = this.model.get('1');
+            var p2 = this.model.get('2');
+            var score1 = 0;
+            var score2 = 0;
+            var name1 = '';
+            var name2 = '';
 
+   
+            if (p1 && p1.username) { name1 = p1.username; }
+            if (p2 && p2.username) { name2 = p2.username;  }
+            if (p1 && p1.goals) { score1 = p1.goals.length; }
+            if (p2 && p2.goals) { score2 = p2.goals.length; }
+            
+            var socialLinks = SocialModel.getShareResultURLs({
+                url: document.location.href,
+                user_1: name1, 
+                user_2: name2, 
+                user_1_score: score1,
+                user_2_score: score2
+            });
+            
             if (this.model.has('time')) {
                 var tplHTML = this.template({
                     matchDetails: this.model.toJSON(),
@@ -159,10 +176,10 @@ define([
                 });
                 this.$el.html(tplHTML);
                 this.renderTeams(); 
-
             } else {
                 this.$el.html('<p>Loading...</p>');
             }
+            
             return this;
             /*
             var matchDetails = App.matchModel.toJSON();
