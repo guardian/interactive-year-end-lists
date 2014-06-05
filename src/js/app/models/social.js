@@ -16,7 +16,7 @@ define([
             share_result_title: 'Dream team latest result: {p1} {score1} - {score2} {p2}. Can you do better?',
             share_team_desc:    'INTERACTIVE DESCRIPTION',
             share_result_desc:  'RESULT DESCRIPTION',
-            photo:              'http://static.guim.co.uk/sys-images/Football/Pix/pictures/2014/6/3/1401831699812/Neymar-Brazil--011.jpg',
+            photo:              'http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/6/5/1401964714817/WorldCupDreamteam.png',
             emailSubject:       'Here is my World Cup dream team',
             emailBody:          'I chose an all-time XI on the Guardian site. Check it out and see if your selection can beat it.  {link}\n',
             redirect_url:       'http://www.theguardian.com/football/ng-interactive/2014/jun/03/-sp-world-cup-dream-team-pick-your-all-time-xi'
