@@ -215,7 +215,6 @@ figure.interactive {
             color:#fff;
             width:100%;
             font-weight:200;
-            max-width:600px;
             &.headerUsername{
                 // font-size:32px;
             }
@@ -233,11 +232,13 @@ figure.interactive {
         }
         a{
             text-decoration:underline;
+            color:#fff;
         }
         h3{
             font-size:18px;
             color:#fff;
             width:100%;
+            max-width:680px;
             font-weight:normal;
             margin-top:10px;
             font-family:"AgateSans", Helvetica, sans-serif;

@@ -9,14 +9,16 @@
 	<% if(isLoggedIn) { %>
 		<% if(hasSavedTeam) { %>
 		<h2 class="headerUsername">World Cup dream team: Pick your all-time XI</h2>
-		<h3>Create your own all-time XI and challenge others to a match</h3>
+		<h3>Choose your perfect team from an all-time lineup of World Cup stars. Share and compare your squad, or see how they would have fared against other people's selections. <a href="http://www.theguardian.com/football/blog/2014/jun/05/world-cup-dream-team-debate-your-best-xis-and-challenge-opponents">Explain your choices here</a></h3>
 		<% }else{ %>
 		<h2 class="headerUsername">World Cup dream team: Pick your all-time XI</h2>
+		<h3>Choose your perfect team from an all-time lineup of World Cup stars. Share and compare your squad, or see how they would have fared against other people's selections. <a href="http://www.theguardian.com/football/blog/2014/jun/05/world-cup-dream-team-debate-your-best-xis-and-challenge-opponents">Explain your choices here</a></h3>
 		<h3>Create your own all-time XI and challenge others to a match</h3>
 		<button class="backToEdit">Create <%= username %> FC</button>
 		<% } %>
 	<% }else{ %>
 		<h2 class="headerUsername">World Cup dream team: Pick your all-time XI</h2>
+		<h3>Choose your perfect team from an all-time lineup of World Cup stars. Share and compare your squad, or see how they would have fared against other people's selections. <a href="http://www.theguardian.com/football/blog/2014/jun/05/world-cup-dream-team-debate-your-best-xis-and-challenge-opponents">Explain your choices here</a></h3>
 		<h3>Sign in to the Guardian to choose your own all-time XI and challenge <span class="headerOpponentName">others</span> to a match</h3>
 		<button class="createAccount">Create an account</button> <span class="signInBtn">or <a href="https://profile.theguardian.com/signin">sign in</a></span>
 	<% } %>
