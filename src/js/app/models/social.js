@@ -13,7 +13,7 @@ define([
             twitter_account:    'guardian',
             base_link:          App.publicURL,
             share_team_title:   'I chose my all-time World Cup dream team at the Guardian. Can you beat it?',
-            share_result_title: '{p1} {score1} - {score2} {p2}. Can you do better?',
+            share_result_title: 'Dream team latest result: {p1} {score1} - {score2} {p2}. Can you do better?',
             share_team_desc:    'INTERACTIVE DESCRIPTION',
             share_result_desc:  'RESULT DESCRIPTION',
             photo:              'http://static.guim.co.uk/sys-images/Football/Pix/pictures/2014/6/3/1401831699812/Neymar-Brazil--011.jpg',
