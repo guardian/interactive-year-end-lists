@@ -5,9 +5,17 @@
         </div>
         <div class="otherTeams">
             <h4>Or take a look at these featured teams</h4>
-            <div class="col-xs-12 opponentTable">
-                <h3>Featured teams</h3>
-                <table class="table">
-                </table>
-            </div>
+           <div class="col-xs-12 opponentTable">
+        <h3>Play against featured teams</h3>
+        <table class="table">
+            <% _.each(specialUsers, function(user) { %>
+                <tr>
+                    <td><%= user.name  %> FC</td>
+                    <td class="viewTeamCell viewTeam" data-guardian-id="<%= user.guardianid %>">
+                        View this team
+                    </td>
+                </tr>
+            <% }) %>
+        </table>
+    </div>
         </div>

@@ -408,14 +408,9 @@ figure.interactive {
             font-family:EgyptianHeadline;
         }
     }
-    #squad-pitch-inner{
-        background:$mainGreyColor;
-        transition: background 0.2s;
-        padding: 0 0 20px 0;
-        .pitchSignup{
-            background:#C2DC49;
+    .pitchSignup{
+            background:#96BD44;
             padding:40px 20px 35px;
-            margin-top:15px;
             margin-bottom:20px;
             color:#fff;
             font-size:18px;
@@ -423,6 +418,11 @@ figure.interactive {
                 color:#fff; text-decoration:underline;
             }
         }
+    #squad-pitch-inner{
+        background:$mainGreyColor;
+        transition: background 0.2s;
+        padding: 0 0 20px 0;
+        
     }
     @media (min-width:30em){
         #squad-filters{
