@@ -498,7 +498,7 @@ figure.interactive {
             float:left;
             margin-bottom:0;
             overflow: hidden;
-            width:70%;
+            width:60%;
             line-height: 1em;
             text-overflow: ellipsis;
             padding-top: 0;
@@ -755,6 +755,8 @@ figure.interactive {
         }
         .scoreCell{
             width:18%;
+            padding-left: 0 !important;
+            padding-right:0 !important;
         }
 
         @media(min-width:30em){
