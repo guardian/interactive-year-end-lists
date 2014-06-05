@@ -1,14 +1,13 @@
- <div class="col-xs-12 opponentTable">
-    <h3>Guardian Opponents</h3>
-    <table class="table">
-        <% _.each(specialUsers, function(user) { %>
-            <tr>
-                <td><%= user.name  %></td>
-                <td class="viewTeamCell viewTeam" data-guardian-id="<%= user.guardianid %>">
-                    See this team or play a match
-                </td>
-            </tr>
-        <% }) %>
-    </table>
-</div>
 
+
+ <div class="pitchSignup">
+            <p>You have to <a href="#">login</a> with you Guardian-account to create your own team</p>
+        </div>
+        <div class="otherTeams">
+            <h4>Or take a look at these featured teams</h4>
+            <div class="col-xs-12 opponentTable">
+                <h3>Featured teams</h3>
+                <table class="table">
+                </table>
+            </div>
+        </div>

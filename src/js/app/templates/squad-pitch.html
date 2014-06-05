@@ -1,6 +1,6 @@
 
 <div id="squad-pitch-inner">
-    <% if(isLoggedIn) { %>
+
         <% if(squadCount !== null) { %>
             <div class="your-team-details">
                 <% if (hasSavedTeam == 'false'){ %>
@@ -67,20 +67,6 @@
 
     <h3><span id="clearSelection">Remove all players</span></h3>
 
-
-    <% }else{ %>
-        <div class="pitchSignup">
-            <p>You have to <a href="#">login</a> with you Guardian-account to create your own team</p>
-        </div>
-        <div class="otherTeams">
-            <h4>Or take a look at these featured teams</h4>
-            <div class="col-xs-12 opponentTable">
-                <h3>Featured teams</h3>
-                <table class="table">
-                </table>
-            </div>
-        </div>
-    <% } %>
     
 </div>
 
