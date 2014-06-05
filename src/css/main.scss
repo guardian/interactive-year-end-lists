@@ -524,7 +524,7 @@ figure.interactive {
         }
     }
 
-    .otherTeams h3{
+    #squad-pitch .otherTeams h3{
             border-top: 1px dotted #dfdfdf;
             padding-top:5px;
             font-size:18px;
@@ -533,6 +533,7 @@ figure.interactive {
             margin-bottom:10px;
             font-family:"EgyptianHeadline";
             font-weight:200;
+            text-align:left;
         }
 
     #user-teamshare{
