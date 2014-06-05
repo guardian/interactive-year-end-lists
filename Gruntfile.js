@@ -201,8 +201,7 @@ module.exports = function(grunt) {
             access: 'public-read',
             maxOperations: 10,
             headers: {
-              'Cache-Control': 'max-age=60, public',
-              'Expires' : new Date(Date.now() + 60).toUTCString()
+              'Cache-Control': 'max-age=180, public'
             }
         },
 
@@ -318,7 +317,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['jshint', 'clean', 'concurrent:assets', 'autoprefixer', 'copy', 'string-replace']);
   grunt.registerTask('default', ['build', 'concurrent:watchers']);
   grunt.registerTask('deploy-server', ['shell']);
-  grunt.registerTask('deploy-s3', ['build', 's3:main', 's3:images']);
+  grunt.registerTask('deploy-s3', ['build', 'uglify', 's3:main', 's3:images']);
   grunt.registerTask('deploy-s3-test', ['build', 's3:test']);
 };
 

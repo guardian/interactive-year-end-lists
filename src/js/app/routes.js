@@ -12,7 +12,6 @@ define([
     return Backbone.Router.extend({
 
         routes: {
-            'soon': 'comingSoon',
             'user/:userid(/)': 'showUser',
             'result/:matchid(/)': 'showMatch',
             'home': 'defaultRoute',
@@ -66,7 +65,7 @@ define([
         },
 
         showErrorAndRedirect: function (msg) {
-            App.appRoutes.navigate('soon', {
+            App.appRoutes.navigate('home', {
                 trigger: true
             });
         }
