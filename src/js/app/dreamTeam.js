@@ -104,6 +104,9 @@ define([
      * @param  {element} el DOM element provided from the page ie. <figure>
      */
     function boot(el, config) {
+        // Hide header
+        $('.content__head .gs-container').hide();
+
         App.$el = $(el);
         // Check CORS support IE10+, Chrome, Safari, FF
         if ($.support.cors === false) {
