@@ -409,11 +409,12 @@ figure.interactive {
         }
     }
     .pitchSignup{
-            background:#96BD44;
-            padding:40px 20px 35px;
-            margin-bottom:20px;
-            color:#fff;
-            font-size:18px;
+            background: #96BD44;
+            padding: 30px 15px 22px;
+            margin-bottom: 20px;
+            color: #fff;
+            text-align: center;
+            font-size: 18px;
             a{
                 color:#fff; text-decoration:underline;
             }
@@ -522,6 +523,17 @@ figure.interactive {
             height:16px;
         }
     }
+
+    .otherTeams h3{
+            border-top: 1px dotted #dfdfdf;
+            padding-top:5px;
+            font-size:18px;
+            color:#333;
+            margin-top:20px;
+            margin-bottom:10px;
+            font-family:"EgyptianHeadline";
+            font-weight:200;
+        }
 
     #user-teamshare{
         font-family:"AgateSans", sans-serif;
