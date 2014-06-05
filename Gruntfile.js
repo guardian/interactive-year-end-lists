@@ -186,8 +186,8 @@ module.exports = function(grunt) {
         deployServer: {
             command: [
                 'cd ./server',
-                'rsync -vt ./* ubuntu@ec2-54-195-231-244.eu-west-1.compute.amazonaws.com:/home/ubuntu/world-cup-2014-dreamteam/',
-                'ssh ubuntu@ec2-54-195-231-244.eu-west-1.compute.amazonaws.com "cd /home/ubuntu/world-cup-2014-dreamteam/ && ./afterDeploy.sh"'
+                'rsync -vt ./* ubuntu@ec2-54-74-106-104.eu-west-1.compute.amazonaws.com:/home/ubuntu/world-cup-2014-dreamteam/',
+                'ssh ubuntu@ec2-54-74-106-104.eu-west-1.compute.amazonaws.com "cd /home/ubuntu/world-cup-2014-dreamteam/ && ./afterDeploy.sh"'
             ].join('&&'),
             options: {
                 stdout: true

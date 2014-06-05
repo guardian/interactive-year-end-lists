@@ -27,7 +27,7 @@ var corsOptions = {
 // Setup
 app.use(cors(corsOptions));
 app.use(bodyParser());
-mongoose.connect("mongodb://localhost/test");
+mongoose.connect("mongodb://54.195.231.244:27017/test");
 
 
 // Helper functions
