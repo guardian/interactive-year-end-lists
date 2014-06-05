@@ -21,8 +21,8 @@ define([
 
         events: {
             'click .viewTeam': 'navigateToUser',
-            'click .viewResult': 'navigateToResult',
-            'click .view-match-history': 'loadUserResult'
+            'click .viewResult': 'navigateToResult'
+            //'click .view-match-history': 'loadUserResult'
         },
 
         initialize: function () {
