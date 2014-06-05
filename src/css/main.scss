@@ -463,9 +463,12 @@ figure.interactive {
             padding:20px;
         }
     }
-    .table-players {
+    .table.table-players {
         max-width: 300px;
         margin: 20px auto;
+         td{
+            font-size:14px;
+        }
     }
 
     #user-screen{
@@ -712,7 +715,7 @@ figure.interactive {
         }
         .teamcell1{
             text-align: right;
-            width:50%;
+            width:41%;
             padding-right:10px;
             position: relative;
             .cellScore{
@@ -730,12 +733,15 @@ figure.interactive {
         .teamcell2{
             text-align: left;
             padding-left:10px;
-            width:50%;
+            width:41%;
              a{color:#333;}
             .cellScore{
                 margin-right:5px;
                 display:block;
             }
+        }
+        .scoreCell{
+            width:18%;
         }
 
         @media(min-width:30em){
@@ -1917,7 +1923,7 @@ figure.interactive {
         font-weight:normal;
         color: #fff;
         border-radius: 2px;
-        vertical-align: top;
+        vertical-align: middle;
         display:inline-block;
         line-height:1em;
     }
@@ -2108,23 +2114,36 @@ figure.interactive {
     @media (min-width: 42.5em) {
         #match-screen{
             h1{
-                font-size:42px;
+                font-size:38px;
             }
             .teamName{
-                font-size:42px;
+                font-size:38px;
+                
                 a{
-                    margin:0 0 0 10px;
+                    float:left;
+                    width:90%;
+                    display:block;
+                    line-height:1em;
                 }
                 .score{
-                    font-size:42px;
+                    font-size:38px;
+                    width:10%;
+                    display:block;
+                    float:left;
+                    line-height:1em;
                 }
 
                 &.teamAlignRight{
                     a{
-                        margin-right:12px;
+                        width:90%;
+                        float:right;
+                        margin:0;
+
                     }
                     .score{
                         float:right;
+                        width:10%;
+
                     }
                 }
             }
@@ -2205,6 +2224,7 @@ figure.interactive {
     }
     #users-team .table-players {
         margin-top: 0;
+
     }
     p.scorer { 
         font-family:"AgateSans", sans-serif;
