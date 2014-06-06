@@ -1,31 +1,4 @@
 {
-  "teams": [
-    {
-      "name": "Total Football",
-      "guardianid": "xxx-001",
-      "rowNumber": 1
-    },
-    {
-      "name": "Joga Bonito",
-      "guardianid": "xxx-002",
-      "rowNumber": 2
-    },
-    {
-      "name": "Parked the team bus",
-      "guardianid": "xxx-003",
-      "rowNumber": 3
-    },
-    {
-      "name": "Star Strikers",
-      "guardianid": "xxx-004",
-      "rowNumber": 4
-    },
-    {
-      "name": "Hipster XI",
-      "guardianid": "hipster-002",
-      "rowNumber": 5
-    }
-  ],
   "Team averages": [
     {
       "_cn6ca": "Arsenal",
@@ -62,6 +35,58 @@
       "midfield": "",
       "attack": "",
       "rowNumber": 4
+    }
+  ],
+  "teams": [
+    {
+      "name": "Total Football",
+      "guardianid": "xxx-001",
+      "rowNumber": 1
+    },
+    {
+      "name": "Joga Bonito",
+      "guardianid": "xxx-002",
+      "rowNumber": 2
+    },
+    {
+      "name": "Parked the team bus",
+      "guardianid": "xxx-003",
+      "rowNumber": 3
+    },
+    {
+      "name": "Hipster XI",
+      "guardianid": "hipster-002",
+      "rowNumber": 4
+    },
+    {
+      "name": "Pure passion",
+      "guardianid": "xxx-005",
+      "rowNumber": 5
+    },
+    {
+      "name": "Barry Glendenning",
+      "guardianid": 2553946,
+      "rowNumber": 6
+    },
+    {
+      "name": "Amy Lawrence",
+      "guardianid": 1333443,
+      "rowNumber": 7
+    },
+    {
+      "name": "Barney Ronay",
+      "guardianid": 3247286,
+      "rowNumber": 8
+    },
+    {
+      "name": "Ian Prior",
+      "guardianid": 1334003,
+      "rowNumber": 9
+    },
+    {
+      "name": "Marcus Christenson",
+      "guardianid": 13295689,
+      "rowNumber": 10
     }
   ],
   "Player data": [

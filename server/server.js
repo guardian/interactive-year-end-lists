@@ -28,6 +28,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser());
 mongoose.connect("mongodb://54.195.231.244:27017/test");
+//mongoose.connect("mongodb://localhost/test");
 
 
 // Helper functions
@@ -383,74 +384,34 @@ app.get('/results/:userid', function(req, res) {
         return;
     }
 
-    var query = {
+    var all_matches_query = {
         '$or': [
             { '1.guardianID' : userID.toString()},
             { '2.guardianID' : userID.toString()}
         ]
     };
 
-    Match.find(query, {}, {sort: { 'time': -1}},  function(err, matchRecords) {
+    var query = {
+        '1.guardianID': userID.toString()
+    };
+
+    
+
+    Match.find(query, {
+        "1.guardianID": 1,
+        "1.username": 1,
+        "1.goals": 1,
+        "2.guardianID": 1,
+        "2.username": 1,
+        "2.goals": 1,
+        "_id": 1
+    }, {sort: { 'time': -1}, limit: 10},  function(err, matchRecords) {
         if (err || matchRecords === null) {
             res.status(404);
             res.json({'msg': 'Could not find users matches match', err: err });
             return;
         }
-
-
-        function latestMatches(matches) {
-            var subSetMatches = matches.slice(0, 9);
-            return subSetMatches.map(function(match) {
-                return {
-                    user1ID: match['1'].guardianID,
-                    user1Name: match['1'].username,
-                    user1Goals: match['1'].goals.length,
-                    user2ID: match['2'].guardianID,
-                    user2Name: match['2'].username,
-                    user2Goals: match['2'].goals.length,
-                    id: match._id,
-                    time: match.time
-                };
-            });
-        }
-
-        var results = {
-            gamesPlayed: matchRecords.length,
-            gamesWon:    0,
-            gamesDrawn:  0,
-            gamesLost:   0,
-            latestResults: latestMatches(matchRecords) 
-        };
-        
-        matchRecords.forEach(function(record) {
-            // Find the correct player index
-            var p1, p2;
-            if (record['1'].guardianID === userID) {
-                p1 = record['1'];
-                p2 = record['2'];
-            } else {
-                p1 = record['2'];
-                p2 = record['1'];
-            }
-            
-            // Win
-            if (p1.goals.length > p2.goals.length) {
-                results.gamesWon++;
-            }
-            
-            // Draw
-            if (p1.goals.length === p2.goals.length) {
-                results.gamesDrawn++;
-            }
-            
-            // Lose
-            if (p1.goals.length < p2.goals.length) {
-                results.gamesLost++;
-            }
-        });
-        
-
-        res.json(results);
+        res.json({ matches: matchRecords });
     });
 });
 

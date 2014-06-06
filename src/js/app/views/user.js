@@ -125,7 +125,6 @@ define([
                     newCookieVal += ',';
                 }
             });
-            console.log(newCookieVal);
 
             // Set cookie
             $.cookie(

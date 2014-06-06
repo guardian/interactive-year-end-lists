@@ -1,6 +1,7 @@
 define([
     'app',
     'backbone',
+    'underscore',
     'jquery',
     'models/player',
     'data/players'
@@ -8,6 +9,7 @@ define([
     App,
     Backbone,
     $,
+    _,
     PlayerModel,
     PlayerData
 ) {
@@ -35,7 +37,10 @@ define([
         },
 
         fetchLocalData: function () {
-            App.specialUsers = PlayerData.teams;
+            App.specialUsers = _.map(PlayerData.teams, function(team) {
+                team.guardianid = team.guardianid.toString();
+                return team;
+            });
             this.parsePlayers(PlayerData['Player data']);
         },
 

@@ -21,8 +21,8 @@ define([
 
         events: {
             'click .viewTeam': 'navigateToUser',
-            'click .viewResult': 'navigateToResult'
-            //'click .view-match-history': 'loadUserResult'
+            'click .viewResult': 'navigateToResult',
+            'click .view-match-history': 'loadUserResult'
         },
 
         initialize: function () {
@@ -49,8 +49,38 @@ define([
             });
         },
 
-        outputResults: function() {
+        parseRecentMatches: function() {
+            var matchRecords = App.resultsModel.get('matches');
+            if (!matchRecords) { return undefined; }
             
+            function latestMatches(matches) {
+                return matches.map(function(match) {
+                    return {
+                        user1ID: match['1'].guardianID,
+                        user1Name: match['1'].username,
+                        user1Goals: match['1'].goals.length,
+                        user2ID: match['2'].guardianID,
+                        user2Name: match['2'].username,
+                        user2Goals: match['2'].goals.length,
+                        id: match._id
+                    };
+                });
+            }
+
+           /* 
+            var results = {
+                gamesPlayed: matchRecords.length,
+                gamesWon:    0,
+                gamesDrawn:  0,
+                gamesLost:   0,
+                latestResults: latestMatches(matchRecords) 
+            };
+            */
+            return latestMatches(matchRecords);
+        },
+
+        getMatchData: function() {
+            return _.each(App.resultsModel.get('matches'), this.parseRecentMatches);
         },
 
         // Render of recently viewed users on user page
@@ -89,7 +119,7 @@ define([
                 url: document.location.href
             });
             this.templateData.specialUsers = App.specialUsers;
-            this.templateData.latestMatches = App.resultsModel.get('latestResults');
+            this.templateData.latestMatches = this.parseRecentMatches(); 
             this.templateData.squadCount = App.userDetails.getSquadCount();
             this.templateData.twitter_link = socialLinks.twitter;
             this.templateData.facebook_link = socialLinks.facebook;
