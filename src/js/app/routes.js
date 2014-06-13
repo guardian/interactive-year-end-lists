@@ -1,75 +1,34 @@
 define([
     'app',
-    'backbone',
-    'models/match',
-    'models/results'
-], function (
+    'backbone'
+],
+function(
     App,
-    Backbone,
-    MatchModel,
-    ResultsModel
-) {
+    Backbone
+){
     return Backbone.Router.extend({
-
         routes: {
-            'user/:userid(/)': 'showUser',
-            'result/:matchid(/)': 'showMatch',
-            'home': 'defaultRoute',
-            '*other': 'showErrorAndRedirect'
+            'user/:username':              'showUser',    // dreamteam#user/andrew
+            'match/:username/:oppontent':  'showMatch',   // dreamteam#match/andrew/daan
+            '*other':                      'defaultRoute' // dreamteam#
         },
 
-        comingSoon: function() {
-            Backbone.trigger('pageStateChange', 'comingSoon');
+        showMatch: function(username, oppontent) {
+            App.player.set('username', username);
+            App.opponent.set('username', oppontent);
+
+            App.$el.empty();
+            App.$el.html(App.matchView.render().$el);
         },
 
-        defaultRoute: function (other) {
-            Backbone.trigger('pageStateChange', 'editPage');
+        showUser: function(username) {
+            App.player.set('username', username);
+            App.$el.empty();
+            App.$el.html(App.teamView.render().$el);
         },
 
-        showUser: function (playerid) {
-            
-            // Check if user is viewing their own profile
-            if (App.userDetails.get('guardianID') === playerid) {
-                App.viewingPlayer = App.userDetails.clone();
-                this.handleUserData(App.viewingPlayer);
-                return;
-            }
-            
-            // Different user so fetch from server
-            App.viewingPlayer.clear({ silent: true });
-            App.viewingPlayer.set(App.viewingPlayer.defaults, {});
-            App.viewingPlayer.set({ guardianID: playerid });
-            App.viewingPlayer.fetchByGuardianId({
-                success: this.handleUserData,
-                error: function (err) {
-                    this.showErrorAndRedirect('No user found!');
-                }.bind(this)
-            });
-        },
-
-        handleUserData: function(data) {
-            if (!data.get('username')) {
-                this.showErrorAndRedirect('No user found!');
-                return;
-            }
-            App.resultsModel = new ResultsModel();
-            App.resultsModel.set('guardianID', App.viewingPlayer.get('guardianID'));
-            //App.resultsModel.fetch();
-            App.notify.closePrompt();
-            Backbone.trigger('pageStateChange', 'userPage');
-        },
-        
-        showMatch: function (matchID) {
-            App.matchModel = new MatchModel({_id: matchID});
-            Backbone.trigger('pageStateChange', 'resultPage');
-        },
-
-        showErrorAndRedirect: function (msg) {
-            App.appRoutes.navigate('home', {
-                trigger: true
-            });
+        defaultRoute: function(other){
+            this.showUser();
         }
-
     });
 });
-

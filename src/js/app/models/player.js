@@ -1,6 +1,6 @@
 define([
     'backbone'
-], function (
+], function(
     Backbone
 ) {
     return Backbone.Model.extend({
@@ -8,11 +8,12 @@ define([
         defaults: {
             uid: null,
             name: null,
-            picture: null,
+            imageSrc: null,
             position: null,
-            countryname: null,
+            country: null,
             careerStart: null,
             careerEnd: null,
+
             selected: false,
             active: false
         }

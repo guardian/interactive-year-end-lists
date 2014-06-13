@@ -1,0 +1,15 @@
+<div id="position_editor">
+    <div id="selected_player">
+        <p>Player name: <%= selectedPlayer.name %></p>
+        <p>Player country: <%= selectedPlayer.country %></p>
+    </div>
+
+    <ol>
+        <% _.each(players, function(player, index) { %>
+            <li>Position #<%= index %></li>
+        <% }) %>
+    </ol>
+
+    <button id="close_position">Cancel</button>
+    <button id="save_position" disabled>Save</button>
+</div>
