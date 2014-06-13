@@ -20,15 +20,15 @@
 
 
         <!-- Libs -->
-        <script src="js/require.js"></script>
+        <script src="js/curl.js"></script>
 
         <!-- Simulate boot.js -->
         <script>
-            var el = document.getElementById('interactive_example');
-
-            require(['js/boot.js'], function(app) {
+          var el = document.getElementById('interactive_example');
+          require = curl;
+          curl(['boot.js'], function(app) {
                 app.boot(el);
-            });
+          });
         </script>
     <body>
 </html>

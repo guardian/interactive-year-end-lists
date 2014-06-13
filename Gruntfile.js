@@ -1,5 +1,6 @@
-module.exports = function(grunt) {
+'use strict';
 
+module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
@@ -26,7 +27,11 @@ module.exports = function(grunt) {
     clean: ['build/'],
 
     jshint: {
-      files: ['Gruntfile.js', 'src/js/*.js', 'src/js/app/**/*.js']
+        options: {
+            jshintrc: true
+        },
+
+      files: ['Gruntfile.js', 'src/*.js', 'src/js/*.js', 'src/js/app/**/*.js']
     },
 
     requirejs: {
@@ -40,13 +45,12 @@ module.exports = function(grunt) {
               'text': '../libs/text'
           },
           optimize: 'none',
-          name: 'main',
-          out: 'build/js/boot.js',
-          // FIXME: Is there a better way to do this?
-          wrap: {
-              start: "define([], function() {",
-              end: " return { boot: function(el) { require(['main'], function(app) { app.boot(el); });  }}} );"
-          }
+          inlineText: true,
+          name: '../libs/almond',
+          out: 'build/js/main.js',
+          wrap: true,
+          include: ['main'],
+          insertRequire: ['main']
         }
       }
     },
@@ -54,7 +58,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['src/**/*.js', 'src/js/app/templates/*.html'],
-        tasks: ['jshint', 'requirejs'],
+        tasks: ['requirejs'],
         options: {
           spawn: false,
         },
@@ -72,7 +76,8 @@ module.exports = function(grunt) {
       build: {
         files: [
           { src: 'src/index.html', dest: 'build/index.html' },
-          { src: 'src/js/libs/require.js', dest: 'build/js/require.js' }
+          { src: 'src/js/libs/curl.js', dest: 'build/js/curl.js' },
+          { src: 'src/boot.js', dest: 'build/boot.js' }
         ]
       }
     }
@@ -85,8 +90,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-s3');
   grunt.loadNpmTasks('grunt-sass');
 
-  grunt.registerTask('build', ['jshint', 'clean', 'sass', 'requirejs', 'copy']);
+  grunt.registerTask('build', ['clean', 'sass', 'requirejs', 'copy']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
 };

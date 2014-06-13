@@ -1,3 +1,5 @@
+'use strict';
+
 define([
     'app',
     'jquery',
@@ -23,29 +25,24 @@ define([
     App.opponent = new Backbone.Model();
 
     // Collections
-    App.usersTeamCollection = new TeamCollection(Array(11));
+    App.usersTeamCollection = new TeamCollection(new Array(11));
     App.opponentTeamCollection = new TeamCollection();
     App.playerCollection = new Backbone.Collection(PlayerData);
 
     // Views
     App.teamView = new TeamScreenView({ collection: App.playerCollection });
     App.matchView = new MatchScreenView();
-
-
-    /**
-     * Bootstrap loader
-     * @param  {element} el DOM element provided from the page ie. <figure>
-     */
-    function boot(el) {
+    
+    function init() {
         // Store DOM target
-        App.$el = $(el);
+        App.$el = $(window.GUI.el);
 
         // Setup routing
         var appRoutes = new Routes();
         Backbone.history.start();
     }
 
-    return {
-        boot: boot
-    };
+
+    init();
 });
+
