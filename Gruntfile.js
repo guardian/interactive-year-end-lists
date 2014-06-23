@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     sass: {
       build: {
         options: {
-          includePaths: ['src/css/']
+          includePaths: ['src/css/partials/']
         },
         files: {
           'build/css/main.css': 'src/css/main.scss'
@@ -48,9 +48,14 @@ module.exports = function(grunt) {
           inlineText: true,
           name: '../libs/almond',
           out: 'build/js/main.js',
-          wrap: true,
           include: ['main'],
-          insertRequire: ['main']
+          insertRequire: ['main'],
+        
+          wrap: {
+            startFile: 'src/wrapStart.frag',
+            endFile: 'src/wrapEnd.frag'
+          }
+          
         }
       }
     },
@@ -70,6 +75,13 @@ module.exports = function(grunt) {
           spawn: false,
         },
       },
+      css: {
+        files: ['src/css/**/*.*'],
+        tasks: ['sass'],
+        options: {
+          spawn: false,
+        },
+      }
     },
 
     copy: {

@@ -2,3 +2,9 @@
  * Project: Project name 
  * File:    Main SCSS
  */
+@import 'colours';
+
+.guInteractive {
+    @import 'reset';
+    @import 'game';
+}
