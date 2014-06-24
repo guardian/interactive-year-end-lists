@@ -1,18 +1,17 @@
 define([
-    'views/appView',
-    'collections/gamesCollection'
+    'backbone',
+    'views/appView'
 ], function(
-    AppView,
-    gamesCollection
+    Backbone,
+    AppView
 ) {
    'use strict';
 
     var appView = new AppView({
-        collection: gamesCollection,
         el: $(window.GUI.el)
     });
 
     appView.render();
-    
+    Backbone.history.start();
 });
 

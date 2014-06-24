@@ -1,10 +1,12 @@
 define([
     'backbone',
     'underscore',
+    'routes',
     'text!templates/gameTemplate.html'
 ], function(
     Backbone,
     _,
+    routes,
     template
 ) {
     'use strict';
@@ -15,6 +17,15 @@ define([
         className: 'game',
 
         tag: 'div',
+
+        events: {
+            'click .title': 'navigate'
+        },
+
+        navigate: function() {
+            var gameID = this.model.get('id');
+            routes.navigate('games/'+gameID, { trigger: true });
+        },
 
         render: function() {
             var templateDate = this.model.toJSON();

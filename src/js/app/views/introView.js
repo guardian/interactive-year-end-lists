@@ -1,15 +1,13 @@
 define([
     'backbone',
     'underscore',
-    'text!templates/headerTemplate.html'
+    'text!templates/introTemplate.html'
 ], function(Backbone, _, templateHTML) {
     'use strict';
 
     return Backbone.View.extend({
-
-        tagName: 'header',
         
-        className: 'header',
+        className: 'intro',
 
         template: _.template(templateHTML),
 

@@ -8,9 +8,10 @@ define([
     return Backbone.Model.extend({
         
         defaults: {
+            id: '',
             name: '',
             releaseDate: new Date(),
-            publisher: ''
+            devloper: ''
         }
 
     });
