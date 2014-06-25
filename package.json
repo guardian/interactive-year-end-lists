@@ -1,7 +1,7 @@
 {
-  "name": "world-cup-2014-dream-team",
-  "version": "0.0.0",
-  "description": "Choose your World Cup 2014 dream team",
+  "name": "Interactive template",
+  "version": "0.0.1",
+  "description": "Base template for interactives",
   "repository": {
     "type": "git",
     "url": "git://github.com/GuardianInteractive/world-cup-2014-dream-team.git"
