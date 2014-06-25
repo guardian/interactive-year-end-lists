@@ -67,7 +67,7 @@ module.exports = function(grunt) {
             length: 32
         },
         js: {
-            src: ['build/js/*.js']
+            src: ['build/js/main.js']
         },
         css: {
             src: ['build/css/*.css']
