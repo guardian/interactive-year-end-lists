@@ -60,10 +60,36 @@ module.exports = function(grunt) {
       }
     },
 
+    filerev: {
+        options: {
+            encoding: 'utf8',
+            algorithm: 'md5',
+            length: 32
+        },
+        js: {
+            src: ['build/js/*.js']
+        },
+        css: {
+            src: ['build/css/*.css']
+        }
+    },
+
+    filerev_apply: {
+        options: {
+          prefix: 'build/'
+        },
+        assets: {
+            files: [{
+                expand: true,
+                src: ['build/boot.js', 'build/js/main*.js']
+            }]
+        }
+    },
+
     watch: {
       scripts: {
         files: ['src/**/*.js', 'src/js/app/templates/*.html'],
-        tasks: ['requirejs'],
+        tasks: ['requirejs', 'version-files'],
         options: {
           spawn: false,
         },
@@ -77,7 +103,7 @@ module.exports = function(grunt) {
       },
       css: {
         files: ['src/css/**/*.*'],
-        tasks: ['sass'],
+        tasks: ['sass', 'version-files'],
         options: {
           spawn: false,
         },
@@ -94,17 +120,23 @@ module.exports = function(grunt) {
       }
     }
 
-  });
+    });
 
+  // Tasks
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-filerev');
+  grunt.loadNpmTasks('grunt-filerev-apply');
   grunt.loadNpmTasks('grunt-s3');
   grunt.loadNpmTasks('grunt-sass');
 
-  grunt.registerTask('build', ['clean', 'sass', 'requirejs', 'copy']);
+  // Tasks
+  grunt.registerTask('version-files', ['filerev', 'copy', 'filerev_apply']);
+  grunt.registerTask('build', ['clean', 'sass', 'requirejs', 'version-files']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
 };
+
