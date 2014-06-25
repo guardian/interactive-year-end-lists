@@ -24,6 +24,12 @@ module.exports = function(grunt) {
       }
     },
 
+    autoprefixer: {
+        css: {
+            src: 'build/css/*.css'
+        }
+    },
+
     clean: ['build/'],
 
     jshint: {
@@ -103,7 +109,7 @@ module.exports = function(grunt) {
       },
       css: {
         files: ['src/css/**/*.*'],
-        tasks: ['sass', 'version-files'],
+        tasks: ['sass', 'autoprefixer', 'version-files'],
         options: {
           spawn: false,
         },
@@ -133,10 +139,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-filerev-apply');
   grunt.loadNpmTasks('grunt-s3');
   grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-autoprefixer');
 
   // Tasks
   grunt.registerTask('version-files', ['filerev', 'copy', 'filerev_apply']);
-  grunt.registerTask('build', ['clean', 'sass', 'requirejs', 'version-files']);
+  grunt.registerTask('build', ['clean', 'sass', 'autoprefixer', 'requirejs', 'version-files']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
 };
 

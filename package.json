@@ -1,5 +1,5 @@
 {
-  "name": "Interactive template",
+  "name": "Interactive-template",
   "version": "0.0.1",
   "description": "Base template for interactives",
   "repository": {
@@ -14,6 +14,7 @@
   "homepage": "https://github.com/GuardianInteractive/world-cup-2014-dream-team",
   "devDependencies": {
     "grunt": "~0.4.5",
+    "grunt-autoprefixer": "^0.7.6",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-connect": "~0.8.0",
     "grunt-contrib-copy": "~0.5.0",
