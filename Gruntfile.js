@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     sass: {
       build: {
         options: {
-          includePaths: ['src/css/partials/']
+          loadPath: ['src/css/partials/']
         },
         files: {
           'build/css/main.css': 'src/css/main.scss'
@@ -46,6 +46,7 @@ module.exports = function(grunt) {
           baseUrl: './src/js/app/',
           paths: {
               'underscore': '../libs/underscore',
+
               'jquery': '../libs/jquery',
               'backbone': '../libs/backbone',
               'text': '../libs/text'
@@ -138,7 +139,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-filerev');
   grunt.loadNpmTasks('grunt-filerev-apply');
   grunt.loadNpmTasks('grunt-s3');
-  grunt.loadNpmTasks('grunt-sass');
+  //grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
 
   // Tasks
