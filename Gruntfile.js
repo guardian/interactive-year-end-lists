@@ -96,7 +96,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['src/**/*.js', 'src/js/app/templates/*.html'],
-        tasks: ['requirejs', 'version-files'],
+        tasks: ['requirejs'],
         options: {
           spawn: false,
         },
@@ -110,7 +110,7 @@ module.exports = function(grunt) {
       },
       css: {
         files: ['src/css/**/*.*'],
-        tasks: ['sass', 'autoprefixer', 'version-files'],
+        tasks: ['sass', 'autoprefixer'],
         options: {
           spawn: false,
         },
@@ -145,7 +145,7 @@ module.exports = function(grunt) {
 
   // Tasks
   grunt.registerTask('version-files', ['filerev', 'copy', 'filerev_apply']);
-  grunt.registerTask('build', ['clean', 'sass', 'autoprefixer', 'requirejs', 'version-files']);
+  grunt.registerTask('build', ['clean', 'sass', 'autoprefixer', 'requirejs', 'copy']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
 };
 
