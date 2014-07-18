@@ -1,13 +1,14 @@
 'use strict';
+var path = require('path');
+var pkg = require('./package.json');
 
 module.exports = function(grunt) {
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
 
     connect: {
       server: {
         options: {
-          port: 9000,
+          port: parseInt(pkg.local_url.split(':')[2], 10),
           base: 'build'
         }
       }
@@ -19,14 +20,14 @@ module.exports = function(grunt) {
           loadPath: ['src/css/partials/']
         },
         files: {
-          'build/css/main.css': 'src/css/main.scss'
+          'build/assets/css/main.css': 'src/css/main.scss'
         }
       }
     },
 
     autoprefixer: {
         css: {
-            src: 'build/css/*.css'
+            src: 'build/assets/css/*.css'
         }
     },
 
@@ -54,7 +55,7 @@ module.exports = function(grunt) {
           optimize: 'none',
           inlineText: true,
           name: '../libs/almond',
-          out: 'build/js/main.js',
+          out: 'build/assets/js/main.js',
           include: ['main'],
           insertRequire: ['main'],
         
@@ -74,10 +75,10 @@ module.exports = function(grunt) {
             length: 32
         },
         js: {
-            src: ['build/js/main.js']
+            src: ['build/assets/js/main.js']
         },
         css: {
-            src: ['build/css/*.css']
+            src: ['build/assets/css/*.css']
         }
     },
 
@@ -121,11 +122,83 @@ module.exports = function(grunt) {
       build: {
         files: [
           { src: 'src/index.html', dest: 'build/index.html' },
-          { src: 'src/js/libs/curl.js', dest: 'build/js/curl.js' },
+          { src: 'src/js/libs/curl.js', dest: 'build/assets/js/curl.js' },
           { src: 'src/boot.js', dest: 'build/boot.js' }
         ]
       }
+    },
+
+    cssmin: {
+        minify: {
+            expand: true,
+            cwd: 'build/assets/css/',
+            dest: 'build/assets/css/',
+            src: ['*.css']
+        }
+    },
+
+    uglify: {
+        minify: {
+            expand: true,
+            cwd: 'build/assets/js/',
+            dest: 'build/assets/js/',
+            src: '*.js'
+        }
+    },
+
+    replace: {
+        prod: {
+            options: {
+                patterns: [{match: 'assetpath/', replacement: pkg.cdn_url }]
+            },
+            files: [{src: ['build/boot.js'], dest: 'build/boot.js' }]
+        },
+        local: {
+            options: {
+                patterns: [{match: 'assetpath/', replacement: pkg.local_url }]
+            },
+            files: [{src: ['build/boot.js'], dest: 'build/boot.js' }]
+        }
+
+    },
+
+    s3: {
+        options: {
+            access: 'public-read',
+            bucket: 'gdn-cdn',
+            maxOperations: 20,
+            debug: (grunt.option('test')) ? true : false,
+            gzip: true,
+            gzipExclude: ['.jpg', '.gif', '.jpeg', '.png']
+        },
+        dist: {
+            upload:[
+                {
+                    options: {
+                        headers: {
+                            'Cache-Control': 'max-age=180, public'
+                        }
+                    },
+                    expand: true,
+                    src: 'build/*.*',
+                    dest: pkg.s3_folder
+                },
+                {
+                    options: {
+                        headers: {
+                            'Cache-Control': 'max-age=3600, public'
+                        }
+                    },
+                    expand: false,
+                    src: 'build/assets/**/*.*',
+                    rel: 'build/',
+                    dest: pkg.s3_folder 
+                }
+            ]
+        }
+
     }
+
 
     });
 
@@ -142,10 +215,23 @@ module.exports = function(grunt) {
   //grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-replace');
 
   // Tasks
   grunt.registerTask('version-files', ['filerev', 'copy', 'filerev_apply']);
-  grunt.registerTask('build', ['clean', 'sass', 'autoprefixer', 'requirejs', 'copy']);
-  grunt.registerTask('default', ['build', 'connect', 'watch']);
+  grunt.registerTask('build',
+                     ['clean', 'sass', 'autoprefixer', 'requirejs', 'copy']);
+  grunt.registerTask('default', ['build', 'replace:local', 'connect', 'watch']);
+  grunt.registerTask('compress', ['uglify', 'cssmin']);
+
+  grunt.registerTask('deploy', [
+      'build',
+      'version-files',
+      'replace:prod',
+      'compress',
+      's3'
+  ]);
 };
 
