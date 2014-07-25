@@ -50,6 +50,7 @@ module.exports = function(grunt) {
               'jquery'          : '../libs/jquery',
               'backbone'        : '../libs/backbone',
               'text'            : '../libs/text',
+              'json'            : '../libs/json',
               'd3'              : '../libs/d3',
               'iframeMessenger' : '../libs/iframeMessenger'
           },
