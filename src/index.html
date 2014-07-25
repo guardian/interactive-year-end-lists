@@ -7,15 +7,15 @@
     </head>
     <body>
 
-
-        <figure id="interactive_example"></figure>
+        <!-- Use the same figure elm as NGW -->
+        <figure class="element-interactive interactive"></figure>
 
         <!-- Libs -->
         <script src="assets/js/curl.js"></script>
 
         <!-- Simulate boot.js -->
         <script>
-          var el = document.getElementById('interactive_example');
+          var el = document.querySelector('.interactive');
           require = curl;
           curl(['boot.js'], function(app) {
                 app.boot(el);
