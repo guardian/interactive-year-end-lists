@@ -1,5 +1,4 @@
 'use strict';
-var path = require('path');
 var pkg = require('./package.json');
 
 module.exports = function(grunt) {
@@ -8,7 +7,7 @@ module.exports = function(grunt) {
     connect: {
       server: {
         options: {
-          port: parseInt(pkg.local_url.split(':')[2], 10),
+          port: pkg.config.port,
           base: 'build'
         }
       }
@@ -46,11 +45,13 @@ module.exports = function(grunt) {
         options: {
           baseUrl: './src/js/app/',
           paths: {
-              'underscore': '../libs/underscore',
-
-              'jquery': '../libs/jquery',
-              'backbone': '../libs/backbone',
-              'text': '../libs/text'
+              // Example libraries. You can add your own here
+              'underscore'      : '../libs/underscore',
+              'jquery'          : '../libs/jquery',
+              'backbone'        : '../libs/backbone',
+              'text'            : '../libs/text',
+              'd3'              : '../libs/d3',
+              'iframeMessenger' : '../libs/iframeMessenger'
           },
           optimize: 'none',
           inlineText: true,
@@ -104,7 +105,7 @@ module.exports = function(grunt) {
       },
       html: {
         files: ['src/index.html'],
-        tasks: ['copy'],
+        tasks: ['copy', 'replace:local'],
         options: {
           spawn: false,
         },
@@ -149,13 +150,19 @@ module.exports = function(grunt) {
     replace: {
         prod: {
             options: {
-                patterns: [{match: 'assetpath/', replacement: pkg.cdn_url }]
+                patterns: [{
+                  match: 'assetpath/',
+                  replacement: pkg.config.cdn_url
+                }]
             },
             files: [{src: ['build/boot.js'], dest: 'build/boot.js' }]
         },
         local: {
             options: {
-                patterns: [{match: 'assetpath/', replacement: pkg.local_url }]
+                patterns: [{
+                  match: 'assetpath/', 
+                  replacement: 'http://localhost:' + pkg.config.port + '/'
+                }]
             },
             files: [{src: ['build/boot.js'], dest: 'build/boot.js' }]
         }
@@ -181,7 +188,7 @@ module.exports = function(grunt) {
                     },
                     expand: true,
                     src: 'build/*.*',
-                    dest: pkg.s3_folder
+                    dest: pkg.config.s3_folder
                 },
                 {
                     options: {
@@ -192,7 +199,7 @@ module.exports = function(grunt) {
                     expand: false,
                     src: 'build/assets/**/*.*',
                     rel: 'build/',
-                    dest: pkg.s3_folder 
+                    dest: pkg.config.s3_folder 
                 }
             ]
         }
@@ -212,7 +219,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-filerev');
   grunt.loadNpmTasks('grunt-filerev-apply');
   grunt.loadNpmTasks('grunt-s3');
-  //grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -221,8 +227,13 @@ module.exports = function(grunt) {
 
   // Tasks
   grunt.registerTask('version-files', ['filerev', 'copy', 'filerev_apply']);
-  grunt.registerTask('build',
-                     ['clean', 'sass', 'autoprefixer', 'requirejs', 'copy']);
+  grunt.registerTask('build',[
+    'clean',
+    'sass',
+    'autoprefixer',
+    'requirejs',
+    'copy'
+  ]);
   grunt.registerTask('default', ['build', 'replace:local', 'connect', 'watch']);
   grunt.registerTask('compress', ['uglify', 'cssmin']);
 

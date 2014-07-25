@@ -4,18 +4,20 @@
   "description": "Base template for interactives",
   "repository": {
     "type": "git",
-    "url": "git://github.com/GuardianInteractive/world-cup-2014-dream-team.git"
+    "url": "https://github.com/guardian/interactive-template.git"
   },
   "author": "Guardian Interactive",
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/GuardianInteractive/world-cup-2014-dream-team/issues"
+    "url": "https://github.com/guardian/interactive-template/issues"
   },
-  "homepage": "https://github.com/GuardianInteractive/world-cup-2014-dream-team",
+  "homepage": "https://github.com/guardian/interactive-template",
 
-  "s3_folder": "/embed/testing/path/",
-  "cdn_url": "http://interactive.guim.co.uk/embed/testing/path/",
-  "local_url": "http://localhost:9000/",
+  "config": {
+    "port": 9000,
+    "s3_folder": "/embed/testing/path/",
+    "cdn_url": "http://interactive.guim.co.uk/embed/testing/path/"
+  },
 
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -32,7 +34,6 @@
     "grunt-filerev": "^0.2.1",
     "grunt-filerev-apply": "0.0.1",
     "grunt-replace": "^0.7.8",
-    "grunt-s3": "^0.2.0-alpha.3",
-    "grunt-sass": "^0.14.0"
+    "grunt-s3": "^0.2.0-alpha.3"
   }
 }

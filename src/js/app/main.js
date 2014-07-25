@@ -1,9 +1,11 @@
 define([
     'backbone',
-    'views/appView'
+    'views/appView',
+    'iframeMessenger'
 ], function(
     Backbone,
-    AppView
+    AppView,
+    iframeMessenger
 ) {
    'use strict';
 
@@ -11,7 +13,12 @@ define([
         el: $(window.GUI.el)
     });
 
+
     appView.render();
     Backbone.history.start();
+    
+    
+    // Enable iframe resizing on the GU site
+    iframeMessenger.enableAutoResize();
 });
 
