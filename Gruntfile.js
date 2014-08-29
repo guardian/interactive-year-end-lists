@@ -59,13 +59,12 @@ module.exports = function(grunt) {
           name: '../libs/almond',
           out: 'build/assets/js/main.js',
           include: ['main'],
-          insertRequire: ['main'],
-        
+
           wrap: {
-            startFile: 'src/wrapStart.frag',
-            endFile: 'src/wrapEnd.frag'
+            start: 'define(["require"], function(require) { var req = (function(){',
+            end: 'return require; }()); return req; });'
           }
-          
+
         }
       }
     },
@@ -98,14 +97,19 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['src/**/*.js', 'src/js/app/templates/*.html'],
+        files: [
+          'src/**/*.js',
+          'src/boot.js',
+          'src/**/*.json',
+          'src/js/app/templates/*.html'
+        ],
         tasks: ['requirejs'],
         options: {
           spawn: false,
         },
       },
       html: {
-        files: ['src/index.html'],
+        files: ['src/*.html'],
         tasks: ['copy', 'replace:local'],
         options: {
           spawn: false,
@@ -124,8 +128,10 @@ module.exports = function(grunt) {
       build: {
         files: [
           { src: 'src/index.html', dest: 'build/index.html' },
+          { src: 'src/ngw.html', dest: 'build/ngw.html' },
           { src: 'src/js/libs/curl.js', dest: 'build/assets/js/curl.js' },
-          { src: 'src/boot.js', dest: 'build/boot.js' }
+          { src: 'src/boot.js', dest: 'build/boot.js' },
+          { cwd: 'src/', src: 'images/**', dest: 'build/assets/', expand: true}
         ]
       }
     },
@@ -161,7 +167,7 @@ module.exports = function(grunt) {
         local: {
             options: {
                 patterns: [{
-                  match: 'assetpath/', 
+                  match: 'assetpath/',
                   replacement: 'http://localhost:' + pkg.config.port + '/'
                 }]
             },
@@ -200,7 +206,7 @@ module.exports = function(grunt) {
                     expand: false,
                     src: 'build/assets/**/*.*',
                     rel: 'build/',
-                    dest: pkg.config.s3_folder 
+                    dest: pkg.config.s3_folder
                 }
             ]
         }

@@ -9,16 +9,20 @@ define([
 ) {
    'use strict';
 
-    var appView = new AppView({
-        el: $(window.GUI.el)
-    });
 
+    function init(el, context, config, mediator) {
+        var appView = new AppView({
+            el: el
+        });
 
-    appView.render();
-    Backbone.history.start();
+        appView.render();
+        Backbone.history.start();
+        
+        // Enable iframe resizing on the GU site
+        iframeMessenger.enableAutoResize();
+    }
     
-    
-    // Enable iframe resizing on the GU site
-    iframeMessenger.enableAutoResize();
+    return {
+        init: init
+    };
 });
-

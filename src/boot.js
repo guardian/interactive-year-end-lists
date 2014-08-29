@@ -1,20 +1,15 @@
 'use strict';
 define([], function() {
     return {
-        boot: function(el) {
-            // Store global ref to element
-            window.GUI = window.GUI || { el: el };
-           // @@assetpath 
-            // Load CSS
-            var head = document.querySelector('head');
-            var link = document.createElement('link');
-            link.setAttribute('type', 'text/css');
-            link.setAttribute('rel', 'stylesheet');
-            link.setAttribute('href', '@@assetpath/assets/css/main.css');
-            head.appendChild(link);
-
+        boot: function(el, context, config, mediator) {
             // Load main application
-            require(['@@assetpath/assets/js/main.js'], function() {});
+            require(['@@assetpath/assets/js/main.js'], function(req) {
+                req(['main'], function(main) {
+                    var config = (config) ? config : {};
+                    config.assetPath = '@@assetpath/';
+                    main.init(el, context, config, mediator);
+                });
+            }, function(err) { console.error('Error loading boot.', err); });
         }
     };
 });
