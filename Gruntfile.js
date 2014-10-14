@@ -1,5 +1,7 @@
 'use strict';
 var pkg = require('./package.json');
+var currentTime = +new Date();
+var assetPath = 'build/assets-' + currentTime;
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -15,28 +17,19 @@ module.exports = function(grunt) {
 
     sass: {
       build: {
-        options: {
-          loadPath: ['src/css/partials/']
-        },
-        files: {
-          'build/assets/css/main.css': 'src/css/main.scss'
-        }
+        options: { loadPath: ['src/css/partials/'] },
+        files: { 'build/assets/css/main.css': 'src/css/main.scss' }
       }
     },
 
     autoprefixer: {
-        css: {
-            src: 'build/assets/css/*.css'
-        }
+        css: { src: 'build/assets/css/*.css' }
     },
 
     clean: ['build/'],
 
     jshint: {
-        options: {
-            jshintrc: true
-        },
-
+        options: { jshintrc: true },
       files: ['Gruntfile.js', 'src/*.js', 'src/js/*.js', 'src/js/app/**/*.js']
     },
 
@@ -61,38 +54,12 @@ module.exports = function(grunt) {
           include: ['main'],
 
           wrap: {
-            start: 'define(["require"], function(require) { var req = (function(){',
+            start: 'define(["require"],function(require){var req=(function(){',
             end: 'return require; }()); return req; });'
           }
 
         }
       }
-    },
-
-    filerev: {
-        options: {
-            encoding: 'utf8',
-            algorithm: 'md5',
-            length: 32
-        },
-        js: {
-            src: ['build/assets/js/main.js']
-        },
-        css: {
-            src: ['build/assets/css/*.css']
-        }
-    },
-
-    filerev_apply: {
-        options: {
-          prefix: 'build/'
-        },
-        assets: {
-            files: [{
-                expand: true,
-                src: ['build/boot.js', 'build/js/main*.js']
-            }]
-        }
     },
 
     watch: {
@@ -109,7 +76,7 @@ module.exports = function(grunt) {
         },
       },
       html: {
-        files: ['src/*.html'],
+        files: ['src/*.html', 'src/**/*.html'],
         tasks: ['copy', 'replace:local'],
         options: {
           spawn: false,
@@ -131,7 +98,7 @@ module.exports = function(grunt) {
           { src: 'src/ngw.html', dest: 'build/ngw.html' },
           { src: 'src/js/libs/curl.js', dest: 'build/assets/js/curl.js' },
           { src: 'src/boot.js', dest: 'build/boot.js' },
-          { cwd: 'src/', src: 'images/**', dest: 'build/assets/', expand: true}
+          { cwd: 'src/', src: 'imgs/**', dest: 'build/assets/', expand: true}
         ]
       }
     },
@@ -146,11 +113,19 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+        options: {
+            preserveComments: 'some',
+            drop_console: true,
+            report: 'min'
+        },
+
         minify: {
-            expand: true,
-            cwd: 'build/assets/js/',
-            dest: 'build/assets/js/',
-            src: '*.js'
+            files:[{
+                expand: true,
+                cwd: 'build/assets/js/',
+                dest: 'build/assets/js/',
+                src: '*.js'
+            }]
         }
     },
 
@@ -158,20 +133,26 @@ module.exports = function(grunt) {
         prod: {
             options: {
                 patterns: [{
-                  match: 'assetpath/',
-                  replacement: pkg.config.cdn_url
+                  match: /\/assets/g,
+                  replacement: pkg.config.cdn_url + 'assets-'+currentTime
                 }]
             },
-            files: [{src: ['build/boot.js'], dest: 'build/boot.js' }]
+            files: [{
+                src: ['build/*.html', 'build/**/*.js', 'build/**/*.css'],
+                dest: './'
+            }]
         },
         local: {
             options: {
                 patterns: [{
-                  match: 'assetpath/',
-                  replacement: 'http://localhost:' + pkg.config.port + '/'
+                  match: /\/assets/g,
+                  replacement: 'http://localhost:' + pkg.config.port + '/assets'
                 }]
             },
-            files: [{src: ['build/boot.js'], dest: 'build/boot.js' }]
+            files: [{
+                src: ['build/*.html', 'build/**/*.js', 'build/**/*.css'],
+                dest: './'
+            }]
         }
 
     },
@@ -181,42 +162,44 @@ module.exports = function(grunt) {
             access: 'public-read',
             bucket: 'gdn-cdn',
             maxOperations: 20,
-            debug: (grunt.option('test')) ? true : false,
+            dryRun: false,
+            headers: {
+                CacheControl: 180,
+            },
             gzip: true,
             gzipExclude: ['.jpg', '.gif', '.jpeg', '.png']
         },
-        dist: {
-            upload:[
-                {
-                    options: {
-                        headers: {
-                            'Cache-Control': 'max-age=180, public'
-                        }
-                    },
-                    expand: true,
-                    src: 'build/*.*',
-                    dest: pkg.config.s3_folder
-                },
-                {
-                    options: {
-                        headers: {
-                            'Cache-Control': 'max-age=3600, public'
-                        }
-                    },
-                    expand: false,
-                    src: 'build/assets/**/*.*',
-                    rel: 'build/',
-                    dest: pkg.config.s3_folder
+        base: {
+            files: [{
+                cwd: 'build',
+                src: '*.*',
+                dest: pkg.config.s3_folder
+            }]
+        },
+        assets: {
+            options: {
+                headers: {
+                    CacheControl: 3600,
                 }
+            },
+            files: [{
+                cwd: 'build',
+                src: 'assets-' + currentTime + '/**/*.*',
+                dest: pkg.config.s3_folder
+            }]
+        }
+    },
+
+    rename: {
+        main: {
+            files: [
+                { src: 'build/assets', dest: assetPath }
             ]
         }
-
     }
+  });
 
-
-    });
-
-  // Tasks
+  // Task pluginsk
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
@@ -225,12 +208,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-filerev');
   grunt.loadNpmTasks('grunt-filerev-apply');
-  grunt.loadNpmTasks('grunt-s3');
+  grunt.loadNpmTasks('grunt-aws');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-contrib-rename');
 
   // Tasks
   grunt.registerTask('version-files', ['filerev', 'copy', 'filerev_apply']);
@@ -246,9 +230,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
       'build',
-      'version-files',
-      'replace:prod',
       'compress',
+      'rename',
+      'replace:prod',
       's3'
   ]);
 };
