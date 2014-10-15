@@ -2,21 +2,11 @@ define([
     'backbone',
     'underscore',
     'routes',
-    'views/gameView',
-    'views/headerView',
-    'views/introView',
-    'views/catalogueView',
-    'views/singleGameView',
     'text!templates/appTemplate.html'
 ], function(
     Backbone,
     _,
     routes,
-    GameView,
-    HeaderView,
-    IntroView,
-    CatalogueView,
-    SingleGameView,
     template
 ) {
     'use strict';
@@ -33,9 +23,11 @@ define([
 
         initialize: function() {
             // Listen to routes
+            /*
             routes.on('route:default', this.defaultRender, this);
             routes.on('route:catalogue', this.catalogueRender, this);
             routes.on('route:singleGame', this.singleGameRender, this);
+            */
         },
 
         defaultRender: function() {
@@ -56,10 +48,6 @@ define([
         render: function() {
             // Render template
             this.$el.html(this.template());
-            
-            // Add header
-            var headerView = new HeaderView();
-            this.$el.prepend(headerView.render().el);
             
             // Store DOM reference
             this.$container = this.$('.container');
