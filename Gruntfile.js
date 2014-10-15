@@ -4,8 +4,8 @@ var currentTime = +new Date();
 var assetPath = 'build/assets-' + currentTime;
 
 module.exports = function(grunt) {
+  var isDev = !(grunt.cli.tasks && grunt.cli.tasks[0] === 'deploy');
   grunt.initConfig({
-
     connect: {
       server: {
         options: {
@@ -18,13 +18,16 @@ module.exports = function(grunt) {
     sass: {
       build: {
         options: {
-            loadPath: ['src/css/partials/']
+            loadPath: ['src/css/partials/'],
+            style: (isDev) ? 'expanded' : 'compressed',
+            sourcemap: 'inline'
         },
         files: { 'build/assets/css/main.css': 'src/css/main.scss' }
       }
     },
 
     autoprefixer: {
+        options: { map: true },
         css: { src: 'build/assets/css/*.css' }
     },
 
@@ -43,11 +46,11 @@ module.exports = function(grunt) {
         options: {
           baseUrl: './src/js/app/',
           mainConfigFile: './src/js/libs/configPaths.js',
-          optimize: 'none',
+          optimize: (isDev) ? 'none' : 'uglify2',
           inlineText: true,
           name: '../libs/almond',
           out: 'build/assets/js/main.js',
-          generateSourceMaps: true,
+          generateSourceMaps: true, 
           preserveLicenseComments: false,
           include: ['main'],
           wrap: {
@@ -98,32 +101,6 @@ module.exports = function(grunt) {
           { cwd: 'src/', src: 'imgs/**', dest: 'build/assets/', expand: true}
         ]
       }
-    },
-
-    cssmin: {
-        minify: {
-            expand: true,
-            cwd: 'build/assets/css/',
-            dest: 'build/assets/css/',
-            src: ['*.css']
-        }
-    },
-
-    uglify: {
-        options: {
-            preserveComments: 'some',
-            drop_console: true,
-            report: 'min'
-        },
-
-        minify: {
-            files:[{
-                expand: true,
-                cwd: 'build/assets/js/',
-                dest: 'build/assets/js/',
-                src: '*.js'
-            }]
-        }
     },
 
     replace: {
@@ -206,8 +183,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-aws');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-contrib-rename');
 
@@ -223,11 +198,8 @@ module.exports = function(grunt) {
   
   grunt.registerTask('default', ['build', 'replace:local', 'connect', 'watch']);
   
-  grunt.registerTask('compress', ['uglify', 'cssmin']);
-
   grunt.registerTask('deploy', [
       'build',
-      'compress',
       'rename',
       'replace:prod',
       's3'
