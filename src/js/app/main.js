@@ -9,11 +9,14 @@ define([
 ) {
    'use strict';
 
-
     function init(el, context, config, mediator) {
+        // DEBUG: What we get given on boot
+        console.log(el, context, config, mediator);
+
         var appView = new AppView({
             el: el
         });
+
 
         appView.render();
         Backbone.history.start();

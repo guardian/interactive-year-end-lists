@@ -17,7 +17,9 @@ module.exports = function(grunt) {
 
     sass: {
       build: {
-        options: { loadPath: ['src/css/partials/'] },
+        options: {
+            loadPath: ['src/css/partials/']
+        },
         files: { 'build/assets/css/main.css': 'src/css/main.scss' }
       }
     },
@@ -29,7 +31,10 @@ module.exports = function(grunt) {
     clean: ['build/'],
 
     jshint: {
-        options: { jshintrc: true },
+      options: {
+          jshintrc: true,
+          force: true 
+      },
       files: ['Gruntfile.js', 'src/*.js', 'src/js/*.js', 'src/js/app/**/*.js']
     },
 
@@ -37,22 +42,14 @@ module.exports = function(grunt) {
       compile: {
         options: {
           baseUrl: './src/js/app/',
-          paths: {
-              // Example libraries. You can add your own here
-              'underscore'      : '../libs/underscore',
-              'jquery'          : '../libs/jquery',
-              'backbone'        : '../libs/backbone',
-              'text'            : '../libs/text',
-              'json'            : '../libs/json',
-              'd3'              : '../libs/d3',
-              'iframeMessenger' : '../libs/iframeMessenger'
-          },
+          mainConfigFile: './src/js/libs/configPaths.js',
           optimize: 'none',
           inlineText: true,
           name: '../libs/almond',
           out: 'build/assets/js/main.js',
+          generateSourceMaps: true,
+          preserveLicenseComments: false,
           include: ['main'],
-
           wrap: {
             start: 'define(["require"],function(require){var req=(function(){',
             end: 'return require; }()); return req; });'
@@ -70,7 +67,7 @@ module.exports = function(grunt) {
           'src/**/*.json',
           'src/js/app/templates/*.html'
         ],
-        tasks: ['requirejs'],
+        tasks: ['jshint', 'requirejs'],
         options: {
           spawn: false,
         },
@@ -206,8 +203,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-filerev');
-  grunt.loadNpmTasks('grunt-filerev-apply');
   grunt.loadNpmTasks('grunt-aws');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
@@ -217,15 +212,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-rename');
 
   // Tasks
-  grunt.registerTask('version-files', ['filerev', 'copy', 'filerev_apply']);
   grunt.registerTask('build',[
+    'jshint',
     'clean',
     'sass',
     'autoprefixer',
     'requirejs',
     'copy'
   ]);
+  
   grunt.registerTask('default', ['build', 'replace:local', 'connect', 'watch']);
+  
   grunt.registerTask('compress', ['uglify', 'cssmin']);
 
   grunt.registerTask('deploy', [
