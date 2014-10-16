@@ -2,13 +2,11 @@ define([
     'backbone',
     'underscore',
     'views/gameView',
-    'collections/gamesCollection',
     'text!templates/catalogueTemplate.html'
 ], function(
     Backbone,
     _,
     GameView,
-    gamesCollection,
     templateHTML
 ) {
     'use strict';

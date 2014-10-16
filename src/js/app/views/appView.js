@@ -1,11 +1,11 @@
 define([
     'backbone',
-    'underscore',
+    'mustache',
     'routes',
     'text!templates/appTemplate.html'
 ], function(
     Backbone,
-    _,
+    Mustache,
     routes,
     template
 ) {
@@ -15,10 +15,31 @@ define([
 
         className: 'guInteractive',
 
-        template: _.template(template),
-        
         events: {
+            'click .column-header': 'sortTable'
+        },
 
+        sortTable: function(event) {
+            var $target = $(event.currentTarget);
+            var sortColumn = $target.data('sort');
+
+            
+            this.collection.comparator = function(model) {
+                return model.get(sortColumn);
+            };
+            
+            this.collection.sort();
+            $target.toggleClass('active');
+
+
+            if ($target.hasClass('active')) {
+                this.sortReversed = !this.sortReversed;
+            }
+
+            if (this.sortReversed) {
+                this.collection.models.reverse();
+            }
+            this.render();
         },
 
         initialize: function() {
@@ -28,29 +49,15 @@ define([
             routes.on('route:catalogue', this.catalogueRender, this);
             routes.on('route:singleGame', this.singleGameRender, this);
             */
-        },
+           this.collection.on('sync', this.render, this);
 
-        defaultRender: function() {
-            var introView = new IntroView();
-            this.$container.html(introView.render().el);
-        },
-
-        catalogueRender: function() {
-            var catalogueView = new CatalogueView();
-            this.$container.html(catalogueView.render().el);
-        },
-
-        singleGameRender: function(gameID) {
-            var singleGameView = new SingleGameView({ gameID: gameID });
-            this.$container.html(singleGameView.render().el);
+           this.sortReversed = false;
         },
 
         render: function() {
-            // Render template
-            this.$el.html(this.template());
+            var templateData = { rows: this.collection.toJSON() };
+            this.$el.html(Mustache.render(template, templateData));
             
-            // Store DOM reference
-            this.$container = this.$('.container');
             return this;
         }
     });

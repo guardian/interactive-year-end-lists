@@ -11,32 +11,31 @@ define([
 ) {
    'use strict';
 
+    var appView;
+    
+    // Your proxied Google spreadsheet goes here
+    var key = '1hy65wVx-pjwjSt2ZK7y4pRDlX9wMXFQbwKN0v3XgtXM';
+
     function init(el, context, config, mediator) {
         // DEBUG: What we get given on boot
         console.log(el, context, config, mediator);
 
-        // DON'T WANT TO DO TWO FETCH FOR EACH SHEET! WILL CACHING FIX THIS?
-        var key = '1ZjPjdEbLD7h3qCQ3Y_W92aT0CjD-bYGnOcDVDbOcNe8';
-        var dataCollection = new SheetCollection({key: key, sheetname: 'data'});
-        dataCollection.fetch();
-        dataCollection.on('sync', function(d) {
-            console.log(d);
+        // Create collection from Google spreadsheet key and sheetname
+        var videogameCollection = new SheetCollection({
+            key: key,
+            sheetname: 'videogames'
+        });
+       
+        // Create an app view, passing along the collection made above
+        appView = new AppView({
+            el: el,
+            collection: videogameCollection
         });
         
-        var totalsCollection = new SheetCollection({key: key, sheetname: 'recoverycalcs'});
-        totalsCollection.fetch();
-        totalsCollection.on('sync', function(d) {
-            console.log(d);
-        });
+        // Fetch data
+        videogameCollection.fetch();
 
-
-
-        var appView = new AppView({
-            el: el
-        });
-
-
-        appView.render();
+        // Start listening to URL #paths
         Backbone.history.start();
         
         // Enable iframe resizing on the GU site

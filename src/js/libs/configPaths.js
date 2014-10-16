@@ -10,6 +10,7 @@ require.config({
       'text'            : '../libs/text',
       'json'            : '../libs/json',
       'd3'              : '../libs/d3',
+      'mustache'        : '../libs/mustache',
       'iframeMessenger' : '../libs/iframeMessenger'
    },
    shims: {
