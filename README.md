@@ -1,11 +1,14 @@
 # Sample interactive project
 
 Quickly spin up a project template that provides boot.js and iframe loading.
-The idea is to reduce the time to required to go from idea discussion to 
+The idea is to reduce the time required to go from idea discussion to 
 stuff on screen, and to simplify deployment to S3.
 
 ## Getting started
-First fork the project over on github then clone your new fork.
+If you haven't already installed [nodejs](http://nodejs.org/download/)
+and [grunt-cli](http://gruntjs.com/getting-started), go do that first.
+
+Fork the project over on github then clone your new fork.
 
 ```bash
 > git clone git@github.com:guardian/my-new-project.git
@@ -26,7 +29,7 @@ If you want to load locally stored data you can use the `grunt fetch` task
 that will download an remote file and store it in the `src/js/app/data` folder.
 
 To specify what file is downloaded and where it is store you'll need to 
-modify the `curl` grunt task, eg.
+modify the `curl` task in the Gruntfile.js, eg.
 
 ```javscript
     curl : { 'local/path/mydata.json': 'http://example.com/data.json' }
@@ -83,11 +86,27 @@ myCollection.fetch();
 The nice thing about listening to the 'reset' event is that multiple views
 can share the once collection and all listen to the 'reset' event.
 
-
 ## Deploying to S3
+
 Once you ready to to play to S3 you can use grunt to upload your files.
 
-First you'll want to simulate the upload to ensure it's going to do what
+First you'll need to specify where the files are to be uploaded to. This
+is done in the `package.json` file (note: this is probably not the best
+place to store that information, it might change in the future).
+
+In the `package.json` there is a section for `config` which contains
+the paths that the deploy task will upload to. Change these paths to
+whatever you need them to be.
+
+```json
+  "config": {
+    "port": 9000,
+    "s3_folder": "embed/testing/path/",
+    "cdn_url": "http://interactive.guim.co.uk/embed/testing/path/"
+  },
+```
+
+Next you'll want to simulate the upload to ensure it's going to do what
 you think it will.
 ```bash
 > grunt deploy --test
