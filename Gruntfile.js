@@ -136,7 +136,7 @@ module.exports = function(grunt) {
             access: 'public-read',
             bucket: 'gdn-cdn',
             maxOperations: 20,
-            dryRun: false,
+            dryRun: (grunt.option('test')) ? true : false,
             headers: {
                 CacheControl: 180,
             },
@@ -170,6 +170,11 @@ module.exports = function(grunt) {
                 { src: 'build/assets', dest: assetPath }
             ]
         }
+    },
+    
+    // Download files locally 
+    curl: {
+      'src/js/app/data/sampleData.json': 'http://interactive.guim.co.uk/spreadsheetdata/1hy65wVx-pjwjSt2ZK7y4pRDlX9wMXFQbwKN0v3XgtXM.json'
     }
   });
 
@@ -185,9 +190,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-contrib-rename');
+  grunt.loadNpmTasks('grunt-curl');
 
   // Tasks
-  grunt.registerTask('build',[
+  grunt.registerTask('fetch', ['curl']);
+  
+  grunt.registerTask('build', [
     'jshint',
     'clean',
     'sass',

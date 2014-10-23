@@ -2,7 +2,7 @@ define([
     'backbone',
     'mustache',
     'routes',
-    'text!templates/appTemplate.html'
+    'text!templates/appTemplate.html',
 ], function(
     Backbone,
     Mustache,
